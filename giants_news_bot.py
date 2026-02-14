@@ -32,11 +32,20 @@ ROSTER_CACHE_HOURS = int(os.getenv("ROSTER_CACHE_HOURS", "24"))
 STAFF_CACHE_HOURS = int(os.getenv("STAFF_CACHE_HOURS", "24"))
 KEEP_POSTED_DAYS = int(os.getenv("KEEP_POSTED_DAYS", "21"))
 
+# Paywall tagging (based on your rule + practical access)
+PAYWALL_DOMAINS = {
+    "theathletic.com",
+    "mercurynews.com",
+    "baseballamerica.com",
+    # Optional: many readers hit a meter, but your fetch test may not show it.
+    "sfchronicle.com",
+}
+
 BSKY_IDENTIFIER = os.environ["BSKY_IDENTIFIER"]  # handle or email
 BSKY_APP_PASSWORD = os.environ["BSKY_APP_PASSWORD"]
 BSKY_PDS = os.getenv("BSKY_PDS", "https://bsky.social")
 
-UA = "GiantsNewsBot/2.0 (+github-actions)"
+UA = "GiantsNewsBot/2.2 (+github-actions)"
 
 
 # -----------------------------
@@ -122,17 +131,12 @@ BASEBALL_SOURCE_HINTS = [
     "fangraphs", "baseball america", "mlb", "sfgiants", "baseball prospectus",
 ]
 
-
 IMPORTANT_KEYWORDS = {
-    # Transactions
     "trade", "traded", "acquire", "acquired", "deal", "waiver", "waivers",
     "claimed", "dfa", "designated for assignment", "optioned", "call-up", "called up",
     "sign", "signed", "signing", "extension",
-    # Health
     "injury", "injured", "il", "injured list", "surgery", "rehab",
-    # Prospects / callups
     "prospect", "prospects", "promotion", "promoted",
-    # Team building
     "rotation", "bullpen", "starter", "closer",
 }
 
@@ -147,7 +151,6 @@ class Item:
     publication: str
     published: datetime
     domain: str
-    # meta
     is_primary: bool
     score: int = 0
     raw_summary: str = ""
@@ -205,7 +208,6 @@ def extract_publication_from_title(raw_title: str) -> Tuple[str, str]:
 
 
 def parse_entry_datetime(entry: Any) -> Optional[datetime]:
-    # feedparser structs
     for key in ("published_parsed", "updated_parsed"):
         st = getattr(entry, key, None)
         if st:
@@ -214,7 +216,6 @@ def parse_entry_datetime(entry: Any) -> Optional[datetime]:
             except Exception:
                 pass
 
-    # strings
     for key in ("published", "updated"):
         val = entry.get(key)
         if val:
@@ -271,6 +272,11 @@ def resolve_url(url: str) -> str:
     except Exception:
         pass
     return u
+
+
+def is_paywalled_domain(domain: str) -> bool:
+    d = (domain or "").lower()
+    return any(d == pw or d.endswith("." + pw) for pw in PAYWALL_DOMAINS)
 
 
 # -----------------------------
@@ -409,10 +415,6 @@ def last_name_token(full_name: str) -> Optional[str]:
 
 
 def build_name_matchers(names: Set[str]) -> Tuple[Set[str], Dict[str, Set[str]]]:
-    """
-    full_names: lowercased full names
-    last_name_map: last name -> set(full names)
-    """
     full_set = set(n.lower() for n in names if n)
     last_map: Dict[str, Set[str]] = {}
     for n in full_set:
@@ -434,11 +436,6 @@ def contains_phrase(text: str, phrase: str) -> bool:
 
 
 def mentions_last_name_tight(text: str, last_name_map: Dict[str, Set[str]]) -> bool:
-    """
-    Tight last-name rule:
-    - last name must appear as a token
-    - AND must include at least one anchor that suggests Giants/baseball context
-    """
     t = norm_text(text)
     anchors_ok = (
         contains_phrase(t, "giants")
@@ -452,10 +449,7 @@ def mentions_last_name_tight(text: str, last_name_map: Dict[str, Set[str]]) -> b
         return False
 
     words = tokenize_words(text)
-    for ln in last_name_map.keys():
-        if ln in words:
-            return True
-    return False
+    return any(ln in words for ln in last_name_map.keys())
 
 
 # -----------------------------
@@ -489,11 +483,9 @@ def is_allowed_item(title: str, summary: str, publication: str,
     if not has_baseball_context(blob, publication):
         return False
 
-    # Strong team mention qualifies
     if mentions_team_strong(blob):
         return True
 
-    # Otherwise must match a known relevant name (roster/staff/front office/key people)
     if full_names and (mentions_full_name(blob, full_names) or mentions_last_name_tight(blob, last_map)):
         return True
 
@@ -506,29 +498,23 @@ def importance_score(title: str, summary: str, publication: str,
     blob = f"{title} {summary}".lower()
     score = 0
 
-    # Big: front office / coaching / VIP names
     for name in key_people:
         if name.lower() in blob:
             score += 10
 
-    # Player/staff full-name mention
     if any(n in blob for n in full_names):
         score += 6
 
-    # Strong team mention
     if ("san francisco giants" in blob) or ("sf giants" in blob):
         score += 4
 
-    # Important baseball keywords
     for kw in IMPORTANT_KEYWORDS:
         if kw in blob:
             score += 2
 
-    # Echo bonus (appears multiple times across feeds)
     if echo_count >= 2:
         score += min(8, 3 * (echo_count - 1))
 
-    # Recency bonus
     hours_old = max(0.0, (utcnow() - published).total_seconds() / 3600.0)
     if hours_old <= 2:
         score += 3
@@ -537,7 +523,6 @@ def importance_score(title: str, summary: str, publication: str,
     elif hours_old <= 12:
         score += 1
 
-    # Slight bonus for publication that’s already baseball-y
     pl = (publication or "").lower()
     if any(h in pl for h in BASEBALL_SOURCE_HINTS):
         score += 1
@@ -551,10 +536,6 @@ def importance_score(title: str, summary: str, publication: str,
 def fetch_feed_items(feed_url: str, source_label: str,
                      cutoff: datetime,
                      full_names: Set[str], last_map: Dict[str, Set[str]]) -> List[Item]:
-    """
-    Fetch via requests (so UA is consistent) then parse with feedparser.
-    Apply tight relevance, and return candidate Items.
-    """
     r = safe_get(feed_url, timeout=30)
     r.raise_for_status()
 
@@ -603,7 +584,7 @@ def fetch_feed_items(feed_url: str, source_label: str,
 
 
 # -----------------------------
-# Bluesky
+# Bluesky (Option A: plain text + URL; let Bluesky unfurl)
 # -----------------------------
 def bsky_create_session() -> Dict[str, Any]:
     r = requests.post(
@@ -616,19 +597,11 @@ def bsky_create_session() -> Dict[str, Any]:
     return r.json()
 
 
-def bsky_post(access_jwt: str, did: str, text: str, url: str, title: str, publication: str) -> None:
+def bsky_post(access_jwt: str, did: str, text: str) -> None:
     record = {
         "$type": "app.bsky.feed.post",
         "text": text,
         "createdAt": utcnow().isoformat().replace("+00:00", "Z"),
-        "embed": {
-            "$type": "app.bsky.embed.external",
-            "external": {
-                "uri": url,
-                "title": (title or "")[:300],
-                "description": (publication or "")[:300],
-            },
-        },
     }
 
     r = requests.post(
@@ -642,19 +615,21 @@ def bsky_post(access_jwt: str, did: str, text: str, url: str, title: str, public
     r.raise_for_status()
 
 
-def format_post_text(title: str, publication: str) -> str:
-    # Keep it clean: no URL in text (embed card handles link)
-    pub = (publication or "").strip()
+def format_post_text(title: str, url: str, domain: str) -> str:
     t = (title or "").strip()
-    text = f"{t}\n{pub}".strip()
+    u = (url or "").strip()
 
+    if is_paywalled_domain(domain):
+        t = f"{t} ($)"
+
+    text = f"{t}\n\n{u}".strip()
     if len(text) <= 300:
         return text
 
-    room_for_title = max(20, 300 - (len(pub) + 1))
+    room_for_title = max(20, 300 - (len(u) + 2))  # "\n\n"
     if len(t) > room_for_title:
         t = t[: room_for_title - 1].rstrip() + "…"
-    return f"{t}\n{pub}".strip()
+    return f"{t}\n\n{u}"
 
 
 # -----------------------------
@@ -667,7 +642,6 @@ def main():
 
     cutoff = utcnow() - timedelta(hours=HOURS_BACK)
 
-    # --- Load / refresh roster + staff caches
     roster_names = load_cached_names(state, "roster_cache", ROSTER_CACHE_HOURS)
     if not roster_names:
         try:
@@ -682,14 +656,12 @@ def main():
     if not staff_names:
         try:
             staff_names = statsapi_coaches_names()
-            # Cache even if empty to avoid hammering
             save_cached_names(state, "staff_cache", staff_names)
             print(f"[info] staff cached: {len(staff_names)} names")
         except Exception as e:
             print(f"[warn] staff fetch failed: {e}")
             staff_names = set()
 
-    # --- Build the name universe: roster + staff + key people
     all_names: Set[str] = set()
     all_names.update(roster_names)
     all_names.update(staff_names)
@@ -706,10 +678,7 @@ def main():
     feeds.append(("SF Standard", "https://sfstandard.com/sports/feed"))
     feeds.append(("SFGate", "https://www.sfgate.com/sports/feed/san-francisco-giants-rss-feed-428.php"))
 
-    # Optional: KNBR podcast feed (often not what you want for “articles”)
-    # feeds.append(("KNBR (Podcast)", "https://www.omnycontent.com/d/playlist/a7b0bd27-d748-4fbe-ab3b-a6fa0049bcf6/e36ffdc5-c7fa-4985-b94c-a8bd01670702/808a103c-058f-4c12-a1ae-a8bd01675a7c/podcast.rss"))
-
-    # Your chosen domains via Google News RSS (baseball-aware)
+    # Google News RSS per-domain searches
     domain_queries = [
         ("SF Chronicle", '(("San Francisco Giants" OR "SF Giants" OR Giants) AND (MLB OR baseball)) site:sfchronicle.com'),
         ("Mercury News", '(("San Francisco Giants" OR "SF Giants" OR Giants) AND (MLB OR baseball)) site:mercurynews.com'),
@@ -730,7 +699,7 @@ def main():
     )))
 
     # ---------
-    # Collect items (already time-filtered in fetch)
+    # Collect items
     # ---------
     all_items: List[Item] = []
     for source_label, feed_url in feeds:
@@ -764,43 +733,34 @@ def main():
             echo_map.get(title_hash(it.title), 1),
         )
 
-    # Sort newest first, but we'll later sort “other” by score
+    # Sort newest first (primary selection), but rank “other” by score later
     all_items.sort(key=lambda x: x.published, reverse=True)
 
     posted = state.get("posted", {})
     seen_urls: Set[str] = set()
 
-    # Split into primary vs other
     primary_candidates: List[Item] = []
     other_candidates: List[Item] = []
     for it in all_items:
-        # Hard skip if already posted
-        if it.url in posted:
-            continue
-        if it.url in seen_urls:
+        if it.url in posted or it.url in seen_urls:
             continue
         seen_urls.add(it.url)
 
-        # Determine "primary-ness" by final URL domain
-        is_primary = any(it.domain == d or it.domain.endswith("." + d) for d in PRIMARY_DOMAINS)
-        it.is_primary = is_primary
-
-        if is_primary:
+        it.is_primary = any(it.domain == d or it.domain.endswith("." + d) for d in PRIMARY_DOMAINS)
+        if it.is_primary:
             primary_candidates.append(it)
         else:
             other_candidates.append(it)
 
-    # Rank “other” by score (desc), then recency
     other_candidates.sort(key=lambda x: (x.score, x.published), reverse=True)
 
-    # Selection with per-publication cap
     per_pub_count: Dict[str, int] = {}
     to_post: List[Item] = []
 
     def pub_key(pub: str) -> str:
         return norm_text(pub)
 
-    # 1) Fill from primary first
+    # 1) Prefer primary sources first
     for it in primary_candidates:
         if len(to_post) >= MAX_POSTS_PER_RUN:
             break
@@ -811,8 +771,7 @@ def main():
         to_post.append(it)
         per_pub_count[pk] += 1
 
-    # 2) Then fill from “other sources” up to daily cap
-    # Only if we still have room
+    # 2) Then fill from other sources, capped per day
     for it in other_candidates:
         if len(to_post) >= MAX_POSTS_PER_RUN:
             break
@@ -827,31 +786,24 @@ def main():
         to_post.append(it)
         per_pub_count[pk] += 1
 
-        # Increment daily other counter only when we actually POST successfully (done later)
-        # For now, just tentatively include.
-
     if not to_post:
         print("No new items to post.")
         save_state(state)
         return
 
-    # ---------
-    # Post
-    # ---------
     sess = bsky_create_session()
     access_jwt = sess["accessJwt"]
     did = sess["did"]
 
     posted_any = 0
     for it in to_post:
-        text = format_post_text(it.title, it.publication)
+        text = format_post_text(it.title, it.url, it.domain)
         try:
             print(f"[post] ({it.score}) {it.publication}: {it.title} -> {it.url}")
-            bsky_post(access_jwt, did, text, it.url, it.title, it.publication)
+            bsky_post(access_jwt, did, text)
             posted[it.url] = utcnow().isoformat()
             posted_any += 1
 
-            # If this was an “other” source (not in PRIMARY_DOMAINS), count it against the daily cap
             if not it.is_primary:
                 daily_other["count"] = int(daily_other.get("count", 0)) + 1
 
