@@ -32,7 +32,7 @@ jobs:
         env:
           BSKY_IDENTIFIER: ${{ secrets.BSKY_IDENTIFIER }}
           BSKY_APP_PASSWORD: ${{ secrets.BSKY_APP_PASSWORD }}
-          HOURS_BACK: "8"
+          HOURS_BACK: "72"
           MAX_POSTS_PER_RUN: "5"
         run: |
           python giants_news_bot.py
