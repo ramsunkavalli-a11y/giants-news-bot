@@ -1,3 +1,75 @@
 {
-  "posted": {}
+  "daily_other": {
+    "count": 0,
+    "date": "2026-02-14"
+  },
+  "posted": {
+    "https://sfstandard.com/2026/02/11/buster-posey-sf-giants-2026-outlook/": "2026-02-14T22:42:59.857343+00:00",
+    "https://sfstandard.com/2026/02/13/patrick-bailey-abs-buster-posey/": "2026-02-14T22:42:59.676576+00:00"
+  },
+  "roster_cache": {
+    "fetched_at": "2026-02-14T22:42:41.414823+00:00",
+    "names": [
+      "Adrian Houser",
+      "Blade Tidwell",
+      "Bryce Eldridge",
+      "Carson Seymour",
+      "Carson Whisenhunt",
+      "Casey Schmitt",
+      "Christian Koss",
+      "Daniel Susac",
+      "Drew Gilbert",
+      "Erik Miller",
+      "Grant McCray",
+      "Harrison Bader",
+      "Hayden Birdsong",
+      "Heliot Ramos",
+      "JT Brubaker",
+      "Jason Foley",
+      "Jerar Encarnacion",
+      "Jesus Rodriguez",
+      "Joel Peguero",
+      "Jos\u00e9 Butt\u00f3",
+      "Jung Hoo Lee",
+      "Keaton Winn",
+      "Landen Roupp",
+      "Logan Webb",
+      "Luis Arraez",
+      "Luis Matos",
+      "Matt Chapman",
+      "Matt Gage",
+      "Patrick Bailey",
+      "Rafael Devers",
+      "Randy Rodr\u00edguez",
+      "Reiver Sanmartin",
+      "Robbie Ray",
+      "Rowan Wick",
+      "Ryan Walker",
+      "Sam Hentges",
+      "Spencer Bivens",
+      "Trevor McDonald",
+      "Tristan Beck",
+      "Tyler Fitzgerald",
+      "Tyler Mahle",
+      "Willy Adames"
+    ]
+  },
+  "staff_cache": {
+    "fetched_at": "2026-02-14T22:42:41.462974+00:00",
+    "names": [
+      "Alex Burg",
+      "Christian Wonders",
+      "Frank Anderson",
+      "Hector Borg",
+      "Hunter Mense",
+      "Jayce Tingler",
+      "Jesse Chavez",
+      "Justin Meccage",
+      "Oscar Bernard",
+      "Ron Washington",
+      "Shane Robinson",
+      "Taira Uematsu",
+      "Tony Vitello"
+    ]
+  }
 }
