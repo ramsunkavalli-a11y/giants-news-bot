@@ -1,0 +1,50 @@
+name: Giants News Bot
+
+on:
+  schedule:
+    # 3 runs/day (UTC). Adjust as you like.
+    - cron: "15 16 * * *"
+    - cron: "15 00 * * *"
+    - cron: "15 08 * * *"
+  workflow_dispatch: {}
+
+permissions:
+  contents: write
+
+jobs:
+  run:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+
+      - name: Install deps
+        run: |
+          python -m pip install --upgrade pip
+          pip install -r requirements.txt
+
+      - name: Run bot
+        env:
+          BSKY_IDENTIFIER: ${{ secrets.BSKY_IDENTIFIER }}
+          BSKY_APP_PASSWORD: ${{ secrets.BSKY_APP_PASSWORD }}
+          HOURS_BACK: "8"
+          MAX_POSTS_PER_RUN: "5"
+        run: |
+          python giants_news_bot.py
+
+      - name: Commit state if changed
+        run: |
+          if git diff --quiet; then
+            echo "No changes."
+            exit 0
+          fi
+          git config user.name "giants-news-bot"
+          git config user.email "giants-news-bot@users.noreply.github.com"
+          git add state.json
+          git commit -m "Update state"
+          git push
