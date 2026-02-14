@@ -264,10 +264,9 @@ def main():
     did = sess["did"]
 
     for it in to_post:
-        text = format_post_text(it.title, it.source, it.url)
-        print(f"Posting: {it.title} ({it.source}) -> {it.url}")
-        bsky_post(access_jwt, did, text, it.url, it.title, it.source)
-        posted[it.url] = utcnow().isoformat()
+text = format_post_text(it.title, it.source)
+bsky_post(access_jwt, did, text, it.url, it.title, it.source)
+
 
     state["posted"] = posted
     save_state(state)
