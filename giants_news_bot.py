@@ -264,8 +264,8 @@ def main():
     did = sess["did"]
 
     for it in to_post:
-text = format_post_text(it.title, it.source)
-bsky_post(access_jwt, did, text, it.url, it.title, it.source)
+        text = format_post_text(it.title, it.source)
+        bsky_post(access_jwt, did, text, it.url, it.title, it.source)
 
 
     state["posted"] = posted
