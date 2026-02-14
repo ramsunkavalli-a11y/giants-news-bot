@@ -182,19 +182,19 @@ def bsky_post(access_jwt: str, did: str, text: str, url: str, title: str, source
     r.raise_for_status()
 
 
-def format_post_text(title: str, source: str, url: str) -> str:
-    # Keep it simple; link in text + embed card.
-    # Bluesky limit is currently 300 chars; keep buffer.
-    base = f"{title}\n{source}\n{url}"
-    if len(base) <= 290:
-        return base
+def format_post_text(title: str, source: str) -> str:
+    # Keep text short; the link is in the embed card.
+    text = f"{title}\n{source}"
+    if len(text) <= 300:
+        return text
 
-    # Trim title first
-    max_title = max(40, 290 - (len(source) + len(url) + 2 + 2))  # two newlines
+    # Trim title if needed
+    # Leave room for newline + source
+    room_for_title = max(20, 300 - (len(source) + 1))
     t = title
-    if len(t) > max_title:
-        t = t[: max_title - 1].rstrip() + "…"
-    return f"{t}\n{source}\n{url}"
+    if len(t) > room_for_title:
+        t = t[: room_for_title - 1].rstrip() + "…"
+    return f"{t}\n{source}"
 
 
 def main():
