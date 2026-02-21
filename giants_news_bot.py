@@ -1424,29 +1424,9 @@ def clean_description(s: str, max_len: int = 240) -> str:
 
 def build_post_text(it: Item) -> str:
     line = build_display_line(it)
-    label = "Read more"
-    text = f"{line}\n\n{label}".strip()
-    # Keep within 300 chars
-    if len(text) <= 300:
-        return text
-
-    # Truncate line to fit
-    room_for_line = max(20, 300 - (len(label) + 2))
-    if len(line) > room_for_line:
-        line = line[: room_for_line - 1].rstrip() + "…"
-    return f"{line}\n\n{label}"
-
-
-def make_link_facet(text: str, label: str, uri: str) -> List[Dict[str, Any]]:
-    idx = text.find(label)
-    if idx < 0 or not uri:
-        return []
-    byte_start = len(text[:idx].encode("utf-8"))
-    byte_end = byte_start + len(label.encode("utf-8"))
-    return [{
-        "index": {"byteStart": byte_start, "byteEnd": byte_end},
-        "features": [{"$type": "app.bsky.richtext.facet#link", "uri": uri}],
-    }]
+    if len(line) <= 300:
+        return line
+    return line[:299].rstrip() + "…"
 
 
 def build_external_embed(it: Item) -> Optional[Dict[str, Any]]:
@@ -1485,7 +1465,7 @@ def build_external_embed(it: Item) -> Optional[Dict[str, Any]]:
     }
 
 
-def bsky_post(access_jwt: str, did: str, text: str, embed: Optional[Dict[str, Any]] = None, facets: Optional[List[Dict[str, Any]]] = None) -> None:
+def bsky_post(access_jwt: str, did: str, text: str, embed: Optional[Dict[str, Any]] = None) -> None:
     record: Dict[str, Any] = {
         "$type": "app.bsky.feed.post",
         "text": text,
@@ -1493,8 +1473,6 @@ def bsky_post(access_jwt: str, did: str, text: str, embed: Optional[Dict[str, An
     }
     if embed:
         record["embed"] = embed
-    if facets:
-        record["facets"] = facets
 
     r = requests.post(
         f"{BSKY_PDS}/xrpc/com.atproto.repo.createRecord",
@@ -1757,10 +1735,9 @@ def main() -> None:
     for it in to_post:
         text = build_post_text(it)
         embed = build_external_embed(it) if ENABLE_EXTERNAL_EMBED else None
-        facets = make_link_facet(text, "Read more", it.url)
         try:
             print(f"[post] ({it.score}) {it.publication}: {it.title} -> {it.url}")
-            bsky_post(access_jwt, did, text, embed=embed, facets=facets)
+            bsky_post(access_jwt, did, text, embed=embed)
             posted[it.url] = utcnow().isoformat()
             posted_any += 1
             if not it.is_primary:
