@@ -50,6 +50,10 @@ ENABLE_EXTERNAL_EMBED = os.getenv("ENABLE_EXTERNAL_EMBED", "true").lower() in {"
 ENRICH_ARTICLE_METADATA = os.getenv("ENRICH_ARTICLE_METADATA", "true").lower() in {"1", "true", "yes"}
 MAX_META_FETCHES_PER_RUN = int(os.getenv("MAX_META_FETCHES_PER_RUN", "25"))
 
+# Listing pages are our non-RSS path. Keep this separate from embed enrichment settings.
+ENABLE_LISTING_FETCH = os.getenv("ENABLE_LISTING_FETCH", "true").lower() in {"1", "true", "yes"}
+MAX_LISTING_META_FETCHES_PER_RUN = int(os.getenv("MAX_LISTING_META_FETCHES_PER_RUN", "40"))
+
 # UA: use a browser-ish UA; some paywalled sites block bot UAs.
 UA = os.getenv(
     "USER_AGENT",
@@ -210,6 +214,30 @@ def safe_get(url: str, timeout: int = 25) -> requests.Response:
     return requests.get(url, timeout=timeout, headers={"User-Agent": UA}, allow_redirects=True)
 
 
+def _jina_proxy_url(url: str) -> str:
+    u = (url or "").strip()
+    if not u:
+        return ""
+    return f"https://r.jina.ai/{u}"
+
+
+def fetch_text_via_jina(url: str, timeout: int = 25) -> str:
+    """
+    Fallback fetch through r.jina.ai to bypass bot/proxy blocks on publisher pages.
+    Returns plain text/markdown-like content or empty string.
+    """
+    proxy_url = _jina_proxy_url(url)
+    if not proxy_url:
+        return ""
+    try:
+        r = requests.get(proxy_url, timeout=timeout, headers={"User-Agent": UA}, allow_redirects=True)
+        if r.status_code >= 400:
+            return ""
+        return r.text or ""
+    except Exception:
+        return ""
+
+
 def domain_of(url: str) -> str:
     try:
         host = urlparse(url).netloc.lower()
@@ -275,6 +303,38 @@ def canonicalize_url(url: str) -> str:
         return urlunparse(p2)
     except Exception:
         return u
+
+
+def title_from_url(url: str) -> str:
+    """
+    Fallback title when article metadata is unavailable.
+    """
+    try:
+        path = (urlparse(url).path or "").strip("/")
+        parts = [seg for seg in path.split("/") if seg]
+        slug = parts[-1] if parts else ""
+        slug = re.sub(r"\.[A-Za-z0-9]+$", "", slug)
+        slug = re.sub(r"[-_]+", " ", slug)
+        slug = RE_SPACE.sub(" ", slug).strip()
+        if not slug:
+            return url
+        return slug[:1].upper() + slug[1:]
+    except Exception:
+        return url
+
+
+def date_from_url(url: str) -> Optional[datetime]:
+    """
+    Best-effort publish date extraction from common URL patterns like /2026/02/21/.
+    """
+    try:
+        m = re.search(r"/(20\d{2})/(\d{1,2})/(\d{1,2})(?:/|$)", urlparse(url).path or "")
+        if not m:
+            return None
+        y, mo, d = int(m.group(1)), int(m.group(2)), int(m.group(3))
+        return datetime(y, mo, d, tzinfo=timezone.utc)
+    except Exception:
+        return None
 
 
 def is_paywalled_domain(domain: str) -> bool:
@@ -791,6 +851,28 @@ def extract_links_from_listing(url: str, html: str) -> List[str]:
     return out
 
 
+def extract_urls_from_text_blob(text: str) -> List[str]:
+    """
+    Extract URLs from plain text/markdown content (used by fallback fetchers).
+    """
+    seen = set()
+    out: List[str] = []
+    for u in RE_URL.findall(text or ""):
+        u2 = canonicalize_url(u.strip())
+        if u2 and u2 not in seen:
+            seen.add(u2)
+            out.append(u2)
+    return out
+
+
+def fallback_title_from_text(text: str, url: str) -> str:
+    for line in (text or "").splitlines():
+        t = line.strip().lstrip("#").strip()
+        if len(t) >= 12 and not t.lower().startswith(("url source", "markdown content", "title:")):
+            return t[:300]
+    return title_from_url(url)
+
+
 # -----------------------------
 # URL resolution: Google News RSS article links
 # -----------------------------
@@ -1063,14 +1145,22 @@ def fetch_listing_items(
     meta_attempts = 0
     meta_success = 0
 
+    html = ""
+    links: List[str] = []
+    fetch_error = 0
     try:
         r = safe_get(src.url, timeout=25)
         r.raise_for_status()
         html = r.text or ""
-    except Exception as e:
-        return [], {"total_links": 0, "kept_links": 0, "meta_attempts": 0, "meta_success": 0, "error": 1}
+        links = extract_links_from_listing(src.url, html)
+    except Exception:
+        # Radical fallback path: text mirror can work when direct publisher fetch is blocked.
+        fallback_text = fetch_text_via_jina(src.url, timeout=25)
+        if fallback_text:
+            links = extract_urls_from_text_blob(fallback_text)
+        else:
+            fetch_error = 1
 
-    links = extract_links_from_listing(src.url, html)
     total_links = len(links)
 
     # Filter + dedupe, cap
@@ -1089,19 +1179,19 @@ def fetch_listing_items(
     kept_links = len(candidates)
 
     for u in candidates:
-        if meta_fetch_budget["remaining"] <= 0:
-            break
-        meta_fetch_budget["remaining"] -= 1
-        meta_attempts += 1
-
-        try:
-            rr = safe_get(u, timeout=20)
-            rr.raise_for_status()
-            meta = parse_html_metadata(u, rr.text or "")
-        except Exception:
-            continue
-
-        meta_success += 1
+        meta: Dict[str, str] = {}
+        article_text_fallback = ""
+        if meta_fetch_budget["remaining"] > 0:
+            meta_fetch_budget["remaining"] -= 1
+            meta_attempts += 1
+            try:
+                rr = safe_get(u, timeout=20)
+                rr.raise_for_status()
+                meta = parse_html_metadata(u, rr.text or "")
+                meta_success += 1
+            except Exception:
+                meta = {}
+                article_text_fallback = fetch_text_via_jina(u, timeout=20)
 
         canonical = canonicalize_url(meta.get("canonical") or u)
         d = domain_of(canonical)
@@ -1109,8 +1199,15 @@ def fetch_listing_items(
             continue
 
         title = (meta.get("title") or "").strip()
+        if not title and article_text_fallback:
+            title = fallback_title_from_text(article_text_fallback, canonical)
+        if not title:
+            title = title_from_url(canonical)
+
         author = (meta.get("author") or "").strip()
         desc = (meta.get("description") or "").strip()
+        if not desc and article_text_fallback:
+            desc = article_text_fallback[:500]
 
         # Published time best-effort
         published = None
@@ -1125,7 +1222,9 @@ def fetch_listing_items(
                 published = None
 
         if not published:
-            # Without a published time, treat as “now” but still respect cutoff lightly:
+            published = date_from_url(canonical)
+        if not published:
+            # Without published metadata, treat as “now” to avoid silently dropping non-RSS stories.
             published = utcnow()
 
         # If the listing page includes older evergreen links, drop clearly old items.
@@ -1159,7 +1258,7 @@ def fetch_listing_items(
         "kept_links": kept_links,
         "meta_attempts": meta_attempts,
         "meta_success": meta_success,
-        "error": 0,
+        "error": fetch_error,
     }
     return items, metrics
 
@@ -1395,24 +1494,27 @@ def main() -> None:
         except Exception as ex:
             print(f"[warn] rss feed failed: {source_label}: {ex}")
 
-    # Listing path (bounded by metadata fetch budget)
-    meta_budget = {"remaining": MAX_META_FETCHES_PER_RUN if ENRICH_ARTICLE_METADATA else 0}
-    for src in listing_sources:
-        try:
-            items, metrics = fetch_listing_items(src, cutoff, full_names, last_map, meta_budget)
-            successful_sources += 1
-            print(
-                "[info] listing metrics"
-                f" source={src.name}"
-                f" total_links={metrics.get('total_links', 0)}"
-                f" kept_links={metrics.get('kept_links', 0)}"
-                f" meta_attempts={metrics.get('meta_attempts', 0)}"
-                f" meta_success={metrics.get('meta_success', 0)}"
-                f" budget_left={meta_budget['remaining']}"
-            )
-            all_items.extend(items)
-        except Exception as ex:
-            print(f"[warn] listing source failed: {src.name}: {ex}")
+    # Listing path (non-RSS). Separate budget from embed enrichment so this path never turns off by accident.
+    if ENABLE_LISTING_FETCH:
+        meta_budget = {"remaining": MAX_LISTING_META_FETCHES_PER_RUN}
+        for src in listing_sources:
+            try:
+                items, metrics = fetch_listing_items(src, cutoff, full_names, last_map, meta_budget)
+                successful_sources += 1
+                print(
+                    "[info] listing metrics"
+                    f" source={src.name}"
+                    f" total_links={metrics.get('total_links', 0)}"
+                    f" kept_links={metrics.get('kept_links', 0)}"
+                    f" meta_attempts={metrics.get('meta_attempts', 0)}"
+                    f" meta_success={metrics.get('meta_success', 0)}"
+                    f" budget_left={meta_budget['remaining']}"
+                )
+                all_items.extend(items)
+            except Exception as ex:
+                print(f"[warn] listing source failed: {src.name}: {ex}")
+    else:
+        print("[info] listing fetch disabled via ENABLE_LISTING_FETCH")
 
     posted = state.get("posted", {})
     seen_urls: Set[str] = set()
