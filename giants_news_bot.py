@@ -49,7 +49,7 @@ BSKY_IDENTIFIER = os.environ["BSKY_IDENTIFIER"]
 BSKY_APP_PASSWORD = os.environ["BSKY_APP_PASSWORD"]
 BSKY_PDS = os.getenv("BSKY_PDS", "https://bsky.social")
 
-UA = "GiantsNewsBot/2.4 (+github-actions)"
+UA = "GiantsNewsBot/2.5 (+github-actions)"
 
 
 # -----------------------------
@@ -76,6 +76,21 @@ AGGREGATOR_BLOCKLIST = {
     "feedly.com",
     "newsbreak.com",
     "ground.news",
+}
+
+# Google/CDN/asset hosts that often appear on Google News pages (not the real article)
+ASSET_DOMAIN_BLOCKLIST = {
+    "lh3.googleusercontent.com",
+    "googleusercontent.com",
+    "gstatic.com",
+    "ggpht.com",
+    "googleapis.com",
+    "ytimg.com",
+}
+
+ASSET_EXTENSIONS = {
+    ".jpg", ".jpeg", ".png", ".gif", ".webp", ".svg", ".bmp", ".ico",
+    ".mp4", ".mov", ".m4v", ".webm",
 }
 
 
@@ -151,7 +166,10 @@ class Item:
 RE_WORD = re.compile(r"[A-Za-z]+(?:'[A-Za-z]+)?")
 RE_SPACE = re.compile(r"\s+")
 RE_HTML_TAG = re.compile(r"<[^>]+>")
-RE_META = re.compile(r'<meta\s+[^>]*(?:property|name)=["\']([^"\']+)["\'][^>]*content=["\']([^"\']*)["\']', re.I)
+RE_META = re.compile(
+    r'<meta\s+[^>]*(?:property|name)=["\']([^"\']+)["\'][^>]*content=["\']([^"\']*)["\']',
+    re.I,
+)
 RE_TITLE = re.compile(r"<title[^>]*>(.*?)</title>", re.I | re.S)
 
 
@@ -226,10 +244,10 @@ def decode_google_news_url(url: str) -> str:
     u = (url or "").strip()
     if not u:
         return u
-
     if not is_google_host(u):
         return u
 
+    # Some Google URLs contain a real destination in query params.
     try:
         parsed = urlparse(u)
         q = parse_qs(parsed.query)
@@ -241,7 +259,7 @@ def decode_google_news_url(url: str) -> str:
     except Exception:
         pass
 
-    # Sometimes the path itself contains an encoded URL.
+    # Sometimes the path contains an encoded URL.
     try:
         decoded_path = unquote(urlparse(u).path)
         m = re.search(r"(https?://[^\s]+)", decoded_path)
@@ -256,14 +274,12 @@ def decode_google_news_url(url: str) -> str:
 def extract_url_from_summary(summary: str) -> str:
     html = summary or ""
 
-    # 1) href targets
     hrefs = re.findall(r'href="(https?://[^"]+)"', html)
     for h in hrefs:
         d = decode_google_news_url(h)
         if d and not is_google_host(d):
             return d
 
-    # 2) visible URL text in summary body
     txt = RE_HTML_TAG.sub(" ", html)
     urls = re.findall(r"https?://[^\s<>\]\)\"']+", txt)
     for u in urls:
@@ -295,27 +311,64 @@ def pick_best_url(entry: Any) -> str:
     return fallback
 
 
-def extract_first_external_url(html: str) -> str:
+def is_asset_like_url(u: str) -> bool:
+    if not u:
+        return True
+    du = domain_of(u)
+    if not du:
+        return True
+    if du in ASSET_DOMAIN_BLOCKLIST or any(du.endswith("." + x) for x in ASSET_DOMAIN_BLOCKLIST):
+        return True
+
+    path = urlparse(u).path.lower()
+    return any(path.endswith(ext) for ext in ASSET_EXTENSIONS)
+
+
+def is_primary_domain(d: str) -> bool:
+    return any(d == pd or d.endswith("." + pd) for pd in PRIMARY_DOMAINS)
+
+
+def extract_best_external_url(html: str) -> str:
     """
-    Google News article pages often include many Google URLs.
-    We want the first non-Google, non-blocklisted http(s) URL.
+    Find the best external URL in a Google News article HTML page.
+    Reject obvious assets, prefer PRIMARY_DOMAINS.
     """
     if not html:
         return ""
-    candidates = re.findall(r'https?://[^\s"\'<>]+', html)
-    for c in candidates:
+
+    raw = re.findall(r'https?://[^\s"\'<>]+', html)
+    candidates: List[str] = []
+
+    for c in raw:
         c = c.strip()
         if not c:
             continue
+        c = decode_google_news_url(c)
+        if not c or not c.startswith("http"):
+            continue
+        if is_google_host(c):
+            continue
+
         d = domain_of(c)
         if not d:
             continue
         if d in AGGREGATOR_BLOCKLIST:
             continue
-        if is_google_host(c):
+        if is_asset_like_url(c):
             continue
-        return c
-    return ""
+
+        candidates.append(c)
+
+    if not candidates:
+        return ""
+
+    # Prefer URLs in PRIMARY_DOMAINS first.
+    for c in candidates:
+        if is_primary_domain(domain_of(c)):
+            return c
+
+    # Otherwise first decent candidate.
+    return candidates[0]
 
 
 def resolve_url(url: str) -> str:
@@ -326,32 +379,27 @@ def resolve_url(url: str) -> str:
     u = decode_google_news_url(u)
 
     try:
-        # If already external, do one hop of redirects (canonicalize).
-        if u and not is_google_host(u):
+        # If already external, just canonicalize through redirects once.
+        if u and not is_google_host(u) and not is_asset_like_url(u):
             r = safe_get(u, timeout=20)
-            if r.url:
-                return r.url
-            return u
+            return r.url or u
 
-        # Google News link: fetch HTML and extract external target URL.
+        # Google News link -> fetch and extract real article.
         r = safe_get(u, timeout=20)
-        html = (r.text or "")
+        html = r.text or ""
 
-        ext = extract_first_external_url(html)
+        ext = extract_best_external_url(html)
         if ext:
-            return ext
+            # One hop to canonicalize (many publishers redirect).
+            try:
+                rr = safe_get(ext, timeout=20)
+                return rr.url or ext
+            except Exception:
+                return ext
 
-        # Rare: final response URL is external
-        if r.url and not is_google_host(r.url):
+        # Fallback: if response URL is external.
+        if r.url and not is_google_host(r.url) and not is_asset_like_url(r.url):
             return r.url
-
-        # Fallback: decode any embedded URLs in HTML
-        for raw in re.findall(r'https?://[^\s"\'<>]+', html):
-            cand = decode_google_news_url(raw)
-            if cand and not is_google_host(cand):
-                d = domain_of(cand)
-                if d and d not in AGGREGATOR_BLOCKLIST:
-                    return cand
 
     except Exception:
         pass
@@ -573,10 +621,8 @@ def is_allowed_item(
     if has_negative(blob):
         return False, "negative_phrase"
 
-    # Recall boost: primary domains with "Giants" mention can pass even when
-    # summary is thin and misses explicit MLB/baseball keywords.
-    is_primary_domain = any(domain == d or domain.endswith("." + d) for d in PRIMARY_DOMAINS)
-    if is_primary_domain and contains_phrase(t, "giants"):
+    # Recall boost: primary domains with "Giants" mention can pass even when summary is thin.
+    if is_primary_domain(domain) and contains_phrase(t, "giants"):
         return True, "primary_giants"
 
     if not has_baseball_context(blob, publication):
@@ -636,22 +682,17 @@ def importance_score(
 
 
 def entry_author(entry: Any) -> str:
-    """
-    Best-effort author extraction across RSS/Atom variants.
-    """
     a = (entry.get("author") or "").strip()
     if a:
         return a
 
     authors = entry.get("authors") or []
     if isinstance(authors, list) and authors:
-        # feedparser authors: [{'name': 'X'}]
         for obj in authors:
             name = (obj.get("name") or "").strip() if isinstance(obj, dict) else str(obj).strip()
             if name:
                 return name
 
-    # Some feeds use dc:creator or similar
     for k in ("dc_creator", "dc:creator", "creator"):
         v = entry.get(k)
         if v and isinstance(v, str) and v.strip():
@@ -698,13 +739,13 @@ def fetch_feed_items(
 
         raw_url = pick_best_url(e)
         url = resolve_url(raw_url)
-        if not url:
+        if not url or is_google_host(url) or is_asset_like_url(url):
             if DEBUG_REJECTIONS:
-                print(f"[debug][reject][{source_label}] no_url title={headline[:90]}")
+                print(f"[debug][reject][{source_label}] bad_url title={headline[:90]}")
             continue
 
         d = domain_of(url)
-        if not d or d in AGGREGATOR_BLOCKLIST or is_google_host(url):
+        if not d or d in AGGREGATOR_BLOCKLIST:
             if DEBUG_REJECTIONS:
                 print(f"[debug][reject][{source_label}] blocked_domain domain={d or 'none'} title={headline[:90]}")
             continue
@@ -719,7 +760,6 @@ def fetch_feed_items(
             continue
         after_relevance += 1
 
-        is_primary = any(d == pd or d.endswith("." + pd) for pd in PRIMARY_DOMAINS)
         items.append(
             Item(
                 title=headline,
@@ -728,7 +768,7 @@ def fetch_feed_items(
                 author=author,
                 published=dt,
                 domain=d,
-                is_primary=is_primary,
+                is_primary=is_primary_domain(d),
                 raw_summary=summary,
             )
         )
@@ -776,34 +816,20 @@ def make_link_facet(text: str, url: str) -> List[Dict[str, Any]]:
 
 
 def parse_external_title_desc(html: str) -> Tuple[str, str]:
-    """
-    Best-effort title/description extraction for link-card embeds.
-    """
     if not html:
         return "", ""
 
     metas = dict((k.lower(), v.strip()) for k, v in RE_META.findall(html) if k and v is not None)
 
-    title = (
-        metas.get("og:title")
-        or metas.get("twitter:title")
-        or ""
-    ).strip()
-
+    title = (metas.get("og:title") or metas.get("twitter:title") or "").strip()
     if not title:
         m = RE_TITLE.search(html)
         if m:
             title = RE_HTML_TAG.sub(" ", m.group(1)).strip()
             title = RE_SPACE.sub(" ", title)
 
-    desc = (
-        metas.get("og:description")
-        or metas.get("twitter:description")
-        or metas.get("description")
-        or ""
-    ).strip()
+    desc = (metas.get("og:description") or metas.get("twitter:description") or metas.get("description") or "").strip()
 
-    # Keep it reasonable
     title = title[:300].strip()
     desc = desc[:300].strip()
     return title, desc
@@ -811,33 +837,31 @@ def parse_external_title_desc(html: str) -> Tuple[str, str]:
 
 def build_external_embed(url: str) -> Optional[Dict[str, Any]]:
     """
-    Build a Bluesky external embed. This is what makes most clients show a "card".
-    We omit thumb (requires blob upload), but cards generally still render with title/desc.
+    Always try to send an embed so clients show a card.
+    If metadata fetch fails (timeouts/paywalls), fall back to a minimal embed.
     """
     u = (url or "").strip()
-    if not u or is_google_host(u):
+    if not u or is_google_host(u) or is_asset_like_url(u):
         return None
 
     try:
         r = safe_get(u, timeout=15)
         html = r.text or ""
         title, desc = parse_external_title_desc(html)
-
-        # If we can't get anything, don't embed.
-        if not title and not desc:
-            return None
-
-        return {
-            "$type": "app.bsky.embed.external",
-            "external": {
-                "$type": "app.bsky.embed.external#external",
-                "uri": u,
-                "title": title or u,
-                "description": desc or "",
-            },
-        }
+        title = title or u
+        desc = desc or ""
     except Exception:
-        return None
+        title, desc = u, ""
+
+    return {
+        "$type": "app.bsky.embed.external",
+        "external": {
+            "$type": "app.bsky.embed.external#external",
+            "uri": u,
+            "title": title,
+            "description": desc,
+        },
+    }
 
 
 def bsky_post(
@@ -876,11 +900,6 @@ def display_prefix(author: str, publication: str) -> str:
 
 
 def format_post_text(prefix: str, title: str, url: str, domain: str) -> str:
-    """
-    Non-url text must be:
-      - "Author: Title" if author is available
-      - else "Publication: Title"
-    """
     p = (prefix or "").strip()
     t = (title or "").strip()
     u = (url or "").strip()
@@ -962,10 +981,7 @@ def main() -> None:
         feeds.append((f"Google News: {name}", google_news_rss_url(q)))
 
     feeds.append(
-        (
-            "Google News: Broad",
-            google_news_rss_url('(("San Francisco Giants" OR "SF Giants") AND (MLB OR baseball))'),
-        )
+        ("Google News: Broad", google_news_rss_url('(("San Francisco Giants" OR "SF Giants") AND (MLB OR baseball))'))
     )
 
     all_items: List[Item] = []
@@ -1012,7 +1028,6 @@ def main() -> None:
             echo_map.get(title_hash(it.title), 1),
         )
 
-    # Newest first
     all_items.sort(key=lambda x: x.published, reverse=True)
 
     primary_candidates: List[Item] = []
@@ -1022,7 +1037,7 @@ def main() -> None:
             continue
         seen_urls.add(it.url)
 
-        it.is_primary = any(it.domain == d or it.domain.endswith("." + d) for d in PRIMARY_DOMAINS)
+        it.is_primary = is_primary_domain(it.domain)
         if it.is_primary:
             primary_candidates.append(it)
         else:
@@ -1033,13 +1048,11 @@ def main() -> None:
     max_posts = effective_max_posts_per_run()
     to_post: List[Item] = []
 
-    # Always include primary articles first; OTHER_DAILY_CAP never blocks these.
     for it in primary_candidates:
         if max_posts is not None and len(to_post) >= max_posts:
             break
         to_post.append(it)
 
-    # Include non-primary articles up to daily cap.
     other_budget = max(0, OTHER_DAILY_CAP - int(daily_other.get("count", 0)))
     for it in other_candidates:
         if max_posts is not None and len(to_post) >= max_posts:
@@ -1049,7 +1062,6 @@ def main() -> None:
         to_post.append(it)
         other_budget -= 1
 
-    # Optional per-source cap only when explicitly enabled.
     if ENFORCE_PER_SOURCE_CAP and PER_SOURCE_CAP > 0:
         filtered: List[Item] = []
         per_pub_count: Dict[str, int] = {}
@@ -1082,8 +1094,6 @@ def main() -> None:
         prefix = display_prefix(it.author, it.publication)
         text = format_post_text(prefix, it.title, it.url, it.domain)
         facets = make_link_facet(text, it.url)
-
-        # This is what usually triggers a "card" in clients.
         embed = build_external_embed(it.url)
 
         try:
