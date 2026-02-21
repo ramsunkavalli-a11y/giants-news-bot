@@ -49,7 +49,7 @@ BSKY_IDENTIFIER = os.environ["BSKY_IDENTIFIER"]
 BSKY_APP_PASSWORD = os.environ["BSKY_APP_PASSWORD"]
 BSKY_PDS = os.getenv("BSKY_PDS", "https://bsky.social")
 
-UA = "GiantsNewsBot/2.5 (+github-actions)"
+UA = "GiantsNewsBot/2.4 (+github-actions)"
 
 
 # -----------------------------
@@ -78,6 +78,7 @@ AGGREGATOR_BLOCKLIST = {
     "ground.news",
 }
 
+
 # Google/CDN/asset hosts that often appear on Google News pages (not the real article)
 ASSET_DOMAIN_BLOCKLIST = {
     "lh3.googleusercontent.com",
@@ -88,9 +89,45 @@ ASSET_DOMAIN_BLOCKLIST = {
     "ytimg.com",
 }
 
+# Tracker/ad/script hosts that are never the article
+TRACKER_DOMAIN_BLOCKLIST = {
+    "google-analytics.com",
+    "www.google-analytics.com",
+    "googletagmanager.com",
+    "www.googletagmanager.com",
+    "doubleclick.net",
+    "www.doubleclick.net",
+    "googlesyndication.com",
+    "www.googlesyndication.com",
+    "adsystem.com",
+    "adservice.google.com",
+}
+
+# File extensions that are almost never an article page
+BAD_EXTENSIONS = {
+    ".js",
+    ".css",
+    ".json",
+    ".xml",
+    ".rss",
+    ".ico",
+    ".svg",
+    ".map",
+}
+
 ASSET_EXTENSIONS = {
-    ".jpg", ".jpeg", ".png", ".gif", ".webp", ".svg", ".bmp", ".ico",
-    ".mp4", ".mov", ".m4v", ".webm",
+    ".jpg",
+    ".jpeg",
+    ".png",
+    ".gif",
+    ".webp",
+    ".svg",
+    ".bmp",
+    ".ico",
+    ".mp4",
+    ".mov",
+    ".m4v",
+    ".webm",
 }
 
 
@@ -114,39 +151,141 @@ KEY_PEOPLE = set(FRONT_OFFICE_POWER) | {"Tony Vitello"}
 # Relevance rules
 # -----------------------------
 BASEBALL_CONTEXT_TERMS = [
-    "mlb", "major league", "baseball", "spring training", "cactus league", "grapefruit league",
-    "opening day", "postseason", "playoffs", "world series", "nl west", "national league",
-    "trade", "traded", "acquired", "deal", "deadline",
-    "dfa", "designated for assignment", "waivers", "claimed",
-    "optioned", "option", "call-up", "called up", "sent down",
-    "roster", "40-man", "40 man", "injured list", "il", "rehab assignment",
-    "pitcher", "starter", "rotation", "bullpen", "reliever", "closer",
-    "catcher", "shortstop", "second base", "third base", "outfield", "first base", "dh",
-    "inning", "innings", "era", "fip", "whip", "strikeout", "strikeouts", "walks", "ks",
-    "home run", "homer", "batting", "slugging", "ops", "wrc+", "war", "xwoba",
-    "prospect", "prospects", "farm system", "scouting", "draft", "international signing",
-    "player development", "minor league", "triple-a", "double-a",
-    "manager", "bench coach", "pitching coach", "hitting coach", "coach",
-    "general manager", "gm", "front office", "president of baseball operations",
+    "mlb",
+    "major league",
+    "baseball",
+    "spring training",
+    "cactus league",
+    "grapefruit league",
+    "opening day",
+    "postseason",
+    "playoffs",
+    "world series",
+    "nl west",
+    "national league",
+    "trade",
+    "traded",
+    "acquired",
+    "deal",
+    "deadline",
+    "dfa",
+    "designated for assignment",
+    "waivers",
+    "claimed",
+    "optioned",
+    "option",
+    "call-up",
+    "called up",
+    "sent down",
+    "roster",
+    "40-man",
+    "40 man",
+    "injured list",
+    "il",
+    "rehab assignment",
+    "pitcher",
+    "starter",
+    "rotation",
+    "bullpen",
+    "reliever",
+    "closer",
+    "catcher",
+    "shortstop",
+    "second base",
+    "third base",
+    "outfield",
+    "first base",
+    "dh",
+    "inning",
+    "innings",
+    "era",
+    "fip",
+    "whip",
+    "strikeout",
+    "strikeouts",
+    "walks",
+    "ks",
+    "home run",
+    "homer",
+    "batting",
+    "slugging",
+    "ops",
+    "wrc+",
+    "war",
+    "xwoba",
+    "prospect",
+    "prospects",
+    "farm system",
+    "scouting",
+    "draft",
+    "international signing",
+    "player development",
+    "minor league",
+    "triple-a",
+    "double-a",
+    "manager",
+    "bench coach",
+    "pitching coach",
+    "hitting coach",
+    "coach",
+    "general manager",
+    "gm",
+    "front office",
+    "president of baseball operations",
 ]
 
 NEGATIVE_PHRASES = [
     "dear abby",
-    "new york giants", "ny giants",
-    "nfl", "super bowl", "touchdown", "quarterback", "wide receiver", "linebacker",
+    "new york giants",
+    "ny giants",
+    "nfl",
+    "super bowl",
+    "touchdown",
+    "quarterback",
+    "wide receiver",
+    "linebacker",
 ]
 
 BASEBALL_SOURCE_HINTS = [
-    "fangraphs", "baseball america", "mlb", "sfgiants", "baseball prospectus",
+    "fangraphs",
+    "baseball america",
+    "mlb",
+    "sfgiants",
+    "baseball prospectus",
 ]
 
 IMPORTANT_KEYWORDS = {
-    "trade", "traded", "acquire", "acquired", "deal", "waiver", "waivers",
-    "claimed", "dfa", "designated for assignment", "optioned", "call-up", "called up",
-    "sign", "signed", "signing", "extension",
-    "injury", "injured", "il", "injured list", "surgery", "rehab",
-    "prospect", "prospects", "promotion", "promoted",
-    "rotation", "bullpen", "starter", "closer",
+    "trade",
+    "traded",
+    "acquire",
+    "acquired",
+    "deal",
+    "waiver",
+    "waivers",
+    "claimed",
+    "dfa",
+    "designated for assignment",
+    "optioned",
+    "call-up",
+    "called up",
+    "sign",
+    "signed",
+    "signing",
+    "extension",
+    "injury",
+    "injured",
+    "il",
+    "injured list",
+    "surgery",
+    "rehab",
+    "prospect",
+    "prospects",
+    "promotion",
+    "promoted",
+    "rotation",
+    "bullpen",
+    "starter",
+    "closer",
 }
 
 
@@ -155,22 +294,20 @@ class Item:
     title: str
     url: str
     publication: str
-    author: str
     published: datetime
     domain: str
     is_primary: bool
+    author: str = ""
     score: int = 0
     raw_summary: str = ""
 
 
 RE_WORD = re.compile(r"[A-Za-z]+(?:'[A-Za-z]+)?")
 RE_SPACE = re.compile(r"\s+")
-RE_HTML_TAG = re.compile(r"<[^>]+>")
 RE_META = re.compile(
-    r'<meta\s+[^>]*(?:property|name)=["\']([^"\']+)["\'][^>]*content=["\']([^"\']*)["\']',
-    re.I,
+    r'<meta[^>]+property=["\']([^"\']+)["\'][^>]+content=["\']([^"\']+)["\']',
+    flags=re.I,
 )
-RE_TITLE = re.compile(r"<title[^>]*>(.*?)</title>", re.I | re.S)
 
 
 def utcnow() -> datetime:
@@ -230,6 +367,11 @@ def parse_entry_datetime(entry: Any) -> Optional[datetime]:
     return None
 
 
+def is_primary_domain(domain: str) -> bool:
+    d = (domain or "").lower()
+    return any(d == pd or d.endswith("." + pd) for pd in PRIMARY_DOMAINS)
+
+
 def google_news_rss_url(query: str) -> str:
     q = quote(query)
     return f"https://news.google.com/rss/search?q={q}&hl=en-US&gl=US&ceid=US:en"
@@ -244,10 +386,10 @@ def decode_google_news_url(url: str) -> str:
     u = (url or "").strip()
     if not u:
         return u
+
     if not is_google_host(u):
         return u
 
-    # Some Google URLs contain a real destination in query params.
     try:
         parsed = urlparse(u)
         q = parse_qs(parsed.query)
@@ -259,7 +401,7 @@ def decode_google_news_url(url: str) -> str:
     except Exception:
         pass
 
-    # Sometimes the path contains an encoded URL.
+    # Sometimes the path itself contains an encoded URL.
     try:
         decoded_path = unquote(urlparse(u).path)
         m = re.search(r"(https?://[^\s]+)", decoded_path)
@@ -271,104 +413,158 @@ def decode_google_news_url(url: str) -> str:
     return u
 
 
-def extract_url_from_summary(summary: str) -> str:
-    html = summary or ""
+def is_asset_like_url(u: str) -> bool:
+    if not u:
+        return True
 
-    hrefs = re.findall(r'href="(https?://[^"]+)"', html)
-    for h in hrefs:
-        d = decode_google_news_url(h)
-        if d and not is_google_host(d):
-            return d
+    du = domain_of(u)
+    if not du:
+        return True
 
-    txt = RE_HTML_TAG.sub(" ", html)
-    urls = re.findall(r"https?://[^\s<>\]\)\"']+", txt)
-    for u in urls:
-        d = decode_google_news_url(u)
-        if d and not is_google_host(d):
-            return d
+    # Block common CDN/asset and tracker hosts
+    if (
+        du in ASSET_DOMAIN_BLOCKLIST
+        or any(du.endswith("." + x) for x in ASSET_DOMAIN_BLOCKLIST)
+        or du in TRACKER_DOMAIN_BLOCKLIST
+        or any(du.endswith("." + x) for x in TRACKER_DOMAIN_BLOCKLIST)
+    ):
+        return True
 
-    return ""
+    path = urlparse(u).path.lower()
+
+    # Reject obvious non-article file types
+    if any(path.endswith(ext) for ext in BAD_EXTENSIONS):
+        return True
+
+    # Reject obvious media assets
+    if any(path.endswith(ext) for ext in ASSET_EXTENSIONS):
+        return True
+
+    return False
+
+
+def extract_href_candidates(html: str) -> List[str]:
+    """
+    Prefer href/meta-like candidates, not "any URL anywhere".
+    This avoids grabbing analytics.js, pixels, etc.
+    """
+    if not html:
+        return []
+
+    cands: List[str] = []
+
+    # Anchor/link hrefs
+    for h in re.findall(r'href=["\'](https?://[^"\']+)["\']', html, flags=re.I):
+        cands.append(h)
+
+    # Meta refresh redirects
+    for content in re.findall(
+        r'<meta[^>]+http-equiv=["\']refresh["\'][^>]+content=["\']([^"\']+)["\']', html, flags=re.I
+    ):
+        m = re.search(r"url=(https?://\S+)", content, flags=re.I)
+        if m:
+            cands.append(m.group(1))
+
+    # Meta og:url / twitter:url (may still be Google host; we score-filter later)
+    for prop, val in RE_META.findall(html):
+        p = (prop or "").lower()
+        if p in {"og:url", "twitter:url"} and val:
+            cands.append(val)
+
+    # De-dupe preserving order
+    seen: Set[str] = set()
+    out: List[str] = []
+    for u in cands:
+        u = (u or "").strip()
+        if not u or u in seen:
+            continue
+        seen.add(u)
+        out.append(u)
+    return out
+
+
+def score_candidate_url(u: str) -> int:
+    """
+    Score URLs so we pick the publisher article, not scripts/trackers.
+    """
+    if not u or not u.startswith("http"):
+        return -10_000
+
+    u2 = decode_google_news_url(u)
+    if is_google_host(u2):
+        return -9_000
+
+    if is_asset_like_url(u2):
+        return -8_000
+
+    d = domain_of(u2)
+    if not d:
+        return -7_000
+
+    score = 0
+
+    # Strong preference: your publisher domains
+    if is_primary_domain(d):
+        score += 5_000
+
+    path = (urlparse(u2).path or "").lower()
+    if any(x in path for x in ["/article", "/sports", "/mlb", "/giants", "/story", "/news"]):
+        score += 300
+
+    # Prefer longer paths
+    score += min(200, len(path))
+
+    lowered = u2.lower()
+    if any(k in lowered for k in ["analytics", "tagmanager", "doubleclick", "pixel"]):
+        score -= 5_000
+
+    return score
+
+
+def extract_best_external_url(html: str) -> str:
+    """
+    Find the best external URL in a Google News HTML page.
+    Only consider href/meta-like candidates, then score them.
+    """
+    candidates = extract_href_candidates(html)
+    if not candidates:
+        return ""
+
+    best_url = ""
+    best_score = -10_000_000
+
+    for c in candidates:
+        c = decode_google_news_url(c)
+        if not c or not c.startswith("http"):
+            continue
+        s = score_candidate_url(c)
+        if s > best_score:
+            best_score = s
+            best_url = c
+
+    return best_url
 
 
 def pick_best_url(entry: Any) -> str:
+    # Prefer links list first
     for l in entry.get("links", []) or []:
         href = l.get("href")
         if not href:
             continue
         decoded = decode_google_news_url(href)
-        if decoded and not is_google_host(decoded):
+        if decoded and not is_google_host(decoded) and not is_asset_like_url(decoded):
             return decoded
 
+    # Next: description/summary hrefs
     summary = entry.get("summary", "") or entry.get("description", "") or ""
-    from_summary = extract_url_from_summary(summary)
-    if from_summary:
-        return from_summary
+    hrefs = re.findall(r'href=["\'](https?://[^"\']+)["\']', summary, flags=re.I)
+    for h in hrefs:
+        d = decode_google_news_url(h)
+        if d and not is_google_host(d) and not is_asset_like_url(d):
+            return d
 
     fallback = decode_google_news_url(entry.get("link", "") or "")
-    if fallback and not is_google_host(fallback):
-        return fallback
-
     return fallback
-
-
-def is_asset_like_url(u: str) -> bool:
-    if not u:
-        return True
-    du = domain_of(u)
-    if not du:
-        return True
-    if du in ASSET_DOMAIN_BLOCKLIST or any(du.endswith("." + x) for x in ASSET_DOMAIN_BLOCKLIST):
-        return True
-
-    path = urlparse(u).path.lower()
-    return any(path.endswith(ext) for ext in ASSET_EXTENSIONS)
-
-
-def is_primary_domain(d: str) -> bool:
-    return any(d == pd or d.endswith("." + pd) for pd in PRIMARY_DOMAINS)
-
-
-def extract_best_external_url(html: str) -> str:
-    """
-    Find the best external URL in a Google News article HTML page.
-    Reject obvious assets, prefer PRIMARY_DOMAINS.
-    """
-    if not html:
-        return ""
-
-    raw = re.findall(r'https?://[^\s"\'<>]+', html)
-    candidates: List[str] = []
-
-    for c in raw:
-        c = c.strip()
-        if not c:
-            continue
-        c = decode_google_news_url(c)
-        if not c or not c.startswith("http"):
-            continue
-        if is_google_host(c):
-            continue
-
-        d = domain_of(c)
-        if not d:
-            continue
-        if d in AGGREGATOR_BLOCKLIST:
-            continue
-        if is_asset_like_url(c):
-            continue
-
-        candidates.append(c)
-
-    if not candidates:
-        return ""
-
-    # Prefer URLs in PRIMARY_DOMAINS first.
-    for c in candidates:
-        if is_primary_domain(domain_of(c)):
-            return c
-
-    # Otherwise first decent candidate.
-    return candidates[0]
 
 
 def resolve_url(url: str) -> str:
@@ -377,30 +573,20 @@ def resolve_url(url: str) -> str:
         return u
 
     u = decode_google_news_url(u)
+    if u and not is_google_host(u) and not is_asset_like_url(u):
+        return u
 
+    # Final fallback: fetch once and find best external candidate
     try:
-        # If already external, just canonicalize through redirects once.
-        if u and not is_google_host(u) and not is_asset_like_url(u):
-            r = safe_get(u, timeout=20)
-            return r.url or u
-
-        # Google News link -> fetch and extract real article.
         r = safe_get(u, timeout=20)
-        html = r.text or ""
+        if r.url:
+            resolved = decode_google_news_url(r.url)
+            if resolved and not is_google_host(resolved) and not is_asset_like_url(resolved):
+                return resolved
 
-        ext = extract_best_external_url(html)
-        if ext:
-            # One hop to canonicalize (many publishers redirect).
-            try:
-                rr = safe_get(ext, timeout=20)
-                return rr.url or ext
-            except Exception:
-                return ext
-
-        # Fallback: if response URL is external.
-        if r.url and not is_google_host(r.url) and not is_asset_like_url(r.url):
-            return r.url
-
+        best = extract_best_external_url(r.text or "")
+        if best:
+            return best
     except Exception:
         pass
 
@@ -479,6 +665,9 @@ def compute_cutoff(state: Dict[str, Any]) -> datetime:
         return base
 
 
+# -----------------------------
+# MLB Stats API: roster + (best effort) coaches
+# -----------------------------
 def load_cached_names(state: Dict[str, Any], key: str, max_age_hours: int) -> Set[str]:
     cache = state.get(key, {})
     ts = cache.get("fetched_at")
@@ -542,6 +731,9 @@ def statsapi_coaches_names() -> Set[str]:
     return set()
 
 
+# -----------------------------
+# Name matching
+# -----------------------------
 def tokenize_words(text: str) -> Set[str]:
     return set(w.lower() for w in RE_WORD.findall(text or ""))
 
@@ -589,6 +781,9 @@ def mentions_last_name_tight(text: str, last_name_map: Dict[str, Set[str]]) -> b
     return any(ln in words for ln in last_name_map.keys())
 
 
+# -----------------------------
+# Relevance + scoring
+# -----------------------------
 def has_negative(text: str) -> bool:
     t = norm_text(text)
     return any(neg in t for neg in NEGATIVE_PHRASES)
@@ -621,7 +816,8 @@ def is_allowed_item(
     if has_negative(blob):
         return False, "negative_phrase"
 
-    # Recall boost: primary domains with "Giants" mention can pass even when summary is thin.
+    # Recall boost: primary domains with "Giants" mention can pass even when
+    # summary is thin and misses explicit MLB/baseball keywords.
     if is_primary_domain(domain) and contains_phrase(t, "giants"):
         return True, "primary_giants"
 
@@ -681,26 +877,44 @@ def importance_score(
     return score
 
 
-def entry_author(entry: Any) -> str:
-    a = (entry.get("author") or "").strip()
-    if a:
-        return a
+# -----------------------------
+# Author extraction
+# -----------------------------
+def extract_author(entry: Any, summary_html: str) -> str:
+    """
+    Best-effort author extraction from RSS/Atom entries.
+    Different feeds use different fields.
+    """
+    # Feedparser normalizes some
+    author = (entry.get("author") or "").strip()
+    if author:
+        return author
 
+    # Some have "authors" list
     authors = entry.get("authors") or []
     if isinstance(authors, list) and authors:
-        for obj in authors:
-            name = (obj.get("name") or "").strip() if isinstance(obj, dict) else str(obj).strip()
-            if name:
-                return name
+        # Each element might be dict with 'name'
+        for a in authors:
+            if isinstance(a, dict):
+                nm = (a.get("name") or "").strip()
+                if nm:
+                    return nm
 
-    for k in ("dc_creator", "dc:creator", "creator"):
-        v = entry.get(k)
-        if v and isinstance(v, str) and v.strip():
-            return v.strip()
+    # Sometimes embedded in summary as "By X"
+    txt = re.sub(r"<[^>]+>", " ", summary_html or "")
+    m = re.search(r"\bBy\s+([A-Z][A-Za-z.\-]+(?:\s+[A-Z][A-Za-z.\-]+){0,3})\b", txt)
+    if m:
+        cand = (m.group(1) or "").strip()
+        # Avoid "By Giants" etc
+        if cand and cand.lower() not in {"giants", "sf", "mlb"}:
+            return cand
 
     return ""
 
 
+# -----------------------------
+# Feeds
+# -----------------------------
 def fetch_feed_items(
     feed_url: str,
     source_label: str,
@@ -735,23 +949,23 @@ def fetch_feed_items(
 
         headline, pub_from_title = extract_publication_from_title(raw_title)
         publication = pub_from_title or source_label
-        author = entry_author(e)
 
         raw_url = pick_best_url(e)
         url = resolve_url(raw_url)
-        if not url or is_google_host(url) or is_asset_like_url(url):
+        if not url:
             if DEBUG_REJECTIONS:
-                print(f"[debug][reject][{source_label}] bad_url title={headline[:90]}")
+                print(f"[debug][reject][{source_label}] no_url title={headline[:90]}")
             continue
 
         d = domain_of(url)
-        if not d or d in AGGREGATOR_BLOCKLIST:
+        if not d or d in AGGREGATOR_BLOCKLIST or is_google_host(url) or is_asset_like_url(url):
             if DEBUG_REJECTIONS:
                 print(f"[debug][reject][{source_label}] blocked_domain domain={d or 'none'} title={headline[:90]}")
             continue
         after_url_domain += 1
 
         summary = e.get("summary", "") or e.get("description", "") or ""
+        author = extract_author(e, summary)
 
         allowed, reason = is_allowed_item(headline, summary, publication, d, full_names, last_map)
         if not allowed:
@@ -760,15 +974,16 @@ def fetch_feed_items(
             continue
         after_relevance += 1
 
+        is_primary = is_primary_domain(d)
         items.append(
             Item(
                 title=headline,
                 url=url,
                 publication=publication,
-                author=author,
                 published=dt,
                 domain=d,
-                is_primary=is_primary_domain(d),
+                is_primary=is_primary,
+                author=author,
                 raw_summary=summary,
             )
         )
@@ -815,53 +1030,94 @@ def make_link_facet(text: str, url: str) -> List[Dict[str, Any]]:
     ]
 
 
-def parse_external_title_desc(html: str) -> Tuple[str, str]:
-    if not html:
-        return "", ""
-
-    metas = dict((k.lower(), v.strip()) for k, v in RE_META.findall(html) if k and v is not None)
-
-    title = (metas.get("og:title") or metas.get("twitter:title") or "").strip()
-    if not title:
-        m = RE_TITLE.search(html)
-        if m:
-            title = RE_HTML_TAG.sub(" ", m.group(1)).strip()
-            title = RE_SPACE.sub(" ", title)
-
-    desc = (metas.get("og:description") or metas.get("twitter:description") or metas.get("description") or "").strip()
-
-    title = title[:300].strip()
-    desc = desc[:300].strip()
-    return title, desc
-
-
-def build_external_embed(url: str) -> Optional[Dict[str, Any]]:
+def bsky_upload_blob(access_jwt: str, content_bytes: bytes, mime_type: str) -> Dict[str, Any]:
     """
-    Always try to send an embed so clients show a card.
-    If metadata fetch fails (timeouts/paywalls), fall back to a minimal embed.
+    Upload an image blob for external embeds.
     """
-    u = (url or "").strip()
-    if not u or is_google_host(u) or is_asset_like_url(u):
+    r = requests.post(
+        f"{BSKY_PDS}/xrpc/com.atproto.repo.uploadBlob",
+        data=content_bytes,
+        timeout=30,
+        headers={
+            "Authorization": f"Bearer {access_jwt}",
+            "User-Agent": UA,
+            "Content-Type": mime_type,
+        },
+    )
+    r.raise_for_status()
+    return r.json().get("blob") or {}
+
+
+def fetch_external_card(url: str) -> Dict[str, Any]:
+    """
+    Fetch basic OpenGraph-like metadata from the target URL to build an external embed.
+    If this fails, we still post without an embed.
+    """
+    try:
+        r = safe_get(url, timeout=20)
+        html = r.text or ""
+    except Exception:
+        return {}
+
+    meta: Dict[str, str] = {}
+    for prop, val in RE_META.findall(html):
+        p = (prop or "").strip().lower()
+        if not p or not val:
+            continue
+        if p in {"og:title", "og:description", "og:image", "og:site_name", "twitter:title", "twitter:description", "twitter:image"}:
+            # Prefer og:* over twitter:* if both exist
+            if p.startswith("twitter:"):
+                og_equiv = "og:" + p.split(":", 1)[1]
+                if og_equiv in meta:
+                    continue
+            meta[p] = val.strip()
+
+    title = meta.get("og:title") or meta.get("twitter:title") or ""
+    desc = meta.get("og:description") or meta.get("twitter:description") or ""
+    img = meta.get("og:image") or meta.get("twitter:image") or ""
+
+    # Keep within typical limits; Bluesky also has size limits.
+    title = (title or "").strip()[:300]
+    desc = (desc or "").strip()[:1000]
+    img = (img or "").strip()
+
+    out: Dict[str, Any] = {"uri": url}
+    if title:
+        out["title"] = title
+    if desc:
+        out["description"] = desc
+    if img and img.startswith("http") and not is_asset_like_url(img):
+        out["thumb_url"] = img
+    return out
+
+
+def build_external_embed(access_jwt: str, card: Dict[str, Any]) -> Optional[Dict[str, Any]]:
+    """
+    Convert fetched metadata into app.bsky.embed.external.
+    Downloads thumb (if present) and uploads as a blob.
+    """
+    if not card or not card.get("uri"):
         return None
 
-    try:
-        r = safe_get(u, timeout=15)
-        html = r.text or ""
-        title, desc = parse_external_title_desc(html)
-        title = title or u
-        desc = desc or ""
-    except Exception:
-        title, desc = u, ""
-
-    return {
-        "$type": "app.bsky.embed.external",
-        "external": {
-            "$type": "app.bsky.embed.external#external",
-            "uri": u,
-            "title": title,
-            "description": desc,
-        },
+    external: Dict[str, Any] = {
+        "uri": card["uri"],
+        "title": card.get("title") or card["uri"],
+        "description": card.get("description") or "",
     }
+
+    thumb_url = card.get("thumb_url")
+    if thumb_url:
+        try:
+            img_r = safe_get(thumb_url, timeout=20)
+            img_r.raise_for_status()
+            mime = img_r.headers.get("Content-Type", "image/jpeg").split(";")[0].strip()
+            blob = bsky_upload_blob(access_jwt, img_r.content, mime_type=mime)
+            if blob:
+                external["thumb"] = blob
+        except Exception:
+            pass
+
+    return {"$type": "app.bsky.embed.external", "external": external}
 
 
 def bsky_post(
@@ -884,7 +1140,7 @@ def bsky_post(
     r = requests.post(
         f"{BSKY_PDS}/xrpc/com.atproto.repo.createRecord",
         json={"repo": did, "collection": "app.bsky.feed.post", "record": record},
-        timeout=20,
+        timeout=30,
         headers={"Authorization": f"Bearer {access_jwt}", "User-Agent": UA},
     )
     if r.status_code >= 400:
@@ -892,30 +1148,32 @@ def bsky_post(
     r.raise_for_status()
 
 
-def display_prefix(author: str, publication: str) -> str:
-    a = (author or "").strip()
+def display_prefix(it: Item) -> str:
+    """
+    If author is available: "Author: Title"
+    else: "Publication: Title"
+    """
+    a = (it.author or "").strip()
     if a:
-        return a
-    return (publication or "").strip() or "Source"
+        return f"{a}: {it.title}".strip()
+    return f"{(it.publication or '').strip()}: {it.title}".strip()
 
 
-def format_post_text(prefix: str, title: str, url: str, domain: str) -> str:
-    p = (prefix or "").strip()
-    t = (title or "").strip()
-    u = (url or "").strip()
+def format_post_text(it: Item) -> str:
+    prefix_title = display_prefix(it)
+    u = (it.url or "").strip()
 
-    head = f"{p}: {t}".strip()
-    if is_paywalled_domain(domain):
-        head = f"{head} ($)"
+    if is_paywalled_domain(it.domain):
+        prefix_title = f"{prefix_title} ($)"
 
-    text = f"{head}\n\n{u}".strip()
+    text = f"{prefix_title}\n\n{u}".strip()
     if len(text) <= 300:
         return text
 
-    room_for_head = max(20, 300 - (len(u) + 2))
-    if len(head) > room_for_head:
-        head = head[: room_for_head - 1].rstrip() + "…"
-    return f"{head}\n\n{u}"
+    room_for_title = max(20, 300 - (len(u) + 2))
+    if len(prefix_title) > room_for_title:
+        prefix_title = prefix_title[: room_for_title - 1].rstrip() + "…"
+    return f"{prefix_title}\n\n{u}"
 
 
 def effective_max_posts_per_run() -> Optional[int]:
@@ -981,7 +1239,10 @@ def main() -> None:
         feeds.append((f"Google News: {name}", google_news_rss_url(q)))
 
     feeds.append(
-        ("Google News: Broad", google_news_rss_url('(("San Francisco Giants" OR "SF Giants") AND (MLB OR baseball))'))
+        (
+            "Google News: Broad",
+            google_news_rss_url('(("San Francisco Giants" OR "SF Giants") AND (MLB OR baseball))'),
+        )
     )
 
     all_items: List[Item] = []
@@ -1028,6 +1289,7 @@ def main() -> None:
             echo_map.get(title_hash(it.title), 1),
         )
 
+    # Newest first
     all_items.sort(key=lambda x: x.published, reverse=True)
 
     primary_candidates: List[Item] = []
@@ -1048,11 +1310,13 @@ def main() -> None:
     max_posts = effective_max_posts_per_run()
     to_post: List[Item] = []
 
+    # Primary first
     for it in primary_candidates:
         if max_posts is not None and len(to_post) >= max_posts:
             break
         to_post.append(it)
 
+    # Others up to daily cap
     other_budget = max(0, OTHER_DAILY_CAP - int(daily_other.get("count", 0)))
     for it in other_candidates:
         if max_posts is not None and len(to_post) >= max_posts:
@@ -1062,6 +1326,7 @@ def main() -> None:
         to_post.append(it)
         other_budget -= 1
 
+    # Optional per-source cap
     if ENFORCE_PER_SOURCE_CAP and PER_SOURCE_CAP > 0:
         filtered: List[Item] = []
         per_pub_count: Dict[str, int] = {}
@@ -1091,13 +1356,19 @@ def main() -> None:
 
     posted_any = 0
     for it in to_post:
-        prefix = display_prefix(it.author, it.publication)
-        text = format_post_text(prefix, it.title, it.url, it.domain)
+        text = format_post_text(it)
         facets = make_link_facet(text, it.url)
-        embed = build_external_embed(it.url)
+
+        # Try to build an external embed to force a “card”
+        embed = None
+        try:
+            card = fetch_external_card(it.url)
+            embed = build_external_embed(access_jwt, card)
+        except Exception:
+            embed = None
 
         try:
-            print(f"[post] ({it.score}) {prefix}: {it.title} -> {it.url}")
+            print(f"[post] ({it.score}) {it.publication}: {it.title} -> {it.url}")
             bsky_post(access_jwt, did, text, facets=facets, embed=embed)
             posted[it.url] = utcnow().isoformat()
             posted_any += 1
