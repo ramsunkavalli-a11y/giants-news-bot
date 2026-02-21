@@ -313,9 +313,12 @@ def title_from_url(url: str) -> str:
         path = (urlparse(url).path or "").strip("/")
         parts = [seg for seg in path.split("/") if seg]
         slug = parts[-1] if parts else ""
+        slug = slug.replace(")", "").replace("(", "")
         slug = re.sub(r"\.[A-Za-z0-9]+$", "", slug)
         slug = re.sub(r"[-_]+", " ", slug)
+        slug = re.sub(r"\b\d{6,}\b", "", slug)
         slug = RE_SPACE.sub(" ", slug).strip()
+        slug = re.sub(r"\ba s\b", "as", slug, flags=re.I)
         if not slug:
             return url
         return slug[:1].upper() + slug[1:]
@@ -866,11 +869,85 @@ def extract_urls_from_text_blob(text: str) -> List[str]:
 
 
 def fallback_title_from_text(text: str, url: str) -> str:
-    for line in (text or "").splitlines():
+    lines = (text or "").splitlines()
+
+    # Prefer explicit "Title:" line if present in mirror output.
+    for line in lines:
+        t = line.strip()
+        if t.lower().startswith("title:"):
+            cand = t.split(":", 1)[1].strip()
+            if cand:
+                return cand[:300]
+
+    skip_prefixes = (
+        "url source:",
+        "published time:",
+        "markdown content:",
+        "warning:",
+    )
+    for line in lines:
         t = line.strip().lstrip("#").strip()
-        if len(t) >= 12 and not t.lower().startswith(("url source", "markdown content", "title:")):
-            return t[:300]
+        if len(t) < 12:
+            continue
+        tl = t.lower()
+        if tl.startswith(skip_prefixes):
+            continue
+        if t.startswith("http://") or t.startswith("https://"):
+            continue
+        return t[:300]
     return title_from_url(url)
+
+
+def fallback_description_from_text(text: str, max_len: int = 240) -> str:
+    skip_prefixes = (
+        "url source:",
+        "published time:",
+        "markdown content:",
+        "title:",
+        "warning:",
+    )
+    kept = []
+    for line in (text or "").splitlines():
+        t = RE_SPACE.sub(" ", line.strip())
+        if not t:
+            continue
+        tl = t.lower()
+        if tl.startswith(skip_prefixes):
+            continue
+        if t.startswith("http://") or t.startswith("https://"):
+            continue
+        kept.append(t)
+        if len(" ".join(kept)) >= max_len:
+            break
+
+    return clean_description(" ".join(kept), max_len=max_len)
+
+
+def is_probable_article_url(src: "ListingSource", url: str) -> bool:
+    """
+    Exclude listing landing pages while allowing true article URLs.
+    """
+    try:
+        src_path = (urlparse(src.url).path or "").rstrip("/")
+        path = (urlparse(url).path or "").rstrip("/")
+
+        # Same path as listing source -> it's the landing page, not an article.
+        if path == src_path:
+            return False
+
+        # Generic team/tag landing pages are usually shallow and evergreen.
+        segs = [x for x in path.split("/") if x]
+        if len(segs) <= 2 and not re.search(r"/20\d{2}/\d{1,2}/\d{1,2}/", path):
+            return False
+
+        # Article-like if it has a date path, article/id marker, or long slug.
+        if re.search(r"/20\d{2}/\d{1,2}/\d{1,2}/", path):
+            return True
+        if any(k in path for k in ("/article/", "-", ".php", ".html")):
+            return True
+        return len(segs) >= 3
+    except Exception:
+        return True
 
 
 # -----------------------------
@@ -1197,6 +1274,8 @@ def fetch_listing_items(
         d = domain_of(canonical)
         if not d or is_google_host(canonical) or is_blocked_domain(d):
             continue
+        if not is_probable_article_url(src, canonical):
+            continue
 
         title = (meta.get("title") or "").strip()
         if not title and article_text_fallback:
@@ -1207,7 +1286,7 @@ def fetch_listing_items(
         author = (meta.get("author") or "").strip()
         desc = (meta.get("description") or "").strip()
         if not desc and article_text_fallback:
-            desc = article_text_fallback[:500]
+            desc = fallback_description_from_text(article_text_fallback, max_len=240)
 
         # Published time best-effort
         published = None
@@ -1445,26 +1524,26 @@ def main() -> None:
     # Patterns are intentionally conservative to avoid pulling unrelated site links.
     listing_sources: List[ListingSource] = [
         ListingSource(
-            name="SF Chronicle (listing)",
+            name="SF Chronicle",
             url="https://www.sfchronicle.com/sports/giants/",
             domain="sfchronicle.com",
             allow_patterns=["/sports/giants/"],
         ),
         # If you find a better Mercury News Giants landing page, swap it in.
         ListingSource(
-            name="Mercury News (listing)",
+            name="Mercury News",
             url="https://www.mercurynews.com/tag/san-francisco-giants/",
             domain="mercurynews.com",
             allow_patterns=["/tag/san-francisco-giants/", "re:/\\d{4}/\\d{2}/\\d{2}/"],
         ),
         ListingSource(
-            name="AP News (listing)",
+            name="AP News",
             url="https://apnews.com/hub/san-francisco-giants",
             domain="apnews.com",
             allow_patterns=["/article/", "/hub/san-francisco-giants"],
         ),
         ListingSource(
-            name="NBCS Bay Area (listing)",
+            name="NBC Sports Bay Area",
             url="https://www.nbcsportsbayarea.com/mlb/san-francisco-giants/",
             domain="nbcsportsbayarea.com",
             allow_patterns=["/mlb/san-francisco-giants/"],
