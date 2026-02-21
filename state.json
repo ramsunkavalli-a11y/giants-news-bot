@@ -1,7 +1,7 @@
 {
   "daily_other": {
     "count": 0,
-    "date": "2026-02-20"
+    "date": "2026-02-21"
   },
   "posted": {
     "https://sfstandard.com/2026/02/11/buster-posey-sf-giants-2026-outlook/": "2026-02-14T22:42:59.857343+00:00",
@@ -11,10 +11,13 @@
     "https://sfstandard.com/2026/02/17/buster-posey-tony-vitello-sf-giants/": "2026-02-18T05:39:24.794542+00:00",
     "https://sfstandard.com/2026/02/17/tony-vitello-sf-giants-tennessee/": "2026-02-17T19:32:28.011910+00:00",
     "https://sfstandard.com/2026/02/18/rafael-devers-sf-giants-bryce-eldridge/": "2026-02-18T18:10:01.190813+00:00",
-    "https://sfstandard.com/2026/02/19/paul-bien-sf-giants-analytics/": "2026-02-19T19:13:03.295340+00:00"
+    "https://sfstandard.com/2026/02/19/paul-bien-sf-giants-analytics/": "2026-02-19T19:13:03.295340+00:00",
+    "https://sfstandard.com/2026/02/20/tony-vitello-sf-giants-cactus-league/": "2026-02-21T04:56:12.304986+00:00",
+    "https://sfstandard.com/section-415/2026/02/20/sf-giants-spring-training-standouts/": "2026-02-21T04:56:11.634006+00:00",
+    "https://www.sfgate.com/giants/article/barry-bonds-jt-snow-21379867.php": "2026-02-21T04:56:11.161328+00:00"
   },
   "roster_cache": {
-    "fetched_at": "2026-02-19T19:12:34.602994+00:00",
+    "fetched_at": "2026-02-21T04:55:44.709964+00:00",
     "names": [
       "Adrian Houser",
       "Blade Tidwell",
@@ -62,7 +65,7 @@
     ]
   },
   "staff_cache": {
-    "fetched_at": "2026-02-19T19:12:34.750131+00:00",
+    "fetched_at": "2026-02-21T04:55:44.827180+00:00",
     "names": [
       "Alex Burg",
       "Christian Wonders",
