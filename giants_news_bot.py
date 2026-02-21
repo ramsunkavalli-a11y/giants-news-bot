@@ -194,6 +194,12 @@ RE_WORD = re.compile(r"[A-Za-z]+(?:'[A-Za-z]+)?")
 RE_SPACE = re.compile(r"\s+")
 RE_URL = re.compile(r"https?://[^\s\"\'<>]+", re.I)
 
+def looks_like_url(text: str) -> bool:
+    t = (text or "").strip()
+    if not t:
+        return False
+    return bool(RE_URL.fullmatch(t))
+
 
 # -----------------------------
 # Time / text helpers
@@ -312,7 +318,22 @@ def title_from_url(url: str) -> str:
     try:
         path = (urlparse(url).path or "").strip("/")
         parts = [seg for seg in path.split("/") if seg]
-        slug = parts[-1] if parts else ""
+
+        # Prefer a slug-like segment over numeric ID/date segments.
+        slug = ""
+        for seg in reversed(parts):
+            seg_l = seg.lower()
+            if re.fullmatch(r"\d+", seg_l):
+                continue
+            if re.fullmatch(r"20\d{2}", seg_l):
+                continue
+            if re.fullmatch(r"\d{1,2}", seg_l):
+                continue
+            slug = seg
+            break
+        if not slug and parts:
+            slug = parts[-1]
+
         slug = slug.replace(")", "").replace("(", "")
         slug = re.sub(r"\.[A-Za-z0-9]+$", "", slug)
         slug = re.sub(r"[-_]+", " ", slug)
@@ -1359,6 +1380,13 @@ def bsky_create_session() -> Dict[str, Any]:
 def build_display_line(it: Item) -> str:
     label = (it.author or "").strip() or (it.publication or "").strip()
     t = (it.title or "").strip()
+
+    # If title is accidentally a URL, derive a cleaner title from item URL.
+    if looks_like_url(t):
+        t = title_from_url(it.url)
+
+    if not t:
+        t = title_from_url(it.url)
 
     if is_paywalled_domain(it.domain):
         t = f"{t} ($)"
