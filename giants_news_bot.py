@@ -4,8 +4,9 @@ import re
 import time
 from dataclasses import dataclass
 from datetime import datetime, timedelta, timezone
+from html.parser import HTMLParser
 from typing import Any, Dict, List, Optional, Set, Tuple
-from urllib.parse import parse_qs, quote, unquote, urlparse
+from urllib.parse import parse_qs, quote, unquote, urljoin, urlparse, urlencode, urlunparse
 
 import feedparser
 import requests
@@ -18,7 +19,7 @@ from dateutil import parser as dtparser
 TEAM_ID = 137  # SF Giants (MLB Stats API)
 
 HOURS_BACK = int(os.getenv("HOURS_BACK", "8"))
-# 0 (or missing/invalid) => unlimited
+# 0 => unlimited
 MAX_POSTS_PER_RUN = int(os.getenv("MAX_POSTS_PER_RUN", "0") or "0")
 STATE_FILE = os.getenv("STATE_FILE", "state.json")
 
@@ -26,8 +27,7 @@ STATE_FILE = os.getenv("STATE_FILE", "state.json")
 ENFORCE_PER_SOURCE_CAP = os.getenv("ENFORCE_PER_SOURCE_CAP", "false").lower() in {"1", "true", "yes"}
 PER_SOURCE_CAP = int(os.getenv("PER_SOURCE_CAP", "0") or "0")
 
-# “Best of the rest” (outside your chosen domains): cap posts per day.
-# This applies only to non-primary domains.
+# Non-primary daily cap
 OTHER_DAILY_CAP = int(os.getenv("OTHER_DAILY_CAP", "2"))
 
 # Cache lifetimes
@@ -37,7 +37,27 @@ KEEP_POSTED_DAYS = int(os.getenv("KEEP_POSTED_DAYS", "21"))
 
 DEBUG_REJECTIONS = os.getenv("DEBUG_REJECTIONS", "0") == "1"
 
-# Paywall tagging (based on your rule + practical access)
+# Google News RSS can be large; resolving each item involves a fetch.
+MAX_GOOGLE_ENTRIES_PER_FEED = int(os.getenv("MAX_GOOGLE_ENTRIES_PER_FEED", "25"))
+
+# Listing pages can have tons of links; cap candidate processing.
+MAX_LISTING_LINKS_PER_SOURCE = int(os.getenv("MAX_LISTING_LINKS_PER_SOURCE", "30"))
+
+# External embed makes a “card” appear like pasting a URL.
+ENABLE_EXTERNAL_EMBED = os.getenv("ENABLE_EXTERNAL_EMBED", "true").lower() in {"1", "true", "yes"}
+
+# Metadata enrichment for embed title/description/author; costs extra fetches.
+ENRICH_ARTICLE_METADATA = os.getenv("ENRICH_ARTICLE_METADATA", "true").lower() in {"1", "true", "yes"}
+MAX_META_FETCHES_PER_RUN = int(os.getenv("MAX_META_FETCHES_PER_RUN", "25"))
+
+# UA: use a browser-ish UA; some paywalled sites block bot UAs.
+UA = os.getenv(
+    "USER_AGENT",
+    "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 "
+    "(KHTML, like Gecko) Chrome/121.0 Safari/537.36 GiantsNewsBot/3.0",
+)
+
+# Paywall tagging
 PAYWALL_DOMAINS = {
     "theathletic.com",
     "mercurynews.com",
@@ -48,8 +68,6 @@ PAYWALL_DOMAINS = {
 BSKY_IDENTIFIER = os.environ["BSKY_IDENTIFIER"]
 BSKY_APP_PASSWORD = os.environ["BSKY_APP_PASSWORD"]
 BSKY_PDS = os.getenv("BSKY_PDS", "https://bsky.social")
-
-UA = "GiantsNewsBot/2.4 (+github-actions)"
 
 
 # -----------------------------
@@ -78,56 +96,18 @@ AGGREGATOR_BLOCKLIST = {
     "ground.news",
 }
 
-
-# Google/CDN/asset hosts that often appear on Google News pages (not the real article)
-ASSET_DOMAIN_BLOCKLIST = {
-    "lh3.googleusercontent.com",
-    "googleusercontent.com",
-    "gstatic.com",
-    "ggpht.com",
-    "googleapis.com",
-    "ytimg.com",
-}
-
-# Tracker/ad/script hosts that are never the article
-TRACKER_DOMAIN_BLOCKLIST = {
+# Tracker / junk domains we never want to post as the “article URL”
+TRACKER_BLOCKLIST = {
     "google-analytics.com",
     "www.google-analytics.com",
-    "googletagmanager.com",
-    "www.googletagmanager.com",
     "doubleclick.net",
-    "www.doubleclick.net",
     "googlesyndication.com",
-    "www.googlesyndication.com",
     "adsystem.com",
     "adservice.google.com",
-}
-
-# File extensions that are almost never an article page
-BAD_EXTENSIONS = {
-    ".js",
-    ".css",
-    ".json",
-    ".xml",
-    ".rss",
-    ".ico",
-    ".svg",
-    ".map",
-}
-
-ASSET_EXTENSIONS = {
-    ".jpg",
-    ".jpeg",
-    ".png",
-    ".gif",
-    ".webp",
-    ".svg",
-    ".bmp",
-    ".ico",
-    ".mp4",
-    ".mov",
-    ".m4v",
-    ".webm",
+    "securepubads.g.doubleclick.net",
+    "tpc.googlesyndication.com",
+    "stats.g.doubleclick.net",
+    "ad.doubleclick.net",
 }
 
 
@@ -151,144 +131,45 @@ KEY_PEOPLE = set(FRONT_OFFICE_POWER) | {"Tony Vitello"}
 # Relevance rules
 # -----------------------------
 BASEBALL_CONTEXT_TERMS = [
-    "mlb",
-    "major league",
-    "baseball",
-    "spring training",
-    "cactus league",
-    "grapefruit league",
-    "opening day",
-    "postseason",
-    "playoffs",
-    "world series",
-    "nl west",
-    "national league",
-    "trade",
-    "traded",
-    "acquired",
-    "deal",
-    "deadline",
-    "dfa",
-    "designated for assignment",
-    "waivers",
-    "claimed",
-    "optioned",
-    "option",
-    "call-up",
-    "called up",
-    "sent down",
-    "roster",
-    "40-man",
-    "40 man",
-    "injured list",
-    "il",
-    "rehab assignment",
-    "pitcher",
-    "starter",
-    "rotation",
-    "bullpen",
-    "reliever",
-    "closer",
-    "catcher",
-    "shortstop",
-    "second base",
-    "third base",
-    "outfield",
-    "first base",
-    "dh",
-    "inning",
-    "innings",
-    "era",
-    "fip",
-    "whip",
-    "strikeout",
-    "strikeouts",
-    "walks",
-    "ks",
-    "home run",
-    "homer",
-    "batting",
-    "slugging",
-    "ops",
-    "wrc+",
-    "war",
-    "xwoba",
-    "prospect",
-    "prospects",
-    "farm system",
-    "scouting",
-    "draft",
-    "international signing",
-    "player development",
-    "minor league",
-    "triple-a",
-    "double-a",
-    "manager",
-    "bench coach",
-    "pitching coach",
-    "hitting coach",
-    "coach",
-    "general manager",
-    "gm",
-    "front office",
-    "president of baseball operations",
+    "mlb", "major league", "baseball", "spring training", "cactus league", "grapefruit league",
+    "opening day", "postseason", "playoffs", "world series", "nl west", "national league",
+    "trade", "traded", "acquired", "deal", "deadline",
+    "dfa", "designated for assignment", "waivers", "claimed",
+    "optioned", "option", "call-up", "called up", "sent down",
+    "roster", "40-man", "40 man", "injured list", "il", "rehab assignment",
+    "pitcher", "starter", "rotation", "bullpen", "reliever", "closer",
+    "catcher", "shortstop", "second base", "third base", "outfield", "first base", "dh",
+    "inning", "innings", "era", "fip", "whip", "strikeout", "strikeouts", "walks", "ks",
+    "home run", "homer", "batting", "slugging", "ops", "wrc+", "war", "xwoba",
+    "prospect", "prospects", "farm system", "scouting", "draft", "international signing",
+    "player development", "minor league", "triple-a", "double-a",
+    "manager", "bench coach", "pitching coach", "hitting coach", "coach",
+    "general manager", "gm", "front office", "president of baseball operations",
 ]
 
 NEGATIVE_PHRASES = [
     "dear abby",
-    "new york giants",
-    "ny giants",
-    "nfl",
-    "super bowl",
-    "touchdown",
-    "quarterback",
-    "wide receiver",
-    "linebacker",
+    "new york giants", "ny giants",
+    "nfl", "super bowl", "touchdown", "quarterback", "wide receiver", "linebacker",
 ]
 
 BASEBALL_SOURCE_HINTS = [
-    "fangraphs",
-    "baseball america",
-    "mlb",
-    "sfgiants",
-    "baseball prospectus",
+    "fangraphs", "baseball america", "mlb", "sfgiants", "baseball prospectus",
 ]
 
 IMPORTANT_KEYWORDS = {
-    "trade",
-    "traded",
-    "acquire",
-    "acquired",
-    "deal",
-    "waiver",
-    "waivers",
-    "claimed",
-    "dfa",
-    "designated for assignment",
-    "optioned",
-    "call-up",
-    "called up",
-    "sign",
-    "signed",
-    "signing",
-    "extension",
-    "injury",
-    "injured",
-    "il",
-    "injured list",
-    "surgery",
-    "rehab",
-    "prospect",
-    "prospects",
-    "promotion",
-    "promoted",
-    "rotation",
-    "bullpen",
-    "starter",
-    "closer",
+    "trade", "traded", "acquire", "acquired", "deal", "waiver", "waivers",
+    "claimed", "dfa", "designated for assignment", "optioned", "call-up", "called up",
+    "sign", "signed", "signing", "extension",
+    "injury", "injured", "il", "injured list", "surgery", "rehab",
+    "prospect", "prospects", "promotion", "promoted",
+    "rotation", "bullpen", "starter", "closer",
 }
 
 
+# -----------------------------
+# Data structures
+# -----------------------------
 @dataclass
 class Item:
     title: str
@@ -302,20 +183,31 @@ class Item:
     raw_summary: str = ""
 
 
+# -----------------------------
+# Regex helpers
+# -----------------------------
 RE_WORD = re.compile(r"[A-Za-z]+(?:'[A-Za-z]+)?")
 RE_SPACE = re.compile(r"\s+")
-RE_META = re.compile(
-    r'<meta[^>]+property=["\']([^"\']+)["\'][^>]+content=["\']([^"\']+)["\']',
-    flags=re.I,
-)
+RE_URL = re.compile(r"https?://[^\s\"\'<>]+", re.I)
 
 
+# -----------------------------
+# Time / text helpers
+# -----------------------------
 def utcnow() -> datetime:
     return datetime.now(timezone.utc)
 
 
 def norm_text(s: str) -> str:
     return RE_SPACE.sub(" ", (s or "").strip().lower())
+
+
+def tokenize_words(text: str) -> Set[str]:
+    return set(w.lower() for w in RE_WORD.findall(text or ""))
+
+
+def safe_get(url: str, timeout: int = 25) -> requests.Response:
+    return requests.get(url, timeout=timeout, headers={"User-Agent": UA}, allow_redirects=True)
 
 
 def domain_of(url: str) -> str:
@@ -328,269 +220,61 @@ def domain_of(url: str) -> str:
     return host
 
 
-def safe_get(url: str, timeout: int = 25) -> requests.Response:
-    return requests.get(url, timeout=timeout, headers={"User-Agent": UA}, allow_redirects=True)
-
-
-def title_hash(title: str) -> str:
-    t = re.sub(r"[^a-z0-9 ]+", "", (title or "").lower())
-    return re.sub(r"\s+", " ", t).strip()
-
-
-def extract_publication_from_title(raw_title: str) -> Tuple[str, str]:
-    t = (raw_title or "").strip()
-    parts = [p.strip() for p in t.split(" - ") if p.strip()]
-    if len(parts) >= 2 and len(parts[-1]) <= 60:
-        return " - ".join(parts[:-1]).strip(), parts[-1].strip()
-    return t, ""
-
-
-def parse_entry_datetime(entry: Any) -> Optional[datetime]:
-    for key in ("published_parsed", "updated_parsed"):
-        st = getattr(entry, key, None)
-        if st:
-            try:
-                return datetime.fromtimestamp(time.mktime(st), tz=timezone.utc)
-            except Exception:
-                pass
-
-    for key in ("published", "updated"):
-        val = entry.get(key)
-        if val:
-            try:
-                dt = dtparser.parse(val)
-                if dt.tzinfo is None:
-                    dt = dt.replace(tzinfo=timezone.utc)
-                return dt.astimezone(timezone.utc)
-            except Exception:
-                pass
-    return None
-
-
-def is_primary_domain(domain: str) -> bool:
-    d = (domain or "").lower()
-    return any(d == pd or d.endswith("." + pd) for pd in PRIMARY_DOMAINS)
-
-
-def google_news_rss_url(query: str) -> str:
-    q = quote(query)
-    return f"https://news.google.com/rss/search?q={q}&hl=en-US&gl=US&ceid=US:en"
-
-
 def is_google_host(url: str) -> bool:
     host = domain_of(url)
-    return ("news.google.com" in host) or ("google.com" in host)
+    return (
+        "news.google.com" in host
+        or host.endswith("google.com")
+        or host.endswith("googleusercontent.com")
+        or host.endswith("gstatic.com")
+    )
 
 
-def decode_google_news_url(url: str) -> str:
-    u = (url or "").strip()
-    if not u:
-        return u
-
-    if not is_google_host(u):
-        return u
-
-    try:
-        parsed = urlparse(u)
-        q = parse_qs(parsed.query)
-        for key in ("url", "u", "q", "redirect", "continue"):
-            for val in (q.get(key) or []):
-                cand = unquote(val).strip()
-                if cand.startswith("http") and not is_google_host(cand):
-                    return cand
-    except Exception:
-        pass
-
-    # Sometimes the path itself contains an encoded URL.
-    try:
-        decoded_path = unquote(urlparse(u).path)
-        m = re.search(r"(https?://[^\s]+)", decoded_path)
-        if m and not is_google_host(m.group(1)):
-            return m.group(1)
-    except Exception:
-        pass
-
-    return u
-
-
-def is_asset_like_url(u: str) -> bool:
-    if not u:
+def is_blocked_domain(domain: str) -> bool:
+    d = (domain or "").lower()
+    if not d:
         return True
-
-    du = domain_of(u)
-    if not du:
+    if d in TRACKER_BLOCKLIST or any(d.endswith("." + x) for x in TRACKER_BLOCKLIST):
         return True
-
-    # Block common CDN/asset and tracker hosts
-    if (
-        du in ASSET_DOMAIN_BLOCKLIST
-        or any(du.endswith("." + x) for x in ASSET_DOMAIN_BLOCKLIST)
-        or du in TRACKER_DOMAIN_BLOCKLIST
-        or any(du.endswith("." + x) for x in TRACKER_DOMAIN_BLOCKLIST)
-    ):
+    if d in AGGREGATOR_BLOCKLIST or any(d.endswith("." + x) for x in AGGREGATOR_BLOCKLIST):
         return True
-
-    path = urlparse(u).path.lower()
-
-    # Reject obvious non-article file types
-    if any(path.endswith(ext) for ext in BAD_EXTENSIONS):
+    if d.endswith("google.com") or d.endswith("googleusercontent.com") or d.endswith("gstatic.com"):
         return True
-
-    # Reject obvious media assets
-    if any(path.endswith(ext) for ext in ASSET_EXTENSIONS):
-        return True
-
     return False
 
 
-def extract_href_candidates(html: str) -> List[str]:
+def canonicalize_url(url: str) -> str:
     """
-    Prefer href/meta-like candidates, not "any URL anywhere".
-    This avoids grabbing analytics.js, pixels, etc.
+    Remove obvious tracking params, fragments, normalize.
+    This improves dedupe and reduces Google/UTM noise.
     """
-    if not html:
-        return []
-
-    cands: List[str] = []
-
-    # Anchor/link hrefs
-    for h in re.findall(r'href=["\'](https?://[^"\']+)["\']', html, flags=re.I):
-        cands.append(h)
-
-    # Meta refresh redirects
-    for content in re.findall(
-        r'<meta[^>]+http-equiv=["\']refresh["\'][^>]+content=["\']([^"\']+)["\']', html, flags=re.I
-    ):
-        m = re.search(r"url=(https?://\S+)", content, flags=re.I)
-        if m:
-            cands.append(m.group(1))
-
-    # Meta og:url / twitter:url (may still be Google host; we score-filter later)
-    for prop, val in RE_META.findall(html):
-        p = (prop or "").lower()
-        if p in {"og:url", "twitter:url"} and val:
-            cands.append(val)
-
-    # De-dupe preserving order
-    seen: Set[str] = set()
-    out: List[str] = []
-    for u in cands:
-        u = (u or "").strip()
-        if not u or u in seen:
-            continue
-        seen.add(u)
-        out.append(u)
-    return out
-
-
-def score_candidate_url(u: str) -> int:
-    """
-    Score URLs so we pick the publisher article, not scripts/trackers.
-    """
-    if not u or not u.startswith("http"):
-        return -10_000
-
-    u2 = decode_google_news_url(u)
-    if is_google_host(u2):
-        return -9_000
-
-    if is_asset_like_url(u2):
-        return -8_000
-
-    d = domain_of(u2)
-    if not d:
-        return -7_000
-
-    score = 0
-
-    # Strong preference: your publisher domains
-    if is_primary_domain(d):
-        score += 5_000
-
-    path = (urlparse(u2).path or "").lower()
-    if any(x in path for x in ["/article", "/sports", "/mlb", "/giants", "/story", "/news"]):
-        score += 300
-
-    # Prefer longer paths
-    score += min(200, len(path))
-
-    lowered = u2.lower()
-    if any(k in lowered for k in ["analytics", "tagmanager", "doubleclick", "pixel"]):
-        score -= 5_000
-
-    return score
-
-
-def extract_best_external_url(html: str) -> str:
-    """
-    Find the best external URL in a Google News HTML page.
-    Only consider href/meta-like candidates, then score them.
-    """
-    candidates = extract_href_candidates(html)
-    if not candidates:
-        return ""
-
-    best_url = ""
-    best_score = -10_000_000
-
-    for c in candidates:
-        c = decode_google_news_url(c)
-        if not c or not c.startswith("http"):
-            continue
-        s = score_candidate_url(c)
-        if s > best_score:
-            best_score = s
-            best_url = c
-
-    return best_url
-
-
-def pick_best_url(entry: Any) -> str:
-    # Prefer links list first
-    for l in entry.get("links", []) or []:
-        href = l.get("href")
-        if not href:
-            continue
-        decoded = decode_google_news_url(href)
-        if decoded and not is_google_host(decoded) and not is_asset_like_url(decoded):
-            return decoded
-
-    # Next: description/summary hrefs
-    summary = entry.get("summary", "") or entry.get("description", "") or ""
-    hrefs = re.findall(r'href=["\'](https?://[^"\']+)["\']', summary, flags=re.I)
-    for h in hrefs:
-        d = decode_google_news_url(h)
-        if d and not is_google_host(d) and not is_asset_like_url(d):
-            return d
-
-    fallback = decode_google_news_url(entry.get("link", "") or "")
-    return fallback
-
-
-def resolve_url(url: str) -> str:
     u = (url or "").strip()
     if not u:
         return u
-
-    u = decode_google_news_url(u)
-    if u and not is_google_host(u) and not is_asset_like_url(u):
-        return u
-
-    # Final fallback: fetch once and find best external candidate
     try:
-        r = safe_get(u, timeout=20)
-        if r.url:
-            resolved = decode_google_news_url(r.url)
-            if resolved and not is_google_host(resolved) and not is_asset_like_url(resolved):
-                return resolved
+        p = urlparse(u)
+        q = parse_qs(p.query, keep_blank_values=True)
 
-        best = extract_best_external_url(r.text or "")
-        if best:
-            return best
+        # Drop tracking keys
+        drop_prefixes = ("utm_",)
+        drop_keys = {
+            "fbclid", "gclid", "mc_cid", "mc_eid", "cmpid", "ref", "refsrc", "source",
+            "smid", "spm", "igshid", "mkt_tok"
+        }
+        new_q = {}
+        for k, v in q.items():
+            lk = k.lower()
+            if lk in drop_keys:
+                continue
+            if any(lk.startswith(pref) for pref in drop_prefixes):
+                continue
+            new_q[k] = v
+
+        query = urlencode(new_q, doseq=True)
+        p2 = p._replace(query=query, fragment="")
+        return urlunparse(p2)
     except Exception:
-        pass
-
-    return u
+        return u
 
 
 def is_paywalled_domain(domain: str) -> bool:
@@ -598,6 +282,9 @@ def is_paywalled_domain(domain: str) -> bool:
     return any(d == pw or d.endswith("." + pw) for pw in PAYWALL_DOMAINS)
 
 
+# -----------------------------
+# State
+# -----------------------------
 def load_state() -> Dict[str, Any]:
     if not os.path.exists(STATE_FILE):
         return {
@@ -654,7 +341,6 @@ def compute_cutoff(state: Dict[str, Any]) -> datetime:
     last_success_raw = state.get("last_run_success_at")
     if not last_success_raw:
         return base
-
     try:
         last_success = dtparser.isoparse(last_success_raw)
         if last_success.tzinfo is None:
@@ -666,7 +352,7 @@ def compute_cutoff(state: Dict[str, Any]) -> datetime:
 
 
 # -----------------------------
-# MLB Stats API: roster + (best effort) coaches
+# MLB Stats API: roster + coaches
 # -----------------------------
 def load_cached_names(state: Dict[str, Any], key: str, max_age_hours: int) -> Set[str]:
     cache = state.get(key, {})
@@ -734,10 +420,6 @@ def statsapi_coaches_names() -> Set[str]:
 # -----------------------------
 # Name matching
 # -----------------------------
-def tokenize_words(text: str) -> Set[str]:
-    return set(w.lower() for w in RE_WORD.findall(text or ""))
-
-
 def last_name_token(full_name: str) -> Optional[str]:
     parts = [p for p in RE_WORD.findall(full_name or "") if p]
     return parts[-1].lower() if parts else None
@@ -776,7 +458,6 @@ def mentions_last_name_tight(text: str, last_name_map: Dict[str, Set[str]]) -> b
     )
     if not anchors_ok:
         return False
-
     words = tokenize_words(text)
     return any(ln in words for ln in last_name_map.keys())
 
@@ -816,9 +497,9 @@ def is_allowed_item(
     if has_negative(blob):
         return False, "negative_phrase"
 
-    # Recall boost: primary domains with "Giants" mention can pass even when
-    # summary is thin and misses explicit MLB/baseball keywords.
-    if is_primary_domain(domain) and contains_phrase(t, "giants"):
+    # Recall boost: primary domains with "Giants" mention can pass even when summary is thin.
+    is_primary_domain = any(domain == d or domain.endswith("." + d) for d in PRIMARY_DOMAINS)
+    if is_primary_domain and contains_phrase(t, "giants"):
         return True, "primary_giants"
 
     if not has_baseball_context(blob, publication):
@@ -878,44 +559,354 @@ def importance_score(
 
 
 # -----------------------------
-# Author extraction
+# Google News RSS URL
 # -----------------------------
-def extract_author(entry: Any, summary_html: str) -> str:
-    """
-    Best-effort author extraction from RSS/Atom entries.
-    Different feeds use different fields.
-    """
-    # Feedparser normalizes some
-    author = (entry.get("author") or "").strip()
-    if author:
-        return author
+def google_news_rss_url(query: str) -> str:
+    q = quote(query)
+    return f"https://news.google.com/rss/search?q={q}&hl=en-US&gl=US&ceid=US:en"
 
-    # Some have "authors" list
-    authors = entry.get("authors") or []
-    if isinstance(authors, list) and authors:
-        # Each element might be dict with 'name'
-        for a in authors:
-            if isinstance(a, dict):
-                nm = (a.get("name") or "").strip()
-                if nm:
-                    return nm
 
-    # Sometimes embedded in summary as "By X"
-    txt = re.sub(r"<[^>]+>", " ", summary_html or "")
-    m = re.search(r"\bBy\s+([A-Z][A-Za-z.\-]+(?:\s+[A-Z][A-Za-z.\-]+){0,3})\b", txt)
-    if m:
-        cand = (m.group(1) or "").strip()
-        # Avoid "By Giants" etc
-        if cand and cand.lower() not in {"giants", "sf", "mlb"}:
-            return cand
+def looks_like_google_news_rss(feed_url: str) -> bool:
+    u = (feed_url or "").lower()
+    return "news.google.com/rss/" in u or "news.google.com/rss" in u
+
+
+def decode_google_redirect_url(url: str) -> str:
+    """
+    Handles cases like https://www.google.com/url?...&url=<target>
+    """
+    u = (url or "").strip()
+    if not u:
+        return u
+    try:
+        parsed = urlparse(u)
+        host = parsed.netloc.lower()
+        if host.endswith("google.com") and parsed.path.startswith("/url"):
+            q = parse_qs(parsed.query)
+            for key in ("url", "q", "u"):
+                vals = q.get(key) or []
+                for val in vals:
+                    cand = unquote(val).strip()
+                    if cand.startswith("http") and not is_google_host(cand):
+                        return cand
+    except Exception:
+        pass
+    return u
+
+
+# -----------------------------
+# HTML parsing (meta, canonical, json-ld, links)
+# -----------------------------
+class MetaLinkParser(HTMLParser):
+    def __init__(self, base_url: str):
+        super().__init__()
+        self.base_url = base_url
+        self.links: List[str] = []
+        self.canonical: str = ""
+        self.og_url: str = ""
+        self.title: str = ""
+        self.og_title: str = ""
+        self.description: str = ""
+        self.og_description: str = ""
+        self.author: str = ""
+        self.published: str = ""
+        self._in_title = False
+        self._jsonld_buf: List[str] = []
+        self._in_jsonld = False
+        self.jsonld_blobs: List[str] = []
+
+    def handle_starttag(self, tag: str, attrs: List[Tuple[str, Optional[str]]]):
+        attr = {k.lower(): (v or "") for k, v in attrs}
+
+        if tag.lower() == "a":
+            href = attr.get("href", "").strip()
+            if href:
+                self.links.append(urljoin(self.base_url, href))
+
+        if tag.lower() == "link" and attr.get("rel", "").lower() == "canonical":
+            href = attr.get("href", "").strip()
+            if href:
+                self.canonical = urljoin(self.base_url, href)
+
+        if tag.lower() == "meta":
+            prop = attr.get("property", "").lower()
+            name = attr.get("name", "").lower()
+            content = (attr.get("content") or "").strip()
+
+            if prop == "og:url" and content:
+                self.og_url = urljoin(self.base_url, content)
+            if prop == "og:title" and content:
+                self.og_title = content
+            if prop == "og:description" and content:
+                self.og_description = content
+
+            # Common author fields
+            if name in {"author", "parsely-author", "article:author", "byl"} and content:
+                self.author = content
+
+            # Common published time fields
+            if prop in {"article:published_time", "og:updated_time"} and content:
+                self.published = content
+            if name in {"pubdate", "publishdate", "date", "dc.date", "dc.date.issued"} and content and not self.published:
+                self.published = content
+
+            # Description
+            if name == "description" and content and not self.description:
+                self.description = content
+
+        if tag.lower() == "title":
+            self._in_title = True
+
+        if tag.lower() == "script":
+            t = attr.get("type", "").lower()
+            if t == "application/ld+json":
+                self._in_jsonld = True
+                self._jsonld_buf = []
+
+    def handle_endtag(self, tag: str):
+        if tag.lower() == "title":
+            self._in_title = False
+        if tag.lower() == "script" and self._in_jsonld:
+            blob = "".join(self._jsonld_buf).strip()
+            if blob:
+                self.jsonld_blobs.append(blob)
+            self._in_jsonld = False
+            self._jsonld_buf = []
+
+    def handle_data(self, data: str):
+        if self._in_title:
+            self.title += data
+        if self._in_jsonld:
+            self._jsonld_buf.append(data)
+
+
+def _extract_from_jsonld(blobs: List[str]) -> Dict[str, str]:
+    """
+    Best-effort extraction of title/author/datePublished from JSON-LD.
+    We avoid importing heavy libs; just json + shape checks.
+    """
+    out = {"title": "", "author": "", "published": "", "description": "", "canonical": ""}
+    for b in blobs:
+        try:
+            obj = json.loads(b)
+        except Exception:
+            continue
+
+        candidates = []
+        if isinstance(obj, list):
+            candidates = obj
+        elif isinstance(obj, dict):
+            # Some sites nest under @graph
+            if isinstance(obj.get("@graph"), list):
+                candidates = obj["@graph"]
+            else:
+                candidates = [obj]
+        else:
+            continue
+
+        for c in candidates:
+            if not isinstance(c, dict):
+                continue
+            t = str(c.get("@type") or "").lower()
+            if t not in {"newsarticle", "article", "reportage", "blogposting"} and "article" not in t:
+                continue
+
+            headline = c.get("headline") or c.get("name") or ""
+            if headline and not out["title"]:
+                out["title"] = str(headline).strip()
+
+            date_p = c.get("datePublished") or c.get("dateCreated") or ""
+            if date_p and not out["published"]:
+                out["published"] = str(date_p).strip()
+
+            desc = c.get("description") or ""
+            if desc and not out["description"]:
+                out["description"] = str(desc).strip()
+
+            author = c.get("author")
+            if author and not out["author"]:
+                if isinstance(author, dict):
+                    out["author"] = str(author.get("name") or "").strip()
+                elif isinstance(author, list):
+                    # take first
+                    a0 = author[0]
+                    if isinstance(a0, dict):
+                        out["author"] = str(a0.get("name") or "").strip()
+                    else:
+                        out["author"] = str(a0).strip()
+                else:
+                    out["author"] = str(author).strip()
+
+            main_entity = c.get("mainEntityOfPage")
+            if main_entity and not out["canonical"]:
+                if isinstance(main_entity, dict):
+                    out["canonical"] = str(main_entity.get("@id") or main_entity.get("url") or "").strip()
+                else:
+                    out["canonical"] = str(main_entity).strip()
+
+        # If we got something useful, stop early
+        if out["title"] or out["author"] or out["published"] or out["canonical"]:
+            return out
+    return out
+
+
+def parse_html_metadata(url: str, html: str) -> Dict[str, str]:
+    p = MetaLinkParser(base_url=url)
+    try:
+        p.feed(html or "")
+    except Exception:
+        pass
+
+    j = _extract_from_jsonld(p.jsonld_blobs)
+
+    canonical = p.canonical or p.og_url or j.get("canonical") or ""
+    title = (p.og_title or j.get("title") or p.title or "").strip()
+    author = (p.author or j.get("author") or "").strip()
+    published = (p.published or j.get("published") or "").strip()
+    description = (p.og_description or j.get("description") or p.description or "").strip()
+
+    return {
+        "canonical": canonical,
+        "title": title,
+        "author": author,
+        "published": published,
+        "description": description,
+    }
+
+
+def extract_links_from_listing(url: str, html: str) -> List[str]:
+    p = MetaLinkParser(base_url=url)
+    try:
+        p.feed(html or "")
+    except Exception:
+        pass
+    # Return unique, preserving order
+    seen = set()
+    out = []
+    for u in p.links:
+        u2 = canonicalize_url(u)
+        if u2 not in seen:
+            seen.add(u2)
+            out.append(u2)
+    return out
+
+
+# -----------------------------
+# URL resolution: Google News RSS article links
+# -----------------------------
+def resolve_google_news_article(gn_url: str) -> str:
+    """
+    Turn a Google News RSS article URL into the real publisher URL.
+    We do NOT scrape random summary links; we explicitly resolve the GN article.
+    """
+    u = (gn_url or "").strip()
+    if not u:
+        return ""
+
+    # If we somehow got a direct google redirect url, decode it.
+    u_dec = decode_google_redirect_url(u)
+    if u_dec != u and u_dec.startswith("http") and not is_google_host(u_dec):
+        return canonicalize_url(u_dec)
+
+    try:
+        r = safe_get(u, timeout=20)
+
+        # Many flows end on google.com/url?url=<target>
+        final = (r.url or "").strip()
+        final_dec = decode_google_redirect_url(final)
+        if final_dec.startswith("http") and not is_google_host(final_dec):
+            return canonicalize_url(final_dec)
+
+        # If final is still GN HTML, look inside page for outbound URL hints.
+        html = r.text or ""
+
+        # 1) Look for explicit google redirect params in HTML
+        m = re.search(r"https?://www\.google\.com/url\?[^\"\'<> ]+", html, flags=re.I)
+        if m:
+            cand = decode_google_redirect_url(m.group(0))
+            if cand.startswith("http") and not is_google_host(cand):
+                return canonicalize_url(cand)
+
+        # 2) Some GN pages contain "data-n-au" with the outbound URL
+        m2 = re.search(r'data-n-au="([^"]+)"', html, flags=re.I)
+        if m2:
+            cand = unquote(m2.group(1)).strip()
+            if cand.startswith("http") and not is_google_host(cand):
+                return canonicalize_url(cand)
+
+        # 3) Fallback: scan for any https URL that isn't google/tracker and looks like an article
+        for uu in RE_URL.findall(html):
+            cand = uu.strip()
+            cand = decode_google_redirect_url(cand)
+            d = domain_of(cand)
+            if cand.startswith("http") and d and not is_google_host(cand) and not is_blocked_domain(d):
+                return canonicalize_url(cand)
+
+    except Exception:
+        pass
 
     return ""
 
 
 # -----------------------------
-# Feeds
+# RSS parsing
 # -----------------------------
-def fetch_feed_items(
+def parse_entry_datetime(entry: Any) -> Optional[datetime]:
+    for key in ("published_parsed", "updated_parsed"):
+        st = getattr(entry, key, None)
+        if st:
+            try:
+                return datetime.fromtimestamp(time.mktime(st), tz=timezone.utc)
+            except Exception:
+                pass
+
+    for key in ("published", "updated"):
+        val = entry.get(key)
+        if val:
+            try:
+                dt = dtparser.parse(val)
+                if dt.tzinfo is None:
+                    dt = dt.replace(tzinfo=timezone.utc)
+                return dt.astimezone(timezone.utc)
+            except Exception:
+                pass
+    return None
+
+
+def extract_publication_from_title(raw_title: str) -> Tuple[str, str]:
+    """
+    Google News RSS items often look like: "Headline - Publication"
+    Return (headline, publication)
+    """
+    t = (raw_title or "").strip()
+    parts = [p.strip() for p in t.split(" - ") if p.strip()]
+    if len(parts) >= 2 and len(parts[-1]) <= 60:
+        return " - ".join(parts[:-1]).strip(), parts[-1].strip()
+    return t, ""
+
+
+def extract_author_from_entry(entry: Any) -> str:
+    """
+    feedparser typically exposes:
+      entry.get("author")
+      entry.get("authors") -> list of dicts with name
+    """
+    a = (entry.get("author") or "").strip()
+    if a:
+        return a
+    authors = entry.get("authors") or []
+    if isinstance(authors, list) and authors:
+        a0 = authors[0]
+        if isinstance(a0, dict):
+            name = (a0.get("name") or "").strip()
+            if name:
+                return name
+        if isinstance(a0, str):
+            return a0.strip()
+    return ""
+
+
+def fetch_rss_items(
     feed_url: str,
     source_label: str,
     cutoff: datetime,
@@ -933,7 +924,13 @@ def fetch_feed_items(
     after_url_domain = 0
     after_relevance = 0
 
-    for e in fp.entries:
+    is_gn = looks_like_google_news_rss(feed_url)
+
+    entries = fp.entries
+    if is_gn and MAX_GOOGLE_ENTRIES_PER_FEED > 0:
+        entries = entries[:MAX_GOOGLE_ENTRIES_PER_FEED]
+
+    for e in entries:
         dt = parse_entry_datetime(e)
         if not dt or dt < cutoff:
             if DEBUG_REJECTIONS:
@@ -950,22 +947,31 @@ def fetch_feed_items(
         headline, pub_from_title = extract_publication_from_title(raw_title)
         publication = pub_from_title or source_label
 
-        raw_url = pick_best_url(e)
-        url = resolve_url(raw_url)
+        author = extract_author_from_entry(e)
+
+        # URL resolution rules:
+        # - For Google News RSS: resolve the GN article page to the real publisher URL.
+        # - For normal RSS: use entry.link and canonicalize.
+        url = ""
+        if is_gn:
+            gn_link = (e.get("link") or "").strip()
+            url = resolve_google_news_article(gn_link)
+        else:
+            url = canonicalize_url((e.get("link") or "").strip())
+
         if not url:
             if DEBUG_REJECTIONS:
                 print(f"[debug][reject][{source_label}] no_url title={headline[:90]}")
             continue
 
         d = domain_of(url)
-        if not d or d in AGGREGATOR_BLOCKLIST or is_google_host(url) or is_asset_like_url(url):
+        if not d or is_google_host(url) or is_blocked_domain(d):
             if DEBUG_REJECTIONS:
-                print(f"[debug][reject][{source_label}] blocked_domain domain={d or 'none'} title={headline[:90]}")
+                print(f"[debug][reject][{source_label}] blocked_domain domain={d or 'none'} title={headline[:90]} url={url[:120]}")
             continue
         after_url_domain += 1
 
         summary = e.get("summary", "") or e.get("description", "") or ""
-        author = extract_author(e, summary)
 
         allowed, reason = is_allowed_item(headline, summary, publication, d, full_names, last_map)
         if not allowed:
@@ -974,7 +980,8 @@ def fetch_feed_items(
             continue
         after_relevance += 1
 
-        is_primary = is_primary_domain(d)
+        is_primary = any(d == pd or d.endswith("." + pd) for pd in PRIMARY_DOMAINS)
+
         items.append(
             Item(
                 title=headline,
@@ -998,7 +1005,167 @@ def fetch_feed_items(
 
 
 # -----------------------------
-# Bluesky
+# Listing page sources (non-RSS)
+# -----------------------------
+@dataclass
+class ListingSource:
+    name: str
+    url: str
+    domain: str
+    # only keep links that match at least one of these path substrings/regexes
+    allow_patterns: List[str]
+
+
+def link_allowed_for_listing(src: ListingSource, url: str) -> bool:
+    if not url:
+        return False
+    d = domain_of(url)
+    if not d:
+        return False
+    if d != src.domain and not d.endswith("." + src.domain):
+        return False
+    # avoid trackers and weird scripts
+    if is_blocked_domain(d):
+        return False
+    # must match allow patterns
+    path = urlparse(url).path or ""
+    for pat in src.allow_patterns:
+        try:
+            if pat.startswith("re:"):
+                if re.search(pat[3:], path):
+                    return True
+            else:
+                if pat in path:
+                    return True
+        except Exception:
+            continue
+    return False
+
+
+def fetch_listing_items(
+    src: ListingSource,
+    cutoff: datetime,
+    full_names: Set[str],
+    last_map: Dict[str, Set[str]],
+    meta_fetch_budget: Dict[str, int],
+) -> Tuple[List[Item], Dict[str, int]]:
+    """
+    Strategy:
+      - Fetch listing HTML
+      - Extract links
+      - Filter to plausible article links
+      - Fetch each candidate article's HTML metadata (limited by budget)
+      - Use metadata title/author/published if present; fallback published=utcnow()
+    """
+    items: List[Item] = []
+    total_links = 0
+    kept_links = 0
+    meta_attempts = 0
+    meta_success = 0
+
+    try:
+        r = safe_get(src.url, timeout=25)
+        r.raise_for_status()
+        html = r.text or ""
+    except Exception as e:
+        return [], {"total_links": 0, "kept_links": 0, "meta_attempts": 0, "meta_success": 0, "error": 1}
+
+    links = extract_links_from_listing(src.url, html)
+    total_links = len(links)
+
+    # Filter + dedupe, cap
+    candidates = []
+    seen = set()
+    for u in links:
+        u2 = canonicalize_url(u)
+        if u2 in seen:
+            continue
+        seen.add(u2)
+        if link_allowed_for_listing(src, u2):
+            candidates.append(u2)
+        if len(candidates) >= MAX_LISTING_LINKS_PER_SOURCE:
+            break
+
+    kept_links = len(candidates)
+
+    for u in candidates:
+        if meta_fetch_budget["remaining"] <= 0:
+            break
+        meta_fetch_budget["remaining"] -= 1
+        meta_attempts += 1
+
+        try:
+            rr = safe_get(u, timeout=20)
+            rr.raise_for_status()
+            meta = parse_html_metadata(u, rr.text or "")
+        except Exception:
+            continue
+
+        meta_success += 1
+
+        canonical = canonicalize_url(meta.get("canonical") or u)
+        d = domain_of(canonical)
+        if not d or is_google_host(canonical) or is_blocked_domain(d):
+            continue
+
+        title = (meta.get("title") or "").strip()
+        author = (meta.get("author") or "").strip()
+        desc = (meta.get("description") or "").strip()
+
+        # Published time best-effort
+        published = None
+        pub_raw = (meta.get("published") or "").strip()
+        if pub_raw:
+            try:
+                dt = dtparser.parse(pub_raw)
+                if dt.tzinfo is None:
+                    dt = dt.replace(tzinfo=timezone.utc)
+                published = dt.astimezone(timezone.utc)
+            except Exception:
+                published = None
+
+        if not published:
+            # Without a published time, treat as “now” but still respect cutoff lightly:
+            published = utcnow()
+
+        # If the listing page includes older evergreen links, drop clearly old items.
+        if published < cutoff:
+            continue
+
+        publication = src.name
+
+        # Relevance check
+        allowed, _reason = is_allowed_item(title or canonical, desc, publication, d, full_names, last_map)
+        if not allowed:
+            continue
+
+        is_primary = any(d == pd or d.endswith("." + pd) for pd in PRIMARY_DOMAINS)
+
+        items.append(
+            Item(
+                title=title or canonical,
+                url=canonical,
+                publication=publication,
+                published=published,
+                domain=d,
+                is_primary=is_primary,
+                author=author,
+                raw_summary=desc,
+            )
+        )
+
+    metrics = {
+        "total_links": total_links,
+        "kept_links": kept_links,
+        "meta_attempts": meta_attempts,
+        "meta_success": meta_success,
+        "error": 0,
+    }
+    return items, metrics
+
+
+# -----------------------------
+# Bluesky posting
 # -----------------------------
 def bsky_create_session() -> Dict[str, Any]:
     r = requests.post(
@@ -1011,136 +1178,90 @@ def bsky_create_session() -> Dict[str, Any]:
     return r.json()
 
 
-def make_link_facet(text: str, url: str) -> List[Dict[str, Any]]:
-    u = (url or "").strip()
-    if not u:
-        return []
+def build_display_line(it: Item) -> str:
+    label = (it.author or "").strip() or (it.publication or "").strip()
+    t = (it.title or "").strip()
 
-    idx = text.rfind(u)
-    if idx < 0:
-        return []
+    if is_paywalled_domain(it.domain):
+        t = f"{t} ($)"
 
-    byte_start = len(text[:idx].encode("utf-8"))
-    byte_end = byte_start + len(u.encode("utf-8"))
-    return [
-        {
-            "index": {"byteStart": byte_start, "byteEnd": byte_end},
-            "features": [{"$type": "app.bsky.richtext.facet#link", "uri": u}],
-        }
-    ]
+    if label:
+        return f"{label}: {t}"
+    return t
 
 
-def bsky_upload_blob(access_jwt: str, content_bytes: bytes, mime_type: str) -> Dict[str, Any]:
+def clean_description(s: str, max_len: int = 240) -> str:
+    txt = re.sub(r"<[^>]+>", " ", s or "")
+    txt = RE_SPACE.sub(" ", txt).strip()
+    if len(txt) > max_len:
+        txt = txt[: max_len - 1].rstrip() + "…"
+    return txt
+
+
+def build_post_text(it: Item) -> str:
+    line = build_display_line(it)
+    u = (it.url or "").strip()
+    text = f"{line}\n\n{u}".strip()
+    # Keep within 300 chars
+    if len(text) <= 300:
+        return text
+
+    # Truncate line to fit
+    room_for_line = max(20, 300 - (len(u) + 2))
+    if len(line) > room_for_line:
+        line = line[: room_for_line - 1].rstrip() + "…"
+    return f"{line}\n\n{u}"
+
+
+def build_external_embed(it: Item) -> Optional[Dict[str, Any]]:
     """
-    Upload an image blob for external embeds.
+    Create an external embed card WITHOUT uploading a thumbnail blob.
+    This avoids BlobTooLarge while still producing a "card" consistently.
     """
-    r = requests.post(
-        f"{BSKY_PDS}/xrpc/com.atproto.repo.uploadBlob",
-        data=content_bytes,
-        timeout=30,
-        headers={
-            "Authorization": f"Bearer {access_jwt}",
-            "User-Agent": UA,
-            "Content-Type": mime_type,
-        },
-    )
-    r.raise_for_status()
-    return r.json().get("blob") or {}
-
-
-def fetch_external_card(url: str) -> Dict[str, Any]:
-    """
-    Fetch basic OpenGraph-like metadata from the target URL to build an external embed.
-    If this fails, we still post without an embed.
-    """
-    try:
-        r = safe_get(url, timeout=20)
-        html = r.text or ""
-    except Exception:
-        return {}
-
-    meta: Dict[str, str] = {}
-    for prop, val in RE_META.findall(html):
-        p = (prop or "").strip().lower()
-        if not p or not val:
-            continue
-        if p in {"og:title", "og:description", "og:image", "og:site_name", "twitter:title", "twitter:description", "twitter:image"}:
-            # Prefer og:* over twitter:* if both exist
-            if p.startswith("twitter:"):
-                og_equiv = "og:" + p.split(":", 1)[1]
-                if og_equiv in meta:
-                    continue
-            meta[p] = val.strip()
-
-    title = meta.get("og:title") or meta.get("twitter:title") or ""
-    desc = meta.get("og:description") or meta.get("twitter:description") or ""
-    img = meta.get("og:image") or meta.get("twitter:image") or ""
-
-    # Keep within typical limits; Bluesky also has size limits.
-    title = (title or "").strip()[:300]
-    desc = (desc or "").strip()[:1000]
-    img = (img or "").strip()
-
-    out: Dict[str, Any] = {"uri": url}
-    if title:
-        out["title"] = title
-    if desc:
-        out["description"] = desc
-    if img and img.startswith("http") and not is_asset_like_url(img):
-        out["thumb_url"] = img
-    return out
-
-
-def build_external_embed(access_jwt: str, card: Dict[str, Any]) -> Optional[Dict[str, Any]]:
-    """
-    Convert fetched metadata into app.bsky.embed.external.
-    Downloads thumb (if present) and uploads as a blob.
-    """
-    if not card or not card.get("uri"):
+    if not ENABLE_EXTERNAL_EMBED:
         return None
 
-    external: Dict[str, Any] = {
-        "uri": card["uri"],
-        "title": card.get("title") or card["uri"],
-        "description": card.get("description") or "",
+    uri = (it.url or "").strip()
+    if not uri:
+        return None
+
+    title = (it.title or "").strip()
+    if not title:
+        title = uri
+
+    # Prefer actual article summary/description, cleaned.
+    desc = clean_description(it.raw_summary or "")
+
+    # If we have no description, a small fallback is better than empty.
+    if not desc:
+        # Use label + title lightly
+        desc = (it.publication or "").strip()
+        desc = desc[:240].strip()
+
+    return {
+        "$type": "app.bsky.embed.external",
+        "external": {
+            "uri": uri,
+            "title": title[:300],
+            "description": desc[:1000],
+            # no thumb -> no blob -> avoids BlobTooLarge
+        },
     }
 
-    thumb_url = card.get("thumb_url")
-    if thumb_url:
-        try:
-            img_r = safe_get(thumb_url, timeout=20)
-            img_r.raise_for_status()
-            mime = img_r.headers.get("Content-Type", "image/jpeg").split(";")[0].strip()
-            blob = bsky_upload_blob(access_jwt, img_r.content, mime_type=mime)
-            if blob:
-                external["thumb"] = blob
-        except Exception:
-            pass
 
-    return {"$type": "app.bsky.embed.external", "external": external}
-
-
-def bsky_post(
-    access_jwt: str,
-    did: str,
-    text: str,
-    facets: Optional[List[Dict[str, Any]]] = None,
-    embed: Optional[Dict[str, Any]] = None,
-) -> None:
+def bsky_post(access_jwt: str, did: str, text: str, embed: Optional[Dict[str, Any]] = None) -> None:
     record: Dict[str, Any] = {
         "$type": "app.bsky.feed.post",
         "text": text,
         "createdAt": utcnow().isoformat().replace("+00:00", "Z"),
     }
-    if facets:
-        record["facets"] = facets
     if embed:
         record["embed"] = embed
 
     r = requests.post(
         f"{BSKY_PDS}/xrpc/com.atproto.repo.createRecord",
         json={"repo": did, "collection": "app.bsky.feed.post", "record": record},
-        timeout=30,
+        timeout=20,
         headers={"Authorization": f"Bearer {access_jwt}", "User-Agent": UA},
     )
     if r.status_code >= 400:
@@ -1148,43 +1269,20 @@ def bsky_post(
     r.raise_for_status()
 
 
-def display_prefix(it: Item) -> str:
-    """
-    If author is available: "Author: Title"
-    else: "Publication: Title"
-    """
-    a = (it.author or "").strip()
-    if a:
-        return f"{a}: {it.title}".strip()
-    return f"{(it.publication or '').strip()}: {it.title}".strip()
-
-
-def format_post_text(it: Item) -> str:
-    prefix_title = display_prefix(it)
-    u = (it.url or "").strip()
-
-    if is_paywalled_domain(it.domain):
-        prefix_title = f"{prefix_title} ($)"
-
-    text = f"{prefix_title}\n\n{u}".strip()
-    if len(text) <= 300:
-        return text
-
-    room_for_title = max(20, 300 - (len(u) + 2))
-    if len(prefix_title) > room_for_title:
-        prefix_title = prefix_title[: room_for_title - 1].rstrip() + "…"
-    return f"{prefix_title}\n\n{u}"
-
-
+# -----------------------------
+# Main
+# -----------------------------
 def effective_max_posts_per_run() -> Optional[int]:
     if MAX_POSTS_PER_RUN <= 0:
         return None
     return MAX_POSTS_PER_RUN
 
 
-# -----------------------------
-# Main
-# -----------------------------
+def title_hash(title: str) -> str:
+    t = re.sub(r"[^a-z0-9 ]+", "", (title or "").lower())
+    return re.sub(r"\s+", " ", t).strip()
+
+
 def main() -> None:
     state = load_state()
     prune_state(state)
@@ -1219,11 +1317,15 @@ def main() -> None:
     all_names.update(KEY_PEOPLE)
     full_names, last_map = build_name_matchers(all_names)
 
-    feeds: List[Tuple[str, str]] = [
+    # -----------------------------
+    # Sources
+    # -----------------------------
+    rss_feeds: List[Tuple[str, str]] = [
         ("SF Standard", "https://sfstandard.com/sports/feed"),
         ("SFGate", "https://www.sfgate.com/sports/feed/san-francisco-giants-rss-feed-428.php"),
     ]
 
+    # Google News per-domain RSS (now with robust resolving)
     domain_queries = [
         ("SF Chronicle", '(("San Francisco Giants" OR "SF Giants" OR Giants) AND (MLB OR baseball)) site:sfchronicle.com'),
         ("Mercury News", '(("San Francisco Giants" OR "SF Giants" OR Giants) AND (MLB OR baseball)) site:mercurynews.com'),
@@ -1236,23 +1338,53 @@ def main() -> None:
         ("KNBR", '(("San Francisco Giants" OR "SF Giants" OR Giants) AND (MLB OR baseball)) site:knbr.com'),
     ]
     for name, q in domain_queries:
-        feeds.append((f"Google News: {name}", google_news_rss_url(q)))
+        rss_feeds.append((f"Google News: {name}", google_news_rss_url(q)))
 
-    feeds.append(
-        (
-            "Google News: Broad",
-            google_news_rss_url('(("San Francisco Giants" OR "SF Giants") AND (MLB OR baseball))'),
-        )
-    )
+    rss_feeds.append(("Google News: Broad", google_news_rss_url('(("San Francisco Giants" OR "SF Giants") AND (MLB OR baseball))')))
 
+    # Non-RSS listing pages (the “radical” part).
+    # Patterns are intentionally conservative to avoid pulling unrelated site links.
+    listing_sources: List[ListingSource] = [
+        ListingSource(
+            name="SF Chronicle (listing)",
+            url="https://www.sfchronicle.com/sports/giants/",
+            domain="sfchronicle.com",
+            allow_patterns=["/sports/giants/"],
+        ),
+        # If you find a better Mercury News Giants landing page, swap it in.
+        ListingSource(
+            name="Mercury News (listing)",
+            url="https://www.mercurynews.com/tag/san-francisco-giants/",
+            domain="mercurynews.com",
+            allow_patterns=["/tag/san-francisco-giants/", "re:/\\d{4}/\\d{2}/\\d{2}/"],
+        ),
+        ListingSource(
+            name="AP News (listing)",
+            url="https://apnews.com/hub/san-francisco-giants",
+            domain="apnews.com",
+            allow_patterns=["/article/", "/hub/san-francisco-giants"],
+        ),
+        ListingSource(
+            name="NBCS Bay Area (listing)",
+            url="https://www.nbcsportsbayarea.com/mlb/san-francisco-giants/",
+            domain="nbcsportsbayarea.com",
+            allow_patterns=["/mlb/san-francisco-giants/"],
+        ),
+    ]
+
+    # -----------------------------
+    # Collect items
+    # -----------------------------
     all_items: List[Item] = []
-    successful_feed_fetches = 0
-    for source_label, feed_url in feeds:
+    successful_sources = 0
+
+    # RSS path
+    for source_label, feed_url in rss_feeds:
         try:
-            items, metrics = fetch_feed_items(feed_url, source_label, cutoff, full_names, last_map)
-            successful_feed_fetches += 1
+            items, metrics = fetch_rss_items(feed_url, source_label, cutoff, full_names, last_map)
+            successful_sources += 1
             print(
-                "[info] feed metrics"
+                "[info] rss metrics"
                 f" source={source_label}"
                 f" total={metrics['total_entries']}"
                 f" after_cutoff={metrics['after_cutoff']}"
@@ -1261,23 +1393,54 @@ def main() -> None:
             )
             all_items.extend(items)
         except Exception as ex:
-            print(f"[warn] feed failed: {source_label}: {ex}")
+            print(f"[warn] rss feed failed: {source_label}: {ex}")
+
+    # Listing path (bounded by metadata fetch budget)
+    meta_budget = {"remaining": MAX_META_FETCHES_PER_RUN if ENRICH_ARTICLE_METADATA else 0}
+    for src in listing_sources:
+        try:
+            items, metrics = fetch_listing_items(src, cutoff, full_names, last_map, meta_budget)
+            successful_sources += 1
+            print(
+                "[info] listing metrics"
+                f" source={src.name}"
+                f" total_links={metrics.get('total_links', 0)}"
+                f" kept_links={metrics.get('kept_links', 0)}"
+                f" meta_attempts={metrics.get('meta_attempts', 0)}"
+                f" meta_success={metrics.get('meta_success', 0)}"
+                f" budget_left={meta_budget['remaining']}"
+            )
+            all_items.extend(items)
+        except Exception as ex:
+            print(f"[warn] listing source failed: {src.name}: {ex}")
 
     posted = state.get("posted", {})
     seen_urls: Set[str] = set()
 
     if not all_items:
         print("No eligible items found.")
-        if successful_feed_fetches > 0:
+        if successful_sources > 0:
             state["last_run_success_at"] = utcnow().isoformat()
         save_state(state)
         return
 
+    # Dedupe by canonicalized URL early
+    deduped: List[Item] = []
+    for it in all_items:
+        it.url = canonicalize_url(it.url)
+        if it.url in seen_urls:
+            continue
+        seen_urls.add(it.url)
+        deduped.append(it)
+    all_items = deduped
+
+    # Echo counts
     echo_map: Dict[str, int] = {}
     for it in all_items:
         h = title_hash(it.title)
         echo_map[h] = echo_map.get(h, 0) + 1
 
+    # Score
     for it in all_items:
         it.score = importance_score(
             it.title,
@@ -1295,11 +1458,9 @@ def main() -> None:
     primary_candidates: List[Item] = []
     other_candidates: List[Item] = []
     for it in all_items:
-        if it.url in posted or it.url in seen_urls:
+        if it.url in posted:
             continue
-        seen_urls.add(it.url)
-
-        it.is_primary = is_primary_domain(it.domain)
+        it.is_primary = any(it.domain == d or it.domain.endswith("." + d) for d in PRIMARY_DOMAINS)
         if it.is_primary:
             primary_candidates.append(it)
         else:
@@ -1310,13 +1471,11 @@ def main() -> None:
     max_posts = effective_max_posts_per_run()
     to_post: List[Item] = []
 
-    # Primary first
     for it in primary_candidates:
         if max_posts is not None and len(to_post) >= max_posts:
             break
         to_post.append(it)
 
-    # Others up to daily cap
     other_budget = max(0, OTHER_DAILY_CAP - int(daily_other.get("count", 0)))
     for it in other_candidates:
         if max_posts is not None and len(to_post) >= max_posts:
@@ -1326,7 +1485,6 @@ def main() -> None:
         to_post.append(it)
         other_budget -= 1
 
-    # Optional per-source cap
     if ENFORCE_PER_SOURCE_CAP and PER_SOURCE_CAP > 0:
         filtered: List[Item] = []
         per_pub_count: Dict[str, int] = {}
@@ -1345,7 +1503,7 @@ def main() -> None:
 
     if not to_post:
         print("No new items to post.")
-        if successful_feed_fetches > 0:
+        if successful_sources > 0:
             state["last_run_success_at"] = utcnow().isoformat()
         save_state(state)
         return
@@ -1356,20 +1514,11 @@ def main() -> None:
 
     posted_any = 0
     for it in to_post:
-        text = format_post_text(it)
-        facets = make_link_facet(text, it.url)
-
-        # Try to build an external embed to force a “card”
-        embed = None
-        try:
-            card = fetch_external_card(it.url)
-            embed = build_external_embed(access_jwt, card)
-        except Exception:
-            embed = None
-
+        text = build_post_text(it)
+        embed = build_external_embed(it) if ENABLE_EXTERNAL_EMBED else None
         try:
             print(f"[post] ({it.score}) {it.publication}: {it.title} -> {it.url}")
-            bsky_post(access_jwt, did, text, facets=facets, embed=embed)
+            bsky_post(access_jwt, did, text, embed=embed)
             posted[it.url] = utcnow().isoformat()
             posted_any += 1
             if not it.is_primary:
@@ -1379,7 +1528,7 @@ def main() -> None:
 
     state["posted"] = posted
     state["daily_other"] = daily_other
-    if successful_feed_fetches > 0:
+    if successful_sources > 0:
         state["last_run_success_at"] = utcnow().isoformat()
     save_state(state)
 
