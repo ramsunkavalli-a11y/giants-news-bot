@@ -4,8 +4,8 @@ import re
 import time
 from dataclasses import dataclass
 from datetime import datetime, timedelta, timezone
-from typing import List, Optional, Dict, Any, Set, Tuple
-from urllib.parse import quote, urlparse
+from typing import Any, Dict, List, Optional, Set, Tuple
+from urllib.parse import parse_qs, quote, unquote, urlparse
 
 import feedparser
 import requests
@@ -18,13 +18,16 @@ from dateutil import parser as dtparser
 TEAM_ID = 137  # SF Giants (MLB Stats API)
 
 HOURS_BACK = int(os.getenv("HOURS_BACK", "8"))
-MAX_POSTS_PER_RUN = int(os.getenv("MAX_POSTS_PER_RUN", "5"))
+# 0 (or missing/invalid) => unlimited
+MAX_POSTS_PER_RUN = int(os.getenv("MAX_POSTS_PER_RUN", "0") or "0")
 STATE_FILE = os.getenv("STATE_FILE", "state.json")
 
-# Per-run diversity: cap how many posts from the same publication in a single run.
-PER_SOURCE_CAP = int(os.getenv("PER_SOURCE_CAP", "2"))
+# Per-run diversity is off by default. Enable explicitly if you want it.
+ENFORCE_PER_SOURCE_CAP = os.getenv("ENFORCE_PER_SOURCE_CAP", "false").lower() in {"1", "true", "yes"}
+PER_SOURCE_CAP = int(os.getenv("PER_SOURCE_CAP", "0") or "0")
 
-# “Best of the rest” (outside your chosen domains): cap posts per day
+# “Best of the rest” (outside your chosen domains): cap posts per day.
+# This applies only to non-primary domains.
 OTHER_DAILY_CAP = int(os.getenv("OTHER_DAILY_CAP", "2"))
 
 # Cache lifetimes
@@ -32,20 +35,21 @@ ROSTER_CACHE_HOURS = int(os.getenv("ROSTER_CACHE_HOURS", "24"))
 STAFF_CACHE_HOURS = int(os.getenv("STAFF_CACHE_HOURS", "24"))
 KEEP_POSTED_DAYS = int(os.getenv("KEEP_POSTED_DAYS", "21"))
 
+DEBUG_REJECTIONS = os.getenv("DEBUG_REJECTIONS", "0") == "1"
+
 # Paywall tagging (based on your rule + practical access)
 PAYWALL_DOMAINS = {
     "theathletic.com",
     "mercurynews.com",
     "baseballamerica.com",
-    # Optional: many readers hit a meter, but your fetch test may not show it.
     "sfchronicle.com",
 }
 
-BSKY_IDENTIFIER = os.environ["BSKY_IDENTIFIER"]  # handle or email
+BSKY_IDENTIFIER = os.environ["BSKY_IDENTIFIER"]
 BSKY_APP_PASSWORD = os.environ["BSKY_APP_PASSWORD"]
 BSKY_PDS = os.getenv("BSKY_PDS", "https://bsky.social")
 
-UA = "GiantsNewsBot/2.2 (+github-actions)"
+UA = "GiantsNewsBot/2.3 (+github-actions)"
 
 
 # -----------------------------
@@ -66,7 +70,6 @@ PRIMARY_DOMAINS = {
     "baseballamerica.com",
 }
 
-# Known aggregator / meta domains you likely don’t want as final links
 AGGREGATOR_BLOCKLIST = {
     "news.google.com",
     "feedspot.com",
@@ -77,8 +80,7 @@ AGGREGATOR_BLOCKLIST = {
 
 
 # -----------------------------
-# Always-relevant “power” names (front office / decision makers)
-# plus your explicitly requested names.
+# Always-relevant names
 # -----------------------------
 FRONT_OFFICE_POWER = {
     "Greg Johnson",
@@ -90,33 +92,25 @@ FRONT_OFFICE_POWER = {
     "Paul Bien",
     "Randy Winn",
 }
-KEY_PEOPLE = set(FRONT_OFFICE_POWER) | {
-    "Tony Vitello",
-}
+KEY_PEOPLE = set(FRONT_OFFICE_POWER) | {"Tony Vitello"}
 
 
 # -----------------------------
-# Relevance rules (tight)
+# Relevance rules
 # -----------------------------
 BASEBALL_CONTEXT_TERMS = [
-    # Baseball / MLB
     "mlb", "major league", "baseball", "spring training", "cactus league", "grapefruit league",
     "opening day", "postseason", "playoffs", "world series", "nl west", "national league",
-    # Transactions / roster
     "trade", "traded", "acquired", "deal", "deadline",
     "dfa", "designated for assignment", "waivers", "claimed",
     "optioned", "option", "call-up", "called up", "sent down",
     "roster", "40-man", "40 man", "injured list", "il", "rehab assignment",
-    # Roles / team building
     "pitcher", "starter", "rotation", "bullpen", "reliever", "closer",
     "catcher", "shortstop", "second base", "third base", "outfield", "first base", "dh",
-    # Stats-y words
     "inning", "innings", "era", "fip", "whip", "strikeout", "strikeouts", "walks", "ks",
     "home run", "homer", "batting", "slugging", "ops", "wrc+", "war", "xwoba",
-    # Prospects / org
     "prospect", "prospects", "farm system", "scouting", "draft", "international signing",
     "player development", "minor league", "triple-a", "double-a",
-    # Coaching/FO terms
     "manager", "bench coach", "pitching coach", "hitting coach", "coach",
     "general manager", "gm", "front office", "president of baseball operations",
 ]
@@ -141,9 +135,6 @@ IMPORTANT_KEYWORDS = {
 }
 
 
-# -----------------------------
-# Data structures
-# -----------------------------
 @dataclass
 class Item:
     title: str
@@ -156,9 +147,6 @@ class Item:
     raw_summary: str = ""
 
 
-# -----------------------------
-# Helpers
-# -----------------------------
 RE_WORD = re.compile(r"[A-Za-z]+(?:'[A-Za-z]+)?")
 RE_SPACE = re.compile(r"\s+")
 
@@ -182,12 +170,7 @@ def domain_of(url: str) -> str:
 
 
 def safe_get(url: str, timeout: int = 25) -> requests.Response:
-    return requests.get(
-        url,
-        timeout=timeout,
-        headers={"User-Agent": UA},
-        allow_redirects=True,
-    )
+    return requests.get(url, timeout=timeout, headers={"User-Agent": UA}, allow_redirects=True)
 
 
 def title_hash(title: str) -> str:
@@ -196,10 +179,6 @@ def title_hash(title: str) -> str:
 
 
 def extract_publication_from_title(raw_title: str) -> Tuple[str, str]:
-    """
-    Many Google News RSS items are like: "Headline - Publication"
-    Return (headline, publication)
-    """
     t = (raw_title or "").strip()
     parts = [p.strip() for p in t.split(" - ") if p.strip()]
     if len(parts) >= 2 and len(parts[-1]) <= 60:
@@ -226,7 +205,6 @@ def parse_entry_datetime(entry: Any) -> Optional[datetime]:
                 return dt.astimezone(timezone.utc)
             except Exception:
                 pass
-
     return None
 
 
@@ -240,37 +218,105 @@ def is_google_host(url: str) -> bool:
     return ("news.google.com" in host) or ("google.com" in host)
 
 
-def pick_best_url(entry: Any) -> str:
-    """
-    Prefer non-Google link in entry.links, then non-Google href in summary, else entry.link.
-    """
-    for l in entry.get("links", []) or []:
-        href = l.get("href")
-        if href and not is_google_host(href):
-            return href
-
-    summary = entry.get("summary", "") or entry.get("description", "") or ""
-    hrefs = re.findall(r'href="(https?://[^"]+)"', summary)
-    for href in hrefs:
-        if href and not is_google_host(href):
-            return href
-
-    return entry.get("link", "") or ""
-
-
-def resolve_url(url: str) -> str:
-    """
-    Follow redirects once to reach the canonical URL when possible.
-    """
+def decode_google_news_url(url: str) -> str:
     u = (url or "").strip()
     if not u:
         return u
+
+    if not is_google_host(u):
+        return u
+
+    try:
+        parsed = urlparse(u)
+        q = parse_qs(parsed.query)
+        for key in ("url", "u", "q", "redirect", "continue"):
+            for val in (q.get(key) or []):
+                cand = unquote(val).strip()
+                if cand.startswith("http") and not is_google_host(cand):
+                    return cand
+    except Exception:
+        pass
+
+    # Sometimes the path itself contains an encoded URL.
+    try:
+        decoded_path = unquote(urlparse(u).path)
+        m = re.search(r"(https?://[^\s]+)", decoded_path)
+        if m and not is_google_host(m.group(1)):
+            return m.group(1)
+    except Exception:
+        pass
+
+    return u
+
+
+def extract_url_from_summary(summary: str) -> str:
+    html = summary or ""
+
+    # 1) href targets
+    hrefs = re.findall(r'href="(https?://[^"]+)"', html)
+    for h in hrefs:
+        d = decode_google_news_url(h)
+        if d and not is_google_host(d):
+            return d
+
+    # 2) visible URL text in summary body
+    txt = re.sub(r"<[^>]+>", " ", html)
+    urls = re.findall(r"https?://[^\s<>\]\)\"']+", txt)
+    for u in urls:
+        d = decode_google_news_url(u)
+        if d and not is_google_host(d):
+            return d
+
+    return ""
+
+
+def pick_best_url(entry: Any) -> str:
+    for l in entry.get("links", []) or []:
+        href = l.get("href")
+        if not href:
+            continue
+        decoded = decode_google_news_url(href)
+        if decoded and not is_google_host(decoded):
+            return decoded
+
+    summary = entry.get("summary", "") or entry.get("description", "") or ""
+    from_summary = extract_url_from_summary(summary)
+    if from_summary:
+        return from_summary
+
+    fallback = decode_google_news_url(entry.get("link", "") or "")
+    if fallback and not is_google_host(fallback):
+        return fallback
+
+    return fallback
+
+
+def resolve_url(url: str) -> str:
+    u = (url or "").strip()
+    if not u:
+        return u
+
+    u = decode_google_news_url(u)
+    if u and not is_google_host(u):
+        return u
+
+    # Final fallback: fetch once and decode redirect target.
     try:
         r = safe_get(u, timeout=20)
         if r.url:
-            return r.url
+            resolved = decode_google_news_url(r.url)
+            if resolved:
+                return resolved
+
+        # Some Google responses still include a canonical URL in body.
+        m = re.search(r'https?://[^\s"\'<>]+', r.text or "")
+        if m:
+            cand = decode_google_news_url(m.group(0))
+            if cand and not is_google_host(cand):
+                return cand
     except Exception:
         pass
+
     return u
 
 
@@ -279,18 +325,22 @@ def is_paywalled_domain(domain: str) -> bool:
     return any(d == pw or d.endswith("." + pw) for pw in PAYWALL_DOMAINS)
 
 
-# -----------------------------
-# State
-# -----------------------------
 def load_state() -> Dict[str, Any]:
     if not os.path.exists(STATE_FILE):
-        return {"posted": {}, "roster_cache": {}, "staff_cache": {}, "daily_other": {}}
+        return {
+            "posted": {},
+            "roster_cache": {},
+            "staff_cache": {},
+            "daily_other": {},
+            "last_run_success_at": None,
+        }
     with open(STATE_FILE, "r", encoding="utf-8") as f:
         state = json.load(f)
     state.setdefault("posted", {})
     state.setdefault("roster_cache", {})
     state.setdefault("staff_cache", {})
     state.setdefault("daily_other", {})
+    state.setdefault("last_run_success_at", None)
     return state
 
 
@@ -326,6 +376,22 @@ def get_daily_other_counter(state: Dict[str, Any]) -> Dict[str, Any]:
     return daily
 
 
+def compute_cutoff(state: Dict[str, Any]) -> datetime:
+    base = utcnow() - timedelta(hours=HOURS_BACK)
+    last_success_raw = state.get("last_run_success_at")
+    if not last_success_raw:
+        return base
+
+    try:
+        last_success = dtparser.isoparse(last_success_raw)
+        if last_success.tzinfo is None:
+            last_success = last_success.replace(tzinfo=timezone.utc)
+        buffered = last_success - timedelta(minutes=15)
+        return min(base, buffered)
+    except Exception:
+        return base
+
+
 def load_cached_names(state: Dict[str, Any], key: str, max_age_hours: int) -> Set[str]:
     cache = state.get(key, {})
     ts = cache.get("fetched_at")
@@ -342,15 +408,9 @@ def load_cached_names(state: Dict[str, Any], key: str, max_age_hours: int) -> Se
 
 
 def save_cached_names(state: Dict[str, Any], key: str, names: Set[str]) -> None:
-    state[key] = {
-        "fetched_at": utcnow().isoformat(),
-        "names": sorted(names),
-    }
+    state[key] = {"fetched_at": utcnow().isoformat(), "names": sorted(names)}
 
 
-# -----------------------------
-# MLB Stats API: roster + (best effort) coaches
-# -----------------------------
 def statsapi_40man_names() -> Set[str]:
     url = f"https://statsapi.mlb.com/api/v1/teams/{TEAM_ID}/roster/40Man"
     r = safe_get(url, timeout=20)
@@ -366,10 +426,6 @@ def statsapi_40man_names() -> Set[str]:
 
 
 def statsapi_coaches_names() -> Set[str]:
-    """
-    Best-effort. MLB Stats API sometimes exposes a coaches endpoint; shape varies.
-    If it fails, return empty set.
-    """
     year = utcnow().year
     candidates = [
         f"https://statsapi.mlb.com/api/v1/teams/{TEAM_ID}/coaches?season={year}",
@@ -381,7 +437,6 @@ def statsapi_coaches_names() -> Set[str]:
             r = safe_get(url, timeout=20)
             r.raise_for_status()
             data = r.json()
-
             coaches = data.get("coaches") or data.get("teamCoaches") or data.get("roster") or []
             names: Set[str] = set()
             for row in coaches:
@@ -400,18 +455,13 @@ def statsapi_coaches_names() -> Set[str]:
     return set()
 
 
-# -----------------------------
-# Name matching (full name + tight last name)
-# -----------------------------
 def tokenize_words(text: str) -> Set[str]:
     return set(w.lower() for w in RE_WORD.findall(text or ""))
 
 
 def last_name_token(full_name: str) -> Optional[str]:
     parts = [p for p in RE_WORD.findall(full_name or "") if p]
-    if not parts:
-        return None
-    return parts[-1].lower()
+    return parts[-1].lower() if parts else None
 
 
 def build_name_matchers(names: Set[str]) -> Tuple[Set[str], Dict[str, Set[str]]]:
@@ -452,9 +502,6 @@ def mentions_last_name_tight(text: str, last_name_map: Dict[str, Set[str]]) -> b
     return any(ln in words for ln in last_name_map.keys())
 
 
-# -----------------------------
-# Relevance + scoring
-# -----------------------------
 def has_negative(text: str) -> bool:
     t = norm_text(text)
     return any(neg in t for neg in NEGATIVE_PHRASES)
@@ -473,28 +520,47 @@ def mentions_team_strong(text: str) -> bool:
     return ("san francisco giants" in t) or ("sf giants" in t)
 
 
-def is_allowed_item(title: str, summary: str, publication: str,
-                    full_names: Set[str], last_map: Dict[str, Set[str]]) -> bool:
+def is_allowed_item(
+    title: str,
+    summary: str,
+    publication: str,
+    domain: str,
+    full_names: Set[str],
+    last_map: Dict[str, Set[str]],
+) -> Tuple[bool, str]:
     blob = f"{title}\n{summary}"
+    t = norm_text(blob)
 
     if has_negative(blob):
-        return False
+        return False, "negative_phrase"
+
+    # Recall boost: primary domains with "Giants" mention can pass even when
+    # summary is thin and misses explicit MLB/baseball keywords.
+    is_primary_domain = any(domain == d or domain.endswith("." + d) for d in PRIMARY_DOMAINS)
+    if is_primary_domain and contains_phrase(t, "giants"):
+        return True, "primary_giants"
 
     if not has_baseball_context(blob, publication):
-        return False
+        return False, "no_baseball_context"
 
     if mentions_team_strong(blob):
-        return True
+        return True, "team_match"
 
     if full_names and (mentions_full_name(blob, full_names) or mentions_last_name_tight(blob, last_map)):
-        return True
+        return True, "name_match"
 
-    return False
+    return False, "no_team_or_name_match"
 
 
-def importance_score(title: str, summary: str, publication: str,
-                     full_names: Set[str], key_people: Set[str],
-                     published: datetime, echo_count: int) -> int:
+def importance_score(
+    title: str,
+    summary: str,
+    publication: str,
+    full_names: Set[str],
+    key_people: Set[str],
+    published: datetime,
+    echo_count: int,
+) -> int:
     blob = f"{title} {summary}".lower()
     score = 0
 
@@ -530,25 +596,36 @@ def importance_score(title: str, summary: str, publication: str,
     return score
 
 
-# -----------------------------
-# Feeds
-# -----------------------------
-def fetch_feed_items(feed_url: str, source_label: str,
-                     cutoff: datetime,
-                     full_names: Set[str], last_map: Dict[str, Set[str]]) -> List[Item]:
+def fetch_feed_items(
+    feed_url: str,
+    source_label: str,
+    cutoff: datetime,
+    full_names: Set[str],
+    last_map: Dict[str, Set[str]],
+) -> Tuple[List[Item], Dict[str, int]]:
     r = safe_get(feed_url, timeout=30)
     r.raise_for_status()
 
     fp = feedparser.parse(r.text)
     items: List[Item] = []
 
+    total_entries = len(fp.entries)
+    after_cutoff = 0
+    after_url_domain = 0
+    after_relevance = 0
+
     for e in fp.entries:
         dt = parse_entry_datetime(e)
         if not dt or dt < cutoff:
+            if DEBUG_REJECTIONS:
+                print(f"[debug][reject][{source_label}] date_cutoff title={(e.get('title') or '')[:90]}")
             continue
+        after_cutoff += 1
 
         raw_title = (e.get("title") or "").strip()
         if not raw_title:
+            if DEBUG_REJECTIONS:
+                print(f"[debug][reject][{source_label}] empty_title")
             continue
 
         headline, pub_from_title = extract_publication_from_title(raw_title)
@@ -557,35 +634,48 @@ def fetch_feed_items(feed_url: str, source_label: str,
         raw_url = pick_best_url(e)
         url = resolve_url(raw_url)
         if not url:
+            if DEBUG_REJECTIONS:
+                print(f"[debug][reject][{source_label}] no_url title={headline[:90]}")
             continue
 
         d = domain_of(url)
-        if not d or d in AGGREGATOR_BLOCKLIST:
+        if not d or d in AGGREGATOR_BLOCKLIST or is_google_host(url):
+            if DEBUG_REJECTIONS:
+                print(f"[debug][reject][{source_label}] blocked_domain domain={d or 'none'} title={headline[:90]}")
             continue
+        after_url_domain += 1
 
         summary = e.get("summary", "") or e.get("description", "") or ""
 
-        if not is_allowed_item(headline, summary, publication, full_names, last_map):
+        allowed, reason = is_allowed_item(headline, summary, publication, d, full_names, last_map)
+        if not allowed:
+            if DEBUG_REJECTIONS:
+                print(f"[debug][reject][{source_label}] {reason} domain={d} title={headline[:90]}")
             continue
+        after_relevance += 1
 
         is_primary = any(d == pd or d.endswith("." + pd) for pd in PRIMARY_DOMAINS)
+        items.append(
+            Item(
+                title=headline,
+                url=url,
+                publication=publication,
+                published=dt,
+                domain=d,
+                is_primary=is_primary,
+                raw_summary=summary,
+            )
+        )
 
-        items.append(Item(
-            title=headline,
-            url=url,
-            publication=publication,
-            published=dt,
-            domain=d,
-            is_primary=is_primary,
-            raw_summary=summary,
-        ))
-
-    return items
+    metrics = {
+        "total_entries": total_entries,
+        "after_cutoff": after_cutoff,
+        "after_url_domain": after_url_domain,
+        "after_relevance": after_relevance,
+    }
+    return items, metrics
 
 
-# -----------------------------
-# Bluesky (Option A: plain text + URL; let Bluesky unfurl)
-# -----------------------------
 def bsky_create_session() -> Dict[str, Any]:
     r = requests.post(
         f"{BSKY_PDS}/xrpc/com.atproto.server.createSession",
@@ -597,12 +687,34 @@ def bsky_create_session() -> Dict[str, Any]:
     return r.json()
 
 
-def bsky_post(access_jwt: str, did: str, text: str) -> None:
-    record = {
+def make_link_facet(text: str, url: str) -> List[Dict[str, Any]]:
+    u = (url or "").strip()
+    if not u:
+        return []
+
+    # We facet exactly the URL substring in "{title}\n\n{url}".
+    idx = text.rfind(u)
+    if idx < 0:
+        return []
+
+    byte_start = len(text[:idx].encode("utf-8"))
+    byte_end = byte_start + len(u.encode("utf-8"))
+    return [
+        {
+            "index": {"byteStart": byte_start, "byteEnd": byte_end},
+            "features": [{"$type": "app.bsky.richtext.facet#link", "uri": u}],
+        }
+    ]
+
+
+def bsky_post(access_jwt: str, did: str, text: str, facets: Optional[List[Dict[str, Any]]] = None) -> None:
+    record: Dict[str, Any] = {
         "$type": "app.bsky.feed.post",
         "text": text,
         "createdAt": utcnow().isoformat().replace("+00:00", "Z"),
     }
+    if facets:
+        record["facets"] = facets
 
     r = requests.post(
         f"{BSKY_PDS}/xrpc/com.atproto.repo.createRecord",
@@ -626,21 +738,25 @@ def format_post_text(title: str, url: str, domain: str) -> str:
     if len(text) <= 300:
         return text
 
-    room_for_title = max(20, 300 - (len(u) + 2))  # "\n\n"
+    room_for_title = max(20, 300 - (len(u) + 2))
     if len(t) > room_for_title:
         t = t[: room_for_title - 1].rstrip() + "…"
     return f"{t}\n\n{u}"
 
 
-# -----------------------------
-# Main
-# -----------------------------
-def main():
+def effective_max_posts_per_run() -> Optional[int]:
+    if MAX_POSTS_PER_RUN <= 0:
+        return None
+    return MAX_POSTS_PER_RUN
+
+
+def main() -> None:
     state = load_state()
     prune_state(state)
     daily_other = get_daily_other_counter(state)
 
-    cutoff = utcnow() - timedelta(hours=HOURS_BACK)
+    cutoff = compute_cutoff(state)
+    print(f"[info] cutoff={cutoff.isoformat()} (hours_back={HOURS_BACK})")
 
     roster_names = load_cached_names(state, "roster_cache", ROSTER_CACHE_HOURS)
     if not roster_names:
@@ -666,19 +782,13 @@ def main():
     all_names.update(roster_names)
     all_names.update(staff_names)
     all_names.update(KEY_PEOPLE)
-
     full_names, last_map = build_name_matchers(all_names)
 
-    # ---------
-    # FEEDS
-    # ---------
-    feeds: List[Tuple[str, str]] = []
+    feeds: List[Tuple[str, str]] = [
+        ("SF Standard", "https://sfstandard.com/sports/feed"),
+        ("SFGate", "https://www.sfgate.com/sports/feed/san-francisco-giants-rss-feed-428.php"),
+    ]
 
-    # Direct RSS
-    feeds.append(("SF Standard", "https://sfstandard.com/sports/feed"))
-    feeds.append(("SFGate", "https://www.sfgate.com/sports/feed/san-francisco-giants-rss-feed-428.php"))
-
-    # Google News RSS per-domain searches
     domain_queries = [
         ("SF Chronicle", '(("San Francisco Giants" OR "SF Giants" OR Giants) AND (MLB OR baseball)) site:sfchronicle.com'),
         ("Mercury News", '(("San Francisco Giants" OR "SF Giants" OR Giants) AND (MLB OR baseball)) site:mercurynews.com'),
@@ -693,35 +803,46 @@ def main():
     for name, q in domain_queries:
         feeds.append((f"Google News: {name}", google_news_rss_url(q)))
 
-    # “Best of the rest” broad search (outside your domains, capped to OTHER_DAILY_CAP/day)
-    feeds.append(("Google News: Broad", google_news_rss_url(
-        '(("San Francisco Giants" OR "SF Giants") AND (MLB OR baseball))'
-    )))
+    feeds.append(
+        (
+            "Google News: Broad",
+            google_news_rss_url('(("San Francisco Giants" OR "SF Giants") AND (MLB OR baseball))'),
+        )
+    )
 
-    # ---------
-    # Collect items
-    # ---------
     all_items: List[Item] = []
+    successful_feed_fetches = 0
     for source_label, feed_url in feeds:
         try:
-            items = fetch_feed_items(feed_url, source_label, cutoff, full_names, last_map)
-            print(f"[info] feed: {source_label} -> {len(items)} eligible")
+            items, metrics = fetch_feed_items(feed_url, source_label, cutoff, full_names, last_map)
+            successful_feed_fetches += 1
+            print(
+                "[info] feed metrics"
+                f" source={source_label}"
+                f" total={metrics['total_entries']}"
+                f" after_cutoff={metrics['after_cutoff']}"
+                f" after_url_domain={metrics['after_url_domain']}"
+                f" after_relevance={metrics['after_relevance']}"
+            )
             all_items.extend(items)
         except Exception as ex:
             print(f"[warn] feed failed: {source_label}: {ex}")
 
+    posted = state.get("posted", {})
+    seen_urls: Set[str] = set()
+
     if not all_items:
         print("No eligible items found.")
+        if successful_feed_fetches > 0:
+            state["last_run_success_at"] = utcnow().isoformat()
         save_state(state)
         return
 
-    # Echo counts (title similarity proxy)
     echo_map: Dict[str, int] = {}
     for it in all_items:
         h = title_hash(it.title)
         echo_map[h] = echo_map.get(h, 0) + 1
 
-    # Score everything (score mainly used for selecting “other sources”)
     for it in all_items:
         it.score = importance_score(
             it.title,
@@ -733,11 +854,8 @@ def main():
             echo_map.get(title_hash(it.title), 1),
         )
 
-    # Sort newest first (primary selection), but rank “other” by score later
+    # Newest first
     all_items.sort(key=lambda x: x.published, reverse=True)
-
-    posted = state.get("posted", {})
-    seen_urls: Set[str] = set()
 
     primary_candidates: List[Item] = []
     other_candidates: List[Item] = []
@@ -754,40 +872,48 @@ def main():
 
     other_candidates.sort(key=lambda x: (x.score, x.published), reverse=True)
 
-    per_pub_count: Dict[str, int] = {}
+    # Post all new items found in the run by default.
+    # Only optional caps can limit output.
+    max_posts = effective_max_posts_per_run()
     to_post: List[Item] = []
 
-    def pub_key(pub: str) -> str:
-        return norm_text(pub)
-
-    # 1) Prefer primary sources first
+    # Always include primary articles first; OTHER_DAILY_CAP never blocks these.
     for it in primary_candidates:
-        if len(to_post) >= MAX_POSTS_PER_RUN:
+        if max_posts is not None and len(to_post) >= max_posts:
             break
-        pk = pub_key(it.publication)
-        per_pub_count.setdefault(pk, 0)
-        if per_pub_count[pk] >= PER_SOURCE_CAP:
-            continue
         to_post.append(it)
-        per_pub_count[pk] += 1
 
-    # 2) Then fill from other sources, capped per day
+    # Include non-primary articles up to daily cap.
+    other_budget = max(0, OTHER_DAILY_CAP - int(daily_other.get("count", 0)))
     for it in other_candidates:
-        if len(to_post) >= MAX_POSTS_PER_RUN:
+        if max_posts is not None and len(to_post) >= max_posts:
             break
-        if daily_other.get("count", 0) >= OTHER_DAILY_CAP:
+        if other_budget <= 0:
             break
-
-        pk = pub_key(it.publication)
-        per_pub_count.setdefault(pk, 0)
-        if per_pub_count[pk] >= PER_SOURCE_CAP:
-            continue
-
         to_post.append(it)
-        per_pub_count[pk] += 1
+        other_budget -= 1
+
+    # Optional per-source cap only when explicitly enabled.
+    if ENFORCE_PER_SOURCE_CAP and PER_SOURCE_CAP > 0:
+        filtered: List[Item] = []
+        per_pub_count: Dict[str, int] = {}
+
+        def pub_key(pub: str) -> str:
+            return norm_text(pub)
+
+        for it in to_post:
+            pk = pub_key(it.publication)
+            per_pub_count.setdefault(pk, 0)
+            if per_pub_count[pk] >= PER_SOURCE_CAP:
+                continue
+            filtered.append(it)
+            per_pub_count[pk] += 1
+        to_post = filtered
 
     if not to_post:
         print("No new items to post.")
+        if successful_feed_fetches > 0:
+            state["last_run_success_at"] = utcnow().isoformat()
         save_state(state)
         return
 
@@ -798,20 +924,21 @@ def main():
     posted_any = 0
     for it in to_post:
         text = format_post_text(it.title, it.url, it.domain)
+        facets = make_link_facet(text, it.url)
         try:
             print(f"[post] ({it.score}) {it.publication}: {it.title} -> {it.url}")
-            bsky_post(access_jwt, did, text)
+            bsky_post(access_jwt, did, text, facets=facets)
             posted[it.url] = utcnow().isoformat()
             posted_any += 1
-
             if not it.is_primary:
                 daily_other["count"] = int(daily_other.get("count", 0)) + 1
-
         except Exception as e:
             print(f"[warn] post failed: {e}")
 
     state["posted"] = posted
     state["daily_other"] = daily_other
+    if successful_feed_fetches > 0:
+        state["last_run_success_at"] = utcnow().isoformat()
     save_state(state)
 
     if posted_any == 0:
