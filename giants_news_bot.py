@@ -49,7 +49,7 @@ BSKY_IDENTIFIER = os.environ["BSKY_IDENTIFIER"]
 BSKY_APP_PASSWORD = os.environ["BSKY_APP_PASSWORD"]
 BSKY_PDS = os.getenv("BSKY_PDS", "https://bsky.social")
 
-UA = "GiantsNewsBot/2.3 (+github-actions)"
+UA = "GiantsNewsBot/2.4 (+github-actions)"
 
 
 # -----------------------------
@@ -140,6 +140,7 @@ class Item:
     title: str
     url: str
     publication: str
+    author: str
     published: datetime
     domain: str
     is_primary: bool
@@ -149,6 +150,9 @@ class Item:
 
 RE_WORD = re.compile(r"[A-Za-z]+(?:'[A-Za-z]+)?")
 RE_SPACE = re.compile(r"\s+")
+RE_HTML_TAG = re.compile(r"<[^>]+>")
+RE_META = re.compile(r'<meta\s+[^>]*(?:property|name)=["\']([^"\']+)["\'][^>]*content=["\']([^"\']*)["\']', re.I)
+RE_TITLE = re.compile(r"<title[^>]*>(.*?)</title>", re.I | re.S)
 
 
 def utcnow() -> datetime:
@@ -260,7 +264,7 @@ def extract_url_from_summary(summary: str) -> str:
             return d
 
     # 2) visible URL text in summary body
-    txt = re.sub(r"<[^>]+>", " ", html)
+    txt = RE_HTML_TAG.sub(" ", html)
     urls = re.findall(r"https?://[^\s<>\]\)\"']+", txt)
     for u in urls:
         d = decode_google_news_url(u)
@@ -291,29 +295,64 @@ def pick_best_url(entry: Any) -> str:
     return fallback
 
 
+def extract_first_external_url(html: str) -> str:
+    """
+    Google News article pages often include many Google URLs.
+    We want the first non-Google, non-blocklisted http(s) URL.
+    """
+    if not html:
+        return ""
+    candidates = re.findall(r'https?://[^\s"\'<>]+', html)
+    for c in candidates:
+        c = c.strip()
+        if not c:
+            continue
+        d = domain_of(c)
+        if not d:
+            continue
+        if d in AGGREGATOR_BLOCKLIST:
+            continue
+        if is_google_host(c):
+            continue
+        return c
+    return ""
+
+
 def resolve_url(url: str) -> str:
     u = (url or "").strip()
     if not u:
         return u
 
     u = decode_google_news_url(u)
-    if u and not is_google_host(u):
-        return u
 
-    # Final fallback: fetch once and decode redirect target.
     try:
-        r = safe_get(u, timeout=20)
-        if r.url:
-            resolved = decode_google_news_url(r.url)
-            if resolved:
-                return resolved
+        # If already external, do one hop of redirects (canonicalize).
+        if u and not is_google_host(u):
+            r = safe_get(u, timeout=20)
+            if r.url:
+                return r.url
+            return u
 
-        # Some Google responses still include a canonical URL in body.
-        m = re.search(r'https?://[^\s"\'<>]+', r.text or "")
-        if m:
-            cand = decode_google_news_url(m.group(0))
+        # Google News link: fetch HTML and extract external target URL.
+        r = safe_get(u, timeout=20)
+        html = (r.text or "")
+
+        ext = extract_first_external_url(html)
+        if ext:
+            return ext
+
+        # Rare: final response URL is external
+        if r.url and not is_google_host(r.url):
+            return r.url
+
+        # Fallback: decode any embedded URLs in HTML
+        for raw in re.findall(r'https?://[^\s"\'<>]+', html):
+            cand = decode_google_news_url(raw)
             if cand and not is_google_host(cand):
-                return cand
+                d = domain_of(cand)
+                if d and d not in AGGREGATOR_BLOCKLIST:
+                    return cand
+
     except Exception:
         pass
 
@@ -596,6 +635,31 @@ def importance_score(
     return score
 
 
+def entry_author(entry: Any) -> str:
+    """
+    Best-effort author extraction across RSS/Atom variants.
+    """
+    a = (entry.get("author") or "").strip()
+    if a:
+        return a
+
+    authors = entry.get("authors") or []
+    if isinstance(authors, list) and authors:
+        # feedparser authors: [{'name': 'X'}]
+        for obj in authors:
+            name = (obj.get("name") or "").strip() if isinstance(obj, dict) else str(obj).strip()
+            if name:
+                return name
+
+    # Some feeds use dc:creator or similar
+    for k in ("dc_creator", "dc:creator", "creator"):
+        v = entry.get(k)
+        if v and isinstance(v, str) and v.strip():
+            return v.strip()
+
+    return ""
+
+
 def fetch_feed_items(
     feed_url: str,
     source_label: str,
@@ -630,6 +694,7 @@ def fetch_feed_items(
 
         headline, pub_from_title = extract_publication_from_title(raw_title)
         publication = pub_from_title or source_label
+        author = entry_author(e)
 
         raw_url = pick_best_url(e)
         url = resolve_url(raw_url)
@@ -660,6 +725,7 @@ def fetch_feed_items(
                 title=headline,
                 url=url,
                 publication=publication,
+                author=author,
                 published=dt,
                 domain=d,
                 is_primary=is_primary,
@@ -676,6 +742,9 @@ def fetch_feed_items(
     return items, metrics
 
 
+# -----------------------------
+# Bluesky
+# -----------------------------
 def bsky_create_session() -> Dict[str, Any]:
     r = requests.post(
         f"{BSKY_PDS}/xrpc/com.atproto.server.createSession",
@@ -692,7 +761,6 @@ def make_link_facet(text: str, url: str) -> List[Dict[str, Any]]:
     if not u:
         return []
 
-    # We facet exactly the URL substring in "{title}\n\n{url}".
     idx = text.rfind(u)
     if idx < 0:
         return []
@@ -707,7 +775,78 @@ def make_link_facet(text: str, url: str) -> List[Dict[str, Any]]:
     ]
 
 
-def bsky_post(access_jwt: str, did: str, text: str, facets: Optional[List[Dict[str, Any]]] = None) -> None:
+def parse_external_title_desc(html: str) -> Tuple[str, str]:
+    """
+    Best-effort title/description extraction for link-card embeds.
+    """
+    if not html:
+        return "", ""
+
+    metas = dict((k.lower(), v.strip()) for k, v in RE_META.findall(html) if k and v is not None)
+
+    title = (
+        metas.get("og:title")
+        or metas.get("twitter:title")
+        or ""
+    ).strip()
+
+    if not title:
+        m = RE_TITLE.search(html)
+        if m:
+            title = RE_HTML_TAG.sub(" ", m.group(1)).strip()
+            title = RE_SPACE.sub(" ", title)
+
+    desc = (
+        metas.get("og:description")
+        or metas.get("twitter:description")
+        or metas.get("description")
+        or ""
+    ).strip()
+
+    # Keep it reasonable
+    title = title[:300].strip()
+    desc = desc[:300].strip()
+    return title, desc
+
+
+def build_external_embed(url: str) -> Optional[Dict[str, Any]]:
+    """
+    Build a Bluesky external embed. This is what makes most clients show a "card".
+    We omit thumb (requires blob upload), but cards generally still render with title/desc.
+    """
+    u = (url or "").strip()
+    if not u or is_google_host(u):
+        return None
+
+    try:
+        r = safe_get(u, timeout=15)
+        html = r.text or ""
+        title, desc = parse_external_title_desc(html)
+
+        # If we can't get anything, don't embed.
+        if not title and not desc:
+            return None
+
+        return {
+            "$type": "app.bsky.embed.external",
+            "external": {
+                "$type": "app.bsky.embed.external#external",
+                "uri": u,
+                "title": title or u,
+                "description": desc or "",
+            },
+        }
+    except Exception:
+        return None
+
+
+def bsky_post(
+    access_jwt: str,
+    did: str,
+    text: str,
+    facets: Optional[List[Dict[str, Any]]] = None,
+    embed: Optional[Dict[str, Any]] = None,
+) -> None:
     record: Dict[str, Any] = {
         "$type": "app.bsky.feed.post",
         "text": text,
@@ -715,6 +854,8 @@ def bsky_post(access_jwt: str, did: str, text: str, facets: Optional[List[Dict[s
     }
     if facets:
         record["facets"] = facets
+    if embed:
+        record["embed"] = embed
 
     r = requests.post(
         f"{BSKY_PDS}/xrpc/com.atproto.repo.createRecord",
@@ -727,21 +868,35 @@ def bsky_post(access_jwt: str, did: str, text: str, facets: Optional[List[Dict[s
     r.raise_for_status()
 
 
-def format_post_text(title: str, url: str, domain: str) -> str:
+def display_prefix(author: str, publication: str) -> str:
+    a = (author or "").strip()
+    if a:
+        return a
+    return (publication or "").strip() or "Source"
+
+
+def format_post_text(prefix: str, title: str, url: str, domain: str) -> str:
+    """
+    Non-url text must be:
+      - "Author: Title" if author is available
+      - else "Publication: Title"
+    """
+    p = (prefix or "").strip()
     t = (title or "").strip()
     u = (url or "").strip()
 
+    head = f"{p}: {t}".strip()
     if is_paywalled_domain(domain):
-        t = f"{t} ($)"
+        head = f"{head} ($)"
 
-    text = f"{t}\n\n{u}".strip()
+    text = f"{head}\n\n{u}".strip()
     if len(text) <= 300:
         return text
 
-    room_for_title = max(20, 300 - (len(u) + 2))
-    if len(t) > room_for_title:
-        t = t[: room_for_title - 1].rstrip() + "…"
-    return f"{t}\n\n{u}"
+    room_for_head = max(20, 300 - (len(u) + 2))
+    if len(head) > room_for_head:
+        head = head[: room_for_head - 1].rstrip() + "…"
+    return f"{head}\n\n{u}"
 
 
 def effective_max_posts_per_run() -> Optional[int]:
@@ -750,6 +905,9 @@ def effective_max_posts_per_run() -> Optional[int]:
     return MAX_POSTS_PER_RUN
 
 
+# -----------------------------
+# Main
+# -----------------------------
 def main() -> None:
     state = load_state()
     prune_state(state)
@@ -872,8 +1030,6 @@ def main() -> None:
 
     other_candidates.sort(key=lambda x: (x.score, x.published), reverse=True)
 
-    # Post all new items found in the run by default.
-    # Only optional caps can limit output.
     max_posts = effective_max_posts_per_run()
     to_post: List[Item] = []
 
@@ -923,11 +1079,16 @@ def main() -> None:
 
     posted_any = 0
     for it in to_post:
-        text = format_post_text(it.title, it.url, it.domain)
+        prefix = display_prefix(it.author, it.publication)
+        text = format_post_text(prefix, it.title, it.url, it.domain)
         facets = make_link_facet(text, it.url)
+
+        # This is what usually triggers a "card" in clients.
+        embed = build_external_embed(it.url)
+
         try:
-            print(f"[post] ({it.score}) {it.publication}: {it.title} -> {it.url}")
-            bsky_post(access_jwt, did, text, facets=facets)
+            print(f"[post] ({it.score}) {prefix}: {it.title} -> {it.url}")
+            bsky_post(access_jwt, did, text, facets=facets, embed=embed)
             posted[it.url] = utcnow().isoformat()
             posted_any += 1
             if not it.is_primary:
