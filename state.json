@@ -3,7 +3,7 @@
     "count": 2,
     "date": "2026-02-22"
   },
-  "last_run_success_at": "2026-02-22T04:51:33.110342+00:00",
+  "last_run_success_at": "2026-02-22T04:58:42.204151+00:00",
   "posted": {
     "http://www.w3.org/2000/svg": "2026-02-22T04:51:33.110322+00:00",
     "https://fonts.googleapis.com/css?family=Google+Sans+Text%3A400%2C500%2C700%2C400i%2C500i%2C700i": "2026-02-22T04:43:10.016437+00:00",
@@ -37,7 +37,7 @@
     "https://www.sfgate.com/giants/article/barry-bonds-jt-snow-21379867.php": "2026-02-21T04:56:11.161328+00:00"
   },
   "roster_cache": {
-    "fetched_at": "2026-02-21T04:55:44.709964+00:00",
+    "fetched_at": "2026-02-22T04:58:08.123548+00:00",
     "names": [
       "Adrian Houser",
       "Blade Tidwell",
@@ -85,7 +85,7 @@
     ]
   },
   "staff_cache": {
-    "fetched_at": "2026-02-21T04:55:44.827180+00:00",
+    "fetched_at": "2026-02-22T04:58:08.270824+00:00",
     "names": [
       "Alex Burg",
       "Christian Wonders",
