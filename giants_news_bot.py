@@ -93,6 +93,18 @@ PRIMARY_DOMAINS = {
     "baseballamerica.com",
 }
 
+
+
+SOURCE_EXPECTED_DOMAINS: Dict[str, Set[str]] = {
+    "Google News: Mercury News": {"mercurynews.com"},
+    "Google News: SF Chronicle": {"sfchronicle.com"},
+    "Google News: NBC Sports Bay Area": {"nbcsportsbayarea.com"},
+    "Google News: The Athletic": {"theathletic.com"},
+    "Google News: Associated Press": {"apnews.com"},
+    "Google News: FanGraphs": {"fangraphs.com"},
+    "Google News: Baseball America": {"baseballamerica.com"},
+    "Google News: KNBR": {"knbr.com"},
+}
 AGGREGATOR_BLOCKLIST = {
     "news.google.com",
     "feedspot.com",
@@ -113,6 +125,15 @@ TRACKER_BLOCKLIST = {
     "tpc.googlesyndication.com",
     "stats.g.doubleclick.net",
     "ad.doubleclick.net",
+}
+
+# Metadata/reference domains sometimes appear in scraped html but are never article URLs.
+REFERENCE_DOMAIN_BLOCKLIST = {
+    "w3.org",
+    "www.w3.org",
+    "schema.org",
+    "www.schema.org",
+    "fonts.googleapis.com",
 }
 
 
@@ -276,6 +297,17 @@ def is_blocked_domain(domain: str) -> bool:
     if d.endswith("google.com") or d.endswith("googleusercontent.com") or d.endswith("gstatic.com") or d.endswith("googleapis.com"):
         return True
     return False
+
+
+def is_reference_domain(domain: str) -> bool:
+    d = (domain or "").lower()
+    if not d:
+        return True
+    return d in REFERENCE_DOMAIN_BLOCKLIST or any(d.endswith("." + x) for x in REFERENCE_DOMAIN_BLOCKLIST)
+
+
+def expected_domains_for_source(source_label: str) -> Set[str]:
+    return SOURCE_EXPECTED_DOMAINS.get(source_label, set())
 
 
 def canonicalize_url(url: str) -> str:
@@ -1046,7 +1078,14 @@ def resolve_google_news_article(gn_url: str) -> str:
             cand = uu.strip()
             cand = decode_google_redirect_url(cand)
             d = domain_of(cand)
-            if cand.startswith("http") and d and not is_google_host(cand) and not is_blocked_domain(d):
+            if (
+                cand.startswith("http")
+                and d
+                and not is_google_host(cand)
+                and not is_blocked_domain(d)
+                and not is_reference_domain(d)
+                and len((urlparse(cand).path or "").strip("/")) > 3
+            ):
                 return canonicalize_url(cand)
 
     except Exception:
@@ -1176,6 +1215,13 @@ def fetch_rss_items(
             if DEBUG_REJECTIONS:
                 print(f"[debug][reject][{source_label}] blocked_domain domain={d or 'none'} title={headline[:90]} url={url[:120]}")
             continue
+
+        expected_domains = expected_domains_for_source(source_label)
+        if expected_domains and not any(d == ed or d.endswith("." + ed) for ed in expected_domains):
+            if DEBUG_REJECTIONS:
+                print(f"[debug][reject][{source_label}] domain_mismatch got={d} expected={sorted(expected_domains)} title={headline[:90]}")
+            continue
+
         after_url_domain += 1
 
         summary = e.get("summary", "") or e.get("description", "") or ""
