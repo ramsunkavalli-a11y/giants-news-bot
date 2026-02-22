@@ -1,4 +1,5 @@
 import json
+import html as html_lib
 import os
 import re
 import time
@@ -272,7 +273,7 @@ def is_blocked_domain(domain: str) -> bool:
         return True
     if d in AGGREGATOR_BLOCKLIST or any(d.endswith("." + x) for x in AGGREGATOR_BLOCKLIST):
         return True
-    if d.endswith("google.com") or d.endswith("googleusercontent.com") or d.endswith("gstatic.com"):
+    if d.endswith("google.com") or d.endswith("googleusercontent.com") or d.endswith("gstatic.com") or d.endswith("googleapis.com"):
         return True
     return False
 
@@ -285,6 +286,11 @@ def canonicalize_url(url: str) -> str:
     u = (url or "").strip()
     if not u:
         return u
+
+    # Common extraction artifact from markdown/text mirrors.
+    while u and u[-1] in ")],.;":
+        u = u[:-1]
+
     try:
         p = urlparse(u)
         q = parse_qs(p.query, keep_blank_values=True)
@@ -956,8 +962,14 @@ def is_probable_article_url(src: "ListingSource", url: str) -> bool:
         if path == src_path:
             return False
 
-        # Generic team/tag landing pages are usually shallow and evergreen.
         segs = [x for x in path.split("/") if x]
+
+        # Reject common listing/tag hubs unless path is clearly article-like.
+        if segs and segs[0] in {"tag", "tags", "topic", "topics", "hub", "section", "sections"}:
+            if not re.search(r"/20\d{2}/\d{1,2}/\d{1,2}/", path) and "/article/" not in path:
+                return False
+
+        # Generic landing pages are usually shallow and evergreen.
         if len(segs) <= 2 and not re.search(r"/20\d{2}/\d{1,2}/\d{1,2}/", path):
             return False
 
@@ -1308,6 +1320,12 @@ def fetch_listing_items(
 
         canonical = canonicalize_url(meta.get("canonical") or u)
         d = domain_of(canonical)
+
+        # Guard against bad canonical metadata (e.g., CDN/font URLs).
+        if not d or (d != src.domain and not d.endswith("." + src.domain)):
+            canonical = canonicalize_url(u)
+            d = domain_of(canonical)
+
         if not d or is_google_host(canonical) or is_blocked_domain(d):
             continue
         if not is_probable_article_url(src, canonical):
@@ -1415,7 +1433,8 @@ def build_display_line(it: Item) -> str:
 
 
 def clean_description(s: str, max_len: int = 240) -> str:
-    txt = re.sub(r"<[^>]+>", " ", s or "")
+    txt = html_lib.unescape(s or "")
+    txt = re.sub(r"<[^>]+>", " ", txt)
     txt = RE_SPACE.sub(" ", txt).strip()
     if len(txt) > max_len:
         txt = txt[: max_len - 1].rstrip() + "…"
