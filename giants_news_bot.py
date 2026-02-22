@@ -1,4 +1,5 @@
 import json
+import argparse
 import base64
 import html as html_lib
 import os
@@ -56,6 +57,10 @@ MAX_META_FETCHES_PER_RUN = int(os.getenv("MAX_META_FETCHES_PER_RUN", "25"))
 ENABLE_LISTING_FETCH = os.getenv("ENABLE_LISTING_FETCH", "true").lower() in {"1", "true", "yes"}
 MAX_LISTING_META_FETCHES_PER_RUN = int(os.getenv("MAX_LISTING_META_FETCHES_PER_RUN", "40"))
 MAX_LISTING_META_FETCHES_PER_SOURCE = int(os.getenv("MAX_LISTING_META_FETCHES_PER_SOURCE", "10"))
+SITEMAP_CACHE_HOURS = int(os.getenv("SITEMAP_CACHE_HOURS", "6"))
+REDIRECT_CACHE_HOURS = int(os.getenv("REDIRECT_CACHE_HOURS", "24"))
+DRY_RUN = os.getenv("DRY_RUN", "0") in {"1", "true", "yes"}
+GOOGLE_ALERTS_RSS = [x.strip() for x in os.getenv("GOOGLE_ALERTS_RSS", "").split(",") if x.strip()]
 
 # UA: use a browser-ish UA; some paywalled sites block bot UAs.
 UA = os.getenv(
@@ -99,15 +104,8 @@ PRIMARY_DOMAINS = {
 
 SOURCE_EXPECTED_DOMAINS: Dict[str, Set[str]] = {
     # Keep strict domain checks only where we repeatedly saw wrong targets.
-    "Google News: SF Chronicle": {"sfchronicle.com"},
     "Google News: Mercury News": {"mercurynews.com"},
-    "Google News: NBC Sports Bay Area": {"nbcsportsbayarea.com"},
-    "Google News: The Athletic": {"theathletic.com", "nytimes.com"},
-    "Google News: Associated Press": {"apnews.com"},
     "Google News: SFGiants.com / MLB Giants": {"sfgiants.com", "mlb.com"},
-    "Google News: FanGraphs": {"fangraphs.com"},
-    "Google News: Baseball America": {"baseballamerica.com"},
-    "Google News: KNBR": {"knbr.com"},
 }
 AGGREGATOR_BLOCKLIST = {
     "news.google.com",
@@ -242,8 +240,17 @@ def tokenize_words(text: str) -> Set[str]:
     return set(w.lower() for w in RE_WORD.findall(text or ""))
 
 
-def safe_get(url: str, timeout: int = 25) -> requests.Response:
-    return requests.get(url, timeout=timeout, headers={"User-Agent": UA}, allow_redirects=True)
+def safe_get(url: str, timeout: int = 25, retries: int = 2, backoff: float = 0.8) -> requests.Response:
+    last_err: Optional[Exception] = None
+    for i in range(max(1, retries + 1)):
+        try:
+            return requests.get(url, timeout=timeout, headers={"User-Agent": UA}, allow_redirects=True)
+        except Exception as ex:
+            last_err = ex
+            if i >= retries:
+                break
+            time.sleep(backoff * (2 ** i))
+    raise last_err if last_err else RuntimeError("safe_get failed")
 
 
 def _jina_proxy_url(url: str) -> str:
@@ -407,27 +414,6 @@ def is_strict_story_url_for_source(source_label: str, url: str, title: str) -> b
         if is_mlb_utility_or_evergreen(url, title):
             return False
 
-    if source_label in {"KNBR Giants RSS", "KNBR Giants", "Google News: KNBR"}:
-        # Keep Giants category stories but reject generic site/category roots.
-        if is_home_or_section_root_url(url):
-            return False
-        if "/san-francisco-giants/" not in path and not re.search(r"/20\d{2}/\d{2}/\d{2}/", "/" + path):
-            return False
-
-    if source_label in {"FanGraphs Giants RSS", "FanGraphs Giants", "Google News: FanGraphs"}:
-        # FanGraphs list pages and category pages are common false positives.
-        if "/category/" in "/" + path and len(segs) <= 2:
-            return False
-        if is_home_or_section_root_url(url):
-            return False
-
-    if source_label in {"NBC Sports Bay Area RSS", "NBC Sports Bay Area", "Google News: NBC Sports Bay Area"}:
-        # NBC should be a story page, not just the team landing page.
-        if path in {"mlb/san-francisco-giants", "tag/san-francisco-giants"}:
-            return False
-        if is_home_or_section_root_url(url):
-            return False
-
     return True
 
 
@@ -536,6 +522,9 @@ def load_state() -> Dict[str, Any]:
             "staff_cache": {},
             "daily_other": {},
             "last_run_success_at": None,
+            "redirect_cache": {},
+            "sitemap_cache": {},
+            "source_seen_urls": {},
         }
     with open(STATE_FILE, "r", encoding="utf-8") as f:
         state = json.load(f)
@@ -544,6 +533,9 @@ def load_state() -> Dict[str, Any]:
     state.setdefault("staff_cache", {})
     state.setdefault("daily_other", {})
     state.setdefault("last_run_success_at", None)
+    state.setdefault("redirect_cache", {})
+    state.setdefault("sitemap_cache", {})
+    state.setdefault("source_seen_urls", {})
     return state
 
 
@@ -568,6 +560,20 @@ def prune_state(state: Dict[str, Any], keep_days: int = KEEP_POSTED_DAYS) -> Non
     for k in to_del:
         posted.pop(k, None)
     state["posted"] = posted
+
+    # prune redirect cache
+    rc = state.get("redirect_cache", {})
+    rc_cutoff = utcnow() - timedelta(hours=REDIRECT_CACHE_HOURS)
+    for k, row in list(rc.items()):
+        try:
+            ts = dtparser.isoparse((row or {}).get("ts", ""))
+            if ts.tzinfo is None:
+                ts = ts.replace(tzinfo=timezone.utc)
+            if ts < rc_cutoff:
+                rc.pop(k, None)
+        except Exception:
+            rc.pop(k, None)
+    state["redirect_cache"] = rc
 
 
 def get_daily_other_counter(state: Dict[str, Any]) -> Dict[str, Any]:
@@ -1541,156 +1547,446 @@ def link_allowed_for_listing(src: ListingSource, url: str) -> bool:
     return False
 
 
+@dataclass
+class Candidate:
+    url: str
+    discovered_at: datetime
+    discovered_from: str
+    title: str = ""
+    author: str = ""
+    published: Optional[datetime] = None
+    summary: str = ""
+
+
+def parse_sitemap_xml(xml: str) -> Tuple[List[str], List[Tuple[str, Optional[datetime]]]]:
+    sitemap_urls: List[str] = []
+    story_urls: List[Tuple[str, Optional[datetime]]] = []
+    if not xml:
+        return sitemap_urls, story_urls
+
+    for loc in re.findall(r"<loc>(.*?)</loc>", xml, flags=re.I | re.S):
+        u = html_lib.unescape((loc or "").strip())
+        if not u:
+            continue
+        if re.search(r"sitemap", u, flags=re.I):
+            sitemap_urls.append(u)
+        else:
+            story_urls.append((u, None))
+
+    for block in re.findall(r"<url>(.*?)</url>", xml, flags=re.I | re.S):
+        lm = None
+        mloc = re.search(r"<loc>(.*?)</loc>", block, flags=re.I | re.S)
+        if not mloc:
+            continue
+        loc = html_lib.unescape(mloc.group(1).strip())
+        mlm = re.search(r"<lastmod>(.*?)</lastmod>", block, flags=re.I | re.S)
+        if mlm:
+            try:
+                dtx = dtparser.parse(html_lib.unescape(mlm.group(1).strip()))
+                if dtx.tzinfo is None:
+                    dtx = dtx.replace(tzinfo=timezone.utc)
+                lm = dtx.astimezone(timezone.utc)
+            except Exception:
+                lm = None
+        story_urls.append((loc, lm))
+    return sitemap_urls, story_urls
+
+
+def _discover_feeds_from_html(base_url: str, html: str) -> List[str]:
+    out: List[str] = []
+    for m in re.findall(r"<link[^>]+rel=[\"'][^\"']*alternate[^\"']*[\"'][^>]+>", html or "", flags=re.I):
+        if re.search(r"application/(rss\+xml|atom\+xml)", m, flags=re.I):
+            h = re.search(r"href=[\"']([^\"']+)[\"']", m, flags=re.I)
+            if h:
+                out.append(urljoin(base_url, h.group(1).strip()))
+    return [canonicalize_url(x) for x in out if x]
+
+
+def _common_feed_endpoints(base_url: str) -> List[str]:
+    return [
+        urljoin(base_url, p) for p in (
+            "/feed", "/feed/", "/feed.xml", "/rss", "/rss.xml", "/atom.xml", "/index.xml",
+        )
+    ]
+
+
+def _discover_sitemaps(domain_url: str, robots_txt: str) -> List[str]:
+    found: List[str] = []
+    for line in (robots_txt or "").splitlines():
+        if line.lower().startswith("sitemap:"):
+            u = line.split(":", 1)[1].strip()
+            if u:
+                found.append(canonicalize_url(u))
+    found.append(urljoin(domain_url, "/sitemap.xml"))
+    found.append(urljoin(domain_url, "/news-sitemap.xml"))
+    ded: List[str] = []
+    seen: Set[str] = set()
+    for u in found:
+        if u and u not in seen:
+            seen.add(u)
+            ded.append(u)
+    return ded
+
+
+def _cached_redirect(url: str, state: Dict[str, Any]) -> str:
+    cache = state.setdefault("redirect_cache", {})
+    now = utcnow()
+    row = cache.get(url)
+    if row:
+        try:
+            ts = dtparser.isoparse(row.get("ts", ""))
+            if ts.tzinfo is None:
+                ts = ts.replace(tzinfo=timezone.utc)
+            if (now - ts) < timedelta(hours=24):
+                return row.get("final", url)
+        except Exception:
+            pass
+    final = url
+    try:
+        r = safe_get(url, timeout=15)
+        final = canonicalize_url(r.url or url)
+    except Exception:
+        final = url
+    cache[url] = {"final": final, "ts": now.isoformat()}
+    return final
+
+
+def _build_item_from_candidate(
+    src: ListingSource,
+    cand: Candidate,
+    cutoff: datetime,
+    full_names: Set[str],
+    last_map: Dict[str, Set[str]],
+    meta_fetch_budget: Dict[str, int],
+) -> Tuple[Optional[Item], str, bool]:
+    url = canonicalize_url(cand.url)
+    d = domain_of(url)
+    if not d or is_google_host(url) or is_blocked_domain(d):
+        return None, "blocked_domain", False
+    if d != src.domain and not d.endswith("." + src.domain):
+        return None, "domain_mismatch", False
+    if not is_probable_article_url(src, url):
+        return None, "not_probable_story", False
+
+    meta: Dict[str, str] = {}
+    text_fallback = ""
+    meta_attempted = False
+    if meta_fetch_budget["remaining"] > 0:
+        meta_fetch_budget["remaining"] -= 1
+        meta_attempted = True
+        try:
+            rr = safe_get(url, timeout=20)
+            rr.raise_for_status()
+            meta = parse_html_metadata(url, rr.text or "")
+        except Exception:
+            text_fallback = fetch_text_via_jina(url, timeout=20)
+
+    canonical = canonicalize_url(meta.get("canonical") or url)
+    d2 = domain_of(canonical)
+    if d2 and (d2 == src.domain or d2.endswith("." + src.domain)) and not is_blocked_domain(d2):
+        url = canonical
+        d = d2
+
+    title = (cand.title or meta.get("title") or "").strip()
+    if not title and text_fallback:
+        title = fallback_title_from_text(text_fallback, url)
+    if not title:
+        title = title_from_url(url)
+
+    desc = (cand.summary or meta.get("description") or "").strip()
+    if not desc and text_fallback:
+        desc = fallback_description_from_text(text_fallback)
+
+    author = (cand.author or meta.get("author") or "").strip()
+
+    if looks_like_video_story(title, desc, url):
+        return None, "video_story", meta_attempted
+
+    published = cand.published
+    if not published:
+        pub_raw = (meta.get("published") or "").strip()
+        if pub_raw:
+            try:
+                pdt = dtparser.parse(pub_raw)
+                if pdt.tzinfo is None:
+                    pdt = pdt.replace(tzinfo=timezone.utc)
+                published = pdt.astimezone(timezone.utc)
+            except Exception:
+                published = None
+    if not published:
+        published = date_from_url(url)
+    if not published:
+        published = cand.discovered_at
+
+    if published < cutoff:
+        return None, "older_than_cutoff", meta_attempted
+
+    if not is_strict_story_url_for_source(src.name, url, title):
+        return None, "strict_source_filter", meta_attempted
+
+    allowed, reason = is_allowed_item(title or url, desc, src.name, d, full_names, last_map)
+    if not allowed:
+        return None, reason, meta_attempted
+
+    it = Item(
+        title=title or url,
+        url=url,
+        publication=src.name,
+        published=published,
+        domain=d,
+        is_primary=any(d == pd or d.endswith("." + pd) for pd in PRIMARY_DOMAINS),
+        author=author,
+        raw_summary=desc,
+    )
+    return it, "accepted", meta_attempted
+
+
 def fetch_listing_items(
     src: ListingSource,
     cutoff: datetime,
     full_names: Set[str],
     last_map: Dict[str, Set[str]],
     meta_fetch_budget: Dict[str, int],
+    state: Dict[str, Any],
 ) -> Tuple[List[Item], Dict[str, int]]:
-    """
-    Strategy:
-      - Fetch listing HTML
-      - Extract links
-      - Filter to plausible article links
-      - Fetch each candidate article's HTML metadata (limited by budget)
-      - Use metadata title/author/published if present; fallback published=utcnow()
-    """
-    items: List[Item] = []
-    total_links = 0
-    kept_links = 0
-    meta_attempts = 0
-    meta_success = 0
+    """Tiered ingest for non-RSS publishers.
 
-    html = ""
-    links: List[str] = []
-    fetch_error = 0
+    Why this is better: we don't rely on one fragile HTML <a> scrape path.
+    We attempt native feed discovery, sitemaps, JSON/embed extraction, Google fallbacks,
+    then HTML link scraping as last resort. Shared normalization/relevance stays centralized.
+    """
+    metrics: Dict[str, int] = {
+        "tier_a_attempts": 0,
+        "tier_b_attempts": 0,
+        "tier_c_attempts": 0,
+        "tier_d_attempts": 0,
+        "tier_e_attempts": 0,
+        "candidates_total": 0,
+        "accepted": 0,
+        "meta_attempts": 0,
+        "meta_success": 0,
+    }
+    rejection_counts: Dict[str, int] = {}
+    candidates: List[Candidate] = []
+    seen: Set[str] = set()
+
+    # Tier A: Native feeds (known + hidden discovery)
+    metrics["tier_a_attempts"] += 1
+    listing_html = ""
+    feed_urls: List[str] = []
     try:
-        r = safe_get(src.url, timeout=25)
-        r.raise_for_status()
-        html = r.text or ""
-        links = extract_links_from_listing(src.url, html)
+        lr = safe_get(src.url, timeout=20)
+        lr.raise_for_status()
+        listing_html = lr.text or ""
+        feed_urls.extend(_discover_feeds_from_html(src.url, listing_html))
     except Exception:
-        # Radical fallback path: text mirror can work when direct publisher fetch is blocked.
-        fallback_text = fetch_text_via_jina(src.url, timeout=25)
-        if fallback_text:
-            links = extract_urls_from_text_blob(fallback_text)
-        else:
-            fetch_error = 1
+        pass
+    feed_urls.extend(_common_feed_endpoints(src.url))
+    for fu in feed_urls[:10]:
+        try:
+            fr = safe_get(fu, timeout=15)
+            if fr.status_code >= 400:
+                continue
+            fp = feedparser.parse(fr.text)
+            if not fp.entries:
+                continue
+            for e in fp.entries[:MAX_LISTING_LINKS_PER_SOURCE]:
+                dt = parse_entry_datetime(e) or utcnow()
+                if dt < cutoff:
+                    continue
+                link = canonicalize_url((e.get("link") or "").strip())
+                if not link or link in seen:
+                    continue
+                seen.add(link)
+                candidates.append(Candidate(url=link, discovered_at=utcnow(), discovered_from=f"A:{fu}", title=(e.get("title") or "").strip(), summary=(e.get("summary") or "")))
+        except Exception:
+            continue
 
-    total_links = len(links)
+    # Tier B: Sitemaps
+    metrics["tier_b_attempts"] += 1
+    sitemap_cache = state.setdefault("sitemap_cache", {})
+    cached = sitemap_cache.get(src.domain, {})
+    story_urls: List[Tuple[str, Optional[datetime]]] = []
+    use_cache = False
+    if cached:
+        try:
+            ts = dtparser.isoparse(cached.get("fetched_at", ""))
+            if ts.tzinfo is None:
+                ts = ts.replace(tzinfo=timezone.utc)
+            if (utcnow() - ts) < timedelta(hours=6):
+                use_cache = True
+                story_urls = [(u, None) for u in cached.get("urls", [])]
+        except Exception:
+            pass
 
-    # Filter + dedupe, cap
-    candidates = []
-    seen = set()
-    for u in links:
+    if not use_cache:
+        root = f"https://{src.domain}"
+        robots = ""
+        try:
+            rr = safe_get(urljoin(root, "/robots.txt"), timeout=12)
+            if rr.status_code < 400:
+                robots = rr.text or ""
+        except Exception:
+            pass
+        sm_queue = _discover_sitemaps(root, robots)
+        visited_sm: Set[str] = set()
+        while sm_queue and len(visited_sm) < 20:
+            su = sm_queue.pop(0)
+            if su in visited_sm:
+                continue
+            visited_sm.add(su)
+            try:
+                sr = safe_get(su, timeout=15)
+                if sr.status_code >= 400:
+                    continue
+                child_maps, urls = parse_sitemap_xml(sr.text or "")
+                # prioritize news sitemaps
+                child_maps.sort(key=lambda x: 0 if "news" in x.lower() else 1)
+                for c in child_maps:
+                    if c not in visited_sm:
+                        sm_queue.append(c)
+                story_urls.extend(urls)
+            except Exception:
+                continue
+        sitemap_cache[src.domain] = {
+            "fetched_at": utcnow().isoformat(),
+            "urls": [u for u, _ in story_urls[:2000]],
+        }
+
+    for u, lm in story_urls[:400]:
         u2 = canonicalize_url(u)
-        if u2 in seen:
+        if not u2 or u2 in seen:
+            continue
+        if lm and lm < cutoff:
             continue
         seen.add(u2)
-        if link_allowed_for_listing(src, u2):
-            candidates.append(u2)
-        if len(candidates) >= MAX_LISTING_LINKS_PER_SOURCE:
-            break
+        candidates.append(Candidate(url=u2, discovered_at=utcnow(), discovered_from="B:sitemap", published=lm))
 
-    kept_links = len(candidates)
+    # Tier C: Embedded JSON / endpoints
+    metrics["tier_c_attempts"] += 1
+    if not listing_html:
+        try:
+            lr2 = safe_get(src.url, timeout=20)
+            if lr2.status_code < 400:
+                listing_html = lr2.text or ""
+        except Exception:
+            listing_html = ""
+    if listing_html:
+        for u in extract_links_from_listing(src.url, listing_html):
+            u2 = canonicalize_url(u)
+            if not u2 or u2 in seen:
+                continue
+            if domain_of(u2).endswith(src.domain):
+                seen.add(u2)
+                candidates.append(Candidate(url=u2, discovered_at=utcnow(), discovered_from="C:embedded"))
+        # Next.js and embedded state url scan
+        for u in _candidate_urls_from_text(listing_html):
+            u2 = canonicalize_url(u)
+            if not u2 or u2 in seen:
+                continue
+            if domain_of(u2).endswith(src.domain):
+                seen.add(u2)
+                candidates.append(Candidate(url=u2, discovered_at=utcnow(), discovered_from="C:state"))
+        # WordPress REST endpoint
+        try:
+            wp = urljoin(f"https://{src.domain}", "/wp-json/wp/v2/posts?search=san%20francisco%20giants&per_page=20&_fields=link,date,title.rendered,excerpt.rendered")
+            wr = safe_get(wp, timeout=15)
+            if wr.status_code < 400:
+                arr = wr.json()
+                if isinstance(arr, list):
+                    for row in arr:
+                        if not isinstance(row, dict):
+                            continue
+                        link = canonicalize_url(str(row.get("link") or "").strip())
+                        if not link or link in seen:
+                            continue
+                        pd = None
+                        dv = str(row.get("date") or "").strip()
+                        if dv:
+                            try:
+                                pd = dtparser.parse(dv)
+                                if pd.tzinfo is None:
+                                    pd = pd.replace(tzinfo=timezone.utc)
+                                pd = pd.astimezone(timezone.utc)
+                            except Exception:
+                                pd = None
+                        ttl = ""
+                        tv = row.get("title")
+                        if isinstance(tv, dict):
+                            ttl = str(tv.get("rendered") or "")
+                        summ = ""
+                        ev = row.get("excerpt")
+                        if isinstance(ev, dict):
+                            summ = str(ev.get("rendered") or "")
+                        seen.add(link)
+                        candidates.append(Candidate(url=link, discovered_at=utcnow(), discovered_from="C:wp-json", title=ttl, summary=summ, published=pd))
+        except Exception:
+            pass
 
-    for u in candidates:
-        meta: Dict[str, str] = {}
-        article_text_fallback = ""
-        if meta_fetch_budget["remaining"] > 0:
-            meta_fetch_budget["remaining"] -= 1
-            meta_attempts += 1
-            try:
-                rr = safe_get(u, timeout=20)
-                rr.raise_for_status()
-                meta = parse_html_metadata(u, rr.text or "")
-                meta_success += 1
-            except Exception:
-                meta = {}
-                article_text_fallback = fetch_text_via_jina(u, timeout=20)
+    # Tier D: Google feeds tied to this domain (search-based fallback)
+    metrics["tier_d_attempts"] += 1
+    gq = google_news_rss_url(f'(("San Francisco Giants" OR "SF Giants") AND (MLB OR baseball)) site:{src.domain}')
+    try:
+        gis, _ = fetch_rss_items(gq, f"Google News: {src.name}", cutoff, full_names, last_map)
+        for it in gis[:MAX_LISTING_LINKS_PER_SOURCE]:
+            if it.url in seen:
+                continue
+            seen.add(it.url)
+            candidates.append(Candidate(url=it.url, discovered_at=utcnow(), discovered_from="D:google", title=it.title, author=it.author, published=it.published, summary=it.raw_summary))
+    except Exception:
+        pass
 
-        canonical = canonicalize_url(meta.get("canonical") or u)
-        d = domain_of(canonical)
+    # Tier E: HTML/text fallback
+    metrics["tier_e_attempts"] += 1
+    if listing_html:
+        for u in extract_links_from_listing(src.url, listing_html):
+            u2 = canonicalize_url(u)
+            if not u2 or u2 in seen:
+                continue
+            seen.add(u2)
+            candidates.append(Candidate(url=u2, discovered_at=utcnow(), discovered_from="E:html"))
+    else:
+        text = fetch_text_via_jina(src.url, timeout=20)
+        for u in extract_urls_from_text_blob(text):
+            u2 = canonicalize_url(u)
+            if not u2 or u2 in seen:
+                continue
+            seen.add(u2)
+            candidates.append(Candidate(url=u2, discovered_at=utcnow(), discovered_from="E:jina"))
 
-        # Guard against bad canonical metadata (e.g., CDN/font URLs).
-        if not d or (d != src.domain and not d.endswith("." + src.domain)):
-            canonical = canonicalize_url(u)
-            d = domain_of(canonical)
+    metrics["candidates_total"] = len(candidates)
 
-        if not d or is_google_host(canonical) or is_blocked_domain(d):
+    items: List[Item] = []
+    source_seen = state.setdefault("source_seen_urls", {}).setdefault(src.name, {})
+
+    for cand in candidates[:max(MAX_LISTING_LINKS_PER_SOURCE * 4, 60)]:
+        if source_seen.get(cand.url):
+            rejection_counts["already_seen_source"] = rejection_counts.get("already_seen_source", 0) + 1
             continue
-        if not is_probable_article_url(src, canonical):
+
+        final_url = _cached_redirect(cand.url, state)
+        cand.url = final_url
+        it, reason, meta_attempted = _build_item_from_candidate(src, cand, cutoff, full_names, last_map, meta_fetch_budget)
+        if meta_attempted:
+            metrics["meta_attempts"] += 1
+        if not it:
+            rejection_counts[reason] = rejection_counts.get(reason, 0) + 1
             continue
 
-        title = (meta.get("title") or "").strip()
-        if not title and article_text_fallback:
-            title = fallback_title_from_text(article_text_fallback, canonical)
-        if not title:
-            title = title_from_url(canonical)
+        metrics["accepted"] += 1
+        if meta_attempted:
+            metrics["meta_success"] += 1
+        items.append(it)
+        source_seen[it.url] = utcnow().isoformat()
 
-        author = (meta.get("author") or "").strip()
-        desc = (meta.get("description") or "").strip()
-        if not desc and article_text_fallback:
-            desc = fallback_description_from_text(article_text_fallback, max_len=240)
+    # prune per-source seen cache
+    if len(source_seen) > 5000:
+        keys = sorted(source_seen.items(), key=lambda kv: kv[1], reverse=True)
+        state["source_seen_urls"][src.name] = dict(keys[:2500])
 
-        if looks_like_video_story(title, desc, canonical):
-            continue
-
-        # Published time best-effort
-        published = None
-        pub_raw = (meta.get("published") or "").strip()
-        if pub_raw:
-            try:
-                dt = dtparser.parse(pub_raw)
-                if dt.tzinfo is None:
-                    dt = dt.replace(tzinfo=timezone.utc)
-                published = dt.astimezone(timezone.utc)
-            except Exception:
-                published = None
-
-        if not published:
-            published = date_from_url(canonical)
-        if not published:
-            # Without published metadata, treat as “now” to avoid silently dropping non-RSS stories.
-            published = utcnow()
-
-        # If the listing page includes older evergreen links, drop clearly old items.
-        if published < cutoff:
-            continue
-
-        publication = src.name
-
-        if not is_strict_story_url_for_source(publication, canonical, title):
-            continue
-
-        # Relevance check
-        allowed, _reason = is_allowed_item(title or canonical, desc, publication, d, full_names, last_map)
-        if not allowed:
-            continue
-
-        is_primary = any(d == pd or d.endswith("." + pd) for pd in PRIMARY_DOMAINS)
-
-        items.append(
-            Item(
-                title=title or canonical,
-                url=canonical,
-                publication=publication,
-                published=published,
-                domain=d,
-                is_primary=is_primary,
-                author=author,
-                raw_summary=desc,
-            )
-        )
-
-    metrics = {
-        "total_links": total_links,
-        "kept_links": kept_links,
-        "meta_attempts": meta_attempts,
-        "meta_success": meta_success,
-        "error": fetch_error,
-    }
+    metrics["rejections"] = sum(rejection_counts.values())
+    for k, v in rejection_counts.items():
+        metrics[f"reject_{k}"] = v
     return items, metrics
 
 
@@ -1813,7 +2109,7 @@ def title_hash(title: str) -> str:
     return re.sub(r"\s+", " ", t).strip()
 
 
-def main() -> None:
+def main(dry_run: bool = DRY_RUN) -> None:
     state = load_state()
     prune_state(state)
     daily_other = get_daily_other_counter(state)
@@ -1853,10 +2149,6 @@ def main() -> None:
     rss_feeds: List[Tuple[str, str]] = [
         ("SF Standard", "https://sfstandard.com/sports/feed"),
         ("SFGate", "https://www.sfgate.com/sports/feed/san-francisco-giants-rss-feed-428.php"),
-        ("NBC Sports Bay Area RSS", "https://www.nbcsportsbayarea.com/tag/san-francisco-giants/feed/"),
-        ("KNBR Giants RSS", "https://www.knbr.com/category/san-francisco-giants/feed/"),
-        ("FanGraphs Giants RSS", "https://blogs.fangraphs.com/category/giants/feed/"),
-        ("Mercury News Giants RSS", "https://www.mercurynews.com/tag/san-francisco-giants/feed/"),
     ]
 
     # Google News per-domain RSS (now with robust resolving)
@@ -1875,6 +2167,8 @@ def main() -> None:
         rss_feeds.append((f"Google News: {name}", google_news_rss_url(q)))
 
     rss_feeds.append(("Google News: Broad", google_news_rss_url('(("San Francisco Giants" OR "SF Giants") AND (MLB OR baseball))')))
+    for i, alert_feed in enumerate(GOOGLE_ALERTS_RSS):
+        rss_feeds.append((f"Google Alerts #{i+1}", alert_feed))
 
     # Non-RSS listing pages (the “radical” part).
     # Patterns are intentionally conservative to avoid pulling unrelated site links.
@@ -1974,16 +2268,22 @@ def main() -> None:
                 continue
             try:
                 per_source_budget = {"remaining": min(MAX_LISTING_META_FETCHES_PER_SOURCE, meta_budget["remaining"])}
-                items, metrics = fetch_listing_items(src, cutoff, full_names, last_map, per_source_budget)
+                items, metrics = fetch_listing_items(src, cutoff, full_names, last_map, per_source_budget, state)
                 meta_budget["remaining"] -= metrics.get("meta_attempts", 0)
                 successful_sources += 1
                 print(
                     "[info] listing metrics"
                     f" source={src.name}"
-                    f" total_links={metrics.get('total_links', 0)}"
-                    f" kept_links={metrics.get('kept_links', 0)}"
+                    f" candidates_total={metrics.get('candidates_total', 0)}"
+                    f" accepted={metrics.get('accepted', 0)}"
+                    f" tierA={metrics.get('tier_a_attempts', 0)}"
+                    f" tierB={metrics.get('tier_b_attempts', 0)}"
+                    f" tierC={metrics.get('tier_c_attempts', 0)}"
+                    f" tierD={metrics.get('tier_d_attempts', 0)}"
+                    f" tierE={metrics.get('tier_e_attempts', 0)}"
                     f" meta_attempts={metrics.get('meta_attempts', 0)}"
                     f" meta_success={metrics.get('meta_success', 0)}"
+                    f" rejections={metrics.get('rejections', 0)}"
                     f" budget_left={meta_budget['remaining']}"
                 )
                 all_items.extend(items)
@@ -2086,6 +2386,15 @@ def main() -> None:
         save_state(state)
         return
 
+    if dry_run:
+        print("[dry-run] final items to post:")
+        for it in to_post:
+            print(f"[dry-run][item] source={it.publication} title={it.title} url={it.url}")
+        if successful_sources > 0:
+            state["last_run_success_at"] = utcnow().isoformat()
+        save_state(state)
+        return
+
     sess = bsky_create_session()
     access_jwt = sess["accessJwt"]
     did = sess["did"]
@@ -2116,4 +2425,7 @@ def main() -> None:
 
 
 if __name__ == "__main__":
-    main()
+    ap = argparse.ArgumentParser(description="SF Giants Bluesky news bot")
+    ap.add_argument("--dry-run", action="store_true", help="Run ingestion and ranking without posting")
+    args = ap.parse_args()
+    main(dry_run=args.dry_run or DRY_RUN)
