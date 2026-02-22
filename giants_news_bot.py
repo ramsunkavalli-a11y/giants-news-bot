@@ -359,11 +359,13 @@ def is_mlb_utility_or_evergreen(url: str, title: str) -> bool:
     pth = (urlparse(url).path or "").lower()
     bad_terms = (
         "all-time lists", "trivia", "tv stream", "schedule", "tickets", "roster",
-        "depth chart", "spring training tickets", "stats", "standings",
+        "depth chart", "spring training tickets", "stats", "standings", "press releases",
+        "injury report",
     )
     bad_path_terms = (
         "/schedule", "/tickets", "/roster", "/stats", "/standings", "/video",
-        "all-time-lists", "trivia", "tv-stream",
+        "/topic/", "/topics/", "/tag/", "/tags/",
+        "all-time-lists", "trivia", "tv-stream", "press-releases", "injury-report",
     )
     if any(term in t for term in bad_terms):
         return True
@@ -377,16 +379,23 @@ def is_strict_story_url_for_source(source_label: str, url: str, title: str) -> b
     Source-specific stricter checks for noisy feeds.
     """
     path = (urlparse(url).path or "").strip("/").lower()
+    segs = [x for x in path.split("/") if x]
 
     if source_label in {"Google News: SFGiants.com / MLB Giants", "MLB Giants News", "SFGiants.com News"}:
-        if not path.startswith("giants/news") and not path.startswith("news"):
+        # Require article paths directly under /news or /giants/news and reject topic/tag sections.
+        if not (path.startswith("giants/news/") or path.startswith("news/")):
             return False
-        segs = [x for x in path.split("/") if x]
-        if len(segs) < 3:
+        if any(x in {"topic", "topics", "tag", "tags"} for x in segs):
             return False
-        slug = segs[-1]
-        # Prefer article-like slugs and reject plain section roots.
-        if "-" not in slug:
+
+        # Expect exactly one slug after .../news/
+        if path.startswith("giants/news/"):
+            tail = path[len("giants/news/"):]
+        else:
+            tail = path[len("news/"):]
+        if not tail or "/" in tail:
+            return False
+        if "-" not in tail:
             return False
         if is_mlb_utility_or_evergreen(url, title):
             return False
@@ -1800,18 +1809,6 @@ def main() -> None:
             allow_patterns=["/mlb/san-francisco-giants/", "re:/\d{6,}/$"],
         ),
         ListingSource(
-            name="MLB Giants News",
-            url="https://www.mlb.com/giants/news",
-            domain="mlb.com",
-            allow_patterns=["/giants/news/", "re:/news/.+"],
-        ),
-        ListingSource(
-            name="SFGiants.com News",
-            url="https://www.sfgiants.com/news",
-            domain="sfgiants.com",
-            allow_patterns=["/news/", "re:/news/.+"],
-        ),
-        ListingSource(
             name="KNBR Giants",
             url="https://www.knbr.com/category/san-francisco-giants/",
             domain="knbr.com",
@@ -1834,6 +1831,18 @@ def main() -> None:
             url="https://www.nytimes.com/athletic/mlb/team/giants/",
             domain="nytimes.com",
             allow_patterns=["/athletic/", "re:/athletic/\d+/"],
+        ),
+        ListingSource(
+            name="MLB Giants News",
+            url="https://www.mlb.com/giants/news",
+            domain="mlb.com",
+            allow_patterns=["/giants/news/", "re:/news/.+"],
+        ),
+        ListingSource(
+            name="SFGiants.com News",
+            url="https://www.sfgiants.com/news",
+            domain="sfgiants.com",
+            allow_patterns=["/news/", "re:/news/.+"],
         ),
     ]
 
