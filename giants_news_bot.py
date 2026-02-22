@@ -351,6 +351,49 @@ def is_likely_story_url(url: str) -> bool:
     return False
 
 
+def is_mlb_utility_or_evergreen(url: str, title: str) -> bool:
+    """
+    Reject known utility/evergreen MLB Giants pages that are not actual news stories.
+    """
+    t = norm_text(title)
+    pth = (urlparse(url).path or "").lower()
+    bad_terms = (
+        "all-time lists", "trivia", "tv stream", "schedule", "tickets", "roster",
+        "depth chart", "spring training tickets", "stats", "standings",
+    )
+    bad_path_terms = (
+        "/schedule", "/tickets", "/roster", "/stats", "/standings", "/video",
+        "all-time-lists", "trivia", "tv-stream",
+    )
+    if any(term in t for term in bad_terms):
+        return True
+    if any(term in pth for term in bad_path_terms):
+        return True
+    return False
+
+
+def is_strict_story_url_for_source(source_label: str, url: str, title: str) -> bool:
+    """
+    Source-specific stricter checks for noisy feeds.
+    """
+    path = (urlparse(url).path or "").strip("/").lower()
+
+    if source_label in {"Google News: SFGiants.com / MLB Giants", "MLB Giants News", "SFGiants.com News"}:
+        if not path.startswith("giants/news") and not path.startswith("news"):
+            return False
+        segs = [x for x in path.split("/") if x]
+        if len(segs) < 3:
+            return False
+        slug = segs[-1]
+        # Prefer article-like slugs and reject plain section roots.
+        if "-" not in slug:
+            return False
+        if is_mlb_utility_or_evergreen(url, title):
+            return False
+
+    return True
+
+
 def canonicalize_url(url: str) -> str:
     """
     Remove obvious tracking params, fragments, normalize.
@@ -1320,6 +1363,11 @@ def fetch_rss_items(
                     print(f"[debug][reject][{source_label}] non_story_url url={url[:140]} title={headline[:90]}")
                 continue
 
+        if not is_strict_story_url_for_source(source_label, url, headline):
+            if DEBUG_REJECTIONS:
+                print(f"[debug][reject][{source_label}] strict_source_filter url={url[:140]} title={headline[:90]}")
+            continue
+
         after_url_domain += 1
 
         summary = e.get("summary", "") or e.get("description", "") or ""
@@ -1512,6 +1560,9 @@ def fetch_listing_items(
             continue
 
         publication = src.name
+
+        if not is_strict_story_url_for_source(publication, canonical, title):
+            continue
 
         # Relevance check
         allowed, _reason = is_allowed_item(title or canonical, desc, publication, d, full_names, last_map)
