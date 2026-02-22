@@ -100,6 +100,7 @@ PRIMARY_DOMAINS = {
 SOURCE_EXPECTED_DOMAINS: Dict[str, Set[str]] = {
     # Keep strict domain checks only where we repeatedly saw wrong targets.
     "Google News: Mercury News": {"mercurynews.com"},
+    "Google News: SFGiants.com / MLB Giants": {"sfgiants.com", "mlb.com"},
 }
 AGGREGATOR_BLOCKLIST = {
     "news.google.com",
@@ -304,6 +305,50 @@ def is_reference_domain(domain: str) -> bool:
 
 def expected_domains_for_source(source_label: str) -> Set[str]:
     return SOURCE_EXPECTED_DOMAINS.get(source_label, set())
+
+
+def is_home_or_section_root_url(url: str) -> bool:
+    """
+    Reject generic home/section roots that are not actual story pages.
+    """
+    try:
+        path = (urlparse(url).path or "").strip("/").lower()
+    except Exception:
+        return True
+    if not path:
+        return True
+
+    rootish = {
+        "news", "giants", "mlb", "sports", "team", "teams", "baseball",
+        "giants/news", "mlb/team/giants", "athletic/mlb/team/giants",
+    }
+    if path in rootish:
+        return True
+
+    # very shallow section path
+    segs = [x for x in path.split("/") if x]
+    if len(segs) <= 1:
+        return True
+    return False
+
+
+def is_likely_story_url(url: str) -> bool:
+    try:
+        path = (urlparse(url).path or "").strip("/").lower()
+    except Exception:
+        return False
+    if not path:
+        return False
+    if re.search(r"/20\d{2}/\d{1,2}/\d{1,2}/", "/" + path):
+        return True
+    segs = [x for x in path.split("/") if x]
+    if len(segs) >= 3 and any("-" in seg for seg in segs):
+        return True
+    if path.startswith("giants/news/") and len(segs) >= 3:
+        return True
+    if path.startswith("news/") and len(segs) >= 2 and "-" in segs[-1]:
+        return True
+    return False
 
 
 def canonicalize_url(url: str) -> str:
@@ -1267,6 +1312,13 @@ def fetch_rss_items(
             if DEBUG_REJECTIONS:
                 print(f"[debug][reject][{source_label}] domain_mismatch got={d} expected={sorted(expected_domains)} title={headline[:90]}")
             continue
+
+        # GN targeted feeds can still surface home/section roots; reject those.
+        if is_gn and source_label == "Google News: SFGiants.com / MLB Giants":
+            if is_home_or_section_root_url(url) or not is_likely_story_url(url):
+                if DEBUG_REJECTIONS:
+                    print(f"[debug][reject][{source_label}] non_story_url url={url[:140]} title={headline[:90]}")
+                continue
 
         after_url_domain += 1
 
