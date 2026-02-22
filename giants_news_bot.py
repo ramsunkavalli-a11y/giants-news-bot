@@ -1231,7 +1231,7 @@ def resolve_google_news_article(gn_url: str) -> str:
         html = r.text or ""
 
         # 1) Look for explicit google redirect params in HTML
-        m = re.search(r"https?://www\.google\.com/url\?[^\"\'<> ]+", html, flags=re.I)
+        m = re.search(r"https?://www\.google\.com/url\?[^\"'<> ]+", html, flags=re.I)
         if m:
             cand = decode_google_redirect_url(m.group(0))
             if cand.startswith("http") and not is_google_host(cand):
@@ -1263,6 +1263,70 @@ def resolve_google_news_article(gn_url: str) -> str:
         pass
 
     return ""
+
+
+def _candidate_urls_from_text(blob: str) -> List[str]:
+    text = (blob or "").strip()
+    if not text:
+        return []
+    out: List[str] = []
+    out.extend(m.strip() for m in RE_URL.findall(text))
+    out.extend(m.strip() for m in re.findall(r"href=[\"']([^\"']+)[\"']", text, flags=re.I))
+    return out
+
+
+def _pick_best_candidate_url(candidates: List[str], expected_domains: Set[str]) -> str:
+    cleaned: List[str] = []
+    for raw in candidates:
+        u = decode_google_redirect_url((raw or "").strip())
+        u = re.sub(r"[\x00-\x1f\x7f]+", "", u)
+        u = canonicalize_url(u)
+        d = domain_of(u)
+        if not u.startswith("http") or not d:
+            continue
+        if is_google_host(u) or is_blocked_domain(d) or is_reference_domain(d):
+            continue
+        cleaned.append(u)
+
+    if not cleaned:
+        return ""
+
+    if expected_domains:
+        for u in cleaned:
+            d = domain_of(u)
+            if any(d == ed or d.endswith("." + ed) for ed in expected_domains):
+                return u
+
+    return cleaned[0]
+
+
+def resolve_google_news_entry_url(entry: Any, source_label: str) -> str:
+    expected_domains = expected_domains_for_source(source_label)
+    candidates: List[str] = []
+
+    link = (entry.get("link") or "").strip()
+    if link:
+        via_article = resolve_google_news_article(link)
+        if via_article:
+            candidates.append(via_article)
+        candidates.append(link)
+
+    entry_id = (entry.get("id") or "").strip()
+    if entry_id:
+        candidates.append(entry_id)
+
+    links = entry.get("links") or []
+    if isinstance(links, list):
+        for ld in links:
+            if isinstance(ld, dict):
+                href = (ld.get("href") or "").strip()
+                if href:
+                    candidates.append(href)
+
+    for field in ("summary", "description"):
+        candidates.extend(_candidate_urls_from_text(entry.get(field) or ""))
+
+    return _pick_best_candidate_url(candidates, expected_domains)
 
 
 # -----------------------------
@@ -1371,8 +1435,7 @@ def fetch_rss_items(
         # - For normal RSS: use entry.link and canonicalize.
         url = ""
         if is_gn:
-            gn_link = (e.get("link") or "").strip()
-            url = resolve_google_news_article(gn_link)
+            url = resolve_google_news_entry_url(e, source_label)
         else:
             url = canonicalize_url((e.get("link") or "").strip())
 
