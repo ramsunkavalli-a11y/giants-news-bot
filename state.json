@@ -3,7 +3,7 @@
     "count": 2,
     "date": "2026-02-22"
   },
-  "last_run_success_at": "2026-02-22T05:17:26.884439+00:00",
+  "last_run_success_at": "2026-02-22T05:27:54.728465+00:00",
   "posted": {
     "http://www.w3.org/2000/svg": "2026-02-22T04:51:33.110322+00:00",
     "https://fonts.googleapis.com/css?family=Google+Sans+Text%3A400%2C500%2C700%2C400i%2C500i%2C700i": "2026-02-22T04:43:10.016437+00:00",
@@ -12,6 +12,10 @@
     "https://sfstandard.com/2026/02/21/bob-melvin-job-giants-athletics/": "2026-02-21T22:11:19.124226+00:00",
     "https://sfstandard.com/section-415/2026/02/20/sf-giants-spring-training-standouts/": "2026-02-21T22:11:19.897793+00:00",
     "https://www.mercurynews.com/tag/san-francisco-giants/)": "2026-02-22T04:43:09.589221+00:00",
+    "https://www.mlb.com/giants/news/giants-tv-stream-2026": "2026-02-22T05:27:52.854085+00:00",
+    "https://www.mlb.com/giants/news/hayden-birdsong-starts-giants-cactus-league-opener": "2026-02-22T05:27:53.467664+00:00",
+    "https://www.mlb.com/giants/news/topic/giants-history-trivia": "2026-02-22T05:27:54.728448+00:00",
+    "https://www.mlb.com/giants/news/topic/giants-injury-report": "2026-02-22T05:27:54.268895+00:00",
     "https://www.nbcsportsbayarea.com/mlb/san-francisco-giants/": "2026-02-21T23:04:48.733592+00:00",
     "https://www.nbcsportsbayarea.com/mlb/san-francisco-giants/bob-melvin-disappointing-manager-career/1918953/": "2026-02-21T23:34:05.487330+00:00",
     "https://www.nbcsportsbayarea.com/mlb/san-francisco-giants/bob-melvin-tony-vitello-manager-hiring/1918984/": "2026-02-21T23:23:41.674792+00:00",
@@ -39,7 +43,8 @@
     "https://www.sfgiants.com/giants/news/hayden-birdsong-starts-giants-cactus-league-opener": "2026-02-22T05:17:26.670035+00:00",
     "https://www.sfgiants.com/giants/news/hector-borg-becomes-giants-new-3rd-base-coach": "2026-02-22T05:17:26.193012+00:00",
     "https://www.sfgiants.com/giants/news/topic/giants-history-trivia": "2026-02-22T05:17:26.776535+00:00",
-    "https://www.sfgiants.com/giants/news/topic/giants-pipeline-coverage": "2026-02-22T05:17:26.884428+00:00"
+    "https://www.sfgiants.com/giants/news/topic/giants-pipeline-coverage": "2026-02-22T05:17:26.884428+00:00",
+    "https://www.sfgiants.com/giants/news/topic/giants-press-releases": "2026-02-22T05:27:52.423888+00:00"
   },
   "roster_cache": {
     "fetched_at": "2026-02-22T04:58:08.123548+00:00",
