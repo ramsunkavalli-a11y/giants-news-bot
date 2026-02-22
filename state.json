@@ -1,10 +1,11 @@
 {
   "daily_other": {
-    "count": 1,
+    "count": 2,
     "date": "2026-02-22"
   },
-  "last_run_success_at": "2026-02-22T04:43:10.016455+00:00",
+  "last_run_success_at": "2026-02-22T04:51:33.110342+00:00",
   "posted": {
+    "http://www.w3.org/2000/svg": "2026-02-22T04:51:33.110322+00:00",
     "https://fonts.googleapis.com/css?family=Google+Sans+Text%3A400%2C500%2C700%2C400i%2C500i%2C700i": "2026-02-22T04:43:10.016437+00:00",
     "https://sfstandard.com/2026/02/19/paul-bien-sf-giants-analytics/": "2026-02-21T21:49:55.566264+00:00",
     "https://sfstandard.com/2026/02/20/tony-vitello-sf-giants-cactus-league/": "2026-02-21T21:49:52.774881+00:00",
@@ -24,6 +25,8 @@
     "https://www.nbcsportsbayarea.com/mlb/san-francisco-giants/jayce-tingler-tony-vitello-coaching-staff/1916754/": "2026-02-21T23:23:40.825650+00:00",
     "https://www.nbcsportsbayarea.com/mlb/san-francisco-giants/logan-webb-top-10-starting-pitchers/1917407/": "2026-02-21T23:17:04.171064+00:00",
     "https://www.nbcsportsbayarea.com/mlb/san-francisco-giants/logan-webb-world-baseball-classic-spring-training/1916522/": "2026-02-21T23:23:40.541828+00:00",
+    "https://www.nbcsportsbayarea.com/mlb/san-francisco-giants/matt-chapman-bob-melvin-hire/1918978/": "2026-02-22T04:51:32.319136+00:00",
+    "https://www.nbcsportsbayarea.com/mlb/san-francisco-giants/notes-tony-vitello-bryce-eldridge/1919033/": "2026-02-22T04:51:31.917349+00:00",
     "https://www.nbcsportsbayarea.com/mlb/san-francisco-giants/patrick-bailey-batting-stance-adjustment/1917579/": "2026-02-21T23:17:04.458901+00:00",
     "https://www.nbcsportsbayarea.com/mlb/san-francisco-giants/sergio-romo-ryan-walker/1917717/": "2026-02-21T23:17:04.859825+00:00",
     "https://www.nbcsportsbayarea.com/mlb/san-francisco-giants/will-brennan-contract-spring-training/1916973/": "2026-02-21T23:23:41.124124+00:00",
