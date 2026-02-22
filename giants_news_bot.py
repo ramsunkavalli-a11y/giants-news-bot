@@ -1,4 +1,5 @@
 import json
+import base64
 import html as html_lib
 import os
 import re
@@ -96,14 +97,8 @@ PRIMARY_DOMAINS = {
 
 
 SOURCE_EXPECTED_DOMAINS: Dict[str, Set[str]] = {
+    # Keep strict domain checks only where we repeatedly saw wrong targets.
     "Google News: Mercury News": {"mercurynews.com"},
-    "Google News: SF Chronicle": {"sfchronicle.com"},
-    "Google News: NBC Sports Bay Area": {"nbcsportsbayarea.com"},
-    "Google News: The Athletic": {"theathletic.com"},
-    "Google News: Associated Press": {"apnews.com"},
-    "Google News: FanGraphs": {"fangraphs.com"},
-    "Google News: Baseball America": {"baseballamerica.com"},
-    "Google News: KNBR": {"knbr.com"},
 }
 AGGREGATOR_BLOCKLIST = {
     "news.google.com",
@@ -1033,6 +1028,51 @@ def looks_like_video_story(title: str, summary: str, url: str) -> bool:
 # -----------------------------
 # URL resolution: Google News RSS article links
 # -----------------------------
+def decode_google_news_token_url(gn_url: str) -> str:
+    """
+    Decode Google News RSS token URLs like /rss/articles/<token> where possible,
+    without making a network request.
+    """
+    u = (gn_url or "").strip()
+    if not u:
+        return ""
+    try:
+        p = urlparse(u)
+        host = (p.netloc or "").lower()
+        if "news.google.com" not in host:
+            return ""
+
+        parts = [x for x in (p.path or "").split("/") if x]
+        token = ""
+        if "articles" in parts:
+            i = parts.index("articles")
+            if i + 1 < len(parts):
+                token = parts[i + 1]
+        elif "read" in parts:
+            i = parts.index("read")
+            if i + 1 < len(parts):
+                token = parts[i + 1]
+
+        if not token:
+            return ""
+
+        token = token.split("?")[0].split("#")[0].strip()
+        pad = "=" * ((4 - len(token) % 4) % 4)
+        raw = base64.urlsafe_b64decode(token + pad)
+        text = raw.decode("utf-8", errors="ignore")
+
+        m = re.search(r"https?://[^\s\"'<>\\]+", text)
+        if not m:
+            return ""
+        cand = canonicalize_url(m.group(0).strip())
+        d = domain_of(cand)
+        if not cand or not d or is_google_host(cand) or is_blocked_domain(d) or is_reference_domain(d):
+            return ""
+        return cand
+    except Exception:
+        return ""
+
+
 def resolve_google_news_article(gn_url: str) -> str:
     """
     Turn a Google News RSS article URL into the real publisher URL.
@@ -1046,6 +1086,11 @@ def resolve_google_news_article(gn_url: str) -> str:
     u_dec = decode_google_redirect_url(u)
     if u_dec != u and u_dec.startswith("http") and not is_google_host(u_dec):
         return canonicalize_url(u_dec)
+
+    # Fast path: decode tokenized Google News URLs directly.
+    tok = decode_google_news_token_url(u)
+    if tok:
+        return tok
 
     try:
         r = safe_get(u, timeout=20)
