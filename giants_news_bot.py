@@ -99,8 +99,15 @@ PRIMARY_DOMAINS = {
 
 SOURCE_EXPECTED_DOMAINS: Dict[str, Set[str]] = {
     # Keep strict domain checks only where we repeatedly saw wrong targets.
+    "Google News: SF Chronicle": {"sfchronicle.com"},
     "Google News: Mercury News": {"mercurynews.com"},
+    "Google News: NBC Sports Bay Area": {"nbcsportsbayarea.com"},
+    "Google News: The Athletic": {"theathletic.com", "nytimes.com"},
+    "Google News: Associated Press": {"apnews.com"},
     "Google News: SFGiants.com / MLB Giants": {"sfgiants.com", "mlb.com"},
+    "Google News: FanGraphs": {"fangraphs.com"},
+    "Google News: Baseball America": {"baseballamerica.com"},
+    "Google News: KNBR": {"knbr.com"},
 }
 AGGREGATOR_BLOCKLIST = {
     "news.google.com",
@@ -398,6 +405,27 @@ def is_strict_story_url_for_source(source_label: str, url: str, title: str) -> b
         if "-" not in tail:
             return False
         if is_mlb_utility_or_evergreen(url, title):
+            return False
+
+    if source_label in {"KNBR Giants RSS", "KNBR Giants", "Google News: KNBR"}:
+        # Keep Giants category stories but reject generic site/category roots.
+        if is_home_or_section_root_url(url):
+            return False
+        if "/san-francisco-giants/" not in path and not re.search(r"/20\d{2}/\d{2}/\d{2}/", "/" + path):
+            return False
+
+    if source_label in {"FanGraphs Giants RSS", "FanGraphs Giants", "Google News: FanGraphs"}:
+        # FanGraphs list pages and category pages are common false positives.
+        if "/category/" in "/" + path and len(segs) <= 2:
+            return False
+        if is_home_or_section_root_url(url):
+            return False
+
+    if source_label in {"NBC Sports Bay Area RSS", "NBC Sports Bay Area", "Google News: NBC Sports Bay Area"}:
+        # NBC should be a story page, not just the team landing page.
+        if path in {"mlb/san-francisco-giants", "tag/san-francisco-giants"}:
+            return False
+        if is_home_or_section_root_url(url):
             return False
 
     return True
@@ -1762,6 +1790,10 @@ def main() -> None:
     rss_feeds: List[Tuple[str, str]] = [
         ("SF Standard", "https://sfstandard.com/sports/feed"),
         ("SFGate", "https://www.sfgate.com/sports/feed/san-francisco-giants-rss-feed-428.php"),
+        ("NBC Sports Bay Area RSS", "https://www.nbcsportsbayarea.com/tag/san-francisco-giants/feed/"),
+        ("KNBR Giants RSS", "https://www.knbr.com/category/san-francisco-giants/feed/"),
+        ("FanGraphs Giants RSS", "https://blogs.fangraphs.com/category/giants/feed/"),
+        ("Mercury News Giants RSS", "https://www.mercurynews.com/tag/san-francisco-giants/feed/"),
     ]
 
     # Google News per-domain RSS (now with robust resolving)
