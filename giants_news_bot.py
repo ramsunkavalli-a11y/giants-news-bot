@@ -55,6 +55,7 @@ MAX_META_FETCHES_PER_RUN = int(os.getenv("MAX_META_FETCHES_PER_RUN", "25"))
 # Listing pages are our non-RSS path. Keep this separate from embed enrichment settings.
 ENABLE_LISTING_FETCH = os.getenv("ENABLE_LISTING_FETCH", "true").lower() in {"1", "true", "yes"}
 MAX_LISTING_META_FETCHES_PER_RUN = int(os.getenv("MAX_LISTING_META_FETCHES_PER_RUN", "40"))
+MAX_LISTING_META_FETCHES_PER_SOURCE = int(os.getenv("MAX_LISTING_META_FETCHES_PER_SOURCE", "10"))
 
 # UA: use a browser-ish UA; some paywalled sites block bot UAs.
 UA = os.getenv(
@@ -1675,14 +1676,13 @@ def main() -> None:
             name="SF Chronicle",
             url="https://www.sfchronicle.com/sports/giants/",
             domain="sfchronicle.com",
-            allow_patterns=["/sports/giants/"],
+            allow_patterns=["/sports/giants/", "re:/\d{4}/\d{2}/\d{2}/"],
         ),
-        # If you find a better Mercury News Giants landing page, swap it in.
         ListingSource(
             name="Mercury News",
             url="https://www.mercurynews.com/tag/san-francisco-giants/",
             domain="mercurynews.com",
-            allow_patterns=["/tag/san-francisco-giants/", "re:/\\d{4}/\\d{2}/\\d{2}/"],
+            allow_patterns=["/tag/san-francisco-giants/", "re:/\d{4}/\d{2}/\d{2}/"],
         ),
         ListingSource(
             name="AP News",
@@ -1694,9 +1694,46 @@ def main() -> None:
             name="NBC Sports Bay Area",
             url="https://www.nbcsportsbayarea.com/mlb/san-francisco-giants/",
             domain="nbcsportsbayarea.com",
-            allow_patterns=["/mlb/san-francisco-giants/"],
+            allow_patterns=["/mlb/san-francisco-giants/", "re:/\d{6,}/$"],
+        ),
+        ListingSource(
+            name="MLB Giants News",
+            url="https://www.mlb.com/giants/news",
+            domain="mlb.com",
+            allow_patterns=["/giants/news/", "re:/news/.+"],
+        ),
+        ListingSource(
+            name="SFGiants.com News",
+            url="https://www.sfgiants.com/news",
+            domain="sfgiants.com",
+            allow_patterns=["/news/", "re:/news/.+"],
+        ),
+        ListingSource(
+            name="KNBR Giants",
+            url="https://www.knbr.com/category/san-francisco-giants/",
+            domain="knbr.com",
+            allow_patterns=["/san-francisco-giants/", "re:/\d{4}/\d{2}/\d{2}/"],
+        ),
+        ListingSource(
+            name="FanGraphs Giants",
+            url="https://blogs.fangraphs.com/category/giants/",
+            domain="fangraphs.com",
+            allow_patterns=["/category/giants/", "re:/\d{4}/\d{2}/"],
+        ),
+        ListingSource(
+            name="Baseball America Giants",
+            url="https://www.baseballamerica.com/teams/mlb/san-francisco-giants/",
+            domain="baseballamerica.com",
+            allow_patterns=["/teams/mlb/san-francisco-giants/", "re:/story/", "re:/news/"],
+        ),
+        ListingSource(
+            name="The Athletic Giants",
+            url="https://www.nytimes.com/athletic/mlb/team/giants/",
+            domain="nytimes.com",
+            allow_patterns=["/athletic/", "re:/athletic/\d+/"],
         ),
     ]
+
 
     # -----------------------------
     # Collect items
@@ -1725,8 +1762,13 @@ def main() -> None:
     if ENABLE_LISTING_FETCH:
         meta_budget = {"remaining": MAX_LISTING_META_FETCHES_PER_RUN}
         for src in listing_sources:
+            if meta_budget["remaining"] <= 0:
+                print(f"[info] listing metrics source={src.name} skipped=budget_exhausted")
+                continue
             try:
-                items, metrics = fetch_listing_items(src, cutoff, full_names, last_map, meta_budget)
+                per_source_budget = {"remaining": min(MAX_LISTING_META_FETCHES_PER_SOURCE, meta_budget["remaining"])}
+                items, metrics = fetch_listing_items(src, cutoff, full_names, last_map, per_source_budget)
+                meta_budget["remaining"] -= metrics.get("meta_attempts", 0)
                 successful_sources += 1
                 print(
                     "[info] listing metrics"
