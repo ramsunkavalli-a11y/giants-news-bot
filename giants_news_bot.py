@@ -28,9 +28,7 @@ import json
 import os
 import re
 import time
-import unicodedata
-import xml.etree.ElementTree as ET
-from collections import defaultdict
+import html as html_lib
 from dataclasses import dataclass
 from datetime import datetime, timedelta, timezone
 from typing import Any, Dict, Iterable, List, Optional, Set, Tuple
@@ -173,8 +171,14 @@ META_DESC_RE = re.compile(r'<meta[^>]+property=["\']og:description["\'][^>]+cont
 META_TWITTER_DESC_RE = re.compile(r'<meta[^>]+name=["\']twitter:description["\'][^>]+content=["\']([^"\']+)', re.I)
 META_IMAGE_RE = re.compile(r'<meta[^>]+property=["\']og:image(?::url)?["\'][^>]+content=["\']([^"\']+)', re.I)
 META_TWITTER_IMAGE_RE = re.compile(r'<meta[^>]+name=["\']twitter:image(?::src)?["\'][^>]+content=["\']([^"\']+)', re.I)
-BYLINE_RE = re.compile(r"\bby\s+([A-Z][A-Za-z.\-']+(?:\s+[A-Z][A-Za-z.\-']+){1,3})\b")
 STRIP_TAGS_RE = re.compile(r"<[^>]+>")
+
+
+SESSION = requests.Session()
+SESSION.headers.update({"User-Agent": UA})
+SESSION.mount("http://", HTTPAdapter(pool_connections=20, pool_maxsize=20))
+SESSION.mount("https://", HTTPAdapter(pool_connections=20, pool_maxsize=20))
+
 
 SESSION = requests.Session()
 SESSION.headers.update({"User-Agent": UA})
@@ -191,8 +195,6 @@ class Candidate:
     summary: str = ""
     categories: List[str] = None
     image_url: str = ""
-    discovered_via: str = ""
-    published_ts: str = ""
 
     def __post_init__(self) -> None:
         if self.categories is None:
@@ -393,6 +395,14 @@ def fetch_html(url: str) -> Optional[str]:
         return None
 
 
+def clean_text(text: str) -> str:
+    if not text:
+        return ""
+    txt = STRIP_TAGS_RE.sub(" ", text)
+    txt = html_lib.unescape(txt)
+    return re.sub(r"\s+", " ", txt).strip()
+
+
 def extract_meta(url: str, html: str) -> Tuple[str, str, str, str, str]:
     title = ""
     author = ""
@@ -437,7 +447,7 @@ def extract_meta(url: str, html: str) -> Tuple[str, str, str, str, str]:
             if not isinstance(item, dict):
                 continue
             if not title and item.get("headline"):
-                title = clean_text(str(item.get("headline")))
+                title = str(item.get("headline")).strip()
             if not description and item.get("description"):
                 description = clean_text(str(item.get("description")))
             if not image_url and item.get("image"):
@@ -451,7 +461,7 @@ def extract_meta(url: str, html: str) -> Tuple[str, str, str, str, str]:
                     elif isinstance(first, dict) and first.get("url"):
                         image_url = canonicalize_url(urljoin(url, str(first.get("url"))))
                 elif isinstance(img, dict) and img.get("url"):
-                    image_url = canonicalize_url(urljoin(url, str(img.get("url"))) )
+                    image_url = canonicalize_url(urljoin(url, str(img.get("url"))))
             if not author and item.get("author"):
                 a = item.get("author")
                 if isinstance(a, dict):
@@ -669,7 +679,7 @@ def discover_non_rss_candidates(limit: int) -> List[Candidate]:
 
         log(f"non_rss_source={source} kept={len(filtered)} checked={len(seen)}")
         for u in filtered:
-            out.append(Candidate(source=source, url=u, discovered_via="nonrss"))
+            out.append(Candidate(source=source, url=u))
 
     return out[:limit]
 
@@ -693,15 +703,15 @@ def enrich_and_validate(
         return None
 
     meta = state["meta_cache"].get(resolved)
-    title = clean_text(c.title)
-    author = clean_text(c.author)
+    title = c.title.strip()
+    author = c.author.strip()
     summary = clean_text(c.summary)
     image_url = c.image_url.strip()
 
     if meta:
-        title = title or clean_text(meta.get("title", ""))
-        author = author or clean_text(meta.get("author", ""))
-        summary = summary or clean_text(meta.get("summary", ""))
+        title = title or meta.get("title", "")
+        author = author or meta.get("author", "")
+        summary = summary or meta.get("summary", "")
         image_url = image_url or meta.get("image_url", "")
     else:
         html = fetch_html(resolved)
@@ -713,9 +723,9 @@ def enrich_and_validate(
                     rejected["not_story_url"] += 1
                     log(f"rejected_not_story_url canonical {m_canonical}")
                     return None
-            title = title or clean_text(m_title)
-            author = author or clean_text(m_author)
-            summary = summary or clean_text(m_desc)
+            title = title or m_title
+            author = author or m_author
+            summary = summary or m_desc
             image_url = image_url or m_image
         state["meta_cache"][resolved] = {
             "title": title,
@@ -724,12 +734,6 @@ def enrich_and_validate(
             "image_url": image_url,
             "ts": now_utc().isoformat(),
         }
-
-    if require_high_author:
-        if not author or not is_high_author(author):
-            rejected["author_not_allowed"] += 1
-            log(f"rejected_author_not_allowed {resolved} author={author or '<missing>'}")
-            return None
 
     if not giants_relevant(title, summary, c.categories, resolved):
         rejected["irrelevant"] += 1
@@ -903,11 +907,9 @@ def post_to_bluesky(c: Candidate, did: str, jwt: str) -> None:
     link_start = text.rfind(c.url)
     facets: List[Dict[str, Any]] = []
     if link_start >= 0:
-        start_bytes = len(text[:link_start].encode("utf-8"))
-        end_bytes = start_bytes + len(c.url.encode("utf-8"))
         facets.append(
             {
-                "index": {"byteStart": start_bytes, "byteEnd": end_bytes},
+                "index": {"byteStart": link_start, "byteEnd": link_start + len(c.url)},
                 "features": [{"$type": "app.bsky.richtext.facet#link", "uri": c.url}],
             }
         )
