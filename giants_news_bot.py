@@ -151,7 +151,9 @@ def log(msg: str) -> None:
     print(f"[{datetime.utcnow().isoformat()}] {msg}")
 
 
-def canonicalize_url(url: str) -> str:
+def canonicalize_url(url: Any) -> str:
+    if not isinstance(url, str):
+        return ""
     if not url:
         return ""
     url = url.strip()
@@ -178,8 +180,20 @@ def is_bad_domain(domain: str) -> bool:
 
 def resolve_final_url(url: str, redirect_cache: Dict[str, str]) -> str:
     c = canonicalize_url(url)
+    if not c:
+        return ""
     if c in redirect_cache:
-        return redirect_cache[c]
+        cached = redirect_cache[c]
+        if isinstance(cached, dict):
+            final = canonicalize_url(cached.get("final", ""))
+            if final:
+                redirect_cache[c] = final
+                return final
+        elif isinstance(cached, str):
+            final = canonicalize_url(cached)
+            if final:
+                redirect_cache[c] = final
+                return final
     final = c
     try:
         r = requests.get(c, headers={"User-Agent": UA}, timeout=REQUEST_TIMEOUT, allow_redirects=True)
@@ -312,6 +326,19 @@ def state_load() -> Dict[str, Any]:
     data.setdefault("posted_urls", {})
     data.setdefault("redirect_cache", {})
     data.setdefault("meta_cache", {})
+
+    normalized_redirect_cache: Dict[str, str] = {}
+    for raw_key, raw_val in data["redirect_cache"].items():
+        key = canonicalize_url(raw_key)
+        if not key:
+            continue
+        if isinstance(raw_val, dict):
+            val = canonicalize_url(raw_val.get("final", ""))
+        else:
+            val = canonicalize_url(raw_val)
+        normalized_redirect_cache[key] = val or key
+    data["redirect_cache"] = normalized_redirect_cache
+
     return data
 
 
