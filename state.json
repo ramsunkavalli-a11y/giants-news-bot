@@ -45,6 +45,11 @@
       "title": "Jeff Kent &#039;overwhelmed&#039; by Giants&#039; decision to retire his number after Hall of Fame election",
       "ts": "2026-02-23T01:15:04.566387+00:00"
     },
+    "https://nbcsportsbayarea.com/mlb/san-francisco-giants/matt-chapman-bob-melvin-hire/1918978/": {
+      "author": "Tristi Rodriguez",
+      "title": "Giants star Matt Chapman reacts to Bob Melvin&#039;s Athletics hire after &#039;funky year&#039; with San Francisco",
+      "ts": "2026-02-23T01:35:32.741343+00:00"
+    },
     "https://nbcsportsbayarea.com/mlb/san-francisco-giants/new-jersey-patch-partnership/1918016/": {
       "author": "Alex Pavlovic",
       "title": "Giants announce new multi-year jersey patch partnership with Airwallex for 2026 MLB season, beyond",
@@ -89,6 +94,16 @@
       "author": "Monte Poole",
       "title": "What we learned as short-handed Warriors storm back to stun Nikola Joki\u0107, Nuggets in big win",
       "ts": "2026-02-23T01:00:29.268794+00:00"
+    },
+    "https://nbcsportsbayarea.com/nba/golden-state-warriors/al-horford-oldest-center-3-pointers/1919320/": {
+      "author": "Angelina Martin",
+      "title": "Warriors big man Al Horford makes NBA history as oldest center to achieve 3-point feat vs. Nuggets",
+      "ts": "2026-02-23T01:35:32.620038+00:00"
+    },
+    "https://nbcsportsbayarea.com/nba/golden-state-warriors/draymond-green-role-steve-kerr/1918951/": {
+      "author": "Tristi Rodriguez",
+      "title": "Warriors coach Steve Kerr states Draymond Green has &#039;accepted&#039; different role as team experiments",
+      "ts": "2026-02-23T01:35:32.421698+00:00"
     },
     "https://nbcsportsbayarea.com/nba/golden-state-warriors/jimmy-butler-email-season-ticket-holders/1918943/": {
       "author": "Eden Collier",
@@ -145,6 +160,11 @@
       "title": "Bob Melvin opens up: A Giants firing, an A\u2019s hiring, and what comes next",
       "ts": "2026-02-23T01:00:26.287454+00:00"
     },
+    "https://sfstandard.com/2026/02/22/sf-giants-emergency-alarm-spring-training/": {
+      "author": "John Shea",
+      "title": "Giants turn triple play, smoker sets off alarm in bizarre game: \u2018A glitch in the matrix\u2019",
+      "ts": "2026-02-23T01:35:31.336161+00:00"
+    },
     "https://sfstandard.com/2026/02/22/tony-vitello-sf-giants-spring-training/": {
       "author": "John Shea",
       "title": "Tony Vitello\u2019s spring debut: A comeback, help from familiar faces \u2014 and a bruise",
@@ -169,14 +189,19 @@
     "https://www.sfgate.com/giants/article/barry-bonds-jt-snow-21379867.php": "2026-02-22T07:43:06.007011+00:00"
   },
   "posted_urls": {
+    "https://nbcsportsbayarea.com/mlb/san-francisco-giants/bob-melvin-disappointing-manager-career/1918953/": "2026-02-23T01:35:36.234282+00:00",
+    "https://nbcsportsbayarea.com/mlb/san-francisco-giants/bob-melvin-tony-vitello-manager-hiring/1918984/": "2026-02-23T01:35:35.186729+00:00",
     "https://nbcsportsbayarea.com/mlb/san-francisco-giants/carson-whisenhunt-velocity-jump-spring-training/1918469/": "2026-02-23T01:15:05.946371+00:00",
     "https://nbcsportsbayarea.com/mlb/san-francisco-giants/christian-koss-versatility-help-analysis/1918739/": "2026-02-23T01:15:08.916031+00:00",
     "https://nbcsportsbayarea.com/mlb/san-francisco-giants/hayden-birdsong-spring-training-tony-vitello/1918999/": "2026-02-23T01:15:08.014097+00:00",
+    "https://nbcsportsbayarea.com/mlb/san-francisco-giants/hector-borg-role-organization/1917247/": "2026-02-23T01:35:34.268780+00:00",
     "https://nbcsportsbayarea.com/mlb/san-francisco-giants/patrick-bailey-batting-stance-adjustment/1917579/": "2026-02-23T01:15:05.043586+00:00",
     "https://nbcsportsbayarea.com/mlb/san-francisco-giants/robbie-ray-fire-alarm-triple-play/1919310/": "2026-02-23T01:15:06.979597+00:00",
+    "https://nbcsportsbayarea.com/video/mlb/san-francisco-giants/tony-vitellos-tennessee-rant-analysis/1918463/": "2026-02-23T01:35:37.154469+00:00",
     "https://nytimes.com/2023/09/14/sports/baseball/tim-flannery-lunatic-fringe.html": "2026-02-23T01:00:36.672214+00:00",
     "https://sfstandard.com/2026/02/20/tony-vitello-sf-giants-cactus-league/": "2026-02-23T01:00:35.721616+00:00",
     "https://sfstandard.com/2026/02/21/bob-melvin-job-giants-athletics/": "2026-02-23T01:00:33.687050+00:00",
+    "https://sfstandard.com/2026/02/22/sf-giants-emergency-alarm-spring-training/": "2026-02-23T01:35:33.221415+00:00",
     "https://sfstandard.com/2026/02/22/tony-vitello-sf-giants-spring-training/": "2026-02-23T01:00:32.735038+00:00",
     "https://sfstandard.com/section-415/2026/02/20/sf-giants-spring-training-standouts/": "2026-02-23T01:00:34.642465+00:00"
   },
@@ -1752,7 +1777,9 @@
     "https://nbcsportsbayarea.com/nba/": "https://nbcsportsbayarea.com/nba/",
     "https://nbcsportsbayarea.com/nba/golden-state-warriors/": "https://nbcsportsbayarea.com/nba/golden-state-warriors/",
     "https://nbcsportsbayarea.com/nba/golden-state-warriors/al-horford-nikola-jokic-denver-nuggets/1919334/": "https://nbcsportsbayarea.com/nba/golden-state-warriors/al-horford-nikola-jokic-denver-nuggets/1919334/",
+    "https://nbcsportsbayarea.com/nba/golden-state-warriors/al-horford-oldest-center-3-pointers/1919320/": "https://nbcsportsbayarea.com/nba/golden-state-warriors/al-horford-oldest-center-3-pointers/1919320/",
     "https://nbcsportsbayarea.com/nba/golden-state-warriors/dalton-johnson/": "https://nbcsportsbayarea.com/nba/golden-state-warriors/dalton-johnson/",
+    "https://nbcsportsbayarea.com/nba/golden-state-warriors/draymond-green-role-steve-kerr/1918951/": "https://nbcsportsbayarea.com/nba/golden-state-warriors/draymond-green-role-steve-kerr/1918951/",
     "https://nbcsportsbayarea.com/nba/golden-state-warriors/dubs-talk/": "https://nbcsportsbayarea.com/nba/golden-state-warriors/dubs-talk/",
     "https://nbcsportsbayarea.com/nba/golden-state-warriors/jimmy-butler-email-season-ticket-holders/1918943/": "https://nbcsportsbayarea.com/nba/golden-state-warriors/jimmy-butler-email-season-ticket-holders/1918943/",
     "https://nbcsportsbayarea.com/nba/golden-state-warriors/kristaps-porzingis-illness/1919221/": "https://nbcsportsbayarea.com/nba/golden-state-warriors/kristaps-porzingis-illness/1919221/",
@@ -2088,6 +2115,7 @@
     "https://sfchronicle.com/projects/us-drug-overdose-deaths/treatment-centers-embed/": "https://sfchronicle.com/projects/us-drug-overdose-deaths/treatment-centers-embed/",
     "https://sfstandard.com/2026/02/20/tony-vitello-sf-giants-cactus-league/": "https://sfstandard.com/2026/02/20/tony-vitello-sf-giants-cactus-league/",
     "https://sfstandard.com/2026/02/21/bob-melvin-job-giants-athletics/": "https://sfstandard.com/2026/02/21/bob-melvin-job-giants-athletics/",
+    "https://sfstandard.com/2026/02/22/sf-giants-emergency-alarm-spring-training/": "https://sfstandard.com/2026/02/22/sf-giants-emergency-alarm-spring-training/",
     "https://sfstandard.com/2026/02/22/tony-vitello-sf-giants-spring-training/": "https://sfstandard.com/2026/02/22/tony-vitello-sf-giants-spring-training/",
     "https://sfstandard.com/section-415/2026/02/20/sf-giants-spring-training-standouts/": "https://sfstandard.com/section-415/2026/02/20/sf-giants-spring-training-standouts/",
     "https://thesportsleader.com": "https://thesportsleader.com/",
