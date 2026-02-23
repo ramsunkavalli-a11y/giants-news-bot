@@ -24,6 +24,7 @@ import re
 import time
 from dataclasses import dataclass
 from datetime import datetime, timedelta, timezone
+from requests.adapters import HTTPAdapter
 from typing import Any, Dict, Iterable, List, Optional, Set, Tuple
 from urllib.parse import parse_qsl, urlencode, urljoin, urlparse, urlunparse
 import xml.etree.ElementTree as ET
@@ -44,6 +45,7 @@ MAX_POSTS_PER_RUN = int(os.getenv("MAX_POSTS_PER_RUN", "10"))
 KEEP_POSTED_DAYS = int(os.getenv("KEEP_POSTED_DAYS", "21"))
 MAX_NON_RSS_URLS_PER_SOURCE = int(os.getenv("MAX_NON_RSS_URLS_PER_SOURCE", "60"))
 MAX_RSS_ENTRIES_PER_FEED = int(os.getenv("MAX_RSS_ENTRIES_PER_FEED", "40"))
+MAX_VALIDATION_TARGET = int(os.getenv("MAX_VALIDATION_TARGET", str(max(20, MAX_POSTS_PER_RUN * 3))))
 
 BSKY_PDS = os.getenv("BSKY_PDS", "https://bsky.social")
 BSKY_IDENTIFIER = os.getenv("BSKY_IDENTIFIER", "")
@@ -133,6 +135,12 @@ NEXT_DATA_RE = re.compile(r'<script[^>]*id=["\']__NEXT_DATA__["\'][^>]*>(.*?)</s
 JSON_LD_RE = re.compile(r'<script[^>]+type=["\']application/ld\+json["\'][^>]*>(.*?)</script>', re.I | re.S)
 
 
+SESSION = requests.Session()
+SESSION.headers.update({"User-Agent": UA})
+SESSION.mount("http://", HTTPAdapter(pool_connections=20, pool_maxsize=20))
+SESSION.mount("https://", HTTPAdapter(pool_connections=20, pool_maxsize=20))
+
+
 @dataclass
 class Candidate:
     source: str
@@ -200,8 +208,11 @@ def resolve_final_url(url: str, redirect_cache: Dict[str, str]) -> str:
                 return final
     final = c
     try:
-        r = requests.get(c, headers={"User-Agent": UA}, timeout=REQUEST_TIMEOUT, allow_redirects=True)
+        r = SESSION.request("HEAD", c, timeout=REQUEST_TIMEOUT, allow_redirects=True)
         final = canonicalize_url(r.url or c)
+        if r.status_code >= 400:
+            with SESSION.get(c, timeout=REQUEST_TIMEOUT, allow_redirects=True, stream=True) as fallback:
+                final = canonicalize_url(fallback.url or c)
     except Exception:
         pass
     redirect_cache[c] = final
@@ -269,7 +280,7 @@ def giants_relevant(title: str, summary: str, categories: Iterable[str], url: st
 
 def fetch_html(url: str) -> Optional[str]:
     try:
-        r = requests.get(url, headers={"User-Agent": UA}, timeout=REQUEST_TIMEOUT)
+        r = SESSION.get(url, timeout=REQUEST_TIMEOUT)
         if r.status_code >= 400 or "text/html" not in r.headers.get("Content-Type", ""):
             return None
         return r.text[:2_000_000]
@@ -367,7 +378,7 @@ def prune_state(state: Dict[str, Any]) -> None:
 def discover_from_rss() -> List[Candidate]:
     out: List[Candidate] = []
     for source_name, feed_url in RSS_SOURCES:
-        feed = feedparser.parse(feed_url)
+        feed = feedparser.parse(feed_url, request_headers={"User-Agent": UA})
         for e in feed.entries[:MAX_RSS_ENTRIES_PER_FEED]:
             out.append(
                 Candidate(
@@ -384,7 +395,7 @@ def discover_from_rss() -> List[Candidate]:
 
 def fetch_xml(url: str) -> Optional[str]:
     try:
-        r = requests.get(url, headers={"User-Agent": UA}, timeout=REQUEST_TIMEOUT)
+        r = SESSION.get(url, timeout=REQUEST_TIMEOUT)
         if r.status_code >= 400:
             return None
         return r.text
@@ -457,8 +468,11 @@ def discover_from_listing(url: str) -> List[str]:
     return list(found)
 
 
-def discover_non_rss_candidates() -> List[Candidate]:
+def discover_non_rss_candidates(limit: int) -> List[Candidate]:
     out: List[Candidate] = []
+    if limit <= 0:
+        return out
+
     for source, listing in NON_RSS_LISTING_URLS.items():
         filtered: List[str] = []
         seen: Set[str] = set()
@@ -471,9 +485,9 @@ def discover_non_rss_candidates() -> List[Candidate]:
                 seen.add(cu)
                 if is_story_url(cu):
                     filtered.append(cu)
-                if len(filtered) >= MAX_NON_RSS_URLS_PER_SOURCE:
+                if len(filtered) >= min(MAX_NON_RSS_URLS_PER_SOURCE, limit - len(out)):
                     break
-            if len(filtered) >= MAX_NON_RSS_URLS_PER_SOURCE:
+            if len(filtered) >= min(MAX_NON_RSS_URLS_PER_SOURCE, limit - len(out)):
                 break
 
         if not filtered:
@@ -484,12 +498,46 @@ def discover_non_rss_candidates() -> List[Candidate]:
                 seen.add(cu)
                 if is_story_url(cu):
                     filtered.append(cu)
-                if len(filtered) >= MAX_NON_RSS_URLS_PER_SOURCE:
+                if len(filtered) >= min(MAX_NON_RSS_URLS_PER_SOURCE, limit - len(out)):
                     break
 
         log(f"non_rss_source={source} kept={len(filtered)} checked={len(seen)}")
         for u in filtered:
             out.append(Candidate(source=source, url=u))
+            if len(out) >= limit:
+                return out
+
+    return out
+
+
+def collect_validated(
+    candidates: List[Candidate],
+    state: Dict[str, Any],
+    target: int,
+    seen_urls: Set[str],
+) -> List[Candidate]:
+    out: List[Candidate] = []
+    for c in candidates:
+        if len(out) >= target:
+            break
+        if not c.url:
+            continue
+
+        normalized = canonicalize_url(c.url)
+        if not normalized:
+            continue
+        if normalized in state["posted_urls"] or normalized in seen_urls:
+            continue
+
+        # Fast prefilter when a source already provides title/summary/categories.
+        if (c.title or c.summary or c.categories) and not giants_relevant(c.title, c.summary, c.categories, normalized):
+            continue
+
+        c.url = normalized
+        vc = enrich_and_validate(c, state)
+        if vc and vc.url not in state["posted_urls"] and vc.url not in seen_urls:
+            seen_urls.add(vc.url)
+            out.append(vc)
     return out
 
 
@@ -547,7 +595,7 @@ def dedupe(candidates: List[Candidate], state: Dict[str, Any]) -> List[Candidate
 
 
 def bsky_login() -> Tuple[str, str]:
-    r = requests.post(
+    r = SESSION.post(
         f"{BSKY_PDS}/xrpc/com.atproto.server.createSession",
         json={"identifier": BSKY_IDENTIFIER, "password": BSKY_APP_PASSWORD},
         timeout=REQUEST_TIMEOUT,
@@ -581,7 +629,7 @@ def post_to_bluesky(c: Candidate, did: str, jwt: str) -> None:
             "createdAt": datetime.now(timezone.utc).isoformat().replace("+00:00", "Z"),
         },
     }
-    r = requests.post(
+    r = SESSION.post(
         f"{BSKY_PDS}/xrpc/com.atproto.repo.createRecord",
         headers={"Authorization": f"Bearer {jwt}"},
         json=payload,
@@ -595,17 +643,20 @@ def main() -> None:
     prune_state(state)
 
     rss_candidates = discover_from_rss()
-    non_rss_candidates = discover_non_rss_candidates()
-    candidates = rss_candidates + non_rss_candidates
-    log(f"candidates_total={len(candidates)} rss={len(rss_candidates)} non_rss={len(non_rss_candidates)}")
+    target = max(MAX_POSTS_PER_RUN, MAX_VALIDATION_TARGET)
+    seen_urls: Set[str] = set()
+    validated = collect_validated(rss_candidates, state, target=target, seen_urls=seen_urls)
 
-    validated: List[Candidate] = []
-    for c in candidates:
-        if not c.url:
-            continue
-        vc = enrich_and_validate(c, state)
-        if vc:
-            validated.append(vc)
+    non_rss_candidates: List[Candidate] = []
+    if len(validated) < target:
+        remaining = target - len(validated)
+        non_rss_candidates = discover_non_rss_candidates(limit=remaining)
+        validated.extend(collect_validated(non_rss_candidates, state, target=remaining, seen_urls=seen_urls))
+
+    log(
+        f"candidates_total={len(rss_candidates) + len(non_rss_candidates)} "
+        f"rss={len(rss_candidates)} non_rss={len(non_rss_candidates)} validated={len(validated)}"
+    )
 
     validated = dedupe(validated, state)
     validated = validated[:MAX_POSTS_PER_RUN]
