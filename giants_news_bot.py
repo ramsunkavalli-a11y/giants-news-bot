@@ -12,6 +12,8 @@ Configuration (env vars):
 - DRY_RUN (default: 0)
 - USER_AGENT (optional)
 - REQUEST_TIMEOUT (default: 15)
+- MAX_NON_RSS_URLS_PER_SOURCE (default: 60)
+- MAX_RSS_ENTRIES_PER_FEED (default: 40)
 """
 
 from __future__ import annotations
@@ -40,6 +42,8 @@ DRY_RUN = os.getenv("DRY_RUN", "0").lower() in {"1", "true", "yes"}
 STATE_FILE = os.getenv("STATE_FILE", "state.json")
 MAX_POSTS_PER_RUN = int(os.getenv("MAX_POSTS_PER_RUN", "10"))
 KEEP_POSTED_DAYS = int(os.getenv("KEEP_POSTED_DAYS", "21"))
+MAX_NON_RSS_URLS_PER_SOURCE = int(os.getenv("MAX_NON_RSS_URLS_PER_SOURCE", "60"))
+MAX_RSS_ENTRIES_PER_FEED = int(os.getenv("MAX_RSS_ENTRIES_PER_FEED", "40"))
 
 BSKY_PDS = os.getenv("BSKY_PDS", "https://bsky.social")
 BSKY_IDENTIFIER = os.getenv("BSKY_IDENTIFIER", "")
@@ -151,7 +155,9 @@ def log(msg: str) -> None:
     print(f"[{datetime.utcnow().isoformat()}] {msg}")
 
 
-def canonicalize_url(url: str) -> str:
+def canonicalize_url(url: Any) -> str:
+    if not isinstance(url, str):
+        return ""
     if not url:
         return ""
     url = url.strip()
@@ -178,8 +184,20 @@ def is_bad_domain(domain: str) -> bool:
 
 def resolve_final_url(url: str, redirect_cache: Dict[str, str]) -> str:
     c = canonicalize_url(url)
+    if not c:
+        return ""
     if c in redirect_cache:
-        return redirect_cache[c]
+        cached = redirect_cache[c]
+        if isinstance(cached, dict):
+            final = canonicalize_url(cached.get("final", ""))
+            if final:
+                redirect_cache[c] = final
+                return final
+        elif isinstance(cached, str):
+            final = canonicalize_url(cached)
+            if final:
+                redirect_cache[c] = final
+                return final
     final = c
     try:
         r = requests.get(c, headers={"User-Agent": UA}, timeout=REQUEST_TIMEOUT, allow_redirects=True)
@@ -312,6 +330,19 @@ def state_load() -> Dict[str, Any]:
     data.setdefault("posted_urls", {})
     data.setdefault("redirect_cache", {})
     data.setdefault("meta_cache", {})
+
+    normalized_redirect_cache: Dict[str, str] = {}
+    for raw_key, raw_val in data["redirect_cache"].items():
+        key = canonicalize_url(raw_key)
+        if not key:
+            continue
+        if isinstance(raw_val, dict):
+            val = canonicalize_url(raw_val.get("final", ""))
+        else:
+            val = canonicalize_url(raw_val)
+        normalized_redirect_cache[key] = val or key
+    data["redirect_cache"] = normalized_redirect_cache
+
     return data
 
 
@@ -337,7 +368,7 @@ def discover_from_rss() -> List[Candidate]:
     out: List[Candidate] = []
     for source_name, feed_url in RSS_SOURCES:
         feed = feedparser.parse(feed_url)
-        for e in feed.entries[:60]:
+        for e in feed.entries[:MAX_RSS_ENTRIES_PER_FEED]:
             out.append(
                 Candidate(
                     source=source_name,
@@ -429,14 +460,35 @@ def discover_from_listing(url: str) -> List[str]:
 def discover_non_rss_candidates() -> List[Candidate]:
     out: List[Candidate] = []
     for source, listing in NON_RSS_LISTING_URLS.items():
-        urls: Set[str] = set()
+        filtered: List[str] = []
+        seen: Set[str] = set()
+
         for sm in discover_sitemaps(listing):
             for u in urls_from_sitemap(sm):
-                urls.add(u)
-        if not urls:
+                cu = canonicalize_url(u)
+                if not cu or cu in seen:
+                    continue
+                seen.add(cu)
+                if is_story_url(cu):
+                    filtered.append(cu)
+                if len(filtered) >= MAX_NON_RSS_URLS_PER_SOURCE:
+                    break
+            if len(filtered) >= MAX_NON_RSS_URLS_PER_SOURCE:
+                break
+
+        if not filtered:
             for u in discover_from_listing(listing):
-                urls.add(u)
-        for u in list(urls)[:200]:
+                cu = canonicalize_url(u)
+                if not cu or cu in seen:
+                    continue
+                seen.add(cu)
+                if is_story_url(cu):
+                    filtered.append(cu)
+                if len(filtered) >= MAX_NON_RSS_URLS_PER_SOURCE:
+                    break
+
+        log(f"non_rss_source={source} kept={len(filtered)} checked={len(seen)}")
+        for u in filtered:
             out.append(Candidate(source=source, url=u))
     return out
 
@@ -542,7 +594,11 @@ def main() -> None:
     state = state_load()
     prune_state(state)
 
-    candidates = discover_from_rss() + discover_non_rss_candidates()
+    rss_candidates = discover_from_rss()
+    non_rss_candidates = discover_non_rss_candidates()
+    candidates = rss_candidates + non_rss_candidates
+    log(f"candidates_total={len(candidates)} rss={len(rss_candidates)} non_rss={len(non_rss_candidates)}")
+
     validated: List[Candidate] = []
     for c in candidates:
         if not c.url:
