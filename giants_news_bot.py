@@ -43,6 +43,7 @@ REQUEST_TIMEOUT = int(os.getenv("REQUEST_TIMEOUT", "15"))
 DRY_RUN = os.getenv("DRY_RUN", "0").lower() in {"1", "true", "yes"}
 STATE_FILE = os.getenv("STATE_FILE", "state.json")
 MAX_POSTS_PER_RUN = int(os.getenv("MAX_POSTS_PER_RUN", "10"))
+HOURS_BACK = int(os.getenv("HOURS_BACK", "24"))
 KEEP_POSTED_DAYS = int(os.getenv("KEEP_POSTED_DAYS", "21"))
 MAX_NON_RSS_URLS_PER_SOURCE = int(os.getenv("MAX_NON_RSS_URLS_PER_SOURCE", "60"))
 MAX_RSS_ENTRIES_PER_FEED = int(os.getenv("MAX_RSS_ENTRIES_PER_FEED", "40"))
@@ -57,6 +58,17 @@ RSS_SOURCES = [
     ("SFGate Giants", "https://www.sfgate.com/giants/feed/Giants-447.php"),
     ("NYTimes Baseball", "https://rss.nytimes.com/services/xml/rss/nyt/Baseball.xml"),
 ]
+
+GOOGLE_NEWS_QUERIES = {
+    "NBC Sports Bay Area": 'site:nbcsportsbayarea.com "San Francisco Giants"',
+    "SF Chronicle Giants": 'site:sfchronicle.com "San Francisco Giants"',
+    "Mercury News Giants": 'site:mercurynews.com "San Francisco Giants"',
+    "AP Giants": 'site:apnews.com "San Francisco Giants"',
+    "MLB Giants": 'site:mlb.com/giants/news "San Francisco Giants"',
+    "Fangraphs Giants": 'site:blogs.fangraphs.com giants',
+    "Baseball America Giants": 'site:baseballamerica.com "San Francisco Giants"',
+    "KNBR Giants": 'site:knbr.com giants',
+}
 
 NON_RSS_LISTING_URLS = {
     "NBC Sports Bay Area": "https://www.nbcsportsbayarea.com/mlb/san-francisco-giants/",
@@ -156,6 +168,7 @@ class Candidate:
     summary: str = ""
     categories: List[str] = None
     image_url: str = ""
+    published_at: str = ""
 
     def __post_init__(self) -> None:
         if self.categories is None:
@@ -418,6 +431,12 @@ def discover_from_rss() -> List[Candidate]:
     for source_name, feed_url in RSS_SOURCES:
         feed = feedparser.parse(feed_url, request_headers={"User-Agent": UA})
         for e in feed.entries[:MAX_RSS_ENTRIES_PER_FEED]:
+            published_at = (
+                getattr(e, "published", "")
+                or getattr(e, "updated", "")
+                or getattr(e, "pubDate", "")
+                or ""
+            )
             out.append(
                 Candidate(
                     source=source_name,
@@ -426,9 +445,45 @@ def discover_from_rss() -> List[Candidate]:
                     author=getattr(e, "author", "") or "",
                     summary=getattr(e, "summary", "") or "",
                     categories=[t.get("term", "") for t in getattr(e, "tags", []) if isinstance(t, dict)],
+                    published_at=published_at,
                 )
             )
     return out
+
+
+def google_news_rss_url(query: str) -> str:
+    q = urlencode({"q": f"{query} when:{HOURS_BACK}h", "hl": "en-US", "gl": "US", "ceid": "US:en"})
+    return f"https://news.google.com/rss/search?{q}"
+
+
+def discover_from_google_news() -> List[Candidate]:
+    out: List[Candidate] = []
+    for source_name, query in GOOGLE_NEWS_QUERIES.items():
+        feed = feedparser.parse(google_news_rss_url(query), request_headers={"User-Agent": UA})
+        for e in feed.entries[:MAX_RSS_ENTRIES_PER_FEED]:
+            out.append(
+                Candidate(
+                    source=source_name,
+                    url=getattr(e, "link", "") or "",
+                    title=getattr(e, "title", "") or "",
+                    author=(getattr(e, "source", {}) or {}).get("title", "") if isinstance(getattr(e, "source", {}), dict) else "",
+                    summary=getattr(e, "summary", "") or "",
+                    published_at=getattr(e, "published", "") or getattr(e, "updated", "") or "",
+                )
+            )
+    return out
+
+
+def is_recent_enough(published_at: str) -> bool:
+    if not published_at:
+        return True
+    try:
+        dt = dtparser.parse(published_at)
+        if dt.tzinfo is None:
+            dt = dt.replace(tzinfo=timezone.utc)
+        return dt >= now_utc() - timedelta(hours=HOURS_BACK)
+    except Exception:
+        return True
 
 
 def fetch_xml(url: str) -> Optional[str]:
@@ -557,6 +612,8 @@ def collect_validated(
         if len(out) >= target:
             break
         if not c.url:
+            continue
+        if not is_recent_enough(c.published_at):
             continue
 
         normalized = canonicalize_url(c.url)
@@ -720,9 +777,11 @@ def post_to_bluesky(c: Candidate, did: str, jwt: str) -> None:
     link_start = text.rfind(c.url)
     facets: List[Dict[str, Any]] = []
     if link_start >= 0:
+        start_bytes = len(text[:link_start].encode("utf-8"))
+        end_bytes = start_bytes + len(c.url.encode("utf-8"))
         facets.append(
             {
-                "index": {"byteStart": link_start, "byteEnd": link_start + len(c.url)},
+                "index": {"byteStart": start_bytes, "byteEnd": end_bytes},
                 "features": [{"$type": "app.bsky.richtext.facet#link", "uri": c.url}],
             }
         )
@@ -752,9 +811,10 @@ def main() -> None:
     prune_state(state)
 
     rss_candidates = discover_from_rss()
+    google_candidates = discover_from_google_news()
     target = max(MAX_POSTS_PER_RUN, MAX_VALIDATION_TARGET)
     seen_urls: Set[str] = set()
-    validated = collect_validated(rss_candidates, state, target=target, seen_urls=seen_urls)
+    validated = collect_validated(rss_candidates + google_candidates, state, target=target, seen_urls=seen_urls)
 
     non_rss_candidates: List[Candidate] = []
     if len(validated) < target:
@@ -763,8 +823,8 @@ def main() -> None:
         validated.extend(collect_validated(non_rss_candidates, state, target=remaining, seen_urls=seen_urls))
 
     log(
-        f"candidates_total={len(rss_candidates) + len(non_rss_candidates)} "
-        f"rss={len(rss_candidates)} non_rss={len(non_rss_candidates)} validated={len(validated)}"
+        f"candidates_total={len(rss_candidates) + len(google_candidates) + len(non_rss_candidates)} "
+        f"rss={len(rss_candidates)} google={len(google_candidates)} non_rss={len(non_rss_candidates)} validated={len(validated)}"
     )
 
     validated = dedupe(validated, state)
