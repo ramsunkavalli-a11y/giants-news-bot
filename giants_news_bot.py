@@ -147,6 +147,12 @@ SESSION.mount("http://", HTTPAdapter(pool_connections=20, pool_maxsize=20))
 SESSION.mount("https://", HTTPAdapter(pool_connections=20, pool_maxsize=20))
 
 
+SESSION = requests.Session()
+SESSION.headers.update({"User-Agent": UA})
+SESSION.mount("http://", HTTPAdapter(pool_connections=20, pool_maxsize=20))
+SESSION.mount("https://", HTTPAdapter(pool_connections=20, pool_maxsize=20))
+
+
 @dataclass
 class Candidate:
     source: str
@@ -525,9 +531,9 @@ def discover_non_rss_candidates(limit: int) -> List[Candidate]:
                 seen.add(cu)
                 if is_story_url(cu):
                     filtered.append(cu)
-                if len(filtered) >= MAX_NON_RSS_URLS_PER_SOURCE:
+                if len(filtered) >= min(MAX_NON_RSS_URLS_PER_SOURCE, limit - len(out)):
                     break
-            if len(filtered) >= MAX_NON_RSS_URLS_PER_SOURCE:
+            if len(filtered) >= min(MAX_NON_RSS_URLS_PER_SOURCE, limit - len(out)):
                 break
 
         if not filtered:
@@ -538,7 +544,7 @@ def discover_non_rss_candidates(limit: int) -> List[Candidate]:
                 seen.add(cu)
                 if is_story_url(cu):
                     filtered.append(cu)
-                if len(filtered) >= MAX_NON_RSS_URLS_PER_SOURCE:
+                if len(filtered) >= min(MAX_NON_RSS_URLS_PER_SOURCE, limit - len(out)):
                     break
 
         log(f"non_rss_source={source} kept={len(filtered)} checked={len(seen)}")
