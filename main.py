@@ -4,7 +4,7 @@ import json
 import time
 from collections import defaultdict
 from datetime import datetime, timezone
-from typing import Any, Dict, List
+from typing import Any, Dict, List, Tuple
 from urllib.parse import urljoin, urlparse
 
 import requests
@@ -18,10 +18,13 @@ from discovery_rss import discover_rss_sources
 from filters import (
     canonicalize_url,
     clean_text,
+    extract_publisher_url_from_google_wrapper,
     is_bad_domain,
     is_recent_enough,
     is_relevant_giants,
     is_story_url,
+    looks_like_google_wrapper,
+    source_policy_allows,
     source_url_allowed,
 )
 from models import Candidate
@@ -79,9 +82,6 @@ class BudgetSession:
     def post(self, url: str, **kwargs):
         return self.request("POST", url, **kwargs)
 
-    def head(self, url: str, **kwargs):
-        return self.request("HEAD", url, **kwargs)
-
 
 def log(message: str) -> None:
     print(f"[{datetime.utcnow().isoformat()}] {message}")
@@ -95,6 +95,31 @@ def create_session(settings: Settings) -> requests.Session:
     return session
 
 
+def resolve_google_news_url(session: BudgetSession, settings: Settings, url: str) -> Tuple[str, str]:
+    google_url = ""
+    current = canonicalize_url(url, settings)
+    if not current:
+        return "", ""
+
+    if not looks_like_google_wrapper(current):
+        return current, ""
+
+    google_url = current
+    from_wrapper = extract_publisher_url_from_google_wrapper(current)
+    if from_wrapper:
+        current = canonicalize_url(from_wrapper, settings)
+
+    try:
+        with session.get(google_url, timeout=settings.request_timeout, allow_redirects=True, stream=True) as r:
+            final = canonicalize_url(r.url or current, settings)
+            if final and "news.google.com" not in final:
+                current = final
+    except Exception:
+        pass
+
+    return current, google_url
+
+
 def resolve_final_url(session: BudgetSession, settings: Settings, url: str, redirect_cache: Dict[str, str]) -> str:
     c = canonicalize_url(url, settings)
     if not c:
@@ -106,18 +131,27 @@ def resolve_final_url(session: BudgetSession, settings: Settings, url: str, redi
         r = session.request("HEAD", c, timeout=settings.request_timeout, allow_redirects=True)
         final = canonicalize_url(r.url or c, settings)
     except Exception:
-        final = c
+        pass
     redirect_cache[c] = final
     return final
 
 
-def fetch_html(session: BudgetSession, settings: Settings, url: str) -> str:
+def fetch_html(session: BudgetSession, settings: Settings, candidate: Candidate) -> str:
     try:
-        r = session.get(url, timeout=settings.request_timeout)
-        if r.status_code >= 400 or "text/html" not in r.headers.get("Content-Type", ""):
+        r = session.get(candidate.url, timeout=settings.request_timeout)
+        candidate.http_status = r.status_code
+        candidate.content_type = r.headers.get("Content-Type", "")
+        if r.status_code >= 400:
+            candidate.add_reject("http_error")
             return ""
+        if "text/html" not in candidate.content_type:
+            candidate.add_reject("not_html")
+            return ""
+        candidate.stage = "fetched"
         return r.text[:1_200_000]
-    except Exception:
+    except Exception as exc:
+        candidate.exception = repr(exc)
+        candidate.add_reject("fetch_exception")
         return ""
 
 
@@ -129,20 +163,30 @@ def enrich_candidate(session: BudgetSession, settings: Settings, state: Dict[str
         c.summary = c.summary or cache.get("summary", "")
         c.image_url = c.image_url or cache.get("image_url", "")
         c.article_meta_confirmed = bool(cache.get("article_meta_confirmed", False))
+        c.meta_sources_used = list(cache.get("meta_sources_used", []))
+        c.stage = "parsed"
         return c
 
-    html = fetch_html(session, settings, c.url)
-    if html:
-        meta = extract_meta(c.url, html)
-        if meta.canonical:
-            c.url = resolve_final_url(session, settings, canonicalize_url(urljoin(c.url, meta.canonical), settings), state["redirect_cache"])
-        c.title = c.title or meta.title
-        c.author = c.author or meta.author
-        c.summary = c.summary or meta.description
+    html = fetch_html(session, settings, c)
+    if not html:
+        return c
+
+    meta = extract_meta(c.url, html)
+    c.meta_sources_used = meta.meta_sources_used
+    if meta.canonical:
+        c.canonical_url = canonicalize_url(urljoin(c.url, meta.canonical), settings)
+        c.url = resolve_final_url(session, settings, c.canonical_url, state["redirect_cache"])
+    else:
+        c.canonical_url = c.url
+
+    c.title = c.title or meta.title
+    c.author = c.author or meta.author
+    c.summary = c.summary or meta.description
+    if meta.image_url:
         c.image_url = c.image_url or canonicalize_url(urljoin(c.url, meta.image_url), settings)
-        c.article_meta_confirmed = meta.article_meta_confirmed or (
-            bool(c.title) and bool(c.summary) and bool(meta.canonical)
-        )
+
+    c.article_meta_confirmed = meta.article_meta_confirmed or bool(c.title and c.canonical_url)
+    c.stage = "parsed"
 
     state["meta_cache"][c.url] = {
         "title": c.title,
@@ -150,9 +194,43 @@ def enrich_candidate(session: BudgetSession, settings: Settings, state: Dict[str
         "summary": c.summary,
         "image_url": c.image_url,
         "article_meta_confirmed": c.article_meta_confirmed,
+        "meta_sources_used": c.meta_sources_used,
         "ts": now_utc().isoformat(),
     }
     return c
+
+
+def _cand_dict(c: Candidate) -> Dict[str, Any]:
+    return {
+        "source": c.source,
+        "google_url": c.google_url,
+        "url": c.url,
+        "final_url": c.final_url,
+        "canonical_url": c.canonical_url,
+        "title": c.title,
+        "author": c.author,
+        "summary": c.summary,
+        "published_ts": c.published_ts,
+        "discovered_via": c.discovered_via,
+        "stage": c.stage,
+        "skip_reason": c.skip_reason,
+        "skip_reasons": c.reject_reasons,
+        "exception": c.exception,
+        "http_status": c.http_status,
+        "content_type": c.content_type,
+        "article_meta_confirmed": c.article_meta_confirmed,
+        "score": c.score,
+        "score_components": c.score_components,
+        "selected_reasons": c.selected_reasons,
+        "meta_sources_used": c.meta_sources_used,
+    }
+
+
+def _reject(c: Candidate, diagnostics: Dict[str, Any], reason: str) -> None:
+    c.add_reject(reason)
+    c.stage = "skipped"
+    diagnostics["rejections"][c.source][reason] += 1
+    diagnostics["pipeline"].append(_cand_dict(c))
 
 
 def validate_candidates(
@@ -168,92 +246,107 @@ def validate_candidates(
     enrich_count = 0
 
     for c in candidates:
-        raw_url = c.url
+        c.stage = "discovered"
         c.url = canonicalize_url(c.url, settings)
         if not c.url:
-            diagnostics["rejections"][c.source]["bad_url"] += 1
+            _reject(c, diagnostics, "bad_url")
             continue
         if c.url in state["posted_urls"] or c.url in seen:
-            diagnostics["rejections"][c.source]["duplicate"] += 1
+            _reject(c, diagnostics, "duplicate")
             continue
         if not is_recent_enough(c.published_ts, settings.hours_back):
-            diagnostics["rejections"][c.source]["stale"] += 1
+            _reject(c, diagnostics, "stale")
             continue
 
-        c.url = resolve_final_url(session, settings, c.url, state["redirect_cache"])
+        resolved, google_url = resolve_google_news_url(session, settings, c.url)
+        if google_url:
+            c.google_url = google_url
+        c.url = resolve_final_url(session, settings, resolved, state["redirect_cache"])
+        c.final_url = c.url
+        c.canonical_url = c.url
+        c.stage = "canonicalized"
+
         domain = urlparse(c.url).netloc.lower()
         if is_bad_domain(domain):
-            diagnostics["rejections"][c.source]["bad_domain"] += 1
+            _reject(c, diagnostics, "bad_domain")
             continue
         if not source_url_allowed(c.source, c.url):
-            reason = "mlb_non_article_url" if domain.endswith("mlb.com") else "source_url_rules"
-            diagnostics["rejections"][c.source][reason] += 1
+            _reject(c, diagnostics, "mlb_non_article_url" if domain.endswith("mlb.com") else "source_url_rules")
             continue
         if not is_story_url(c.url):
-            diagnostics["rejections"][c.source]["not_story_url"] += 1
+            _reject(c, diagnostics, "not_story_url")
             continue
 
-        if not is_relevant_giants(c.title, c.summary, c.categories, c.url):
-            diagnostics["rejections"][c.source]["irrelevant_prefilter"] += 1
+        policy_ok, policy_reason = source_policy_allows(c.source, c.url, c.title, c.summary)
+        if not policy_ok:
+            _reject(c, diagnostics, policy_reason)
+            continue
+
+        c = score_candidate(c)
+        c.stage = "scored"
+
+        if c.score < 1:
+            _reject(c, diagnostics, "low_provisional_score")
             continue
 
         if enrich_count >= settings.max_enrich_candidates:
-            diagnostics["rejections"][c.source]["enrich_budget_exceeded"] += 1
+            _reject(c, diagnostics, "enrich_budget_exceeded")
             continue
         if budget.budget_exceeded():
             budget.log_once(log)
-            diagnostics["rejections"][c.source]["request_budget_exceeded"] += 1
+            _reject(c, diagnostics, "request_budget_exceeded")
             continue
 
         enrich_count += 1
         c = enrich_candidate(session, settings, state, c)
 
+        # Non-RSS junk guard: empty/low-information pages are dropped.
+        if c.discovered_via == "nonrss" and not c.title and not c.summary and not c.canonical_url:
+            _reject(c, diagnostics, "empty_candidate")
+            continue
+        if c.discovered_via == "nonrss" and not c.title and not c.summary:
+            _reject(c, diagnostics, "no_title_or_summary")
+            continue
+
         if not is_relevant_giants(c.title, c.summary, c.categories, c.url):
-            diagnostics["rejections"][c.source]["irrelevant"] += 1
+            _reject(c, diagnostics, "irrelevant")
+            continue
+
+        policy_ok, policy_reason = source_policy_allows(c.source, c.url, c.title, c.summary)
+        if not policy_ok:
+            _reject(c, diagnostics, policy_reason)
+            continue
+
+        # MLB requires article metadata confirmation to avoid junk landing pages.
+        if domain.endswith("mlb.com") and not c.article_meta_confirmed:
+            _reject(c, diagnostics, "mlb_missing_article_meta")
             continue
 
         c.title = clean_text(c.title) or "Giants update"
         c.author = clean_text(c.author)
         c.summary = clean_text(c.summary)
 
-        # strict MLB rule: metadata should confirm article when available
-        if urlparse(c.url).netloc.lower().endswith("mlb.com") and not c.article_meta_confirmed:
-            diagnostics["rejections"][c.source]["mlb_missing_article_meta"] += 1
-            continue
-
         c = score_candidate(c)
+        c.stage = "validated"
+
         if c.score < settings.score_threshold:
-            diagnostics["rejections"][c.source]["low_score"] += 1
+            _reject(c, diagnostics, "low_score")
             continue
 
         if c.discovered_via == "rss":
             c.selected_reasons.append("rss")
         if c.article_meta_confirmed:
             c.selected_reasons.append("article_meta_confirmed")
+        if c.google_url and c.url != c.google_url:
+            c.selected_reasons.append("canonicalized_google_url")
         if c.author and "priority_author" in c.score_components:
             c.selected_reasons.append("priority_author")
 
         seen.add(c.url)
         out.append(c)
-        diagnostics["validated"][c.source].append(_cand_dict(c, raw_url=raw_url))
+        diagnostics["validated"][c.source].append(_cand_dict(c))
+        diagnostics["pipeline"].append(_cand_dict(c))
     return out
-
-
-def _cand_dict(c: Candidate, raw_url: str = "") -> Dict[str, Any]:
-    return {
-        "source": c.source,
-        "raw_url": raw_url or c.url,
-        "url": c.url,
-        "title": c.title,
-        "author": c.author,
-        "summary": c.summary,
-        "published_ts": c.published_ts,
-        "discovered_via": c.discovered_via,
-        "score": c.score,
-        "score_components": c.score_components,
-        "article_meta_confirmed": c.article_meta_confirmed,
-        "selected_reasons": c.selected_reasons,
-    }
 
 
 def select_candidates(settings: Settings, candidates: List[Candidate]) -> List[Candidate]:
@@ -273,6 +366,7 @@ def select_candidates(settings: Settings, candidates: List[Candidate]) -> List[C
             break
         if per_source[c.source] >= settings.max_per_source_per_run:
             continue
+        c.stage = "selected"
         selected.append(c)
         per_source[c.source] += 1
     return selected
@@ -302,6 +396,7 @@ def main() -> None:
         "discovered": defaultdict(list),
         "validated": defaultdict(list),
         "rejections": defaultdict(lambda: defaultdict(int)),
+        "pipeline": [],
         "selected": [],
     }
 
@@ -325,7 +420,14 @@ def main() -> None:
     if rss_only_seen_nonrss:
         log(f"warning rss_only_source_seen_in_nonrss={sorted(rss_only_seen_nonrss)}")
 
-    validated = validate_candidates(session, settings, state, rss_candidates + google_candidates + nonrss_candidates, diagnostics, budget)
+    validated = validate_candidates(
+        session,
+        settings,
+        state,
+        rss_candidates + google_candidates + nonrss_candidates,
+        diagnostics,
+        budget,
+    )
     selected = select_candidates(settings, validated)
 
     all_sources = sorted({c.source for c in rss_candidates + google_candidates + nonrss_candidates})
@@ -334,8 +436,11 @@ def main() -> None:
         validated_n = len(diagnostics["validated"][source])
         rejects = diagnostics["rejections"][source]
         rejected_n = sum(rejects.values())
-        top = ", ".join([f"{k}={v}" for k, v in sorted(rejects.items(), key=lambda kv: kv[1], reverse=True)[:4]]) or "none"
-        log(f"source_summary source={source} discovered={discovered_n} rejected={rejected_n} validated={validated_n} top_reasons={top}")
+        top = ", ".join([f"{k}={v}" for k, v in sorted(rejects.items(), key=lambda kv: kv[1], reverse=True)[:5]]) or "none"
+        log(
+            f"source_summary source={source} discovered={discovered_n} "
+            f"rejected={rejected_n} validated={validated_n} top_reasons={top}"
+        )
 
     for c in selected:
         diagnostics["selected"].append(_cand_dict(c))

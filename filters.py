@@ -5,7 +5,7 @@ import re
 import unicodedata
 from datetime import datetime, timedelta, timezone
 from typing import Any, Iterable, Optional
-from urllib.parse import parse_qsl, urlencode, urlparse, urlunparse
+from urllib.parse import parse_qsl, urlencode, urlparse, urlunparse, unquote
 
 from dateutil import parser as dtparser
 
@@ -51,6 +51,7 @@ BASEBALL_TERMS = {
     "hitter",
 }
 NFL_TERMS = {"new york giants", "quarterback", "touchdown", "nfl", "super bowl", "metlife"}
+OTHER_SPORTS_NOISE = {"49ers", "warriors", "sharks", "raiders", "nba", "nhl", "nfl", "college football"}
 MLB_BLOCKED_SEGMENTS = {
     "video",
     "videos",
@@ -68,6 +69,7 @@ MLB_BLOCKED_SEGMENTS = {
 }
 
 TAG_RE = re.compile(r"<[^>]+>")
+URL_IN_TEXT_RE = re.compile(r"https?://[^\s\"'<>]+")
 
 
 def clean_text(text: str) -> str:
@@ -129,6 +131,26 @@ def is_bad_domain(domain: str) -> bool:
     return d in AGGREGATOR_BLOCKLIST or d.endswith(".google.com")
 
 
+def looks_like_google_wrapper(url: str) -> bool:
+    p = urlparse(url)
+    return p.netloc.endswith("news.google.com") and ("/rss/articles/" in p.path or "/articles/" in p.path)
+
+
+def extract_publisher_url_from_google_wrapper(url: str) -> str:
+    p = urlparse(url)
+    query = dict(parse_qsl(p.query, keep_blank_values=True))
+    for key in ("url", "u", "q"):
+        v = query.get(key)
+        if v and v.startswith("http"):
+            return unquote(v)
+    decoded = unquote(url)
+    matches = URL_IN_TEXT_RE.findall(decoded)
+    for m in matches:
+        if "news.google.com" not in m:
+            return m
+    return ""
+
+
 def is_story_url(url: str) -> bool:
     try:
         p = urlparse(url)
@@ -183,6 +205,33 @@ def source_url_allowed(source: str, url: str) -> bool:
     if excludes and any(v in path for v in excludes):
         return False
     return True
+
+
+def source_policy_allows(source: str, url: str, title: str, summary: str) -> tuple[bool, str]:
+    path = urlparse(url).path.lower()
+    text = f"{clean_text(title)} {clean_text(summary)}".lower()
+
+    if "fangraphs" in source.lower() or "fangraphs" in urlparse(url).netloc:
+        if any(k in path for k in ["/author/", "/category/", "/archive", "/job", "/jobs"]):
+            return False, "blocked_by_source_policy_fangraphs"
+
+    if "baseball america" in source.lower() or "baseballamerica" in urlparse(url).netloc:
+        if any(k in path for k in ["/store", "/shop", "/rankings", "/teams/"]):
+            return False, "blocked_by_source_policy_baseball_america"
+
+    if any(k in source.lower() for k in ["nbc sports", "mercury", "chronicle", "knbr"]):
+        has_giants = ("san francisco giants" in text) or ("sf giants" in text) or (" giants" in text)
+        has_baseball = any(term in text for term in BASEBALL_TERMS)
+        if not (has_giants and has_baseball):
+            return False, "source_policy_giants_baseball_required"
+        if any(noise in text for noise in OTHER_SPORTS_NOISE) and "giants" not in text:
+            return False, "blocked_by_other_sports_noise"
+
+    if source.lower().startswith("ap") or "apnews.com" in urlparse(url).netloc:
+        if any(seg in path for seg in ["/hub/", "/live/"]) or path.strip("/") in {"", "hub", "sports"}:
+            return False, "blocked_ap_non_article"
+
+    return True, ""
 
 
 def giants_relevance_signals(title: str, summary: str, categories: Iterable[str], url: str) -> dict[str, bool]:
