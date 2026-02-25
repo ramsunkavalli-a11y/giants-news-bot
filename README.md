@@ -17,6 +17,18 @@ Python GitHub-Actions-friendly SF Giants → Bluesky bot.
   - `MAX_ENRICH_CANDIDATES`
 - DRY_RUN writes `diagnostics.json` with stage-level outcomes and URL transformation fields.
 
+## Debug / replay mode
+
+Replay a prior diagnostics run with verbose resolver logs:
+
+```bash
+DRY_RUN=1 python giants_news_bot.py \
+  --diagnostics-in diagnostics.json \
+  --replay-candidates \
+  --limit 100 \
+  --verbose-resolver
+```
+
 ## Run
 
 ```bash

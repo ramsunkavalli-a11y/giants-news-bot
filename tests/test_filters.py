@@ -48,3 +48,9 @@ def test_source_policy_blocks_fangraphs_category_page():
     allowed, reason = source_policy_allows("Fangraphs Giants", "https://blogs.fangraphs.com/category/giants/", "Giants", "")
     assert not allowed
     assert reason.startswith("blocked_by_source_policy")
+
+
+def test_ap_article_page_allowed():
+    allowed, reason = source_policy_allows("AP Giants", "https://apnews.com/article/san-francisco-giants-rotation-updates-abc123", "San Francisco Giants rotation", "MLB update")
+    assert allowed
+    assert reason == ""
