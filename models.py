@@ -19,6 +19,8 @@ class Candidate:
     score: int = 0
     score_components: Dict[str, int] = field(default_factory=dict)
     reject_reasons: List[str] = field(default_factory=list)
+    article_meta_confirmed: bool = False
+    selected_reasons: List[str] = field(default_factory=list)
 
     def add_reject(self, reason: str) -> None:
         self.reject_reasons.append(reason)

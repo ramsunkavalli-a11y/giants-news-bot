@@ -42,7 +42,10 @@ def score_candidate(candidate: Candidate) -> Candidate:
         components["non_story_penalty"] = -2
 
     if candidate.discovered_via == "rss":
-        components["rss_preference"] = 1
+        components["rss_preference"] = 2
+
+    if candidate.article_meta_confirmed:
+        components["article_meta_confirmed"] = 2
 
     candidate.score_components = components
     candidate.score = sum(components.values())

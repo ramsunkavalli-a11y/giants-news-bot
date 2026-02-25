@@ -9,7 +9,7 @@ from urllib.parse import parse_qsl, urlencode, urlparse, urlunparse
 
 from dateutil import parser as dtparser
 
-from config import AGGREGATOR_BLOCKLIST, SUSPICIOUS_HOST_TERMS, Settings
+from config import AGGREGATOR_BLOCKLIST, SOURCE_URL_RULES, SUSPICIOUS_HOST_TERMS, Settings
 
 
 STORY_REJECT_SEGMENTS = {
@@ -51,7 +51,21 @@ BASEBALL_TERMS = {
     "hitter",
 }
 NFL_TERMS = {"new york giants", "quarterback", "touchdown", "nfl", "super bowl", "metlife"}
-
+MLB_BLOCKED_SEGMENTS = {
+    "video",
+    "videos",
+    "schedule",
+    "stats",
+    "standings",
+    "roster",
+    "depth-chart",
+    "scores",
+    "tickets",
+    "podcast",
+    "gallery",
+    "photos",
+    "team",
+}
 
 TAG_RE = re.compile(r"<[^>]+>")
 
@@ -137,6 +151,38 @@ def is_story_url(url: str) -> bool:
     if segs[-1].endswith(".html") or "/article/" in "/" + path + "/":
         return True
     return "-" in segs[-1] and len(segs[-1]) >= 20
+
+
+def mlb_article_url_allowed(url: str) -> bool:
+    p = urlparse(url)
+    if not p.netloc.lower().endswith("mlb.com"):
+        return True
+    path = p.path.lower()
+    if "/giants/news/" not in path:
+        return False
+    segs = [s for s in path.strip("/").split("/") if s]
+    last = segs[-1] if segs else ""
+    if last.count("-") < 3 or len(last) < 24:
+        return False
+    if any(f"/{block}" in path for block in MLB_BLOCKED_SEGMENTS):
+        return False
+    return True
+
+
+def source_url_allowed(source: str, url: str) -> bool:
+    if not mlb_article_url_allowed(url):
+        return False
+    rule = SOURCE_URL_RULES.get(source)
+    if not rule:
+        return True
+    path = urlparse(url).path.lower()
+    includes = [v.lower() for v in rule.get("include", [])]
+    excludes = [v.lower() for v in rule.get("exclude", [])]
+    if includes and not any(v in path for v in includes):
+        return False
+    if excludes and any(v in path for v in excludes):
+        return False
+    return True
 
 
 def giants_relevance_signals(title: str, summary: str, categories: Iterable[str], url: str) -> dict[str, bool]:

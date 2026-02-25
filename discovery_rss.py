@@ -19,6 +19,7 @@ def discover_rss_sources(settings: Settings, sources: List[SourceConfig]) -> Tup
             "bozo": bool(getattr(feed, "bozo", False)),
             "entry_count": len(entries),
             "status": getattr(feed, "status", None),
+            "bozo_exception": str(getattr(feed, "bozo_exception", "")) if getattr(feed, "bozo", False) else "",
         }
         for e in entries:
             candidates.append(

@@ -34,8 +34,11 @@ class Settings:
     hours_back: int = int(os.getenv("HOURS_BACK", "24"))
     keep_posted_days: int = int(os.getenv("KEEP_POSTED_DAYS", "21"))
     meta_cache_days: int = int(os.getenv("META_CACHE_DAYS", os.getenv("KEEP_POSTED_DAYS", "21")))
-    max_non_rss_urls_per_source: int = int(os.getenv("MAX_NON_RSS_URLS_PER_SOURCE", "60"))
+    max_non_rss_urls_per_source: int = int(os.getenv("MAX_NON_RSS_URLS_PER_SOURCE", "25"))
     max_rss_entries_per_feed: int = int(os.getenv("MAX_RSS_ENTRIES_PER_FEED", "40"))
+    max_total_http_requests: int = int(os.getenv("MAX_TOTAL_HTTP_REQUESTS", "220"))
+    max_discovery_seconds: int = int(os.getenv("MAX_DISCOVERY_SECONDS", "150"))
+    max_enrich_candidates: int = int(os.getenv("MAX_ENRICH_CANDIDATES", "40"))
     score_threshold: int = int(os.getenv("SCORE_THRESHOLD", "2"))
     bsky_pds: str = os.getenv("BSKY_PDS", "https://bsky.social")
     bsky_identifier: str = os.getenv("BSKY_IDENTIFIER", "")
@@ -121,7 +124,6 @@ NON_RSS_SOURCES: List[SourceConfig] = [
     SourceConfig(name="SF Chronicle Giants", discovery_mode="non_rss", listing_url="https://www.sfchronicle.com/sports/giants/", trust_tier=1),
     SourceConfig(name="Mercury News Giants", discovery_mode="non_rss", listing_url="https://www.mercurynews.com/tag/san-francisco-giants/", trust_tier=1),
     SourceConfig(name="AP Giants hub", discovery_mode="non_rss", listing_url="https://apnews.com/hub/san-francisco-giants", trust_tier=1),
-    SourceConfig(name="MLB Giants News", discovery_mode="non_rss", listing_url="https://www.mlb.com/giants/news", trust_tier=1),
     SourceConfig(name="Fangraphs Giants", discovery_mode="non_rss", listing_url="https://blogs.fangraphs.com/category/giants/", trust_tier=1),
     SourceConfig(name="Baseball America Giants", discovery_mode="non_rss", listing_url="https://www.baseballamerica.com/teams/2003/san-francisco-giants/", trust_tier=1),
     SourceConfig(name="KNBR Giants", discovery_mode="non_rss", listing_url="https://www.knbr.com/category/giants/", trust_tier=1),
@@ -130,6 +132,18 @@ NON_RSS_SOURCES: List[SourceConfig] = [
 ALL_SOURCES = RSS_ONLY_SOURCES + GOOGLE_NEWS_SOURCES + NON_RSS_SOURCES
 SOURCE_TRUST: Dict[str, int] = {s.name: s.trust_tier for s in ALL_SOURCES}
 RSS_ONLY_NAMES = {s.name for s in RSS_ONLY_SOURCES}
+
+
+SOURCE_URL_RULES: Dict[str, Dict[str, List[str]]] = {
+    "MLB Giants": {
+        "include": ["/giants/news/"],
+        "exclude": ["/video", "/videos", "/schedule", "/stats", "/standings", "/roster", "/depth-chart", "/scores", "/tickets", "/podcast", "/gallery", "/photos", "/team"],
+    },
+    "MLB Giants News": {
+        "include": ["/giants/news/"],
+        "exclude": ["/video", "/videos", "/schedule", "/stats", "/standings", "/roster", "/depth-chart", "/scores", "/tickets", "/podcast", "/gallery", "/photos", "/team"],
+    },
+}
 
 AGGREGATOR_BLOCKLIST = {
     "news.google.com",

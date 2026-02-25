@@ -1,9 +1,7 @@
 from __future__ import annotations
 
 import json
-from dataclasses import dataclass
-from typing import Optional
-from urllib.parse import urljoin
+from dataclasses import dataclass, field
 
 try:
     from bs4 import BeautifulSoup
@@ -13,6 +11,15 @@ except Exception:
 from filters import clean_text
 
 
+ARTICLE_SCHEMA_TYPES = {
+    "article",
+    "newsarticle",
+    "reportagearticle",
+    "analysisnewsarticle",
+    "sportsarticle",
+}
+
+
 @dataclass
 class MetaResult:
     title: str = ""
@@ -20,6 +27,14 @@ class MetaResult:
     canonical: str = ""
     description: str = ""
     image_url: str = ""
+    og_type: str = ""
+    schema_types: list[str] = field(default_factory=list)
+
+    @property
+    def article_meta_confirmed(self) -> bool:
+        if self.og_type.lower() == "article":
+            return True
+        return any(t.lower() in ARTICLE_SCHEMA_TYPES for t in self.schema_types)
 
 
 META_NAMES = {
@@ -38,6 +53,15 @@ def _as_json(value: str):
         return None
 
 
+def _schema_type_values(item: dict) -> list[str]:
+    at = item.get("@type")
+    if isinstance(at, str):
+        return [at]
+    if isinstance(at, list):
+        return [str(v) for v in at if isinstance(v, str)]
+    return []
+
+
 def extract_meta(url: str, html: str) -> MetaResult:
     out = MetaResult()
     if BeautifulSoup is None:
@@ -52,11 +76,11 @@ def extract_meta(url: str, html: str) -> MetaResult:
 
     og_url = soup.find("meta", attrs={"property": "og:url"})
     if og_url and og_url.get("content"):
-        out.canonical = urljoin(url, og_url["content"])
+        out.canonical = og_url["content"]
 
     canonical = soup.find("link", attrs={"rel": lambda v: v and "canonical" in str(v).lower()})
     if canonical and canonical.get("href"):
-        out.canonical = urljoin(url, canonical["href"])
+        out.canonical = canonical["href"]
 
     og_desc = soup.find("meta", attrs={"property": "og:description"})
     if og_desc and og_desc.get("content"):
@@ -64,7 +88,11 @@ def extract_meta(url: str, html: str) -> MetaResult:
 
     og_image = soup.find("meta", attrs={"property": lambda v: v and v.startswith("og:image")})
     if og_image and og_image.get("content"):
-        out.image_url = urljoin(url, og_image["content"])
+        out.image_url = og_image["content"]
+
+    og_type = soup.find("meta", attrs={"property": "og:type"})
+    if og_type and og_type.get("content"):
+        out.og_type = clean_text(og_type["content"])
 
     for m in soup.find_all("meta"):
         key = (m.get("name") or "").lower()
@@ -87,6 +115,7 @@ def extract_meta(url: str, html: str) -> MetaResult:
         for item in items:
             if not isinstance(item, dict):
                 continue
+            out.schema_types.extend(_schema_type_values(item))
             if not out.title and item.get("headline"):
                 out.title = clean_text(str(item.get("headline")))
             if not out.description and item.get("description"):
@@ -94,11 +123,11 @@ def extract_meta(url: str, html: str) -> MetaResult:
             if not out.image_url:
                 image = item.get("image")
                 if isinstance(image, str):
-                    out.image_url = urljoin(url, image)
+                    out.image_url = image
                 elif isinstance(image, list) and image and isinstance(image[0], str):
-                    out.image_url = urljoin(url, image[0])
+                    out.image_url = image[0]
                 elif isinstance(image, dict) and image.get("url"):
-                    out.image_url = urljoin(url, str(image["url"]))
+                    out.image_url = str(image["url"])
             if not out.author:
                 author = item.get("author")
                 if isinstance(author, dict):

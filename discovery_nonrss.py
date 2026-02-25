@@ -48,19 +48,6 @@ def urls_from_sitemap(session: requests.Session, sitemap_url: str, settings: Set
     for loc in root.findall(".//sm:url/sm:loc", ns):
         if loc.text:
             out.append(loc.text.strip())
-    for loc in root.findall(".//sm:sitemap/sm:loc", ns):
-        if not loc.text or "news" not in loc.text.lower():
-            continue
-        nested = _fetch_text(session, loc.text.strip(), settings.request_timeout)
-        if not nested:
-            continue
-        try:
-            nested_root = ET.fromstring(nested.encode("utf-8"))
-        except Exception:
-            continue
-        for nloc in nested_root.findall(".//sm:url/sm:loc", ns):
-            if nloc.text:
-                out.append(nloc.text.strip())
     return out
 
 
@@ -92,7 +79,7 @@ def discover_non_rss(settings: Settings, session: requests.Session, sources: Lis
         seen: Set[str] = set()
         filtered: List[str] = []
 
-        for sm in discover_sitemaps(session, source.listing_url, settings):
+        for sm in discover_sitemaps(session, source.listing_url, settings)[:3]:
             for u in urls_from_sitemap(session, sm, settings):
                 cu = canonicalize_url(u, settings)
                 if not cu or cu in seen:
