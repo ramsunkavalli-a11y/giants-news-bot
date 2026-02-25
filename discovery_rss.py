@@ -27,6 +27,7 @@ def discover_rss_sources(settings: Settings, sources: List[SourceConfig]) -> Tup
                     source=source.name,
                     discovered_via="rss",
                     url=getattr(e, "link", "") or "",
+                    feed_url=getattr(e, "link", "") or "",
                     title=getattr(e, "title", "") or "",
                     author=getattr(e, "author", "") or "",
                     summary=getattr(e, "summary", "") or "",

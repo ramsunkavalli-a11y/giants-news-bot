@@ -15,9 +15,15 @@ class Candidate:
     image_url: str = ""
     discovered_via: str = ""
     published_ts: str = ""
-    google_url: str = ""
-    final_url: str = ""
+
+    # URL lifecycle fields
+    feed_url: str = ""
+    resolved_url: str = ""
+    publisher_url: str = ""
     canonical_url: str = ""
+    post_url: str = ""
+    google_url: str = ""
+
     score: int = 0
     score_components: Dict[str, int] = field(default_factory=dict)
     reject_reasons: List[str] = field(default_factory=list)
@@ -29,6 +35,9 @@ class Candidate:
     meta_sources_used: List[str] = field(default_factory=list)
     http_status: int = 0
     content_type: str = ""
+    is_cardable: bool = False
+    validation_domain: str = ""
+    source_policy_reason: str = ""
 
     def add_reject(self, reason: str) -> None:
         self.reject_reasons.append(reason)

@@ -18,6 +18,7 @@ from discovery_rss import discover_rss_sources
 from filters import (
     canonicalize_url,
     clean_text,
+    extract_external_url_from_text,
     extract_publisher_url_from_google_wrapper,
     is_bad_domain,
     is_recent_enough,
@@ -95,50 +96,94 @@ def create_session(settings: Settings) -> requests.Session:
     return session
 
 
-def resolve_google_news_url(session: BudgetSession, settings: Settings, url: str) -> Tuple[str, str]:
-    google_url = ""
-    current = canonicalize_url(url, settings)
-    if not current:
-        return "", ""
+def pick_domain_for_validation(c: Candidate) -> str:
+    for u in [c.canonical_url, c.publisher_url, c.resolved_url, c.feed_url, c.url]:
+        if u:
+            return urlparse(u).netloc.lower()
+    return ""
 
-    if not looks_like_google_wrapper(current):
-        return current, ""
 
-    google_url = current
-    from_wrapper = extract_publisher_url_from_google_wrapper(current)
-    if from_wrapper:
-        current = canonicalize_url(from_wrapper, settings)
+def resolve_google_news_url(session: BudgetSession, settings: Settings, c: Candidate) -> None:
+    raw = canonicalize_url(c.feed_url or c.url, settings)
+    c.feed_url = raw
+    c.url = raw
+    c.stage = "canonicalized"
 
+    if not raw:
+        return
+    if not looks_like_google_wrapper(raw):
+        c.resolved_url = raw
+        c.publisher_url = raw
+        c.canonical_url = raw
+        c.post_url = raw
+        return
+
+    c.google_url = raw
+
+    # 1) try feed metadata/body extraction first
+    hinted = extract_external_url_from_text(c.summary)
+    if not hinted:
+        hinted = extract_publisher_url_from_google_wrapper(raw)
+    if hinted:
+        c.resolved_url = canonicalize_url(hinted, settings)
+
+    # 2) follow redirect chain from google wrapper
     try:
-        with session.get(google_url, timeout=settings.request_timeout, allow_redirects=True, stream=True) as r:
-            final = canonicalize_url(r.url or current, settings)
-            if final and "news.google.com" not in final:
-                current = final
-    except Exception:
-        pass
+        with session.get(raw, timeout=settings.request_timeout, allow_redirects=True, stream=True) as r:
+            redirect_final = canonicalize_url(r.url or "", settings)
+            if redirect_final and "news.google.com" not in redirect_final:
+                c.resolved_url = redirect_final
+            c.http_status = r.status_code
+            c.content_type = r.headers.get("Content-Type", "")
+            html = ""
+            if "text/html" in c.content_type:
+                try:
+                    html = r.text[:600_000]
+                except Exception:
+                    html = ""
+            if html:
+                meta = extract_meta(redirect_final or raw, html)
+                cand = canonicalize_url(urljoin(redirect_final or raw, meta.canonical), settings) if meta.canonical else ""
+                if cand and "news.google.com" not in cand:
+                    c.publisher_url = cand
+    except Exception as exc:
+        c.exception = repr(exc)
 
-    return current, google_url
+    # 3) extra decode fallback if still unresolved
+    if not c.resolved_url or "news.google.com" in c.resolved_url:
+        fallback = extract_publisher_url_from_google_wrapper(raw)
+        if fallback:
+            c.resolved_url = canonicalize_url(fallback, settings)
+
+    if not c.publisher_url:
+        c.publisher_url = c.resolved_url or raw
+    c.canonical_url = c.publisher_url
+    c.post_url = c.publisher_url
 
 
-def resolve_final_url(session: BudgetSession, settings: Settings, url: str, redirect_cache: Dict[str, str]) -> str:
-    c = canonicalize_url(url, settings)
-    if not c:
-        return ""
-    if c in redirect_cache:
-        return redirect_cache[c]
-    final = c
-    try:
-        r = session.request("HEAD", c, timeout=settings.request_timeout, allow_redirects=True)
-        final = canonicalize_url(r.url or c, settings)
-    except Exception:
-        pass
-    redirect_cache[c] = final
-    return final
+def resolve_final_url(session: BudgetSession, settings: Settings, c: Candidate, redirect_cache: Dict[str, str]) -> None:
+    target = canonicalize_url(c.publisher_url or c.resolved_url or c.feed_url or c.url, settings)
+    if not target:
+        return
+    if target in redirect_cache:
+        final = redirect_cache[target]
+    else:
+        final = target
+        try:
+            r = session.request("HEAD", target, timeout=settings.request_timeout, allow_redirects=True)
+            final = canonicalize_url(r.url or target, settings)
+        except Exception:
+            pass
+        redirect_cache[target] = final
+    c.resolved_url = c.resolved_url or target
+    c.publisher_url = final
+    c.canonical_url = final
+    c.post_url = final
 
 
 def fetch_html(session: BudgetSession, settings: Settings, candidate: Candidate) -> str:
     try:
-        r = session.get(candidate.url, timeout=settings.request_timeout)
+        r = session.get(candidate.post_url or candidate.publisher_url or candidate.url, timeout=settings.request_timeout)
         candidate.http_status = r.status_code
         candidate.content_type = r.headers.get("Content-Type", "")
         if r.status_code >= 400:
@@ -156,7 +201,7 @@ def fetch_html(session: BudgetSession, settings: Settings, candidate: Candidate)
 
 
 def enrich_candidate(session: BudgetSession, settings: Settings, state: Dict[str, Any], c: Candidate) -> Candidate:
-    cache = state["meta_cache"].get(c.url, {})
+    cache = state["meta_cache"].get(c.canonical_url or c.post_url or c.url, {})
     if cache:
         c.title = c.title or cache.get("title", "")
         c.author = c.author or cache.get("author", "")
@@ -171,24 +216,27 @@ def enrich_candidate(session: BudgetSession, settings: Settings, state: Dict[str
     if not html:
         return c
 
-    meta = extract_meta(c.url, html)
+    meta = extract_meta(c.post_url or c.publisher_url or c.url, html)
     c.meta_sources_used = meta.meta_sources_used
+
     if meta.canonical:
-        c.canonical_url = canonicalize_url(urljoin(c.url, meta.canonical), settings)
-        c.url = resolve_final_url(session, settings, c.canonical_url, state["redirect_cache"])
-    else:
-        c.canonical_url = c.url
+        canon = canonicalize_url(urljoin(c.post_url or c.publisher_url or c.url, meta.canonical), settings)
+        if canon:
+            c.canonical_url = canon
+            c.publisher_url = canon
+            c.post_url = canon
 
     c.title = c.title or meta.title
     c.author = c.author or meta.author
     c.summary = c.summary or meta.description
     if meta.image_url:
-        c.image_url = c.image_url or canonicalize_url(urljoin(c.url, meta.image_url), settings)
+        c.image_url = c.image_url or canonicalize_url(urljoin(c.post_url or c.publisher_url or c.url, meta.image_url), settings)
 
-    c.article_meta_confirmed = meta.article_meta_confirmed or bool(c.title and c.canonical_url)
+    c.article_meta_confirmed = meta.article_meta_confirmed or bool(c.title and c.post_url)
+    c.is_cardable = bool(c.post_url and not looks_like_google_wrapper(c.post_url) and is_story_url(c.post_url))
     c.stage = "parsed"
 
-    state["meta_cache"][c.url] = {
+    state["meta_cache"][c.canonical_url or c.post_url or c.url] = {
         "title": c.title,
         "author": c.author,
         "summary": c.summary,
@@ -203,10 +251,13 @@ def enrich_candidate(session: BudgetSession, settings: Settings, state: Dict[str
 def _cand_dict(c: Candidate) -> Dict[str, Any]:
     return {
         "source": c.source,
-        "google_url": c.google_url,
-        "url": c.url,
-        "final_url": c.final_url,
+        "feed_url": c.feed_url,
+        "resolved_url": c.resolved_url,
+        "publisher_url": c.publisher_url,
         "canonical_url": c.canonical_url,
+        "post_url": c.post_url,
+        "google_url": c.google_url,
+        "validation_domain": c.validation_domain,
         "title": c.title,
         "author": c.author,
         "summary": c.summary,
@@ -215,10 +266,12 @@ def _cand_dict(c: Candidate) -> Dict[str, Any]:
         "stage": c.stage,
         "skip_reason": c.skip_reason,
         "skip_reasons": c.reject_reasons,
+        "source_policy_reason": c.source_policy_reason,
         "exception": c.exception,
         "http_status": c.http_status,
         "content_type": c.content_type,
         "article_meta_confirmed": c.article_meta_confirmed,
+        "is_cardable": c.is_cardable,
         "score": c.score,
         "score_components": c.score_components,
         "selected_reasons": c.selected_reasons,
@@ -247,44 +300,53 @@ def validate_candidates(
 
     for c in candidates:
         c.stage = "discovered"
-        c.url = canonicalize_url(c.url, settings)
-        if not c.url:
-            _reject(c, diagnostics, "bad_url")
-            continue
-        if c.url in state["posted_urls"] or c.url in seen:
-            _reject(c, diagnostics, "duplicate")
+        c.feed_url = c.feed_url or c.url
+
+        c.feed_url = canonicalize_url(c.feed_url, settings)
+        if not c.feed_url:
+            _reject(c, diagnostics, "bad_feed_url")
             continue
         if not is_recent_enough(c.published_ts, settings.hours_back):
             _reject(c, diagnostics, "stale")
             continue
 
-        resolved, google_url = resolve_google_news_url(session, settings, c.url)
-        if google_url:
-            c.google_url = google_url
-        c.url = resolve_final_url(session, settings, resolved, state["redirect_cache"])
-        c.final_url = c.url
-        c.canonical_url = c.url
-        c.stage = "canonicalized"
+        resolve_google_news_url(session, settings, c)
+        if c.google_url and (not c.publisher_url or "news.google.com" in c.publisher_url):
+            _reject(c, diagnostics, "unresolved_google_news_redirect")
+            continue
 
-        domain = urlparse(c.url).netloc.lower()
-        if is_bad_domain(domain):
+        resolve_final_url(session, settings, c, state["redirect_cache"])
+
+        dedupe_key = c.canonical_url or c.publisher_url or c.resolved_url or c.feed_url
+        if not dedupe_key:
+            _reject(c, diagnostics, "no_canonical_url")
+            continue
+        if dedupe_key in state["posted_urls"] or dedupe_key in seen:
+            _reject(c, diagnostics, "duplicate")
+            continue
+
+        c.validation_domain = pick_domain_for_validation(c)
+        if is_bad_domain(c.validation_domain):
             _reject(c, diagnostics, "bad_domain")
             continue
-        if not source_url_allowed(c.source, c.url):
-            _reject(c, diagnostics, "mlb_non_article_url" if domain.endswith("mlb.com") else "source_url_rules")
+
+        validate_url = c.canonical_url or c.publisher_url or c.resolved_url or c.feed_url
+        if not source_url_allowed(c.source, validate_url):
+            _reject(c, diagnostics, "mlb_non_article_url" if c.validation_domain.endswith("mlb.com") else "source_url_rules")
             continue
-        if not is_story_url(c.url):
+        if not is_story_url(validate_url):
             _reject(c, diagnostics, "not_story_url")
             continue
 
-        policy_ok, policy_reason = source_policy_allows(c.source, c.url, c.title, c.summary)
+        policy_ok, policy_reason = source_policy_allows(c.source, validate_url, c.title, c.summary)
+        c.source_policy_reason = policy_reason
         if not policy_ok:
             _reject(c, diagnostics, policy_reason)
             continue
 
+        c.url = validate_url
         c = score_candidate(c)
         c.stage = "scored"
-
         if c.score < 1:
             _reject(c, diagnostics, "low_provisional_score")
             continue
@@ -300,7 +362,6 @@ def validate_candidates(
         enrich_count += 1
         c = enrich_candidate(session, settings, state, c)
 
-        # Non-RSS junk guard: empty/low-information pages are dropped.
         if c.discovered_via == "nonrss" and not c.title and not c.summary and not c.canonical_url:
             _reject(c, diagnostics, "empty_candidate")
             continue
@@ -308,17 +369,17 @@ def validate_candidates(
             _reject(c, diagnostics, "no_title_or_summary")
             continue
 
-        if not is_relevant_giants(c.title, c.summary, c.categories, c.url):
+        if not is_relevant_giants(c.title, c.summary, c.categories, c.post_url or c.url):
             _reject(c, diagnostics, "irrelevant")
             continue
 
-        policy_ok, policy_reason = source_policy_allows(c.source, c.url, c.title, c.summary)
+        policy_ok, policy_reason = source_policy_allows(c.source, c.post_url or c.url, c.title, c.summary)
+        c.source_policy_reason = policy_reason
         if not policy_ok:
             _reject(c, diagnostics, policy_reason)
             continue
 
-        # MLB requires article metadata confirmation to avoid junk landing pages.
-        if domain.endswith("mlb.com") and not c.article_meta_confirmed:
+        if c.validation_domain.endswith("mlb.com") and not c.article_meta_confirmed:
             _reject(c, diagnostics, "mlb_missing_article_meta")
             continue
 
@@ -326,9 +387,14 @@ def validate_candidates(
         c.author = clean_text(c.author)
         c.summary = clean_text(c.summary)
 
+        c.url = c.post_url or c.canonical_url or c.publisher_url or c.resolved_url or c.feed_url
         c = score_candidate(c)
         c.stage = "validated"
+        c.is_cardable = bool(c.url and not looks_like_google_wrapper(c.url))
 
+        if not c.is_cardable:
+            _reject(c, diagnostics, "no_link_card")
+            continue
         if c.score < settings.score_threshold:
             _reject(c, diagnostics, "low_score")
             continue
@@ -342,7 +408,7 @@ def validate_candidates(
         if c.author and "priority_author" in c.score_components:
             c.selected_reasons.append("priority_author")
 
-        seen.add(c.url)
+        seen.add(dedupe_key)
         out.append(c)
         diagnostics["validated"][c.source].append(_cand_dict(c))
         diagnostics["pipeline"].append(_cand_dict(c))
@@ -457,7 +523,7 @@ def main() -> None:
     if settings.dry_run:
         for c in selected:
             log(f"DRY_RUN would post: {build_post_text(c)}")
-            state["posted_urls"][c.url] = now_utc().isoformat()
+            state["posted_urls"][c.canonical_url or c.url] = now_utc().isoformat()
         state_save(settings, state)
         return
 
@@ -467,7 +533,7 @@ def main() -> None:
     did, jwt = bsky_login(raw_session, settings.bsky_pds, settings.bsky_identifier, settings.bsky_app_password, settings.request_timeout)
     for c in selected:
         post_to_bluesky(raw_session, c, settings.bsky_pds, did, jwt, settings.request_timeout)
-        state["posted_urls"][c.url] = now_utc().isoformat()
+        state["posted_urls"][c.canonical_url or c.url] = now_utc().isoformat()
         log(f"posted {c.url}")
         time.sleep(0.8)
 

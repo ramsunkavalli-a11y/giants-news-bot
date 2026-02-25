@@ -151,6 +151,14 @@ def extract_publisher_url_from_google_wrapper(url: str) -> str:
     return ""
 
 
+def extract_external_url_from_text(text: str) -> str:
+    decoded = unquote(text or "")
+    matches = URL_IN_TEXT_RE.findall(decoded)
+    for m in matches:
+        if "news.google.com" not in m:
+            return m
+    return ""
+
 def is_story_url(url: str) -> bool:
     try:
         p = urlparse(url)

@@ -29,6 +29,7 @@ def discover_google_news(settings: Settings, sources: List[SourceConfig]) -> Lis
                     source=source.name,
                     discovered_via="google",
                     url=getattr(e, "link", "") or "",
+                    feed_url=getattr(e, "link", "") or "",
                     google_url=getattr(e, "link", "") or "",
                     title=getattr(e, "title", "") or "",
                     author=src_title,

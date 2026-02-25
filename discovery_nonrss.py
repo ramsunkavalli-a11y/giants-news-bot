@@ -104,5 +104,5 @@ def discover_non_rss(settings: Settings, session: requests.Session, sources: Lis
                     break
 
         for url in filtered:
-            out.append(Candidate(source=source.name, url=url, discovered_via="nonrss"))
+            out.append(Candidate(source=source.name, url=url, feed_url=url, discovered_via="nonrss"))
     return out

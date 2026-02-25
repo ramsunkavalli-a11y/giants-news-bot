@@ -17,7 +17,8 @@ def truncate_line(line: str, max_len: int) -> str:
 def build_post_text(candidate: Candidate) -> str:
     first = f"{candidate.source}: {candidate.title or 'Giants update'}"
     first = truncate_line(first, 260)
-    return f"{first}\n{candidate.url}"
+    post_url = candidate.post_url or candidate.canonical_url or candidate.publisher_url or candidate.url
+    return f"{first}\n{post_url}"
 
 
 def bsky_login(session: requests.Session, pds: str, identifier: str, app_password: str, timeout: int) -> Tuple[str, str]:
@@ -59,7 +60,7 @@ def upload_external_thumb(session: requests.Session, image_url: str, pds: str, j
 def create_embed_for_candidate(session: requests.Session, candidate: Candidate, pds: str, jwt: str, timeout: int) -> Dict[str, Any]:
     description = truncate_line(candidate.summary or candidate.source, 280)
     external: Dict[str, Any] = {
-        "uri": candidate.url,
+        "uri": candidate.post_url or candidate.canonical_url or candidate.publisher_url or candidate.url,
         "title": truncate_line(candidate.title or "Giants update", 100),
         "description": description,
     }
@@ -71,15 +72,16 @@ def create_embed_for_candidate(session: requests.Session, candidate: Candidate, 
 
 def post_to_bluesky(session: requests.Session, candidate: Candidate, pds: str, did: str, jwt: str, timeout: int) -> None:
     text = build_post_text(candidate)
-    link_start = text.rfind(candidate.url)
+    post_url = candidate.post_url or candidate.canonical_url or candidate.publisher_url or candidate.url
+    link_start = text.rfind(post_url)
     facets: List[Dict[str, Any]] = []
     if link_start >= 0:
         start_bytes = len(text[:link_start].encode("utf-8"))
-        end_bytes = start_bytes + len(candidate.url.encode("utf-8"))
+        end_bytes = start_bytes + len(post_url.encode("utf-8"))
         facets.append(
             {
                 "index": {"byteStart": start_bytes, "byteEnd": end_bytes},
-                "features": [{"$type": "app.bsky.richtext.facet#link", "uri": candidate.url}],
+                "features": [{"$type": "app.bsky.richtext.facet#link", "uri": post_url}],
             }
         )
 
