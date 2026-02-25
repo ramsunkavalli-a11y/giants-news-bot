@@ -2,7 +2,6 @@ name: Giants News Bot
 
 on:
   schedule:
-    # 3 runs/day (UTC). Adjust as you like.
     - cron: "15 16 * * *"
     - cron: "15 00 * * *"
     - cron: "15 08 * * *"
@@ -34,8 +33,18 @@ jobs:
           BSKY_APP_PASSWORD: ${{ secrets.BSKY_APP_PASSWORD }}
           HOURS_BACK: "72"
           MAX_POSTS_PER_RUN: "5"
+          DIAGNOSTICS_ENABLED: "1"
+          DIAGNOSTICS_FILE: diagnostics.json
         run: |
           python giants_news_bot.py
+
+      - name: Upload diagnostics artifact
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: giants-news-diagnostics
+          path: diagnostics.json
+          if-no-files-found: warn
 
       - name: Commit state if changed
         run: |
