@@ -2,7 +2,7 @@ name: V2 Structured Discovery Probe
 
 on:
   push:
-    branches: [v2/structured-discovery, v2/game-story-threads, v2/game-root-first-core, v2/radar-lane]
+    branches: [v2/structured-discovery, v2/game-story-threads, v2/game-root-first-core, v2/radar-lane, v2/game-post-presentation]
     paths:
       - "v2_probe.py"
       - "v2_select_probe.py"
