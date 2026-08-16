@@ -143,15 +143,24 @@ def upload_external_thumb(session: requests.Session, image_url: str, pds: str, j
 
 
 def create_embed_for_candidate(session: requests.Session, candidate: Candidate, pds: str, jwt: str, timeout: int) -> Dict[str, Any]:
-    hide_card_text = is_game_thread_candidate(candidate)
-    description = "" if hide_card_text else truncate_line(candidate.summary or display_source_name(candidate.source), 280)
-    title = "" if hide_card_text else truncate_line(candidate.title or "Giants update", 100)
+    game_thread = is_game_thread_candidate(candidate)
+    thumb_blob = upload_external_thumb(session, candidate.image_url, pds, jwt, timeout)
+
+    if game_thread:
+        # The headline already lives in the post text. With a working thumbnail,
+        # let the visual/link card stand on its own. Without one, retain a small
+        # outlet label so the card does not render as an empty box.
+        title = "" if thumb_blob else display_source_name(candidate.source)
+        description = ""
+    else:
+        title = truncate_line(candidate.title or "Giants update", 100)
+        description = truncate_line(candidate.summary or display_source_name(candidate.source), 280)
+
     external: Dict[str, Any] = {
         "uri": candidate.post_url or candidate.canonical_url or candidate.publisher_url or candidate.url,
         "title": title,
         "description": description,
     }
-    thumb_blob = upload_external_thumb(session, candidate.image_url, pds, jwt, timeout)
     if thumb_blob:
         external["thumb"] = thumb_blob
     return {"$type": "app.bsky.embed.external", "external": external}
