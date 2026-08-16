@@ -27,3 +27,5 @@ bot_main._cand_dict = _audit_cand_dict
 
 if __name__ == "__main__":
     bot_main.main()
+
+# audit rerun: image + pseudo-author cleanup
