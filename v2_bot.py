@@ -22,6 +22,7 @@ from v2_probe import (
     discover_sf_standard,
     discover_sfgate,
 )
+from v2_radar import discover_core_writer_radar
 from v2_selector import canonicalize_url, parse_dt, select_articles
 
 DISCOVERERS = [
@@ -31,6 +32,7 @@ DISCOVERERS = [
     discover_sfgate,
     discover_fangraphs,
     discover_nbc,
+    discover_core_writer_radar,
 ]
 
 PROMO_SUMMARY_PATTERNS = (
