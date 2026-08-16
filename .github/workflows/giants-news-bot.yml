@@ -1,6 +1,9 @@
 name: Giants News Bot
 
 on:
+  push:
+    branches:
+      - fix/multi-source-discovery
   schedule:
     - cron: "15 16 * * *"
     - cron: "15 00 * * *"
@@ -35,6 +38,7 @@ jobs:
           MAX_POSTS_PER_RUN: "5"
           DIAGNOSTICS_ENABLED: "1"
           DIAGNOSTICS_FILE: diagnostics.json
+          DRY_RUN: "1"
         run: |
           python giants_news_bot.py
 
@@ -47,6 +51,7 @@ jobs:
           if-no-files-found: warn
 
       - name: Commit state if changed
+        if: github.ref == 'refs/heads/main'
         run: |
           if git diff --quiet; then
             echo "No changes."
