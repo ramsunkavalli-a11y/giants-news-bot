@@ -14,7 +14,8 @@ DISPLAY_SOURCE_NAMES = {
     "SFGate Giants": "SFGATE",
     "NYTimes Baseball": "The New York Times",
     "NBC Sports Bay Area": "NBC Sports Bay Area",
-    "SF Chronicle Giants": "San Francisco Chronicle",
+    "SF Chronicle Giants": "SF Chronicle",
+    "San Francisco Chronicle": "SF Chronicle",
     "Mercury News Giants": "Mercury News",
     "AP Giants": "Associated Press",
     "AP Giants hub": "Associated Press",
@@ -78,13 +79,31 @@ def display_author(author: str, source: str) -> str:
     return cleaned
 
 
-def build_post_text(candidate: Candidate) -> str:
+def _source_author_text(candidate: Candidate) -> str:
     source = display_source_name(candidate.source)
     if candidate.access == "paywalled":
         source = f"{source} ($)"
     author = display_author(candidate.author, candidate.source)
-    text = f"{source} · {author}" if author else source
-    return truncate_line(text, 290)
+    return f"{source} · {author}" if author else source
+
+
+def is_game_thread_candidate(candidate: Candidate) -> bool:
+    return (candidate.discovered_via or "").startswith("game_thread:")
+
+
+def build_game_post_text(candidate: Candidate) -> str:
+    prefix = f"Game recap · {_source_author_text(candidate)}"
+    headline = (candidate.title or "").strip()
+    if not headline:
+        return truncate_line(prefix, 290)
+    remaining = max(1, 290 - len(prefix) - 1)
+    return f"{prefix}\n{truncate_line(headline, remaining)}"
+
+
+def build_post_text(candidate: Candidate) -> str:
+    if is_game_thread_candidate(candidate):
+        return build_game_post_text(candidate)
+    return truncate_line(_source_author_text(candidate), 290)
 
 
 def bsky_login(session: requests.Session, pds: str, identifier: str, app_password: str, timeout: int) -> Tuple[str, str]:
@@ -124,10 +143,12 @@ def upload_external_thumb(session: requests.Session, image_url: str, pds: str, j
 
 
 def create_embed_for_candidate(session: requests.Session, candidate: Candidate, pds: str, jwt: str, timeout: int) -> Dict[str, Any]:
-    description = truncate_line(candidate.summary or display_source_name(candidate.source), 280)
+    hide_card_text = is_game_thread_candidate(candidate)
+    description = "" if hide_card_text else truncate_line(candidate.summary or display_source_name(candidate.source), 280)
+    title = "" if hide_card_text else truncate_line(candidate.title or "Giants update", 100)
     external: Dict[str, Any] = {
         "uri": candidate.post_url or candidate.canonical_url or candidate.publisher_url or candidate.url,
-        "title": truncate_line(candidate.title or "Giants update", 100),
+        "title": title,
         "description": description,
     }
     thumb_blob = upload_external_thumb(session, candidate.image_url, pds, jwt, timeout)
@@ -166,7 +187,7 @@ def post_to_bluesky(
     }
     r = session.post(
         f"{pds}/xrpc/com.atproto.repo.createRecord",
-        headers={"Authorization": f"Bearer {jwt}"},
+        headers={"Authorization": f"Bearer {jwt}", "Content-Type": "application/json"},
         json=payload,
         timeout=timeout,
     )
