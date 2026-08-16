@@ -17,10 +17,13 @@ HTTP_TARGETS = [
 ]
 
 FEED_TARGETS = [
+    "https://www.mlb.com/giants/feeds/news/rss.xml",
     "https://www.sfchronicle.com/sports/giants/feed/",
-    "https://www.sfgate.com/giants/feed/Giants-447.php",
+    "https://www.sfgate.com/sports/feed/San-Francisco-Giants-RSS-Feed-428.php",
+    "https://www.mercurynews.com/sports/feed/",
     "https://www.baseballamerica.com/feed/",
     "https://blogs.fangraphs.com/category/teams/giants/feed/",
+    "https://www.knbr.com/feed/",
 ]
 
 
@@ -50,7 +53,8 @@ def main() -> None:
             "bozo": bool(getattr(feed, "bozo", False)),
             "entries": len(feed.entries),
             "title": getattr(feed.feed, "title", ""),
-            "sample": [getattr(e, "title", "") for e in feed.entries[:5]],
+            "sample": [getattr(e, "title", "") for e in feed.entries[:8]],
+            "authors": [getattr(e, "author", "") for e in feed.entries[:8]],
         })
 
     with open("v2-source-diag.json", "w", encoding="utf-8") as f:
