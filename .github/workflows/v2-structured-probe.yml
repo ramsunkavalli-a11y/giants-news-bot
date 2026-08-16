@@ -2,7 +2,7 @@ name: V2 Structured Discovery Probe
 
 on:
   push:
-    branches: [v2/structured-discovery, v2/game-story-threads, v2/game-root-first-core, v2/radar-lane, v2/game-post-presentation]
+    branches: [v2/structured-discovery, v2/game-story-threads, v2/game-root-first-core, v2/radar-lane, v2/game-post-presentation, v2/cadence-tuning]
     paths:
       - "v2_probe.py"
       - "v2_select_probe.py"
@@ -76,7 +76,7 @@ jobs:
           DRY_RUN: "1"
           HOURS_BACK: "72"
           GAME_HOURS_BACK: "30"
-          MAX_POSTS_PER_RUN: "5"
+          MAX_POSTS_PER_RUN: "3"
           DIAGNOSTICS_ENABLED: "1"
           DIAGNOSTICS_FILE: v2-runtime-diagnostics.json
         run: |
