@@ -265,6 +265,8 @@ def select_game_threads(
                 reason = "eligible_game_story"
                 article["_published_dt"] = dt
                 article["canonical_url"] = canonical
+                article["content_type"] = "game_story"
+                article["section"] = f"game_thread:{article.get('section', '')}"
                 eligible.append(article)
 
         reasons[reason] += 1
