@@ -6,6 +6,7 @@ on:
     paths:
       - "v2_probe.py"
       - "v2_athletic_probe.py"
+      - "v2_athletic_meta_probe.py"
       - "v2_authors.py"
       - "v2_source_diag.py"
       - ".github/workflows/v2-structured-probe.yml"
@@ -37,6 +38,9 @@ jobs:
       - name: Run Athletic RSS probe
         run: python v2_athletic_probe.py
 
+      - name: Run Athletic structured metadata probe
+        run: python v2_athletic_meta_probe.py
+
       - name: Run structured source diagnostics
         run: python v2_source_diag.py
 
@@ -48,5 +52,6 @@ jobs:
           path: |
             v2-probe.json
             v2-athletic-probe.json
+            v2-athletic-meta-probe.json
             v2-source-diag.json
           if-no-files-found: error
