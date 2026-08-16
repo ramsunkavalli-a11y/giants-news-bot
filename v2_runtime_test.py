@@ -102,7 +102,7 @@ class RuntimeSmokeTests(unittest.TestCase):
         record = session.last_payload["record"]
         self.assertIn(candidate.title, record["text"])
         external = record["embed"]["external"]
-        self.assertEqual(external["title"], "")
+        self.assertEqual(external["title"], "Mercury News")
         self.assertEqual(external["description"], "")
 
     def test_missing_state_initializes_game_threads(self):
