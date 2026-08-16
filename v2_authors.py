@@ -28,6 +28,18 @@ AUTHOR_PRIORS = {
     "evan drellich": {"preference": "national", "scope": "giants_specific"},
 }
 
+# These are the local/core Giants writers eligible for first-published top
+# billing in a game-coverage thread. Editorial tiers still apply elsewhere.
+CORE_GAME_WRITERS = {
+    "andrew baggarly",
+    "alex pavlovic",
+    "shayna rubin",
+    "susan slusser",
+    "justice delos santos",
+    "john shea",
+    "maria guardado",
+}
+
 # Publication-level priors are intentionally light-touch. They are mainly for
 # choosing between multiple versions of the same story, not for suppressing a
 # legitimate exclusive or useful article on their own.
@@ -72,8 +84,20 @@ def normalize_author(name: str) -> str:
     return AUTHOR_ALIASES.get(normalized, normalized)
 
 
+def _author_parts(name: str) -> list[str]:
+    value = " ".join((name or "").strip().lower().split())
+    if not value:
+        return []
+    value = value.replace(" & ", ",").replace(" and ", ",")
+    return [normalize_author(part.strip()) for part in value.split(",") if part.strip()]
+
+
 def author_prior(name: str):
     return AUTHOR_PRIORS.get(normalize_author(name))
+
+
+def is_core_game_writer(name: str) -> bool:
+    return any(part in CORE_GAME_WRITERS for part in _author_parts(name))
 
 
 def normalize_source(name: str) -> str:
