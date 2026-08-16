@@ -1,0 +1,46 @@
+name: Giants News Metadata Audit
+
+on:
+  push:
+    branches: [audit/source-metadata]
+    paths:
+      - ".github/workflows/metadata-audit.yml"
+      - "metadata_audit.py"
+
+permissions:
+  contents: read
+
+jobs:
+  audit:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+
+      - name: Install deps
+        run: |
+          python -m pip install --upgrade pip
+          pip install -r requirements.txt
+
+      - name: Run metadata audit
+        env:
+          DRY_RUN: "1"
+          HOURS_BACK: "72"
+          MAX_POSTS_PER_RUN: "10"
+          DIAGNOSTICS_ENABLED: "1"
+          DIAGNOSTICS_FILE: metadata-diagnostics.json
+        run: |
+          python metadata_audit.py
+
+      - name: Upload metadata diagnostics
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: giants-news-metadata-audit
+          path: metadata-diagnostics.json
+          if-no-files-found: error
