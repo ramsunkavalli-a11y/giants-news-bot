@@ -33,6 +33,14 @@ class GameThreadTests(unittest.TestCase):
         }
         self.assertTrue(is_game_story(article))
 
+    def test_go_ahead_rbi_headline_is_game_coverage(self):
+        article = {
+            "title": "Giants’ Turner Hill delivers go-ahead RBI in major-league debut",
+            "quality": "high",
+            "author": "Shayna Rubin",
+        }
+        self.assertTrue(is_game_story(article))
+
     def test_structured_summary_can_identify_game_analysis(self):
         article = {
             "title": "Giants have squandered Logan Webb's talents; an anonymous group changed that for a day",

@@ -2,7 +2,7 @@ name: V2 Structured Discovery Probe
 
 on:
   push:
-    branches: [v2/structured-discovery, v2/game-story-threads, v2/game-root-first-core]
+    branches: [v2/structured-discovery, v2/game-story-threads, v2/game-root-first-core, v2/radar-lane]
     paths:
       - "v2_probe.py"
       - "v2_select_probe.py"
@@ -13,6 +13,9 @@ on:
       - "v2_game_threads_test.py"
       - "v2_runtime_test.py"
       - "v2_bot.py"
+      - "v2_radar.py"
+      - "v2_radar_test.py"
+      - "v2_radar_probe.py"
       - "v2_athletic_probe.py"
       - "v2_athletic_meta_probe.py"
       - "v2_authors.py"
@@ -43,11 +46,14 @@ jobs:
           python -m pip install --upgrade pip
           pip install -r requirements.txt
 
-      - name: Test story clustering, game threads, and runtime
-        run: python -m unittest -v v2_story_test.py v2_game_threads_test.py v2_runtime_test.py
+      - name: Test story clustering, game threads, radar, and runtime
+        run: python -m unittest -v v2_story_test.py v2_game_threads_test.py v2_radar_test.py v2_runtime_test.py
 
       - name: Run structured discovery probe
         run: python v2_probe.py
+
+      - name: Run contained radar probe
+        run: python v2_radar_probe.py
 
       - name: Read production state
         run: |
@@ -94,6 +100,7 @@ jobs:
           name: v2-structured-probe
           path: |
             v2-probe.json
+            v2-radar-probe.json
             v2-selection.json
             v2-selection-fresh.json
             v2-runtime-diagnostics.json

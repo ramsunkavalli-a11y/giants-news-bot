@@ -60,6 +60,7 @@ GAME_TITLE_PATTERNS = (
     " falls to ",
     " fall to ",
     " doom ",
+    "go-ahead",
     "earns win",
     "earned win",
     "quality start",
