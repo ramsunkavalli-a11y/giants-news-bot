@@ -50,6 +50,11 @@ jobs:
       - name: Run realistic selection simulation
         run: python v2_select_probe.py --state /tmp/main-state.json
 
+      - name: Run clean-slate duplicate-choice simulation
+        run: |
+          printf '{"posted_urls": {}}\n' > /tmp/empty-state.json
+          python v2_select_probe.py --state /tmp/empty-state.json --output v2-selection-fresh.json
+
       - name: Run Athletic RSS probe
         run: python v2_athletic_probe.py
 
@@ -67,6 +72,7 @@ jobs:
           path: |
             v2-probe.json
             v2-selection.json
+            v2-selection-fresh.json
             v2-athletic-probe.json
             v2-athletic-meta-probe.json
             v2-source-diag.json
