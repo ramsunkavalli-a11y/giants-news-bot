@@ -58,6 +58,53 @@ class RuntimeSmokeTests(unittest.TestCase):
         )
         self.assertEqual(build_post_text(candidate), "MLB.com · Maria Guardado")
 
+    def test_sf_chronicle_display_name_is_short(self):
+        candidate = Candidate(
+            source="San Francisco Chronicle",
+            url="https://example.com/story",
+            author="Shayna Rubin",
+        )
+        self.assertEqual(build_post_text(candidate), "SF Chronicle · Shayna Rubin")
+
+    def test_game_recap_moves_headline_into_post_text(self):
+        candidate = Candidate(
+            source="San Francisco Chronicle",
+            url="https://example.com/game-story",
+            title="Giants’ Turner Hill delivers go-ahead RBI in major-league debut",
+            author="Shayna Rubin",
+            discovered_via="game_thread:Google News core-writer radar",
+        )
+        self.assertEqual(
+            build_post_text(candidate),
+            "Game recap · SF Chronicle · Shayna Rubin\n"
+            "Giants’ Turner Hill delivers go-ahead RBI in major-league debut",
+        )
+
+    def test_game_recap_card_does_not_repeat_headline(self):
+        session = FakeSession()
+        candidate = Candidate(
+            source="Mercury News",
+            url="https://example.com/game-story",
+            post_url="https://example.com/game-story",
+            title="Webb’s strong outing, Gilbert’s big day lead SF Giants to win over Rockies",
+            summary="A recap of the Giants win.",
+            author="Justice delos Santos",
+            discovered_via="game_thread:Google News core-writer radar",
+        )
+        post_to_bluesky(
+            session,
+            candidate,
+            "https://bsky.social",
+            "did:plc:test",
+            "jwt",
+            5,
+        )
+        record = session.last_payload["record"]
+        self.assertIn(candidate.title, record["text"])
+        external = record["embed"]["external"]
+        self.assertEqual(external["title"], "Mercury News")
+        self.assertEqual(external["description"], "")
+
     def test_missing_state_initializes_game_threads(self):
         with tempfile.TemporaryDirectory() as directory:
             path = os.path.join(directory, "missing-state.json")
