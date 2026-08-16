@@ -17,6 +17,7 @@ on:
       - "v2_source_diag.py"
       - "models.py"
       - "bsky_client.py"
+      - ".github/workflows/giants-news-bot.yml"
       - ".github/workflows/v2-structured-probe.yml"
   workflow_dispatch: {}
 
