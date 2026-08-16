@@ -177,6 +177,16 @@ def is_story_url(url: str) -> bool:
         return False
     if segs[-1] in STORY_REJECT_SLUGS:
         return False
+
+    # NBC Sports Bay Area article URLs use a numeric content ID after the slug,
+    # while team hubs and subcategory pages stop at the slug. Treat only the
+    # former as stories, and keep explicit /video/ pages out of this news bot.
+    host = p.netloc.lower()
+    if host.endswith("nbcsportsbayarea.com") and segs[:2] == ["mlb", "san-francisco-giants"]:
+        if "video" in segs:
+            return False
+        return len(segs) >= 4 and segs[-1].isdigit() and "-" in segs[-2]
+
     if re.search(r"/20\d{2}/\d{1,2}/\d{1,2}/", "/" + path + "/"):
         return True
     if segs[-1].endswith(".html") or "/article/" in "/" + path + "/":
