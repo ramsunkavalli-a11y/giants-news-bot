@@ -12,8 +12,9 @@ from bs4 import BeautifulSoup
 
 from v2_authors import author_prior
 
-UA = "Mozilla/5.0 GiantsNewsBotV2Probe/0.3"
+UA = "Mozilla/5.0 GiantsNewsBotV2Probe/0.4"
 TIMEOUT = 20
+ATHLETIC_AUTHOR_ENRICH_LIMIT = 8
 
 # Publications we trust editorially but do not currently have a clean, reliable,
 # zero-cost direct adapter for on a GitHub Actions runner. These belong in the
@@ -52,6 +53,10 @@ LOW_VALUE_PATTERNS = (
     "watch live",
     "how to watch",
     "injuries and roster moves",
+    "injuries & transactions",
+    "trivia puzzle",
+    "top 30 prospects list",
+    "top 100 and top 30 prospects lists are here",
     "power rankings",
     "each team's",
     "every team",
@@ -114,6 +119,18 @@ def extract_card_author(anchor) -> str:
     return ""
 
 
+def structured_meta_author(url: str) -> str:
+    """Optional enrichment only: a failure here must never block discovery."""
+    try:
+        response = requests.get(url, headers={"User-Agent": UA}, timeout=TIMEOUT, allow_redirects=True)
+        response.raise_for_status()
+        soup = BeautifulSoup(response.text, "lxml")
+        tag = soup.find("meta", attrs={"name": "author"})
+        return clean(tag.get("content", "")) if tag else ""
+    except Exception:
+        return ""
+
+
 def classify(source: str, title: str, author: str = "") -> tuple[str, str, str]:
     blob = title.lower()
     prior = author_prior(author)
@@ -123,6 +140,8 @@ def classify(source: str, title: str, author: str = "") -> tuple[str, str, str]:
         return "low", "commodity_or_generic_content", preference
     if any(pattern in blob for pattern in DERIVATIVE_PATTERNS):
         return "low", "summarizes_other_publication", preference
+    if source == "FanGraphs" and blob.startswith("sunday notes:"):
+        return "low", "broad_recurring_roundup", preference
 
     # The user's strongest author preference is intentionally meaningful:
     # a Baggarly Giants piece is presumed worth surfacing unless it hit a hard
@@ -208,16 +227,48 @@ def discover_sf_standard() -> list[Article]:
 
 
 def discover_athletic() -> list[Article]:
-    # The NYT-hosted Giants feed also contains some broad MLB pieces. Requiring
-    # Giants relevance in title + RSS description removes those without fetching
-    # the paywalled article.
-    return articles_from_feed(
-        source="The Athletic",
-        feed_url="https://www.nytimes.com/athletic/rss/mlb/sf-giants/",
-        section="Giants RSS",
-        access="paywalled",
-        limit=60,
-    )
+    # RSS is the discovery source. The NYT-hosted Giants feed contains occasional
+    # broad MLB pieces, so title + RSS description must actually be Giants-related.
+    # For only a small number of newest eligible entries, optionally read the
+    # standard author meta tag. Metadata failure never removes the article.
+    feed = parse_feed("https://www.nytimes.com/athletic/rss/mlb/sf-giants/")
+    out: list[Article] = []
+    seen: set[str] = set()
+    enriched = 0
+    for entry in feed.entries[:60]:
+        title = clean(getattr(entry, "title", ""))
+        summary = clean(getattr(entry, "summary", ""))
+        url = getattr(entry, "link", "") or ""
+        if not title or not url or url in seen or not giants_relevant(f"{title} {summary}"):
+            continue
+        seen.add(url)
+        author = entry_author(entry)
+        initial = make_article(
+            source="The Athletic",
+            title=title,
+            url=url,
+            published=getattr(entry, "published", "") or getattr(entry, "updated", "") or "",
+            author=author,
+            summary=summary,
+            section="Giants RSS",
+            access="paywalled",
+        )
+        if not author and initial.quality != "low" and enriched < ATHLETIC_AUTHOR_ENRICH_LIMIT:
+            author = structured_meta_author(url)
+            enriched += 1
+            if author:
+                initial = make_article(
+                    source="The Athletic",
+                    title=title,
+                    url=url,
+                    published=initial.published,
+                    author=author,
+                    summary=summary,
+                    section="Giants RSS + author meta",
+                    access="paywalled",
+                )
+        out.append(initial)
+    return out
 
 
 def discover_mlb() -> list[Article]:
@@ -243,8 +294,9 @@ def discover_sfgate() -> list[Article]:
 
 
 def discover_fangraphs() -> list[Article]:
-    # FanGraphs' category tagging is broader than the headline itself, so retain
-    # only entries where title/description actually mention the Giants/SF.
+    # FanGraphs' category tagging is broader than the headline itself. Keep
+    # entries where title/description actually connect to SF, then reject broad
+    # recurring roundups separately in classify().
     return articles_from_feed(
         source="FanGraphs",
         feed_url="https://blogs.fangraphs.com/category/teams/giants/feed/",
