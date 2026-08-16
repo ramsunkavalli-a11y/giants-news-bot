@@ -12,14 +12,11 @@ from bs4 import BeautifulSoup
 
 from v2_authors import author_prior, source_prior
 
-UA = "Mozilla/5.0 GiantsNewsBotV2Probe/0.5"
+UA = "Mozilla/5.0 GiantsNewsBotV2Probe/0.6"
 TIMEOUT = 20
 ATHLETIC_AUTHOR_ENRICH_LIMIT = 8
 NBC_AUTHOR_ENRICH_LIMIT = 10
 
-# Publications we trust editorially but do not currently have a clean, reliable,
-# zero-cost direct adapter for on a GitHub Actions runner. These belong in the
-# wildcard/radar discovery lane rather than driving scraping complexity.
 TRUSTED_RADAR_SOURCES = [
     "San Francisco Chronicle",
     "Mercury News",
@@ -112,20 +109,60 @@ def entry_author(entry) -> str:
     return ""
 
 
+def _plausible_author(value: str) -> str:
+    text = re.sub(r"^\s*by\s+", "", clean(value), flags=re.I).strip()
+    if not text or text.startswith("http://") or text.startswith("https://"):
+        return ""
+    words = text.split()
+    if not 2 <= len(words) <= 7 or len(text) > 100:
+        return ""
+    if text.lower() in {
+        "nbc sports bay area",
+        "the athletic",
+        "major league baseball",
+        "san francisco giants",
+    }:
+        return ""
+    return text
+
+
 def extract_card_author(anchor) -> str:
     node = anchor.find_parent("article") or anchor.find_parent("li") or anchor.parent
     if not node:
         return ""
     for selector in ('[rel="author"]', '[class*="author"]', '[class*="byline"]'):
         for candidate in node.select(selector):
-            text = re.sub(r"^\s*by\s+", "", clean(candidate.get_text(" ")), flags=re.I)
-            if 1 < len(text.split()) <= 5 and len(text) < 80:
-                return text
+            author = _plausible_author(candidate.get_text(" "))
+            if author:
+                return author
     return ""
 
 
+def _author_from_json_value(value) -> str:
+    if isinstance(value, str):
+        return _plausible_author(value)
+    if isinstance(value, dict):
+        return _plausible_author(value.get("name", ""))
+    if isinstance(value, list):
+        for item in value:
+            author = _author_from_json_value(item)
+            if author:
+                return author
+    return ""
+
+
+def _iter_json_nodes(value):
+    if isinstance(value, dict):
+        yield value
+        for child in value.values():
+            yield from _iter_json_nodes(child)
+    elif isinstance(value, list):
+        for child in value:
+            yield from _iter_json_nodes(child)
+
+
 def structured_meta_author(url: str) -> str:
-    """Optional enrichment only: a failure here must never block discovery."""
+    """Best-effort structured byline enrichment; failure never blocks discovery."""
     try:
         response = requests.get(
             url,
@@ -135,10 +172,49 @@ def structured_meta_author(url: str) -> str:
         )
         response.raise_for_status()
         soup = BeautifulSoup(response.text, "lxml")
-        tag = soup.find("meta", attrs={"name": "author"})
-        return clean(tag.get("content", "")) if tag else ""
+
+        for attrs in (
+            {"name": "author"},
+            {"name": "parsely-author"},
+            {"property": "article:author"},
+            {"name": "byl"},
+        ):
+            tag = soup.find("meta", attrs=attrs)
+            if tag and tag.get("content"):
+                author = _plausible_author(tag.get("content", ""))
+                if author:
+                    return author
+
+        for script in soup.find_all("script", attrs={"type": "application/ld+json"}):
+            raw = script.string or script.get_text("", strip=True)
+            if not raw:
+                continue
+            try:
+                payload = json.loads(raw)
+            except (TypeError, json.JSONDecodeError):
+                continue
+            for node in _iter_json_nodes(payload):
+                node_type = node.get("@type", "")
+                types = node_type if isinstance(node_type, list) else [node_type]
+                if not any("article" in str(item).lower() for item in types):
+                    continue
+                author = _author_from_json_value(node.get("author"))
+                if author:
+                    return author
+
+        for selector in (
+            '[class*="byline"] a',
+            '[class*="byline"]',
+            '[class*="author"] a',
+            '[data-testid*="author"]',
+        ):
+            for node in soup.select(selector):
+                author = _plausible_author(node.get_text(" "))
+                if author:
+                    return author
     except Exception:
         return ""
+    return ""
 
 
 def classify(source: str, title: str, author: str = "") -> tuple[str, str, str]:
@@ -153,8 +229,6 @@ def classify(source: str, title: str, author: str = "") -> tuple[str, str, str]:
     if source == "FanGraphs" and blob.startswith("sunday notes:"):
         return "low", "broad_recurring_roundup", preference
 
-    # A strong byline is an editorial prior, not permission to elevate routine
-    # game-story packaging. Preserve the recap gate before applying author priors.
     if any(pattern in blob for pattern in GAME_STORY_PATTERNS) or RESULT_VERBS.search(title):
         return "medium", "game_story_or_postgame_analysis", preference
 
@@ -249,9 +323,6 @@ def discover_sf_standard() -> list[Article]:
 
 
 def discover_athletic() -> list[Article]:
-    # RSS is discovery. The NYT-hosted Giants feed contains occasional broad MLB
-    # pieces, so title + description must actually be Giants-related. Enrich only
-    # a handful of current candidates with the standard author meta tag.
     feed = parse_feed("https://www.nytimes.com/athletic/rss/mlb/sf-giants/")
     out: list[Article] = []
     seen: set[str] = set()
@@ -315,8 +386,6 @@ def discover_sfgate() -> list[Article]:
 
 
 def discover_fangraphs() -> list[Article]:
-    # FanGraphs category tagging is broader than the headline itself. Require the
-    # title/description to connect to SF, then reject recurring roundups separately.
     return articles_from_feed(
         source="FanGraphs",
         feed_url="https://blogs.fangraphs.com/category/teams/giants/feed/",
