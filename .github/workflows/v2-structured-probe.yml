@@ -1,0 +1,100 @@
+name: V2 Structured Discovery Probe
+
+on:
+  push:
+    branches: [v2/structured-discovery]
+    paths:
+      - "v2_probe.py"
+      - "v2_select_probe.py"
+      - "v2_selector.py"
+      - "v2_story.py"
+      - "v2_story_test.py"
+      - "v2_runtime_test.py"
+      - "v2_bot.py"
+      - "v2_athletic_probe.py"
+      - "v2_athletic_meta_probe.py"
+      - "v2_authors.py"
+      - "v2_source_diag.py"
+      - "models.py"
+      - "bsky_client.py"
+      - ".github/workflows/giants-news-bot.yml"
+      - ".github/workflows/v2-structured-probe.yml"
+  workflow_dispatch: {}
+
+permissions:
+  contents: read
+
+jobs:
+  probe:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+
+      - name: Install deps
+        run: |
+          python -m pip install --upgrade pip
+          pip install -r requirements.txt
+
+      - name: Test story clustering and runtime
+        run: python -m unittest -v v2_story_test.py v2_runtime_test.py
+
+      - name: Run structured discovery probe
+        run: python v2_probe.py
+
+      - name: Read production state
+        run: |
+          git fetch origin main --depth=1
+          git show origin/main:state.json > /tmp/main-state.json
+          cp /tmp/main-state.json /tmp/main-state-before.json
+          python -c 'import json; d=json.load(open("/tmp/main-state.json")); print("PRODUCTION_STATE posted_urls=", len(d.get("posted_urls", {})))'
+
+      - name: Run realistic selection simulation
+        run: python v2_select_probe.py --state /tmp/main-state.json
+
+      - name: Run clean-slate duplicate-choice simulation
+        run: |
+          printf '{"posted_urls": {}, "posted_stories": []}\n' > /tmp/empty-state.json
+          python v2_select_probe.py --state /tmp/empty-state.json --output v2-selection-fresh.json
+
+      - name: Dry run full V2 bot
+        env:
+          STATE_FILE: /tmp/main-state.json
+          DRY_RUN: "1"
+          HOURS_BACK: "72"
+          MAX_POSTS_PER_RUN: "5"
+          DIAGNOSTICS_ENABLED: "1"
+          DIAGNOSTICS_FILE: v2-runtime-diagnostics.json
+        run: |
+          python v2_bot.py
+          cmp /tmp/main-state-before.json /tmp/main-state.json
+          echo "DRY_RUN_STATE_UNCHANGED=true"
+
+      - name: Run Athletic RSS probe
+        run: python v2_athletic_probe.py
+
+      - name: Run Athletic structured metadata probe
+        run: python v2_athletic_meta_probe.py
+
+      - name: Run structured source diagnostics
+        run: python v2_source_diag.py
+
+      - name: Upload probe output
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: v2-structured-probe
+          path: |
+            v2-probe.json
+            v2-selection.json
+            v2-selection-fresh.json
+            v2-runtime-diagnostics.json
+            v2-athletic-probe.json
+            v2-athletic-meta-probe.json
+            v2-source-diag.json
+          if-no-files-found: error
