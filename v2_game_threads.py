@@ -1,14 +1,17 @@
 from __future__ import annotations
 
 import re
-from collections import defaultdict
+from collections import Counter, defaultdict
 from datetime import datetime, timedelta, timezone
 from zoneinfo import ZoneInfo
 
 from dateutil import parser as dtparser
 
+from v2_story import candidate_preference_key
+
 PACIFIC = ZoneInfo("America/Los_Angeles")
 BASEBALL_DAY_SHIFT_HOURS = 12
+DEFAULT_GAME_HOURS_BACK = 36
 
 # These aliases are only used to label/group a game-coverage thread. Failure to
 # identify an opponent falls back to a date-only key; it never blocks a story.
@@ -155,7 +158,7 @@ def group_game_articles(articles: list[dict]) -> list[dict]:
                 "key": game_thread_key(day, opponent),
                 "game_day": day,
                 "opponent": opponent,
-                "articles": members,
+                "articles": sorted(members, key=candidate_preference_key, reverse=True),
             })
 
     def newest(group: dict) -> datetime:
@@ -164,3 +167,101 @@ def group_game_articles(articles: list[dict]) -> list[dict]:
 
     groups.sort(key=newest, reverse=True)
     return groups
+
+
+def select_game_threads(
+    articles: list[dict],
+    state: dict,
+    *,
+    hours_back: int = DEFAULT_GAME_HOURS_BACK,
+    now: datetime | None = None,
+) -> dict:
+    """Select every fresh, non-low game story. Cross-publisher versions are kept."""
+    # Local import avoids coupling the standalone selector back to this lane.
+    from v2_selector import canonicalize_url, optional_page_metadata, parse_dt
+
+    now = now or datetime.now(timezone.utc)
+    cutoff = now - timedelta(hours=hours_back)
+    raw_posted = state.get("posted_urls", {})
+    if isinstance(raw_posted, dict):
+        posted = {canonicalize_url(url) for url in raw_posted}
+    elif isinstance(raw_posted, list):
+        posted = {canonicalize_url(url) for url in raw_posted}
+    else:
+        posted = set()
+    posted.discard("")
+
+    reasons = Counter()
+    diagnostics: list[dict] = []
+    eligible: list[dict] = []
+    timestamp_enrichments = 0
+
+    for raw in articles:
+        article = dict(raw)
+        url = article.get("url", "")
+        canonical = canonicalize_url(url)
+        reason = "not_game_story"
+
+        if not is_game_story(article):
+            pass
+        elif article.get("quality") == "low":
+            reason = "quality_low"
+        elif not canonical:
+            reason = "missing_url"
+        elif canonical in posted:
+            reason = "already_posted"
+        else:
+            dt = parse_dt(article.get("published", ""))
+            if dt is None and article.get("source") == "NBC Sports Bay Area" and timestamp_enrichments < 12:
+                _, published = optional_page_metadata(url)
+                timestamp_enrichments += 1
+                if published:
+                    article["published"] = published
+                    dt = parse_dt(published)
+            if dt is None:
+                reason = "missing_published"
+            elif dt < cutoff:
+                reason = "stale_game_story"
+            else:
+                reason = "eligible_game_story"
+                article["_published_dt"] = dt
+                article["canonical_url"] = canonical
+                eligible.append(article)
+
+        reasons[reason] += 1
+        if reason != "not_game_story":
+            diagnostics.append({
+                "source": article.get("source", ""),
+                "title": article.get("title", ""),
+                "url": url,
+                "published": article.get("published", ""),
+                "quality": article.get("quality", ""),
+                "quality_reason": article.get("quality_reason", ""),
+                "reason": reason,
+            })
+
+    threads = group_game_articles(eligible)
+
+    def public(article: dict) -> dict:
+        return {key: value for key, value in article.items() if not key.startswith("_")}
+
+    public_threads = []
+    for thread in threads:
+        public_threads.append({
+            "key": thread["key"],
+            "game_day": thread["game_day"],
+            "opponent": thread["opponent"],
+            "articles": [public(article) for article in thread["articles"]],
+        })
+
+    reasons["selected_game_stories"] = sum(len(thread["articles"]) for thread in threads)
+    reasons["selected_game_threads"] = len(threads)
+    return {
+        "generated_at": now.isoformat(),
+        "hours_back": hours_back,
+        "cutoff": cutoff.isoformat(),
+        "reasons": dict(reasons),
+        "timestamp_enrichment_attempts": timestamp_enrichments,
+        "threads": public_threads,
+        "diagnostics": diagnostics,
+    }
