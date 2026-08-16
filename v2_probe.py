@@ -5,14 +5,16 @@ import json
 import re
 import xml.etree.ElementTree as ET
 from dataclasses import asdict, dataclass
-from datetime import datetime, timedelta, timezone
+from datetime import datetime, timezone
 from urllib.parse import urljoin, urlparse
 
 import feedparser
 import requests
 from bs4 import BeautifulSoup
 
-UA = "Mozilla/5.0 GiantsNewsBotV2Probe/0.1"
+from v2_authors import author_prior
+
+UA = "Mozilla/5.0 GiantsNewsBotV2Probe/0.2"
 TIMEOUT = 20
 
 
@@ -25,6 +27,8 @@ class Article:
     author: str = ""
     summary: str = ""
     section: str = ""
+    access: str = "unknown"
+    author_preference: str = ""
     quality: str = "high"
     quality_reason: str = "structured_source"
 
@@ -38,6 +42,7 @@ LOW_VALUE_PATTERNS = (
     "stream games",
     "watch live",
     "how to watch",
+    "injuries and roster moves",
 )
 
 GENERIC_PATTERNS = (
@@ -45,6 +50,30 @@ GENERIC_PATTERNS = (
     "each team's",
     "every team",
     "for every team",
+    "all 30 teams",
+)
+
+GAME_RECAP_PATTERNS = (
+    "what we learned",
+    "observations",
+    " in win",
+    " in loss",
+    " win over ",
+    " loss to ",
+    " beat ",
+    " beats ",
+    " rout ",
+    " falls to ",
+    " fall to ",
+    " doom ",
+)
+
+SFGATE_REWRITE_PATTERNS = (
+    "reportedly",
+    "top mlb insider",
+    "insider says",
+    "insider believes",
+    "report says",
 )
 
 
@@ -57,15 +86,58 @@ def giants_relevant(text: str) -> bool:
     return "giants" in t or "san francisco" in t
 
 
-def classify(title: str, section: str = "") -> tuple[str, str]:
+def entry_author(entry) -> str:
+    author = clean(getattr(entry, "author", ""))
+    if author:
+        return author
+    authors = getattr(entry, "authors", None) or []
+    if authors and isinstance(authors[0], dict):
+        return clean(authors[0].get("name", ""))
+    return ""
+
+
+def extract_card_author(anchor) -> str:
+    node = anchor.find_parent("article") or anchor.find_parent("li") or anchor.parent
+    if not node:
+        return ""
+    for selector in ('[rel="author"]', '[class*="author"]', '[class*="byline"]'):
+        for candidate in node.select(selector):
+            text = re.sub(r"^\s*by\s+", "", clean(candidate.get_text(" ")), flags=re.I)
+            if 1 < len(text.split()) <= 5 and len(text) < 80:
+                return text
+    text = clean(node.get_text(" "))[:600]
+    match = re.search(
+        r"\bBy\s+([A-Z][A-Za-z.'’\-]+(?:\s+[A-Z][A-Za-z.'’\-]+){1,3})(?=\s|$)",
+        text,
+    )
+    return clean(match.group(1)) if match else ""
+
+
+def classify(source: str, title: str, author: str = "", section: str = "") -> tuple[str, str, str]:
     blob = f"{title} {section}".lower()
+    prior = author_prior(author)
+    preference = prior["preference"] if prior else ""
+
     if any(p in blob for p in LOW_VALUE_PATTERNS):
-        return "low", "commodity_video_or_recap"
+        return "low", "commodity_or_recurring_content", preference
     if any(p in blob for p in GENERIC_PATTERNS):
-        return "low", "generic_multi_team_content"
-    if "what we learned" in blob or "observations" in blob:
-        return "medium", "postgame_analysis"
-    return "high", "original_news_or_analysis_candidate"
+        return "low", "generic_multi_team_content", preference
+    if source == "MLB.com" and title.lower().startswith("release:"):
+        return "low", "press_release", preference
+    if source == "SFGATE" and any(p in blob for p in SFGATE_REWRITE_PATTERNS):
+        return "low", "likely_rewrite_or_aggregation", preference
+    if source == "NBC Sports Bay Area" and "baseball america" in blob and "rank" in blob:
+        return "low", "summarizes_other_publication", preference
+
+    if preference == "elite":
+        return "high", "elite_author", preference
+
+    if any(p in blob for p in GAME_RECAP_PATTERNS):
+        return "medium", "game_story_or_postgame_analysis", preference
+
+    if preference:
+        return "high", f"known_author:{preference}", preference
+    return "high", "original_news_or_analysis_candidate", preference
 
 
 def get(url: str) -> requests.Response:
@@ -74,26 +146,73 @@ def get(url: str) -> requests.Response:
     return r
 
 
+def parse_feed(url: str):
+    feed = feedparser.parse(url, request_headers={"User-Agent": UA})
+    status = getattr(feed, "status", None)
+    if status and status >= 400:
+        raise RuntimeError(f"feed HTTP {status}: {url}")
+    if getattr(feed, "bozo", False) and not feed.entries:
+        raise RuntimeError(f"invalid feed {url}: {getattr(feed, 'bozo_exception', '')}")
+    return feed
+
+
+def make_article(
+    *, source: str, title: str, url: str, published: str = "", author: str = "",
+    summary: str = "", section: str = "", access: str = "unknown"
+) -> Article:
+    quality, reason, preference = classify(source, title, author, section)
+    return Article(
+        source=source,
+        title=title,
+        url=url,
+        published=published,
+        author=author,
+        summary=summary,
+        section=section,
+        access=access,
+        author_preference=preference,
+        quality=quality,
+        quality_reason=reason,
+    )
+
+
 def discover_sf_standard() -> list[Article]:
-    feed_url = "https://sfstandard.com/category/sports/feed/"
-    feed = feedparser.parse(feed_url, request_headers={"User-Agent": UA})
+    feed = parse_feed("https://sfstandard.com/category/sports/feed/")
     out: list[Article] = []
     for e in feed.entries[:30]:
         title = clean(getattr(e, "title", ""))
         summary = clean(getattr(e, "summary", ""))
         if not giants_relevant(f"{title} {summary}"):
             continue
-        q, reason = classify(title)
-        out.append(Article(
+        out.append(make_article(
             source="San Francisco Standard",
             title=title,
             url=getattr(e, "link", "") or "",
             published=getattr(e, "published", "") or getattr(e, "updated", "") or "",
-            author=clean(getattr(e, "author", "")),
+            author=entry_author(e),
             summary=summary,
             section="Sports RSS",
-            quality=q,
-            quality_reason=reason,
+            access="free",
+        ))
+    return out
+
+
+def discover_athletic() -> list[Article]:
+    feed = parse_feed("https://www.nytimes.com/athletic/rss/mlb/sf-giants/")
+    out: list[Article] = []
+    for e in feed.entries[:40]:
+        title = clean(getattr(e, "title", ""))
+        if not title:
+            continue
+        out.append(make_article(
+            source="The Athletic",
+            title=title,
+            url=getattr(e, "link", "") or "",
+            published=getattr(e, "published", "") or getattr(e, "updated", "") or "",
+            author=entry_author(e),
+            summary=clean(getattr(e, "summary", "")),
+            section="Giants RSS",
+            access="paywalled",
         ))
     return out
 
@@ -115,15 +234,13 @@ def discover_mlb() -> list[Article]:
         published = clean(node.findtext("news:news/news:publication_date", default="", namespaces=ns))
         if not loc or not title or not giants_relevant(title):
             continue
-        q, reason = classify(title)
-        out.append(Article(
+        out.append(make_article(
             source="MLB.com",
             title=title,
             url=loc,
             published=published,
             section="48-hour news sitemap",
-            quality=q,
-            quality_reason=reason,
+            access="free",
         ))
     return out
 
@@ -149,51 +266,160 @@ def discover_nbc() -> list[Article]:
             if not title or len(title) < 20 or href in seen:
                 continue
             seen.add(href)
-            q, reason = classify(title, section)
-            out.append(Article(
+            out.append(make_article(
                 source="NBC Sports Bay Area",
                 title=title,
                 url=href,
+                author=extract_card_author(a),
                 section=section,
-                quality=q,
-                quality_reason=reason,
+                access="free",
             ))
     return out
 
 
 def discover_chronicle() -> list[Article]:
+    page_url = "https://www.sfchronicle.com/sports/giants/"
+    soup = BeautifulSoup(get(page_url).text, "lxml")
+    seen: set[str] = set()
+    out: list[Article] = []
+    for a in soup.find_all("a", href=True):
+        href = urljoin(page_url, a["href"])
+        title = clean(a.get_text(" "))
+        if "/sports/giants/article/" not in href:
+            continue
+        if not title or len(title) < 20 or href in seen:
+            continue
+        seen.add(href)
+        out.append(make_article(
+            source="San Francisco Chronicle",
+            title=title,
+            url=href,
+            author=extract_card_author(a),
+            section="Giants landing page",
+            access="unknown",
+        ))
+    return out
+
+
+def discover_sfgate() -> list[Article]:
+    page_url = "https://www.sfgate.com/giants/"
+    soup = BeautifulSoup(get(page_url).text, "lxml")
+    seen: set[str] = set()
+    out: list[Article] = []
+    for a in soup.find_all("a", href=True):
+        href = urljoin(page_url, a["href"])
+        title = clean(a.get_text(" "))
+        if "/giants/article/" not in href:
+            continue
+        if not title or len(title) < 20 or href in seen:
+            continue
+        seen.add(href)
+        out.append(make_article(
+            source="SFGATE",
+            title=title,
+            url=href,
+            author=extract_card_author(a),
+            section="Giants landing page",
+            access="free",
+        ))
+    return out
+
+
+def discover_fangraphs() -> list[Article]:
+    page_url = "https://blogs.fangraphs.com/category/teams/giants/"
+    soup = BeautifulSoup(get(page_url).text, "lxml")
+    seen: set[str] = set()
+    out: list[Article] = []
+    for heading in soup.find_all(["h2", "h3"]):
+        a = heading.find("a", href=True)
+        if not a:
+            continue
+        href = urljoin(page_url, a["href"])
+        title = clean(a.get_text(" "))
+        if urlparse(href).netloc not in {"blogs.fangraphs.com", "www.fangraphs.com"}:
+            continue
+        if not title or len(title) < 20 or href in seen or not giants_relevant(title):
+            continue
+        seen.add(href)
+        out.append(make_article(
+            source="FanGraphs",
+            title=title,
+            url=href,
+            author=extract_card_author(a),
+            section="Giants archive",
+            access="unknown",
+        ))
+    return out
+
+
+def discover_baseball_america() -> list[Article]:
     out: list[Article] = []
     seen: set[str] = set()
-    now = datetime.now(timezone.utc)
-    for days_back in range(3):
-        day = now - timedelta(days=days_back)
-        month = day.strftime("%B").lower()
-        page_url = f"https://www.sfchronicle.com/sitemap/{day.year}/{month}/{day.day}/"
-        try:
-            soup = BeautifulSoup(get(page_url).text, "lxml")
-        except requests.RequestException:
-            continue
-        for a in soup.find_all("a", href=True):
-            href = urljoin(page_url, a["href"])
-            title = clean(a.get_text(" "))
-            if "/sports/giants/article/" not in href or not title or href in seen:
+
+    try:
+        feed = parse_feed("https://www.baseballamerica.com/feed/")
+        for e in feed.entries[:100]:
+            title = clean(getattr(e, "title", ""))
+            if not title or not giants_relevant(title):
+                continue
+            href = getattr(e, "link", "") or ""
+            if not href or href in seen:
                 continue
             seen.add(href)
-            q, reason = classify(title)
-            out.append(Article(
-                source="San Francisco Chronicle",
+            out.append(make_article(
+                source="Baseball America",
                 title=title,
                 url=href,
-                published=day.date().isoformat(),
-                section="daily sitemap",
-                quality=q,
-                quality_reason=reason,
+                published=getattr(e, "published", "") or getattr(e, "updated", "") or "",
+                author=entry_author(e),
+                summary=clean(getattr(e, "summary", "")),
+                section="site RSS",
+                access="unknown",
             ))
+    except Exception:
+        pass
+
+    if out:
+        return out
+
+    page_url = "https://www.baseballamerica.com/stories/teams/2019-san-francisco-giants/"
+    try:
+        soup = BeautifulSoup(get(page_url).text, "lxml")
+    except requests.RequestException:
+        return out
+    for heading in soup.find_all(["h2", "h3", "h4"]):
+        a = heading.find("a", href=True)
+        if not a:
+            continue
+        href = urljoin(page_url, a["href"])
+        title = clean(a.get_text(" "))
+        if "/stories/" not in href or not title or len(title) < 20 or href in seen:
+            continue
+        if not giants_relevant(title):
+            continue
+        seen.add(href)
+        out.append(make_article(
+            source="Baseball America",
+            title=title,
+            url=href,
+            author=extract_card_author(a),
+            section="Giants team page",
+            access="unknown",
+        ))
     return out
 
 
 def main() -> None:
-    discoverers = [discover_sf_standard, discover_mlb, discover_nbc, discover_chronicle]
+    discoverers = [
+        discover_sf_standard,
+        discover_athletic,
+        discover_mlb,
+        discover_nbc,
+        discover_chronicle,
+        discover_sfgate,
+        discover_fangraphs,
+        discover_baseball_america,
+    ]
     all_articles: list[Article] = []
     health = {}
     for fn in discoverers:
@@ -224,7 +450,12 @@ def main() -> None:
 
     print(json.dumps(payload["health"], indent=2))
     for a in articles:
-        print(f"[{a.quality.upper():6}] {a.source}: {a.title} | {a.quality_reason}")
+        byline = f" · {a.author}" if a.author else ""
+        access = " ($)" if a.access == "paywalled" else ""
+        print(
+            f"[{a.quality.upper():6}] {a.source}{access}{byline}: {a.title} "
+            f"| {a.quality_reason}"
+        )
 
 
 if __name__ == "__main__":
