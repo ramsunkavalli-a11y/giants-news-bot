@@ -1,9 +1,7 @@
 from __future__ import annotations
 
-import gzip
 import json
 import re
-import xml.etree.ElementTree as ET
 from dataclasses import asdict, dataclass
 from datetime import datetime, timezone
 from urllib.parse import urljoin, urlparse
@@ -14,8 +12,19 @@ from bs4 import BeautifulSoup
 
 from v2_authors import author_prior
 
-UA = "Mozilla/5.0 GiantsNewsBotV2Probe/0.2"
+UA = "Mozilla/5.0 GiantsNewsBotV2Probe/0.3"
 TIMEOUT = 20
+
+# Publications we trust editorially but do not currently have a clean, reliable,
+# zero-cost direct adapter for on a GitHub Actions runner. These belong in the
+# wildcard/radar discovery lane rather than driving scraping complexity.
+TRUSTED_RADAR_SOURCES = [
+    "San Francisco Chronicle",
+    "Mercury News",
+    "Baseball America",
+    "Associated Press",
+    "KNBR",
+]
 
 
 @dataclass
@@ -43,9 +52,6 @@ LOW_VALUE_PATTERNS = (
     "watch live",
     "how to watch",
     "injuries and roster moves",
-)
-
-GENERIC_PATTERNS = (
     "power rankings",
     "each team's",
     "every team",
@@ -53,27 +59,27 @@ GENERIC_PATTERNS = (
     "all 30 teams",
 )
 
-GAME_RECAP_PATTERNS = (
+DERIVATIVE_PATTERNS = (
+    "where giants' farm system ranks in",
+    "where the giants' farm system ranks in",
+)
+
+GAME_STORY_PATTERNS = (
     "what we learned",
     "observations",
     " in win",
     " in loss",
     " win over ",
     " loss to ",
-    " beat ",
-    " beats ",
-    " rout ",
     " falls to ",
     " fall to ",
     " doom ",
 )
 
-SFGATE_REWRITE_PATTERNS = (
-    "reportedly",
-    "top mlb insider",
-    "insider says",
-    "insider believes",
-    "report says",
+RESULT_VERBS = re.compile(
+    r"\b(?:lead|leads|lift|lifts|power|powers|propel|propels|beat|beats|edge|edges|"
+    r"defeat|defeats|top|tops|rout|routs)\b.*\b(?:over|past)\b",
+    flags=re.I,
 )
 
 
@@ -105,45 +111,31 @@ def extract_card_author(anchor) -> str:
             text = re.sub(r"^\s*by\s+", "", clean(candidate.get_text(" ")), flags=re.I)
             if 1 < len(text.split()) <= 5 and len(text) < 80:
                 return text
-    text = clean(node.get_text(" "))[:600]
-    match = re.search(
-        r"\bBy\s+([A-Z][A-Za-z.'’\-]+(?:\s+[A-Z][A-Za-z.'’\-]+){1,3})(?=\s|$)",
-        text,
-    )
-    return clean(match.group(1)) if match else ""
+    return ""
 
 
-def classify(source: str, title: str, author: str = "", section: str = "") -> tuple[str, str, str]:
-    blob = f"{title} {section}".lower()
+def classify(source: str, title: str, author: str = "") -> tuple[str, str, str]:
+    blob = title.lower()
     prior = author_prior(author)
     preference = prior["preference"] if prior else ""
 
-    if any(p in blob for p in LOW_VALUE_PATTERNS):
-        return "low", "commodity_or_recurring_content", preference
-    if any(p in blob for p in GENERIC_PATTERNS):
-        return "low", "generic_multi_team_content", preference
-    if source == "MLB.com" and title.lower().startswith("release:"):
-        return "low", "press_release", preference
-    if source == "SFGATE" and any(p in blob for p in SFGATE_REWRITE_PATTERNS):
-        return "low", "likely_rewrite_or_aggregation", preference
-    if source == "NBC Sports Bay Area" and "baseball america" in blob and "rank" in blob:
+    if any(pattern in blob for pattern in LOW_VALUE_PATTERNS):
+        return "low", "commodity_or_generic_content", preference
+    if any(pattern in blob for pattern in DERIVATIVE_PATTERNS):
         return "low", "summarizes_other_publication", preference
 
+    # The user's strongest author preference is intentionally meaningful:
+    # a Baggarly Giants piece is presumed worth surfacing unless it hit a hard
+    # low-value rule above.
     if preference == "elite":
         return "high", "elite_author", preference
 
-    if any(p in blob for p in GAME_RECAP_PATTERNS):
+    if any(pattern in blob for pattern in GAME_STORY_PATTERNS) or RESULT_VERBS.search(title):
         return "medium", "game_story_or_postgame_analysis", preference
 
     if preference:
         return "high", f"known_author:{preference}", preference
     return "high", "original_news_or_analysis_candidate", preference
-
-
-def get(url: str) -> requests.Response:
-    r = requests.get(url, headers={"User-Agent": UA}, timeout=TIMEOUT)
-    r.raise_for_status()
-    return r
 
 
 def parse_feed(url: str):
@@ -160,7 +152,7 @@ def make_article(
     *, source: str, title: str, url: str, published: str = "", author: str = "",
     summary: str = "", section: str = "", access: str = "unknown"
 ) -> Article:
-    quality, reason, preference = classify(source, title, author, section)
+    quality, reason, preference = classify(source, title, author)
     return Article(
         source=source,
         title=title,
@@ -176,73 +168,90 @@ def make_article(
     )
 
 
-def discover_sf_standard() -> list[Article]:
-    feed = parse_feed("https://sfstandard.com/category/sports/feed/")
+def articles_from_feed(
+    *, source: str, feed_url: str, section: str, access: str,
+    limit: int = 40, require_giants_relevance: bool = True,
+) -> list[Article]:
+    feed = parse_feed(feed_url)
     out: list[Article] = []
-    for e in feed.entries[:30]:
-        title = clean(getattr(e, "title", ""))
-        summary = clean(getattr(e, "summary", ""))
-        if not giants_relevant(f"{title} {summary}"):
+    seen: set[str] = set()
+    for entry in feed.entries[:limit]:
+        title = clean(getattr(entry, "title", ""))
+        summary = clean(getattr(entry, "summary", ""))
+        url = getattr(entry, "link", "") or ""
+        if not title or not url or url in seen:
             continue
+        if require_giants_relevance and not giants_relevant(f"{title} {summary}"):
+            continue
+        seen.add(url)
         out.append(make_article(
-            source="San Francisco Standard",
+            source=source,
             title=title,
-            url=getattr(e, "link", "") or "",
-            published=getattr(e, "published", "") or getattr(e, "updated", "") or "",
-            author=entry_author(e),
+            url=url,
+            published=getattr(entry, "published", "") or getattr(entry, "updated", "") or "",
+            author=entry_author(entry),
             summary=summary,
-            section="Sports RSS",
-            access="free",
+            section=section,
+            access=access,
         ))
     return out
+
+
+def discover_sf_standard() -> list[Article]:
+    return articles_from_feed(
+        source="San Francisco Standard",
+        feed_url="https://sfstandard.com/category/sports/feed/",
+        section="Sports RSS",
+        access="free",
+        limit=30,
+    )
 
 
 def discover_athletic() -> list[Article]:
-    feed = parse_feed("https://www.nytimes.com/athletic/rss/mlb/sf-giants/")
-    out: list[Article] = []
-    for e in feed.entries[:40]:
-        title = clean(getattr(e, "title", ""))
-        if not title:
-            continue
-        out.append(make_article(
-            source="The Athletic",
-            title=title,
-            url=getattr(e, "link", "") or "",
-            published=getattr(e, "published", "") or getattr(e, "updated", "") or "",
-            author=entry_author(e),
-            summary=clean(getattr(e, "summary", "")),
-            section="Giants RSS",
-            access="paywalled",
-        ))
-    return out
+    # The NYT-hosted Giants feed also contains some broad MLB pieces. Requiring
+    # Giants relevance in title + RSS description removes those without fetching
+    # the paywalled article.
+    return articles_from_feed(
+        source="The Athletic",
+        feed_url="https://www.nytimes.com/athletic/rss/mlb/sf-giants/",
+        section="Giants RSS",
+        access="paywalled",
+        limit=60,
+    )
 
 
 def discover_mlb() -> list[Article]:
-    url = "https://www.mlb.com/sitemaps/48-hr-news.xml.gz"
-    raw = get(url).content
-    if raw[:2] == b"\x1f\x8b":
-        raw = gzip.decompress(raw)
-    root = ET.fromstring(raw)
-    ns = {
-        "sm": "http://www.sitemaps.org/schemas/sitemap/0.9",
-        "news": "http://www.google.com/schemas/sitemap-news/0.9",
-    }
-    out: list[Article] = []
-    for node in root.findall("sm:url", ns):
-        loc = clean(node.findtext("sm:loc", default="", namespaces=ns))
-        title = clean(node.findtext("news:news/news:title", default="", namespaces=ns))
-        published = clean(node.findtext("news:news/news:publication_date", default="", namespaces=ns))
-        if not loc or not title or not giants_relevant(title):
-            continue
-        out.append(make_article(
-            source="MLB.com",
-            title=title,
-            url=loc,
-            published=published,
-            section="48-hour news sitemap",
-            access="free",
-        ))
-    return out
+    return articles_from_feed(
+        source="MLB.com",
+        feed_url="https://www.mlb.com/giants/feeds/news/rss.xml",
+        section="Official Giants RSS",
+        access="free",
+        limit=30,
+        require_giants_relevance=False,
+    )
+
+
+def discover_sfgate() -> list[Article]:
+    return articles_from_feed(
+        source="SFGATE",
+        feed_url="https://www.sfgate.com/sports/feed/San-Francisco-Giants-RSS-Feed-428.php",
+        section="Giants RSS",
+        access="free",
+        limit=30,
+        require_giants_relevance=False,
+    )
+
+
+def discover_fangraphs() -> list[Article]:
+    # FanGraphs' category tagging is broader than the headline itself, so retain
+    # only entries where title/description actually mention the Giants/SF.
+    return articles_from_feed(
+        source="FanGraphs",
+        feed_url="https://blogs.fangraphs.com/category/teams/giants/feed/",
+        section="Giants category RSS",
+        access="free",
+        limit=20,
+    )
 
 
 def discover_nbc() -> list[Article]:
@@ -253,12 +262,14 @@ def discover_nbc() -> list[Article]:
     seen: set[str] = set()
     out: list[Article] = []
     for section, page_url in pages:
-        soup = BeautifulSoup(get(page_url).text, "lxml")
-        for a in soup.find_all("a", href=True):
-            href = urljoin(page_url, a["href"])
+        response = requests.get(page_url, headers={"User-Agent": UA}, timeout=TIMEOUT)
+        response.raise_for_status()
+        soup = BeautifulSoup(response.text, "lxml")
+        for anchor in soup.find_all("a", href=True):
+            href = urljoin(page_url, anchor["href"])
             path = urlparse(href).path.rstrip("/")
-            title = clean(a.get_text(" "))
-            parts = [p for p in path.split("/") if p]
+            title = clean(anchor.get_text(" "))
+            parts = [part for part in path.split("/") if part]
             if len(parts) < 4 or parts[:2] != ["mlb", "san-francisco-giants"]:
                 continue
             if not parts[-1].isdigit() or "video" in parts:
@@ -270,142 +281,10 @@ def discover_nbc() -> list[Article]:
                 source="NBC Sports Bay Area",
                 title=title,
                 url=href,
-                author=extract_card_author(a),
+                author=extract_card_author(anchor),
                 section=section,
                 access="free",
             ))
-    return out
-
-
-def discover_chronicle() -> list[Article]:
-    page_url = "https://www.sfchronicle.com/sports/giants/"
-    soup = BeautifulSoup(get(page_url).text, "lxml")
-    seen: set[str] = set()
-    out: list[Article] = []
-    for a in soup.find_all("a", href=True):
-        href = urljoin(page_url, a["href"])
-        title = clean(a.get_text(" "))
-        if "/sports/giants/article/" not in href:
-            continue
-        if not title or len(title) < 20 or href in seen:
-            continue
-        seen.add(href)
-        out.append(make_article(
-            source="San Francisco Chronicle",
-            title=title,
-            url=href,
-            author=extract_card_author(a),
-            section="Giants landing page",
-            access="unknown",
-        ))
-    return out
-
-
-def discover_sfgate() -> list[Article]:
-    page_url = "https://www.sfgate.com/giants/"
-    soup = BeautifulSoup(get(page_url).text, "lxml")
-    seen: set[str] = set()
-    out: list[Article] = []
-    for a in soup.find_all("a", href=True):
-        href = urljoin(page_url, a["href"])
-        title = clean(a.get_text(" "))
-        if "/giants/article/" not in href:
-            continue
-        if not title or len(title) < 20 or href in seen:
-            continue
-        seen.add(href)
-        out.append(make_article(
-            source="SFGATE",
-            title=title,
-            url=href,
-            author=extract_card_author(a),
-            section="Giants landing page",
-            access="free",
-        ))
-    return out
-
-
-def discover_fangraphs() -> list[Article]:
-    page_url = "https://blogs.fangraphs.com/category/teams/giants/"
-    soup = BeautifulSoup(get(page_url).text, "lxml")
-    seen: set[str] = set()
-    out: list[Article] = []
-    for heading in soup.find_all(["h2", "h3"]):
-        a = heading.find("a", href=True)
-        if not a:
-            continue
-        href = urljoin(page_url, a["href"])
-        title = clean(a.get_text(" "))
-        if urlparse(href).netloc not in {"blogs.fangraphs.com", "www.fangraphs.com"}:
-            continue
-        if not title or len(title) < 20 or href in seen or not giants_relevant(title):
-            continue
-        seen.add(href)
-        out.append(make_article(
-            source="FanGraphs",
-            title=title,
-            url=href,
-            author=extract_card_author(a),
-            section="Giants archive",
-            access="unknown",
-        ))
-    return out
-
-
-def discover_baseball_america() -> list[Article]:
-    out: list[Article] = []
-    seen: set[str] = set()
-
-    try:
-        feed = parse_feed("https://www.baseballamerica.com/feed/")
-        for e in feed.entries[:100]:
-            title = clean(getattr(e, "title", ""))
-            if not title or not giants_relevant(title):
-                continue
-            href = getattr(e, "link", "") or ""
-            if not href or href in seen:
-                continue
-            seen.add(href)
-            out.append(make_article(
-                source="Baseball America",
-                title=title,
-                url=href,
-                published=getattr(e, "published", "") or getattr(e, "updated", "") or "",
-                author=entry_author(e),
-                summary=clean(getattr(e, "summary", "")),
-                section="site RSS",
-                access="unknown",
-            ))
-    except Exception:
-        pass
-
-    if out:
-        return out
-
-    page_url = "https://www.baseballamerica.com/stories/teams/2019-san-francisco-giants/"
-    try:
-        soup = BeautifulSoup(get(page_url).text, "lxml")
-    except requests.RequestException:
-        return out
-    for heading in soup.find_all(["h2", "h3", "h4"]):
-        a = heading.find("a", href=True)
-        if not a:
-            continue
-        href = urljoin(page_url, a["href"])
-        title = clean(a.get_text(" "))
-        if "/stories/" not in href or not title or len(title) < 20 or href in seen:
-            continue
-        if not giants_relevant(title):
-            continue
-        seen.add(href)
-        out.append(make_article(
-            source="Baseball America",
-            title=title,
-            url=href,
-            author=extract_card_author(a),
-            section="Giants team page",
-            access="unknown",
-        ))
     return out
 
 
@@ -414,47 +293,44 @@ def main() -> None:
         discover_sf_standard,
         discover_athletic,
         discover_mlb,
-        discover_nbc,
-        discover_chronicle,
         discover_sfgate,
         discover_fangraphs,
-        discover_baseball_america,
+        discover_nbc,
     ]
+
     all_articles: list[Article] = []
-    health = {}
-    for fn in discoverers:
-        name = fn.__name__.replace("discover_", "")
+    health: dict[str, dict] = {}
+    for discover in discoverers:
+        name = discover.__name__.replace("discover_", "")
         try:
-            items = fn()
+            items = discover()
             health[name] = {"ok": True, "count": len(items)}
             all_articles.extend(items)
         except Exception as exc:
             health[name] = {"ok": False, "error": f"{type(exc).__name__}: {exc}"}
 
-    deduped: dict[str, Article] = {}
-    for article in all_articles:
-        deduped[article.url] = article
-
-    articles = list(deduped.values())
+    articles = list({article.url: article for article in all_articles}.values())
     payload = {
         "generated_at": datetime.now(timezone.utc).isoformat(),
         "health": health,
+        "trusted_radar_sources": TRUSTED_RADAR_SOURCES,
         "counts_by_quality": {
-            q: sum(1 for a in articles if a.quality == q)
-            for q in ("high", "medium", "low")
+            quality: sum(1 for article in articles if article.quality == quality)
+            for quality in ("high", "medium", "low")
         },
-        "articles": [asdict(a) for a in articles],
+        "articles": [asdict(article) for article in articles],
     }
-    with open("v2-probe.json", "w", encoding="utf-8") as f:
-        json.dump(payload, f, indent=2, ensure_ascii=False)
+    with open("v2-probe.json", "w", encoding="utf-8") as handle:
+        json.dump(payload, handle, indent=2, ensure_ascii=False)
 
-    print(json.dumps(payload["health"], indent=2))
-    for a in articles:
-        byline = f" · {a.author}" if a.author else ""
-        access = " ($)" if a.access == "paywalled" else ""
+    print(json.dumps(health, indent=2))
+    print(f"TRUSTED_RADAR: {', '.join(TRUSTED_RADAR_SOURCES)}")
+    for article in articles:
+        byline = f" · {article.author}" if article.author else ""
+        access = " ($)" if article.access == "paywalled" else ""
         print(
-            f"[{a.quality.upper():6}] {a.source}{access}{byline}: {a.title} "
-            f"| {a.quality_reason}"
+            f"[{article.quality.upper():6}] {article.source}{access}{byline}: "
+            f"{article.title} | {article.quality_reason}"
         )
 
 
