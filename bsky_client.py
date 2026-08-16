@@ -1,11 +1,50 @@
 from __future__ import annotations
 
+import re
 from datetime import datetime, timezone
-from typing import Any, Dict, List, Optional, Tuple
+from typing import Any, Dict, Optional, Tuple
 
 import requests
 
 from models import Candidate
+
+
+DISPLAY_SOURCE_NAMES = {
+    "SF Standard": "San Francisco Standard",
+    "SFGate Giants": "SFGATE",
+    "NYTimes Baseball": "The New York Times",
+    "NBC Sports Bay Area": "NBC Sports Bay Area",
+    "SF Chronicle Giants": "San Francisco Chronicle",
+    "Mercury News Giants": "Mercury News",
+    "AP Giants": "Associated Press",
+    "AP Giants hub": "Associated Press",
+    "MLB Giants": "MLB.com",
+    "MLB Giants News": "MLB.com",
+    "Fangraphs Giants": "FanGraphs",
+    "Baseball America Giants": "Baseball America",
+    "KNBR Giants": "KNBR",
+}
+
+OUTLET_AUTHOR_NAMES = {
+    "san francisco standard",
+    "sf standard",
+    "sfgate",
+    "the new york times",
+    "new york times",
+    "nbc sports bay area",
+    "san francisco chronicle",
+    "sf chronicle",
+    "mercury news",
+    "the mercury news",
+    "associated press",
+    "the associated press",
+    "ap",
+    "mlb.com",
+    "major league baseball",
+    "fangraphs",
+    "baseball america",
+    "knbr",
+}
 
 
 def truncate_line(line: str, max_len: int) -> str:
@@ -14,11 +53,29 @@ def truncate_line(line: str, max_len: int) -> str:
     return line[: max_len - 1].rstrip() + "…"
 
 
+def display_source_name(source: str) -> str:
+    return DISPLAY_SOURCE_NAMES.get(source, source or "Giants News")
+
+
+def display_author(author: str, source: str) -> str:
+    cleaned = re.sub(r"^\s*by\s+", "", (author or "").strip(), flags=re.I)
+    if not cleaned:
+        return ""
+    normalized = re.sub(r"\s+", " ", cleaned).strip().lower()
+    if normalized in OUTLET_AUTHOR_NAMES:
+        return ""
+    if normalized == (source or "").strip().lower():
+        return ""
+    if normalized == display_source_name(source).lower():
+        return ""
+    return cleaned
+
+
 def build_post_text(candidate: Candidate) -> str:
-    first = f"{candidate.source}: {candidate.title or 'Giants update'}"
-    first = truncate_line(first, 260)
-    post_url = candidate.post_url or candidate.canonical_url or candidate.publisher_url or candidate.url
-    return f"{first}\n{post_url}"
+    source = display_source_name(candidate.source)
+    author = display_author(candidate.author, candidate.source)
+    text = f"{source} · {author}" if author else source
+    return truncate_line(text, 290)
 
 
 def bsky_login(session: requests.Session, pds: str, identifier: str, app_password: str, timeout: int) -> Tuple[str, str]:
@@ -58,7 +115,7 @@ def upload_external_thumb(session: requests.Session, image_url: str, pds: str, j
 
 
 def create_embed_for_candidate(session: requests.Session, candidate: Candidate, pds: str, jwt: str, timeout: int) -> Dict[str, Any]:
-    description = truncate_line(candidate.summary or candidate.source, 280)
+    description = truncate_line(candidate.summary or display_source_name(candidate.source), 280)
     external: Dict[str, Any] = {
         "uri": candidate.post_url or candidate.canonical_url or candidate.publisher_url or candidate.url,
         "title": truncate_line(candidate.title or "Giants update", 100),
@@ -71,27 +128,12 @@ def create_embed_for_candidate(session: requests.Session, candidate: Candidate, 
 
 
 def post_to_bluesky(session: requests.Session, candidate: Candidate, pds: str, did: str, jwt: str, timeout: int) -> None:
-    text = build_post_text(candidate)
-    post_url = candidate.post_url or candidate.canonical_url or candidate.publisher_url or candidate.url
-    link_start = text.rfind(post_url)
-    facets: List[Dict[str, Any]] = []
-    if link_start >= 0:
-        start_bytes = len(text[:link_start].encode("utf-8"))
-        end_bytes = start_bytes + len(post_url.encode("utf-8"))
-        facets.append(
-            {
-                "index": {"byteStart": start_bytes, "byteEnd": end_bytes},
-                "features": [{"$type": "app.bsky.richtext.facet#link", "uri": post_url}],
-            }
-        )
-
     payload = {
         "repo": did,
         "collection": "app.bsky.feed.post",
         "record": {
             "$type": "app.bsky.feed.post",
-            "text": text,
-            "facets": facets,
+            "text": build_post_text(candidate),
             "embed": create_embed_for_candidate(session, candidate, pds, jwt, timeout),
             "createdAt": datetime.now(timezone.utc).isoformat().replace("+00:00", "Z"),
         },
