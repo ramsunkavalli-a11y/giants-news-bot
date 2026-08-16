@@ -38,16 +38,29 @@ def log(message: str) -> None:
 
 def load_state(path: str) -> dict:
     if not os.path.exists(path):
-        return {"posted_urls": {}, "posted_stories": {}}
+        return {
+            "posted_urls": {},
+            "posted_stories": [],
+            "redirect_cache": {},
+            "meta_cache": {},
+        }
     try:
-        raw = open(path, "r", encoding="utf-8").read().strip()
+        with open(path, "r", encoding="utf-8") as handle:
+            raw = handle.read().strip()
         state = json.loads(raw) if raw else {}
     except (OSError, json.JSONDecodeError):
         state = {}
-    state.setdefault("posted_urls", {})
-    state.setdefault("posted_stories", [])
-    state.setdefault("redirect_cache", {})
-    state.setdefault("meta_cache", {})
+
+    if not isinstance(state, dict):
+        state = {}
+    if not isinstance(state.get("posted_urls"), dict):
+        state["posted_urls"] = {}
+    if not isinstance(state.get("posted_stories"), list):
+        state["posted_stories"] = []
+    if not isinstance(state.get("redirect_cache"), dict):
+        state["redirect_cache"] = {}
+    if not isinstance(state.get("meta_cache"), dict):
+        state["meta_cache"] = {}
     return state
 
 
@@ -128,7 +141,11 @@ def enrich_card_metadata(url: str, timeout: int = 15) -> dict:
 
 
 def article_to_candidate(article: dict, card_meta: dict) -> Candidate:
-    url = article.get("canonical_url") or canonicalize_url(article.get("url", "")) or article.get("url", "")
+    url = (
+        article.get("canonical_url")
+        or canonicalize_url(article.get("url", ""))
+        or article.get("url", "")
+    )
     summary = article.get("summary", "") or card_meta.get("description", "")
     return Candidate(
         source=article.get("source", ""),
@@ -151,9 +168,16 @@ def article_to_candidate(article: dict, card_meta: dict) -> Candidate:
 
 def mark_posted(state: dict, article: dict) -> None:
     ts = datetime.now(timezone.utc).isoformat()
-    url = article.get("canonical_url") or canonicalize_url(article.get("url", "")) or article.get("url", "")
+    url = (
+        article.get("canonical_url")
+        or canonicalize_url(article.get("url", ""))
+        or article.get("url", "")
+    )
     state.setdefault("posted_urls", {})[url] = ts
     stories = state.setdefault("posted_stories", [])
+    if not isinstance(stories, list):
+        stories = []
+        state["posted_stories"] = stories
     stories.append({
         "title": article.get("title", ""),
         "url": url,
@@ -206,13 +230,22 @@ def main() -> None:
         with open(settings.diagnostics_file, "w", encoding="utf-8") as handle:
             json.dump(diagnostics, handle, indent=2, ensure_ascii=False)
 
-    log(f"V2 discovered={len(articles)} selected={len(candidates)} reasons={selection['reasons']}")
+    log(
+        f"V2 discovered={len(articles)} selected={len(candidates)} "
+        f"reasons={selection['reasons']}"
+    )
     for _, candidate, _ in candidates:
-        log(f"selected {build_post_text(candidate)} | {candidate.title} | {candidate.post_url}")
+        log(
+            f"selected {build_post_text(candidate)} | {candidate.title} | "
+            f"{candidate.post_url}"
+        )
 
     if settings.dry_run:
         for _, candidate, _ in candidates:
-            log(f"DRY_RUN would post text={build_post_text(candidate)!r} card_title={candidate.title!r}")
+            log(
+                f"DRY_RUN would post text={build_post_text(candidate)!r} "
+                f"card_title={candidate.title!r}"
+            )
         # A dry run must never mutate production dedupe state.
         return
 
@@ -220,7 +253,9 @@ def main() -> None:
         save_state(settings.state_file, state)
         return
     if not settings.bsky_identifier or not settings.bsky_app_password:
-        raise RuntimeError("BSKY_IDENTIFIER and BSKY_APP_PASSWORD are required when not DRY_RUN")
+        raise RuntimeError(
+            "BSKY_IDENTIFIER and BSKY_APP_PASSWORD are required when not DRY_RUN"
+        )
 
     session = requests.Session()
     did, jwt = bsky_login(
