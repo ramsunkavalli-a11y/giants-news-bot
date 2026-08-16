@@ -5,6 +5,8 @@ on:
     branches: [v2/structured-discovery]
     paths:
       - "v2_probe.py"
+      - "v2_athletic_probe.py"
+      - "v2_authors.py"
       - ".github/workflows/v2-structured-probe.yml"
   workflow_dispatch: {}
 
@@ -31,10 +33,15 @@ jobs:
       - name: Run structured discovery probe
         run: python v2_probe.py
 
+      - name: Run Athletic RSS probe
+        run: python v2_athletic_probe.py
+
       - name: Upload probe output
         if: always()
         uses: actions/upload-artifact@v4
         with:
           name: v2-structured-probe
-          path: v2-probe.json
+          path: |
+            v2-probe.json
+            v2-athletic-probe.json
           if-no-files-found: error
