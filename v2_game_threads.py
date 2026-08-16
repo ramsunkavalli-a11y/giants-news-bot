@@ -7,6 +7,7 @@ from zoneinfo import ZoneInfo
 
 from dateutil import parser as dtparser
 
+from v2_authors import is_core_game_writer
 from v2_story import candidate_preference_key
 
 PACIFIC = ZoneInfo("America/Los_Angeles")
@@ -91,6 +92,15 @@ def _parse_dt(value: str) -> datetime | None:
     return dt.astimezone(timezone.utc)
 
 
+def _article_dt(article: dict) -> datetime | None:
+    value = article.get("_published_dt")
+    if isinstance(value, datetime):
+        if value.tzinfo is None:
+            value = value.replace(tzinfo=timezone.utc)
+        return value.astimezone(timezone.utc)
+    return _parse_dt(str(article.get("published", "") or ""))
+
+
 def is_game_story(article: dict) -> bool:
     if article.get("content_type") == "game_story":
         return True
@@ -137,6 +147,31 @@ def game_thread_key(game_day: str, opponent: str = "") -> str:
     return f"game:{game_day}:{opponent or 'unknown'}"
 
 
+def order_game_articles(members: list[dict]) -> list[dict]:
+    """First-published core writer gets root; otherwise retain quality fallback."""
+    core = [article for article in members if is_core_game_writer(article.get("author", ""))]
+    if not core:
+        return sorted(members, key=candidate_preference_key, reverse=True)
+
+    ceiling = datetime.max.replace(tzinfo=timezone.utc)
+    root = min(
+        core,
+        key=lambda article: (
+            _article_dt(article) or ceiling,
+            article.get("url", ""),
+        ),
+    )
+    replies = [article for article in members if article is not root]
+    replies.sort(
+        key=lambda article: (
+            _article_dt(article) or ceiling,
+            article.get("source", ""),
+            article.get("url", ""),
+        )
+    )
+    return [root, *replies]
+
+
 def group_game_articles(articles: list[dict]) -> list[dict]:
     """Group game coverage by baseball day/opponent without suppressing versions."""
     per_day: dict[str, dict[str, list[dict]]] = defaultdict(lambda: defaultdict(list))
@@ -161,7 +196,7 @@ def group_game_articles(articles: list[dict]) -> list[dict]:
                 "key": game_thread_key(day, opponent),
                 "game_day": day,
                 "opponent": opponent,
-                "articles": sorted(members, key=candidate_preference_key, reverse=True),
+                "articles": order_game_articles(members),
             })
 
     def newest(group: dict) -> datetime:
