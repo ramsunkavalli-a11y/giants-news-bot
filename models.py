@@ -15,6 +15,7 @@ class Candidate:
     image_url: str = ""
     discovered_via: str = ""
     published_ts: str = ""
+    access: str = "unknown"
 
     # URL lifecycle fields
     feed_url: str = ""
