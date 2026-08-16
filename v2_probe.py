@@ -10,7 +10,7 @@ import feedparser
 import requests
 from bs4 import BeautifulSoup
 
-from v2_authors import author_prior
+from v2_authors import author_prior, source_prior
 
 UA = "Mozilla/5.0 GiantsNewsBotV2Probe/0.4"
 TIMEOUT = 20
@@ -39,6 +39,7 @@ class Article:
     section: str = ""
     access: str = "unknown"
     author_preference: str = ""
+    source_preference: str = ""
     quality: str = "high"
     quality_reason: str = "structured_source"
 
@@ -143,8 +144,7 @@ def classify(source: str, title: str, author: str = "") -> tuple[str, str, str]:
     if source == "FanGraphs" and blob.startswith("sunday notes:"):
         return "low", "broad_recurring_roundup", preference
 
-    # The user's strongest author preference is intentionally meaningful:
-    # a Baggarly Giants piece is presumed worth surfacing unless it hit a hard
+    # Elite Giants writers are presumed worth surfacing unless they hit a hard
     # low-value rule above.
     if preference == "elite":
         return "high", "elite_author", preference
@@ -172,6 +172,7 @@ def make_article(
     summary: str = "", section: str = "", access: str = "unknown"
 ) -> Article:
     quality, reason, preference = classify(source, title, author)
+    publication_prior = source_prior(source)
     return Article(
         source=source,
         title=title,
@@ -182,6 +183,7 @@ def make_article(
         section=section,
         access=access,
         author_preference=preference,
+        source_preference=publication_prior["preference"] if publication_prior else "",
         quality=quality,
         quality_reason=reason,
     )
@@ -380,9 +382,10 @@ def main() -> None:
     for article in articles:
         byline = f" · {article.author}" if article.author else ""
         access = " ($)" if article.access == "paywalled" else ""
+        source_weight = f" source={article.source_preference}" if article.source_preference else ""
         print(
             f"[{article.quality.upper():6}] {article.source}{access}{byline}: "
-            f"{article.title} | {article.quality_reason}"
+            f"{article.title} | {article.quality_reason}{source_weight}"
         )
 
 
