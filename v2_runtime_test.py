@@ -4,7 +4,7 @@ import unittest
 
 from bsky_client import build_post_text
 from models import Candidate
-from v2_bot import load_state, mark_posted
+from v2_bot import clean_card_summary, load_state, mark_posted
 
 
 class RuntimeSmokeTests(unittest.TestCase):
@@ -51,6 +51,13 @@ class RuntimeSmokeTests(unittest.TestCase):
             "https://www.mlb.com/giants/news/example",
             state["posted_urls"],
         )
+
+    def test_newsletter_promo_is_not_used_as_card_summary(self):
+        promo = (
+            "This story was excerpted from Maria Guardado’s Giants Beat newsletter. "
+            "To read the full newsletter, click here. And subscribe to get it regularly."
+        )
+        self.assertEqual(clean_card_summary(promo, promo), "")
 
 
 if __name__ == "__main__":
