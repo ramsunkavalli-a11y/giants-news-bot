@@ -32,6 +32,14 @@ class GameThreadTests(unittest.TestCase):
         }
         self.assertTrue(is_game_story(article))
 
+    def test_structured_summary_can_identify_game_analysis(self):
+        article = {
+            "title": "Giants have squandered Logan Webb's talents; an anonymous group changed that for a day",
+            "summary": "Webb posted another quality start and showed again that he is a standard setter for the Giants.",
+            "quality": "high",
+        }
+        self.assertTrue(is_game_story(article))
+
     def test_does_not_turn_general_analysis_into_game_story(self):
         article = {
             "title": "Building the next good Giants bullpen will require more than spending money on it",
