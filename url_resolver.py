@@ -223,7 +223,11 @@ def resolve_article_url(candidate, session, settings, verbose: bool = False) -> 
     elif "news.google.com" in result.post_url:
         result.failure_reason = "unresolved_google_news_redirect"
     elif not is_story_url(result.post_url):
+        # main.py treats an empty post_url as non-postable. Clear it here so
+        # Google-resolved hubs/video pages cannot be resurrected downstream.
         result.failure_reason = "non_article_page"
+        result.post_url = ""
+        result.is_cardable = False
     elif result.exception and not result.http_status:
         result.failure_reason = "network_error"
 
