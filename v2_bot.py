@@ -2,6 +2,7 @@ from __future__ import annotations
 
 import json
 import os
+import re
 import time
 from dataclasses import asdict
 from datetime import datetime, timedelta, timezone
@@ -30,6 +31,13 @@ DISCOVERERS = [
     discover_fangraphs,
     discover_nbc,
 ]
+
+PROMO_SUMMARY_PATTERNS = (
+    "this story was excerpted from",
+    "to read the full newsletter",
+    "subscribe to get it regularly",
+    "subscribe to our newsletter",
+)
 
 
 def log(message: str) -> None:
@@ -101,7 +109,6 @@ def discover_articles() -> tuple[list[dict], dict]:
             articles.extend(asdict(item) for item in items)
         except Exception as exc:
             health[name] = {"ok": False, "error": f"{type(exc).__name__}: {exc}"}
-    # Direct URL is the discovery identity in V2.
     unique = {item.get("url", ""): item for item in articles if item.get("url")}
     return list(unique.values()), health
 
@@ -140,13 +147,31 @@ def enrich_card_metadata(url: str, timeout: int = 15) -> dict:
         return {"ok": False, "status": 0, "error": f"{type(exc).__name__}: {exc}"}
 
 
+def clean_card_summary(*values: str) -> str:
+    for value in values:
+        if not value:
+            continue
+        text = BeautifulSoup(value, "html.parser").get_text(" ")
+        text = re.sub(r"\s+", " ", text).strip()
+        if not text:
+            continue
+        lower = text.lower()
+        if any(pattern in lower for pattern in PROMO_SUMMARY_PATTERNS):
+            continue
+        return text
+    return ""
+
+
 def article_to_candidate(article: dict, card_meta: dict) -> Candidate:
     url = (
         article.get("canonical_url")
         or canonicalize_url(article.get("url", ""))
         or article.get("url", "")
     )
-    summary = article.get("summary", "") or card_meta.get("description", "")
+    summary = clean_card_summary(
+        article.get("summary", ""),
+        card_meta.get("description", ""),
+    )
     return Candidate(
         source=article.get("source", ""),
         url=url,
@@ -246,7 +271,6 @@ def main() -> None:
                 f"DRY_RUN would post text={build_post_text(candidate)!r} "
                 f"card_title={candidate.title!r}"
             )
-        # A dry run must never mutate production dedupe state.
         return
 
     if not candidates:
@@ -275,8 +299,6 @@ def main() -> None:
             settings.request_timeout,
         )
         mark_posted(state, article)
-        # Persist each successful post locally so an always-run workflow state
-        # commit can preserve partial progress if a later post fails.
         save_state(settings.state_file, state)
         log(f"posted {candidate.post_url}")
         time.sleep(0.8)
