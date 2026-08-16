@@ -6,6 +6,8 @@ on:
     paths:
       - "v2_probe.py"
       - "v2_select_probe.py"
+      - "v2_story.py"
+      - "v2_story_test.py"
       - "v2_athletic_probe.py"
       - "v2_athletic_meta_probe.py"
       - "v2_authors.py"
@@ -32,6 +34,9 @@ jobs:
         run: |
           python -m pip install --upgrade pip
           pip install -r requirements.txt
+
+      - name: Test story clustering
+        run: python -m unittest -v v2_story_test.py
 
       - name: Run structured discovery probe
         run: python v2_probe.py
