@@ -30,7 +30,7 @@ class Settings:
     diagnostics_enabled: bool = os.getenv("DIAGNOSTICS_ENABLED", "0").lower() in {"1", "true", "yes"}
     diagnostics_file: str = os.getenv("DIAGNOSTICS_FILE", "diagnostics.json")
     max_posts_per_run: int = int(os.getenv("MAX_POSTS_PER_RUN", "10"))
-    max_per_source_per_run: int = int(os.getenv("MAX_PER_SOURCE_PER_RUN", "3"))
+    max_per_source_per_run: int = int(os.getenv("MAX_PER_SOURCE_PER_RUN", "1"))
     hours_back: int = int(os.getenv("HOURS_BACK", "24"))
     keep_posted_days: int = int(os.getenv("KEEP_POSTED_DAYS", "21"))
     meta_cache_days: int = int(os.getenv("META_CACHE_DAYS", os.getenv("KEEP_POSTED_DAYS", "21")))
