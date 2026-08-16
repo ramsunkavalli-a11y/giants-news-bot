@@ -80,6 +80,8 @@ def display_author(author: str, source: str) -> str:
 
 def build_post_text(candidate: Candidate) -> str:
     source = display_source_name(candidate.source)
+    if candidate.access == "paywalled":
+        source = f"{source} ($)"
     author = display_author(candidate.author, candidate.source)
     text = f"{source} · {author}" if author else source
     return truncate_line(text, 290)
