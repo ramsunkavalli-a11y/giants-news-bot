@@ -1,10 +1,6 @@
 name: Giants News Bot
 
 on:
-  push:
-    branches: [fix/feed-presentation-diversity]
-    paths:
-      - ".github/workflows/giants-news-bot.yml"
   schedule:
     - cron: "15 16 * * *"
     - cron: "15 00 * * *"
@@ -39,7 +35,6 @@ jobs:
           MAX_POSTS_PER_RUN: "5"
           DIAGNOSTICS_ENABLED: "1"
           DIAGNOSTICS_FILE: diagnostics.json
-          DRY_RUN: "1"
         run: |
           python giants_news_bot.py
 
@@ -52,6 +47,13 @@ jobs:
           if-no-files-found: warn
 
       - name: Commit state if changed
-        if: ${{ false }}
         run: |
-          echo "Dry run; state not persisted."
+          if git diff --quiet; then
+            echo "No changes."
+            exit 0
+          fi
+          git config user.name "giants-news-bot"
+          git config user.email "giants-news-bot@users.noreply.github.com"
+          git add state.json
+          git commit -m "Update state"
+          git push
