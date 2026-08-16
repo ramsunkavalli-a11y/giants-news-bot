@@ -159,6 +159,7 @@ def extract_external_url_from_text(text: str) -> str:
             return m
     return ""
 
+
 def is_story_url(url: str) -> bool:
     try:
         p = urlparse(url)
@@ -217,7 +218,6 @@ def source_url_allowed(source: str, url: str) -> bool:
 
 def source_policy_allows(source: str, url: str, title: str, summary: str) -> tuple[bool, str]:
     path = urlparse(url).path.lower()
-    text = f"{clean_text(title)} {clean_text(summary)}".lower()
 
     if "fangraphs" in source.lower() or "fangraphs" in urlparse(url).netloc:
         if any(k in path for k in ["/author/", "/category/", "/archive", "/job", "/jobs"]):
@@ -228,12 +228,13 @@ def source_policy_allows(source: str, url: str, title: str, summary: str) -> tup
             return False, "blocked_by_source_policy_baseball_america"
 
     if any(k in source.lower() for k in ["nbc sports", "mercury", "chronicle", "knbr"]):
-        has_giants = ("san francisco giants" in text) or ("sf giants" in text) or (" giants" in text)
-        has_baseball = any(term in text for term in BASEBALL_TERMS)
-        if not (has_giants and has_baseball):
-            return False, "source_policy_giants_baseball_required"
-        if any(noise in text for noise in OTHER_SPORTS_NOISE) and "giants" not in text:
-            return False, "blocked_by_other_sports_noise"
+        # These are broad sports publications, so require real Giants relevance,
+        # but do not require a second literal baseball keyword. Headlines such as
+        # "SF Giants' Chapman talks surgery" are unambiguously on-topic even
+        # without words like MLB, pitcher, or baseball.
+        signals = giants_relevance_signals(title, summary, [], url)
+        if signals["nfl_signal"] or not (signals["strong_giants"] or signals["giants_baseball"]):
+            return False, "source_policy_giants_relevance_required"
 
     if source.lower().startswith("ap") or "apnews.com" in urlparse(url).netloc:
         if any(seg in path for seg in ["/hub/", "/live/"]) or path.strip("/") in {"", "hub", "sports"}:
