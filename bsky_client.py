@@ -39,6 +39,7 @@ OUTLET_AUTHOR_NAMES = {
     "associated press",
     "the associated press",
     "ap",
+    "ap news",
     "mlb.com",
     "major league baseball",
     "fangraphs",
@@ -57,12 +58,18 @@ def display_source_name(source: str) -> str:
     return DISPLAY_SOURCE_NAMES.get(source, source or "Giants News")
 
 
+def _looks_like_domain(value: str) -> bool:
+    return bool(re.fullmatch(r"(?:www\.)?[a-z0-9-]+(?:\.[a-z0-9-]+)+", value))
+
+
 def display_author(author: str, source: str) -> str:
     cleaned = re.sub(r"^\s*by\s+", "", (author or "").strip(), flags=re.I)
     if not cleaned:
         return ""
     normalized = re.sub(r"\s+", " ", cleaned).strip().lower()
     if normalized in OUTLET_AUTHOR_NAMES:
+        return ""
+    if _looks_like_domain(normalized):
         return ""
     if normalized == (source or "").strip().lower():
         return ""
