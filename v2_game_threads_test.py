@@ -5,6 +5,7 @@ from v2_game_threads import (
     extract_opponent,
     game_thread_key,
     group_game_articles,
+    is_game_story,
 )
 
 
@@ -22,6 +23,21 @@ class GameThreadTests(unittest.TestCase):
     def test_extracts_opponent(self):
         article = {"title": "What we learned as Giants bats fall flat in loss to Rockies"}
         self.assertEqual(extract_opponent(article), "rockies")
+
+    def test_recognizes_game_story_even_if_quality_was_high(self):
+        article = {
+            "title": "Opener strategy pays off as Houser earns win for first time since May",
+            "quality": "high",
+            "quality_reason": "known_author:good",
+        }
+        self.assertTrue(is_game_story(article))
+
+    def test_does_not_turn_general_analysis_into_game_story(self):
+        article = {
+            "title": "Building the next good Giants bullpen will require more than spending money on it",
+            "quality": "high",
+        }
+        self.assertFalse(is_game_story(article))
 
     def test_unknown_story_merges_into_only_known_opponent_that_day(self):
         articles = [
