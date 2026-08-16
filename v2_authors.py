@@ -6,11 +6,11 @@ from __future__ import annotations
 AUTHOR_PRIORS = {
     "andrew baggarly": {"preference": "elite", "scope": "any_giants_relevant"},
     "grant brisbee": {"preference": "fine", "scope": "any_giants_relevant"},
-    "alex pavlovic": {"preference": "very_good", "scope": "any_giants_relevant"},
+    "alex pavlovic": {"preference": "elite", "scope": "any_giants_relevant"},
     "susan slusser": {"preference": "very_good", "scope": "any_giants_relevant"},
     "john shea": {"preference": "good", "scope": "any_giants_relevant"},
     "maria guardado": {"preference": "good", "scope": "any_giants_relevant"},
-    "shayna rubin": {"preference": "very_good", "scope": "any_giants_relevant"},
+    "shayna rubin": {"preference": "elite", "scope": "any_giants_relevant"},
     "justice delos santos": {"preference": "very_good", "scope": "any_giants_relevant"},
     "evan webeck": {"preference": "fine", "scope": "any_giants_relevant"},
     "kerry crowley": {"preference": "good", "scope": "giants_specific"},
