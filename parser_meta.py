@@ -95,10 +95,16 @@ def extract_meta(url: str, html: str) -> MetaResult:
         out.description = clean_text(og_desc["content"])
         out.meta_sources_used.append("og:description")
 
-    og_image = soup.find("meta", attrs={"property": lambda v: v and v.startswith("og:image")})
+    # Match the actual image URL tag, not og:image:width / og:image:height.
+    og_image = soup.find("meta", attrs={"property": "og:image"})
     if og_image and og_image.get("content"):
         out.image_url = og_image["content"]
         out.meta_sources_used.append("og:image")
+    if not out.image_url:
+        twitter_image = soup.find("meta", attrs={"name": "twitter:image"})
+        if twitter_image and twitter_image.get("content"):
+            out.image_url = twitter_image["content"]
+            out.meta_sources_used.append("twitter:image")
 
     og_type = soup.find("meta", attrs={"property": "og:type"})
     if og_type and og_type.get("content"):
