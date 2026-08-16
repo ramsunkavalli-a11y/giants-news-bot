@@ -16,6 +16,9 @@ from filters import canonicalize_url, is_story_url
 from models import Candidate
 
 
+MAX_NON_RSS_CANDIDATES_PER_SOURCE = 5
+
+
 def _fetch_text(session: requests.Session, url: str, timeout: int) -> str:
     try:
         r = session.get(url, timeout=timeout)
@@ -75,6 +78,7 @@ def discover_from_listing(session: requests.Session, listing_url: str, settings:
 
 def discover_non_rss(settings: Settings, session: requests.Session, sources: List[SourceConfig]) -> List[Candidate]:
     out: List[Candidate] = []
+    source_limit = min(settings.max_non_rss_urls_per_source, MAX_NON_RSS_CANDIDATES_PER_SOURCE)
     for source in sources:
         seen: Set[str] = set()
         filtered: List[str] = []
@@ -87,9 +91,9 @@ def discover_non_rss(settings: Settings, session: requests.Session, sources: Lis
                 seen.add(cu)
                 if is_story_url(cu):
                     filtered.append(cu)
-                if len(filtered) >= settings.max_non_rss_urls_per_source:
+                if len(filtered) >= source_limit:
                     break
-            if len(filtered) >= settings.max_non_rss_urls_per_source:
+            if len(filtered) >= source_limit:
                 break
 
         if not filtered:
@@ -100,7 +104,7 @@ def discover_non_rss(settings: Settings, session: requests.Session, sources: Lis
                 seen.add(cu)
                 if is_story_url(cu):
                     filtered.append(cu)
-                if len(filtered) >= settings.max_non_rss_urls_per_source:
+                if len(filtered) >= source_limit:
                     break
 
         for url in filtered:
