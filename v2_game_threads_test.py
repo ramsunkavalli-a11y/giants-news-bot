@@ -6,6 +6,7 @@ from v2_game_threads import (
     game_thread_key,
     group_game_articles,
     is_game_story,
+    order_game_articles,
 )
 
 
@@ -46,6 +47,66 @@ class GameThreadTests(unittest.TestCase):
             "quality": "high",
         }
         self.assertFalse(is_game_story(article))
+
+    def test_first_published_core_writer_gets_root_regardless_of_tier(self):
+        articles = [
+            {
+                "author": "Andrew Baggarly",
+                "author_preference": "elite",
+                "published": "2026-08-15T20:10:00-07:00",
+                "url": "https://example.com/baggarly",
+            },
+            {
+                "author": "Maria Guardado",
+                "author_preference": "good",
+                "published": "2026-08-15T20:02:00-07:00",
+                "url": "https://example.com/guardado",
+            },
+            {
+                "author": "Alex Pavlovic",
+                "author_preference": "elite",
+                "published": "2026-08-15T20:05:00-07:00",
+                "url": "https://example.com/pavlovic",
+            },
+        ]
+        ordered = order_game_articles(articles)
+        self.assertEqual(ordered[0]["author"], "Maria Guardado")
+
+    def test_non_core_writer_cannot_take_root_when_core_writer_is_available(self):
+        articles = [
+            {
+                "author": "Other Writer",
+                "author_preference": "elite",
+                "published": "2026-08-15T19:45:00-07:00",
+                "url": "https://example.com/other",
+            },
+            {
+                "author": "John Shea",
+                "author_preference": "good",
+                "published": "2026-08-15T20:00:00-07:00",
+                "url": "https://example.com/shea",
+            },
+        ]
+        ordered = order_game_articles(articles)
+        self.assertEqual(ordered[0]["author"], "John Shea")
+
+    def test_no_core_writer_keeps_existing_quality_fallback(self):
+        articles = [
+            {
+                "author": "Unknown Writer",
+                "author_preference": "",
+                "published": "2026-08-15T19:45:00-07:00",
+                "url": "https://example.com/unknown",
+            },
+            {
+                "author": "Grant Brisbee",
+                "author_preference": "fine",
+                "published": "2026-08-15T20:00:00-07:00",
+                "url": "https://example.com/brisbee",
+            },
+        ]
+        ordered = order_game_articles(articles)
+        self.assertEqual(ordered[0]["author"], "Grant Brisbee")
 
     def test_unknown_story_merges_into_only_known_opponent_that_day(self):
         articles = [
