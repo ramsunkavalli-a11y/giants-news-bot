@@ -2,13 +2,15 @@ name: V2 Structured Discovery Probe
 
 on:
   push:
-    branches: [v2/structured-discovery]
+    branches: [v2/structured-discovery, v2/game-story-threads]
     paths:
       - "v2_probe.py"
       - "v2_select_probe.py"
       - "v2_selector.py"
       - "v2_story.py"
       - "v2_story_test.py"
+      - "v2_game_threads.py"
+      - "v2_game_threads_test.py"
       - "v2_runtime_test.py"
       - "v2_bot.py"
       - "v2_athletic_probe.py"
@@ -41,8 +43,8 @@ jobs:
           python -m pip install --upgrade pip
           pip install -r requirements.txt
 
-      - name: Test story clustering and runtime
-        run: python -m unittest -v v2_story_test.py v2_runtime_test.py
+      - name: Test story clustering, game threads, and runtime
+        run: python -m unittest -v v2_story_test.py v2_game_threads_test.py v2_runtime_test.py
 
       - name: Run structured discovery probe
         run: python v2_probe.py
@@ -59,7 +61,7 @@ jobs:
 
       - name: Run clean-slate duplicate-choice simulation
         run: |
-          printf '{"posted_urls": {}, "posted_stories": []}\n' > /tmp/empty-state.json
+          printf '{"posted_urls": {}, "posted_stories": [], "game_threads": {}}\n' > /tmp/empty-state.json
           python v2_select_probe.py --state /tmp/empty-state.json --output v2-selection-fresh.json
 
       - name: Dry run full V2 bot
@@ -67,6 +69,7 @@ jobs:
           STATE_FILE: /tmp/main-state.json
           DRY_RUN: "1"
           HOURS_BACK: "72"
+          GAME_HOURS_BACK: "36"
           MAX_POSTS_PER_RUN: "5"
           DIAGNOSTICS_ENABLED: "1"
           DIAGNOSTICS_FILE: v2-runtime-diagnostics.json
