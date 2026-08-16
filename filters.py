@@ -159,6 +159,7 @@ def extract_external_url_from_text(text: str) -> str:
             return m
     return ""
 
+
 def is_story_url(url: str) -> bool:
     try:
         p = urlparse(url)
@@ -176,6 +177,16 @@ def is_story_url(url: str) -> bool:
         return False
     if segs[-1] in STORY_REJECT_SLUGS:
         return False
+
+    # NBC Sports Bay Area article URLs use a numeric content ID after the slug,
+    # while team hubs and subcategory pages stop at the slug. Treat only the
+    # former as stories, and keep explicit /video/ pages out of this news bot.
+    host = p.netloc.lower()
+    if host.endswith("nbcsportsbayarea.com") and segs[:2] == ["mlb", "san-francisco-giants"]:
+        if "video" in segs:
+            return False
+        return len(segs) >= 4 and segs[-1].isdigit() and "-" in segs[-2]
+
     if re.search(r"/20\d{2}/\d{1,2}/\d{1,2}/", "/" + path + "/"):
         return True
     if segs[-1].endswith(".html") or "/article/" in "/" + path + "/":
@@ -188,7 +199,9 @@ def mlb_article_url_allowed(url: str) -> bool:
     if not p.netloc.lower().endswith("mlb.com"):
         return True
     path = p.path.lower()
-    if "/giants/news/" not in path:
+    # MLB now canonicalizes team news stories to mlb.com/news/<slug> as well
+    # as the older /giants/news/<slug> pattern.
+    if "/giants/news/" not in path and not path.startswith("/news/"):
         return False
     segs = [s for s in path.strip("/").split("/") if s]
     last = segs[-1] if segs else ""
@@ -202,6 +215,11 @@ def mlb_article_url_allowed(url: str) -> bool:
 def source_url_allowed(source: str, url: str) -> bool:
     if not mlb_article_url_allowed(url):
         return False
+    # MLB Giants discovery is already scoped to Giants news, and relevance is
+    # checked later. Do not re-reject a valid canonical /news/<slug> URL using
+    # the legacy /giants/news/ include rule from config.py.
+    if source in {"MLB Giants", "MLB Giants News"}:
+        return True
     rule = SOURCE_URL_RULES.get(source)
     if not rule:
         return True
@@ -217,7 +235,6 @@ def source_url_allowed(source: str, url: str) -> bool:
 
 def source_policy_allows(source: str, url: str, title: str, summary: str) -> tuple[bool, str]:
     path = urlparse(url).path.lower()
-    text = f"{clean_text(title)} {clean_text(summary)}".lower()
 
     if "fangraphs" in source.lower() or "fangraphs" in urlparse(url).netloc:
         if any(k in path for k in ["/author/", "/category/", "/archive", "/job", "/jobs"]):
@@ -228,12 +245,13 @@ def source_policy_allows(source: str, url: str, title: str, summary: str) -> tup
             return False, "blocked_by_source_policy_baseball_america"
 
     if any(k in source.lower() for k in ["nbc sports", "mercury", "chronicle", "knbr"]):
-        has_giants = ("san francisco giants" in text) or ("sf giants" in text) or (" giants" in text)
-        has_baseball = any(term in text for term in BASEBALL_TERMS)
-        if not (has_giants and has_baseball):
-            return False, "source_policy_giants_baseball_required"
-        if any(noise in text for noise in OTHER_SPORTS_NOISE) and "giants" not in text:
-            return False, "blocked_by_other_sports_noise"
+        # These are broad sports publications, so require real Giants relevance,
+        # but do not require a second literal baseball keyword. Headlines such as
+        # "SF Giants' Chapman talks surgery" are unambiguously on-topic even
+        # without words like MLB, pitcher, or baseball.
+        signals = giants_relevance_signals(title, summary, [], url)
+        if signals["nfl_signal"] or not (signals["strong_giants"] or signals["giants_baseball"]):
+            return False, "source_policy_giants_relevance_required"
 
     if source.lower().startswith("ap") or "apnews.com" in urlparse(url).netloc:
         if any(seg in path for seg in ["/hub/", "/live/"]) or path.strip("/") in {"", "hub", "sports"}:
