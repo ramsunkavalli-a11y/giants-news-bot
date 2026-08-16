@@ -57,4 +57,4 @@ jobs:
           git commit -m "Update state"
           git push
 
-# burst: 2
+# burst: 3
