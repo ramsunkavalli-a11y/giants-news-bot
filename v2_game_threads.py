@@ -44,6 +44,36 @@ TEAM_ALIASES = {
     "nationals": ("nationals", "washington nationals"),
 }
 
+GAME_TITLE_PATTERNS = (
+    "what we learned",
+    "observations",
+    "takeaways:",
+    "takeaways ",
+    " in win",
+    " in loss",
+    " win over ",
+    " loss to ",
+    " falls to ",
+    " fall to ",
+    " doom ",
+    "earns win",
+    "earned win",
+    "solid start",
+    "sharp start",
+    "sterling start",
+    "strong start",
+)
+RESULT_VERBS = re.compile(
+    r"\b(?:lead|leads|lift|lifts|power|powers|propel|propels|beat|beats|edge|edges|"
+    r"defeat|defeats|top|tops|rout|routs)\b.*\b(?:over|past)\b",
+    flags=re.I,
+)
+GIANTS_RESULT = re.compile(
+    r"(?:\bgiants\b.*\b(?:win|loss|victory|defeat)\b|"
+    r"\b(?:win|loss|victory|defeat)\b.*\bgiants\b)",
+    flags=re.I,
+)
+
 
 def _parse_dt(value: str) -> datetime | None:
     if not value:
@@ -58,9 +88,16 @@ def _parse_dt(value: str) -> datetime | None:
 
 
 def is_game_story(article: dict) -> bool:
+    if article.get("content_type") == "game_story":
+        return True
+    if article.get("quality_reason") == "game_story_or_postgame_analysis":
+        return True
+    title = str(article.get("title", "") or "")
+    lower = title.lower()
     return (
-        article.get("content_type") == "game_story"
-        or article.get("quality_reason") == "game_story_or_postgame_analysis"
+        any(pattern in lower for pattern in GAME_TITLE_PATTERNS)
+        or bool(RESULT_VERBS.search(title))
+        or bool(GIANTS_RESULT.search(title))
     )
 
 
