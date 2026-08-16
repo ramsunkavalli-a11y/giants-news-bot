@@ -7,6 +7,7 @@ on:
       - "v2_probe.py"
       - "v2_athletic_probe.py"
       - "v2_authors.py"
+      - "v2_source_diag.py"
       - ".github/workflows/v2-structured-probe.yml"
   workflow_dispatch: {}
 
@@ -36,6 +37,9 @@ jobs:
       - name: Run Athletic RSS probe
         run: python v2_athletic_probe.py
 
+      - name: Run structured source diagnostics
+        run: python v2_source_diag.py
+
       - name: Upload probe output
         if: always()
         uses: actions/upload-artifact@v4
@@ -44,4 +48,5 @@ jobs:
           path: |
             v2-probe.json
             v2-athletic-probe.json
+            v2-source-diag.json
           if-no-files-found: error
