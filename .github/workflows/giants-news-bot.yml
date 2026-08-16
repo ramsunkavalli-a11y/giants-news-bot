@@ -27,7 +27,7 @@ jobs:
           python -m pip install --upgrade pip
           pip install -r requirements.txt
 
-      - name: Run bot
+      - name: Run V2 bot
         env:
           BSKY_IDENTIFIER: ${{ secrets.BSKY_IDENTIFIER }}
           BSKY_APP_PASSWORD: ${{ secrets.BSKY_APP_PASSWORD }}
@@ -35,8 +35,7 @@ jobs:
           MAX_POSTS_PER_RUN: "5"
           DIAGNOSTICS_ENABLED: "1"
           DIAGNOSTICS_FILE: diagnostics.json
-        run: |
-          python giants_news_bot.py
+        run: python v2_bot.py
 
       - name: Upload diagnostics artifact
         if: always()
@@ -47,9 +46,10 @@ jobs:
           if-no-files-found: warn
 
       - name: Commit state if changed
+        if: always()
         run: |
-          if git diff --quiet; then
-            echo "No changes."
+          if git diff --quiet -- state.json; then
+            echo "No state changes."
             exit 0
           fi
           git config user.name "giants-news-bot"
