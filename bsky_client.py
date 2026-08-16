@@ -136,16 +136,33 @@ def create_embed_for_candidate(session: requests.Session, candidate: Candidate, 
     return {"$type": "app.bsky.embed.external", "external": external}
 
 
-def post_to_bluesky(session: requests.Session, candidate: Candidate, pds: str, did: str, jwt: str, timeout: int) -> None:
+def post_to_bluesky(
+    session: requests.Session,
+    candidate: Candidate,
+    pds: str,
+    did: str,
+    jwt: str,
+    timeout: int,
+    *,
+    reply_root: Optional[Dict[str, str]] = None,
+    reply_parent: Optional[Dict[str, str]] = None,
+) -> Dict[str, str]:
+    record: Dict[str, Any] = {
+        "$type": "app.bsky.feed.post",
+        "text": build_post_text(candidate),
+        "embed": create_embed_for_candidate(session, candidate, pds, jwt, timeout),
+        "createdAt": datetime.now(timezone.utc).isoformat().replace("+00:00", "Z"),
+    }
+    if reply_root and reply_parent:
+        record["reply"] = {
+            "root": {"uri": reply_root["uri"], "cid": reply_root["cid"]},
+            "parent": {"uri": reply_parent["uri"], "cid": reply_parent["cid"]},
+        }
+
     payload = {
         "repo": did,
         "collection": "app.bsky.feed.post",
-        "record": {
-            "$type": "app.bsky.feed.post",
-            "text": build_post_text(candidate),
-            "embed": create_embed_for_candidate(session, candidate, pds, jwt, timeout),
-            "createdAt": datetime.now(timezone.utc).isoformat().replace("+00:00", "Z"),
-        },
+        "record": record,
     }
     r = session.post(
         f"{pds}/xrpc/com.atproto.repo.createRecord",
@@ -154,3 +171,5 @@ def post_to_bluesky(session: requests.Session, candidate: Candidate, pds: str, d
         timeout=timeout,
     )
     r.raise_for_status()
+    data = r.json()
+    return {"uri": data["uri"], "cid": data["cid"]}
