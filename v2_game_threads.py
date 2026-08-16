@@ -11,7 +11,7 @@ from v2_story import candidate_preference_key
 
 PACIFIC = ZoneInfo("America/Los_Angeles")
 BASEBALL_DAY_SHIFT_HOURS = 12
-DEFAULT_GAME_HOURS_BACK = 36
+DEFAULT_GAME_HOURS_BACK = 30
 
 # These aliases are only used to label/group a game-coverage thread. Failure to
 # identify an opponent falls back to a date-only key; it never blocks a story.
@@ -61,6 +61,7 @@ GAME_TITLE_PATTERNS = (
     " doom ",
     "earns win",
     "earned win",
+    "quality start",
     "solid start",
     "sharp start",
     "sterling start",
@@ -96,11 +97,13 @@ def is_game_story(article: dict) -> bool:
     if article.get("quality_reason") == "game_story_or_postgame_analysis":
         return True
     title = str(article.get("title", "") or "")
-    lower = title.lower()
+    summary = str(article.get("summary", "") or "")
+    blob = f"{title} {summary}"
+    lower = blob.lower()
     return (
         any(pattern in lower for pattern in GAME_TITLE_PATTERNS)
-        or bool(RESULT_VERBS.search(title))
-        or bool(GIANTS_RESULT.search(title))
+        or bool(RESULT_VERBS.search(blob))
+        or bool(GIANTS_RESULT.search(blob))
     )
 
 
