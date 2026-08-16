@@ -69,7 +69,7 @@ jobs:
           STATE_FILE: /tmp/main-state.json
           DRY_RUN: "1"
           HOURS_BACK: "72"
-          GAME_HOURS_BACK: "36"
+          GAME_HOURS_BACK: "30"
           MAX_POSTS_PER_RUN: "5"
           DIAGNOSTICS_ENABLED: "1"
           DIAGNOSTICS_FILE: v2-runtime-diagnostics.json
