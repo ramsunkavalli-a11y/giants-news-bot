@@ -23,6 +23,16 @@ from filters import (
 from parser_meta import extract_meta
 
 
+CHALLENGE_TITLE_MARKERS = {
+    "client challenge",
+    "access denied",
+    "just a moment",
+    "attention required",
+    "verify you are human",
+    "security check",
+}
+
+
 @dataclass
 class ResolutionResult:
     resolved_url: str = ""
@@ -78,6 +88,12 @@ def _is_google_news_wrapper(url: str) -> bool:
     return p.netloc.endswith("news.google.com") and "/read/" in p.path
 
 
+def _looks_like_challenge_page(meta) -> bool:
+    title = (meta.title or "").strip().lower()
+    description = (meta.description or "").strip().lower()
+    return any(marker in title or marker in description for marker in CHALLENGE_TITLE_MARKERS)
+
+
 def _apply_meta_to_candidate(candidate, meta) -> None:
     if meta.title:
         candidate.title = meta.title
@@ -96,14 +112,18 @@ def resolve_article_url(candidate, session, settings, verbose: bool = False) -> 
         result.failure_reason = "bad_feed_url"
         return result
 
-    # Direct URLs are already publisher URLs. Keep this fast path cheap; the
-    # Google path below is where publisher resolution is required.
+    # Direct crawlers often encounter team hubs, category pages, and other
+    # navigation URLs. Do not let those bypass the article URL rules simply
+    # because they are already publisher URLs.
     if not _is_google_news_wrapper(feed_url):
         result.resolved_url = feed_url
         result.canonical_url = feed_url
-        result.post_url = feed_url
         result.validation_domain = urlparse(feed_url).netloc.lower()
         result.resolver_path = "direct_feed_url"
+        if not is_story_url(feed_url):
+            result.failure_reason = "non_article_page"
+            return result
+        result.post_url = feed_url
         result.is_cardable = feed_url.startswith("https://") and "news.google.com" not in feed_url
         return result
 
@@ -155,13 +175,15 @@ def resolve_article_url(candidate, session, settings, verbose: bool = False) -> 
         base_url = result.resolved_url or fetch_url
         meta = extract_meta(base_url, html)
         result.meta_sources_used = meta.meta_sources_used
-        result.article_meta_confirmed = meta.article_meta_confirmed
+        challenge_page = _looks_like_challenge_page(meta)
+        result.article_meta_confirmed = meta.article_meta_confirmed and not challenge_page
 
         if "news.google.com" not in urlparse(base_url).netloc.lower():
-            # We reached the publisher. Prefer its metadata over the Google feed
-            # title/snippet so downstream relevance and Bluesky cards use the
-            # actual article information.
-            _apply_meta_to_candidate(candidate, meta)
+            # Some publishers serve bot challenges to GitHub Actions. In that
+            # case keep the useful Google News headline/snippet instead of
+            # replacing it with titles such as "Client Challenge".
+            if not challenge_page:
+                _apply_meta_to_candidate(candidate, meta)
             if meta.canonical:
                 can = canonicalize_url(urljoin(base_url, meta.canonical), settings)
                 if can and "news.google.com" not in can:
