@@ -189,7 +189,9 @@ def mlb_article_url_allowed(url: str) -> bool:
     if not p.netloc.lower().endswith("mlb.com"):
         return True
     path = p.path.lower()
-    if "/giants/news/" not in path:
+    # MLB now canonicalizes team news stories to mlb.com/news/<slug> as well
+    # as the older /giants/news/<slug> pattern.
+    if "/giants/news/" not in path and not path.startswith("/news/"):
         return False
     segs = [s for s in path.strip("/").split("/") if s]
     last = segs[-1] if segs else ""
@@ -203,6 +205,11 @@ def mlb_article_url_allowed(url: str) -> bool:
 def source_url_allowed(source: str, url: str) -> bool:
     if not mlb_article_url_allowed(url):
         return False
+    # MLB Giants discovery is already scoped to Giants news, and relevance is
+    # checked later. Do not re-reject a valid canonical /news/<slug> URL using
+    # the legacy /giants/news/ include rule from config.py.
+    if source in {"MLB Giants", "MLB Giants News"}:
+        return True
     rule = SOURCE_URL_RULES.get(source)
     if not rule:
         return True
