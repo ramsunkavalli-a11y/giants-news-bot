@@ -132,7 +132,7 @@ class GameThreadTests(unittest.TestCase):
         self.assertEqual(groups[0]["key"], game_thread_key("2026-08-15", "rockies"))
         self.assertEqual(len(groups[0]["articles"]), 2)
 
-    def test_different_baseball_days_do_not_merge(self):
+    def test_different_baseball_days_do_not_merge_without_schedule(self):
         articles = [
             {
                 "title": "Giants beat Rockies",
@@ -145,6 +145,54 @@ class GameThreadTests(unittest.TestCase):
         ]
         groups = group_game_articles(articles)
         self.assertEqual(len(groups), 2)
+
+    def test_next_day_followup_maps_to_actual_previous_game(self):
+        article = {
+            "title": "Tony Vitello reveals message in team meeting after Giants' loss to Rockies",
+            "published": "2026-08-17T14:45:00-07:00",
+            "author": "Vince Lontz",
+        }
+        schedule = [{
+            "game_pk": 900001,
+            "official_date": "2026-08-16",
+            "game_date": "2026-08-16T20:05:00Z",
+            "opponent": "rockies",
+        }]
+        groups = group_game_articles([article], schedule_games=schedule)
+        self.assertEqual(len(groups), 1)
+        self.assertTrue(groups[0]["schedule_grounded"])
+        self.assertEqual(groups[0]["game_pk"], 900001)
+        self.assertEqual(groups[0]["game_day"], "2026-08-16")
+        self.assertEqual(groups[0]["key"], "game:900001")
+
+    def test_doubleheader_articles_map_to_most_recent_started_game(self):
+        schedule = [
+            {
+                "game_pk": 910001,
+                "official_date": "2026-09-05",
+                "game_date": "2026-09-05T18:00:00Z",
+                "opponent": "dodgers",
+            },
+            {
+                "game_pk": 910002,
+                "official_date": "2026-09-05",
+                "game_date": "2026-09-05T23:00:00Z",
+                "opponent": "dodgers",
+            },
+        ]
+        between_games = {
+            "title": "Giants beat Dodgers in opener",
+            "published": "2026-09-05T21:30:00Z",
+        }
+        after_nightcap = {
+            "title": "Giants lose to Dodgers in nightcap",
+            "published": "2026-09-06T03:00:00Z",
+        }
+        groups = group_game_articles([between_games, after_nightcap], schedule_games=schedule)
+        by_pk = {group["game_pk"]: group for group in groups}
+        self.assertEqual(set(by_pk), {910001, 910002})
+        self.assertEqual(by_pk[910001]["articles"][0]["title"], between_games["title"])
+        self.assertEqual(by_pk[910002]["articles"][0]["title"], after_nightcap["title"])
 
 
 if __name__ == "__main__":

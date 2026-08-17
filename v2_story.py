@@ -20,12 +20,17 @@ EVENT_TOKENS = {
     "suspend", "extension", "sign", "waiver", "dfa", "release", "hire", "fire",
     "host", "fracture", "rehab", "return", "debut", "roster", "deadline",
 }
+EVENT_FAMILIES = {
+    "promote": "callup",
+}
 
 PHRASE_REPLACEMENTS = (
     (r"all[- ]star", "allstar"),
     (r"season[- ]ending", "seasonending"),
     (r"called? up", "callup"),
     (r"call[- ]up", "callup"),
+    (r"gets? (?:the )?call(?: to (?:the )?(?:majors|big leagues))?", "callup"),
+    (r"recalled? from (?:triple[- ]a|aaa)", "callup"),
     (r"placed on (?:the )?il", " il "),
     (r"designated for assignment", " dfa "),
 )
@@ -59,6 +64,24 @@ SOURCE_RANK = {
     "": 1,
 }
 
+ANALYSIS_AUTHORS = {
+    "grant brisbee",
+}
+ANALYSIS_SOURCES = {
+    "FanGraphs",
+}
+ANALYSIS_TITLE_PATTERNS = (
+    "analysis",
+    "breakdown",
+    "scouting",
+    "repertoire",
+    "pitch mix",
+    "pitching style",
+    "chance to be",
+    "what makes",
+    "why ",
+)
+
 
 def _normalize_text(text: str) -> str:
     value = (text or "").lower().replace("’", "'")
@@ -82,6 +105,22 @@ def event_tokens(title: str) -> set[str]:
     return story_tokens(title) & EVENT_TOKENS
 
 
+def _event_families(tokens: set[str]) -> set[str]:
+    return {EVENT_FAMILIES.get(token, token) for token in tokens if token in EVENT_TOKENS}
+
+
+def story_role(article: dict) -> str:
+    """Distinguish deeper analysis from the event-reporting version of a story."""
+    author = str(article.get("author", "") or "").strip().lower()
+    source = str(article.get("source", "") or "")
+    title = str(article.get("title", "") or "").lower()
+    if author in ANALYSIS_AUTHORS or source in ANALYSIS_SOURCES:
+        return "analysis"
+    if any(pattern in title for pattern in ANALYSIS_TITLE_PATTERNS):
+        return "analysis"
+    return "news"
+
+
 def same_story(title_a: str, title_b: str) -> bool:
     """Conservative event-level duplicate test for news headlines."""
     a = story_tokens(title_a)
@@ -92,8 +131,8 @@ def same_story(title_a: str, title_b: str) -> bool:
     if len(overlap) < 2:
         return False
 
-    events = (a & EVENT_TOKENS) & (b & EVENT_TOKENS)
-    # One shared event concept + one shared identifying token (usually a player,
+    events = _event_families(a) & _event_families(b)
+    # One shared event family + one shared identifying token (usually a player,
     # team action or distinctive year) is strong evidence of the same event.
     if events and len(overlap - EVENT_TOKENS) >= 1:
         return True

@@ -33,8 +33,9 @@ def main() -> None:
     for index, article in enumerate(result["selected"], start=1):
         byline = f" · {article.get('author')}" if article.get("author") else ""
         access = " ($)" if article.get("access") == "paywalled" else ""
+        role = article.get("story_role", "news")
         print(
-            f"WOULD_POST {index}: {article.get('source')}{access}{byline} | "
+            f"WOULD_POST {index}: [{role}] {article.get('source')}{access}{byline} | "
             f"{article.get('title')} | {article.get('published')} | {article.get('url')}"
         )
     print("REASONS " + json.dumps(result["reasons"], sort_keys=True))
@@ -43,14 +44,19 @@ def main() -> None:
     if duplicate_clusters:
         print("DUPLICATE_CLUSTERS:")
         for item in duplicate_clusters:
-            print(
-                f"  CHOSE {item['chosen_source']} · {item['chosen_author']} | "
-                f"{item['chosen_title']}"
-            )
-            for alternative in item["alternatives"]:
+            rotation = " rotation=yes" if item.get("rotation_applied") else ""
+            print(f"  EVENT members={item['member_count']}{rotation}")
+            for representative in item.get("representatives", []):
                 print(
-                    f"    OVER {alternative['source']} · {alternative['author']} | "
-                    f"{alternative['title']}"
+                    f"    KEEP [{representative.get('role', 'news')}] "
+                    f"{representative.get('source')} · {representative.get('author')} | "
+                    f"{representative.get('title')}"
+                )
+            for alternative in item.get("alternatives", []):
+                print(
+                    f"    DROP [{alternative.get('role', 'news')}] "
+                    f"{alternative.get('source')} · {alternative.get('author')} | "
+                    f"{alternative.get('title')}"
                 )
 
 

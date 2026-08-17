@@ -4,9 +4,9 @@ This is the quickest way for a new maintainer or a new ChatGPT conversation to u
 
 ## What the product is
 
-A Bluesky bot that posts a curated stream of San Francisco Giants journalism from multiple publications. The goal is **useful coverage, not maximum volume**. It should feel closer to an automatically maintained Giants news desk than an indiscriminate RSS firehose.
+A Bluesky bot that posts a curated stream of San Francisco Giants journalism and selected original audio from multiple publications. The goal is **useful coverage, not maximum volume**. It should feel closer to an automatically maintained Giants news desk than an indiscriminate RSS firehose.
 
-The account favors original reporting, breaking news, transactions, injuries, prospect work, meaningful analysis/features, and trusted beat reporting. It should avoid generic summaries, commodity recaps, promo pages, highlights/video-only pages, recurring evergreen content, and derivative articles whose main value is repeating another outlet.
+The account favors original reporting, breaking news, transactions, injuries, prospect work, meaningful analysis/features, trusted beat reporting, and direct access to Giants decision-makers. It should avoid generic summaries, commodity recaps, broad multi-team rankings/listicles, promo pages, highlights/video-only pages, recurring evergreen content, and derivative articles whose main value is repeating another outlet.
 
 Cost should remain essentially zero while the account is small. Prefer mature public feeds/parsers and deterministic logic over paid APIs, embeddings, or custom crawling infrastructure.
 
@@ -21,9 +21,7 @@ Pacific local time:
 - **Monday–Friday:** 8:30 AM, 2:30 PM, 7:30 PM, 11:30 PM
 - **Saturday–Sunday:** 8:30 AM, 1:30 PM, 5:30 PM, 10:30 PM
 
-The weekend shifts earlier because Giants weekends contain more day games and the first postgame stories often arrive in the afternoon. Four checks/day was chosen to reduce story delay and batch size without making the account feel continuously noisy.
-
-GitHub schedules in UTC. The workflow includes both PDT and PST equivalents and an `America/Los_Angeles` gate so local times do not drift when daylight saving changes.
+The weekend shifts earlier because Giants weekends contain more day games and the first postgame stories often arrive in the afternoon. GitHub schedules in UTC; the workflow includes PDT and PST equivalents and an `America/Los_Angeles` gate so local times do not drift across daylight saving.
 
 ### Volume/freshness
 
@@ -32,7 +30,7 @@ GitHub schedules in UTC. The workflow includes both PDT and PST equivalents and 
 - Game-story window: **30 hours**.
 - Game-thread replies are separate from the standalone cap.
 - A run can legitimately post nothing.
-- GitHub Actions scheduled jobs may start several minutes late; judge failures by whether the workflow actually ran, not by the exact wall-clock minute.
+- GitHub Actions scheduled jobs may start several minutes late.
 
 ## Source philosophy
 
@@ -46,8 +44,23 @@ GitHub schedules in UTC. The workflow includes both PDT and PST equivalents and 
 4. **SFGATE** — Giants RSS
 5. **FanGraphs** — Giants category RSS
 6. **NBC Sports Bay Area** — dedicated Giants news and analysis pages
+7. **KNBR The Executive Show** — Giants-only Omny playlist/RSS in `v2_knbr.py`
 
-These are implemented in `v2_probe.py`. Despite the filename, those discoverers are production code.
+The first six article adapters are implemented in `v2_probe.py`. Despite the filename, those discoverers are production code. KNBR is intentionally separate because it is audio and has different presentation/filtering semantics.
+
+### KNBR Executive Show
+
+The bot does **not** broadly scrape KNBR. It follows the Giants-only playlist for The Executive Show, a recurring baseball-season front-office/manager interview series, and filters away 49ers-only episodes. Typical guests include Buster Posey, Zack Minasian, Tony Vitello, Larry Baer, and other Giants leadership.
+
+Executive Show posts are headline-first like articles, but use:
+
+```text
+Episode title
+KNBR · The Executive Show
+Listen at omny.fm →
+```
+
+The existing Thursday 8:30 AM Pacific production poll is expected to catch most Thursday-morning episodes. Do not add a special Thursday poll unless real publication timing shows that this regularly misses them.
 
 ### Blocked-source radar
 
@@ -57,17 +70,17 @@ SF Chronicle and Mercury News are important, but their pages/feeds are unreliabl
 - Shayna Rubin — SF Chronicle
 - Justice delos Santos — Mercury News
 
-For each writer the bot queries Google News RSS with the exact author + exact publisher domain + Giants, decodes the Google wrapper URL, verifies the resulting publisher domain, limits the results, rejects ambiguous multi-author-query attribution, and uses visible page metadata as an additional veto when available.
+For each writer the bot queries Google News RSS with the exact author + exact publisher domain + Giants, decodes the Google wrapper URL, verifies the resulting publisher domain, limits the results, rejects ambiguous multi-target attribution, and uses visible page metadata as an additional veto when available. A co-byline is valid when the targeted core writer is explicitly one of the visible authors; a contradictory byline still rejects the result.
 
-This is intentionally **not** broad Google News discovery. Broad Google results are noisy and are allowed only in diagnostics/probes. Do not quietly turn Google News into a general production feed.
+This is intentionally **not** broad Google News discovery. Broad Google results are diagnostic only.
 
-### Trusted but inactive radar names
+### Trusted but inactive names
 
-Baseball America, Associated Press, and KNBR remain publications worth considering in a future targeted adapter/radar, but they are **not currently active production discoverers**. Do not document or treat them as live until an adapter is actually added.
+Baseball America and Associated Press remain worth considering for future targeted discovery, but they are not currently active production discoverers.
 
 ## Editorial priors
 
-Author preference is useful for choosing among otherwise overlapping coverage; it is not a blanket permission to publish low-value material.
+Author preference is useful for choosing among overlapping coverage; it is not blanket permission to publish low-value material.
 
 Current local/beat priors in `v2_authors.py`:
 
@@ -77,34 +90,58 @@ Current local/beat priors in `v2_authors.py`:
 - **Fine:** Grant Brisbee, Evan Webeck
 - **National / high-value when Giants-specific:** Jeff Passan, Buster Olney, Jon Heyman, Bob Nightengale, Jon Morosi, Robert Murray, Ken Rosenthal, Evan Drellich
 
-SFGATE has a mild `secondary` publication prior because its packaging can be click-driven. This should only be a light tie-breaker, not a hard suppression rule.
+SFGATE has a mild `secondary` publication prior. This is a tie-breaker, not hard suppression.
 
 ## Story/event dedupe
 
-The system intentionally avoids a global numerical relevance score. Selection is mostly deterministic.
+The system avoids a global numerical relevance score. Selection is mostly deterministic.
 
-`v2_story.py` normalizes titles, recognizes event anchors/synonyms, and clusters stories that describe the same event within a time window. Examples that should cluster include multiple reports of the same surgery, retirement, trade, signing, promotion, or hosting announcement. Two different analyses about the same player should not cluster merely because the player name matches.
+`v2_story.py` normalizes titles, event anchors and useful synonyms. Promotion/call-up language such as `promoted`, `called up`, and `gets the call` belongs to the same event family when the identifying subject matches.
 
-Within a duplicate cluster, author preference is the strongest tie-breaker, followed by light source preference, a real named byline, and recency.
+A key product rule is now **same event does not always mean one URL**. The selector distinguishes:
 
-Important rule: **choose the best article in an event before applying the one-source-per-run rule.** If the best article's publication has already been used for that standalone run, skip the event rather than falling through to a weaker duplicate just to fill the quota.
+- **news/reporting** — the event, roster implications, quotes, organizational context;
+- **analysis** — materially deeper interpretation/scouting/style/repertoire work.
 
-Historical dedupe also compares against recent `posted_stories` and canonical posted URLs in `state.json`.
+For a single event, the selector can retain at most one strong news/reporting representative and one differentiated analysis representative. Grant Brisbee and FanGraphs are simple current analysis priors; title cues can also identify analysis. The purpose is to avoid three interchangeable call-up posts without suppressing a useful deeper piece triggered by the same transaction.
+
+### Comparable-story rotation
+
+Routine event coverage should not always resolve to the same publication merely because one writer has a slightly higher prior. For comparable event-news candidates:
+
+- use recent standalone publication representation over a **14-day** window as a tie-breaker;
+- consider candidates within one author-prior tier of the strongest candidate comparable;
+- a substantial early-reporting lead (currently **90 minutes**) overrides rotation;
+- larger quality differences still use normal editorial preference.
+
+This is deterministic rotation, not random fairness. Publication diversity is secondary to reader value.
+
+The representative(s) of an event are chosen before the one-source-per-run rule. Historical dedupe is role-aware: a previously posted news version does not automatically suppress a later differentiated analysis version, but another same-event analysis version can be suppressed.
 
 ## Standalone selection
-
-Standalone news is for high-value material that is not being handled as game coverage.
 
 - High-quality candidates only.
 - Maximum 3/run.
 - One standalone story per publication per run.
-- Cross-publisher story/event duplicates collapsed to one winner.
+- One event-news representative plus, when justified, one differentiated analysis representative.
+- Broad all-MLB ranking/listicle patterns are rejected at the selector safety boundary even if an adapter misclassifies them.
 - Missing timestamps are enriched where possible; unresolved missing timestamps are excluded.
 - Fetch/enrichment failure should not invalidate an otherwise good structured-feed item.
 
 ## Game-story threads
 
 Game coverage has its own lane because the product goal is to show several useful writers without scattering repetitive game stories across the main feed.
+
+### MLB schedule grounding
+
+`v2_mlb_schedule.py` uses the free MLB StatsAPI schedule endpoint for Giants team ID 137. When a game-story opponent can be identified, `v2_game_threads.py` matches the story to the closest actual Giants game that had already started, within a conservative time window, and uses MLB `gamePk` as the stable new thread identity.
+
+This fixes two important cases:
+
+- a Monday article discussing Sunday's loss should append to Sunday's real thread rather than create a phantom Monday game;
+- doubleheaders have separate `gamePk` values instead of one date/opponent bucket.
+
+If MLB schedule access or opponent extraction fails, the older Pacific baseball-day + opponent heuristic remains a nonblocking fallback. During migration, a new gamePk-based group will reuse an existing legacy `game:YYYY-MM-DD:opponent` thread when they refer to the same game, preserving live Bluesky root/parent refs.
 
 Core game writers:
 
@@ -116,22 +153,11 @@ Core game writers:
 - John Shea
 - Maria Guardado
 
-Rules:
-
-1. Group game stories by Pacific "baseball day" plus opponent.
-2. If any core writer has an eligible story when a new thread is first created, the **earliest publication timestamp among core writers** gets root/top billing. Author tier does not override publication time for this root choice.
-3. Other eligible game stories follow as chronological replies.
-4. If no core writer is available at creation time, use the existing quality fallback.
-5. Once a Bluesky root is live, never replace it later; an earlier-discovered/stronger story found later simply appends.
-6. Persist root and latest-parent refs in `state.json` so later scheduled runs can append to the same thread.
-7. Do not impose the standalone one-source cap inside a game thread.
-8. Do not cross-publisher story-dedupe game-thread articles; multiple perspectives are the point. Exact URL dedupe still applies.
-
-Known edge case: grouping is a Pacific-day + opponent heuristic, not an MLB game-ID system, so doubleheaders are the main structural edge case. Using MLB schedule game IDs would be a future robustness improvement if needed.
+Rules after grouping are unchanged: earliest-published available core writer gets a new root; later eligible stories are chronological replies; a live root is immutable; game stories are outside the standalone cap; cross-publisher game perspectives are intentionally retained.
 
 ## Bluesky presentation
 
-All posted articles are **headline-first**. The reader should see the story before publication/byline metadata. A normal standalone post is:
+All posts are headline-first. Standard article:
 
 ```text
 Example Giants headline
@@ -139,7 +165,7 @@ NBC Sports Bay Area · Alex Pavlovic
 Read at www.nbcsportsbayarea.com →
 ```
 
-The Athletic is labeled in the metadata line but links to the actual destination hostname:
+The Athletic:
 
 ```text
 Example headline
@@ -147,59 +173,54 @@ The Athletic ($) · Andrew Baggarly
 Read at www.nytimes.com →
 ```
 
-Game story text keeps `Game recap ·` on the metadata line:
+Game story:
 
 ```text
-Giants’ Turner Hill delivers go-ahead RBI in major-league debut
+Example postgame headline
 Game recap · SF Chronicle · Shayna Rubin
 Read at www.sfchronicle.com →
 ```
 
-The final line deliberately separates presentation from the rich-text link facet. `Read at ` and ` →` are plain text; **only the exact article destination hostname** is linked to the direct publisher article. Bluesky's client warns when visible linked text does not represent the destination host, which caused the earlier `Read at SF Chronicle →` / `Read at NBC Sports Bay Area →` labels to open a "Leaving Bluesky" confirmation dialog. Matching the linked text to the exact hostname avoids that mismatch warning while preserving direct publisher URLs.
+Executive Show audio uses `Listen at`, not `Read at`.
 
-If a usable article image is available, it is uploaded as a **native Bluesky image embed**, including its aspect ratio. If the image fetch/upload fails, the post remains text + the clickable hostname. Image failures are presentation failures, not selection failures.
-
-**Do not use Bluesky external link cards for article presentation.** Earlier iterations produced duplicated headlines, raw URL fallbacks when the card title was blank, and redundant publisher footer bars when the title was replaced by the outlet name. Native image + direct hostname link is the current chosen presentation.
-
-Use the display name **SF Chronicle**, not the full `San Francisco Chronicle`, in the source/author line. The article headline belongs first in post text for both standalone and game stories.
-
-Last-mile image/metadata fetches happen after selection. They are enhancements and should remain non-blocking.
+Only the exact destination hostname is the rich-text link facet. This prevents Bluesky's misleading-label/"Leaving Bluesky" confirmation while preserving the direct publisher URL. If a usable image is available, it is uploaded as a native Bluesky image with aspect ratio. Image failure is cosmetic and nonblocking. Do not restore external link cards without a specific product reason.
 
 ## State
 
-`state.json` is production data, not a fixture to casually reset. Its important current concepts are:
+`state.json` is production data, not a fixture to casually reset. Important concepts:
 
-- `posted_urls` — canonical URL history for exact dedupe
-- `posted_stories` — recent story metadata for historical story/event dedupe
-- `game_threads` — Bluesky root/latest-parent refs and game identity so later runs can append
+- `posted_urls` — canonical URL history
+- `posted_stories` — recent story metadata used for historical/event dedupe and recent source representation
+- `game_threads` — Bluesky root/latest-parent refs plus game identity; newer entries may also include `game_pk`
 
-A dry run must not mutate this state. Any cleanup of state must preserve posted-history and live thread refs.
+A dry run must not mutate this state. Any cleanup must preserve posted history and live thread refs.
 
 ## Validation standard
 
-Before merging a behavioral change, use `.github/workflows/v2-structured-probe.yml`. It runs:
+`.github/workflows/v2-structured-probe.yml` runs on V2 development branches and pull requests to `main`. It includes:
 
-- deterministic story/game/radar/runtime unit tests
-- structured live-source discovery probe
-- contained core-writer radar probe
-- realistic selection using a copy of production state
-- clean-slate duplicate-choice simulation
-- full `DRY_RUN=1` V2 bot against production state and verifies byte-for-byte state is unchanged
-- Athletic feed/metadata probes
-- source diagnostics
+- deterministic story/selector/game/schedule/KNBR/radar/runtime tests;
+- structured live-source discovery;
+- a live KNBR Executive Show adapter probe;
+- a live MLB StatsAPI schedule probe;
+- contained core-writer radar;
+- realistic production-state selection;
+- clean-slate duplicate-choice simulation;
+- full `DRY_RUN=1` V2 bot against a copy of production state, with byte-for-byte immutability check;
+- Athletic and source diagnostics.
 
-Do **not** manually trigger a live Bluesky production run merely to test code. Maintenance/CI should remain non-posting unless a live post is explicitly requested.
+Do **not** manually trigger a live Bluesky production run merely to test code.
 
 ## Change philosophy
 
 - Work in small, verifiable batches rather than large rewrites.
 - Reuse mature public feeds/libraries before inventing parsers.
 - Prefer deterministic explainable rules over opaque scoring/ML for this scale.
-- Keep each publisher adapter small and isolated.
-- A broken source should not break other sources.
+- Keep publisher adapters small and isolated.
+- A broken source should not break unrelated sources.
 - A failed page fetch should not block a valid core article.
 - Preserve direct publisher URLs; do not post Google News wrapper URLs.
-- Keep the account selective; adding a source is not automatically better if it adds commodity content.
+- Keep the account selective; adding a source is not automatically better.
 - Protect production state and avoid live-post side effects during development.
 
 ## Files a new session should inspect first
@@ -209,10 +230,12 @@ Do **not** manually trigger a live Bluesky production run merely to test code. M
 3. `docs/ARCHITECTURE.md`
 4. `docs/OPERATIONS.md`
 5. `v2_bot.py`
-6. `v2_authors.py`
+6. `v2_selector.py`
 7. `v2_story.py`
 8. `v2_game_threads.py`
-9. `v2_selector.py`
-10. `.github/workflows/giants-news-bot.yml`
+9. `v2_mlb_schedule.py`
+10. `v2_knbr.py`
+11. `v2_radar.py`
+12. `.github/workflows/giants-news-bot.yml`
 
 If those agree, they are the current source of truth. Old chat history should not override current code.

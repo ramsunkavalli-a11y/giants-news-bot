@@ -6,12 +6,12 @@ Production is `.github/workflows/giants-news-bot.yml` on `main`.
 
 The workflow:
 
-1. evaluates the Pacific-time cadence gate
-2. checks out `main`
-3. installs Python 3.11 dependencies
-4. runs `python v2_bot.py`
-5. uploads `diagnostics.json`
-6. commits `state.json` back to `main` only if it changed
+1. evaluates the Pacific-time cadence gate;
+2. checks out `main`;
+3. installs Python 3.11 dependencies;
+4. runs `python v2_bot.py`;
+5. uploads `diagnostics.json`;
+6. commits `state.json` back to `main` only if it changed.
 
 Required GitHub Actions secrets:
 
@@ -22,7 +22,7 @@ The default Bluesky PDS is `https://bsky.social` and can be overridden with `BSK
 
 ## Schedule
 
-All intended times below are **America/Los_Angeles** local time.
+All intended times are **America/Los_Angeles** local time.
 
 ### Monday–Friday
 
@@ -38,19 +38,13 @@ All intended times below are **America/Los_Angeles** local time.
 - 5:30 PM
 - 10:30 PM
 
-The earlier weekend windows better match day-game reporting while retaining an evening/postgame scan for late Saturday games.
+The earlier weekend windows better match day-game reporting. GitHub Actions cron is UTC, so production registers PDT and PST equivalents and checks the current Pacific offset. The inactive duplicate exits before checkout/install.
 
-### Why the cron file looks more complicated
+Scheduled jobs can begin several or even tens of minutes late; scheduler delay is not automatically a bot failure.
 
-GitHub Actions cron is UTC and does not accept a named timezone. The workflow therefore registers both PDT and PST UTC equivalents and then checks the current `America/Los_Angeles` offset before running the bot. The inactive duplicate schedule exits before checkout/install.
-
-Do not simplify the workflow to one fixed UTC schedule unless an hour of seasonal drift is acceptable.
-
-Scheduled Actions are not guaranteed to start on the exact minute. A run beginning several or even tens of minutes late is a scheduler-delay issue, not automatically a bot failure.
+The existing Thursday 8:30 AM poll is the expected collection point for most KNBR Executive Show episodes. Do not add a Thursday-specific production poll unless observed Omny publication timing demonstrates a recurring miss.
 
 ## Production environment
-
-Current important values set by the workflow:
 
 ```text
 HOURS_BACK=72
@@ -64,229 +58,179 @@ Other environment-backed settings are in `config.py`.
 
 ## Safe local/test execution
 
-Install:
-
 ```bash
 python -m venv .venv
 source .venv/bin/activate
 pip install -r requirements.txt
+DRY_RUN=1 DIAGNOSTICS_ENABLED=1 HOURS_BACK=72 GAME_HOURS_BACK=30 MAX_POSTS_PER_RUN=3 python v2_bot.py
 ```
 
-Full dry run:
-
-```bash
-DRY_RUN=1 \
-DIAGNOSTICS_ENABLED=1 \
-HOURS_BACK=72 \
-GAME_HOURS_BACK=30 \
-MAX_POSTS_PER_RUN=3 \
-python v2_bot.py
-```
-
-Use an alternate state file when experimenting with state behavior:
+Use an alternate state file for state experiments:
 
 ```bash
 STATE_FILE=/tmp/test-state.json DRY_RUN=1 python v2_bot.py
 ```
 
-A dry run must not post to Bluesky or mutate state.
+A dry run must never post to Bluesky or mutate state.
 
 ## Validation workflow
 
-`.github/workflows/v2-structured-probe.yml` is the pre-merge safety suite for V2/maintenance changes.
-
-It intentionally goes beyond unit tests because the project depends on live public feeds whose formats can drift.
+`.github/workflows/v2-structured-probe.yml` runs on V2/maintenance branch pushes **and pull requests to `main`**. The pull-request trigger is the inspectable pre-merge gate; behavioral PRs should not merge while it is failing.
 
 The suite includes:
 
-1. `v2_story_test.py`
-2. `v2_game_threads_test.py`
-3. `v2_radar_test.py`
-4. `v2_runtime_test.py`
-5. live structured-source probe
-6. contained radar probe
-7. copy of current production `state.json`
-8. realistic selection simulation against production state
-9. clean-slate duplicate-choice simulation
-10. full V2 dry run against copied production state
-11. explicit comparison that dry-run state is unchanged
-12. Athletic RSS probe
-13. Athletic structured-metadata probe
-14. structured source diagnostics
-15. artifact upload of probe outputs
-
-A behavioral PR should not be merged merely because unit tests pass if the full probe workflow is failing.
+1. deterministic story clustering tests;
+2. role-aware selector/rotation tests;
+3. game-thread and doubleheader tests;
+4. MLB schedule parsing/migration tests;
+5. KNBR Executive Show/filter/link-format tests;
+6. radar/co-byline tests;
+7. Bluesky runtime/image/link/state tests;
+8. live structured article discovery;
+9. live KNBR Executive Show/Omny probe;
+10. live MLB StatsAPI schedule probe;
+11. contained Chronicle/Mercury radar probe;
+12. copy of current production `state.json`;
+13. realistic selection simulation against production state;
+14. clean-slate duplicate-choice simulation;
+15. full V2 dry run against copied production state;
+16. byte-for-byte verification that dry-run state is unchanged;
+17. Athletic RSS/metadata probes and source diagnostics;
+18. artifact upload of all probe outputs.
 
 ## Deployment
 
-There is no separate server deployment. Merging to `main` changes what the next scheduled GitHub Actions run executes.
+There is no separate server. Merging to `main` changes what the next scheduled GitHub Actions run executes.
 
-Normal change process:
+Normal process:
 
-1. branch from current `main`
-2. make a small coherent change
-3. ensure the V2 validation workflow runs on the exact branch head
-4. review failures/diagnostics
-5. confirm production-state dry run is unchanged
-6. merge PR
-7. allow the next scheduled production run to exercise the code naturally
+1. branch from current `main`;
+2. make a coherent change;
+3. run/inspect the exact-head V2 validation workflow;
+4. review live adapter and production-state diagnostics;
+5. confirm dry-run state is unchanged;
+6. merge;
+7. let the next scheduled production run exercise the code naturally.
 
-Do **not** manually dispatch production just to prove a merge worked. A manual dispatch is a real bot run and can post live stories.
+Do **not** manually dispatch production just to prove a merge worked. A manual production dispatch can create live Bluesky posts.
 
 ## State management
 
-`state.json` is committed production state. Treat it as data.
+`state.json` is production data. Important fields:
 
-Important content:
+- `posted_urls` — exact/canonical URL history;
+- `posted_stories` — recent story metadata used for role-aware event dedupe and recent publication representation;
+- `game_threads` — live Bluesky root/latest-parent refs and game identity; newer entries can include MLB `game_pk`.
 
-- `posted_urls`: exact/canonical URL posting history
-- `posted_stories`: recent story metadata used for historical story dedupe
-- `game_threads`: live Bluesky root/latest-parent refs for game threads
+Never casually reset state, delete posted history to make tests pass, or remove live game-thread refs. Schema migrations must preserve dedupe history and Bluesky refs and should be validated on a copy first.
 
-### Never casually do these
+### gamePk migration
 
-- replace `state.json` with `{}`
-- delete `posted_urls` to make tests pass
-- delete `game_threads` while a thread may still receive replies
-- use production state as a writable local test fixture
-- commit state produced by a dry run
-
-If the schema needs migration, preserve all dedupe history and Bluesky refs, validate the migration on a copy first, and make the migration explicit in code/PR notes.
+Newly schedule-grounded game groups use `game:{gamePk}`. Existing production threads may still use `game:YYYY-MM-DD:opponent`. Runtime lookup intentionally reuses a legacy thread when its date/opponent matches the newly grounded game, so no state rewrite is required just to migrate identifiers.
 
 ## Diagnostics
 
-Production uploads `diagnostics.json` as a GitHub Actions artifact for every real bot run that passes the cadence gate.
+Production uploads `diagnostics.json` for every real scan that passes the cadence gate. V2 CI uploads a broader `v2-structured-probe` artifact containing source, KNBR, schedule, radar, selection, runtime, Athletic and source-diagnostic outputs.
 
-The V2 CI workflow uploads a broader `v2-structured-probe` artifact containing source, radar, selection, runtime, Athletic, and diagnostics outputs.
+Absence of a post can mean:
 
-When debugging, diagnostics are preferable to guessing from the Bluesky feed because the absence of a post can mean several different things:
-
-- workflow did not run yet
-- cadence gate intentionally skipped the UTC duplicate
-- no new candidate was discovered
-- candidate was stale
-- exact URL already posted
-- event/story already posted
-- candidate was low-value or not Giants-specific enough
-- a stronger duplicate won
-- source diversity suppressed the event after its winner was chosen
-- candidate belongs to a game thread and was handled there
+- workflow has not run yet;
+- cadence gate skipped an inactive UTC twin;
+- no new candidate was discovered;
+- candidate was stale or already posted;
+- same event/role was already posted;
+- candidate lost same-role event dedupe;
+- a different role from the same event was retained instead;
+- source diversity or run cap suppressed it;
+- candidate is low-value or too broad;
+- candidate belongs in a game thread.
 
 ## Troubleshooting: no post appeared
 
-### 1. Did the workflow actually run?
-
-Check the latest `Giants News Bot` Actions runs. Compare the run's creation/start timestamp with the intended Pacific slot.
-
-If no scheduled run exists yet, do not debug article selection. GitHub may simply be late.
-
-### 2. Did the cadence gate allow it?
-
-Because both PDT and PST cron equivalents exist, some scheduled workflow invocations are expected to stop at the gate. Inspect the `Pacific-time cadence gate` output for:
-
-- `event_schedule`
-- `pacific_offset`
-- `run_bot`
-
-Only `run_bot=true` is a real production scan.
-
-### 3. Did `Run V2 bot` execute successfully?
-
-If not, inspect the first exception. Discovery is source-isolated, so one source error normally should not fail the run; authentication/state-write problems are more likely to fail the whole job.
-
-### 4. Inspect diagnostics
-
-Look for discovered counts, selected standalone items, game-thread actions, and rejection/dedupe reasons.
-
-### 5. Remember the caps and dedupe rules
-
-A valid article can be intentionally absent because:
-
-- another outlet's version won the same event cluster
-- that winning publication was already used in the standalone run
-- the article URL/story is in recent state
-- the article is a game recap already represented/queued in a game thread
-
-Do not loosen filters merely because one run was quiet.
+1. Confirm the scheduled workflow actually ran.
+2. Confirm `run_bot=true` at the Pacific cadence gate.
+3. Inspect the first exception if `Run V2 bot` failed; one source error normally should not abort discovery.
+4. Inspect diagnostics for discovered counts, rejection reasons, selected standalone items and game-thread actions.
+5. Do not loosen filters merely because a run was quiet.
 
 ## Troubleshooting: source disappeared
 
-Use the source-specific/structured probes before editing global selection logic.
+Use the narrowest probe:
 
-- Direct RSS/listing issue: `v2_probe.py` / `v2_source_diag.py`
-- Chronicle/Mercury radar issue: `v2_radar_probe.py`
-- The Athletic feed issue: `v2_athletic_probe.py`
-- The Athletic page metadata issue: `v2_athletic_meta_probe.py`
+- article RSS/listing sources: `v2_probe.py` / `v2_source_diag.py`;
+- Executive Show: `v2_knbr_probe.py`;
+- Chronicle/Mercury radar: `v2_radar_probe.py`;
+- MLB schedule: `v2_schedule_probe.py`;
+- The Athletic RSS: `v2_athletic_probe.py`;
+- The Athletic metadata: `v2_athletic_meta_probe.py`.
 
-A publisher failure should be fixed in its adapter or accepted as temporary degradation. Avoid changing unrelated sources to accommodate it.
+A publisher/source failure should be fixed in its adapter or accepted as temporary degradation. Avoid changing unrelated adapters to accommodate it.
 
 ## Troubleshooting: wrong duplicate won
 
 Check:
 
-1. Are the two headlines correctly in the same event cluster?
-2. Does the higher-priority author/source metadata exist on the candidate?
-3. Is a byline missing because enrichment failed?
-4. Did historical state cause one candidate to be excluded before comparison?
-5. Is this actually game coverage, where the core-writer earliest-publication root rule is intentionally different?
+1. Are the headlines correctly in the same event cluster/event family?
+2. Are they both `news`, or is one legitimately `analysis`?
+3. Does the selected candidate have a real author/source prior?
+4. Was comparable-source rotation applied? Inspect `rotation_applied`, `representatives`, alternatives and recent source counts.
+5. Did one candidate have a 90+ minute early-reporting lead?
+6. Did historical state suppress one role before comparison?
+7. Is this actually game coverage, where root ordering follows a different rule?
 
-Add a regression test for any real misclassification before changing the clustering rule.
+Add a regression test for a real misclassification before broadening clustering or rotation.
 
 ## Troubleshooting: game thread looks wrong
 
-Check `v2_game_threads.py` and `state.json.game_threads`.
+Check `v2_game_threads.py`, `v2_mlb_schedule.py`, diagnostics and `state.json.game_threads`.
 
 Important distinctions:
 
-- **new thread:** earliest published eligible core writer gets root
-- **existing thread:** root cannot be changed; new stories append
-- **unknown opponent:** an existing unknown-opponent thread may be reused when opponent becomes known
-- **doubleheader:** current day+opponent heuristic may be ambiguous
+- schedule-grounded group: `schedule_grounded=true`, stable `game_pk`;
+- schedule fallback: Pacific baseball-day + opponent;
+- new thread: earliest published available core writer gets root;
+- existing thread: root is immutable and new stories append;
+- legacy migration: gamePk group can reuse an existing date/opponent thread;
+- doubleheader: separate gamePk values should separate stories based on which game had most recently started.
 
-Do not delete a thread's state to force a different root on Bluesky.
+If schedule matching is incorrect, do not delete a live Bluesky thread. Fix the matcher/test and preserve existing refs.
 
 ## Bluesky presentation failures
 
-If text posts but the card has no image or weak metadata, first determine whether the publisher blocks article-page fetching.
+Current presentation is headline-first text + exact-hostname rich-text link + optional native image. External cards are intentionally not used.
 
-This is expected sometimes for Chronicle/Mercury. The posting path should degrade gracefully. A missing image is not grounds to suppress valid reporting.
-
-If the external card repeats a game headline, check `bsky_client.py`; game posts intentionally move the headline to the post text and suppress card title/description.
+- Articles: `Read at <hostname> →`
+- KNBR Executive Show: `Listen at <hostname> →`
+- Only the hostname is linked, avoiding Bluesky's misleading-link warning.
+- Images are native `app.bsky.embed.images` with aspect ratio when available.
+- Missing/blocked images should degrade to text + direct link, not suppress the story.
 
 ## Adding a new source
 
 Before coding:
 
-1. Look for an official team/category RSS feed.
-2. Look for an official sitemap or clean category/team listing.
-3. Search for a mature public parser/package if cleanup is nontrivial.
-4. Only then consider a narrow source-specific page adapter.
-5. Use targeted search/radar only when direct access is genuinely blocked and attribution can be constrained tightly.
+1. look for official team/category RSS;
+2. look for an official sitemap or clean listing;
+3. reuse a mature parser/package if cleanup is nontrivial;
+4. only then consider a narrow source-specific adapter;
+5. use targeted radar only when direct access is genuinely blocked and attribution can be tightly constrained.
 
-For a new adapter:
-
-- return direct publisher URLs
-- isolate exceptions
-- attach reliable publication time/source/title
-- enforce Giants relevance
-- classify obvious low-value page types locally
-- add diagnostics
-- add regression tests if the source introduces a new behavior class
-
-Avoid creating a generic broad web crawler.
+For audio/podcast sources, prefer a dedicated show/playlist feed over broad station scraping and use an appropriate presentation verb such as `Listen at`.
 
 ## Safe-change checklist
 
 Before merging:
 
 - [ ] Production entrypoint remains `v2_bot.py`
-- [ ] Direct publisher URL is preserved
+- [ ] Direct destination URL is preserved
 - [ ] No broad Google News production path was introduced
 - [ ] One broken source cannot abort discovery
-- [ ] Article-page enrichment failure remains non-blocking
-- [ ] Standalone duplicate winner is selected before source diversity
-- [ ] Game root behavior is unchanged unless intentionally modified
+- [ ] Article-page enrichment failure remains nonblocking
+- [ ] Same-event differentiated analysis is not accidentally collapsed
+- [ ] Comparable rotation is not used as a broad quality override
+- [ ] Schedule failure retains the game-grouping fallback
+- [ ] Live game roots/legacy refs are preserved
 - [ ] Dry run cannot post or mutate state
-- [ ] Full V2 CI passed on the exact head commit
+- [ ] Full V2 PR validation passed on the exact head commit
 - [ ] No manual live Bluesky run was used as a test
-- [ ] Documentation updated if product behavior changed
+- [ ] Documentation reflects product behavior

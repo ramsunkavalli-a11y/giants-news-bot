@@ -1,7 +1,7 @@
 from datetime import datetime, timezone
 import unittest
 
-from v2_story import candidate_preference_key, same_story
+from v2_story import candidate_preference_key, same_story, story_role
 
 
 class StoryDedupeTests(unittest.TestCase):
@@ -22,6 +22,31 @@ class StoryDedupeTests(unittest.TestCase):
             "Iconic Giants voice Mike Krukow announces retirement at end of season",
             "SF Giants announcer Mike Krukow to retire at end of season",
         ))
+
+    def test_wilkinson_transaction_wording_clusters(self):
+        brisbee = "The Giants promoted Matt 'Tugboat' Wilkinson, who has a chance to be a fan favorite"
+        slusser = "Giants call up Matt ‘Tugboat’ Wilkinson with eye toward 2027 rotation options"
+        mlb = "LHP Tugboat Wilkinson -- who throws an 'Invisiball' -- gets call from Giants (source)"
+        self.assertTrue(same_story(brisbee, slusser))
+        self.assertTrue(same_story(slusser, mlb))
+        self.assertTrue(same_story(brisbee, mlb))
+
+    def test_brisbee_wilkinson_is_analysis_while_transaction_beats_are_news(self):
+        self.assertEqual(story_role({
+            "source": "The Athletic",
+            "author": "Grant Brisbee",
+            "title": "The Giants promoted Matt 'Tugboat' Wilkinson, who has a chance to be a fan favorite",
+        }), "analysis")
+        self.assertEqual(story_role({
+            "source": "San Francisco Chronicle",
+            "author": "Susan Slusser",
+            "title": "Giants call up Matt ‘Tugboat’ Wilkinson with eye toward 2027 rotation options",
+        }), "news")
+        self.assertEqual(story_role({
+            "source": "MLB.com",
+            "author": "Maria Guardado",
+            "title": "LHP Tugboat Wilkinson -- who throws an 'Invisiball' -- gets call from Giants (source)",
+        }), "news")
 
     def test_distinct_webb_analysis_does_not_cluster(self):
         self.assertFalse(same_story(

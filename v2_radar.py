@@ -14,7 +14,7 @@ except Exception:
 from v2_authors import normalize_author
 from v2_probe import Article, clean, make_article, structured_meta_author
 
-UA = "Mozilla/5.0 GiantsNewsBotV2Radar/1.0"
+UA = "Mozilla/5.0 GiantsNewsBotV2Radar/1.1"
 RADAR_MAX_PER_AUTHOR = 6
 
 
@@ -67,6 +67,19 @@ def strip_google_source_suffix(title: str, source: str) -> str:
         if value.lower().endswith(suffix.lower()):
             return value[: -len(suffix)].strip()
     return value
+
+
+def metadata_byline_includes_target(metadata_author: str, target_author: str) -> bool:
+    """Accept an exact target writer inside an otherwise valid co-byline."""
+    target = normalize_author(target_author)
+    if not target:
+        return False
+    value = " ".join((metadata_author or "").strip().lower().split())
+    if normalize_author(value) == target:
+        return True
+    value = value.replace(" & ", ",").replace(" and ", ",")
+    parts = [normalize_author(part.strip()) for part in value.split(",") if part.strip()]
+    return target in parts or target in value
 
 
 def _feed_records(target: RadarTarget, hours_back: int) -> list[dict]:
@@ -135,9 +148,10 @@ def discover_core_writer_radar(hours_back: int = 72) -> list[Article]:
         target: RadarTarget = record["target"]
 
         # Best effort only. A contradictory server-visible byline vetoes the
-        # query attribution; a challenge/blank byline does not.
+        # query attribution; a challenge/blank byline does not. Co-bylines are
+        # accepted when the targeted core writer is explicitly one of them.
         metadata_author = structured_meta_author(record["url"])
-        if metadata_author and normalize_author(metadata_author) != normalize_author(target.author):
+        if metadata_author and not metadata_byline_includes_target(metadata_author, target.author):
             continue
 
         articles.append(make_article(
