@@ -8,14 +8,17 @@ from zoneinfo import ZoneInfo
 from dateutil import parser as dtparser
 
 from v2_authors import is_core_game_writer
+from v2_mlb_schedule import fetch_giants_schedule
 from v2_story import candidate_preference_key
 
 PACIFIC = ZoneInfo("America/Los_Angeles")
 BASEBALL_DAY_SHIFT_HOURS = 12
 DEFAULT_GAME_HOURS_BACK = 30
+SCHEDULE_MATCH_MAX_HOURS = 48
 
-# These aliases are only used to label/group a game-coverage thread. Failure to
-# identify an opponent falls back to a date-only key; it never blocks a story.
+# These aliases are used to identify the opponent in article text. Failure to
+# identify an opponent never blocks a story; schedule grounding then falls back
+# to the older publication-time heuristic.
 TEAM_ALIASES = {
     "diamondbacks": ("diamondbacks", "d-backs", "arizona"),
     "athletics": ("athletics", "a's"),
@@ -119,7 +122,7 @@ def is_game_story(article: dict) -> bool:
 
 
 def baseball_day(article: dict) -> str:
-    """Return the likely local game date, with a noon cutoff for next-day coverage."""
+    """Fallback game date when MLB schedule grounding is unavailable."""
     dt = _parse_dt(article.get("published", ""))
     if dt is None:
         return ""
@@ -144,7 +147,9 @@ def extract_opponent(article: dict) -> str:
     return ""
 
 
-def game_thread_key(game_day: str, opponent: str = "") -> str:
+def game_thread_key(game_day: str, opponent: str = "", game_pk: int = 0) -> str:
+    if game_pk:
+        return f"game:{game_pk}"
     return f"game:{game_day}:{opponent or 'unknown'}"
 
 
@@ -173,18 +178,78 @@ def order_game_articles(members: list[dict]) -> list[dict]:
     return [root, *replies]
 
 
+def _schedule_games_for_articles(articles: list[dict]) -> list[dict]:
+    dates = [
+        dt.astimezone(PACIFIC).date()
+        for article in articles
+        if (dt := _article_dt(article)) is not None
+    ]
+    if not dates:
+        return []
+    try:
+        return fetch_giants_schedule(min(dates) - timedelta(days=3), max(dates) + timedelta(days=1))
+    except Exception:
+        return []
+
+
+def _match_schedule_game(article: dict, games: list[dict]) -> dict | None:
+    """Match a postgame story to the most recent actual Giants game it can describe."""
+    article_dt = _article_dt(article)
+    opponent = extract_opponent(article)
+    if article_dt is None or not opponent:
+        return None
+
+    candidates: list[tuple[float, dict]] = []
+    for game in games:
+        if game.get("opponent") != opponent:
+            continue
+        game_dt = _parse_dt(str(game.get("game_date", "") or ""))
+        if game_dt is None or game_dt > article_dt:
+            continue
+        age_hours = (article_dt - game_dt).total_seconds() / 3600
+        if age_hours > SCHEDULE_MATCH_MAX_HOURS:
+            continue
+        candidates.append((age_hours, game))
+
+    if not candidates:
+        return None
+    candidates.sort(key=lambda item: (item[0], -int(item[1].get("game_pk") or 0)))
+    return candidates[0][1]
+
+
 def group_game_articles(articles: list[dict]) -> list[dict]:
-    """Group game coverage by baseball day/opponent without suppressing versions."""
-    per_day: dict[str, dict[str, list[dict]]] = defaultdict(lambda: defaultdict(list))
+    """Group coverage by real MLB game when possible; use the legacy heuristic as fallback."""
+    games = _schedule_games_for_articles(articles)
+    grounded: dict[int, list[dict]] = defaultdict(list)
+    fallback: dict[str, dict[str, list[dict]]] = defaultdict(lambda: defaultdict(list))
+    game_meta: dict[int, dict] = {}
+
     for article in articles:
+        game = _match_schedule_game(article, games)
+        game_pk = int((game or {}).get("game_pk") or 0)
+        if game_pk:
+            grounded[game_pk].append(article)
+            game_meta[game_pk] = game
+            continue
+
         day = baseball_day(article)
         if not day:
             continue
-        opponent = extract_opponent(article)
-        per_day[day][opponent].append(article)
+        fallback[day][extract_opponent(article)].append(article)
 
     groups: list[dict] = []
-    for day, opponent_groups in per_day.items():
+    for game_pk, members in grounded.items():
+        game = game_meta[game_pk]
+        groups.append({
+            "key": game_thread_key(game.get("official_date", ""), game.get("opponent", ""), game_pk),
+            "game_pk": game_pk,
+            "game_day": game.get("official_date", ""),
+            "opponent": game.get("opponent", ""),
+            "schedule_grounded": True,
+            "articles": order_game_articles(members),
+        })
+
+    for day, opponent_groups in fallback.items():
         known = [opponent for opponent in opponent_groups if opponent]
         unknown = opponent_groups.pop("", [])
         if unknown and len(known) == 1:
@@ -195,13 +260,15 @@ def group_game_articles(articles: list[dict]) -> list[dict]:
         for opponent, members in opponent_groups.items():
             groups.append({
                 "key": game_thread_key(day, opponent),
+                "game_pk": 0,
                 "game_day": day,
                 "opponent": opponent,
+                "schedule_grounded": False,
                 "articles": order_game_articles(members),
             })
 
     def newest(group: dict) -> datetime:
-        values = [_parse_dt(item.get("published", "")) for item in group["articles"]]
+        values = [_article_dt(item) for item in group["articles"]]
         return max((value for value in values if value is not None), default=datetime.min.replace(tzinfo=timezone.utc))
 
     groups.sort(key=newest, reverse=True)
@@ -290,11 +357,14 @@ def select_game_threads(
     for thread in threads:
         public_threads.append({
             "key": thread["key"],
+            "game_pk": thread.get("game_pk", 0),
             "game_day": thread["game_day"],
             "opponent": thread["opponent"],
+            "schedule_grounded": thread.get("schedule_grounded", False),
             "articles": [public(article) for article in thread["articles"]],
         })
 
+    reasons["schedule_grounded_threads"] = sum(1 for thread in threads if thread.get("schedule_grounded"))
     reasons["selected_game_stories"] = sum(len(thread["articles"]) for thread in threads)
     reasons["selected_game_threads"] = len(threads)
     return {
