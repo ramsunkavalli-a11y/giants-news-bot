@@ -5,6 +5,9 @@ on:
     branches:
       - "v2/**"
       - "maintenance/**"
+  pull_request:
+    branches:
+      - main
   workflow_dispatch: {}
 
 permissions:
