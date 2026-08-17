@@ -1,13 +1,17 @@
 from __future__ import annotations
 
+import io
 import re
 from datetime import datetime, timezone
 from typing import Any, Dict, Optional, Tuple
 
 import requests
+from PIL import Image, ImageOps, UnidentifiedImageError
 
 from models import Candidate
 
+
+IMAGE_MAX_BYTES = 2_000_000
 
 DISPLAY_SOURCE_NAMES = {
     "SF Standard": "San Francisco Standard",
@@ -152,7 +156,31 @@ def bsky_login(session: requests.Session, pds: str, identifier: str, app_passwor
     return data["did"], data["accessJwt"]
 
 
-def upload_image_blob(session: requests.Session, image_url: str, pds: str, jwt: str, timeout: int) -> Optional[Dict[str, Any]]:
+def _image_aspect_ratio(blob_bytes: bytes) -> Optional[Dict[str, int]]:
+    """Return the displayed image ratio, respecting EXIF rotation when present."""
+    try:
+        with Image.open(io.BytesIO(blob_bytes)) as image:
+            oriented = ImageOps.exif_transpose(image)
+            try:
+                width, height = oriented.size
+            finally:
+                if oriented is not image:
+                    oriented.close()
+    except (UnidentifiedImageError, OSError, ValueError):
+        return None
+
+    if width < 1 or height < 1:
+        return None
+    return {"width": int(width), "height": int(height)}
+
+
+def upload_image_blob(
+    session: requests.Session,
+    image_url: str,
+    pds: str,
+    jwt: str,
+    timeout: int,
+) -> Optional[Tuple[Dict[str, Any], Dict[str, int]]]:
     if not image_url:
         return None
     try:
@@ -162,11 +190,18 @@ def upload_image_blob(session: requests.Session, image_url: str, pds: str, jwt: 
             content_type = r.headers.get("Content-Type", "")
             if not content_type.startswith("image/"):
                 return None
-            blob_bytes = r.raw.read(900_000)
-            if not blob_bytes:
+            # Read one byte beyond the lexicon limit so an oversize image is
+            # rejected cleanly instead of being silently truncated.
+            blob_bytes = r.raw.read(IMAGE_MAX_BYTES + 1)
+            if not blob_bytes or len(blob_bytes) > IMAGE_MAX_BYTES:
                 return None
     except Exception:
         return None
+
+    aspect_ratio = _image_aspect_ratio(blob_bytes)
+    if not aspect_ratio:
+        return None
+
     up = session.post(
         f"{pds}/xrpc/com.atproto.repo.uploadBlob",
         headers={"Authorization": f"Bearer {jwt}", "Content-Type": content_type},
@@ -174,16 +209,24 @@ def upload_image_blob(session: requests.Session, image_url: str, pds: str, jwt: 
         timeout=timeout,
     )
     up.raise_for_status()
-    return up.json().get("blob")
+    blob = up.json().get("blob")
+    if not blob:
+        return None
+    return blob, aspect_ratio
 
 
-def create_image_embed(candidate: Candidate, image_blob: Dict[str, Any]) -> Dict[str, Any]:
+def create_image_embed(
+    candidate: Candidate,
+    image_blob: Dict[str, Any],
+    aspect_ratio: Dict[str, int],
+) -> Dict[str, Any]:
     alt = (candidate.title or f"Image from {display_source_name(candidate.source)}").strip()
     return {
         "$type": "app.bsky.embed.images",
         "images": [{
             "image": image_blob,
             "alt": truncate_line(alt, 1000),
+            "aspectRatio": aspect_ratio,
         }],
     }
 
@@ -199,7 +242,7 @@ def post_to_bluesky(
     reply_root: Optional[Dict[str, str]] = None,
     reply_parent: Optional[Dict[str, str]] = None,
 ) -> Dict[str, str]:
-    image_blob = upload_image_blob(session, candidate.image_url, pds, jwt, timeout)
+    image_upload = upload_image_blob(session, candidate.image_url, pds, jwt, timeout)
     text, facets = build_link_post(candidate)
 
     record: Dict[str, Any] = {
@@ -208,8 +251,9 @@ def post_to_bluesky(
         "facets": facets,
         "createdAt": datetime.now(timezone.utc).isoformat().replace("+00:00", "Z"),
     }
-    if image_blob:
-        record["embed"] = create_image_embed(candidate, image_blob)
+    if image_upload:
+        image_blob, aspect_ratio = image_upload
+        record["embed"] = create_image_embed(candidate, image_blob, aspect_ratio)
 
     if reply_root and reply_parent:
         record["reply"] = {
