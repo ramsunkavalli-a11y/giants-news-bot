@@ -55,7 +55,7 @@ exact URL + story/event dedupe
         ↓
 optional image/metadata enrichment
         ↓
-Bluesky post: source/author + headline + publisher link
+Bluesky post: headline + source/author + publisher-domain link
         ↓
 native image when available
         ↓
@@ -72,27 +72,25 @@ Cross-publisher duplicates are clustered deterministically. The best version of 
 
 ## Bluesky presentation
 
-All stories use one consistent text/link pattern. Standalone example:
+Stories are **headline-first** so the reader sees the news before the metadata. Standalone example:
 
 ```text
-MLB.com · Maria Guardado
 Example Giants headline
+MLB.com · Maria Guardado
 Read at www.mlb.com →
 ```
 
-Game coverage adds the game label:
+Game coverage keeps the game label on the metadata line:
 
 ```text
-Game recap · SF Chronicle · Shayna Rubin
 Giants’ Turner Hill delivers go-ahead RBI in major-league debut
+Game recap · SF Chronicle · Shayna Rubin
 Read at www.sfchronicle.com →
 ```
 
-Only the **exact destination hostname** (for example, `www.sfchronicle.com`) is the Bluesky rich-text link facet; `Read at` and the arrow remain plain text. This intentionally matches Bluesky's external-link safety check so normal publisher links open without the misleading-label/"Leaving Bluesky" confirmation caused by branded link text that does not match the URL host.
+On the final line, only the exact destination hostname is a Bluesky rich-text link to the direct publisher URL. Matching the visible linked hostname to the destination avoids Bluesky's external-link mismatch warning. If a usable article image is available, it is uploaded as a **native Bluesky image** beneath the text. The bot deliberately does **not** use external link cards: they caused duplicate headlines, raw-URL fallbacks, and redundant publisher footer boxes. If no usable image is available, the post remains text + clickable publisher-domain link only.
 
-The facet still points directly to the publisher article. If a usable article image is available, it is uploaded as a **native Bluesky image** beneath the text. The bot deliberately does **not** use external link cards: they caused duplicate headlines, raw-URL fallbacks, and redundant publisher footer boxes. If no usable image is available, the post remains text + clickable publisher-domain link only.
-
-Use the display name **SF Chronicle** in the source/author line. The Athletic is displayed as **The Athletic ($)**.
+Use the display name **SF Chronicle** in the metadata line. The Athletic is displayed as **The Athletic ($)**.
 
 ## Game coverage
 
@@ -141,7 +139,7 @@ Useful environment variables:
 - `v2_story.py` — story/event clustering and duplicate winner logic
 - `v2_game_threads.py` — game detection, grouping, and root/reply ordering
 - `v2_authors.py` — author registry and editorial priors
-- `bsky_client.py` — Bluesky text/link formatting, native image upload/embed, and reply creation
+- `bsky_client.py` — Bluesky headline/metadata/link formatting, native image upload/embed, and reply creation
 - `models.py` — shared candidate model
 - `config.py` — small V2 runtime settings object
 - `v2_*_test.py` — deterministic regression tests
