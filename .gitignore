@@ -1,0 +1,21 @@
+# Python
+__pycache__/
+*.py[cod]
+.venv/
+venv/
+
+# Local/runtime outputs
+diagnostics.json
+v2-probe.json
+v2-radar-probe.json
+v2-selection.json
+v2-selection-fresh.json
+v2-runtime-diagnostics.json
+v2-athletic-probe.json
+v2-athletic-meta-probe.json
+v2-source-diag.json
+
+# Editors / OS
+.DS_Store
+.vscode/
+.idea/
