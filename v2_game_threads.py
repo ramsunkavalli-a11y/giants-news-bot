@@ -16,9 +16,6 @@ BASEBALL_DAY_SHIFT_HOURS = 12
 DEFAULT_GAME_HOURS_BACK = 30
 SCHEDULE_MATCH_MAX_HOURS = 48
 
-# These aliases are used to identify the opponent in article text. Failure to
-# identify an opponent never blocks a story; schedule grounding then falls back
-# to the older publication-time heuristic.
 TEAM_ALIASES = {
     "diamondbacks": ("diamondbacks", "d-backs", "arizona"),
     "athletics": ("athletics", "a's"),
@@ -122,7 +119,6 @@ def is_game_story(article: dict) -> bool:
 
 
 def baseball_day(article: dict) -> str:
-    """Fallback game date when MLB schedule grounding is unavailable."""
     dt = _parse_dt(article.get("published", ""))
     if dt is None:
         return ""
@@ -154,7 +150,6 @@ def game_thread_key(game_day: str, opponent: str = "", game_pk: int = 0) -> str:
 
 
 def order_game_articles(members: list[dict]) -> list[dict]:
-    """First-published core writer gets root; otherwise retain quality fallback."""
     core = [article for article in members if is_core_game_writer(article.get("author", ""))]
     if not core:
         return sorted(members, key=candidate_preference_key, reverse=True)
@@ -193,7 +188,6 @@ def _schedule_games_for_articles(articles: list[dict]) -> list[dict]:
 
 
 def _match_schedule_game(article: dict, games: list[dict]) -> dict | None:
-    """Match a postgame story to the most recent actual Giants game it can describe."""
     article_dt = _article_dt(article)
     opponent = extract_opponent(article)
     if article_dt is None or not opponent:
@@ -217,9 +211,13 @@ def _match_schedule_game(article: dict, games: list[dict]) -> dict | None:
     return candidates[0][1]
 
 
-def group_game_articles(articles: list[dict]) -> list[dict]:
-    """Group coverage by real MLB game when possible; use the legacy heuristic as fallback."""
-    games = _schedule_games_for_articles(articles)
+def group_game_articles(
+    articles: list[dict],
+    *,
+    schedule_games: list[dict] | None = None,
+) -> list[dict]:
+    """Group by real MLB game when supplied; otherwise use the legacy heuristic."""
+    games = schedule_games or []
     grounded: dict[int, list[dict]] = defaultdict(list)
     fallback: dict[str, dict[str, list[dict]]] = defaultdict(lambda: defaultdict(list))
     game_meta: dict[int, dict] = {}
@@ -282,8 +280,6 @@ def select_game_threads(
     hours_back: int = DEFAULT_GAME_HOURS_BACK,
     now: datetime | None = None,
 ) -> dict:
-    """Select every fresh, non-low game story. Cross-publisher versions are kept."""
-    # Local import avoids coupling the standalone selector back to this lane.
     from v2_selector import canonicalize_url, optional_page_metadata, parse_dt
 
     now = now or datetime.now(timezone.utc)
@@ -348,7 +344,8 @@ def select_game_threads(
                 "reason": reason,
             })
 
-    threads = group_game_articles(eligible)
+    schedule_games = _schedule_games_for_articles(eligible)
+    threads = group_game_articles(eligible, schedule_games=schedule_games)
 
     def public(article: dict) -> dict:
         return {key: value for key, value in article.items() if not key.startswith("_")}
