@@ -180,11 +180,11 @@ def upload_external_thumb(session: requests.Session, image_url: str, pds: str, j
 
 
 def create_embed_for_candidate(candidate: Candidate, thumb_blob: Dict[str, Any]) -> Dict[str, Any]:
-    # The headline lives in post text; the external card exists only when there
-    # is a real image, so it stays a clean visual/link target.
+    # Bluesky renders a raw URL when an external card title is blank. Keep the
+    # headline in post text, but give image cards a compact publisher label.
     external: Dict[str, Any] = {
         "uri": _article_url(candidate),
-        "title": "",
+        "title": display_source_name(candidate.source),
         "description": "",
         "thumb": thumb_blob,
     }
