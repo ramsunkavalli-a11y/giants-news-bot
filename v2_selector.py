@@ -22,7 +22,10 @@ TIMEOUT = 15
 TRACKING_KEYS = {
     "fbclid", "gclid", "ref", "refsrc", "mc_cid", "mc_eid", "igshid", "source"
 }
-LOW_VALUE_TITLE_RE = re.compile(r"\bhighlights\b", flags=re.I)
+LOW_VALUE_TITLE_RE = re.compile(
+    r"\bhighlights\b|\branking every mlb\b|\bfarm system,\s*1-30\b",
+    flags=re.I,
+)
 ROTATION_WINDOW_DAYS = 14
 EARLY_REPORTING_EDGE_MINUTES = 90
 
@@ -304,8 +307,7 @@ def select_articles(
         reason = "eligible"
 
         # Safety boundary: discovery adapters should already classify commodity
-        # highlight pages as low value, but do not let one through if a title
-        # variant misses an adapter pattern.
+        # pages as low value, but do not let known broad/highlight patterns through.
         if LOW_VALUE_TITLE_RE.search(title or ""):
             reason = "quality_low"
         elif article.get("quality") != "high":
