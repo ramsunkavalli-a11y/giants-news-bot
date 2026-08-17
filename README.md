@@ -1,37 +1,143 @@
-# giants-news-bot
+# SF Giants News Bot
 
-Python GitHub-Actions-friendly SF Giants → Bluesky bot.
+Automated, curated San Francisco Giants news feed for Bluesky. The bot discovers stories from a small set of structured publisher sources, filters for Giants relevance and editorial value, deduplicates overlapping coverage, groups game stories into threads, and posts direct publisher links.
 
-## Key behaviors
+**Production is V2.** The entrypoint is `v2_bot.py`. Older crawler/scoring code has been retired and is not part of the current system.
 
-- RSS-only sources: SF Standard, SFGate Giants, NYTimes Baseball.
-- Google News wrappers are resolved to direct publisher URLs before domain checks, dedupe, scoring, and posting.
-- Candidate URL lifecycle is explicit: `feed_url` → `resolved_url` → `publisher_url` → `canonical_url` → `post_url`.
-- Non-RSS crawling excludes MLB.com listing/sitemap discovery.
-- Strict MLB article URL validation (`/giants/news/` + article-like slug + blocked-path exclusions).
-- Source policies filter noisy/non-article pages for FanGraphs, Baseball America, AP hubs, and generic Bay Area sports pages.
-- Author priority is a score boost, not a hard gate.
-- Request/runtime guardrails:
-  - `MAX_TOTAL_HTTP_REQUESTS`
-  - `MAX_DISCOVERY_SECONDS`
-  - `MAX_ENRICH_CANDIDATES`
-- DRY_RUN writes `diagnostics.json` with stage-level outcomes and URL transformation fields.
+## Production at a glance
 
-## Debug / replay mode
+- **Entrypoint:** `python v2_bot.py`
+- **Workflow:** `.github/workflows/giants-news-bot.yml`
+- **Persistent state:** `state.json`
+- **Standalone cap:** 3 stories per run
+- **Standalone freshness:** 72 hours
+- **Game-story freshness:** 30 hours
+- **Dry run:** never mutates production state or posts to Bluesky
+- **Weekday cadence, Pacific:** 8:30 AM / 2:30 PM / 7:30 PM / 11:30 PM
+- **Weekend cadence, Pacific:** 8:30 AM / 1:30 PM / 5:30 PM / 10:30 PM
 
-Replay a prior diagnostics run with verbose resolver logs:
+GitHub cron is UTC, so the production workflow schedules both PDT and PST equivalents and uses an `America/Los_Angeles` gate to keep those local times stable through daylight-saving changes.
 
-```bash
-DRY_RUN=1 python giants_news_bot.py \
-  --diagnostics-in diagnostics.json \
-  --replay-candidates \
-  --limit 100 \
-  --verbose-resolver
+## Current source strategy
+
+The design principle is **structured discovery, own the last mile**. Prefer a publisher's official RSS/feed or clean team/category page rather than maintaining a universal crawler.
+
+| Publication | Production discovery |
+| --- | --- |
+| SF Standard | Official Sports RSS |
+| The Athletic | Giants RSS |
+| MLB.com | Giants RSS |
+| SFGATE | Giants RSS |
+| FanGraphs | Giants category RSS |
+| NBC Sports Bay Area | Giants news + analysis pages |
+| SF Chronicle | Targeted core-writer radar |
+| Mercury News | Targeted core-writer radar |
+
+Chronicle and Mercury pages are unreliable from GitHub runners, so the bot uses tightly scoped Google News RSS queries only for named core writers at those publishers, decodes the wrapper URL, verifies the publisher domain, and then sends the result through the same V2 filters as every other candidate. **Broad Google News search is diagnostic only and is not a production source.**
+
+Baseball America, Associated Press, and KNBR are trusted/interesting publishers but are not currently active production discoverers.
+
+## Pipeline
+
+```text
+structured discovery
+        ↓
+Giants relevance + editorial-value classification
+        ↓
+exact URL + story/event dedupe
+        ↓
+┌──────────────────────┬────────────────────────┐
+│ standalone news      │ game-story lane        │
+│ best article/event   │ group by game          │
+│ one source/run       │ root + threaded replies│
+│ max 3/run            │ separate from cap      │
+└──────────────────────┴────────────────────────┘
+        ↓
+optional card metadata/image enrichment
+        ↓
+Bluesky post
+        ↓
+state + diagnostics
 ```
 
-## Run
+A failed article-page fetch must not turn an otherwise valid structured-feed item into a rejection. Page fetches are primarily last-mile enrichment and targeted metadata work, not the foundation of discovery.
+
+## Editorial behavior
+
+The bot is intended to surface original reporting, breaking news, transactions, injuries, prospect coverage, meaningful analysis/features, and trusted beat reporting. It downweights or rejects commodity score recaps, generic multi-team pieces, recurring evergreen pages, promo/stream/highlight pages, video-only content, and derivative articles that mainly summarize another outlet.
+
+Cross-publisher duplicates are clustered deterministically. The best version of a story is selected **before** the one-source-per-run diversity rule is applied; the selector does not fall through to a weaker duplicate just to fill a slot.
+
+## Game coverage
+
+Game stories use a separate lane so readers can get several useful perspectives without filling the main feed with disconnected recap posts.
+
+- Stories are grouped by Pacific baseball day and opponent.
+- Core game writers are Andrew Baggarly, Alex Pavlovic, Shayna Rubin, Susan Slusser, Justice delos Santos, John Shea, and Maria Guardado.
+- If at least one core writer is available when a new game thread is created, the **earliest-published core-writer story** gets the root post.
+- Other eligible game stories become chronological replies.
+- Once a Bluesky thread root exists, it is never replaced; later discoveries append to that thread.
+- Root/parent Bluesky refs are persisted in `state.json` so later runs can continue the same thread.
+- Game stories do not count against the 3-story standalone cap.
+
+Game post text is:
+
+```text
+Game recap · SF Chronicle · Shayna Rubin
+Giants’ Turner Hill delivers go-ahead RBI in major-league debut
+```
+
+Normal standalone text is simply `Publication · Author` (for example, `The Athletic ($) · Andrew Baggarly`), with the headline/summary/image carried by the external card.
+
+## Local development
 
 ```bash
+python -m venv .venv
+source .venv/bin/activate
 pip install -r requirements.txt
-DRY_RUN=1 DIAGNOSTICS_ENABLED=1 python giants_news_bot.py
+DRY_RUN=1 DIAGNOSTICS_ENABLED=1 python v2_bot.py
 ```
+
+For a production Bluesky post, `BSKY_IDENTIFIER` and `BSKY_APP_PASSWORD` must be present. Do not use a live run as a routine test; the V2 CI workflow exercises live source discovery and a full production-state dry run without posting.
+
+Useful environment variables:
+
+| Variable | Production/default purpose |
+| --- | --- |
+| `HOURS_BACK` | 72-hour standalone discovery window |
+| `GAME_HOURS_BACK` | 30-hour game-story window in production |
+| `MAX_POSTS_PER_RUN` | 3 standalone posts/run |
+| `DRY_RUN` | `1` prints actions without posting or mutating state |
+| `STATE_FILE` | Alternate state path for tests/replays |
+| `DIAGNOSTICS_ENABLED` | Write selection/discovery diagnostics |
+| `DIAGNOSTICS_FILE` | Diagnostics output path |
+| `REQUEST_TIMEOUT` | HTTP timeout, default 15 seconds |
+| `KEEP_POSTED_DAYS` | State retention window, default 21 days |
+| `BSKY_PDS` | Bluesky PDS, default `https://bsky.social` |
+
+## Repository map
+
+- `v2_bot.py` — production orchestration
+- `v2_probe.py` — **production structured source adapters** plus structured-discovery diagnostic entrypoint; the historical name is slightly misleading
+- `v2_radar.py` — tightly scoped Chronicle/Mercury core-writer radar
+- `v2_selector.py` — freshness, historical dedupe, standalone selection
+- `v2_story.py` — story/event clustering and duplicate winner logic
+- `v2_game_threads.py` — game detection, grouping, and root/reply ordering
+- `v2_authors.py` — author registry and editorial priors
+- `bsky_client.py` — Bluesky text, external-card, image upload, and reply creation
+- `models.py` — shared candidate model
+- `config.py` — small V2 runtime settings object
+- `v2_*_test.py` — deterministic regression tests
+- `v2_*_probe.py`, `v2_source_diag.py`, `v2_select_probe.py` — CI diagnostics/simulations; these are intentional, not retired prototypes
+- `.github/workflows/giants-news-bot.yml` — production scheduler
+- `.github/workflows/v2-structured-probe.yml` — validation workflow
+
+## Documentation
+
+A new maintainer or new ChatGPT session should read these in order:
+
+1. [`docs/PROJECT_CONTEXT.md`](docs/PROJECT_CONTEXT.md) — current decisions, priorities, sources, authors, and known caveats
+2. [`docs/ARCHITECTURE.md`](docs/ARCHITECTURE.md) — pipeline and module-level design
+3. [`docs/OPERATIONS.md`](docs/OPERATIONS.md) — scheduling, testing, deployment, state, diagnostics, and troubleshooting
+
+The project intentionally favors small, deterministic rules and mature public feeds/parsers over bespoke crawling or paid infrastructure.

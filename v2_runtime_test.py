@@ -1,3 +1,4 @@
+import json
 import os
 import tempfile
 import unittest
@@ -112,6 +113,30 @@ class RuntimeSmokeTests(unittest.TestCase):
             self.assertEqual(state["posted_urls"], {})
             self.assertEqual(state["posted_stories"], [])
             self.assertEqual(state["game_threads"], {})
+            self.assertEqual(set(state), {"posted_urls", "posted_stories", "game_threads"})
+
+    def test_load_state_drops_retired_crawler_caches(self):
+        with tempfile.TemporaryDirectory() as directory:
+            path = os.path.join(directory, "legacy-state.json")
+            with open(path, "w", encoding="utf-8") as handle:
+                json.dump(
+                    {
+                        "posted_urls": {"https://example.com/a": "2026-08-16T00:00:00+00:00"},
+                        "posted_stories": [{"title": "Example"}],
+                        "game_threads": {"game:2026-08-16:test": {"root": {}}},
+                        "redirect_cache": {"legacy": "large"},
+                        "meta_cache": {"legacy": "large"},
+                    },
+                    handle,
+                )
+            state = load_state(path)
+            self.assertEqual(
+                set(state),
+                {"posted_urls", "posted_stories", "game_threads"},
+            )
+            self.assertIn("https://example.com/a", state["posted_urls"])
+            self.assertEqual(state["posted_stories"][0]["title"], "Example")
+            self.assertIn("game:2026-08-16:test", state["game_threads"])
 
     def test_mark_posted_stores_game_kind(self):
         state = {"posted_urls": {}, "posted_stories": []}

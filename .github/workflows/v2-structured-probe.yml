@@ -1,29 +1,10 @@
-name: V2 Structured Discovery Probe
+name: V2 Validation
 
 on:
   push:
-    branches: [v2/structured-discovery, v2/game-story-threads, v2/game-root-first-core, v2/radar-lane, v2/game-post-presentation, v2/cadence-tuning, v2/weekend-cadence]
-    paths:
-      - "v2_probe.py"
-      - "v2_select_probe.py"
-      - "v2_selector.py"
-      - "v2_story.py"
-      - "v2_story_test.py"
-      - "v2_game_threads.py"
-      - "v2_game_threads_test.py"
-      - "v2_runtime_test.py"
-      - "v2_bot.py"
-      - "v2_radar.py"
-      - "v2_radar_test.py"
-      - "v2_radar_probe.py"
-      - "v2_athletic_probe.py"
-      - "v2_athletic_meta_probe.py"
-      - "v2_authors.py"
-      - "v2_source_diag.py"
-      - "models.py"
-      - "bsky_client.py"
-      - ".github/workflows/giants-news-bot.yml"
-      - ".github/workflows/v2-structured-probe.yml"
+    branches:
+      - "v2/**"
+      - "maintenance/**"
   workflow_dispatch: {}
 
 permissions:
