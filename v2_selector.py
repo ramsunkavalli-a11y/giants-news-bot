@@ -23,7 +23,7 @@ TRACKING_KEYS = {
     "fbclid", "gclid", "ref", "refsrc", "mc_cid", "mc_eid", "igshid", "source"
 }
 LOW_VALUE_TITLE_RE = re.compile(
-    r"\bhighlights\b|\branking every mlb\b|\bfarm system,\s*1-30\b",
+    r"\bhighlights\b|\branking every mlb\b|\bfarm system,\s*1-30\b|\bfarm system ranking by\b",
     flags=re.I,
 )
 ROTATION_WINDOW_DAYS = 14
