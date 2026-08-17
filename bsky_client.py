@@ -122,11 +122,9 @@ def build_post_text(candidate: Candidate) -> str:
     return _headline_post_text(_post_prefix(candidate), candidate.title)
 
 
-def build_no_image_post(candidate: Candidate) -> tuple[str, list[dict]]:
-    """Build a clean text-only post with a clickable publisher link fallback."""
+def build_link_post(candidate: Candidate) -> tuple[str, list[dict]]:
+    """Build post text with a compact clickable publisher link on the final line."""
     link_label = f"Read at {display_source_name(candidate.source)} →"
-    # Keep a little margin under Bluesky's 300-grapheme limit and reserve room
-    # for the final linked line before truncating the headline.
     body_max = max(1, 290 - len(link_label) - 1)
     body = _headline_post_text(_post_prefix(candidate), candidate.title, body_max)
     text = f"{body}\n{link_label}"
@@ -154,7 +152,7 @@ def bsky_login(session: requests.Session, pds: str, identifier: str, app_passwor
     return data["did"], data["accessJwt"]
 
 
-def upload_external_thumb(session: requests.Session, image_url: str, pds: str, jwt: str, timeout: int) -> Optional[Dict[str, Any]]:
+def upload_image_blob(session: requests.Session, image_url: str, pds: str, jwt: str, timeout: int) -> Optional[Dict[str, Any]]:
     if not image_url:
         return None
     try:
@@ -179,16 +177,15 @@ def upload_external_thumb(session: requests.Session, image_url: str, pds: str, j
     return up.json().get("blob")
 
 
-def create_embed_for_candidate(candidate: Candidate, thumb_blob: Dict[str, Any]) -> Dict[str, Any]:
-    # Bluesky renders a raw URL when an external card title is blank. Keep the
-    # headline in post text, but give image cards a compact publisher label.
-    external: Dict[str, Any] = {
-        "uri": _article_url(candidate),
-        "title": display_source_name(candidate.source),
-        "description": "",
-        "thumb": thumb_blob,
+def create_image_embed(candidate: Candidate, image_blob: Dict[str, Any]) -> Dict[str, Any]:
+    alt = (candidate.title or f"Image from {display_source_name(candidate.source)}").strip()
+    return {
+        "$type": "app.bsky.embed.images",
+        "images": [{
+            "image": image_blob,
+            "alt": truncate_line(alt, 1000),
+        }],
     }
-    return {"$type": "app.bsky.embed.external", "external": external}
 
 
 def post_to_bluesky(
@@ -202,19 +199,17 @@ def post_to_bluesky(
     reply_root: Optional[Dict[str, str]] = None,
     reply_parent: Optional[Dict[str, str]] = None,
 ) -> Dict[str, str]:
-    thumb_blob = upload_external_thumb(session, candidate.image_url, pds, jwt, timeout)
+    image_blob = upload_image_blob(session, candidate.image_url, pds, jwt, timeout)
+    text, facets = build_link_post(candidate)
 
     record: Dict[str, Any] = {
         "$type": "app.bsky.feed.post",
+        "text": text,
+        "facets": facets,
         "createdAt": datetime.now(timezone.utc).isoformat().replace("+00:00", "Z"),
     }
-    if thumb_blob:
-        record["text"] = build_post_text(candidate)
-        record["embed"] = create_embed_for_candidate(candidate, thumb_blob)
-    else:
-        text, facets = build_no_image_post(candidate)
-        record["text"] = text
-        record["facets"] = facets
+    if image_blob:
+        record["embed"] = create_image_embed(candidate, image_blob)
 
     if reply_root and reply_parent:
         record["reply"] = {
