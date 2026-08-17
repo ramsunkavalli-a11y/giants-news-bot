@@ -52,14 +52,19 @@ class RuntimeSmokeTests(unittest.TestCase):
             "The Athletic ($) · Andrew Baggarly",
         )
 
-    def test_free_source_post_text_unchanged(self):
+    def test_standalone_headline_moves_into_post_text(self):
         candidate = Candidate(
-            source="MLB.com",
+            source="Mercury News",
             url="https://example.com/story",
-            author="Maria Guardado",
+            title="Despite lingering back issue, SF Giants’ Adames hopes to avoid IL stint",
+            author="Justice delos Santos",
             access="free",
         )
-        self.assertEqual(build_post_text(candidate), "MLB.com · Maria Guardado")
+        self.assertEqual(
+            build_post_text(candidate),
+            "Mercury News · Justice delos Santos\n"
+            "Despite lingering back issue, SF Giants’ Adames hopes to avoid IL stint",
+        )
 
     def test_sf_chronicle_display_name_is_short(self):
         candidate = Candidate(
@@ -106,6 +111,34 @@ class RuntimeSmokeTests(unittest.TestCase):
         self.assertIn(candidate.title, record["text"])
         external = record["embed"]["external"]
         self.assertEqual(external["title"], "Mercury News")
+        self.assertEqual(external["description"], "")
+
+    def test_standalone_card_does_not_repeat_headline_or_summary(self):
+        session = FakeSession()
+        candidate = Candidate(
+            source="NBC Sports Bay Area",
+            url="https://example.com/story",
+            post_url="https://example.com/story",
+            title="Giants' Landen Roupp looking for mechanical tweak",
+            summary="Roupp is searching for a mechanical adjustment.",
+            author="Taylor Wirth",
+        )
+        post_to_bluesky(
+            session,
+            candidate,
+            "https://bsky.social",
+            "did:plc:test",
+            "jwt",
+            5,
+        )
+        record = session.last_payload["record"]
+        self.assertEqual(
+            record["text"],
+            "NBC Sports Bay Area · Taylor Wirth\n"
+            "Giants' Landen Roupp looking for mechanical tweak",
+        )
+        external = record["embed"]["external"]
+        self.assertEqual(external["title"], "NBC Sports Bay Area")
         self.assertEqual(external["description"], "")
 
     def test_missing_state_initializes_game_threads(self):
