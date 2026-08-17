@@ -9,14 +9,22 @@ import requests
 from bs4 import BeautifulSoup
 from dateutil import parser as dtparser
 
-from v2_story import candidate_preference_key, cluster_articles, same_story
+from v2_story import (
+    candidate_preference_key,
+    cluster_articles,
+    event_tokens,
+    same_story,
+    story_role,
+)
 
-UA = "Mozilla/5.0 GiantsNewsBotV2Selector/0.4"
+UA = "Mozilla/5.0 GiantsNewsBotV2Selector/0.5"
 TIMEOUT = 15
 TRACKING_KEYS = {
     "fbclid", "gclid", "ref", "refsrc", "mc_cid", "mc_eid", "igshid", "source"
 }
 LOW_VALUE_TITLE_RE = re.compile(r"\bhighlights\b", flags=re.I)
+ROTATION_WINDOW_DAYS = 14
+EARLY_REPORTING_EDGE_MINUTES = 90
 
 
 def canonicalize_url(url: str) -> str:
@@ -149,11 +157,15 @@ def recent_story_history(
         title = (item.get("title") or "").strip()
         url = canonicalize_url(item.get("url", ""))
         if title:
-            history.append({
+            stored = {
                 "title": title,
                 "url": url,
+                "source": item.get("source", ""),
+                "author": item.get("author", ""),
                 "posted_at": posted_at.isoformat() if posted_at else "",
-            })
+            }
+            stored["story_role"] = story_role(stored)
+            history.append(stored)
             if url:
                 known_urls.add(url)
 
@@ -168,12 +180,93 @@ def recent_story_history(
             if meta_title:
                 title = meta_title
         if title:
-            history.append({
+            legacy = {
                 "title": title,
                 "url": url,
+                "source": "",
+                "author": "",
                 "posted_at": dt.isoformat() if dt else "",
-            })
+            }
+            legacy["story_role"] = story_role(legacy)
+            history.append(legacy)
     return history, enrichments
+
+
+def _recent_source_counts(state: dict, now: datetime) -> Counter:
+    cutoff = now - timedelta(days=ROTATION_WINDOW_DAYS)
+    counts = Counter()
+    for item in state.get("posted_stories", []) or []:
+        if not isinstance(item, dict) or item.get("kind", "standalone") != "standalone":
+            continue
+        dt = parse_dt(item.get("posted_at", ""))
+        if dt is not None and dt < cutoff:
+            continue
+        source = str(item.get("source", "") or "")
+        if source:
+            counts[source] += 1
+    return counts
+
+
+def _choose_news_winner(members: list[dict], source_counts: Counter) -> tuple[dict, bool]:
+    """Rotate truly comparable event reporting; meaningful quality gaps still win."""
+    ranked = sorted(members, key=candidate_preference_key, reverse=True)
+    if len(ranked) < 2 or not any(event_tokens(item.get("title", "")) for item in ranked):
+        return ranked[0], False
+
+    top_author_rank = candidate_preference_key(ranked[0])[0]
+    comparable = [
+        item for item in ranked
+        if candidate_preference_key(item)[0] >= top_author_rank - 1
+    ]
+    if len(comparable) < 2:
+        return ranked[0], False
+
+    chronological = sorted(
+        (item for item in comparable if isinstance(item.get("_published_dt"), datetime)),
+        key=lambda item: item["_published_dt"],
+    )
+    if len(chronological) >= 2:
+        lead = chronological[1]["_published_dt"] - chronological[0]["_published_dt"]
+        if lead >= timedelta(minutes=EARLY_REPORTING_EDGE_MINUTES):
+            return chronological[0], False
+
+    def rotation_key(item: dict) -> tuple:
+        author_rank, source_rank, named, timestamp = candidate_preference_key(item)
+        return (
+            source_counts.get(item.get("source", ""), 0),
+            -author_rank,
+            -source_rank,
+            -named,
+            -timestamp,
+        )
+
+    chosen = min(comparable, key=rotation_key)
+    return chosen, chosen is not ranked[0]
+
+
+def _role_representatives(cluster, source_counts: Counter) -> tuple[list[dict], list[dict], bool]:
+    by_role = {"news": [], "analysis": []}
+    for member in cluster.members:
+        by_role.setdefault(story_role(member), []).append(member)
+
+    representatives: list[dict] = []
+    duplicates: list[dict] = []
+    rotation_applied = False
+
+    news = by_role.get("news", [])
+    if news:
+        chosen, rotated = _choose_news_winner(news, source_counts)
+        representatives.append(chosen)
+        duplicates.extend(item for item in news if item is not chosen)
+        rotation_applied = rotated
+
+    analysis = by_role.get("analysis", [])
+    if analysis:
+        chosen_analysis = max(analysis, key=candidate_preference_key)
+        representatives.append(chosen_analysis)
+        duplicates.extend(item for item in analysis if item is not chosen_analysis)
+
+    return representatives, duplicates, rotation_applied
 
 
 def select_articles(
@@ -196,6 +289,7 @@ def select_articles(
     posted.discard("")
 
     history, history_enrichments = recent_story_history(state, cutoff)
+    source_counts = _recent_source_counts(state, now)
     reasons = Counter()
     diagnostics: list[dict] = []
     eligible: list[dict] = []
@@ -211,8 +305,7 @@ def select_articles(
 
         # Safety boundary: discovery adapters should already classify commodity
         # highlight pages as low value, but do not let one through if a title
-        # variant misses an adapter pattern (for example, a title ending in
-        # "highlights" with no trailing punctuation).
+        # variant misses an adapter pattern.
         if LOW_VALUE_TITLE_RE.search(title or ""):
             reason = "quality_low"
         elif article.get("quality") != "high":
@@ -236,6 +329,7 @@ def select_articles(
             else:
                 article["_published_dt"] = dt
                 article["canonical_url"] = canonical
+                article["story_role"] = story_role(article)
                 eligible.append(article)
 
         reasons[reason] += 1
@@ -250,9 +344,11 @@ def select_articles(
 
     fresh: list[dict] = []
     for article in eligible:
+        role = story_role(article)
         match = next((
             item for item in history
-            if same_story(article.get("title", ""), item.get("title", ""))
+            if item.get("story_role", "news") == role
+            and same_story(article.get("title", ""), item.get("title", ""))
         ), None)
         if match:
             reasons["story_already_posted"] += 1
@@ -260,6 +356,7 @@ def select_articles(
                 "source": article.get("source", ""),
                 "title": article.get("title", ""),
                 "url": article.get("url", ""),
+                "story_role": role,
                 "reason": "story_already_posted",
                 "matched_posted_title": match.get("title", ""),
                 "matched_posted_url": match.get("url", ""),
@@ -277,56 +374,66 @@ def select_articles(
     summaries: list[dict] = []
 
     for cluster in clusters:
-        ranked = cluster.ranked()
-        if not ranked:
+        representatives, duplicates, rotated = _role_representatives(cluster, source_counts)
+        if not representatives:
             continue
-        chosen = ranked[0]
-        alternatives = ranked[1:]
+
         summaries.append({
-            "chosen_title": chosen.get("title", ""),
-            "chosen_source": chosen.get("source", ""),
-            "chosen_author": chosen.get("author", ""),
-            "member_count": len(ranked),
-            "alternatives": [
+            "member_count": len(cluster.members),
+            "rotation_applied": rotated,
+            "representatives": [
                 {
+                    "role": story_role(item),
                     "source": item.get("source", ""),
                     "author": item.get("author", ""),
                     "title": item.get("title", ""),
-                    "author_preference": item.get("author_preference", ""),
-                    "source_preference": item.get("source_preference", ""),
                 }
-                for item in alternatives
+                for item in representatives
+            ],
+            "alternatives": [
+                {
+                    "role": story_role(item),
+                    "source": item.get("source", ""),
+                    "author": item.get("author", ""),
+                    "title": item.get("title", ""),
+                }
+                for item in duplicates
             ],
         })
-        for duplicate in alternatives:
+
+        for duplicate in duplicates:
             reasons["story_duplicate"] += 1
             diagnostics.append({
                 "source": duplicate.get("source", ""),
                 "title": duplicate.get("title", ""),
                 "url": duplicate.get("url", ""),
+                "story_role": story_role(duplicate),
                 "reason": "story_duplicate",
-                "chosen_source": chosen.get("source", ""),
-                "chosen_title": chosen.get("title", ""),
             })
 
-        source = chosen.get("source", "")
-        if source in used_sources:
-            reasons["source_cap_cluster"] += 1
-            diagnostics.append({
-                "source": source,
-                "title": chosen.get("title", ""),
-                "url": chosen.get("url", ""),
-                "reason": "source_cap_cluster",
-            })
-            continue
-        if len(selected) >= max_posts:
-            overflow.append(chosen)
-            reasons["run_cap"] += 1
-            continue
+        for chosen in representatives:
+            source = chosen.get("source", "")
+            if source in used_sources:
+                reasons["source_cap_cluster"] += 1
+                diagnostics.append({
+                    "source": source,
+                    "title": chosen.get("title", ""),
+                    "url": chosen.get("url", ""),
+                    "reason": "source_cap_cluster",
+                })
+                continue
+            if len(selected) >= max_posts:
+                overflow.append(chosen)
+                reasons["run_cap"] += 1
+                continue
 
-        chosen["selection_preference"] = list(candidate_preference_key(chosen)[:-1])
-        selected.append(chosen)
-        used_sources.add(source)
+            chosen["selection_preference"] = list(candidate_preference_key(chosen)[:-1])
+            chosen["story_role"] = story_role(chosen)
+            selected.append(chosen)
+            used_sources.add(source)
+            source_counts[source] += 1
+            if rotated and story_role(chosen) == "news":
+                reasons["comparable_story_rotation"] += 1
 
     reasons["selected"] = len(selected)
 
@@ -340,6 +447,7 @@ def select_articles(
         "max_posts": max_posts,
         "production_posted_url_count": len(posted),
         "recent_posted_story_count": len(history),
+        "recent_source_counts": dict(source_counts),
         "timestamp_enrichment_attempts": timestamp_enrichments,
         "history_enrichment_attempts": history_enrichments,
         "reasons": dict(reasons),
