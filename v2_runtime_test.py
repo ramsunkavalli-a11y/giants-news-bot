@@ -148,7 +148,7 @@ class RuntimeSmokeTests(unittest.TestCase):
         self.assertTrue(record["text"].endswith("Read at Mercury News →"))
         self.assertEqual(record["facets"][0]["features"][0]["uri"], candidate.url)
 
-    def test_image_story_keeps_clean_visual_card(self):
+    def test_image_story_uses_native_image_plus_read_link(self):
         session = FakeSession(image_available=True)
         candidate = Candidate(
             source="NBC Sports Bay Area",
@@ -159,12 +159,13 @@ class RuntimeSmokeTests(unittest.TestCase):
         )
         post_to_bluesky(session, candidate, "https://bsky.social", "did:plc:test", "jwt", 5)
         record = session.last_payload["record"]
-        self.assertNotIn("facets", record)
-        external = record["embed"]["external"]
-        self.assertEqual(external["title"], "NBC Sports Bay Area")
-        self.assertEqual(external["description"], "")
-        self.assertIn("thumb", external)
-        self.assertIn(candidate.title, record["text"])
+        self.assertTrue(record["text"].endswith("Read at NBC Sports Bay Area →"))
+        self.assertEqual(record["facets"][0]["features"][0]["uri"], candidate.url)
+        self.assertEqual(record["embed"]["$type"], "app.bsky.embed.images")
+        image = record["embed"]["images"][0]
+        self.assertEqual(image["alt"], candidate.title)
+        self.assertEqual(image["image"]["ref"]["$link"], "bafyimage")
+        self.assertNotIn("external", record["embed"])
 
     def test_missing_state_initializes_game_threads(self):
         with tempfile.TemporaryDirectory() as directory:
