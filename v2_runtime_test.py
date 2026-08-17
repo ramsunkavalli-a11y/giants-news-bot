@@ -2,6 +2,7 @@ import json
 import os
 import tempfile
 import unittest
+from datetime import datetime, timezone
 
 from bsky_client import build_post_text, post_to_bluesky
 from models import Candidate
@@ -12,6 +13,7 @@ from v2_bot import (
     load_state,
     mark_posted,
 )
+from v2_selector import select_articles
 
 
 class FakeResponse:
@@ -137,6 +139,23 @@ class RuntimeSmokeTests(unittest.TestCase):
             self.assertIn("https://example.com/a", state["posted_urls"])
             self.assertEqual(state["posted_stories"][0]["title"], "Example")
             self.assertIn("game:2026-08-16:test", state["game_threads"])
+
+    def test_highlight_page_rejected_at_selection_boundary(self):
+        now = datetime(2026, 8, 16, 18, 0, tzinfo=timezone.utc)
+        article = {
+            "source": "MLB.com",
+            "title": "Rockies-Giants highlights",
+            "url": "https://www.mlb.com/stories/game/823182",
+            "published": now.isoformat(),
+            "quality": "high",
+        }
+        selection = select_articles(
+            [article],
+            {"posted_urls": {}, "posted_stories": [], "game_threads": {}},
+            now=now,
+        )
+        self.assertEqual(selection["selected"], [])
+        self.assertEqual(selection["reasons"].get("quality_low"), 1)
 
     def test_mark_posted_stores_game_kind(self):
         state = {"posted_urls": {}, "posted_stories": []}
