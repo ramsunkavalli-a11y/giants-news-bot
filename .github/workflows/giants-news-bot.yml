@@ -1,6 +1,10 @@
 name: Giants News Bot
 
 on:
+  push:
+    branches: [main]
+    paths:
+      - ".github/manual-clearout-trigger"
   schedule:
     # GitHub cron is UTC. Run the weekday cadence at 8:30am / 2:30pm /
     # 7:30pm / 11:30pm PT, and shift weekends earlier for day-game coverage:
@@ -45,9 +49,9 @@ jobs:
         id: cadence
         shell: bash
         run: |
-          if [ "${{ github.event_name }}" = "workflow_dispatch" ]; then
+          if [ "${{ github.event_name }}" = "workflow_dispatch" ] || [ "${{ github.event_name }}" = "push" ]; then
             echo "run_bot=true" >> "$GITHUB_OUTPUT"
-            echo "Manual dispatch: running bot."
+            echo "Manual clearout/dispatch: running bot."
             exit 0
           fi
 
