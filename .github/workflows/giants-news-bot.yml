@@ -2,16 +2,36 @@ name: Giants News Bot
 
 on:
   schedule:
-    # GitHub cron is UTC. Schedule both PDT and PST equivalents, then use the
-    # cadence gate below so the bot stays at 8:30am / 2:30pm / 7:30pm / 11:30pm PT year-round.
+    # GitHub cron is UTC. Run the weekday cadence at 8:30am / 2:30pm /
+    # 7:30pm / 11:30pm PT, and shift weekends earlier for day-game coverage:
+    # 8:30am / 1:30pm / 5:30pm / 10:30pm PT. Each slot includes both PDT
+    # and PST equivalents; the cadence gate below suppresses the inactive one.
     - cron: "30 15 * * *"
     - cron: "30 16 * * *"
-    - cron: "30 21 * * *"
-    - cron: "30 22 * * *"
-    - cron: "30 02 * * *"
-    - cron: "30 03 * * *"
-    - cron: "30 06 * * *"
-    - cron: "30 07 * * *"
+
+    # Weekday 2:30pm PT.
+    - cron: "30 21 * * 1-5"
+    - cron: "30 22 * * 1-5"
+
+    # Weekend 1:30pm PT.
+    - cron: "30 20 * * 6,0"
+    - cron: "30 21 * * 6,0"
+
+    # Weekday 7:30pm PT (next UTC calendar day).
+    - cron: "30 02 * * 2-6"
+    - cron: "30 03 * * 2-6"
+
+    # Weekend 5:30pm PT (next UTC calendar day).
+    - cron: "30 00 * * 0,1"
+    - cron: "30 01 * * 0,1"
+
+    # Weekday 11:30pm PT (next UTC calendar day).
+    - cron: "30 06 * * 2-6"
+    - cron: "30 07 * * 2-6"
+
+    # Weekend 10:30pm PT (next UTC calendar day).
+    - cron: "30 05 * * 0,1"
+    - cron: "30 06 * * 0,1"
   workflow_dispatch: {}
 
 permissions:
@@ -36,10 +56,20 @@ jobs:
           run_bot=false
 
           case "$offset|$schedule" in
-            "-0700|30 15 * * *"|"-0700|30 21 * * *"|"-0700|30 02 * * *"|"-0700|30 06 * * *")
+            # 8:30am PT every day.
+            "-0700|30 15 * * *"|"-0800|30 16 * * *")
               run_bot=true
               ;;
-            "-0800|30 16 * * *"|"-0800|30 22 * * *"|"-0800|30 03 * * *"|"-0800|30 07 * * *")
+
+            # Mon-Fri: 2:30pm / 7:30pm / 11:30pm PT.
+            "-0700|30 21 * * 1-5"|"-0700|30 02 * * 2-6"|"-0700|30 06 * * 2-6"|\
+            "-0800|30 22 * * 1-5"|"-0800|30 03 * * 2-6"|"-0800|30 07 * * 2-6")
+              run_bot=true
+              ;;
+
+            # Sat-Sun: 1:30pm / 5:30pm / 10:30pm PT.
+            "-0700|30 20 * * 6,0"|"-0700|30 00 * * 0,1"|"-0700|30 05 * * 0,1"|\
+            "-0800|30 21 * * 6,0"|"-0800|30 01 * * 0,1"|"-0800|30 06 * * 0,1")
               run_bot=true
               ;;
           esac
