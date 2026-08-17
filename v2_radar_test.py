@@ -7,6 +7,7 @@ from v2_radar import (
     RadarTarget,
     discover_core_writer_radar,
     domain_matches,
+    metadata_byline_includes_target,
     strip_google_source_suffix,
     unique_author_records,
 )
@@ -36,6 +37,11 @@ class CoreWriterRadarTests(unittest.TestCase):
         ]
         self.assertEqual(unique_author_records(records), [])
 
+    def test_target_writer_can_be_one_member_of_metadata_cobyline(self):
+        self.assertTrue(metadata_byline_includes_target("Susan Slusser, J.D. Morris", "Susan Slusser"))
+        self.assertTrue(metadata_byline_includes_target("J.D. Morris and Susan Slusser", "Susan Slusser"))
+        self.assertFalse(metadata_byline_includes_target("J.D. Morris, John Shea", "Susan Slusser"))
+
     @patch("v2_radar.structured_meta_author", return_value="")
     @patch("v2_radar._feed_records")
     def test_unique_exact_author_query_can_supply_blocked_byline(self, feed_records, _meta):
@@ -58,6 +64,27 @@ class CoreWriterRadarTests(unittest.TestCase):
         self.assertEqual(articles[0].author, "Shayna Rubin")
         self.assertEqual(articles[0].author_preference, "elite")
         self.assertEqual(articles[0].source, "San Francisco Chronicle")
+
+    @patch("v2_radar.structured_meta_author", return_value="Susan Slusser, J.D. Morris")
+    @patch("v2_radar._feed_records")
+    def test_targeted_core_writer_cobyline_is_accepted(self, feed_records, _meta):
+        slusser = next(target for target in CORE_WRITER_RADAR_TARGETS if target.author == "Susan Slusser")
+
+        def records(target, _hours_back):
+            if target != slusser:
+                return []
+            return [{
+                "target": slusser,
+                "url": "https://www.sfchronicle.com/sports/giants/all-star.html",
+                "title": "Giants’ Oracle Park to host 2028 All-Star Game",
+                "summary": "",
+                "published": "Fri, 14 Aug 2026 16:00:00 GMT",
+            }]
+
+        feed_records.side_effect = records
+        articles = discover_core_writer_radar()
+        self.assertEqual(len(articles), 1)
+        self.assertEqual(articles[0].author, "Susan Slusser")
 
     @patch("v2_radar.structured_meta_author", return_value="Different Writer")
     @patch("v2_radar._feed_records")
