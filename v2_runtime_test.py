@@ -119,11 +119,11 @@ class RuntimeSmokeTests(unittest.TestCase):
             "Giants’ Turner Hill delivers go-ahead RBI in major-league debut",
         )
 
-    def test_no_image_game_recap_uses_link_line_instead_of_empty_card(self):
+    def test_no_image_game_recap_uses_matching_domain_link(self):
         session = FakeSession()
         candidate = Candidate(
             source="San Francisco Chronicle",
-            url="https://example.com/slusser-game-story",
+            url="https://www.sfchronicle.com/sports/giants/article/slusser-game-story-123.php",
             title="Giants’ Tony Vitello says play in loss to Rockies had feel of ‘junior college game’",
             author="Susan Slusser",
             discovered_via="game_thread:Google News core-writer radar",
@@ -135,41 +135,49 @@ class RuntimeSmokeTests(unittest.TestCase):
             record["text"],
             "Game recap · SF Chronicle · Susan Slusser\n"
             "Giants’ Tony Vitello says play in loss to Rockies had feel of ‘junior college game’\n"
-            "Read at SF Chronicle →",
+            "Read at www.sfchronicle.com →",
         )
         facet = record["facets"][0]
         self.assertEqual(facet["features"][0]["uri"], candidate.url)
         encoded = record["text"].encode("utf-8")
         linked = encoded[facet["index"]["byteStart"]:facet["index"]["byteEnd"]].decode("utf-8")
-        self.assertEqual(linked, "Read at SF Chronicle →")
+        self.assertEqual(linked, "www.sfchronicle.com")
 
-    def test_no_image_standalone_uses_link_line_instead_of_empty_card(self):
+    def test_no_image_standalone_uses_matching_domain_link(self):
         session = FakeSession()
         candidate = Candidate(
             source="Mercury News",
-            url="https://example.com/story",
+            url="https://www.mercurynews.com/2026/08/17/example-story/",
             title="Despite lingering back issue, SF Giants’ Adames hopes to avoid IL stint",
             author="Justice delos Santos",
         )
         post_to_bluesky(session, candidate, "https://bsky.social", "did:plc:test", "jwt", 5)
         record = session.last_payload["record"]
         self.assertNotIn("embed", record)
-        self.assertTrue(record["text"].endswith("Read at Mercury News →"))
-        self.assertEqual(record["facets"][0]["features"][0]["uri"], candidate.url)
+        self.assertTrue(record["text"].endswith("Read at www.mercurynews.com →"))
+        facet = record["facets"][0]
+        self.assertEqual(facet["features"][0]["uri"], candidate.url)
+        encoded = record["text"].encode("utf-8")
+        linked = encoded[facet["index"]["byteStart"]:facet["index"]["byteEnd"]].decode("utf-8")
+        self.assertEqual(linked, "www.mercurynews.com")
 
-    def test_image_story_uses_native_image_with_aspect_ratio_and_read_link(self):
+    def test_image_story_uses_native_image_with_aspect_ratio_and_matching_domain_link(self):
         session = FakeSession(image_available=True, image_bytes=jpeg_bytes(1200, 675))
         candidate = Candidate(
             source="NBC Sports Bay Area",
-            url="https://example.com/story",
+            url="https://www.nbcsportsbayarea.com/mlb/san-francisco-giants/example/1957101/",
             title="Giants' Landen Roupp looking for mechanical tweak",
             author="Taylor Wirth",
             image_url="https://example.com/image.jpg",
         )
         post_to_bluesky(session, candidate, "https://bsky.social", "did:plc:test", "jwt", 5)
         record = session.last_payload["record"]
-        self.assertTrue(record["text"].endswith("Read at NBC Sports Bay Area →"))
-        self.assertEqual(record["facets"][0]["features"][0]["uri"], candidate.url)
+        self.assertTrue(record["text"].endswith("Read at www.nbcsportsbayarea.com →"))
+        facet = record["facets"][0]
+        self.assertEqual(facet["features"][0]["uri"], candidate.url)
+        encoded = record["text"].encode("utf-8")
+        linked = encoded[facet["index"]["byteStart"]:facet["index"]["byteEnd"]].decode("utf-8")
+        self.assertEqual(linked, "www.nbcsportsbayarea.com")
         self.assertEqual(record["embed"]["$type"], "app.bsky.embed.images")
         image = record["embed"]["images"][0]
         self.assertEqual(image["alt"], candidate.title)
@@ -181,27 +189,27 @@ class RuntimeSmokeTests(unittest.TestCase):
         session = FakeSession(image_available=True, image_bytes=b"x" * 2_000_001)
         candidate = Candidate(
             source="MLB.com",
-            url="https://example.com/story",
+            url="https://www.mlb.com/giants/news/example",
             title="Example Giants story",
             image_url="https://example.com/huge.jpg",
         )
         post_to_bluesky(session, candidate, "https://bsky.social", "did:plc:test", "jwt", 5)
         record = session.last_payload["record"]
         self.assertNotIn("embed", record)
-        self.assertTrue(record["text"].endswith("Read at MLB.com →"))
+        self.assertTrue(record["text"].endswith("Read at www.mlb.com →"))
 
     def test_invalid_image_bytes_degrade_to_text_link(self):
         session = FakeSession(image_available=True, image_bytes=b"not-a-real-image")
         candidate = Candidate(
             source="MLB.com",
-            url="https://example.com/story",
+            url="https://www.mlb.com/giants/news/example",
             title="Example Giants story",
             image_url="https://example.com/bad.jpg",
         )
         post_to_bluesky(session, candidate, "https://bsky.social", "did:plc:test", "jwt", 5)
         record = session.last_payload["record"]
         self.assertNotIn("embed", record)
-        self.assertTrue(record["text"].endswith("Read at MLB.com →"))
+        self.assertTrue(record["text"].endswith("Read at www.mlb.com →"))
 
     def test_missing_state_initializes_game_threads(self):
         with tempfile.TemporaryDirectory() as directory:

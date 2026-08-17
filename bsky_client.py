@@ -4,6 +4,7 @@ import io
 import re
 from datetime import datetime, timezone
 from typing import Any, Dict, Optional, Tuple
+from urllib.parse import urlparse
 
 import requests
 from PIL import Image, ImageOps, UnidentifiedImageError
@@ -100,6 +101,16 @@ def _article_url(candidate: Candidate) -> str:
     return candidate.post_url or candidate.canonical_url or candidate.publisher_url or candidate.url
 
 
+def _article_hostname(candidate: Candidate) -> str:
+    """Return the exact hostname shown by Bluesky for the article destination."""
+    article_url = _article_url(candidate)
+    try:
+        hostname = urlparse(article_url).hostname
+    except ValueError:
+        hostname = None
+    return (hostname or article_url).lower()
+
+
 def is_game_thread_candidate(candidate: Candidate) -> bool:
     return (candidate.discovered_via or "").startswith("game_thread:")
 
@@ -127,14 +138,19 @@ def build_post_text(candidate: Candidate) -> str:
 
 
 def build_link_post(candidate: Candidate) -> tuple[str, list[dict]]:
-    """Build post text with a compact clickable publisher link on the final line."""
-    link_label = f"Read at {display_source_name(candidate.source)} →"
-    body_max = max(1, 290 - len(link_label) - 1)
+    """Build a direct publisher link whose visible facet text matches its host."""
+    hostname = _article_hostname(candidate)
+    link_prefix = "Read at "
+    link_suffix = " →"
+    link_line = f"{link_prefix}{hostname}{link_suffix}"
+    body_max = max(1, 290 - len(link_line) - 1)
     body = _headline_post_text(_post_prefix(candidate), candidate.title, body_max)
-    text = f"{body}\n{link_label}"
+    text = f"{body}\n{link_line}"
 
-    byte_start = len(f"{body}\n".encode("utf-8"))
-    byte_end = byte_start + len(link_label.encode("utf-8"))
+    # Bluesky warns when a rich-text link label does not match the target host.
+    # Link only the exact hostname; keep the surrounding "Read at" text plain.
+    byte_start = len(f"{body}\n{link_prefix}".encode("utf-8"))
+    byte_end = byte_start + len(hostname.encode("utf-8"))
     facets = [{
         "index": {"byteStart": byte_start, "byteEnd": byte_end},
         "features": [{

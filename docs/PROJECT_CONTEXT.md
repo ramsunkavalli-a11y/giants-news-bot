@@ -131,20 +131,20 @@ Known edge case: grouping is a Pacific-day + opponent heuristic, not an MLB game
 
 ## Bluesky presentation
 
-All posted articles now follow the same basic presentation. A normal standalone post is:
+All posted articles follow the same basic presentation. A normal standalone post is:
 
 ```text
 NBC Sports Bay Area · Alex Pavlovic
 Example Giants headline
-Read at NBC Sports Bay Area →
+Read at www.nbcsportsbayarea.com →
 ```
 
-The Athletic is labeled:
+The Athletic is labeled in the source line but links to the actual destination hostname:
 
 ```text
 The Athletic ($) · Andrew Baggarly
 Example headline
-Read at The Athletic →
+Read at www.nytimes.com →
 ```
 
 Game story text is:
@@ -152,14 +152,16 @@ Game story text is:
 ```text
 Game recap · SF Chronicle · Shayna Rubin
 Giants’ Turner Hill delivers go-ahead RBI in major-league debut
-Read at SF Chronicle →
+Read at www.sfchronicle.com →
 ```
 
-The final `Read at ... →` line is a Bluesky rich-text facet linking directly to the publisher article. If a usable article image is available, it is uploaded as a **native Bluesky image embed**. If the image fetch/upload fails, the post remains text + the clickable publisher link.
+The final line deliberately separates presentation from the rich-text link facet. `Read at ` and ` →` are plain text; **only the exact article destination hostname** is linked to the direct publisher article. Bluesky's client warns when visible linked text does not represent the destination host, which caused the earlier `Read at SF Chronicle →` / `Read at NBC Sports Bay Area →` labels to open a "Leaving Bluesky" confirmation dialog. Matching the linked text to the exact hostname avoids that mismatch warning while preserving direct publisher URLs.
 
-**Do not use Bluesky external link cards for article presentation.** Earlier iterations produced duplicated headlines, raw URL fallbacks when the card title was blank, and redundant publisher footer bars when the title was replaced by the outlet name. Native image + text link is the current chosen presentation.
+If a usable article image is available, it is uploaded as a **native Bluesky image embed**, including its aspect ratio. If the image fetch/upload fails, the post remains text + the clickable hostname. Image failures are presentation failures, not selection failures.
 
-Use the display name **SF Chronicle**, not the full `San Francisco Chronicle`, in Bluesky text. The article headline belongs in post text for both standalone and game stories.
+**Do not use Bluesky external link cards for article presentation.** Earlier iterations produced duplicated headlines, raw URL fallbacks when the card title was blank, and redundant publisher footer bars when the title was replaced by the outlet name. Native image + direct hostname link is the current chosen presentation.
+
+Use the display name **SF Chronicle**, not the full `San Francisco Chronicle`, in the source/author line. The article headline belongs in post text for both standalone and game stories.
 
 Last-mile image/metadata fetches happen after selection. They are enhancements and should remain non-blocking.
 
