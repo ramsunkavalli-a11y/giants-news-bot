@@ -141,9 +141,9 @@ def build_post_text(candidate: Candidate) -> str:
 
 
 def build_link_post(candidate: Candidate) -> tuple[str, list[dict]]:
-    """Build a direct publisher link whose visible facet text matches its host."""
+    """Build a direct link whose visible facet text matches its host."""
     hostname = _article_hostname(candidate)
-    link_prefix = "Read at "
+    link_prefix = "Listen at " if candidate.source == "KNBR" else "Read at "
     link_suffix = " →"
     link_line = f"{link_prefix}{hostname}{link_suffix}"
     body_max = max(1, 290 - len(link_line) - 1)
@@ -151,7 +151,7 @@ def build_link_post(candidate: Candidate) -> tuple[str, list[dict]]:
     text = f"{body}\n{link_line}"
 
     # Bluesky warns when a rich-text link label does not match the target host.
-    # Link only the exact hostname; keep the surrounding "Read at" text plain.
+    # Link only the exact hostname; keep the surrounding action text plain.
     byte_start = len(f"{body}\n{link_prefix}".encode("utf-8"))
     byte_end = byte_start + len(hostname.encode("utf-8"))
     facets = [{
