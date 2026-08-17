@@ -77,7 +77,7 @@ All stories use one consistent text/link pattern. Standalone example:
 ```text
 MLB.com · Maria Guardado
 Example Giants headline
-Read at MLB.com →
+Read at www.mlb.com →
 ```
 
 Game coverage adds the game label:
@@ -85,12 +85,14 @@ Game coverage adds the game label:
 ```text
 Game recap · SF Chronicle · Shayna Rubin
 Giants’ Turner Hill delivers go-ahead RBI in major-league debut
-Read at SF Chronicle →
+Read at www.sfchronicle.com →
 ```
 
-`Read at ... →` is a Bluesky rich-text link to the direct publisher URL. If a usable article image is available, it is uploaded as a **native Bluesky image** beneath the text. The bot deliberately does **not** use external link cards: they caused duplicate headlines, raw-URL fallbacks, and redundant publisher footer boxes. If no usable image is available, the post remains text + clickable publisher link only.
+Only the **exact destination hostname** (for example, `www.sfchronicle.com`) is the Bluesky rich-text link facet; `Read at` and the arrow remain plain text. This intentionally matches Bluesky's external-link safety check so normal publisher links open without the misleading-label/"Leaving Bluesky" confirmation caused by branded link text that does not match the URL host.
 
-Use the display name **SF Chronicle** in posts. The Athletic is displayed as **The Athletic ($)**.
+The facet still points directly to the publisher article. If a usable article image is available, it is uploaded as a **native Bluesky image** beneath the text. The bot deliberately does **not** use external link cards: they caused duplicate headlines, raw-URL fallbacks, and redundant publisher footer boxes. If no usable image is available, the post remains text + clickable publisher-domain link only.
+
+Use the display name **SF Chronicle** in the source/author line. The Athletic is displayed as **The Athletic ($)**.
 
 ## Game coverage
 
