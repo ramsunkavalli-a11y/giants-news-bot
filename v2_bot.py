@@ -53,8 +53,6 @@ def load_state(path: str) -> dict:
             "posted_urls": {},
             "posted_stories": [],
             "game_threads": {},
-            "redirect_cache": {},
-            "meta_cache": {},
         }
     try:
         with open(path, "r", encoding="utf-8") as handle:
@@ -65,17 +63,16 @@ def load_state(path: str) -> dict:
 
     if not isinstance(state, dict):
         state = {}
-    if not isinstance(state.get("posted_urls"), dict):
-        state["posted_urls"] = {}
-    if not isinstance(state.get("posted_stories"), list):
-        state["posted_stories"] = []
-    if not isinstance(state.get("game_threads"), dict):
-        state["game_threads"] = {}
-    if not isinstance(state.get("redirect_cache"), dict):
-        state["redirect_cache"] = {}
-    if not isinstance(state.get("meta_cache"), dict):
-        state["meta_cache"] = {}
-    return state
+
+    posted_urls = state.get("posted_urls", {})
+    posted_stories = state.get("posted_stories", [])
+    game_threads = state.get("game_threads", {})
+
+    return {
+        "posted_urls": posted_urls if isinstance(posted_urls, dict) else {},
+        "posted_stories": posted_stories if isinstance(posted_stories, list) else [],
+        "game_threads": game_threads if isinstance(game_threads, dict) else {},
+    }
 
 
 def save_state(path: str, state: dict) -> None:
@@ -298,7 +295,7 @@ def main() -> None:
     prune_state(state, settings.keep_posted_days)
 
     articles, health = discover_articles()
-    game_hours_back = int(os.getenv("GAME_HOURS_BACK", "36"))
+    game_hours_back = int(os.getenv("GAME_HOURS_BACK", "30"))
 
     game_selection = select_game_threads(
         articles,
