@@ -14,6 +14,7 @@ from bsky_client import bsky_login, build_post_text, post_to_bluesky
 from config import Settings
 from models import Candidate
 from v2_game_threads import is_game_story, select_game_threads
+from v2_knbr import discover_knbr_executive_show
 from v2_probe import (
     discover_athletic,
     discover_fangraphs,
@@ -32,6 +33,7 @@ DISCOVERERS = [
     discover_sfgate,
     discover_fangraphs,
     discover_nbc,
+    discover_knbr_executive_show,
     discover_core_writer_radar,
 ]
 
@@ -250,6 +252,11 @@ def _existing_thread_key(state: dict, thread: dict) -> str:
         return key
 
     day = thread.get("game_day", "")
+    opponent = thread.get("opponent", "")
+    legacy_known = f"game:{day}:{opponent}" if day and opponent else ""
+    if legacy_known and legacy_known in threads:
+        return legacy_known
+
     unknown = f"game:{day}:unknown"
     if unknown in threads:
         return unknown
@@ -272,6 +279,7 @@ def _set_thread_state(
     threads = state.setdefault("game_threads", {})
     existing = threads.get(key, {}) if isinstance(threads.get(key), dict) else {}
     threads[key] = {
+        "game_pk": thread.get("game_pk", 0) or existing.get("game_pk", 0),
         "game_day": thread.get("game_day", ""),
         "opponent": thread.get("opponent", "") or existing.get("opponent", ""),
         "root": root,
@@ -341,8 +349,10 @@ def main() -> None:
         "game_threads": [
             {
                 "key": thread["key"],
+                "game_pk": thread.get("game_pk", 0),
                 "game_day": thread["game_day"],
                 "opponent": thread["opponent"],
+                "schedule_grounded": thread.get("schedule_grounded", False),
                 "existing_thread_key": _existing_thread_key(state, thread),
                 "posts": [
                     {
@@ -380,7 +390,8 @@ def main() -> None:
         mode = "append" if _valid_ref(existing.get("root")) else "start"
         log(
             f"selected game_thread key={thread['key']} mode={mode} "
-            f"stories={len(thread['posts'])} opponent={thread['opponent'] or 'unknown'}"
+            f"stories={len(thread['posts'])} opponent={thread['opponent'] or 'unknown'} "
+            f"game_pk={thread.get('game_pk', 0)} grounded={thread.get('schedule_grounded', False)}"
         )
 
     if settings.dry_run:
