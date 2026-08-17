@@ -53,9 +53,11 @@ exact URL + story/event dedupe
 │ max 3/run            │ separate from cap      │
 └──────────────────────┴────────────────────────┘
         ↓
-optional card metadata/image enrichment
+optional image/metadata enrichment
         ↓
-Bluesky post
+Bluesky post: source/author + headline + publisher link
+        ↓
+native image when available
         ↓
 state + diagnostics
 ```
@@ -68,6 +70,28 @@ The bot is intended to surface original reporting, breaking news, transactions, 
 
 Cross-publisher duplicates are clustered deterministically. The best version of a story is selected **before** the one-source-per-run diversity rule is applied; the selector does not fall through to a weaker duplicate just to fill a slot.
 
+## Bluesky presentation
+
+All stories use one consistent text/link pattern. Standalone example:
+
+```text
+MLB.com · Maria Guardado
+Example Giants headline
+Read at MLB.com →
+```
+
+Game coverage adds the game label:
+
+```text
+Game recap · SF Chronicle · Shayna Rubin
+Giants’ Turner Hill delivers go-ahead RBI in major-league debut
+Read at SF Chronicle →
+```
+
+`Read at ... →` is a Bluesky rich-text link to the direct publisher URL. If a usable article image is available, it is uploaded as a **native Bluesky image** beneath the text. The bot deliberately does **not** use external link cards: they caused duplicate headlines, raw-URL fallbacks, and redundant publisher footer boxes. If no usable image is available, the post remains text + clickable publisher link only.
+
+Use the display name **SF Chronicle** in posts. The Athletic is displayed as **The Athletic ($)**.
+
 ## Game coverage
 
 Game stories use a separate lane so readers can get several useful perspectives without filling the main feed with disconnected recap posts.
@@ -79,15 +103,6 @@ Game stories use a separate lane so readers can get several useful perspectives 
 - Once a Bluesky thread root exists, it is never replaced; later discoveries append to that thread.
 - Root/parent Bluesky refs are persisted in `state.json` so later runs can continue the same thread.
 - Game stories do not count against the 3-story standalone cap.
-
-Game post text is:
-
-```text
-Game recap · SF Chronicle · Shayna Rubin
-Giants’ Turner Hill delivers go-ahead RBI in major-league debut
-```
-
-Normal standalone text is simply `Publication · Author` (for example, `The Athletic ($) · Andrew Baggarly`), with the headline/summary/image carried by the external card.
 
 ## Local development
 
@@ -124,7 +139,7 @@ Useful environment variables:
 - `v2_story.py` — story/event clustering and duplicate winner logic
 - `v2_game_threads.py` — game detection, grouping, and root/reply ordering
 - `v2_authors.py` — author registry and editorial priors
-- `bsky_client.py` — Bluesky text, external-card, image upload, and reply creation
+- `bsky_client.py` — Bluesky text/link formatting, native image upload/embed, and reply creation
 - `models.py` — shared candidate model
 - `config.py` — small V2 runtime settings object
 - `v2_*_test.py` — deterministic regression tests
