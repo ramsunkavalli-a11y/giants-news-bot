@@ -163,6 +163,23 @@ class SelectorEditorialTests(unittest.TestCase):
         self.assertEqual(selection["selected"], [])
         self.assertEqual(selection["reasons"].get("quality_low"), 1)
 
+    def test_derivative_farm_ranking_rewrite_is_rejected_at_selection_boundary(self):
+        ranking = article(
+            "NBC Sports Bay Area",
+            "Giants earn another top-five farm system ranking by prominent prospect outlet",
+            "Vince Lontz",
+            "",
+            0,
+        )
+        selection = select_articles(
+            [ranking],
+            {"posted_urls": {}, "posted_stories": [], "game_threads": {}},
+            max_posts=3,
+            now=NOW,
+        )
+        self.assertEqual(selection["selected"], [])
+        self.assertEqual(selection["reasons"].get("quality_low"), 1)
+
 
 if __name__ == "__main__":
     unittest.main()
