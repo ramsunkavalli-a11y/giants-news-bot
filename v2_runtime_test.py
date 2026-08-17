@@ -5,6 +5,8 @@ import tempfile
 import unittest
 from datetime import datetime, timezone
 
+from PIL import Image
+
 from bsky_client import build_post_text, post_to_bluesky
 from models import Candidate
 from v2_bot import (
@@ -37,10 +39,17 @@ class FakeResponse:
         return False
 
 
+def jpeg_bytes(width=1200, height=675):
+    buffer = io.BytesIO()
+    Image.new("RGB", (width, height)).save(buffer, format="JPEG")
+    return buffer.getvalue()
+
+
 class FakeSession:
-    def __init__(self, *, image_available=False):
+    def __init__(self, *, image_available=False, image_bytes=None):
         self.last_payload = None
         self.image_available = image_available
+        self.image_bytes = image_bytes if image_bytes is not None else jpeg_bytes()
 
     def get(self, url, **kwargs):
         if not self.image_available:
@@ -48,7 +57,7 @@ class FakeSession:
         return FakeResponse(
             status_code=200,
             headers={"Content-Type": "image/jpeg"},
-            raw=io.BytesIO(b"fake-image-bytes"),
+            raw=io.BytesIO(self.image_bytes),
         )
 
     def post(self, url, **kwargs):
@@ -148,8 +157,8 @@ class RuntimeSmokeTests(unittest.TestCase):
         self.assertTrue(record["text"].endswith("Read at Mercury News →"))
         self.assertEqual(record["facets"][0]["features"][0]["uri"], candidate.url)
 
-    def test_image_story_uses_native_image_plus_read_link(self):
-        session = FakeSession(image_available=True)
+    def test_image_story_uses_native_image_with_aspect_ratio_and_read_link(self):
+        session = FakeSession(image_available=True, image_bytes=jpeg_bytes(1200, 675))
         candidate = Candidate(
             source="NBC Sports Bay Area",
             url="https://example.com/story",
@@ -165,7 +174,34 @@ class RuntimeSmokeTests(unittest.TestCase):
         image = record["embed"]["images"][0]
         self.assertEqual(image["alt"], candidate.title)
         self.assertEqual(image["image"]["ref"]["$link"], "bafyimage")
+        self.assertEqual(image["aspectRatio"], {"width": 1200, "height": 675})
         self.assertNotIn("external", record["embed"])
+
+    def test_oversize_image_is_not_silently_truncated(self):
+        session = FakeSession(image_available=True, image_bytes=b"x" * 2_000_001)
+        candidate = Candidate(
+            source="MLB.com",
+            url="https://example.com/story",
+            title="Example Giants story",
+            image_url="https://example.com/huge.jpg",
+        )
+        post_to_bluesky(session, candidate, "https://bsky.social", "did:plc:test", "jwt", 5)
+        record = session.last_payload["record"]
+        self.assertNotIn("embed", record)
+        self.assertTrue(record["text"].endswith("Read at MLB.com →"))
+
+    def test_invalid_image_bytes_degrade_to_text_link(self):
+        session = FakeSession(image_available=True, image_bytes=b"not-a-real-image")
+        candidate = Candidate(
+            source="MLB.com",
+            url="https://example.com/story",
+            title="Example Giants story",
+            image_url="https://example.com/bad.jpg",
+        )
+        post_to_bluesky(session, candidate, "https://bsky.social", "did:plc:test", "jwt", 5)
+        record = session.last_payload["record"]
+        self.assertNotIn("embed", record)
+        self.assertTrue(record["text"].endswith("Read at MLB.com →"))
 
     def test_missing_state_initializes_game_threads(self):
         with tempfile.TemporaryDirectory() as directory:
