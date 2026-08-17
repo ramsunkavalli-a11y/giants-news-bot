@@ -83,7 +83,7 @@ class RuntimeSmokeTests(unittest.TestCase):
             "The Athletic ($) · Andrew Baggarly",
         )
 
-    def test_standalone_headline_moves_into_post_text(self):
+    def test_standalone_headline_is_first_in_post_text(self):
         candidate = Candidate(
             source="Mercury News",
             url="https://example.com/story",
@@ -93,8 +93,8 @@ class RuntimeSmokeTests(unittest.TestCase):
         )
         self.assertEqual(
             build_post_text(candidate),
-            "Mercury News · Justice delos Santos\n"
-            "Despite lingering back issue, SF Giants’ Adames hopes to avoid IL stint",
+            "Despite lingering back issue, SF Giants’ Adames hopes to avoid IL stint\n"
+            "Mercury News · Justice delos Santos",
         )
 
     def test_sf_chronicle_display_name_is_short(self):
@@ -105,7 +105,7 @@ class RuntimeSmokeTests(unittest.TestCase):
         )
         self.assertEqual(build_post_text(candidate), "SF Chronicle · Shayna Rubin")
 
-    def test_game_recap_moves_headline_into_post_text(self):
+    def test_game_recap_headline_is_first_in_post_text(self):
         candidate = Candidate(
             source="San Francisco Chronicle",
             url="https://example.com/game-story",
@@ -115,8 +115,8 @@ class RuntimeSmokeTests(unittest.TestCase):
         )
         self.assertEqual(
             build_post_text(candidate),
-            "Game recap · SF Chronicle · Shayna Rubin\n"
-            "Giants’ Turner Hill delivers go-ahead RBI in major-league debut",
+            "Giants’ Turner Hill delivers go-ahead RBI in major-league debut\n"
+            "Game recap · SF Chronicle · Shayna Rubin",
         )
 
     def test_no_image_game_recap_uses_matching_domain_link(self):
@@ -133,8 +133,8 @@ class RuntimeSmokeTests(unittest.TestCase):
         self.assertNotIn("embed", record)
         self.assertEqual(
             record["text"],
-            "Game recap · SF Chronicle · Susan Slusser\n"
             "Giants’ Tony Vitello says play in loss to Rockies had feel of ‘junior college game’\n"
+            "Game recap · SF Chronicle · Susan Slusser\n"
             "Read at www.sfchronicle.com →",
         )
         facet = record["facets"][0]
@@ -154,6 +154,10 @@ class RuntimeSmokeTests(unittest.TestCase):
         post_to_bluesky(session, candidate, "https://bsky.social", "did:plc:test", "jwt", 5)
         record = session.last_payload["record"]
         self.assertNotIn("embed", record)
+        self.assertTrue(record["text"].startswith(
+            "Despite lingering back issue, SF Giants’ Adames hopes to avoid IL stint\n"
+            "Mercury News · Justice delos Santos\n"
+        ))
         self.assertTrue(record["text"].endswith("Read at www.mercurynews.com →"))
         facet = record["facets"][0]
         self.assertEqual(facet["features"][0]["uri"], candidate.url)
@@ -172,6 +176,10 @@ class RuntimeSmokeTests(unittest.TestCase):
         )
         post_to_bluesky(session, candidate, "https://bsky.social", "did:plc:test", "jwt", 5)
         record = session.last_payload["record"]
+        self.assertTrue(record["text"].startswith(
+            "Giants' Landen Roupp looking for mechanical tweak\n"
+            "NBC Sports Bay Area · Taylor Wirth\n"
+        ))
         self.assertTrue(record["text"].endswith("Read at www.nbcsportsbayarea.com →"))
         facet = record["facets"][0]
         self.assertEqual(facet["features"][0]["uri"], candidate.url)
