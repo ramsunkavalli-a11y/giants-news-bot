@@ -121,12 +121,15 @@ def _post_prefix(candidate: Candidate) -> str:
 
 
 def _headline_post_text(prefix: str, headline: str, max_len: int = 290) -> str:
-    prefix = truncate_line(prefix, max_len)
+    """Put the article headline first and source/author metadata second."""
+    prefix = truncate_line((prefix or "").strip(), max_len)
     headline = (headline or "").strip()
     if not headline:
         return prefix
+    if not prefix:
+        return truncate_line(headline, max_len)
     remaining = max(1, max_len - len(prefix) - 1)
-    return f"{prefix}\n{truncate_line(headline, remaining)}"
+    return f"{truncate_line(headline, remaining)}\n{prefix}"
 
 
 def build_game_post_text(candidate: Candidate) -> str:
