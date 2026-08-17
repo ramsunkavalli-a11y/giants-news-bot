@@ -26,6 +26,8 @@ PHRASE_REPLACEMENTS = (
     (r"season[- ]ending", "seasonending"),
     (r"called? up", "callup"),
     (r"call[- ]up", "callup"),
+    (r"gets? (?:the )?call(?: to (?:the )?(?:majors|big leagues))?", "callup"),
+    (r"recalled? from (?:triple[- ]a|aaa)", "callup"),
     (r"placed on (?:the )?il", " il "),
     (r"designated for assignment", " dfa "),
 )
@@ -59,6 +61,24 @@ SOURCE_RANK = {
     "": 1,
 }
 
+ANALYSIS_AUTHORS = {
+    "grant brisbee",
+}
+ANALYSIS_SOURCES = {
+    "FanGraphs",
+}
+ANALYSIS_TITLE_PATTERNS = (
+    "analysis",
+    "breakdown",
+    "scouting",
+    "repertoire",
+    "pitch mix",
+    "pitching style",
+    "chance to be",
+    "what makes",
+    "why ",
+)
+
 
 def _normalize_text(text: str) -> str:
     value = (text or "").lower().replace("’", "'")
@@ -80,6 +100,18 @@ def story_tokens(title: str) -> set[str]:
 
 def event_tokens(title: str) -> set[str]:
     return story_tokens(title) & EVENT_TOKENS
+
+
+def story_role(article: dict) -> str:
+    """Distinguish deeper analysis from the event-reporting version of a story."""
+    author = str(article.get("author", "") or "").strip().lower()
+    source = str(article.get("source", "") or "")
+    title = str(article.get("title", "") or "").lower()
+    if author in ANALYSIS_AUTHORS or source in ANALYSIS_SOURCES:
+        return "analysis"
+    if any(pattern in title for pattern in ANALYSIS_TITLE_PATTERNS):
+        return "analysis"
+    return "news"
 
 
 def same_story(title_a: str, title_b: str) -> bool:
