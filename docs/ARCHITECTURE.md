@@ -39,7 +39,7 @@ Targeted author radar ─┘
                  optional image enrichment
                               │
                               ▼
-              source/author + headline + link
+              headline + source/author + domain link
               + native Bluesky image if available
                               │
                               ▼
@@ -247,8 +247,10 @@ Chronicle/Mercury are especially likely to return challenge pages, so image/meta
 Responsibilities:
 
 - login/session
-- source/author/headline text formatting
-- `Read at <publisher> →` rich-text link facet pointing to the direct article URL
+- headline-first text formatting
+- source/author metadata formatting, with `Game recap ·` for game-thread posts
+- `Read at <exact hostname> →` final line pointing to the direct article URL
+- rich-text facet applied only to the exact hostname so Bluesky does not show a link-label mismatch warning
 - optional remote image download + Bluesky blob upload
 - native `app.bsky.embed.images` payload when an image is available
 - reply root/parent payloads
@@ -256,20 +258,22 @@ Responsibilities:
 Standalone example:
 
 ```text
-Mercury News · Justice delos Santos
 Example Giants headline
-Read at Mercury News →
+Mercury News · Justice delos Santos
+Read at www.mercurynews.com →
 ```
 
 Game example:
 
 ```text
-Game recap · SF Chronicle · Shayna Rubin
 Example postgame headline
-Read at SF Chronicle →
+Game recap · SF Chronicle · Shayna Rubin
+Read at www.sfchronicle.com →
 ```
 
-The system **does not use `app.bsky.embed.external` for article presentation**. Earlier external-card iterations had three UI problems: duplicate headline/summary content, a raw article URL when the card title was blank, and a redundant publisher footer when the title was replaced with the source name. Native image + rich-text article link is the chosen presentation.
+The headline comes first because the article itself is the reader-facing hook; publication and byline are supporting metadata. The final link line uses the article's actual hostname. Only that hostname is linked, while `Read at ` and ` →` remain plain text.
+
+The system **does not use `app.bsky.embed.external` for article presentation**. Earlier external-card iterations had three UI problems: duplicate headline/summary content, a raw article URL when the card title was blank, and a redundant publisher footer when the title was replaced with the source name. Native image + direct hostname link is the chosen presentation.
 
 When no image is available, the same text/link post is created without an image embed. Image failure is therefore cosmetic and non-blocking.
 
@@ -313,7 +317,7 @@ Core robustness principles:
 | `v2_story.py` | event/story keys and duplicate comparison |
 | `v2_game_threads.py` | game detection/grouping/root ordering |
 | `v2_authors.py` | author/source priors and core game writer registry |
-| `bsky_client.py` | Bluesky text/link formatting, native image embed, API posting |
+| `bsky_client.py` | Bluesky headline/metadata/link formatting, native image embed, API posting |
 | `models.py` | shared runtime candidate model |
 | `config.py` | runtime environment settings |
 | `v2_*_test.py` | regression tests |
