@@ -161,7 +161,7 @@ class RuntimeSmokeTests(unittest.TestCase):
         record = session.last_payload["record"]
         self.assertNotIn("facets", record)
         external = record["embed"]["external"]
-        self.assertEqual(external["title"], "")
+        self.assertEqual(external["title"], "NBC Sports Bay Area")
         self.assertEqual(external["description"], "")
         self.assertIn("thumb", external)
         self.assertIn(candidate.title, record["text"])
