@@ -131,30 +131,37 @@ Known edge case: grouping is a Pacific-day + opponent heuristic, not an MLB game
 
 ## Bluesky presentation
 
-Normal standalone post text:
+All posted articles now follow the same basic presentation. A normal standalone post is:
 
 ```text
 NBC Sports Bay Area · Alex Pavlovic
+Example Giants headline
+Read at NBC Sports Bay Area →
 ```
 
 The Athletic is labeled:
 
 ```text
 The Athletic ($) · Andrew Baggarly
+Example headline
+Read at The Athletic →
 ```
 
-Game story text:
+Game story text is:
 
 ```text
 Game recap · SF Chronicle · Shayna Rubin
 Giants’ Turner Hill delivers go-ahead RBI in major-league debut
+Read at SF Chronicle →
 ```
 
-For game stories the headline is intentionally moved into the post, so the external card does not repeat the same headline/description. If a game card has no usable image, it keeps a small publisher label so the link card does not appear empty.
+The final `Read at ... →` line is a Bluesky rich-text facet linking directly to the publisher article. If a usable article image is available, it is uploaded as a **native Bluesky image embed**. If the image fetch/upload fails, the post remains text + the clickable publisher link.
 
-Use the display name **SF Chronicle**, not the full `San Francisco Chronicle`, in Bluesky text.
+**Do not use Bluesky external link cards for article presentation.** Earlier iterations produced duplicated headlines, raw URL fallbacks when the card title was blank, and redundant publisher footer bars when the title was replaced by the outlet name. Native image + text link is the current chosen presentation.
 
-Last-mile card metadata/image fetches happen after selection. They are enhancements and should remain non-blocking.
+Use the display name **SF Chronicle**, not the full `San Francisco Chronicle`, in Bluesky text. The article headline belongs in post text for both standalone and game stories.
+
+Last-mile image/metadata fetches happen after selection. They are enhancements and should remain non-blocking.
 
 ## State
 

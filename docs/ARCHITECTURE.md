@@ -36,7 +36,11 @@ Targeted author radar ─┘
                   selected candidates only
                               │
                               ▼
-              optional card/author/time enrichment
+                 optional image enrichment
+                              │
+                              ▼
+              source/author + headline + link
+              + native Bluesky image if available
                               │
                               ▼
                          Bluesky API
@@ -232,7 +236,7 @@ Selected candidates can be enriched with:
 - author metadata
 - article publication time when missing
 - `og:image` / `twitter:image`
-- `og:description` or comparable summary metadata
+- comparable summary metadata when useful diagnostically
 
 This is last-mile work. A failed enrichment request should degrade presentation, not suppress a good structured-feed story.
 
@@ -243,14 +247,31 @@ Chronicle/Mercury are especially likely to return challenge pages, so image/meta
 Responsibilities:
 
 - login/session
-- post text formatting
-- external card payload
+- source/author/headline text formatting
+- `Read at <publisher> →` rich-text link facet pointing to the direct article URL
 - optional remote image download + Bluesky blob upload
+- native `app.bsky.embed.images` payload when an image is available
 - reply root/parent payloads
 
-Standalone text is publication + author only. The external card supplies headline/description/image.
+Standalone example:
 
-Game text contains the `Game recap` label plus headline; game card headline/description are suppressed to avoid duplication. Image-less game cards retain a small publisher label.
+```text
+Mercury News · Justice delos Santos
+Example Giants headline
+Read at Mercury News →
+```
+
+Game example:
+
+```text
+Game recap · SF Chronicle · Shayna Rubin
+Example postgame headline
+Read at SF Chronicle →
+```
+
+The system **does not use `app.bsky.embed.external` for article presentation**. Earlier external-card iterations had three UI problems: duplicate headline/summary content, a raw article URL when the card title was blank, and a redundant publisher footer when the title was replaced with the source name. Native image + rich-text article link is the chosen presentation.
+
+When no image is available, the same text/link post is created without an image embed. Image failure is therefore cosmetic and non-blocking.
 
 ## 9. State
 
@@ -277,7 +298,7 @@ Core robustness principles:
 - each discoverer runs independently
 - one source throwing an exception should not abort the whole discovery pass
 - radar failure should not disable direct sources
-- card enrichment failure should not reject selection
+- image enrichment failure should not reject selection
 - bad metadata should be ignored rather than posted when it is obviously publisher/challenge boilerplate
 - exact URL/story history should prevent accidental reposts across runs
 
@@ -292,7 +313,7 @@ Core robustness principles:
 | `v2_story.py` | event/story keys and duplicate comparison |
 | `v2_game_threads.py` | game detection/grouping/root ordering |
 | `v2_authors.py` | author/source priors and core game writer registry |
-| `bsky_client.py` | Bluesky formatting/API |
+| `bsky_client.py` | Bluesky text/link formatting, native image embed, API posting |
 | `models.py` | shared runtime candidate model |
 | `config.py` | runtime environment settings |
 | `v2_*_test.py` | regression tests |
@@ -313,3 +334,4 @@ When changing the project, preserve these unless there is a deliberate product d
 8. Do not reset production state as part of code cleanup.
 9. Prefer one small adapter per publication.
 10. Keep product volume intentionally selective.
+11. Keep the article URL as a direct publisher rich-text link; do not revert to external cards without a specific UI reason.
