@@ -2,6 +2,7 @@ import json
 import os
 import tempfile
 import unittest
+from datetime import datetime, timezone
 
 from bsky_client import build_post_text, post_to_bluesky
 from models import Candidate
@@ -12,6 +13,7 @@ from v2_bot import (
     load_state,
     mark_posted,
 )
+from v2_selector import select_articles
 
 
 class FakeResponse:
@@ -50,14 +52,19 @@ class RuntimeSmokeTests(unittest.TestCase):
             "The Athletic ($) · Andrew Baggarly",
         )
 
-    def test_free_source_post_text_unchanged(self):
+    def test_standalone_headline_moves_into_post_text(self):
         candidate = Candidate(
-            source="MLB.com",
+            source="Mercury News",
             url="https://example.com/story",
-            author="Maria Guardado",
+            title="Despite lingering back issue, SF Giants’ Adames hopes to avoid IL stint",
+            author="Justice delos Santos",
             access="free",
         )
-        self.assertEqual(build_post_text(candidate), "MLB.com · Maria Guardado")
+        self.assertEqual(
+            build_post_text(candidate),
+            "Mercury News · Justice delos Santos\n"
+            "Despite lingering back issue, SF Giants’ Adames hopes to avoid IL stint",
+        )
 
     def test_sf_chronicle_display_name_is_short(self):
         candidate = Candidate(
@@ -106,6 +113,34 @@ class RuntimeSmokeTests(unittest.TestCase):
         self.assertEqual(external["title"], "Mercury News")
         self.assertEqual(external["description"], "")
 
+    def test_standalone_card_does_not_repeat_headline_or_summary(self):
+        session = FakeSession()
+        candidate = Candidate(
+            source="NBC Sports Bay Area",
+            url="https://example.com/story",
+            post_url="https://example.com/story",
+            title="Giants' Landen Roupp looking for mechanical tweak",
+            summary="Roupp is searching for a mechanical adjustment.",
+            author="Taylor Wirth",
+        )
+        post_to_bluesky(
+            session,
+            candidate,
+            "https://bsky.social",
+            "did:plc:test",
+            "jwt",
+            5,
+        )
+        record = session.last_payload["record"]
+        self.assertEqual(
+            record["text"],
+            "NBC Sports Bay Area · Taylor Wirth\n"
+            "Giants' Landen Roupp looking for mechanical tweak",
+        )
+        external = record["embed"]["external"]
+        self.assertEqual(external["title"], "NBC Sports Bay Area")
+        self.assertEqual(external["description"], "")
+
     def test_missing_state_initializes_game_threads(self):
         with tempfile.TemporaryDirectory() as directory:
             path = os.path.join(directory, "missing-state.json")
@@ -137,6 +172,23 @@ class RuntimeSmokeTests(unittest.TestCase):
             self.assertIn("https://example.com/a", state["posted_urls"])
             self.assertEqual(state["posted_stories"][0]["title"], "Example")
             self.assertIn("game:2026-08-16:test", state["game_threads"])
+
+    def test_highlight_page_rejected_at_selection_boundary(self):
+        now = datetime(2026, 8, 16, 18, 0, tzinfo=timezone.utc)
+        article = {
+            "source": "MLB.com",
+            "title": "Rockies-Giants highlights",
+            "url": "https://www.mlb.com/stories/game/823182",
+            "published": now.isoformat(),
+            "quality": "high",
+        }
+        selection = select_articles(
+            [article],
+            {"posted_urls": {}, "posted_stories": [], "game_threads": {}},
+            now=now,
+        )
+        self.assertEqual(selection["selected"], [])
+        self.assertEqual(selection["reasons"].get("quality_low"), 1)
 
     def test_mark_posted_stores_game_kind(self):
         state = {"posted_urls": {}, "posted_stories": []}

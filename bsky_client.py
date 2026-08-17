@@ -79,10 +79,15 @@ def display_author(author: str, source: str) -> str:
     return cleaned
 
 
-def _source_author_text(candidate: Candidate) -> str:
+def _source_text(candidate: Candidate) -> str:
     source = display_source_name(candidate.source)
     if candidate.access == "paywalled":
         source = f"{source} ($)"
+    return source
+
+
+def _source_author_text(candidate: Candidate) -> str:
+    source = _source_text(candidate)
     author = display_author(candidate.author, candidate.source)
     return f"{source} · {author}" if author else source
 
@@ -91,19 +96,26 @@ def is_game_thread_candidate(candidate: Candidate) -> bool:
     return (candidate.discovered_via or "").startswith("game_thread:")
 
 
-def build_game_post_text(candidate: Candidate) -> str:
-    prefix = f"Game recap · {_source_author_text(candidate)}"
-    headline = (candidate.title or "").strip()
+def _headline_post_text(prefix: str, headline: str) -> str:
+    prefix = truncate_line(prefix, 290)
+    headline = (headline or "").strip()
     if not headline:
-        return truncate_line(prefix, 290)
+        return prefix
     remaining = max(1, 290 - len(prefix) - 1)
     return f"{prefix}\n{truncate_line(headline, remaining)}"
+
+
+def build_game_post_text(candidate: Candidate) -> str:
+    return _headline_post_text(
+        f"Game recap · {_source_author_text(candidate)}",
+        candidate.title,
+    )
 
 
 def build_post_text(candidate: Candidate) -> str:
     if is_game_thread_candidate(candidate):
         return build_game_post_text(candidate)
-    return truncate_line(_source_author_text(candidate), 290)
+    return _headline_post_text(_source_author_text(candidate), candidate.title)
 
 
 def bsky_login(session: requests.Session, pds: str, identifier: str, app_password: str, timeout: int) -> Tuple[str, str]:
@@ -143,18 +155,13 @@ def upload_external_thumb(session: requests.Session, image_url: str, pds: str, j
 
 
 def create_embed_for_candidate(session: requests.Session, candidate: Candidate, pds: str, jwt: str, timeout: int) -> Dict[str, Any]:
-    game_thread = is_game_thread_candidate(candidate)
     thumb_blob = upload_external_thumb(session, candidate.image_url, pds, jwt, timeout)
 
-    if game_thread:
-        # The headline already lives in the post text. With a working thumbnail,
-        # let the visual/link card stand on its own. Without one, retain a small
-        # outlet label so the card does not render as an empty box.
-        title = "" if thumb_blob else display_source_name(candidate.source)
-        description = ""
-    else:
-        title = truncate_line(candidate.title or "Giants update", 100)
-        description = truncate_line(candidate.summary or display_source_name(candidate.source), 280)
+    # The headline always lives in the post text. The external card is only the
+    # visual/link target: image when available, otherwise a compact outlet label.
+    # Do not repeat the headline or article summary inside the card.
+    title = "" if thumb_blob else _source_text(candidate)
+    description = ""
 
     external: Dict[str, Any] = {
         "uri": candidate.post_url or candidate.canonical_url or candidate.publisher_url or candidate.url,

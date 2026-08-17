@@ -16,6 +16,7 @@ TIMEOUT = 15
 TRACKING_KEYS = {
     "fbclid", "gclid", "ref", "refsrc", "mc_cid", "mc_eid", "igshid", "source"
 }
+LOW_VALUE_TITLE_RE = re.compile(r"\bhighlights\b", flags=re.I)
 
 
 def canonicalize_url(url: str) -> str:
@@ -203,11 +204,18 @@ def select_articles(
     for raw in articles:
         article = dict(raw)
         source = article.get("source", "")
+        title = article.get("title", "")
         url = article.get("url", "")
         canonical = canonicalize_url(url)
         reason = "eligible"
 
-        if article.get("quality") != "high":
+        # Safety boundary: discovery adapters should already classify commodity
+        # highlight pages as low value, but do not let one through if a title
+        # variant misses an adapter pattern (for example, a title ending in
+        # "highlights" with no trailing punctuation).
+        if LOW_VALUE_TITLE_RE.search(title or ""):
+            reason = "quality_low"
+        elif article.get("quality") != "high":
             reason = f"quality_{article.get('quality') or 'unknown'}"
         elif not canonical:
             reason = "missing_url"
