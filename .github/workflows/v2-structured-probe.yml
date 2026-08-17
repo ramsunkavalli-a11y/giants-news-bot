@@ -44,6 +44,12 @@ jobs:
       - name: Run structured discovery probe
         run: python v2_probe.py
 
+      - name: Run KNBR Executive Show probe
+        run: python v2_knbr_probe.py
+
+      - name: Run MLB schedule probe
+        run: python v2_schedule_probe.py
+
       - name: Run contained radar probe
         run: python v2_radar_probe.py
 
@@ -92,6 +98,8 @@ jobs:
           name: v2-structured-probe
           path: |
             v2-probe.json
+            v2-knbr-probe.json
+            v2-schedule-probe.json
             v2-radar-probe.json
             v2-selection.json
             v2-selection-fresh.json
