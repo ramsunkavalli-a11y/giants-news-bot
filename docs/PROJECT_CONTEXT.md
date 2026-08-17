@@ -131,27 +131,27 @@ Known edge case: grouping is a Pacific-day + opponent heuristic, not an MLB game
 
 ## Bluesky presentation
 
-All posted articles follow the same basic presentation. A normal standalone post is:
+All posted articles are **headline-first**. The reader should see the story before publication/byline metadata. A normal standalone post is:
 
 ```text
-NBC Sports Bay Area · Alex Pavlovic
 Example Giants headline
+NBC Sports Bay Area · Alex Pavlovic
 Read at www.nbcsportsbayarea.com →
 ```
 
-The Athletic is labeled in the source line but links to the actual destination hostname:
+The Athletic is labeled in the metadata line but links to the actual destination hostname:
 
 ```text
-The Athletic ($) · Andrew Baggarly
 Example headline
+The Athletic ($) · Andrew Baggarly
 Read at www.nytimes.com →
 ```
 
-Game story text is:
+Game story text keeps `Game recap ·` on the metadata line:
 
 ```text
-Game recap · SF Chronicle · Shayna Rubin
 Giants’ Turner Hill delivers go-ahead RBI in major-league debut
+Game recap · SF Chronicle · Shayna Rubin
 Read at www.sfchronicle.com →
 ```
 
@@ -161,7 +161,7 @@ If a usable article image is available, it is uploaded as a **native Bluesky ima
 
 **Do not use Bluesky external link cards for article presentation.** Earlier iterations produced duplicated headlines, raw URL fallbacks when the card title was blank, and redundant publisher footer bars when the title was replaced by the outlet name. Native image + direct hostname link is the current chosen presentation.
 
-Use the display name **SF Chronicle**, not the full `San Francisco Chronicle`, in the source/author line. The article headline belongs in post text for both standalone and game stories.
+Use the display name **SF Chronicle**, not the full `San Francisco Chronicle`, in the source/author line. The article headline belongs first in post text for both standalone and game stories.
 
 Last-mile image/metadata fetches happen after selection. They are enhancements and should remain non-blocking.
 
