@@ -1,3 +1,4 @@
+import io
 import json
 import os
 import tempfile
@@ -17,8 +18,11 @@ from v2_selector import select_articles
 
 
 class FakeResponse:
-    def __init__(self, data):
-        self._data = data
+    def __init__(self, data=None, *, status_code=200, headers=None, raw=None):
+        self._data = data or {}
+        self.status_code = status_code
+        self.headers = headers or {}
+        self.raw = raw
 
     def raise_for_status(self):
         return None
@@ -26,12 +30,30 @@ class FakeResponse:
     def json(self):
         return self._data
 
+    def __enter__(self):
+        return self
+
+    def __exit__(self, exc_type, exc, tb):
+        return False
+
 
 class FakeSession:
-    def __init__(self):
+    def __init__(self, *, image_available=False):
         self.last_payload = None
+        self.image_available = image_available
+
+    def get(self, url, **kwargs):
+        if not self.image_available:
+            return FakeResponse(status_code=404, raw=io.BytesIO(b""))
+        return FakeResponse(
+            status_code=200,
+            headers={"Content-Type": "image/jpeg"},
+            raw=io.BytesIO(b"fake-image-bytes"),
+        )
 
     def post(self, url, **kwargs):
+        if url.endswith("/xrpc/com.atproto.repo.uploadBlob"):
+            return FakeResponse({"blob": {"$type": "blob", "ref": {"$link": "bafyimage"}}})
         self.last_payload = kwargs.get("json")
         return FakeResponse({
             "uri": "at://did:plc:test/app.bsky.feed.post/abc",
@@ -88,58 +110,61 @@ class RuntimeSmokeTests(unittest.TestCase):
             "Giants’ Turner Hill delivers go-ahead RBI in major-league debut",
         )
 
-    def test_game_recap_card_does_not_repeat_headline(self):
+    def test_no_image_game_recap_uses_link_line_instead_of_empty_card(self):
+        session = FakeSession()
+        candidate = Candidate(
+            source="San Francisco Chronicle",
+            url="https://example.com/slusser-game-story",
+            title="Giants’ Tony Vitello says play in loss to Rockies had feel of ‘junior college game’",
+            author="Susan Slusser",
+            discovered_via="game_thread:Google News core-writer radar",
+        )
+        post_to_bluesky(session, candidate, "https://bsky.social", "did:plc:test", "jwt", 5)
+        record = session.last_payload["record"]
+        self.assertNotIn("embed", record)
+        self.assertEqual(
+            record["text"],
+            "Game recap · SF Chronicle · Susan Slusser\n"
+            "Giants’ Tony Vitello says play in loss to Rockies had feel of ‘junior college game’\n"
+            "Read at SF Chronicle →",
+        )
+        facet = record["facets"][0]
+        self.assertEqual(facet["features"][0]["uri"], candidate.url)
+        encoded = record["text"].encode("utf-8")
+        linked = encoded[facet["index"]["byteStart"]:facet["index"]["byteEnd"]].decode("utf-8")
+        self.assertEqual(linked, "Read at SF Chronicle →")
+
+    def test_no_image_standalone_uses_link_line_instead_of_empty_card(self):
         session = FakeSession()
         candidate = Candidate(
             source="Mercury News",
-            url="https://example.com/game-story",
-            post_url="https://example.com/game-story",
-            title="Webb’s strong outing, Gilbert’s big day lead SF Giants to win over Rockies",
-            summary="A recap of the Giants win.",
+            url="https://example.com/story",
+            title="Despite lingering back issue, SF Giants’ Adames hopes to avoid IL stint",
             author="Justice delos Santos",
-            discovered_via="game_thread:Google News core-writer radar",
         )
-        post_to_bluesky(
-            session,
-            candidate,
-            "https://bsky.social",
-            "did:plc:test",
-            "jwt",
-            5,
-        )
+        post_to_bluesky(session, candidate, "https://bsky.social", "did:plc:test", "jwt", 5)
         record = session.last_payload["record"]
-        self.assertIn(candidate.title, record["text"])
-        external = record["embed"]["external"]
-        self.assertEqual(external["title"], "Mercury News")
-        self.assertEqual(external["description"], "")
+        self.assertNotIn("embed", record)
+        self.assertTrue(record["text"].endswith("Read at Mercury News →"))
+        self.assertEqual(record["facets"][0]["features"][0]["uri"], candidate.url)
 
-    def test_standalone_card_does_not_repeat_headline_or_summary(self):
-        session = FakeSession()
+    def test_image_story_keeps_clean_visual_card(self):
+        session = FakeSession(image_available=True)
         candidate = Candidate(
             source="NBC Sports Bay Area",
             url="https://example.com/story",
-            post_url="https://example.com/story",
             title="Giants' Landen Roupp looking for mechanical tweak",
-            summary="Roupp is searching for a mechanical adjustment.",
             author="Taylor Wirth",
+            image_url="https://example.com/image.jpg",
         )
-        post_to_bluesky(
-            session,
-            candidate,
-            "https://bsky.social",
-            "did:plc:test",
-            "jwt",
-            5,
-        )
+        post_to_bluesky(session, candidate, "https://bsky.social", "did:plc:test", "jwt", 5)
         record = session.last_payload["record"]
-        self.assertEqual(
-            record["text"],
-            "NBC Sports Bay Area · Taylor Wirth\n"
-            "Giants' Landen Roupp looking for mechanical tweak",
-        )
+        self.assertNotIn("facets", record)
         external = record["embed"]["external"]
-        self.assertEqual(external["title"], "NBC Sports Bay Area")
+        self.assertEqual(external["title"], "")
         self.assertEqual(external["description"], "")
+        self.assertIn("thumb", external)
+        self.assertIn(candidate.title, record["text"])
 
     def test_missing_state_initializes_game_threads(self):
         with tempfile.TemporaryDirectory() as directory:
@@ -165,10 +190,7 @@ class RuntimeSmokeTests(unittest.TestCase):
                     handle,
                 )
             state = load_state(path)
-            self.assertEqual(
-                set(state),
-                {"posted_urls", "posted_stories", "game_threads"},
-            )
+            self.assertEqual(set(state), {"posted_urls", "posted_stories", "game_threads"})
             self.assertIn("https://example.com/a", state["posted_urls"])
             self.assertEqual(state["posted_stories"][0]["title"], "Example")
             self.assertIn("game:2026-08-16:test", state["game_threads"])
@@ -225,10 +247,7 @@ class RuntimeSmokeTests(unittest.TestCase):
             "game_day": "2026-08-15",
             "opponent": "rockies",
         }
-        self.assertEqual(
-            _existing_thread_key(state, thread),
-            "game:2026-08-15:unknown",
-        )
+        self.assertEqual(_existing_thread_key(state, thread), "game:2026-08-15:unknown")
 
     def test_thread_state_stores_root_and_latest_parent(self):
         state = {"game_threads": {}}
