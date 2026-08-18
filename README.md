@@ -26,13 +26,15 @@ The design principle is **structured discovery, own the last mile**. Prefer a pu
 | --- | --- |
 | SF Standard | Official Sports RSS |
 | The Athletic | Giants RSS |
-| MLB.com | Giants RSS |
+| MLB.com | Giants RSS; Maria Guardado bylines only |
 | SFGATE | Giants RSS |
 | FanGraphs | Giants category RSS |
 | NBC Sports Bay Area | Giants news + analysis pages |
 | KNBR | Giants-only Executive Show playlist/RSS via Omny |
 | SF Chronicle | Targeted core-writer radar |
 | Mercury News | Targeted core-writer radar |
+
+MLB.com's Giants feed mixes team beat reporting with staff packages, national prospect content, promotional streams, and unsigned commodity pages. Production therefore treats **Maria Guardado as the only eligible MLB.com byline**; other MLB.com authors and unsigned feed items are low-value at the source-classification boundary.
 
 Chronicle and Mercury pages are unreliable from GitHub runners, so the bot uses tightly scoped Google News RSS queries only for named core writers at those publishers, decodes the wrapper URL, verifies the publisher domain, and then sends the result through the same V2 filters as every other candidate. Co-bylines are allowed when the targeted writer is explicitly one of the visible authors. **Broad Google News search is diagnostic only and is not a production source.**
 
