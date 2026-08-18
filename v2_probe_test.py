@@ -13,6 +13,32 @@ class ProbeEditorialClassificationTests(unittest.TestCase):
         self.assertEqual(quality, "low")
         self.assertEqual(reason, "promotional_content")
 
+    def test_mlb_maria_guardado_story_remains_eligible(self):
+        quality, _, _ = classify(
+            "MLB.com",
+            "Chapman looking toward 2027 after season-ending surgery",
+            "Maria Guardado",
+        )
+        self.assertEqual(quality, "high")
+
+    def test_mlb_other_writer_is_low_value(self):
+        quality, reason, _ = classify(
+            "MLB.com",
+            "Triple-A OF Davidson hits his way onto Prospect Team of the Week",
+            "Ben Weinrib",
+        )
+        self.assertEqual(quality, "low")
+        self.assertEqual(reason, "mlb_non_guardado")
+
+    def test_unsigned_mlb_story_is_low_value(self):
+        quality, reason, _ = classify(
+            "MLB.com",
+            "Giants announce roster move before series opener",
+            "",
+        )
+        self.assertEqual(quality, "low")
+        self.assertEqual(reason, "mlb_non_guardado")
+
     def test_nbc_broadcaster_opinion_repackaging_is_low_value(self):
         quality, reason, _ = classify(
             "NBC Sports Bay Area",
