@@ -30,9 +30,10 @@ jobs:
           python -m pip install --upgrade pip
           pip install -r requirements.txt
 
-      - name: Test story clustering, selection, schedules, KNBR, radar, and runtime
+      - name: Test story clustering, source classification, selection, schedules, KNBR, radar, and runtime
         run: >-
           python -m unittest -v
+          v2_probe_test.py
           v2_story_test.py
           v2_selector_test.py
           v2_game_threads_test.py
