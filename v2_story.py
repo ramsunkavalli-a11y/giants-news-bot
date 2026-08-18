@@ -39,7 +39,7 @@ TOKEN_ALIASES = {
     "retirement": "retire", "retires": "retire", "retired": "retire", "retiring": "retire",
     "traded": "trade", "trades": "trade", "trading": "trade", "acquire": "trade",
     "acquires": "trade", "acquired": "trade", "deal": "trade",
-    "promoted": "promote", "promotes": "promote", "promotion": "promote",
+    "promoted": "promote", "promotes": "promote", "promoting": "promote", "promotion": "promote",
     "signed": "sign", "signs": "sign", "signing": "sign",
     "suspended": "suspend", "suspends": "suspend", "suspension": "suspend",
     "fractured": "fracture", "fractures": "fracture",
