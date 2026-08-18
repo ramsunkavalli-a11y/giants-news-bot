@@ -241,6 +241,8 @@ def classify(source: str, title: str, author: str = "") -> tuple[str, str, str]:
 
     if PROMOTIONAL_TITLE_RE.search(title):
         return "low", "promotional_content", preference
+    if source == "MLB.com" and not re.search(r"\bmaria guardado\b", author or "", flags=re.I):
+        return "low", "mlb_non_guardado", preference
     if source == "NBC Sports Bay Area" and NBC_BROADCASTER_REACTION_RE.search(title):
         return "low", "broadcaster_quote_repackaging", preference
     if any(pattern in blob for pattern in LOW_VALUE_PATTERNS):
