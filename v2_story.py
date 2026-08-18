@@ -39,7 +39,7 @@ TOKEN_ALIASES = {
     "retirement": "retire", "retires": "retire", "retired": "retire", "retiring": "retire",
     "traded": "trade", "trades": "trade", "trading": "trade", "acquire": "trade",
     "acquires": "trade", "acquired": "trade", "deal": "trade",
-    "promoted": "promote", "promotes": "promote", "promotion": "promote",
+    "promoted": "promote", "promotes": "promote", "promoting": "promote", "promotion": "promote",
     "signed": "sign", "signs": "sign", "signing": "sign",
     "suspended": "suspend", "suspends": "suspend", "suspension": "suspend",
     "fractured": "fracture", "fractures": "fracture",
@@ -128,14 +128,17 @@ def same_story(title_a: str, title_b: str) -> bool:
     if not a or not b:
         return False
     overlap = a & b
+    events = _event_families(a) & _event_families(b)
+
+    # Event synonyms such as "promoted" vs "called up" may normalize to
+    # different raw event tokens but the same event family. One shared
+    # identifying token (usually a player/surname/nickname) is then enough.
+    identifying_overlap = overlap - EVENT_TOKENS
+    if events and identifying_overlap:
+        return True
+
     if len(overlap) < 2:
         return False
-
-    events = _event_families(a) & _event_families(b)
-    # One shared event family + one shared identifying token (usually a player,
-    # team action or distinctive year) is strong evidence of the same event.
-    if events and len(overlap - EVENT_TOKENS) >= 1:
-        return True
 
     union = a | b
     jaccard = len(overlap) / max(1, len(union))

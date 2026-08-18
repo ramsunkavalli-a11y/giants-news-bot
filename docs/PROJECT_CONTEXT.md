@@ -6,7 +6,7 @@ This is the quickest way for a new maintainer or a new ChatGPT conversation to u
 
 A Bluesky bot that posts a curated stream of San Francisco Giants journalism and selected original audio from multiple publications. The goal is **useful coverage, not maximum volume**. It should feel closer to an automatically maintained Giants news desk than an indiscriminate RSS firehose.
 
-The account favors original reporting, breaking news, transactions, injuries, prospect work, meaningful analysis/features, trusted beat reporting, and direct access to Giants decision-makers. It should avoid generic summaries, commodity recaps, broad multi-team rankings/listicles, promo pages, highlights/video-only pages, recurring evergreen content, and derivative articles whose main value is repeating another outlet.
+The account favors original reporting, breaking news, transactions, injuries, prospect work, meaningful analysis/features, trusted beat reporting, and direct access to Giants decision-makers. It should avoid generic summaries, commodity recaps, broad multi-team rankings/listicles, promo pages, highlights/video-only pages, recurring evergreen content, broadcaster-quote repackaging with little added reporting, and derivative articles whose main value is repeating another outlet.
 
 Cost should remain essentially zero while the account is small. Prefer mature public feeds/parsers and deterministic logic over paid APIs, embeddings, or custom crawling infrastructure.
 
@@ -40,13 +40,17 @@ The weekend shifts earlier because Giants weekends contain more day games and th
 
 1. **SF Standard** — official Sports RSS
 2. **The Athletic** — Giants RSS
-3. **MLB.com** — Giants RSS
+3. **MLB.com** — Giants RSS; Maria Guardado bylines only
 4. **SFGATE** — Giants RSS
 5. **FanGraphs** — Giants category RSS
 6. **NBC Sports Bay Area** — dedicated Giants news and analysis pages
 7. **KNBR The Executive Show** — Giants-only Omny playlist/RSS in `v2_knbr.py`
 
 The first six article adapters are implemented in `v2_probe.py`. Despite the filename, those discoverers are production code. KNBR is intentionally separate because it is audio and has different presentation/filtering semantics.
+
+MLB.com's Giants RSS includes Maria Guardado's team-beat work alongside MLB staff packages, national prospect stories, streaming promotions, commodity pages, and unsigned items. **Only Maria Guardado is production-eligible from MLB.com.** The feed reliably exposes her byline, so other MLB.com authors and unsigned entries are classified low at the source boundary instead of relying on an ever-growing list of title exceptions.
+
+NBC's Giants pages can also package an announcer's on-air opinion as a short article. Low-information headlines built around Mike Krukow, Duane Kuiper, Jon Miller, or Dave Flemming merely `believes/thinks/reacts/weighs in` are suppressed; actual broadcaster news/features and reporting about Giants decision-makers remain eligible.
 
 ### KNBR Executive Show
 
@@ -96,7 +100,7 @@ SFGATE has a mild `secondary` publication prior. This is a tie-breaker, not hard
 
 The system avoids a global numerical relevance score. Selection is mostly deterministic.
 
-`v2_story.py` normalizes titles, event anchors and useful synonyms. Promotion/call-up language such as `promoted`, `called up`, and `gets the call` belongs to the same event family when the identifying subject matches.
+`v2_story.py` normalizes titles, event anchors and useful synonyms. Promotion/call-up language such as `promoted`, `promoting`, `called up`, and `gets the call` belongs to the same event family when the identifying subject matches. This includes short headlines such as `Report: Giants promoting "Tugboat"`, which must dedupe against fuller Matt Wilkinson call-up coverage.
 
 A key product rule is now **same event does not always mean one URL**. The selector distinguishes:
 
@@ -125,6 +129,7 @@ The representative(s) of an event are chosen before the one-source-per-run rule.
 - One standalone story per publication per run.
 - One event-news representative plus, when justified, one differentiated analysis representative.
 - Broad all-MLB ranking/listicle patterns are rejected at the selector safety boundary even if an adapter misclassifies them.
+- Promotional/streaming pages and low-information broadcaster reaction repackaging are rejected at source classification.
 - Missing timestamps are enriched where possible; unresolved missing timestamps are excluded.
 - Fetch/enrichment failure should not invalidate an otherwise good structured-feed item.
 
@@ -199,7 +204,7 @@ A dry run must not mutate this state. Any cleanup must preserve posted history a
 
 `.github/workflows/v2-structured-probe.yml` runs on V2 development branches and pull requests to `main`. It includes:
 
-- deterministic story/selector/game/schedule/KNBR/radar/runtime tests;
+- deterministic source-classification/story/selector/game/schedule/KNBR/radar/runtime tests;
 - structured live-source discovery;
 - a live KNBR Executive Show adapter probe;
 - a live MLB StatsAPI schedule probe;
