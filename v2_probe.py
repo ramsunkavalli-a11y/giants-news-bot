@@ -12,7 +12,7 @@ from bs4 import BeautifulSoup
 
 from v2_authors import author_prior, source_prior
 
-UA = "Mozilla/5.0 GiantsNewsBotV2Probe/0.6"
+UA = "Mozilla/5.0 GiantsNewsBotV2Probe/0.7"
 TIMEOUT = 20
 ATHLETIC_AUTHOR_ENRICH_LIMIT = 8
 NBC_AUTHOR_ENRICH_LIMIT = 10
@@ -66,6 +66,23 @@ LOW_VALUE_PATTERNS = (
 DERIVATIVE_PATTERNS = (
     "where giants' farm system ranks in",
     "where the giants' farm system ranks in",
+)
+
+# Free-viewing/event ads sometimes arrive through an otherwise legitimate team
+# RSS feed and look article-like enough to pass the generic title gate.
+PROMOTIONAL_TITLE_RE = re.compile(
+    r"\bwatch\b.*\b(?:prospect|game)\b.*\bfor free\b|"
+    r"\bplay at (?:low-|high-)?a\b.*\bfor free\b",
+    flags=re.I,
+)
+
+# NBC frequently turns a broadcaster's on-air reaction into a short article.
+# Keep actual broadcaster news/features, but suppress the low-information
+# "X believes/reacts/thinks" repackaging class.
+NBC_BROADCASTER_REACTION_RE = re.compile(
+    r"^(?:mike krukow|duane kuiper|jon miller|dave flemming)\b.*\b"
+    r"(?:believes?|thinks?|reacts?|weighs in|shares (?:his )?thoughts|explains why)\b",
+    flags=re.I,
 )
 
 GAME_STORY_PATTERNS = (
@@ -222,6 +239,10 @@ def classify(source: str, title: str, author: str = "") -> tuple[str, str, str]:
     prior = author_prior(author)
     preference = prior["preference"] if prior else ""
 
+    if PROMOTIONAL_TITLE_RE.search(title):
+        return "low", "promotional_content", preference
+    if source == "NBC Sports Bay Area" and NBC_BROADCASTER_REACTION_RE.search(title):
+        return "low", "broadcaster_quote_repackaging", preference
     if any(pattern in blob for pattern in LOW_VALUE_PATTERNS):
         return "low", "commodity_or_generic_content", preference
     if any(pattern in blob for pattern in DERIVATIVE_PATTERNS):
