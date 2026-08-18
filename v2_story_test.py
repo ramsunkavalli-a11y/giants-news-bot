@@ -31,6 +31,16 @@ class StoryDedupeTests(unittest.TestCase):
         self.assertTrue(same_story(slusser, mlb))
         self.assertTrue(same_story(brisbee, mlb))
 
+    def test_short_tugboat_promotion_headline_matches_callup_event(self):
+        self.assertTrue(same_story(
+            'Report: Giants promoting "Tugboat"',
+            "Giants call up Matt ‘Tugboat’ Wilkinson with eye toward 2027 rotation options",
+        ))
+        self.assertTrue(same_story(
+            'Report: Giants promoting "Tugboat"',
+            "LHP Tugboat Wilkinson -- who throws an 'Invisiball' -- gets call from Giants (source)",
+        ))
+
     def test_brisbee_wilkinson_is_analysis_while_transaction_beats_are_news(self):
         self.assertEqual(story_role({
             "source": "The Athletic",
