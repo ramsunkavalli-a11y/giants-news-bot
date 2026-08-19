@@ -391,11 +391,19 @@
       "source": "NBC Sports Bay Area",
       "title": "Carson Whisenhunt gets lit up by Guardians in Giants' series-opening loss",
       "url": "https://www.nbcsportsbayarea.com/mlb/san-francisco-giants/carson-whisenhunt-bryce-eldridge-cleveland-guardians/1957401/"
+    },
+    {
+      "author": "Maria Guardado",
+      "game_key": "",
+      "kind": "standalone",
+      "posted_at": "2026-08-19T07:22:03.982355+00:00",
+      "source": "MLB.com",
+      "title": "Bailey reflects on time with Giants in 1st bout vs. former team",
+      "url": "https://www.mlb.com/giants/news/patrick-bailey-discusses-career-with-giants"
     }
   ],
   "posted_urls": {
     "https://apnews.com/article/rockies-giants-score-935e66257655c1df502d35d032c6bedd": "2026-08-16T13:09:16.016508+00:00",
-    "https://sfstandard.com/2026/07/28/harrison-bader-sf-giants-scooter-accident/": "2026-07-29T03:42:42.737678+00:00",
     "https://sfstandard.com/2026/07/29/jackson-flora-sf-giants-top-prospects/": "2026-07-30T03:31:43.796996+00:00",
     "https://sfstandard.com/2026/07/30/barry-bonds-hall-of-fame-sf-giants/": "2026-07-30T17:50:57.395588+00:00",
     "https://sfstandard.com/2026/07/30/harrison-bader-scooter-crash-giants/": "2026-07-31T03:53:19.122862+00:00",
@@ -422,7 +430,6 @@
     "https://sfstandard.com/2026/08/17/buster-posey-sf-giants-tony-vitello-2027/": "2026-08-18T03:24:16.539880+00:00",
     "https://sfstandard.com/2026/08/18/bo-davidson-sf-giants-undrafted-players/": "2026-08-18T15:57:51.601733+00:00",
     "https://sfstandard.com/2026/08/18/valkyries-all-star-game-san-francisco-2027/": "2026-08-18T21:48:22.341412+00:00",
-    "https://sfstandard.com/section-415/2026/07/28/buster-posey-hall-of-fame-sf-giants-jeff-kent/": "2026-07-29T03:42:43.630475+00:00",
     "https://sfstandard.com/section-415/2026/08/04/sf-giants-trade-deadline-podcast/": "2026-08-05T03:35:04.309339+00:00",
     "https://www.mercurynews.com/2026/08/14/roupps-rocky-night-more-quiet-bats-doom-sf-giants-vs-rockies/": "2026-08-16T13:11:41.500314+00:00",
     "https://www.mercurynews.com/2026/08/14/sf-giants-turner-hill-hit-streak-roster-grant-mccray-matt-chapman/amp/": "2026-08-16T16:43:58.887549+00:00",
@@ -438,6 +445,7 @@
     "https://www.mlb.com/giants/news/giants-walk-10-batters-in-loss-to-rockies": "2026-08-17T02:01:42.604437+00:00",
     "https://www.mlb.com/giants/news/in-season-farm-system-rankings-2026": "2026-08-17T15:50:04.887340+00:00",
     "https://www.mlb.com/giants/news/matt-tugboat-wilkinson-called-up-by-giants": "2026-08-17T21:50:59.051522+00:00",
+    "https://www.mlb.com/giants/news/patrick-bailey-discusses-career-with-giants": "2026-08-19T07:22:03.982355+00:00",
     "https://www.mlb.com/giants/news/watch-minor-league-baseball-games-for-free-2026": "2026-08-18T03:24:10.707953+00:00",
     "https://www.mlb.com/stories/game/823182": "2026-08-17T01:12:56.217835+00:00",
     "https://www.nbcsportsbayarea.com/mlb/san-francisco-giants/carson-whisenhunt-bryce-eldridge-cleveland-guardians/1957401/": "2026-08-19T03:25:51.577720+00:00",
