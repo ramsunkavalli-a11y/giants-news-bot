@@ -15,7 +15,7 @@ except Exception:
 from v2_authors import normalize_author
 from v2_probe import Article, clean, make_article, structured_meta_author
 
-UA = "Mozilla/5.0 GiantsNewsBotV2Radar/1.2"
+UA = "Mozilla/5.0 GiantsNewsBotV2Radar/1.3"
 RADAR_MAX_PER_AUTHOR = 6
 
 
@@ -149,7 +149,7 @@ def _feed_records(target: RadarTarget, hours_back: int) -> list[dict]:
 
 
 def unique_author_records(records: list[dict]) -> list[dict]:
-    """Do not infer a byline when the same URL matches multiple writer queries."""
+    """Keep only URLs discovered through one target query; this never proves a byline."""
     grouped: dict[str, list[dict]] = defaultdict(list)
     for record in records:
         grouped[record.get("url", "")].append(record)
@@ -168,7 +168,13 @@ def unique_author_records(records: list[dict]) -> list[dict]:
 
 
 def discover_core_writer_radar(hours_back: int = 72) -> list[Article]:
-    """Optional author-targeted discovery for blocked Chronicle/Mercury pages."""
+    """Optional author-targeted discovery for blocked Chronicle/Mercury pages.
+
+    The Google query identifies where to look, not who wrote the result. A target
+    author is attached only when the article itself exposes metadata confirming
+    that writer. If metadata is unavailable, the valid story can still enter the
+    candidate pool with an unknown author. Contradictory metadata vetoes it.
+    """
     records: list[dict] = []
     for target in CORE_WRITER_RADAR_TARGETS:
         records.extend(_feed_records(target, hours_back))
@@ -176,25 +182,23 @@ def discover_core_writer_radar(hours_back: int = 72) -> list[Article]:
     articles: list[Article] = []
     for record in unique_author_records(records):
         target: RadarTarget = record["target"]
-
-        # Best effort only. A contradictory server-visible byline vetoes the
-        # query attribution; a challenge/blank byline does not. Co-bylines are
-        # accepted when the targeted core writer is explicitly one of them.
         metadata_author = structured_meta_author(record["url"])
+
         if metadata_author and not metadata_byline_includes_target(metadata_author, target.author):
             continue
 
+        verified_author = target.author if metadata_author else ""
         articles.append(make_article(
             source=target.source,
             title=record["title"],
             url=record["url"],
             published=record["published"],
-            author=target.author,
+            author=verified_author,
             summary=record["summary"],
             section=(
-                "Google News core-writer radar + author meta"
-                if metadata_author
-                else "Google News core-writer radar (unique exact-author query)"
+                "Google News core-writer radar + verified author meta"
+                if verified_author
+                else "Google News core-writer radar (author unverified)"
             ),
             access="unknown",
         ))
