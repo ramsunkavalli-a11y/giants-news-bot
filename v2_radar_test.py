@@ -1,13 +1,17 @@
 import unittest
+from types import SimpleNamespace
 from unittest.mock import patch
 
 from v2_probe import make_article
 from v2_radar import (
     CORE_WRITER_RADAR_TARGETS,
     RadarTarget,
+    _feed_records,
     discover_core_writer_radar,
     domain_matches,
     metadata_byline_includes_target,
+    radar_title_allowed,
+    radar_url_allowed,
     strip_google_source_suffix,
     unique_author_records,
 )
@@ -18,6 +22,39 @@ class CoreWriterRadarTests(unittest.TestCase):
         self.assertTrue(domain_matches("https://www.sfchronicle.com/sports/giants/a", "sfchronicle.com"))
         self.assertTrue(domain_matches("https://mercurynews.com/2026/a", "mercurynews.com"))
         self.assertFalse(domain_matches("https://example.com/giants", "sfchronicle.com"))
+
+    def test_chronicle_radar_requires_giants_article_path(self):
+        rubin = next(target for target in CORE_WRITER_RADAR_TARGETS if target.author == "Shayna Rubin")
+        self.assertTrue(radar_url_allowed(
+            rubin,
+            "https://www.sfchronicle.com/sports/giants/article/sf-giants-test-22390000.php",
+        ))
+        self.assertFalse(radar_url_allowed(
+            rubin,
+            "https://www.sfchronicle.com/weather/?page=7",
+        ))
+
+    def test_generic_pagination_title_is_rejected(self):
+        self.assertFalse(radar_title_allowed("Weather - Page 7"))
+        self.assertFalse(radar_title_allowed("Giants - Page 3"))
+        self.assertTrue(radar_title_allowed("Giants adjust rotation before Guardians series"))
+
+    @patch("v2_radar.decode_google_news_url", return_value="https://www.sfchronicle.com/weather/?page=7")
+    @patch("v2_radar.feedparser.parse")
+    def test_weather_page_false_positive_is_rejected_at_feed_boundary(self, feed_parse, _decode):
+        rubin = next(target for target in CORE_WRITER_RADAR_TARGETS if target.author == "Shayna Rubin")
+        feed_parse.return_value = SimpleNamespace(
+            status=200,
+            bozo=False,
+            entries=[SimpleNamespace(
+                link="https://news.google.com/rss/articles/fake",
+                title="Weather - Page 7 - San Francisco Chronicle",
+                summary="Shayna Rubin Giants",
+                published="Wed, 19 Aug 2026 15:50:00 GMT",
+                source={"title": "San Francisco Chronicle"},
+            )],
+        )
+        self.assertEqual(_feed_records(rubin, 72), [])
 
     def test_google_source_suffix_is_removed(self):
         self.assertEqual(
