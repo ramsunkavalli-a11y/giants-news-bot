@@ -37,6 +37,7 @@ jobs:
           v2_story_test.py
           v2_selector_test.py
           v2_game_threads_test.py
+          v2_game_story_subject_test.py
           v2_schedule_test.py
           v2_knbr_test.py
           v2_radar_test.py

@@ -48,18 +48,13 @@ TEAM_ALIASES = {
     "nationals": ("nationals", "washington nationals"),
 }
 
-GAME_TITLE_PATTERNS = (
+# These phrases describe a game or game analysis directly. They are safe to use
+# in either a headline or a structured summary.
+GAME_ANALYSIS_PATTERNS = (
     "what we learned",
     "observations",
     "takeaways:",
     "takeaways ",
-    " in win",
-    " in loss",
-    " win over ",
-    " loss to ",
-    " falls to ",
-    " fall to ",
-    " doom ",
     "go-ahead",
     "earns win",
     "earned win",
@@ -69,6 +64,25 @@ GAME_TITLE_PATTERNS = (
     "sterling start",
     "strong start",
 )
+
+# Result language is useful when it is in the headline, where it describes the
+# primary subject. We intentionally do not use these generic result phrases from
+# a summary alone; reaction/commentary stories often mention the just-finished
+# score in their dek even when the article is really about quotes or criticism.
+TITLE_RESULT_PATTERNS = (
+    " in win",
+    " in loss",
+    " win over ",
+    " loss to ",
+    " lost to ",
+    " loses to ",
+    " lose to ",
+    " falls to ",
+    " fall to ",
+    " fell to ",
+    " doom ",
+)
+
 RESULT_VERBS = re.compile(
     r"\b(?:lead|leads|lift|lifts|power|powers|propel|propels|beat|beats|edge|edges|"
     r"defeat|defeats|top|tops|rout|routs)\b.*\b(?:over|past)\b",
@@ -77,6 +91,34 @@ RESULT_VERBS = re.compile(
 GIANTS_RESULT = re.compile(
     r"(?:\bgiants\b.*\b(?:win|loss|victory|defeat)\b|"
     r"\b(?:win|loss|victory|defeat)\b.*\bgiants\b)",
+    flags=re.I,
+)
+
+# Common completed-game headline constructions that do not literally say
+# "win" or "loss". Requiring a recognized opponent keeps phrases such as
+# "blown out by criticism" from being treated as baseball results.
+COMPLETED_GAME_RESULT = re.compile(
+    r"\b(?:blown out|shut out|blanked|walked off|routed|trounced|crushed|"
+    r"outslugged|outlasted|swept)\b.*\b(?:by|to)\b",
+    flags=re.I,
+)
+
+# When a headline is explicitly about somebody's reaction, criticism, or
+# comments, the game is context rather than the primary subject. This guard is
+# applied only to inferred game stories; explicit upstream game-story metadata
+# remains authoritative.
+REACTION_TITLE_PATTERNS = (
+    " reacts to ",
+    " reaction to ",
+    " calls out ",
+    " sounds off ",
+    " weighs in ",
+    " reveals message ",
+    " team meeting after ",
+)
+REACTION_VERB_TARGET = re.compile(
+    r"\b(?:rip|rips|ripped|criticize|criticizes|criticized|question|questions|questioned)\b"
+    r".{0,45}\b(?:giants|players?|team|club|teammates?|effort|focus|concentration|decision)\b",
     flags=re.I,
 )
 
@@ -102,20 +144,42 @@ def _article_dt(article: dict) -> datetime | None:
     return _parse_dt(str(article.get("published", "") or ""))
 
 
+def _looks_like_reaction_title(title: str) -> bool:
+    lower = f" {title.lower()} "
+    return (
+        any(pattern in lower for pattern in REACTION_TITLE_PATTERNS)
+        or bool(REACTION_VERB_TARGET.search(title))
+    )
+
+
 def is_game_story(article: dict) -> bool:
     if article.get("content_type") == "game_story":
         return True
     if article.get("quality_reason") == "game_story_or_postgame_analysis":
         return True
+
     title = str(article.get("title", "") or "")
     summary = str(article.get("summary", "") or "")
-    blob = f"{title} {summary}"
-    lower = blob.lower()
-    return (
-        any(pattern in lower for pattern in GAME_TITLE_PATTERNS)
-        or bool(RESULT_VERBS.search(blob))
-        or bool(GIANTS_RESULT.search(blob))
+    title_lower = title.lower()
+    summary_lower = summary.lower()
+
+    headline_game_signal = (
+        any(pattern in title_lower for pattern in GAME_ANALYSIS_PATTERNS)
+        or any(pattern in title_lower for pattern in TITLE_RESULT_PATTERNS)
+        or bool(RESULT_VERBS.search(title))
+        or bool(GIANTS_RESULT.search(title))
+        or (
+            bool(COMPLETED_GAME_RESULT.search(title))
+            and bool(extract_opponent({"title": title}))
+        )
     )
+    if headline_game_signal:
+        return not _looks_like_reaction_title(title)
+
+    # A summary may rescue a headline-framed analysis story when it contains a
+    # concrete on-field/game-analysis signal (for example, "quality start").
+    # Generic result language in a summary is deliberately insufficient.
+    return any(pattern in summary_lower for pattern in GAME_ANALYSIS_PATTERNS)
 
 
 def baseball_day(article: dict) -> str:
