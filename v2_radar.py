@@ -1,5 +1,6 @@
 from __future__ import annotations
 
+import re
 from collections import defaultdict
 from dataclasses import dataclass
 from urllib.parse import urlencode, urlparse
@@ -14,7 +15,7 @@ except Exception:
 from v2_authors import normalize_author
 from v2_probe import Article, clean, make_article, structured_meta_author
 
-UA = "Mozilla/5.0 GiantsNewsBotV2Radar/1.1"
+UA = "Mozilla/5.0 GiantsNewsBotV2Radar/1.2"
 RADAR_MAX_PER_AUTHOR = 6
 
 
@@ -31,6 +32,11 @@ CORE_WRITER_RADAR_TARGETS = (
     RadarTarget("Justice delos Santos", "Mercury News", "mercurynews.com"),
 )
 
+# Google News occasionally returns publisher section/listing pages for an
+# otherwise precise author query. Those pages can inherit snippets that contain
+# the author and "Giants" even though the result itself is not an article.
+GENERIC_PAGINATION_TITLE_RE = re.compile(r"(?:^|[-–—]\s+)page\s+\d+\s*$", flags=re.I)
+
 
 def google_news_rss_url(target: RadarTarget, hours_back: int = 72) -> str:
     query = f'site:{target.domain} "{target.author}" "Giants" when:{hours_back}h'
@@ -42,6 +48,30 @@ def domain_matches(url: str, domain: str) -> bool:
     host = urlparse(url or "").netloc.lower().split(":", 1)[0]
     domain = domain.lower()
     return host == domain or host.endswith("." + domain)
+
+
+def radar_url_allowed(target: RadarTarget, url: str) -> bool:
+    """Require a publisher-specific article surface, not merely the right domain."""
+    if not domain_matches(url, target.domain):
+        return False
+
+    path = urlparse(url or "").path or "/"
+    if target.domain.lower() == "sfchronicle.com":
+        # The Chronicle radar exists specifically for Giants beat coverage.
+        # Known valid results use this article subtree; weather, homepage,
+        # pagination, and other section pages must never inherit author credit.
+        return path.startswith("/sports/giants/")
+
+    return True
+
+
+def radar_title_allowed(title: str) -> bool:
+    value = clean(title)
+    if not value:
+        return False
+    if GENERIC_PAGINATION_TITLE_RE.search(value):
+        return False
+    return True
 
 
 def decode_google_news_url(url: str) -> str:
@@ -97,7 +127,7 @@ def _feed_records(target: RadarTarget, hours_back: int) -> list[dict]:
     for entry in feed.entries[:RADAR_MAX_PER_AUTHOR]:
         google_url = getattr(entry, "link", "") or ""
         direct_url = decode_google_news_url(google_url)
-        if not direct_url or not domain_matches(direct_url, target.domain):
+        if not direct_url or not radar_url_allowed(target, direct_url):
             continue
         source = getattr(entry, "source", {})
         google_source = source.get("title", "") if isinstance(source, dict) else ""
@@ -106,7 +136,7 @@ def _feed_records(target: RadarTarget, hours_back: int) -> list[dict]:
             google_source or target.source,
         )
         summary = clean(getattr(entry, "summary", "") or "")
-        if not title:
+        if not radar_title_allowed(title):
             continue
         records.append({
             "target": target,
