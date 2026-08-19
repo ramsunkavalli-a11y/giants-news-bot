@@ -1,6 +1,7 @@
 import unittest
+from unittest.mock import patch
 
-from v2_probe import classify
+from v2_probe import classify, discover_sf_standard
 
 
 class ProbeEditorialClassificationTests(unittest.TestCase):
@@ -63,6 +64,21 @@ class ProbeEditorialClassificationTests(unittest.TestCase):
             "Alex Pavlovic",
         )
         self.assertEqual(quality, "high")
+
+    @patch("v2_probe.articles_from_feed")
+    def test_sf_standard_uses_dedicated_giants_feed(self, articles_from_feed):
+        articles_from_feed.return_value = []
+
+        discover_sf_standard()
+
+        articles_from_feed.assert_called_once_with(
+            source="San Francisco Standard",
+            feed_url="https://sfstandard.com/tag/san-francisco-giants/feed/",
+            section="Giants tag RSS",
+            access="free",
+            limit=30,
+            require_giants_relevance=False,
+        )
 
 
 if __name__ == "__main__":
