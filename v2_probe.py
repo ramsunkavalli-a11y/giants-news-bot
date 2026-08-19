@@ -338,10 +338,11 @@ def articles_from_feed(
 def discover_sf_standard() -> list[Article]:
     return articles_from_feed(
         source="San Francisco Standard",
-        feed_url="https://sfstandard.com/category/sports/feed/",
-        section="Sports RSS",
+        feed_url="https://sfstandard.com/tag/san-francisco-giants/feed/",
+        section="Giants tag RSS",
         access="free",
         limit=30,
+        require_giants_relevance=False,
     )
 
 
