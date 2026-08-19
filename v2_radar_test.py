@@ -81,7 +81,7 @@ class CoreWriterRadarTests(unittest.TestCase):
 
     @patch("v2_radar.structured_meta_author", return_value="")
     @patch("v2_radar._feed_records")
-    def test_unique_exact_author_query_can_supply_blocked_byline(self, feed_records, _meta):
+    def test_exact_author_query_does_not_create_unverified_byline(self, feed_records, _meta):
         rubin = next(target for target in CORE_WRITER_RADAR_TARGETS if target.author == "Shayna Rubin")
 
         def records(target, _hours_back):
@@ -98,13 +98,32 @@ class CoreWriterRadarTests(unittest.TestCase):
         feed_records.side_effect = records
         articles = discover_core_writer_radar()
         self.assertEqual(len(articles), 1)
+        self.assertEqual(articles[0].author, "")
+        self.assertEqual(articles[0].author_preference, "")
+        self.assertEqual(articles[0].source, "San Francisco Chronicle")
+        self.assertIn("author unverified", articles[0].section)
+
+    @patch("v2_radar.structured_meta_author", return_value="Shayna Rubin")
+    @patch("v2_radar._feed_records")
+    def test_article_metadata_confirms_target_byline(self, feed_records, _meta):
+        rubin = next(target for target in CORE_WRITER_RADAR_TARGETS if target.author == "Shayna Rubin")
+        feed_records.return_value = [{
+            "target": rubin,
+            "url": "https://www.sfchronicle.com/sports/giants/article/test.html",
+            "title": "Giants adjust rotation",
+            "summary": "",
+            "published": "Sun, 16 Aug 2026 02:07:47 GMT",
+        }]
+
+        articles = discover_core_writer_radar()
+        self.assertEqual(len(articles), 1)
         self.assertEqual(articles[0].author, "Shayna Rubin")
         self.assertEqual(articles[0].author_preference, "elite")
-        self.assertEqual(articles[0].source, "San Francisco Chronicle")
+        self.assertIn("verified author meta", articles[0].section)
 
     @patch("v2_radar.structured_meta_author", return_value="Susan Slusser, J.D. Morris")
     @patch("v2_radar._feed_records")
-    def test_targeted_core_writer_cobyline_is_accepted(self, feed_records, _meta):
+    def test_targeted_core_writer_cobyline_confirms_target(self, feed_records, _meta):
         slusser = next(target for target in CORE_WRITER_RADAR_TARGETS if target.author == "Susan Slusser")
 
         def records(target, _hours_back):
@@ -122,6 +141,7 @@ class CoreWriterRadarTests(unittest.TestCase):
         articles = discover_core_writer_radar()
         self.assertEqual(len(articles), 1)
         self.assertEqual(articles[0].author, "Susan Slusser")
+        self.assertEqual(articles[0].author_preference, "very_good")
 
     @patch("v2_radar.structured_meta_author", return_value="Different Writer")
     @patch("v2_radar._feed_records")
