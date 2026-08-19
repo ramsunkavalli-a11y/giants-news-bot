@@ -56,12 +56,14 @@ Targeted author radar ────┘
 
 Contains the six direct article adapters:
 
-- SF Standard Sports RSS
+- SF Standard dedicated San Francisco Giants tag RSS
 - The Athletic Giants RSS
 - MLB.com Giants RSS
 - SFGATE Giants RSS
 - FanGraphs Giants category RSS
 - NBC Sports Bay Area Giants news/analysis listing pages
+
+The SF Standard adapter deliberately uses the Giants tag feed rather than the broad Sports RSS, which mixes Warriors, Valkyries, 49ers, Giants and other local sports. Team relevance is therefore established by the publisher's structured tag boundary instead of generic `San Francisco` text matching.
 
 Each adapter returns `Article` objects with normalized source, title, direct URL, publication time, author when available, summary, access and classification metadata.
 
