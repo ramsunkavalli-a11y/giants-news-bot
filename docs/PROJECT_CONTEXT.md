@@ -38,13 +38,15 @@ The weekend shifts earlier because Giants weekends contain more day games and th
 
 ### Active direct sources
 
-1. **SF Standard** — official Sports RSS
+1. **SF Standard** — dedicated San Francisco Giants tag RSS
 2. **The Athletic** — Giants RSS
 3. **MLB.com** — Giants RSS; Maria Guardado bylines only
 4. **SFGATE** — Giants RSS
 5. **FanGraphs** — Giants category RSS
 6. **NBC Sports Bay Area** — dedicated Giants news and analysis pages
 7. **KNBR The Executive Show** — Giants-only Omny playlist/RSS in `v2_knbr.py`
+
+The SF Standard's broad Sports RSS mixes Giants coverage with Warriors, Valkyries, 49ers and other local sports, so production intentionally uses the publisher's dedicated San Francisco Giants tag feed instead. This establishes Giants relevance at the structured-source boundary rather than relying on generic mentions of `San Francisco`.
 
 The first six article adapters are implemented in `v2_probe.py`. Despite the filename, those discoverers are production code. KNBR is intentionally separate because it is audio and has different presentation/filtering semantics.
 

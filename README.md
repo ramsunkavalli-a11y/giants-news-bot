@@ -24,7 +24,7 @@ The design principle is **structured discovery, own the last mile**. Prefer a pu
 
 | Publication | Production discovery |
 | --- | --- |
-| SF Standard | Official Sports RSS |
+| SF Standard | Dedicated San Francisco Giants tag RSS |
 | The Athletic | Giants RSS |
 | MLB.com | Giants RSS; Maria Guardado bylines only |
 | SFGATE | Giants RSS |
@@ -33,6 +33,8 @@ The design principle is **structured discovery, own the last mile**. Prefer a pu
 | KNBR | Giants-only Executive Show playlist/RSS via Omny |
 | SF Chronicle | Targeted core-writer radar |
 | Mercury News | Targeted core-writer radar |
+
+The SF Standard's broad Sports RSS is intentionally not used because it mixes Giants coverage with Warriors, Valkyries, 49ers, and other local sports. The dedicated Giants tag feed establishes team relevance at the source boundary and avoids relying on generic `San Francisco` text matching.
 
 MLB.com's Giants feed mixes team beat reporting with staff packages, national prospect content, promotional streams, and unsigned commodity pages. Production therefore treats **Maria Guardado as the only eligible MLB.com byline**; other MLB.com authors and unsigned feed items are low-value at the source-classification boundary.
 
