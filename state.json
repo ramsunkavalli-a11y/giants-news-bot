@@ -592,12 +592,29 @@
       "source": "SFGATE",
       "title": "SF Giants drop beer prices for a game after KNBR pressure campaign",
       "url": "https://www.sfgate.com/giants/article/sf-giants-knbr-beer-22396588.php"
+    },
+    {
+      "author": "Kerry Crowley",
+      "game_key": "",
+      "kind": "standalone",
+      "posted_at": "2026-08-21T21:49:17.293755+00:00",
+      "source": "San Francisco Standard",
+      "title": "‘Section 415’ podcast: How Giants broadcasts will sound without Mike Krukow",
+      "url": "https://sfstandard.com/section-415/2026/08/21/section-415-podcast-giants-broadcasts-will-sound-mike-krukow/"
+    },
+    {
+      "author": "Grant Brisbee",
+      "game_key": "",
+      "kind": "standalone",
+      "posted_at": "2026-08-21T21:49:19.492004+00:00",
+      "source": "The Athletic",
+      "title": "As he returns to Boston, Rafael Devers remains what he’s always been — a pretty good hitter",
+      "url": "https://www.nytimes.com/athletic/7529461/2026/08/21/rafael-devers-boston-return-sf-giants/"
     }
   ],
   "posted_urls": {
     "https://apnews.com/article/rockies-giants-score-935e66257655c1df502d35d032c6bedd": "2026-08-16T13:09:16.016508+00:00",
     "https://omny.fm/shows/the-executives-show/giants-executive-show-larry-baer-on-fan-appreciation-and-exciting-news-about-a-beer-promotion-day-in-partnership-with-knbeer": "2026-08-20T21:54:21.143960+00:00",
-    "https://sfstandard.com/2026/07/31/robbie-ray-sf-giants-trade-targets/": "2026-07-31T17:53:52.533445+00:00",
     "https://sfstandard.com/2026/08/01/harrison-bader-sf-giants-scooter/": "2026-08-01T17:16:41.211038+00:00",
     "https://sfstandard.com/2026/08/02/heliot-ramos-sf-giants-trade-candidate/": "2026-08-02T17:17:36.634230+00:00",
     "https://sfstandard.com/2026/08/02/sf-giants-trade-deadline-live-updates/": "2026-08-03T03:56:38.157190+00:00",
@@ -622,6 +639,7 @@
     "https://sfstandard.com/2026/08/18/valkyries-all-star-game-san-francisco-2027/": "2026-08-18T21:48:22.341412+00:00",
     "https://sfstandard.com/2026/08/20/duane-kuiper-mike-krukow-sf-giants/": "2026-08-20T15:59:11.710152+00:00",
     "https://sfstandard.com/section-415/2026/08/04/sf-giants-trade-deadline-podcast/": "2026-08-05T03:35:04.309339+00:00",
+    "https://sfstandard.com/section-415/2026/08/21/section-415-podcast-giants-broadcasts-will-sound-mike-krukow/": "2026-08-21T21:49:17.293755+00:00",
     "https://www.mercurynews.com/2026/08/14/roupps-rocky-night-more-quiet-bats-doom-sf-giants-vs-rockies/": "2026-08-16T13:11:41.500314+00:00",
     "https://www.mercurynews.com/2026/08/14/sf-giants-turner-hill-hit-streak-roster-grant-mccray-matt-chapman/amp/": "2026-08-16T16:43:58.887549+00:00",
     "https://www.mercurynews.com/2026/08/15/rafael-devers-boston-red-sox-sf-giants-fenway-park/": "2026-08-16T13:11:38.930398+00:00",
@@ -666,6 +684,7 @@
     "https://www.nytimes.com/athletic/7521984/2026/08/18/sf-giants-trade-deadline-history/": "2026-08-18T21:48:19.725610+00:00",
     "https://www.nytimes.com/athletic/7525965/2026/08/20/giants-matt-tugboat-wilkinson-debut-guardians/": "2026-08-20T15:59:14.041882+00:00",
     "https://www.nytimes.com/athletic/7528049/2026/08/20/growth-opportunities-sf-giants-3-to-watch/": "2026-08-21T03:30:53.098536+00:00",
+    "https://www.nytimes.com/athletic/7529461/2026/08/21/rafael-devers-boston-return-sf-giants/": "2026-08-21T21:49:19.492004+00:00",
     "https://www.sfchronicle.com/sports/giants/article/catcher-susac-rodriguez-cavanaugh-22390558.php": "2026-08-18T15:57:52.683980+00:00",
     "https://www.sfchronicle.com/sports/giants/article/dylan-smith-giants-pitch-22383627.php": "2026-08-17T02:01:45.872687+00:00",
     "https://www.sfchronicle.com/sports/giants/article/giants-call-matt-tugboat-wilkinson-22391548.php": "2026-08-17T21:50:59.991303+00:00",
