@@ -556,6 +556,33 @@
       "source": "NBC Sports Bay Area",
       "title": "Giants' offense quiet again as loss to Guardians extends ugly road series streak",
       "url": "https://www.nbcsportsbayarea.com/mlb/san-francisco-giants/road-losing-streak-guardians/1957668/"
+    },
+    {
+      "author": "Andrew Baggarly",
+      "game_key": "",
+      "kind": "standalone",
+      "posted_at": "2026-08-21T03:30:53.098536+00:00",
+      "source": "The Athletic",
+      "title": "Growth opportunities abound for Giants down the stretch: Here are 3 to watch",
+      "url": "https://www.nytimes.com/athletic/7528049/2026/08/20/growth-opportunities-sf-giants-3-to-watch/"
+    },
+    {
+      "author": "Maria Guardado",
+      "game_key": "",
+      "kind": "standalone",
+      "posted_at": "2026-08-21T03:30:55.672073+00:00",
+      "source": "MLB.com",
+      "title": "Adames milestone 200th blast slightly marred by defensive miscues",
+      "url": "https://www.mlb.com/giants/news/willy-adames-hits-200th-career-home-run-in-cleveland"
+    },
+    {
+      "author": "Ryan Greenberg",
+      "game_key": "",
+      "kind": "standalone",
+      "posted_at": "2026-08-21T03:30:57.748719+00:00",
+      "source": "NBC Sports Bay Area",
+      "title": "Giants' top 100 prospects",
+      "url": "https://www.nbcsportsbayarea.com/mlb/san-francisco-giants/five-prospects-top-100-list/1957627/"
     }
   ],
   "posted_urls": {
@@ -606,11 +633,13 @@
     "https://www.mlb.com/giants/news/matt-wilkinson-delivers-scoreless-outing-in-mlb-debut": "2026-08-20T03:25:37.394867+00:00",
     "https://www.mlb.com/giants/news/patrick-bailey-discusses-career-with-giants": "2026-08-19T07:22:03.982355+00:00",
     "https://www.mlb.com/giants/news/watch-minor-league-baseball-games-for-free-2026": "2026-08-18T03:24:10.707953+00:00",
+    "https://www.mlb.com/giants/news/willy-adames-hits-200th-career-home-run-in-cleveland": "2026-08-21T03:30:55.672073+00:00",
     "https://www.mlb.com/stories/game/823182": "2026-08-17T01:12:56.217835+00:00",
     "https://www.nbcsportsbayarea.com/mlb/san-francisco-giants/bryce-eldridge-franchise-history-home-runs/1957446/": "2026-08-20T07:25:00.071272+00:00",
     "https://www.nbcsportsbayarea.com/mlb/san-francisco-giants/carson-whisenhunt-bryce-eldridge-cleveland-guardians/1957401/": "2026-08-19T03:25:51.577720+00:00",
     "https://www.nbcsportsbayarea.com/mlb/san-francisco-giants/drew-gilbert-dugout-antics-2026-season/1957504/": "2026-08-19T21:50:43.527818+00:00",
     "https://www.nbcsportsbayarea.com/mlb/san-francisco-giants/drew-gilbert-logan-webb-colorado-rockies/1956824/": "2026-08-16T16:44:05.658797+00:00",
+    "https://www.nbcsportsbayarea.com/mlb/san-francisco-giants/five-prospects-top-100-list/1957627/": "2026-08-21T03:30:57.748719+00:00",
     "https://www.nbcsportsbayarea.com/mlb/san-francisco-giants/landen-roupp-mechanics-loss-rockies/1956776/": "2026-08-17T01:13:00.714570+00:00",
     "https://www.nbcsportsbayarea.com/mlb/san-francisco-giants/logan-webb-example-teammates-rockies/1956838/": "2026-08-16T16:43:53.565274+00:00",
     "https://www.nbcsportsbayarea.com/mlb/san-francisco-giants/marcelo-mayer-debut-upcoming-road-trip/1957042/": "2026-08-17T15:50:02.705053+00:00",
@@ -628,6 +657,7 @@
     "https://www.nytimes.com/athletic/7519650/2026/08/17/sf-giants-matt-tugboat-wilkinson-callup/": "2026-08-17T21:50:56.528754+00:00",
     "https://www.nytimes.com/athletic/7521984/2026/08/18/sf-giants-trade-deadline-history/": "2026-08-18T21:48:19.725610+00:00",
     "https://www.nytimes.com/athletic/7525965/2026/08/20/giants-matt-tugboat-wilkinson-debut-guardians/": "2026-08-20T15:59:14.041882+00:00",
+    "https://www.nytimes.com/athletic/7528049/2026/08/20/growth-opportunities-sf-giants-3-to-watch/": "2026-08-21T03:30:53.098536+00:00",
     "https://www.sfchronicle.com/sports/giants/article/catcher-susac-rodriguez-cavanaugh-22390558.php": "2026-08-18T15:57:52.683980+00:00",
     "https://www.sfchronicle.com/sports/giants/article/dylan-smith-giants-pitch-22383627.php": "2026-08-17T02:01:45.872687+00:00",
     "https://www.sfchronicle.com/sports/giants/article/giants-call-matt-tugboat-wilkinson-22391548.php": "2026-08-17T21:50:59.991303+00:00",
