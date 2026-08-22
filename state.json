@@ -86,6 +86,21 @@
         "uri": "at://did:plc:gkkepfzghvnfrkrohm2c4nwy/app.bsky.feed.post/3mtfruwxyx324"
       },
       "updated_at": "2026-08-19T03:25:51.577698+00:00"
+    },
+    "game:824721": {
+      "created_at": "2026-08-22T03:21:58.783254+00:00",
+      "game_day": "2026-08-21",
+      "game_pk": 824721,
+      "opponent": "red-sox",
+      "parent": {
+        "cid": "bafyreidpubhv2cwm3ydsfnrb2ltr6hw7u3d4xd5f6zubuair7p7sv3iysi",
+        "uri": "at://did:plc:gkkepfzghvnfrkrohm2c4nwy/app.bsky.feed.post/3mtnd2rqttr23"
+      },
+      "root": {
+        "cid": "bafyreidpubhv2cwm3ydsfnrb2ltr6hw7u3d4xd5f6zubuair7p7sv3iysi",
+        "uri": "at://did:plc:gkkepfzghvnfrkrohm2c4nwy/app.bsky.feed.post/3mtnd2rqttr23"
+      },
+      "updated_at": "2026-08-22T03:21:58.783254+00:00"
     }
   },
   "posted_stories": [
@@ -610,6 +625,42 @@
       "source": "The Athletic",
       "title": "As he returns to Boston, Rafael Devers remains what he’s always been — a pretty good hitter",
       "url": "https://www.nytimes.com/athletic/7529461/2026/08/21/rafael-devers-boston-return-sf-giants/"
+    },
+    {
+      "author": "Ali Thanawalla",
+      "game_key": "",
+      "kind": "standalone",
+      "posted_at": "2026-08-22T03:21:55.820245+00:00",
+      "source": "NBC Sports Bay Area",
+      "title": "Watch Giants' Rafael Devers crush homer vs. Red Sox in first game back at Fenway",
+      "url": "https://www.nbcsportsbayarea.com/mlb/san-francisco-giants/rafael-devers-home-run-red-sox/1958025/"
+    },
+    {
+      "author": "Justice delos Santos",
+      "game_key": "",
+      "kind": "standalone",
+      "posted_at": "2026-08-22T03:21:56.881687+00:00",
+      "source": "Mercury News",
+      "title": "Marcelo Mayer’s SF Giants debut delayed by right foot bone bruise",
+      "url": "https://www.mercurynews.com/2026/08/21/marcello-mayers-sf-giants-debut-delayed-by-right-foot-bone-bruise/amp/"
+    },
+    {
+      "author": "",
+      "game_key": "",
+      "kind": "standalone",
+      "posted_at": "2026-08-22T03:21:57.833842+00:00",
+      "source": "San Francisco Chronicle",
+      "title": "Giants’ Marcelo Mayer not yet healthy enough to face former team in Boston",
+      "url": "https://www.sfchronicle.com/sports/giants/article/sf-giants-marcelo-mayer-not-ready-return-injuries-22398521.php"
+    },
+    {
+      "author": "",
+      "game_key": "game:824721",
+      "kind": "game_story",
+      "posted_at": "2026-08-22T03:21:58.783276+00:00",
+      "source": "San Francisco Chronicle",
+      "title": "Giants fall to Red Sox despite Rafael Devers’ homer as Logan Webb falters",
+      "url": "https://www.sfchronicle.com/sports/giants/article/sf-giants-get-homer-rafael-devers-logan-webb-22390562.php"
     }
   ],
   "posted_urls": {
@@ -649,6 +700,7 @@
     "https://www.mercurynews.com/2026/08/16/despite-lingering-back-issue-sf-giants-adames-hopes-to-avoid-il-stint/amp/": "2026-08-17T01:12:58.472702+00:00",
     "https://www.mercurynews.com/2026/08/18/whisenhunts-troubles-continue-as-sf-giants-blown-out-by-guardians/amp/": "2026-08-19T03:25:48.317036+00:00",
     "https://www.mercurynews.com/2026/08/19/wilkinsons-impressive-debut-houser-and-smiths-strong-outings-lead-way-in-sf-giants-narrow-win-over-guardians/": "2026-08-20T03:25:40.185417+00:00",
+    "https://www.mercurynews.com/2026/08/21/marcello-mayers-sf-giants-debut-delayed-by-right-foot-bone-bruise/amp/": "2026-08-22T03:21:56.881687+00:00",
     "https://www.mlb.com/giants/news/drew-gilbert-and-turner-hill-lead-giants-over-rockies": "2026-08-16T16:44:07.736486+00:00",
     "https://www.mlb.com/giants/news/giants-bo-davidson-logs-career-high-eight-rbis-at-triple-a": "2026-08-17T05:59:46.403298+00:00",
     "https://www.mlb.com/giants/news/giants-top-30-prospects-2026-midseason-update": "2026-08-16T16:43:56.578583+00:00",
@@ -672,6 +724,7 @@
     "https://www.nbcsportsbayarea.com/mlb/san-francisco-giants/matt-chapman-injury-surgery-stanford-medicine/1957299/": "2026-08-20T15:59:16.037868+00:00",
     "https://www.nbcsportsbayarea.com/mlb/san-francisco-giants/matt-wilkinson-tugboat-debut-guardians/1957551/": "2026-08-20T03:25:34.495174+00:00",
     "https://www.nbcsportsbayarea.com/mlb/san-francisco-giants/mike-krukow-tony-vitello-returning-2027/1957159/": "2026-08-18T03:24:07.974331+00:00",
+    "https://www.nbcsportsbayarea.com/mlb/san-francisco-giants/rafael-devers-home-run-red-sox/1958025/": "2026-08-22T03:21:55.820245+00:00",
     "https://www.nbcsportsbayarea.com/mlb/san-francisco-giants/revisiting-patrick-bailey-trade-guardians/1957247/": "2026-08-18T15:57:48.669997+00:00",
     "https://www.nbcsportsbayarea.com/mlb/san-francisco-giants/road-losing-streak-guardians/1957668/": "2026-08-20T21:54:22.932417+00:00",
     "https://www.nbcsportsbayarea.com/mlb/san-francisco-giants/takeaways-blade-tidwell-loss-rockies/1956965/": "2026-08-17T01:13:02.590803+00:00",
@@ -690,6 +743,8 @@
     "https://www.sfchronicle.com/sports/giants/article/giants-call-matt-tugboat-wilkinson-22391548.php": "2026-08-17T21:50:59.991303+00:00",
     "https://www.sfchronicle.com/sports/giants/article/giants-matt-chapman-says-dealt-pain-season-22389825.php": "2026-08-16T16:43:54.534263+00:00",
     "https://www.sfchronicle.com/sports/giants/article/greeting-awaits-rafael-devers-giants-slugger-22390560.php": "2026-08-20T21:54:17.030884+00:00",
+    "https://www.sfchronicle.com/sports/giants/article/sf-giants-get-homer-rafael-devers-logan-webb-22390562.php": "2026-08-22T03:21:58.783276+00:00",
+    "https://www.sfchronicle.com/sports/giants/article/sf-giants-marcelo-mayer-not-ready-return-injuries-22398521.php": "2026-08-22T03:21:57.833842+00:00",
     "https://www.sfchronicle.com/sports/giants/article/sf-giants-pitchers-issue-10-walks-loss-rockies-22390547.php": "2026-08-17T01:13:03.673229+00:00",
     "https://www.sfchronicle.com/sports/giants/article/sf-giants-turner-hill-mlb-debut-drives-winning-22389859.php": "2026-08-16T16:44:08.704502+00:00",
     "https://www.sfchronicle.com/weather/?page=7": "2026-08-19T15:58:25.082601+00:00",
