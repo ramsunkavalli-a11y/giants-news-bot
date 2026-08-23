@@ -57,6 +57,21 @@
       },
       "updated_at": "2026-08-20T03:25:40.185394+00:00"
     },
+    "game:2026-08-21:unknown": {
+      "created_at": "2026-08-23T02:08:53.227302+00:00",
+      "game_day": "2026-08-21",
+      "game_pk": 0,
+      "opponent": "",
+      "parent": {
+        "cid": "bafyreiftvmcpx5277vlzhjsjrdafsj5geoaaecjcw4ybtpgnvre6vhwkoq",
+        "uri": "at://did:plc:gkkepfzghvnfrkrohm2c4nwy/app.bsky.feed.post/3mtppgyh4rt2t"
+      },
+      "root": {
+        "cid": "bafyreiftvmcpx5277vlzhjsjrdafsj5geoaaecjcw4ybtpgnvre6vhwkoq",
+        "uri": "at://did:plc:gkkepfzghvnfrkrohm2c4nwy/app.bsky.feed.post/3mtppgyh4rt2t"
+      },
+      "updated_at": "2026-08-23T02:08:53.227302+00:00"
+    },
     "game:824395": {
       "created_at": "2026-08-20T21:54:22.932396+00:00",
       "game_day": "2026-08-20",
@@ -697,6 +712,24 @@
       "source": "NBC Sports Bay Area",
       "title": "Erik Miller has been good fit for Red Sox after ‘surprising' Giants trade",
       "url": "https://www.nbcsportsbayarea.com/mlb/san-francisco-giants/erik-miller-red-sox-trade/1958098/"
+    },
+    {
+      "author": "Alex Pavlovic",
+      "game_key": "",
+      "kind": "standalone",
+      "posted_at": "2026-08-23T02:08:51.373827+00:00",
+      "source": "NBC Sports Bay Area",
+      "title": "Devers unfazed in Boston",
+      "url": "https://www.nbcsportsbayarea.com/mlb/san-francisco-giants/rafael-devers-boston-return-logan-webb/1958062/"
+    },
+    {
+      "author": "Alex Pavlovic",
+      "game_key": "game:2026-08-21:unknown",
+      "kind": "game_story",
+      "posted_at": "2026-08-23T02:08:53.227325+00:00",
+      "source": "NBC Sports Bay Area",
+      "title": "What we learned as Rafael Devers' Fenway Park return spoiled in Giants' loss",
+      "url": "https://www.nbcsportsbayarea.com/mlb/san-francisco-giants/rafael-devers-red-sox-loss-analysis/1958045/"
     }
   ],
   "posted_urls": {
@@ -763,7 +796,9 @@
     "https://www.nbcsportsbayarea.com/mlb/san-francisco-giants/matt-chapman-injury-surgery-stanford-medicine/1957299/": "2026-08-20T15:59:16.037868+00:00",
     "https://www.nbcsportsbayarea.com/mlb/san-francisco-giants/matt-wilkinson-tugboat-debut-guardians/1957551/": "2026-08-20T03:25:34.495174+00:00",
     "https://www.nbcsportsbayarea.com/mlb/san-francisco-giants/mike-krukow-tony-vitello-returning-2027/1957159/": "2026-08-18T03:24:07.974331+00:00",
+    "https://www.nbcsportsbayarea.com/mlb/san-francisco-giants/rafael-devers-boston-return-logan-webb/1958062/": "2026-08-23T02:08:51.373827+00:00",
     "https://www.nbcsportsbayarea.com/mlb/san-francisco-giants/rafael-devers-home-run-red-sox/1958025/": "2026-08-22T03:21:55.820245+00:00",
+    "https://www.nbcsportsbayarea.com/mlb/san-francisco-giants/rafael-devers-red-sox-loss-analysis/1958045/": "2026-08-23T02:08:53.227325+00:00",
     "https://www.nbcsportsbayarea.com/mlb/san-francisco-giants/revisiting-patrick-bailey-trade-guardians/1957247/": "2026-08-18T15:57:48.669997+00:00",
     "https://www.nbcsportsbayarea.com/mlb/san-francisco-giants/road-losing-streak-guardians/1957668/": "2026-08-20T21:54:22.932417+00:00",
     "https://www.nbcsportsbayarea.com/mlb/san-francisco-giants/takeaways-blade-tidwell-loss-rockies/1956965/": "2026-08-17T01:13:02.590803+00:00",
