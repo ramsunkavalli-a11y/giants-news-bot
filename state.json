@@ -108,14 +108,14 @@
       "game_pk": 824718,
       "opponent": "red-sox",
       "parent": {
-        "cid": "bafyreiadfmx2y6qwysqsraqkrw6kq44savephxz3dm2omi4gzwrytsa3ru",
-        "uri": "at://did:plc:gkkepfzghvnfrkrohm2c4nwy/app.bsky.feed.post/3mtq43adcmf2e"
+        "cid": "bafyreid2kdin2zoffghbjioyeuziesbzp7suxjwv7gi72c4ws4qdepkc5a",
+        "uri": "at://did:plc:gkkepfzghvnfrkrohm2c4nwy/app.bsky.feed.post/3mtrnvuirac24"
       },
       "root": {
         "cid": "bafyreih2l7e7qes3xt6wh6xtvk4x7wqovoqgi374kpkkohg4yqdvgkkreq",
         "uri": "at://did:plc:gkkepfzghvnfrkrohm2c4nwy/app.bsky.feed.post/3mtq43743je24"
       },
-      "updated_at": "2026-08-23T05:54:57.065126+00:00"
+      "updated_at": "2026-08-23T20:46:44.004838+00:00"
     },
     "game:824721": {
       "created_at": "2026-08-22T03:21:58.783254+00:00",
@@ -790,12 +790,20 @@
       "source": "NBC Sports Bay Area",
       "title": "Giants waste pitching performances",
       "url": "https://www.nbcsportsbayarea.com/mlb/san-francisco-giants/blade-tidwell-dylan-dmith-red-sox/1958142/"
+    },
+    {
+      "author": "Justice delos Santos",
+      "game_key": "game:824718",
+      "kind": "game_story",
+      "posted_at": "2026-08-23T20:46:44.004858+00:00",
+      "source": "Mercury News",
+      "title": "SF Giants blow ninth-inning lead in walk-off loss to Red Sox, waste Tidwell’s excellent start",
+      "url": "https://www.mercurynews.com/2026/08/22/sf-giants-blow-ninth-inning-lead-in-walk-off-loss-to-red-sox-waste-tidwells-excellent-start/"
     }
   ],
   "posted_urls": {
     "https://apnews.com/article/rockies-giants-score-935e66257655c1df502d35d032c6bedd": "2026-08-16T13:09:16.016508+00:00",
     "https://omny.fm/shows/the-executives-show/giants-executive-show-larry-baer-on-fan-appreciation-and-exciting-news-about-a-beer-promotion-day-in-partnership-with-knbeer": "2026-08-20T21:54:21.143960+00:00",
-    "https://sfstandard.com/2026/08/02/heliot-ramos-sf-giants-trade-candidate/": "2026-08-02T17:17:36.634230+00:00",
     "https://sfstandard.com/2026/08/02/sf-giants-trade-deadline-live-updates/": "2026-08-03T03:56:38.157190+00:00",
     "https://sfstandard.com/2026/08/03/luis-arraez-sf-giants-trade-deadline-moves-robbie-ray/": "2026-08-04T03:40:09.660726+00:00",
     "https://sfstandard.com/2026/08/03/luis-arraez-sf-giants-trade-deadline-moves/": "2026-08-03T18:07:59.744795+00:00",
@@ -832,6 +840,7 @@
     "https://www.mercurynews.com/2026/08/19/wilkinsons-impressive-debut-houser-and-smiths-strong-outings-lead-way-in-sf-giants-narrow-win-over-guardians/": "2026-08-20T03:25:40.185417+00:00",
     "https://www.mercurynews.com/2026/08/21/devers-homers-in-boston-return-but-sf-giants-fall-to-red-sox-as-webb-endures-shortest-outing-of-year/amp/": "2026-08-22T07:11:07.899843+00:00",
     "https://www.mercurynews.com/2026/08/21/marcello-mayers-sf-giants-debut-delayed-by-right-foot-bone-bruise/amp/": "2026-08-22T03:21:56.881687+00:00",
+    "https://www.mercurynews.com/2026/08/22/sf-giants-blow-ninth-inning-lead-in-walk-off-loss-to-red-sox-waste-tidwells-excellent-start/": "2026-08-23T20:46:44.004858+00:00",
     "https://www.mercurynews.com/2026/08/22/sf-giants-blow-ninth-inning-lead-in-walk-off-loss-to-red-sox-waste-tidwells-excellent-start/amp/": "2026-08-23T05:54:56.161973+00:00",
     "https://www.mlb.com/giants/news/drew-gilbert-and-turner-hill-lead-giants-over-rockies": "2026-08-16T16:44:07.736486+00:00",
     "https://www.mlb.com/giants/news/giants-bo-davidson-logs-career-high-eight-rbis-at-triple-a": "2026-08-17T05:59:46.403298+00:00",
