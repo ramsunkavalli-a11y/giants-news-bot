@@ -117,6 +117,21 @@
       },
       "updated_at": "2026-08-23T20:46:44.004838+00:00"
     },
+    "game:824720": {
+      "created_at": "2026-08-24T02:06:39.647170+00:00",
+      "game_day": "2026-08-23",
+      "game_pk": 824720,
+      "opponent": "red-sox",
+      "parent": {
+        "cid": "bafyreiahhxuax4ocxdqlek5yarfeentlfiotpqgomhyzickajvrsp2x3be",
+        "uri": "at://did:plc:gkkepfzghvnfrkrohm2c4nwy/app.bsky.feed.post/3mts7rwfvc22a"
+      },
+      "root": {
+        "cid": "bafyreiahhxuax4ocxdqlek5yarfeentlfiotpqgomhyzickajvrsp2x3be",
+        "uri": "at://did:plc:gkkepfzghvnfrkrohm2c4nwy/app.bsky.feed.post/3mts7rwfvc22a"
+      },
+      "updated_at": "2026-08-24T02:06:39.647170+00:00"
+    },
     "game:824721": {
       "created_at": "2026-08-22T03:21:58.783254+00:00",
       "game_day": "2026-08-21",
@@ -799,6 +814,42 @@
       "source": "Mercury News",
       "title": "SF Giants blow ninth-inning lead in walk-off loss to Red Sox, waste Tidwell’s excellent start",
       "url": "https://www.mercurynews.com/2026/08/22/sf-giants-blow-ninth-inning-lead-in-walk-off-loss-to-red-sox-waste-tidwells-excellent-start/"
+    },
+    {
+      "author": "Alex Pavlovic",
+      "game_key": "",
+      "kind": "standalone",
+      "posted_at": "2026-08-24T02:06:33.216939+00:00",
+      "source": "NBC Sports Bay Area",
+      "title": "Giants suffer more injuries",
+      "url": "https://www.nbcsportsbayarea.com/mlb/san-francisco-giants/victor-bericoto-willy-adames-injuries/1958271/"
+    },
+    {
+      "author": "",
+      "game_key": "",
+      "kind": "standalone",
+      "posted_at": "2026-08-24T02:06:34.171082+00:00",
+      "source": "San Francisco Chronicle",
+      "title": "Giants’ Jonah Cox shows potential with homer, but S.F. can't avoid sweep in Boston",
+      "url": "https://www.sfchronicle.com/sports/giants/article/giants-jonah-cox-offers-positive-offensive-sign-22400166.php"
+    },
+    {
+      "author": "Justice delos Santos",
+      "game_key": "",
+      "kind": "standalone",
+      "posted_at": "2026-08-24T02:06:36.863137+00:00",
+      "source": "Mercury News",
+      "title": "SF Giants’ Adames, Bericoto leave Sunday’s game vs. Red Sox with injuries",
+      "url": "https://www.mercurynews.com/2026/08/23/sf-giants-adames-bericoto-leave-sundays-game-vs-red-sox-with-injuries/amp/"
+    },
+    {
+      "author": "Justice delos Santos",
+      "game_key": "game:824720",
+      "kind": "game_story",
+      "posted_at": "2026-08-24T02:06:39.647189+00:00",
+      "source": "Mercury News",
+      "title": "Wilkinson’s rough afternoon, multiple injuries headline loss as SF Giants swept by Red Sox",
+      "url": "https://www.mercurynews.com/2026/08/23/wilkinsons-rough-afternoon-multiple-injuries-headline-loss-as-sf-giants-swept-by-red-sox/amp/"
     }
   ],
   "posted_urls": {
@@ -842,6 +893,8 @@
     "https://www.mercurynews.com/2026/08/21/marcello-mayers-sf-giants-debut-delayed-by-right-foot-bone-bruise/amp/": "2026-08-22T03:21:56.881687+00:00",
     "https://www.mercurynews.com/2026/08/22/sf-giants-blow-ninth-inning-lead-in-walk-off-loss-to-red-sox-waste-tidwells-excellent-start/": "2026-08-23T20:46:44.004858+00:00",
     "https://www.mercurynews.com/2026/08/22/sf-giants-blow-ninth-inning-lead-in-walk-off-loss-to-red-sox-waste-tidwells-excellent-start/amp/": "2026-08-23T05:54:56.161973+00:00",
+    "https://www.mercurynews.com/2026/08/23/sf-giants-adames-bericoto-leave-sundays-game-vs-red-sox-with-injuries/amp/": "2026-08-24T02:06:36.863137+00:00",
+    "https://www.mercurynews.com/2026/08/23/wilkinsons-rough-afternoon-multiple-injuries-headline-loss-as-sf-giants-swept-by-red-sox/amp/": "2026-08-24T02:06:39.647189+00:00",
     "https://www.mlb.com/giants/news/drew-gilbert-and-turner-hill-lead-giants-over-rockies": "2026-08-16T16:44:07.736486+00:00",
     "https://www.mlb.com/giants/news/giants-bo-davidson-logs-career-high-eight-rbis-at-triple-a": "2026-08-17T05:59:46.403298+00:00",
     "https://www.mlb.com/giants/news/giants-top-30-prospects-2026-midseason-update": "2026-08-16T16:43:56.578583+00:00",
@@ -877,6 +930,7 @@
     "https://www.nbcsportsbayarea.com/mlb/san-francisco-giants/takeaways-blade-tidwell-loss-rockies/1956965/": "2026-08-17T01:13:02.590803+00:00",
     "https://www.nbcsportsbayarea.com/mlb/san-francisco-giants/tony-vitello-team-meeting/1957101/": "2026-08-17T21:51:02.208210+00:00",
     "https://www.nbcsportsbayarea.com/mlb/san-francisco-giants/tony-vitello-willy-adames/1956703/": "2026-08-17T02:01:44.941875+00:00",
+    "https://www.nbcsportsbayarea.com/mlb/san-francisco-giants/victor-bericoto-willy-adames-injuries/1958271/": "2026-08-24T02:06:33.216939+00:00",
     "https://www.nytimes.com/athletic/7513641/2026/08/14/sf-giants-buster-posey-2026-season-analysis/": "2026-08-16T16:44:01.805207+00:00",
     "https://www.nytimes.com/athletic/7516245/2026/08/15/giants-logan-webb-talents-win-rockies/": "2026-08-16T16:44:11.223261+00:00",
     "https://www.nytimes.com/athletic/7518171/2026/08/16/giants-tony-vitello-junior-college-comparison/": "2026-08-17T05:59:49.788867+00:00",
@@ -888,6 +942,7 @@
     "https://www.sfchronicle.com/sports/giants/article/catcher-susac-rodriguez-cavanaugh-22390558.php": "2026-08-18T15:57:52.683980+00:00",
     "https://www.sfchronicle.com/sports/giants/article/dylan-smith-giants-pitch-22383627.php": "2026-08-17T02:01:45.872687+00:00",
     "https://www.sfchronicle.com/sports/giants/article/giants-call-matt-tugboat-wilkinson-22391548.php": "2026-08-17T21:50:59.991303+00:00",
+    "https://www.sfchronicle.com/sports/giants/article/giants-jonah-cox-offers-positive-offensive-sign-22400166.php": "2026-08-24T02:06:34.171082+00:00",
     "https://www.sfchronicle.com/sports/giants/article/giants-matt-chapman-says-dealt-pain-season-22389825.php": "2026-08-16T16:43:54.534263+00:00",
     "https://www.sfchronicle.com/sports/giants/article/greeting-awaits-rafael-devers-giants-slugger-22390560.php": "2026-08-20T21:54:17.030884+00:00",
     "https://www.sfchronicle.com/sports/giants/article/sf-giants-get-homer-rafael-devers-logan-webb-22390562.php": "2026-08-22T03:21:58.783276+00:00",
