@@ -123,14 +123,14 @@
       "game_pk": 824720,
       "opponent": "red-sox",
       "parent": {
-        "cid": "bafyreiahhxuax4ocxdqlek5yarfeentlfiotpqgomhyzickajvrsp2x3be",
-        "uri": "at://did:plc:gkkepfzghvnfrkrohm2c4nwy/app.bsky.feed.post/3mts7rwfvc22a"
+        "cid": "bafyreihq75bjuecnlk452wrirvawv6657bmv3kchrja6ljit75yw5lcjf4",
+        "uri": "at://did:plc:gkkepfzghvnfrkrohm2c4nwy/app.bsky.feed.post/3mtuc4os6mm2a"
       },
       "root": {
         "cid": "bafyreiahhxuax4ocxdqlek5yarfeentlfiotpqgomhyzickajvrsp2x3be",
         "uri": "at://did:plc:gkkepfzghvnfrkrohm2c4nwy/app.bsky.feed.post/3mts7rwfvc22a"
       },
-      "updated_at": "2026-08-24T02:06:39.647170+00:00"
+      "updated_at": "2026-08-24T21:53:47.546454+00:00"
     },
     "game:824721": {
       "created_at": "2026-08-22T03:21:58.783254+00:00",
@@ -877,14 +877,21 @@
       "source": "NBC Sports Bay Area",
       "title": "Matt Wilkinson's latest Giants start a learning experience; Jonah Cox snaps skid",
       "url": "https://www.nbcsportsbayarea.com/mlb/san-francisco-giants/matt-wilkinson-outing-red-sox/1958333/"
+    },
+    {
+      "author": "Grant Brisbee",
+      "game_key": "game:824720",
+      "kind": "game_story",
+      "posted_at": "2026-08-24T21:53:47.546478+00:00",
+      "source": "The Athletic",
+      "title": "The Giants were swept by the Red Sox, the team they wished they were",
+      "url": "https://www.nytimes.com/athletic/7535281/2026/08/24/giants-red-sox-sweep-logan-webb/"
     }
   ],
   "posted_urls": {
     "https://apnews.com/article/rockies-giants-score-935e66257655c1df502d35d032c6bedd": "2026-08-16T13:09:16.016508+00:00",
     "https://omny.fm/shows/the-executives-show/giants-executive-show-larry-baer-on-fan-appreciation-and-exciting-news-about-a-beer-promotion-day-in-partnership-with-knbeer": "2026-08-20T21:54:21.143960+00:00",
     "https://sfstandard.com/2026/08/03/luis-arraez-sf-giants-trade-deadline-moves-robbie-ray/": "2026-08-04T03:40:09.660726+00:00",
-    "https://sfstandard.com/2026/08/03/luis-arraez-sf-giants-trade-deadline-moves/": "2026-08-03T18:07:59.744795+00:00",
-    "https://sfstandard.com/2026/08/03/one-year-later-buster-posey-fared-first-trade-deadline-giants/": "2026-08-03T18:08:00.652737+00:00",
     "https://sfstandard.com/2026/08/04/buster-posey-sf-giants-selloff-trade-deadline/": "2026-08-05T03:35:03.418816+00:00",
     "https://sfstandard.com/2026/08/04/buster-posey-sf-giants-trade-deadline-rebuild/": "2026-08-04T18:04:15.410339+00:00",
     "https://sfstandard.com/2026/08/05/tony-vitello-sf-giants-buster-posey-dynamic/": "2026-08-05T17:54:28.402748+00:00",
@@ -967,6 +974,7 @@
     "https://www.nytimes.com/athletic/7525965/2026/08/20/giants-matt-tugboat-wilkinson-debut-guardians/": "2026-08-20T15:59:14.041882+00:00",
     "https://www.nytimes.com/athletic/7528049/2026/08/20/growth-opportunities-sf-giants-3-to-watch/": "2026-08-21T03:30:53.098536+00:00",
     "https://www.nytimes.com/athletic/7529461/2026/08/21/rafael-devers-boston-return-sf-giants/": "2026-08-21T21:49:19.492004+00:00",
+    "https://www.nytimes.com/athletic/7535281/2026/08/24/giants-red-sox-sweep-logan-webb/": "2026-08-24T21:53:47.546478+00:00",
     "https://www.sfchronicle.com/sports/giants/article/catcher-susac-rodriguez-cavanaugh-22390558.php": "2026-08-18T15:57:52.683980+00:00",
     "https://www.sfchronicle.com/sports/giants/article/dylan-smith-giants-pitch-22383627.php": "2026-08-17T02:01:45.872687+00:00",
     "https://www.sfchronicle.com/sports/giants/article/giants-call-matt-tugboat-wilkinson-22391548.php": "2026-08-17T21:50:59.991303+00:00",
