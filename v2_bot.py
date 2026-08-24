@@ -261,6 +261,20 @@ def _existing_thread_key(state: dict, thread: dict) -> str:
     if unknown in threads:
         return unknown
 
+    # A late article can omit the opponent even though a schedule-grounded
+    # thread for that single Giants game already exists. Reuse that root rather
+    # than splitting one game's coverage across two Bluesky threads. Never
+    # guess when a doubleheader or another ambiguity leaves multiple matches.
+    same_game = [
+        candidate_key
+        for candidate_key, candidate in threads.items()
+        if isinstance(candidate, dict)
+        and candidate.get("game_day") == day
+        and (not opponent or candidate.get("opponent") == opponent)
+    ]
+    if len(same_game) == 1:
+        return same_game[0]
+
     day_prefix = f"game:{day}:"
     same_day = [candidate for candidate in threads if candidate.startswith(day_prefix)]
     if len(same_day) == 1:
@@ -297,6 +311,23 @@ def _prepare_posts(articles: list[dict], timeout: int) -> list[tuple[dict, Candi
     return prepared
 
 
+def _state_with_planned_game_stories(state: dict, game_selection: dict, now: datetime) -> dict:
+    """Prevent a standalone from repeating a game-thread story in the same run."""
+    planned = list(state.get("posted_stories", []) or [])
+    for thread in game_selection.get("threads", []) or []:
+        for article in thread.get("articles", []) or []:
+            planned.append({
+                "title": article.get("title", ""),
+                "url": article.get("canonical_url") or canonicalize_url(article.get("url", "")),
+                "source": article.get("source", ""),
+                "author": article.get("author", ""),
+                "kind": "game_story",
+                "game_key": thread.get("key", ""),
+                "posted_at": now.isoformat(),
+            })
+    return {**state, "posted_stories": planned}
+
+
 def main() -> None:
     settings = Settings()
     state = load_state(settings.state_file)
@@ -313,7 +344,7 @@ def main() -> None:
     standalone_articles = [article for article in articles if not is_game_story(article)]
     selection = select_articles(
         standalone_articles,
-        state,
+        _state_with_planned_game_stories(state, game_selection, datetime.now(timezone.utc)),
         hours_back=settings.hours_back,
         max_posts=settings.max_posts_per_run,
     )

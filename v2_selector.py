@@ -23,7 +23,8 @@ TRACKING_KEYS = {
     "fbclid", "gclid", "ref", "refsrc", "mc_cid", "mc_eid", "igshid", "source"
 }
 LOW_VALUE_TITLE_RE = re.compile(
-    r"\bhighlights\b|\branking every mlb\b|\bfarm system,\s*1-30\b|\bfarm system ranking by\b",
+    r"\bhighlights\b|\bwatch\b.*\b(?:homer|home run|highlights?|clip|video)\b|"
+    r"\branking every mlb\b|\bfarm system,\s*1-30\b|\bfarm system ranking by\b",
     flags=re.I,
 )
 ROTATION_WINDOW_DAYS = 14
@@ -40,8 +41,16 @@ def canonicalize_url(url: str) -> str:
         if low in TRACKING_KEYS or low.startswith("utm_") or low.startswith("mc_"):
             continue
         filtered.append((key, value))
+    netloc = parsed.netloc.lower()
+    path = parsed.path
+    # Mercury News exposes the same article at both its canonical URL and an
+    # /amp/ variant. Treat those as one story before consulting state so a
+    # later feed variant cannot become a second Bluesky post.
+    if netloc.removeprefix("www.") == "mercurynews.com":
+        path = re.sub(r"/amp/?$", "/", path, flags=re.I)
     return urlunparse(parsed._replace(
-        netloc=parsed.netloc.lower(),
+        netloc=netloc,
+        path=path,
         query=urlencode(filtered, doseq=True),
         fragment="",
     ))

@@ -15,8 +15,9 @@ from v2_bot import (
     clean_card_summary,
     load_state,
     mark_posted,
+    _state_with_planned_game_stories,
 )
-from v2_selector import select_articles
+from v2_selector import canonicalize_url, select_articles
 
 
 class FakeResponse:
@@ -265,6 +266,48 @@ class RuntimeSmokeTests(unittest.TestCase):
         self.assertEqual(selection["selected"], [])
         self.assertEqual(selection["reasons"].get("quality_low"), 1)
 
+    def test_watch_homer_clip_is_rejected_at_selection_boundary(self):
+        now = datetime(2026, 8, 22, 4, 0, tzinfo=timezone.utc)
+        article = {
+            "source": "NBC Sports Bay Area",
+            "title": "Watch Giants' Rafael Devers crush homer vs. Red Sox",
+            "url": "https://www.nbcsportsbayarea.com/example",
+            "published": now.isoformat(),
+            "quality": "high",
+        }
+        selection = select_articles(
+            [article],
+            {"posted_urls": {}, "posted_stories": [], "game_threads": {}},
+            now=now,
+        )
+        self.assertEqual(selection["selected"], [])
+        self.assertEqual(selection["reasons"].get("quality_low"), 1)
+
+    def test_mercury_amp_url_matches_canonical_article_url(self):
+        canonical = "https://www.mercurynews.com/2026/08/22/example-story/"
+        amp = "https://www.mercurynews.com/2026/08/22/example-story/amp/"
+        self.assertEqual(canonicalize_url(amp), canonicalize_url(canonical))
+
+    def test_planned_game_story_suppresses_matching_standalone(self):
+        now = datetime(2026, 8, 24, 2, 0, tzinfo=timezone.utc)
+        game_article = {
+            "title": "Giants suffer multiple injuries in loss to Red Sox",
+            "url": "https://example.com/game-recap",
+            "source": "Mercury News",
+            "author": "Justice delos Santos",
+            "published": now.isoformat(),
+            "quality": "high",
+        }
+        state = _state_with_planned_game_stories(
+            {"posted_urls": {}, "posted_stories": [], "game_threads": {}},
+            {"threads": [{"key": "game:824720", "articles": [game_article]}]},
+            now,
+        )
+        standalone = dict(game_article, url="https://example.com/injury-update")
+        selection = select_articles([standalone], state, now=now)
+        self.assertEqual(selection["selected"], [])
+        self.assertEqual(selection["reasons"].get("story_already_posted"), 1)
+
     def test_mark_posted_stores_game_kind(self):
         state = {"posted_urls": {}, "posted_stories": []}
         article = {
@@ -301,6 +344,24 @@ class RuntimeSmokeTests(unittest.TestCase):
             "opponent": "rockies",
         }
         self.assertEqual(_existing_thread_key(state, thread), "game:2026-08-15:unknown")
+
+    def test_unknown_opponent_reuses_only_schedule_grounded_thread_that_day(self):
+        state = {
+            "game_threads": {
+                "game:824721": {
+                    "game_pk": 824721,
+                    "game_day": "2026-08-21",
+                    "opponent": "red-sox",
+                    "root": {"uri": "at://root", "cid": "rootcid"},
+                }
+            }
+        }
+        thread = {
+            "key": "game:2026-08-21:unknown",
+            "game_day": "2026-08-21",
+            "opponent": "",
+        }
+        self.assertEqual(_existing_thread_key(state, thread), "game:824721")
 
     def test_thread_state_stores_root_and_latest_parent(self):
         state = {"game_threads": {}}
