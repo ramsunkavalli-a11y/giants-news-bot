@@ -72,6 +72,21 @@
       },
       "updated_at": "2026-08-23T02:08:53.227302+00:00"
     },
+    "game:823183": {
+      "created_at": "2026-08-25T07:26:59.839697+00:00",
+      "game_day": "2026-08-24",
+      "game_pk": 823183,
+      "opponent": "reds",
+      "parent": {
+        "cid": "bafyreiczbcsmzzignscwega6ejvnhcqkhiviitw4ekijvfrzh4ek2dhqne",
+        "uri": "at://did:plc:gkkepfzghvnfrkrohm2c4nwy/app.bsky.feed.post/3mtvc5o6ntg2y"
+      },
+      "root": {
+        "cid": "bafyreiczbcsmzzignscwega6ejvnhcqkhiviitw4ekijvfrzh4ek2dhqne",
+        "uri": "at://did:plc:gkkepfzghvnfrkrohm2c4nwy/app.bsky.feed.post/3mtvc5o6ntg2y"
+      },
+      "updated_at": "2026-08-25T07:26:59.839697+00:00"
+    },
     "game:824395": {
       "created_at": "2026-08-20T21:54:22.932396+00:00",
       "game_day": "2026-08-20",
@@ -904,12 +919,38 @@
       "source": "NBC Sports Bay Area",
       "title": "Krukisms: Giants broadcaster Mike Krukow breaks down origins of his catchphrases",
       "url": "https://www.nbcsportsbayarea.com/mlb/san-francisco-giants/mike-krukow-catchphrases-origins/1958410/"
+    },
+    {
+      "author": "Maria Guardado",
+      "game_key": "",
+      "kind": "standalone",
+      "posted_at": "2026-08-25T07:26:56.792754+00:00",
+      "source": "MLB.com",
+      "title": "Devers brings healing power to banged-up club with tape-measure tater",
+      "url": "https://www.mlb.com/giants/news/rafael-devers-hits-3-run-homer-as-giants-beat-reds"
+    },
+    {
+      "author": "Tristi Rodriguez",
+      "game_key": "",
+      "kind": "standalone",
+      "posted_at": "2026-08-25T07:26:58.823674+00:00",
+      "source": "NBC Sports Bay Area",
+      "title": "Carson Whisenhunt reflects on ‘weird' season as injury leaves Giants concerned",
+      "url": "https://www.nbcsportsbayarea.com/mlb/san-francisco-giants/carson-whisenhunt-injury-update-reds/1958489/"
+    },
+    {
+      "author": "",
+      "game_key": "game:823183",
+      "kind": "game_story",
+      "posted_at": "2026-08-25T07:26:59.839719+00:00",
+      "source": "San Francisco Chronicle",
+      "title": "Giants, with makeshift lineup, batter Reds All-Star pitcher in victory",
+      "url": "https://www.sfchronicle.com/sports/giants/article/sf-giants-pitcher-carson-whisenhunt-exits-22402031.php"
     }
   ],
   "posted_urls": {
     "https://apnews.com/article/rockies-giants-score-935e66257655c1df502d35d032c6bedd": "2026-08-16T13:09:16.016508+00:00",
     "https://omny.fm/shows/the-executives-show/giants-executive-show-larry-baer-on-fan-appreciation-and-exciting-news-about-a-beer-promotion-day-in-partnership-with-knbeer": "2026-08-20T21:54:21.143960+00:00",
-    "https://sfstandard.com/2026/08/03/luis-arraez-sf-giants-trade-deadline-moves-robbie-ray/": "2026-08-04T03:40:09.660726+00:00",
     "https://sfstandard.com/2026/08/04/buster-posey-sf-giants-selloff-trade-deadline/": "2026-08-05T03:35:03.418816+00:00",
     "https://sfstandard.com/2026/08/04/buster-posey-sf-giants-trade-deadline-rebuild/": "2026-08-04T18:04:15.410339+00:00",
     "https://sfstandard.com/2026/08/05/tony-vitello-sf-giants-buster-posey-dynamic/": "2026-08-05T17:54:28.402748+00:00",
@@ -955,6 +996,7 @@
     "https://www.mlb.com/giants/news/matt-tugboat-wilkinson-called-up-by-giants": "2026-08-17T21:50:59.051522+00:00",
     "https://www.mlb.com/giants/news/matt-wilkinson-delivers-scoreless-outing-in-mlb-debut": "2026-08-20T03:25:37.394867+00:00",
     "https://www.mlb.com/giants/news/patrick-bailey-discusses-career-with-giants": "2026-08-19T07:22:03.982355+00:00",
+    "https://www.mlb.com/giants/news/rafael-devers-hits-3-run-homer-as-giants-beat-reds": "2026-08-25T07:26:56.792754+00:00",
     "https://www.mlb.com/giants/news/watch-minor-league-baseball-games-for-free-2026": "2026-08-18T03:24:10.707953+00:00",
     "https://www.mlb.com/giants/news/willy-adames-hits-200th-career-home-run-in-cleveland": "2026-08-21T03:30:55.672073+00:00",
     "https://www.mlb.com/giants/news/willy-adames-victor-bericoto-jt-brubaker-placed-on-injured-list": "2026-08-25T03:27:24.306483+00:00",
@@ -963,6 +1005,7 @@
     "https://www.nbcsportsbayarea.com/mlb/san-francisco-giants/blade-tidwell-dylan-smith-bullpen/1958177/": "2026-08-23T05:54:52.087682+00:00",
     "https://www.nbcsportsbayarea.com/mlb/san-francisco-giants/bryce-eldridge-franchise-history-home-runs/1957446/": "2026-08-20T07:25:00.071272+00:00",
     "https://www.nbcsportsbayarea.com/mlb/san-francisco-giants/carson-whisenhunt-bryce-eldridge-cleveland-guardians/1957401/": "2026-08-19T03:25:51.577720+00:00",
+    "https://www.nbcsportsbayarea.com/mlb/san-francisco-giants/carson-whisenhunt-injury-update-reds/1958489/": "2026-08-25T07:26:58.823674+00:00",
     "https://www.nbcsportsbayarea.com/mlb/san-francisco-giants/drew-gilbert-dugout-antics-2026-season/1957504/": "2026-08-19T21:50:43.527818+00:00",
     "https://www.nbcsportsbayarea.com/mlb/san-francisco-giants/drew-gilbert-logan-webb-colorado-rockies/1956824/": "2026-08-16T16:44:05.658797+00:00",
     "https://www.nbcsportsbayarea.com/mlb/san-francisco-giants/erik-miller-red-sox-trade/1958098/": "2026-08-22T20:47:21.092618+00:00",
@@ -1005,6 +1048,7 @@
     "https://www.sfchronicle.com/sports/giants/article/sf-giants-get-homer-rafael-devers-logan-webb-22390562.php": "2026-08-22T03:21:58.783276+00:00",
     "https://www.sfchronicle.com/sports/giants/article/sf-giants-marcelo-mayer-not-ready-return-injuries-22398521.php": "2026-08-22T03:21:57.833842+00:00",
     "https://www.sfchronicle.com/sports/giants/article/sf-giants-ninth-inning-letdown-leads-win-red-sox-22390564.php": "2026-08-23T05:54:57.065145+00:00",
+    "https://www.sfchronicle.com/sports/giants/article/sf-giants-pitcher-carson-whisenhunt-exits-22402031.php": "2026-08-25T07:26:59.839719+00:00",
     "https://www.sfchronicle.com/sports/giants/article/sf-giants-pitchers-issue-10-walks-loss-rockies-22390547.php": "2026-08-17T01:13:03.673229+00:00",
     "https://www.sfchronicle.com/sports/giants/article/sf-giants-turner-hill-mlb-debut-drives-winning-22389859.php": "2026-08-16T16:44:08.704502+00:00",
     "https://www.sfchronicle.com/weather/?page=7": "2026-08-19T15:58:25.082601+00:00",
