@@ -27,6 +27,15 @@ LOW_VALUE_TITLE_RE = re.compile(
     r"\branking every mlb\b|\bfarm system,\s*1-30\b|\bfarm system ranking by\b",
     flags=re.I,
 )
+BREAKING_NEWS_TITLE_RE = re.compile(
+    r"\b(?:injur(?:y|ies)|injured|il|bereavement|waiver|dfa|designated for assignment|"
+    r"roster moves?|transactions?|placed on|land on)\b",
+    flags=re.I,
+)
+DEFERRABLE_FEATURE_TITLE_RE = re.compile(
+    r"\b(?:catchphrases?|origins?|history|oral history|looking back)\b",
+    flags=re.I,
+)
 ROTATION_WINDOW_DAYS = 14
 EARLY_REPORTING_EDGE_MINUTES = 90
 
@@ -306,6 +315,13 @@ def select_articles(
     diagnostics: list[dict] = []
     eligible: list[dict] = []
     timestamp_enrichments = 0
+    breaking_news_count = sum(
+        1
+        for article in articles
+        if article.get("quality") == "high"
+        and BREAKING_NEWS_TITLE_RE.search(str(article.get("title", "") or ""))
+    )
+    defer_features = breaking_news_count >= 2
 
     for raw in articles:
         article = dict(raw)
@@ -319,6 +335,8 @@ def select_articles(
         # pages as low value, but do not let known broad/highlight patterns through.
         if LOW_VALUE_TITLE_RE.search(title or ""):
             reason = "quality_low"
+        elif defer_features and DEFERRABLE_FEATURE_TITLE_RE.search(title or ""):
+            reason = "deferred_for_breaking_news"
         elif article.get("quality") != "high":
             reason = f"quality_{article.get('quality') or 'unknown'}"
         elif not canonical:

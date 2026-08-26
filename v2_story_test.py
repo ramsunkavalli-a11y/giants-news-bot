@@ -70,6 +70,18 @@ class StoryDedupeTests(unittest.TestCase):
             "Matt Chapman expects to have season-ending surgery for abdominal injury",
         ))
 
+    def test_named_partnership_announcement_clusters(self):
+        self.assertTrue(same_story(
+            "Giants among five MLB teams launching partnership with Kalshi predictions market",
+            "SF Giants announce partnership with controversial prediction market Kalshi",
+        ))
+
+    def test_player_bereavement_update_clusters(self):
+        self.assertTrue(same_story(
+            "Giants’ Bryce Eldridge headed to bereavement list, will miss series against Reds",
+            "Bryce Eldridge reportedly being added to bereavement list for Giants-Reds series",
+        ))
+
     def test_author_signal_can_overcome_secondary_source(self):
         dt = datetime(2026, 8, 16, tzinfo=timezone.utc)
         alex_simon = {

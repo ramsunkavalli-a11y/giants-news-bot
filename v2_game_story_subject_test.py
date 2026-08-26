@@ -44,6 +44,21 @@ class GameStorySubjectTests(unittest.TestCase):
         }
         self.assertTrue(is_game_story(article))
 
+    def test_season_outlook_is_not_a_game_story(self):
+        article = {
+            "source": "San Francisco Standard",
+            "title": "A 100-loss season looms for the Giants. Here’s who’s left trying to stop it",
+        }
+        self.assertFalse(is_game_story(article))
+
+    def test_official_mlb_recap_uses_explicit_result_in_url_slug(self):
+        article = {
+            "source": "MLB.com",
+            "title": "Devers brings healing power to banged-up club with tape-measure tater",
+            "url": "https://www.mlb.com/giants/news/rafael-devers-hits-3-run-homer-as-giants-beat-reds",
+        }
+        self.assertTrue(is_game_story(article))
+
 
 if __name__ == "__main__":
     unittest.main()

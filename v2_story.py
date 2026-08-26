@@ -18,7 +18,8 @@ STOPWORDS = {
 EVENT_TOKENS = {
     "allstar", "surgery", "injury", "il", "retire", "trade", "promote", "callup",
     "suspend", "extension", "sign", "waiver", "dfa", "release", "hire", "fire",
-    "host", "fracture", "rehab", "return", "debut", "roster", "deadline",
+    "host", "fracture", "rehab", "return", "debut", "roster", "deadline", "partnership",
+    "bereavement",
 }
 EVENT_FAMILIES = {
     "promote": "callup",
@@ -48,6 +49,7 @@ TOKEN_ALIASES = {
     "debuted": "debut", "debuts": "debut",
     "hosts": "host", "hosting": "host", "hosted": "host",
     "injured": "injury", "injuries": "injury",
+    "partner": "partnership", "partners": "partnership", "partnered": "partnership",
 }
 
 AUTHOR_RANK = {

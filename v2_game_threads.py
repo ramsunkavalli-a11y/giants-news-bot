@@ -3,6 +3,7 @@ from __future__ import annotations
 import re
 from collections import Counter, defaultdict
 from datetime import datetime, timedelta, timezone
+from urllib.parse import urlparse
 from zoneinfo import ZoneInfo
 
 from dateutil import parser as dtparser
@@ -121,6 +122,14 @@ REACTION_VERB_TARGET = re.compile(
     r".{0,45}\b(?:giants|players?|team|club|teammates?|effort|focus|concentration|decision)\b",
     flags=re.I,
 )
+URL_GAME_RESULT = re.compile(
+    r"\bgiants\b.*\b(?:beat|beats|win|won|lose|loses|lost|fall|falls|fell|defeat|defeats)\b",
+    flags=re.I,
+)
+SEASON_OUTLOOK_RE = re.compile(
+    r"\b\d{2,3}-loss season\b|\bseason looms\b|\bseason outlook\b",
+    flags=re.I,
+)
 
 
 def _parse_dt(value: str) -> datetime | None:
@@ -162,6 +171,22 @@ def is_game_story(article: dict) -> bool:
     summary = str(article.get("summary", "") or "")
     title_lower = title.lower()
     summary_lower = summary.lower()
+
+    # A season outlook may use words such as "loss" but is not coverage of
+    # the just-finished game and belongs in the main feed.
+    if SEASON_OUTLOOK_RE.search(title):
+        return False
+
+    # MLB's official recap headlines are often colorful rather than result-led,
+    # while the article slug retains the concrete game outcome. Use that
+    # publisher metadata only when it contains an explicit result construction.
+    url_slug = urlparse(str(article.get("url", "") or "")).path.rsplit("/", 1)[-1]
+    if article.get("source") == "MLB.com" and (
+        RESULT_VERBS.search(url_slug.replace("-", " "))
+        or GIANTS_RESULT.search(url_slug.replace("-", " "))
+        or URL_GAME_RESULT.search(url_slug.replace("-", " "))
+    ):
+        return True
 
     headline_game_signal = (
         any(pattern in title_lower for pattern in GAME_ANALYSIS_PATTERNS)

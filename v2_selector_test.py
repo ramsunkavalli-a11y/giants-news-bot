@@ -180,6 +180,39 @@ class SelectorEditorialTests(unittest.TestCase):
         self.assertEqual(selection["selected"], [])
         self.assertEqual(selection["reasons"].get("quality_low"), 1)
 
+    def test_defers_human_interest_feature_during_multiple_breaking_updates(self):
+        feature = article(
+            "NBC Sports Bay Area",
+            "Krukisms: Giants broadcaster Mike Krukow breaks down origins of his catchphrases",
+            "Alex Pavlovic",
+            "elite",
+            0,
+        )
+        injuries = [
+            article(
+                "MLB.com",
+                "Giants make flurry of moves after players land on IL",
+                "Maria Guardado",
+                "good",
+                0,
+            ),
+            article(
+                "San Francisco Chronicle",
+                "Giants place key player on injured list",
+                "Susan Slusser",
+                "very_good",
+                0,
+            ),
+        ]
+        selection = select_articles(
+            [feature, *injuries],
+            {"posted_urls": {}, "posted_stories": [], "game_threads": {}},
+            max_posts=3,
+            now=NOW,
+        )
+        self.assertNotIn(feature["url"], {item["url"] for item in selection["selected"]})
+        self.assertEqual(selection["reasons"].get("deferred_for_breaking_news"), 1)
+
 
 if __name__ == "__main__":
     unittest.main()
