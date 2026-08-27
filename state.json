@@ -1192,6 +1192,33 @@
       "source": "MLB.com",
       "title": "Giants dealt first-of-its-kind loss in team history",
       "url": "https://www.mlb.com/giants/news/giants-suffer-defeat-after-allowing-7-runs-in-ninth-inning"
+    },
+    {
+      "author": "Grant Brisbee",
+      "game_key": "",
+      "kind": "standalone",
+      "posted_at": "2026-08-27T17:52:13.566705+00:00",
+      "source": "The Athletic",
+      "title": "Here's why the contrast between the Giants' bullpen and lineup is so startling",
+      "url": "https://www.nytimes.com/athletic/7543502/2026/08/27/sf-giants-lineup-bullpen-unproven/"
+    },
+    {
+      "author": "Justice delos Santos",
+      "game_key": "",
+      "kind": "standalone",
+      "posted_at": "2026-08-27T17:52:19.001464+00:00",
+      "source": "Mercury News",
+      "title": "Why two teenagers at Single-A San Jose could be the future of the SF Giants",
+      "url": "https://www.mercurynews.com/2026/08/27/josuar-gonzalez-sf-giants-prospects-luis-hernandez/"
+    },
+    {
+      "author": "Maria Guardado",
+      "game_key": "",
+      "kind": "standalone",
+      "posted_at": "2026-08-27T17:52:21.009551+00:00",
+      "source": "MLB.com",
+      "title": "What Kent thinks about his son's trade to the Giants",
+      "url": "https://www.mlb.com/giants/news/jeff-kent-reacts-to-kaeden-kent-being-traded-to-giants"
     }
   ],
   "posted_urls": {
@@ -1233,6 +1260,7 @@
     "https://www.mercurynews.com/2026/08/23/wilkinsons-rough-afternoon-multiple-injuries-headline-loss-as-sf-giants-swept-by-red-sox/amp/": "2026-08-24T02:06:39.647189+00:00",
     "https://www.mercurynews.com/2026/08/25/sf-giants-kalshi-prediction-market-partnership/": "2026-08-25T21:53:32.097610+00:00",
     "https://www.mercurynews.com/2026/08/26/sf-giants-meltdown-in-ninth-blow-six-run-lead-and-fail-to-complete-seasons-first-three-game-sweep/": "2026-08-27T00:57:41.706110+00:00",
+    "https://www.mercurynews.com/2026/08/27/josuar-gonzalez-sf-giants-prospects-luis-hernandez/": "2026-08-27T17:52:19.001464+00:00",
     "https://www.mlb.com/giants/news/adrian-houser-placed-on-injured-list-with-right-forearm-strain": "2026-08-27T00:57:43.261305+00:00",
     "https://www.mlb.com/giants/news/carson-whisenhunt-has-torn-ucl-in-elbow": "2026-08-26T03:34:07.300313+00:00",
     "https://www.mlb.com/giants/news/drew-gilbert-and-turner-hill-lead-giants-over-rockies": "2026-08-16T16:44:07.736486+00:00",
@@ -1241,6 +1269,7 @@
     "https://www.mlb.com/giants/news/giants-top-30-prospects-2026-midseason-update": "2026-08-16T16:43:56.578583+00:00",
     "https://www.mlb.com/giants/news/giants-walk-10-batters-in-loss-to-rockies": "2026-08-17T02:01:42.604437+00:00",
     "https://www.mlb.com/giants/news/in-season-farm-system-rankings-2026": "2026-08-17T15:50:04.887340+00:00",
+    "https://www.mlb.com/giants/news/jeff-kent-reacts-to-kaeden-kent-being-traded-to-giants": "2026-08-27T17:52:21.009551+00:00",
     "https://www.mlb.com/giants/news/matt-gage-credits-wife-paige-with-pitching-mechanics": "2026-08-20T21:54:19.266666+00:00",
     "https://www.mlb.com/giants/news/matt-tugboat-wilkinson-called-up-by-giants": "2026-08-17T21:50:59.051522+00:00",
     "https://www.mlb.com/giants/news/matt-wilkinson-delivers-scoreless-outing-in-mlb-debut": "2026-08-20T03:25:37.394867+00:00",
@@ -1299,6 +1328,7 @@
     "https://www.nytimes.com/athletic/7535281/2026/08/24/giants-red-sox-sweep-logan-webb/": "2026-08-24T21:53:47.546478+00:00",
     "https://www.nytimes.com/athletic/7537110/2026/08/25/giants-rafael-devers-injury-ravaged-win/": "2026-08-25T16:08:43.167139+00:00",
     "https://www.nytimes.com/athletic/7539206/2026/08/25/giants-carson-whisenhunt-torn-ucl-tommy-john-surgery-recommended/": "2026-08-26T03:34:09.413653+00:00",
+    "https://www.nytimes.com/athletic/7543502/2026/08/27/sf-giants-lineup-bullpen-unproven/": "2026-08-27T17:52:13.566705+00:00",
     "https://www.sfchronicle.com/sports/giants/article/catcher-susac-rodriguez-cavanaugh-22390558.php": "2026-08-18T15:57:52.683980+00:00",
     "https://www.sfchronicle.com/sports/giants/article/dylan-smith-giants-pitch-22383627.php": "2026-08-17T02:01:45.872687+00:00",
     "https://www.sfchronicle.com/sports/giants/article/giants-among-5-teams-new-partnership-kalshi-22402851.php": "2026-08-25T21:53:29.098360+00:00",
