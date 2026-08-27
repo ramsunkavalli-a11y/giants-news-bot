@@ -93,14 +93,14 @@
       "game_pk": 0,
       "opponent": "",
       "parent": {
-        "cid": "bafyreihqjrgsx3xmxzffuuwyp3bsn64eony6uriyyzvv4as4qbxrs526ry",
-        "uri": "at://did:plc:gkkepfzghvnfrkrohm2c4nwy/app.bsky.feed.post/3mtzndj66mg2e"
+        "cid": "bafyreightcfsbwfe5b2ntdooqdtqzfcccrpiwacddfw2sqif3fcfkryc7a",
+        "uri": "at://did:plc:gkkepfzghvnfrkrohm2c4nwy/app.bsky.feed.post/3mu2vpqp6db24"
       },
       "root": {
         "cid": "bafyreifarabuczjekmn4m5nrl2bosnhnq7muhcoenpojns6cyn5rklulci",
         "uri": "at://did:plc:gkkepfzghvnfrkrohm2c4nwy/app.bsky.feed.post/3mtzndhvlhh2h"
       },
-      "updated_at": "2026-08-27T00:57:46.033038+00:00"
+      "updated_at": "2026-08-27T13:00:26.712008+00:00"
     },
     "game:823183": {
       "created_at": "2026-08-25T07:26:59.839697+00:00",
@@ -1165,6 +1165,33 @@
       "source": "NBC Sports Bay Area",
       "title": "Mike Krukow chides Reds pitcher Brady Singer for ‘odd' tactics in loss to Giants",
       "url": "https://www.nbcsportsbayarea.com/mlb/san-francisco-giants/brady-singer-drew-gilbert-mike-krukow/1958782/"
+    },
+    {
+      "author": "Maria Guardado",
+      "game_key": "",
+      "kind": "standalone",
+      "posted_at": "2026-08-27T13:00:23.831536+00:00",
+      "source": "MLB.com",
+      "title": "Vitello ejected in first inning after arguing check-swing call",
+      "url": "https://www.mlb.com/giants/news/tony-vitello-ejected-in-first-inning-against-reds"
+    },
+    {
+      "author": "Dave Tobener",
+      "game_key": "",
+      "kind": "standalone",
+      "posted_at": "2026-08-27T13:00:24.777181+00:00",
+      "source": "SFGATE",
+      "title": "The SF Giants aren't even trying to hide their shameless money grabs now",
+      "url": "https://www.sfgate.com/giants/article/sf-giants-kalshi-22403647.php"
+    },
+    {
+      "author": "Maria Guardado",
+      "game_key": "game:2026-08-26:unknown",
+      "kind": "game_story",
+      "posted_at": "2026-08-27T13:00:26.712033+00:00",
+      "source": "MLB.com",
+      "title": "Giants dealt first-of-its-kind loss in team history",
+      "url": "https://www.mlb.com/giants/news/giants-suffer-defeat-after-allowing-7-runs-in-ninth-inning"
     }
   ],
   "posted_urls": {
@@ -1210,6 +1237,7 @@
     "https://www.mlb.com/giants/news/carson-whisenhunt-has-torn-ucl-in-elbow": "2026-08-26T03:34:07.300313+00:00",
     "https://www.mlb.com/giants/news/drew-gilbert-and-turner-hill-lead-giants-over-rockies": "2026-08-16T16:44:07.736486+00:00",
     "https://www.mlb.com/giants/news/giants-bo-davidson-logs-career-high-eight-rbis-at-triple-a": "2026-08-17T05:59:46.403298+00:00",
+    "https://www.mlb.com/giants/news/giants-suffer-defeat-after-allowing-7-runs-in-ninth-inning": "2026-08-27T13:00:26.712033+00:00",
     "https://www.mlb.com/giants/news/giants-top-30-prospects-2026-midseason-update": "2026-08-16T16:43:56.578583+00:00",
     "https://www.mlb.com/giants/news/giants-walk-10-batters-in-loss-to-rockies": "2026-08-17T02:01:42.604437+00:00",
     "https://www.mlb.com/giants/news/in-season-farm-system-rankings-2026": "2026-08-17T15:50:04.887340+00:00",
@@ -1218,6 +1246,7 @@
     "https://www.mlb.com/giants/news/matt-wilkinson-delivers-scoreless-outing-in-mlb-debut": "2026-08-20T03:25:37.394867+00:00",
     "https://www.mlb.com/giants/news/patrick-bailey-discusses-career-with-giants": "2026-08-19T07:22:03.982355+00:00",
     "https://www.mlb.com/giants/news/rafael-devers-hits-3-run-homer-as-giants-beat-reds": "2026-08-25T07:26:56.792754+00:00",
+    "https://www.mlb.com/giants/news/tony-vitello-ejected-in-first-inning-against-reds": "2026-08-27T13:00:23.831536+00:00",
     "https://www.mlb.com/giants/news/watch-minor-league-baseball-games-for-free-2026": "2026-08-18T03:24:10.707953+00:00",
     "https://www.mlb.com/giants/news/willy-adames-hits-200th-career-home-run-in-cleveland": "2026-08-21T03:30:55.672073+00:00",
     "https://www.mlb.com/giants/news/willy-adames-victor-bericoto-jt-brubaker-placed-on-injured-list": "2026-08-25T03:27:24.306483+00:00",
@@ -1290,6 +1319,7 @@
     "https://www.sfchronicle.com/weather/?page=7": "2026-08-19T15:58:25.082601+00:00",
     "https://www.sfgate.com/giants/article/krukow-kuiper-rip-sf-giants-22393738.php": "2026-08-19T03:25:49.233635+00:00",
     "https://www.sfgate.com/giants/article/sf-giants-broadcast-poll-22395459.php": "2026-08-20T03:25:35.396454+00:00",
+    "https://www.sfgate.com/giants/article/sf-giants-kalshi-22403647.php": "2026-08-27T13:00:24.777181+00:00",
     "https://www.sfgate.com/giants/article/sf-giants-knbr-beer-22396588.php": "2026-08-21T07:26:02.606218+00:00"
   }
 }
