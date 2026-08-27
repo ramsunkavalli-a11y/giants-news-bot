@@ -78,14 +78,29 @@
       "game_pk": 823181,
       "opponent": "reds",
       "parent": {
-        "cid": "bafyreifnwpf4fic2czju2htyexxcbqjxpvtpdsl5gmtmdfy6cdqmlxs6km",
-        "uri": "at://did:plc:gkkepfzghvnfrkrohm2c4nwy/app.bsky.feed.post/3mtxsp4ctkx2y"
+        "cid": "bafyreigbskz6sspfasqx7xvjw4enlbimzwsgzbe2elkjtdxsicfan6zdf4",
+        "uri": "at://did:plc:gkkepfzghvnfrkrohm2c4nwy/app.bsky.feed.post/3mtzndkkbjd2k"
       },
       "root": {
         "cid": "bafyreibzky5tv2yevovks7j4cq6ls6bdbiceu4owfk36674lm4vsy6tc2q",
         "uri": "at://did:plc:gkkepfzghvnfrkrohm2c4nwy/app.bsky.feed.post/3mtxsoz6za72y"
       },
-      "updated_at": "2026-08-26T07:28:24.437424+00:00"
+      "updated_at": "2026-08-27T00:57:48.010288+00:00"
+    },
+    "game:2026-08-26:unknown": {
+      "created_at": "2026-08-27T00:57:45.120772+00:00",
+      "game_day": "2026-08-26",
+      "game_pk": 0,
+      "opponent": "",
+      "parent": {
+        "cid": "bafyreihqjrgsx3xmxzffuuwyp3bsn64eony6uriyyzvv4as4qbxrs526ry",
+        "uri": "at://did:plc:gkkepfzghvnfrkrohm2c4nwy/app.bsky.feed.post/3mtzndj66mg2e"
+      },
+      "root": {
+        "cid": "bafyreifarabuczjekmn4m5nrl2bosnhnq7muhcoenpojns6cyn5rklulci",
+        "uri": "at://did:plc:gkkepfzghvnfrkrohm2c4nwy/app.bsky.feed.post/3mtzndhvlhh2h"
+      },
+      "updated_at": "2026-08-27T00:57:46.033038+00:00"
     },
     "game:823183": {
       "created_at": "2026-08-25T07:26:59.839697+00:00",
@@ -1096,12 +1111,65 @@
       "source": "San Francisco Chronicle",
       "title": "Giants manager Tony Vitello fondly recalls meeting Dolly Parton",
       "url": "https://www.sfchronicle.com/sports/giants/article/giants-manager-tony-vitello-fondly-recalls-22403948.php"
+    },
+    {
+      "author": "Tristi Rodriguez",
+      "game_key": "",
+      "kind": "standalone",
+      "posted_at": "2026-08-27T00:57:40.595738+00:00",
+      "source": "NBC Sports Bay Area",
+      "title": "Depleted Giants ready to flush ‘unfortunate' series-finale collapse to Reds",
+      "url": "https://www.nbcsportsbayarea.com/mlb/san-francisco-giants/logan-webb-tony-vitello-loss-reds-analysis/1958875/"
+    },
+    {
+      "author": "Justice delos Santos",
+      "game_key": "",
+      "kind": "standalone",
+      "posted_at": "2026-08-27T00:57:41.706110+00:00",
+      "source": "Mercury News",
+      "title": "SF Giants meltdown in ninth, blow six-run lead and fail to complete season’s first three-game sweep",
+      "url": "https://www.mercurynews.com/2026/08/26/sf-giants-meltdown-in-ninth-blow-six-run-lead-and-fail-to-complete-seasons-first-three-game-sweep/"
+    },
+    {
+      "author": "Maria Guardado",
+      "game_key": "",
+      "kind": "standalone",
+      "posted_at": "2026-08-27T00:57:43.261305+00:00",
+      "source": "MLB.com",
+      "title": "Houser (forearm strain) becomes latest Giants pitcher placed on IL",
+      "url": "https://www.mlb.com/giants/news/adrian-houser-placed-on-injured-list-with-right-forearm-strain"
+    },
+    {
+      "author": "Tristi Rodriguez",
+      "game_key": "game:2026-08-26:unknown",
+      "kind": "game_story",
+      "posted_at": "2026-08-27T00:57:45.120792+00:00",
+      "source": "NBC Sports Bay Area",
+      "title": "What we learned as Spencer Bivens, bullpen collapse prevent Giants' first sweep",
+      "url": "https://www.nbcsportsbayarea.com/mlb/san-francisco-giants/logan-webb-loss-reds-history-analysis/1958802/"
+    },
+    {
+      "author": "",
+      "game_key": "game:2026-08-26:unknown",
+      "kind": "game_story",
+      "posted_at": "2026-08-27T00:57:46.033056+00:00",
+      "source": "San Francisco Chronicle",
+      "title": "Tony Vitello unleashes profane tirade after ejection, then Giants unravel in historic loss",
+      "url": "https://www.sfchronicle.com/sports/giants/article/giants-tony-vitello-unleashes-profane-tirade-22405057.php"
+    },
+    {
+      "author": "Ali Thanawalla",
+      "game_key": "game:2026-08-25:unknown",
+      "kind": "game_story",
+      "posted_at": "2026-08-27T00:57:48.010307+00:00",
+      "source": "NBC Sports Bay Area",
+      "title": "Mike Krukow chides Reds pitcher Brady Singer for ‘odd' tactics in loss to Giants",
+      "url": "https://www.nbcsportsbayarea.com/mlb/san-francisco-giants/brady-singer-drew-gilbert-mike-krukow/1958782/"
     }
   ],
   "posted_urls": {
     "https://apnews.com/article/rockies-giants-score-935e66257655c1df502d35d032c6bedd": "2026-08-16T13:09:16.016508+00:00",
     "https://omny.fm/shows/the-executives-show/giants-executive-show-larry-baer-on-fan-appreciation-and-exciting-news-about-a-beer-promotion-day-in-partnership-with-knbeer": "2026-08-20T21:54:21.143960+00:00",
-    "https://sfstandard.com/2026/08/05/tony-vitello-sf-giants-buster-posey-dynamic/": "2026-08-05T17:54:28.402748+00:00",
     "https://sfstandard.com/2026/08/06/mike-krukow-sf-giants-retirement-broadcaster/": "2026-08-07T03:17:16.187638+00:00",
     "https://sfstandard.com/2026/08/06/sf-giants-josuar-gonzalez-luis-hernandez/": "2026-08-07T03:17:15.300583+00:00",
     "https://sfstandard.com/2026/08/07/i-ve-known-mike-krukow-40-years-s-giants-should-honor/": "2026-08-07T17:09:25.215141+00:00",
@@ -1137,6 +1205,8 @@
     "https://www.mercurynews.com/2026/08/23/sf-giants-adames-bericoto-leave-sundays-game-vs-red-sox-with-injuries/amp/": "2026-08-24T02:06:36.863137+00:00",
     "https://www.mercurynews.com/2026/08/23/wilkinsons-rough-afternoon-multiple-injuries-headline-loss-as-sf-giants-swept-by-red-sox/amp/": "2026-08-24T02:06:39.647189+00:00",
     "https://www.mercurynews.com/2026/08/25/sf-giants-kalshi-prediction-market-partnership/": "2026-08-25T21:53:32.097610+00:00",
+    "https://www.mercurynews.com/2026/08/26/sf-giants-meltdown-in-ninth-blow-six-run-lead-and-fail-to-complete-seasons-first-three-game-sweep/": "2026-08-27T00:57:41.706110+00:00",
+    "https://www.mlb.com/giants/news/adrian-houser-placed-on-injured-list-with-right-forearm-strain": "2026-08-27T00:57:43.261305+00:00",
     "https://www.mlb.com/giants/news/carson-whisenhunt-has-torn-ucl-in-elbow": "2026-08-26T03:34:07.300313+00:00",
     "https://www.mlb.com/giants/news/drew-gilbert-and-turner-hill-lead-giants-over-rockies": "2026-08-16T16:44:07.736486+00:00",
     "https://www.mlb.com/giants/news/giants-bo-davidson-logs-career-high-eight-rbis-at-triple-a": "2026-08-17T05:59:46.403298+00:00",
@@ -1156,6 +1226,7 @@
     "https://www.nbcsportsbayarea.com/mlb/san-francisco-giants/adrian-houser-injury-cincinnati-reds/1958686/": "2026-08-26T07:28:19.759209+00:00",
     "https://www.nbcsportsbayarea.com/mlb/san-francisco-giants/blade-tidwell-dylan-dmith-red-sox/1958142/": "2026-08-23T15:47:33.946614+00:00",
     "https://www.nbcsportsbayarea.com/mlb/san-francisco-giants/blade-tidwell-dylan-smith-bullpen/1958177/": "2026-08-23T05:54:52.087682+00:00",
+    "https://www.nbcsportsbayarea.com/mlb/san-francisco-giants/brady-singer-drew-gilbert-mike-krukow/1958782/": "2026-08-27T00:57:48.010307+00:00",
     "https://www.nbcsportsbayarea.com/mlb/san-francisco-giants/bryce-eldridge-bereavement-lisit-reds/1958343/": "2026-08-25T21:53:34.211507+00:00",
     "https://www.nbcsportsbayarea.com/mlb/san-francisco-giants/bryce-eldridge-franchise-history-home-runs/1957446/": "2026-08-20T07:25:00.071272+00:00",
     "https://www.nbcsportsbayarea.com/mlb/san-francisco-giants/carson-whisenhunt-bryce-eldridge-cleveland-guardians/1957401/": "2026-08-19T03:25:51.577720+00:00",
@@ -1167,6 +1238,8 @@
     "https://www.nbcsportsbayarea.com/mlb/san-francisco-giants/landen-roupp-mechanics-loss-rockies/1956776/": "2026-08-17T01:13:00.714570+00:00",
     "https://www.nbcsportsbayarea.com/mlb/san-francisco-giants/leadoff-hitter-lineup-2026-season/1958556/": "2026-08-25T16:08:40.955118+00:00",
     "https://www.nbcsportsbayarea.com/mlb/san-francisco-giants/logan-webb-example-teammates-rockies/1956838/": "2026-08-16T16:43:53.565274+00:00",
+    "https://www.nbcsportsbayarea.com/mlb/san-francisco-giants/logan-webb-loss-reds-history-analysis/1958802/": "2026-08-27T00:57:45.120792+00:00",
+    "https://www.nbcsportsbayarea.com/mlb/san-francisco-giants/logan-webb-tony-vitello-loss-reds-analysis/1958875/": "2026-08-27T00:57:40.595738+00:00",
     "https://www.nbcsportsbayarea.com/mlb/san-francisco-giants/marcelo-mayer-debut-red-sox/1957963/": "2026-08-22T07:11:03.540183+00:00",
     "https://www.nbcsportsbayarea.com/mlb/san-francisco-giants/marcelo-mayer-debut-upcoming-road-trip/1957042/": "2026-08-17T15:50:02.705053+00:00",
     "https://www.nbcsportsbayarea.com/mlb/san-francisco-giants/matt-chapman-injury-surgery-stanford-medicine/1957299/": "2026-08-20T15:59:16.037868+00:00",
@@ -1204,6 +1277,7 @@
     "https://www.sfchronicle.com/sports/giants/article/giants-jonah-cox-offers-positive-offensive-sign-22400166.php": "2026-08-24T02:06:34.171082+00:00",
     "https://www.sfchronicle.com/sports/giants/article/giants-manager-tony-vitello-fondly-recalls-22403948.php": "2026-08-26T16:36:37.506859+00:00",
     "https://www.sfchronicle.com/sports/giants/article/giants-matt-chapman-says-dealt-pain-season-22389825.php": "2026-08-16T16:43:54.534263+00:00",
+    "https://www.sfchronicle.com/sports/giants/article/giants-tony-vitello-unleashes-profane-tirade-22405057.php": "2026-08-27T00:57:46.033056+00:00",
     "https://www.sfchronicle.com/sports/giants/article/greeting-awaits-rafael-devers-giants-slugger-22390560.php": "2026-08-20T21:54:17.030884+00:00",
     "https://www.sfchronicle.com/sports/giants/article/sf-giants-bryce-eldridge-placed-bereavement-list-22400535.php": "2026-08-24T06:03:07.744982+00:00",
     "https://www.sfchronicle.com/sports/giants/article/sf-giants-get-homer-rafael-devers-logan-webb-22390562.php": "2026-08-22T03:21:58.783276+00:00",
