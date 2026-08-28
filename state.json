@@ -102,6 +102,21 @@
       },
       "updated_at": "2026-08-27T13:00:26.712008+00:00"
     },
+    "game:2026-08-27:unknown": {
+      "created_at": "2026-08-28T05:32:22.707426+00:00",
+      "game_day": "2026-08-27",
+      "game_pk": 0,
+      "opponent": "",
+      "parent": {
+        "cid": "bafyreihfomlfqrwsi6364nv4ak5ye5fpgnklusitkb2rwdexoaonjmw7aq",
+        "uri": "at://did:plc:gkkepfzghvnfrkrohm2c4nwy/app.bsky.feed.post/3mu4n5izdwq2h"
+      },
+      "root": {
+        "cid": "bafyreic5pmkxwztvfjdp5pavh3x6sm6kddtuhgq5pulirunh6vtz7h2nty",
+        "uri": "at://did:plc:gkkepfzghvnfrkrohm2c4nwy/app.bsky.feed.post/3mu4n5hdqjj2b"
+      },
+      "updated_at": "2026-08-28T05:32:23.764040+00:00"
+    },
     "game:823183": {
       "created_at": "2026-08-25T07:26:59.839697+00:00",
       "game_day": "2026-08-24",
@@ -1246,14 +1261,39 @@
       "source": "FanGraphs",
       "title": "Erstwhile Sidewinder Javier López Tackles a Challenging Career Quiz",
       "url": "https://blogs.fangraphs.com/erstwhile-sidewinder-javier-lopez-tackles-a-challenging-career-quiz/"
+    },
+    {
+      "author": "Justice delos Santos",
+      "game_key": "",
+      "kind": "standalone",
+      "posted_at": "2026-08-28T05:32:20.134123+00:00",
+      "source": "Mercury News",
+      "title": "SF Giants’ Adames likely to miss remainder of regular season",
+      "url": "https://www.mercurynews.com/2026/08/27/sf-giants-adames-likely-to-miss-remainder-of-regular-season/"
+    },
+    {
+      "author": "Taylor Wirth",
+      "game_key": "game:2026-08-27:unknown",
+      "kind": "game_story",
+      "posted_at": "2026-08-28T05:32:22.707445+00:00",
+      "source": "NBC Sports Bay Area",
+      "title": "Gilbert fuels Giants' win",
+      "url": "https://www.nbcsportsbayarea.com/mlb/san-francisco-giants/takeaways-landen-roupp-win-diamondbacks/1959104/"
+    },
+    {
+      "author": "",
+      "game_key": "game:2026-08-27:unknown",
+      "kind": "game_story",
+      "posted_at": "2026-08-28T05:32:23.764061+00:00",
+      "source": "San Francisco Chronicle",
+      "title": "Giants still standing show their mettle taking down D’backs in 6-1 win",
+      "url": "https://www.sfchronicle.com/sports/giants/article/giants-still-standing-show-mettle-taking-22406395.php"
     }
   ],
   "posted_urls": {
     "https://apnews.com/article/rockies-giants-score-935e66257655c1df502d35d032c6bedd": "2026-08-16T13:09:16.016508+00:00",
     "https://blogs.fangraphs.com/erstwhile-sidewinder-javier-lopez-tackles-a-challenging-career-quiz/": "2026-08-28T00:30:36.587672+00:00",
     "https://omny.fm/shows/the-executives-show/giants-executive-show-larry-baer-on-fan-appreciation-and-exciting-news-about-a-beer-promotion-day-in-partnership-with-knbeer": "2026-08-20T21:54:21.143960+00:00",
-    "https://sfstandard.com/2026/08/06/mike-krukow-sf-giants-retirement-broadcaster/": "2026-08-07T03:17:16.187638+00:00",
-    "https://sfstandard.com/2026/08/06/sf-giants-josuar-gonzalez-luis-hernandez/": "2026-08-07T03:17:15.300583+00:00",
     "https://sfstandard.com/2026/08/07/i-ve-known-mike-krukow-40-years-s-giants-should-honor/": "2026-08-07T17:09:25.215141+00:00",
     "https://sfstandard.com/2026/08/10/as-giants-sink-their-former-stars-buying-hype-buster-posey-s-farm-system/": "2026-08-10T17:10:48.159214+00:00",
     "https://sfstandard.com/2026/08/10/david-forst-sf-giants-buster-posey/": "2026-08-11T02:29:14.317537+00:00",
@@ -1290,6 +1330,7 @@
     "https://www.mercurynews.com/2026/08/25/sf-giants-kalshi-prediction-market-partnership/": "2026-08-25T21:53:32.097610+00:00",
     "https://www.mercurynews.com/2026/08/26/sf-giants-meltdown-in-ninth-blow-six-run-lead-and-fail-to-complete-seasons-first-three-game-sweep/": "2026-08-27T00:57:41.706110+00:00",
     "https://www.mercurynews.com/2026/08/27/josuar-gonzalez-sf-giants-prospects-luis-hernandez/": "2026-08-27T17:52:19.001464+00:00",
+    "https://www.mercurynews.com/2026/08/27/sf-giants-adames-likely-to-miss-remainder-of-regular-season/": "2026-08-28T05:32:20.134123+00:00",
     "https://www.mlb.com/giants/news/adrian-houser-placed-on-injured-list-with-right-forearm-strain": "2026-08-27T00:57:43.261305+00:00",
     "https://www.mlb.com/giants/news/carson-whisenhunt-has-torn-ucl-in-elbow": "2026-08-26T03:34:07.300313+00:00",
     "https://www.mlb.com/giants/news/drew-gilbert-and-turner-hill-lead-giants-over-rockies": "2026-08-16T16:44:07.736486+00:00",
@@ -1343,6 +1384,7 @@
     "https://www.nbcsportsbayarea.com/mlb/san-francisco-giants/revisiting-patrick-bailey-trade-guardians/1957247/": "2026-08-18T15:57:48.669997+00:00",
     "https://www.nbcsportsbayarea.com/mlb/san-francisco-giants/road-losing-streak-guardians/1957668/": "2026-08-20T21:54:22.932417+00:00",
     "https://www.nbcsportsbayarea.com/mlb/san-francisco-giants/takeaways-blade-tidwell-loss-rockies/1956965/": "2026-08-17T01:13:02.590803+00:00",
+    "https://www.nbcsportsbayarea.com/mlb/san-francisco-giants/takeaways-landen-roupp-win-diamondbacks/1959104/": "2026-08-28T05:32:22.707445+00:00",
     "https://www.nbcsportsbayarea.com/mlb/san-francisco-giants/tony-vitello-team-meeting/1957101/": "2026-08-17T21:51:02.208210+00:00",
     "https://www.nbcsportsbayarea.com/mlb/san-francisco-giants/tony-vitello-willy-adames/1956703/": "2026-08-17T02:01:44.941875+00:00",
     "https://www.nbcsportsbayarea.com/mlb/san-francisco-giants/victor-bericoto-willy-adames-injuries/1958271/": "2026-08-24T02:06:33.216939+00:00",
@@ -1366,6 +1408,7 @@
     "https://www.sfchronicle.com/sports/giants/article/giants-jonah-cox-offers-positive-offensive-sign-22400166.php": "2026-08-24T02:06:34.171082+00:00",
     "https://www.sfchronicle.com/sports/giants/article/giants-manager-tony-vitello-fondly-recalls-22403948.php": "2026-08-26T16:36:37.506859+00:00",
     "https://www.sfchronicle.com/sports/giants/article/giants-matt-chapman-says-dealt-pain-season-22389825.php": "2026-08-16T16:43:54.534263+00:00",
+    "https://www.sfchronicle.com/sports/giants/article/giants-still-standing-show-mettle-taking-22406395.php": "2026-08-28T05:32:23.764061+00:00",
     "https://www.sfchronicle.com/sports/giants/article/giants-tony-vitello-unleashes-profane-tirade-22405057.php": "2026-08-27T00:57:46.033056+00:00",
     "https://www.sfchronicle.com/sports/giants/article/greeting-awaits-rafael-devers-giants-slugger-22390560.php": "2026-08-20T21:54:17.030884+00:00",
     "https://www.sfchronicle.com/sports/giants/article/sf-giants-bryce-eldridge-placed-bereavement-list-22400535.php": "2026-08-24T06:03:07.744982+00:00",
