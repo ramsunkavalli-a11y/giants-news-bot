@@ -1219,10 +1219,38 @@
       "source": "MLB.com",
       "title": "What Kent thinks about his son's trade to the Giants",
       "url": "https://www.mlb.com/giants/news/jeff-kent-reacts-to-kaeden-kent-being-traded-to-giants"
+    },
+    {
+      "author": "Vince Lontz",
+      "game_key": "",
+      "kind": "standalone",
+      "posted_at": "2026-08-28T00:30:30.529190+00:00",
+      "source": "NBC Sports Bay Area",
+      "title": "General manager Zack Minasian offers intriguing defense of Giants' shaky bullpen",
+      "url": "https://www.nbcsportsbayarea.com/mlb/san-francisco-giants/zack-minasian-defends-bullpen-general-manager/1959020/"
+    },
+    {
+      "author": "Kerry Crowley",
+      "game_key": "",
+      "kind": "standalone",
+      "posted_at": "2026-08-28T00:30:34.082451+00:00",
+      "source": "San Francisco Standard",
+      "title": "The worst part of the Giants’ historic 9th inning collapse? It was meaningless",
+      "url": "https://sfstandard.com/2026/08/27/sf-giants-ninth-inning-collapse-tony-vitello/"
+    },
+    {
+      "author": "David Laurila",
+      "game_key": "",
+      "kind": "standalone",
+      "posted_at": "2026-08-28T00:30:36.587672+00:00",
+      "source": "FanGraphs",
+      "title": "Erstwhile Sidewinder Javier López Tackles a Challenging Career Quiz",
+      "url": "https://blogs.fangraphs.com/erstwhile-sidewinder-javier-lopez-tackles-a-challenging-career-quiz/"
     }
   ],
   "posted_urls": {
     "https://apnews.com/article/rockies-giants-score-935e66257655c1df502d35d032c6bedd": "2026-08-16T13:09:16.016508+00:00",
+    "https://blogs.fangraphs.com/erstwhile-sidewinder-javier-lopez-tackles-a-challenging-career-quiz/": "2026-08-28T00:30:36.587672+00:00",
     "https://omny.fm/shows/the-executives-show/giants-executive-show-larry-baer-on-fan-appreciation-and-exciting-news-about-a-beer-promotion-day-in-partnership-with-knbeer": "2026-08-20T21:54:21.143960+00:00",
     "https://sfstandard.com/2026/08/06/mike-krukow-sf-giants-retirement-broadcaster/": "2026-08-07T03:17:16.187638+00:00",
     "https://sfstandard.com/2026/08/06/sf-giants-josuar-gonzalez-luis-hernandez/": "2026-08-07T03:17:15.300583+00:00",
@@ -1242,6 +1270,7 @@
     "https://sfstandard.com/2026/08/23/bo-davidson-sf-giants-debut-parks-harber/": "2026-08-23T15:47:31.695606+00:00",
     "https://sfstandard.com/2026/08/25/sf-giants-worst-lineup-teams-franchise-history/": "2026-08-25T16:08:46.173263+00:00",
     "https://sfstandard.com/2026/08/26/sf-giants-tommy-john-surgery-elbow-injury/": "2026-08-26T16:36:36.584428+00:00",
+    "https://sfstandard.com/2026/08/27/sf-giants-ninth-inning-collapse-tony-vitello/": "2026-08-28T00:30:34.082451+00:00",
     "https://sfstandard.com/section-415/2026/08/21/section-415-podcast-giants-broadcasts-will-sound-mike-krukow/": "2026-08-21T21:49:17.293755+00:00",
     "https://www.mercurynews.com/2026/08/14/roupps-rocky-night-more-quiet-bats-doom-sf-giants-vs-rockies/": "2026-08-16T13:11:41.500314+00:00",
     "https://www.mercurynews.com/2026/08/14/sf-giants-turner-hill-hit-streak-roster-grant-mccray-matt-chapman/amp/": "2026-08-16T16:43:58.887549+00:00",
@@ -1317,6 +1346,7 @@
     "https://www.nbcsportsbayarea.com/mlb/san-francisco-giants/tony-vitello-team-meeting/1957101/": "2026-08-17T21:51:02.208210+00:00",
     "https://www.nbcsportsbayarea.com/mlb/san-francisco-giants/tony-vitello-willy-adames/1956703/": "2026-08-17T02:01:44.941875+00:00",
     "https://www.nbcsportsbayarea.com/mlb/san-francisco-giants/victor-bericoto-willy-adames-injuries/1958271/": "2026-08-24T02:06:33.216939+00:00",
+    "https://www.nbcsportsbayarea.com/mlb/san-francisco-giants/zack-minasian-defends-bullpen-general-manager/1959020/": "2026-08-28T00:30:30.529190+00:00",
     "https://www.nytimes.com/athletic/7513641/2026/08/14/sf-giants-buster-posey-2026-season-analysis/": "2026-08-16T16:44:01.805207+00:00",
     "https://www.nytimes.com/athletic/7516245/2026/08/15/giants-logan-webb-talents-win-rockies/": "2026-08-16T16:44:11.223261+00:00",
     "https://www.nytimes.com/athletic/7518171/2026/08/16/giants-tony-vitello-junior-college-comparison/": "2026-08-17T05:59:49.788867+00:00",
