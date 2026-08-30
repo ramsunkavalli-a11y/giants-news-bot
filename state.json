@@ -117,6 +117,21 @@
       },
       "updated_at": "2026-08-28T18:57:49.116207+00:00"
     },
+    "game:823176": {
+      "created_at": "2026-08-30T05:37:45.763300+00:00",
+      "game_day": "2026-08-29",
+      "game_pk": 823176,
+      "opponent": "diamondbacks",
+      "parent": {
+        "cid": "bafyreihkjbycsjr73jv6sm6iw5ujqztchc3glcgduupnlkwdcg33v6vbum",
+        "uri": "at://did:plc:gkkepfzghvnfrkrohm2c4nwy/app.bsky.feed.post/3muboezozaf2h"
+      },
+      "root": {
+        "cid": "bafyreifq6ef5ousdzqrfrhxfyxlzyonrdz2on3tk5mpx5xzr2rxvmfqq6y",
+        "uri": "at://did:plc:gkkepfzghvnfrkrohm2c4nwy/app.bsky.feed.post/3muboewnsi22y"
+      },
+      "updated_at": "2026-08-30T05:37:48.570607+00:00"
+    },
     "game:823178": {
       "created_at": "2026-08-29T09:18:16.506555+00:00",
       "game_day": "2026-08-28",
@@ -1411,6 +1426,51 @@
       "source": "MLB.com",
       "title": "Wotus ejected during lineup card exchange after heated conversation",
       "url": "https://www.mlb.com/giants/news/ron-wotus-ejected-before-game-1-of-doubleheader-vs-d-backs"
+    },
+    {
+      "author": "Maria Guardado",
+      "game_key": "",
+      "kind": "standalone",
+      "posted_at": "2026-08-30T05:37:41.239285+00:00",
+      "source": "MLB.com",
+      "title": "Kent joins Giants royalty with number retirement, and has more than just a hug for Bonds",
+      "url": "https://www.mlb.com/giants/news/jeff-kent-has-number-retired-by-giants"
+    },
+    {
+      "author": "Angelina Martin",
+      "game_key": "",
+      "kind": "standalone",
+      "posted_at": "2026-08-30T05:37:43.881240+00:00",
+      "source": "NBC Sports Bay Area",
+      "title": "Wotus ejected before game",
+      "url": "https://www.nbcsportsbayarea.com/mlb/san-francisco-giants/ron-wotus-ejection-alan-porter/1959510/"
+    },
+    {
+      "author": "Tristi Rodriguez",
+      "game_key": "game:823176",
+      "kind": "game_story",
+      "posted_at": "2026-08-30T05:37:45.763324+00:00",
+      "source": "NBC Sports Bay Area",
+      "title": "What we learned as Yunior Marte's strong MLB debut fuels Giants' win vs. D-backs",
+      "url": "https://www.nbcsportsbayarea.com/mlb/san-francisco-giants/yunior-marte-debut-win-diamondbacks/1959577/"
+    },
+    {
+      "author": "Tristi Rodriguez",
+      "game_key": "game:823176",
+      "kind": "game_story",
+      "posted_at": "2026-08-30T05:37:47.643670+00:00",
+      "source": "NBC Sports Bay Area",
+      "title": "What we learned as Giants waste Matt Wilkinson's solid Oracle Park debut in loss",
+      "url": "https://www.nbcsportsbayarea.com/mlb/san-francisco-giants/matt-wilkinson-debut-loss-diamondbacks/1959520/"
+    },
+    {
+      "author": "",
+      "game_key": "game:823176",
+      "kind": "game_story",
+      "posted_at": "2026-08-30T05:37:48.570631+00:00",
+      "source": "San Francisco Chronicle",
+      "title": "Giants’ frustrations with umpires lead to pregame ejection for coach before loss",
+      "url": "https://www.sfchronicle.com/sports/giants/article/sf-giants-coach-ejected-loss-first-game-22409124.php"
     }
   ],
   "posted_urls": {
@@ -1464,6 +1524,7 @@
     "https://www.mlb.com/giants/news/giants-top-30-prospects-2026-midseason-update": "2026-08-16T16:43:56.578583+00:00",
     "https://www.mlb.com/giants/news/giants-walk-10-batters-in-loss-to-rockies": "2026-08-17T02:01:42.604437+00:00",
     "https://www.mlb.com/giants/news/in-season-farm-system-rankings-2026": "2026-08-17T15:50:04.887340+00:00",
+    "https://www.mlb.com/giants/news/jeff-kent-has-number-retired-by-giants": "2026-08-30T05:37:41.239285+00:00",
     "https://www.mlb.com/giants/news/jeff-kent-reacts-to-kaeden-kent-being-traded-to-giants": "2026-08-27T17:52:21.009551+00:00",
     "https://www.mlb.com/giants/news/matt-gage-credits-wife-paige-with-pitching-mechanics": "2026-08-20T21:54:19.266666+00:00",
     "https://www.mlb.com/giants/news/matt-tugboat-wilkinson-called-up-by-giants": "2026-08-17T21:50:59.051522+00:00",
@@ -1498,6 +1559,7 @@
     "https://www.nbcsportsbayarea.com/mlb/san-francisco-giants/marcelo-mayer-debut-red-sox/1957963/": "2026-08-22T07:11:03.540183+00:00",
     "https://www.nbcsportsbayarea.com/mlb/san-francisco-giants/marcelo-mayer-debut-upcoming-road-trip/1957042/": "2026-08-17T15:50:02.705053+00:00",
     "https://www.nbcsportsbayarea.com/mlb/san-francisco-giants/matt-chapman-injury-surgery-stanford-medicine/1957299/": "2026-08-20T15:59:16.037868+00:00",
+    "https://www.nbcsportsbayarea.com/mlb/san-francisco-giants/matt-wilkinson-debut-loss-diamondbacks/1959520/": "2026-08-30T05:37:47.643670+00:00",
     "https://www.nbcsportsbayarea.com/mlb/san-francisco-giants/matt-wilkinson-outing-red-sox/1958333/": "2026-08-24T16:04:09.316583+00:00",
     "https://www.nbcsportsbayarea.com/mlb/san-francisco-giants/matt-wilkinson-sweep-red-sox/1958235/": "2026-08-24T06:03:10.132738+00:00",
     "https://www.nbcsportsbayarea.com/mlb/san-francisco-giants/matt-wilkinson-tugboat-debut-guardians/1957551/": "2026-08-20T03:25:34.495174+00:00",
@@ -1511,6 +1573,7 @@
     "https://www.nbcsportsbayarea.com/mlb/san-francisco-giants/rafael-devers-red-sox-loss-analysis/1958045/": "2026-08-23T02:08:53.227325+00:00",
     "https://www.nbcsportsbayarea.com/mlb/san-francisco-giants/revisiting-patrick-bailey-trade-guardians/1957247/": "2026-08-18T15:57:48.669997+00:00",
     "https://www.nbcsportsbayarea.com/mlb/san-francisco-giants/road-losing-streak-guardians/1957668/": "2026-08-20T21:54:22.932417+00:00",
+    "https://www.nbcsportsbayarea.com/mlb/san-francisco-giants/ron-wotus-ejection-alan-porter/1959510/": "2026-08-30T05:37:43.881240+00:00",
     "https://www.nbcsportsbayarea.com/mlb/san-francisco-giants/takeaways-blade-tidwell-loss-rockies/1956965/": "2026-08-17T01:13:02.590803+00:00",
     "https://www.nbcsportsbayarea.com/mlb/san-francisco-giants/takeaways-landen-roupp-win-diamondbacks/1959104/": "2026-08-28T05:32:22.707445+00:00",
     "https://www.nbcsportsbayarea.com/mlb/san-francisco-giants/tony-vitello-ejection-reaction-diamondbacks/1959449/": "2026-08-29T09:18:19.367270+00:00",
@@ -1518,6 +1581,7 @@
     "https://www.nbcsportsbayarea.com/mlb/san-francisco-giants/tony-vitello-team-meeting/1957101/": "2026-08-17T21:51:02.208210+00:00",
     "https://www.nbcsportsbayarea.com/mlb/san-francisco-giants/tony-vitello-willy-adames/1956703/": "2026-08-17T02:01:44.941875+00:00",
     "https://www.nbcsportsbayarea.com/mlb/san-francisco-giants/victor-bericoto-willy-adames-injuries/1958271/": "2026-08-24T02:06:33.216939+00:00",
+    "https://www.nbcsportsbayarea.com/mlb/san-francisco-giants/yunior-marte-debut-win-diamondbacks/1959577/": "2026-08-30T05:37:45.763324+00:00",
     "https://www.nbcsportsbayarea.com/mlb/san-francisco-giants/zack-minasian-defends-bullpen-general-manager/1959020/": "2026-08-28T00:30:30.529190+00:00",
     "https://www.nytimes.com/athletic/7513641/2026/08/14/sf-giants-buster-posey-2026-season-analysis/": "2026-08-16T16:44:01.805207+00:00",
     "https://www.nytimes.com/athletic/7516245/2026/08/15/giants-logan-webb-talents-win-rockies/": "2026-08-16T16:44:11.223261+00:00",
@@ -1544,6 +1608,7 @@
     "https://www.sfchronicle.com/sports/giants/article/giants-tony-vitello-unleashes-profane-tirade-22405057.php": "2026-08-27T00:57:46.033056+00:00",
     "https://www.sfchronicle.com/sports/giants/article/greeting-awaits-rafael-devers-giants-slugger-22390560.php": "2026-08-20T21:54:17.030884+00:00",
     "https://www.sfchronicle.com/sports/giants/article/sf-giants-bryce-eldridge-placed-bereavement-list-22400535.php": "2026-08-24T06:03:07.744982+00:00",
+    "https://www.sfchronicle.com/sports/giants/article/sf-giants-coach-ejected-loss-first-game-22409124.php": "2026-08-30T05:37:48.570631+00:00",
     "https://www.sfchronicle.com/sports/giants/article/sf-giants-get-homer-rafael-devers-logan-webb-22390562.php": "2026-08-22T03:21:58.783276+00:00",
     "https://www.sfchronicle.com/sports/giants/article/sf-giants-lose-pitcher-adrian-houser-apparent-22403130.php": "2026-08-26T07:28:24.437445+00:00",
     "https://www.sfchronicle.com/sports/giants/article/sf-giants-manager-tony-vitello-ejected-loss-22408680.php": "2026-08-29T09:18:17.466232+00:00",
