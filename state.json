@@ -1525,13 +1525,30 @@
       "source": "San Francisco Chronicle",
       "title": "What Buster Posey and Tony Vitello are saying about the Giants manager’s future",
       "url": "https://www.sfchronicle.com/sports/giants/article/buster-posey-tony-vitello-see-giants-manager-s-22410003.php"
+    },
+    {
+      "author": "Justice delos Santos",
+      "game_key": "",
+      "kind": "standalone",
+      "posted_at": "2026-08-31T20:58:24.739378+00:00",
+      "source": "Mercury News",
+      "title": "His last name is SF Giants royalty, but Peyton Bonds hopes to forge his own path",
+      "url": "https://www.mercurynews.com/2026/08/31/sf-giants-peyton-bonds-barry-bobby-draft-pick-mlb-home-run-king/"
+    },
+    {
+      "author": "Grant Brisbee",
+      "game_key": "",
+      "kind": "standalone",
+      "posted_at": "2026-08-31T20:58:26.660696+00:00",
+      "source": "The Athletic",
+      "title": "The statistics where the San Francisco Giants' rank last around the league",
+      "url": "https://www.nytimes.com/athletic/7550660/2026/08/31/sf-giants-stats-facts/"
     }
   ],
   "posted_urls": {
     "https://apnews.com/article/rockies-giants-score-935e66257655c1df502d35d032c6bedd": "2026-08-16T13:09:16.016508+00:00",
     "https://blogs.fangraphs.com/erstwhile-sidewinder-javier-lopez-tackles-a-challenging-career-quiz/": "2026-08-28T00:30:36.587672+00:00",
     "https://omny.fm/shows/the-executives-show/giants-executive-show-larry-baer-on-fan-appreciation-and-exciting-news-about-a-beer-promotion-day-in-partnership-with-knbeer": "2026-08-20T21:54:21.143960+00:00",
-    "https://sfstandard.com/2026/08/10/as-giants-sink-their-former-stars-buying-hype-buster-posey-s-farm-system/": "2026-08-10T17:10:48.159214+00:00",
     "https://sfstandard.com/2026/08/10/david-forst-sf-giants-buster-posey/": "2026-08-11T02:29:14.317537+00:00",
     "https://sfstandard.com/2026/08/11/ron-washington-sf-giants-2027-coaching-staff/": "2026-08-11T17:13:54.297493+00:00",
     "https://sfstandard.com/2026/08/13/sf-giants-farm-system-ranking/": "2026-08-13T17:14:33.418357+00:00",
@@ -1573,6 +1590,7 @@
     "https://www.mercurynews.com/2026/08/28/vitello-webb-tossed-in-sf-giants-loss-to-diamondbacks/": "2026-08-29T09:18:16.506568+00:00",
     "https://www.mercurynews.com/2026/08/29/martes-strong-debut-eldridges-big-day-lead-sf-giants-to-win-in-game-2-of-doubleheader-vs-diamondbacks/": "2026-08-30T10:35:58.482231+00:00",
     "https://www.mercurynews.com/2026/08/29/sf-giants-wotus-ejected-before-game-1-of-doubleheader-following-contentious-lineup-exchange/": "2026-08-30T10:36:02.787689+00:00",
+    "https://www.mercurynews.com/2026/08/31/sf-giants-peyton-bonds-barry-bobby-draft-pick-mlb-home-run-king/": "2026-08-31T20:58:24.739378+00:00",
     "https://www.mlb.com/giants/news/adrian-houser-placed-on-injured-list-with-right-forearm-strain": "2026-08-27T00:57:43.261305+00:00",
     "https://www.mlb.com/giants/news/carson-whisenhunt-has-torn-ucl-in-elbow": "2026-08-26T03:34:07.300313+00:00",
     "https://www.mlb.com/giants/news/drew-gilbert-and-turner-hill-lead-giants-over-rockies": "2026-08-16T16:44:07.736486+00:00",
@@ -1654,6 +1672,7 @@
     "https://www.nytimes.com/athletic/7539206/2026/08/25/giants-carson-whisenhunt-torn-ucl-tommy-john-surgery-recommended/": "2026-08-26T03:34:09.413653+00:00",
     "https://www.nytimes.com/athletic/7543502/2026/08/27/sf-giants-lineup-bullpen-unproven/": "2026-08-27T17:52:13.566705+00:00",
     "https://www.nytimes.com/athletic/7545254/2026/08/28/giants-bullpen-win-diamondbacks/": "2026-08-28T14:31:40.510017+00:00",
+    "https://www.nytimes.com/athletic/7550660/2026/08/31/sf-giants-stats-facts/": "2026-08-31T20:58:26.660696+00:00",
     "https://www.sfchronicle.com/sports/giants/article/buster-posey-tony-vitello-see-giants-manager-s-22410003.php": "2026-08-31T05:52:31.277429+00:00",
     "https://www.sfchronicle.com/sports/giants/article/catcher-susac-rodriguez-cavanaugh-22390558.php": "2026-08-18T15:57:52.683980+00:00",
     "https://www.sfchronicle.com/sports/giants/article/dylan-smith-giants-pitch-22383627.php": "2026-08-17T02:01:45.872687+00:00",
