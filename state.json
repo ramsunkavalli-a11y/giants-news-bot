@@ -1735,13 +1735,30 @@
       "source": "San Francisco Chronicle",
       "title": "Giants bounce back with feel-good win over Pirates after crushing loss",
       "url": "https://www.sfchronicle.com/sports/giants/article/sf-giants-rebound-feel-good-win-pirates-crushing-22415343.php"
+    },
+    {
+      "author": "Andrew Baggarly",
+      "game_key": "",
+      "kind": "standalone",
+      "posted_at": "2026-09-03T18:50:07.538710+00:00",
+      "source": "The Athletic",
+      "title": "Pirates sidestep red-hot Rafael Devers; Bryce Eldridge wins it for Giants in 10th",
+      "url": "https://www.nytimes.com/athletic/7561417/2026/09/03/sf-giants-win-pirates-rafael-devers-bryce-eldridge/"
+    },
+    {
+      "author": "Justice delos Santos",
+      "game_key": "",
+      "kind": "standalone",
+      "posted_at": "2026-09-03T18:50:08.810279+00:00",
+      "source": "Mercury News",
+      "title": "‘You have to pick your poison’: Devers, Eldridge showing signs of becoming SF Giants’ next dynamic duo",
+      "url": "https://www.mercurynews.com/2026/09/03/you-have-to-pick-your-poison-devers-eldridge-showing-signs-of-becoming-sf-giants-next-dynamic-duo/"
     }
   ],
   "posted_urls": {
     "https://apnews.com/article/rockies-giants-score-935e66257655c1df502d35d032c6bedd": "2026-08-16T13:09:16.016508+00:00",
     "https://blogs.fangraphs.com/erstwhile-sidewinder-javier-lopez-tackles-a-challenging-career-quiz/": "2026-08-28T00:30:36.587672+00:00",
     "https://omny.fm/shows/the-executives-show/giants-executive-show-larry-baer-on-fan-appreciation-and-exciting-news-about-a-beer-promotion-day-in-partnership-with-knbeer": "2026-08-20T21:54:21.143960+00:00",
-    "https://sfstandard.com/2026/08/13/sf-giants-farm-system-ranking/": "2026-08-13T17:14:33.418357+00:00",
     "https://sfstandard.com/2026/08/14/giants-land-2028-mlb-all-star-game/": "2026-08-14T17:12:54.665447+00:00",
     "https://sfstandard.com/2026/08/15/sf-giants-catchers-buster-posey-daniel-susac/": "2026-08-15T16:42:39.525918+00:00",
     "https://sfstandard.com/2026/08/16/tony-vitello-sf-giants-buster-posey/": "2026-08-16T13:09:13.856298+00:00",
@@ -1786,6 +1803,7 @@
     "https://www.mercurynews.com/2026/09/01/sf-giants-finalizing-minor-league-deal-with-son-of-dusty-baker-report/": "2026-09-01T23:28:22.268705+00:00",
     "https://www.mercurynews.com/2026/09/01/sf-giants-top-pitching-prospect-jackson-flora-to-make-pro-debut-for-san-jose/": "2026-09-02T11:38:54.984292+00:00",
     "https://www.mercurynews.com/2026/09/02/devers-stays-hot-eldridge-hill-drive-in-two-apiece-as-sf-giants-beat-pirates-in-10-innings/": "2026-09-03T07:20:06.748651+00:00",
+    "https://www.mercurynews.com/2026/09/03/you-have-to-pick-your-poison-devers-eldridge-showing-signs-of-becoming-sf-giants-next-dynamic-duo/": "2026-09-03T18:50:08.810279+00:00",
     "https://www.mlb.com/giants/news/adrian-houser-placed-on-injured-list-with-right-forearm-strain": "2026-08-27T00:57:43.261305+00:00",
     "https://www.mlb.com/giants/news/carson-whisenhunt-has-torn-ucl-in-elbow": "2026-08-26T03:34:07.300313+00:00",
     "https://www.mlb.com/giants/news/drew-gilbert-and-turner-hill-lead-giants-over-rockies": "2026-08-16T16:44:07.736486+00:00",
@@ -1877,6 +1895,7 @@
     "https://www.nytimes.com/athletic/7557005/2026/09/02/sf-giants-outfield-depth-chart-bo-davidson/": "2026-09-02T18:51:45.550543+00:00",
     "https://www.nytimes.com/athletic/7557208/2026/09/01/sf-giants-franchise-bloodlines-darren-baker/": "2026-09-02T07:16:32.299016+00:00",
     "https://www.nytimes.com/athletic/7557933/2026/09/01/pirates-giants-combine-for-35-hits/": "2026-09-02T07:16:34.456769+00:00",
+    "https://www.nytimes.com/athletic/7561417/2026/09/03/sf-giants-win-pirates-rafael-devers-bryce-eldridge/": "2026-09-03T18:50:07.538710+00:00",
     "https://www.sfchronicle.com/sports/giants/article/bruce-maxwell-knee-mlb-kaepernick-22410012.php": "2026-09-01T11:57:39.570273+00:00",
     "https://www.sfchronicle.com/sports/giants/article/buster-posey-tony-vitello-see-giants-manager-s-22410003.php": "2026-08-31T05:52:31.277429+00:00",
     "https://www.sfchronicle.com/sports/giants/article/catcher-susac-rodriguez-cavanaugh-22390558.php": "2026-08-18T15:57:52.683980+00:00",
