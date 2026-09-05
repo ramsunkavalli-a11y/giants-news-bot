@@ -207,6 +207,21 @@
       },
       "updated_at": "2026-09-02T07:16:37.020216+00:00"
     },
+    "game:823579": {
+      "created_at": "2026-09-05T07:04:15.262605+00:00",
+      "game_day": "2026-09-04",
+      "game_pk": 823579,
+      "opponent": "mets",
+      "parent": {
+        "cid": "bafyreigpf24cceys2mbci3ndqdgevlculebprby2d5mevvnmtzhmpt6pie",
+        "uri": "at://did:plc:gkkepfzghvnfrkrohm2c4nwy/app.bsky.feed.post/3muqvz4uci72h"
+      },
+      "root": {
+        "cid": "bafyreigpf24cceys2mbci3ndqdgevlculebprby2d5mevvnmtzhmpt6pie",
+        "uri": "at://did:plc:gkkepfzghvnfrkrohm2c4nwy/app.bsky.feed.post/3muqvz4uci72h"
+      },
+      "updated_at": "2026-09-05T07:04:15.262605+00:00"
+    },
     "game:824395": {
       "created_at": "2026-08-20T21:54:22.932396+00:00",
       "game_day": "2026-08-20",
@@ -1903,6 +1918,24 @@
       "source": "The Athletic",
       "title": "Tony Vitello Q&A: Giants' manager on what he's learned during a disappointing first season",
       "url": "https://www.nytimes.com/athletic/7563145/2026/09/04/sf-giants-tony-vitello-manager-interview/"
+    },
+    {
+      "author": "Alex Pavlovic",
+      "game_key": "",
+      "kind": "standalone",
+      "posted_at": "2026-09-05T07:04:13.896665+00:00",
+      "source": "NBC Sports Bay Area",
+      "title": "Giants shipwrecked in Queens",
+      "url": "https://www.nbcsportsbayarea.com/mlb/san-francisco-giants/rafael-devers-matt-wilkinson-loss-mets/1960923/"
+    },
+    {
+      "author": "Justice delos Santos",
+      "game_key": "game:823579",
+      "kind": "game_story",
+      "posted_at": "2026-09-05T07:04:15.262624+00:00",
+      "source": "Mercury News",
+      "title": "SF Giants allow five homers, Wilkinson roughed up in loss to Mets",
+      "url": "https://www.mercurynews.com/2026/09/04/sf-giants-allow-five-homers-wilkinson-roughed-up-in-loss-to-mets/"
     }
   ],
   "posted_urls": {
@@ -1958,6 +1991,7 @@
     "https://www.mercurynews.com/2026/09/02/devers-stays-hot-eldridge-hill-drive-in-two-apiece-as-sf-giants-beat-pirates-in-10-innings/": "2026-09-03T07:20:06.748651+00:00",
     "https://www.mercurynews.com/2026/09/03/walks-doom-sf-giants-in-series-finale-defeat-vs-pirates/": "2026-09-04T07:22:18.339639+00:00",
     "https://www.mercurynews.com/2026/09/03/you-have-to-pick-your-poison-devers-eldridge-showing-signs-of-becoming-sf-giants-next-dynamic-duo/": "2026-09-03T18:50:08.810279+00:00",
+    "https://www.mercurynews.com/2026/09/04/sf-giants-allow-five-homers-wilkinson-roughed-up-in-loss-to-mets/": "2026-09-05T07:04:15.262624+00:00",
     "https://www.mercurynews.com/2026/09/04/sf-giants-unveil-spring-training-schedule-with-lockout-threat-hanging-over-2027-season/": "2026-09-04T23:09:55.368448+00:00",
     "https://www.mlb.com/giants/news/adrian-houser-placed-on-injured-list-with-right-forearm-strain": "2026-08-27T00:57:43.261305+00:00",
     "https://www.mlb.com/giants/news/carson-whisenhunt-has-torn-ucl-in-elbow": "2026-08-26T03:34:07.300313+00:00",
@@ -2021,6 +2055,7 @@
     "https://www.nbcsportsbayarea.com/mlb/san-francisco-giants/rafael-devers-chase-burns-reds-analysis/1958462/": "2026-08-25T21:53:36.161024+00:00",
     "https://www.nbcsportsbayarea.com/mlb/san-francisco-giants/rafael-devers-drew-cavanaugh-cincinnati-reds/1958708/": "2026-08-26T07:28:21.529748+00:00",
     "https://www.nbcsportsbayarea.com/mlb/san-francisco-giants/rafael-devers-home-run-red-sox/1958025/": "2026-08-22T03:21:55.820245+00:00",
+    "https://www.nbcsportsbayarea.com/mlb/san-francisco-giants/rafael-devers-matt-wilkinson-loss-mets/1960923/": "2026-09-05T07:04:13.896665+00:00",
     "https://www.nbcsportsbayarea.com/mlb/san-francisco-giants/rafael-devers-mike-krukow-leadership/1959349/": "2026-08-28T18:57:45.453739+00:00",
     "https://www.nbcsportsbayarea.com/mlb/san-francisco-giants/rafael-devers-red-sox-loss-analysis/1958045/": "2026-08-23T02:08:53.227325+00:00",
     "https://www.nbcsportsbayarea.com/mlb/san-francisco-giants/revisiting-patrick-bailey-trade-guardians/1957247/": "2026-08-18T15:57:48.669997+00:00",
