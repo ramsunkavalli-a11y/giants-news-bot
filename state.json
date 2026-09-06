@@ -208,6 +208,21 @@
       },
       "updated_at": "2026-09-06T04:56:05.267965+00:00"
     },
+    "game:823578": {
+      "created_at": "2026-09-06T22:12:13.759764+00:00",
+      "game_day": "2026-09-06",
+      "game_pk": 823578,
+      "opponent": "mets",
+      "parent": {
+        "cid": "bafyreiev4esghrt3oewvlv7qhyn7oylm5kxwwltnp3xakxfclbueytuczq",
+        "uri": "at://did:plc:gkkepfzghvnfrkrohm2c4nwy/app.bsky.feed.post/3muuz7mqm4o2z"
+      },
+      "root": {
+        "cid": "bafyreiev4esghrt3oewvlv7qhyn7oylm5kxwwltnp3xakxfclbueytuczq",
+        "uri": "at://did:plc:gkkepfzghvnfrkrohm2c4nwy/app.bsky.feed.post/3muuz7mqm4o2z"
+      },
+      "updated_at": "2026-09-06T22:12:13.759764+00:00"
+    },
     "game:823579": {
       "created_at": "2026-09-05T07:04:15.262605+00:00",
       "game_day": "2026-09-04",
@@ -1892,6 +1907,15 @@
       "source": "NBC Sports Bay Area",
       "title": "How Giants' top pitching prospect Jackson Flora fared in his minor league debut",
       "url": "https://www.nbcsportsbayarea.com/mlb/san-francisco-giants/jackson-flora-minor-league-debut/1960943/"
+    },
+    {
+      "author": "Taylor Wirth",
+      "game_key": "game:823578",
+      "kind": "game_story",
+      "posted_at": "2026-09-06T22:12:13.759785+00:00",
+      "source": "NBC Sports Bay Area",
+      "title": "Cesar Perdomo shines before Giants bullpen falters in loss to Mets on Sunday",
+      "url": "https://www.nbcsportsbayarea.com/mlb/san-francisco-giants/cesar-perdomo-series-loss-mets/1961155/"
     }
   ],
   "posted_urls": {
@@ -1976,6 +2000,7 @@
     "https://www.nbcsportsbayarea.com/mlb/san-francisco-giants/bryce-eldridge-rafael-devers-pirates/1960513/": "2026-09-03T07:20:09.084779+00:00",
     "https://www.nbcsportsbayarea.com/mlb/san-francisco-giants/carson-whisenhunt-bryce-eldridge-cleveland-guardians/1957401/": "2026-08-19T03:25:51.577720+00:00",
     "https://www.nbcsportsbayarea.com/mlb/san-francisco-giants/carson-whisenhunt-injury-update-reds/1958489/": "2026-08-25T07:26:58.823674+00:00",
+    "https://www.nbcsportsbayarea.com/mlb/san-francisco-giants/cesar-perdomo-series-loss-mets/1961155/": "2026-09-06T22:12:13.759785+00:00",
     "https://www.nbcsportsbayarea.com/mlb/san-francisco-giants/drew-gilbert-dugout-antics-2026-season/1957504/": "2026-08-19T21:50:43.527818+00:00",
     "https://www.nbcsportsbayarea.com/mlb/san-francisco-giants/drew-gilbert-energy-maturation-2026/1959252/": "2026-08-28T14:31:38.314310+00:00",
     "https://www.nbcsportsbayarea.com/mlb/san-francisco-giants/erik-miller-red-sox-trade/1958098/": "2026-08-22T20:47:21.092618+00:00",
