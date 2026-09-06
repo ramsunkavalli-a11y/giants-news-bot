@@ -207,6 +207,21 @@
       },
       "updated_at": "2026-09-02T07:16:37.020216+00:00"
     },
+    "game:823577": {
+      "created_at": "2026-09-06T04:56:05.267965+00:00",
+      "game_day": "2026-09-05",
+      "game_pk": 823577,
+      "opponent": "mets",
+      "parent": {
+        "cid": "bafyreigrkvm6eev67qm7qtmhfnggzdvs6u6iobkjecvmmt5zyj4f6ejkuy",
+        "uri": "at://did:plc:gkkepfzghvnfrkrohm2c4nwy/app.bsky.feed.post/3mut7cu5m6l2x"
+      },
+      "root": {
+        "cid": "bafyreigrkvm6eev67qm7qtmhfnggzdvs6u6iobkjecvmmt5zyj4f6ejkuy",
+        "uri": "at://did:plc:gkkepfzghvnfrkrohm2c4nwy/app.bsky.feed.post/3mut7cu5m6l2x"
+      },
+      "updated_at": "2026-09-06T04:56:05.267965+00:00"
+    },
     "game:823579": {
       "created_at": "2026-09-05T07:04:15.262605+00:00",
       "game_day": "2026-09-04",
@@ -1945,6 +1960,24 @@
       "source": "NBC Sports Bay Area",
       "title": "Giants' Tony Vitello ejected again after a questionable replay review ruling",
       "url": "https://www.nbcsportsbayarea.com/mlb/san-francisco-giants/tony-vitello-ejected-new-york-mets/1961023/"
+    },
+    {
+      "author": "Ali Thanawalla",
+      "game_key": "",
+      "kind": "standalone",
+      "posted_at": "2026-09-06T04:56:03.227033+00:00",
+      "source": "NBC Sports Bay Area",
+      "title": "Devers hits two more homers",
+      "url": "https://www.nbcsportsbayarea.com/mlb/san-francisco-giants/rafael-devers-homers-new-york-mets/1961039/"
+    },
+    {
+      "author": "Will Simonds",
+      "game_key": "game:823577",
+      "kind": "game_story",
+      "posted_at": "2026-09-06T04:56:05.268024+00:00",
+      "source": "NBC Sports Bay Area",
+      "title": "Tony Vitello shares another odd explanation for ejection in Giants' win vs. Mets",
+      "url": "https://www.nbcsportsbayarea.com/mlb/san-francisco-giants/tony-vitello-explanation-ejection-win-mets/1961068/"
     }
   ],
   "posted_urls": {
@@ -2063,6 +2096,7 @@
     "https://www.nbcsportsbayarea.com/mlb/san-francisco-giants/rafael-devers-chase-burns-reds-analysis/1958462/": "2026-08-25T21:53:36.161024+00:00",
     "https://www.nbcsportsbayarea.com/mlb/san-francisco-giants/rafael-devers-drew-cavanaugh-cincinnati-reds/1958708/": "2026-08-26T07:28:21.529748+00:00",
     "https://www.nbcsportsbayarea.com/mlb/san-francisco-giants/rafael-devers-home-run-red-sox/1958025/": "2026-08-22T03:21:55.820245+00:00",
+    "https://www.nbcsportsbayarea.com/mlb/san-francisco-giants/rafael-devers-homers-new-york-mets/1961039/": "2026-09-06T04:56:03.227033+00:00",
     "https://www.nbcsportsbayarea.com/mlb/san-francisco-giants/rafael-devers-matt-wilkinson-loss-mets/1960923/": "2026-09-05T07:04:13.896665+00:00",
     "https://www.nbcsportsbayarea.com/mlb/san-francisco-giants/rafael-devers-mike-krukow-leadership/1959349/": "2026-08-28T18:57:45.453739+00:00",
     "https://www.nbcsportsbayarea.com/mlb/san-francisco-giants/rafael-devers-red-sox-loss-analysis/1958045/": "2026-08-23T02:08:53.227325+00:00",
@@ -2073,6 +2107,7 @@
     "https://www.nbcsportsbayarea.com/mlb/san-francisco-giants/takeaways-landen-roupp-win-diamondbacks/1959104/": "2026-08-28T05:32:22.707445+00:00",
     "https://www.nbcsportsbayarea.com/mlb/san-francisco-giants/tony-vitello-ejected-new-york-mets/1961023/": "2026-09-05T22:09:20.096263+00:00",
     "https://www.nbcsportsbayarea.com/mlb/san-francisco-giants/tony-vitello-ejection-reaction-diamondbacks/1959449/": "2026-08-29T09:18:19.367270+00:00",
+    "https://www.nbcsportsbayarea.com/mlb/san-francisco-giants/tony-vitello-explanation-ejection-win-mets/1961068/": "2026-09-06T04:56:05.268024+00:00",
     "https://www.nbcsportsbayarea.com/mlb/san-francisco-giants/tony-vitello-logan-webb-ejected-diamondbacks/1959418/": "2026-08-29T09:18:15.139647+00:00",
     "https://www.nbcsportsbayarea.com/mlb/san-francisco-giants/tony-vitello-team-meeting/1957101/": "2026-08-17T21:51:02.208210+00:00",
     "https://www.nbcsportsbayarea.com/mlb/san-francisco-giants/tony-vitello-willy-adames/1956703/": "2026-08-17T02:01:44.941875+00:00",
