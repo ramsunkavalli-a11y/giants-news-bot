@@ -1,19 +1,5 @@
 {
   "game_threads": {
-    "game:2026-08-16:rockies": {
-      "created_at": "2026-08-17T01:13:02.590782+00:00",
-      "game_day": "2026-08-16",
-      "opponent": "rockies",
-      "parent": {
-        "cid": "bafyreic2jbeseznpp2bse7rrwq5534mq6hqqngw7o3okj5dvb4jswxsfoa",
-        "uri": "at://did:plc:gkkepfzghvnfrkrohm2c4nwy/app.bsky.feed.post/3mtazkg46ep2h"
-      },
-      "root": {
-        "cid": "bafyreihhq7eths65qbznzlnun722pduzfcjtrnzwplaifvpwmvqcctam3e",
-        "uri": "at://did:plc:gkkepfzghvnfrkrohm2c4nwy/app.bsky.feed.post/3mtajjmbfxu2y"
-      },
-      "updated_at": "2026-08-17T05:59:49.788846+00:00"
-    },
     "game:2026-08-17:rockies": {
       "created_at": "2026-08-17T21:51:02.208193+00:00",
       "game_day": "2026-08-17",
@@ -315,24 +301,6 @@
     }
   },
   "posted_stories": [
-    {
-      "author": "MLB.com staff",
-      "game_key": "",
-      "kind": "standalone",
-      "posted_at": "2026-08-17T05:59:46.403298+00:00",
-      "source": "MLB.com",
-      "title": "Bo knows slugging! Giants' No. 8 prospect fuels surging system with torrid night",
-      "url": "https://www.mlb.com/giants/news/giants-bo-davidson-logs-career-high-eight-rbis-at-triple-a"
-    },
-    {
-      "author": "Andrew Baggarly",
-      "game_key": "game:2026-08-16:rockies",
-      "kind": "game_story",
-      "posted_at": "2026-08-17T05:59:49.788867+00:00",
-      "source": "The Athletic",
-      "title": "Tony Vitello meets with 'junior college' Giants after they drop season series to Rockies",
-      "url": "https://www.nytimes.com/athletic/7518171/2026/08/16/giants-tony-vitello-junior-college-comparison/"
-    },
     {
       "author": "Alex Pavlovic",
       "game_key": "",
@@ -1893,7 +1861,6 @@
     "https://www.mercurynews.com/2026/09/04/sf-giants-unveil-spring-training-schedule-with-lockout-threat-hanging-over-2027-season/": "2026-09-04T23:09:55.368448+00:00",
     "https://www.mlb.com/giants/news/adrian-houser-placed-on-injured-list-with-right-forearm-strain": "2026-08-27T00:57:43.261305+00:00",
     "https://www.mlb.com/giants/news/carson-whisenhunt-has-torn-ucl-in-elbow": "2026-08-26T03:34:07.300313+00:00",
-    "https://www.mlb.com/giants/news/giants-bo-davidson-logs-career-high-eight-rbis-at-triple-a": "2026-08-17T05:59:46.403298+00:00",
     "https://www.mlb.com/giants/news/giants-offense-struggles-series-finale-loss-to-pirates": "2026-09-03T23:25:08.303714+00:00",
     "https://www.mlb.com/giants/news/giants-suffer-defeat-after-allowing-7-runs-in-ninth-inning": "2026-08-27T13:00:26.712033+00:00",
     "https://www.mlb.com/giants/news/in-season-farm-system-rankings-2026": "2026-08-17T15:50:04.887340+00:00",
@@ -1966,7 +1933,6 @@
     "https://www.nbcsportsbayarea.com/mlb/san-francisco-giants/yunior-marte-debut-win-diamondbacks/1959577/": "2026-08-30T05:37:45.763324+00:00",
     "https://www.nbcsportsbayarea.com/mlb/san-francisco-giants/yunior-marte-emotional-debut-brother/1959615/": "2026-08-30T10:36:01.643523+00:00",
     "https://www.nbcsportsbayarea.com/mlb/san-francisco-giants/zack-minasian-defends-bullpen-general-manager/1959020/": "2026-08-28T00:30:30.529190+00:00",
-    "https://www.nytimes.com/athletic/7518171/2026/08/16/giants-tony-vitello-junior-college-comparison/": "2026-08-17T05:59:49.788867+00:00",
     "https://www.nytimes.com/athletic/7519650/2026/08/17/sf-giants-matt-tugboat-wilkinson-callup/": "2026-08-17T21:50:56.528754+00:00",
     "https://www.nytimes.com/athletic/7521984/2026/08/18/sf-giants-trade-deadline-history/": "2026-08-18T21:48:19.725610+00:00",
     "https://www.nytimes.com/athletic/7525965/2026/08/20/giants-matt-tugboat-wilkinson-debut-guardians/": "2026-08-20T15:59:14.041882+00:00",
