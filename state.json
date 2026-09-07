@@ -302,24 +302,6 @@
   },
   "posted_stories": [
     {
-      "author": "Alex Pavlovic",
-      "game_key": "",
-      "kind": "standalone",
-      "posted_at": "2026-08-17T15:50:02.705053+00:00",
-      "source": "NBC Sports Bay Area",
-      "title": "Giants notes: Marcelo Mayer could debut soon; reunions will highlight road trip",
-      "url": "https://www.nbcsportsbayarea.com/mlb/san-francisco-giants/marcelo-mayer-debut-upcoming-road-trip/1957042/"
-    },
-    {
-      "author": "Sam Dykstra, Jim Callis and Jonathan Mayo",
-      "game_key": "",
-      "kind": "standalone",
-      "posted_at": "2026-08-17T15:50:04.887340+00:00",
-      "source": "MLB.com",
-      "title": "Ranking every MLB farm system, 1-30",
-      "url": "https://www.mlb.com/giants/news/in-season-farm-system-rankings-2026"
-    },
-    {
       "author": "Grant Brisbee",
       "game_key": "",
       "kind": "standalone",
@@ -1863,7 +1845,6 @@
     "https://www.mlb.com/giants/news/carson-whisenhunt-has-torn-ucl-in-elbow": "2026-08-26T03:34:07.300313+00:00",
     "https://www.mlb.com/giants/news/giants-offense-struggles-series-finale-loss-to-pirates": "2026-09-03T23:25:08.303714+00:00",
     "https://www.mlb.com/giants/news/giants-suffer-defeat-after-allowing-7-runs-in-ninth-inning": "2026-08-27T13:00:26.712033+00:00",
-    "https://www.mlb.com/giants/news/in-season-farm-system-rankings-2026": "2026-08-17T15:50:04.887340+00:00",
     "https://www.mlb.com/giants/news/jeff-kent-has-number-retired-by-giants": "2026-08-30T05:37:41.239285+00:00",
     "https://www.mlb.com/giants/news/jeff-kent-reacts-to-kaeden-kent-being-traded-to-giants": "2026-08-27T17:52:21.009551+00:00",
     "https://www.mlb.com/giants/news/logan-webb-allows-nine-runs-in-wild-giants-pirates-game": "2026-09-02T07:16:28.784350+00:00",
@@ -1903,7 +1884,6 @@
     "https://www.nbcsportsbayarea.com/mlb/san-francisco-giants/logan-webb-paul-skenes-pittsburgh-pirates/1960214/": "2026-09-02T07:16:37.020236+00:00",
     "https://www.nbcsportsbayarea.com/mlb/san-francisco-giants/logan-webb-tony-vitello-loss-reds-analysis/1958875/": "2026-08-27T00:57:40.595738+00:00",
     "https://www.nbcsportsbayarea.com/mlb/san-francisco-giants/marcelo-mayer-debut-red-sox/1957963/": "2026-08-22T07:11:03.540183+00:00",
-    "https://www.nbcsportsbayarea.com/mlb/san-francisco-giants/marcelo-mayer-debut-upcoming-road-trip/1957042/": "2026-08-17T15:50:02.705053+00:00",
     "https://www.nbcsportsbayarea.com/mlb/san-francisco-giants/matt-chapman-injury-surgery-stanford-medicine/1957299/": "2026-08-20T15:59:16.037868+00:00",
     "https://www.nbcsportsbayarea.com/mlb/san-francisco-giants/matt-wilkinson-debut-loss-diamondbacks/1959520/": "2026-08-30T05:37:47.643670+00:00",
     "https://www.nbcsportsbayarea.com/mlb/san-francisco-giants/matt-wilkinson-outing-red-sox/1958333/": "2026-08-24T16:04:09.316583+00:00",
