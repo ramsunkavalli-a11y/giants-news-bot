@@ -11,7 +11,7 @@ The workflow:
 3. installs Python 3.11 dependencies;
 4. runs `python v2_bot.py`;
 5. uploads `diagnostics.json`;
-6. commits `state.json` back to `main` only if it changed.
+6. commits `state.json` back to `main` whenever the bot records a posting change or a production heartbeat.
 
 Required GitHub Actions secrets:
 
@@ -120,7 +120,8 @@ Do **not** manually dispatch production just to prove a merge worked. A manual p
 
 - `posted_urls` — exact/canonical URL history;
 - `posted_stories` — recent story metadata used for role-aware event dedupe and recent publication representation;
-- `game_threads` — live Bluesky root/latest-parent refs and game identity; newer entries can include MLB `game_pk`.
+- `game_threads` — live Bluesky root/latest-parent refs and game identity; newer entries can include MLB `game_pk` and doubleheader `game_number`.
+- `run_history` — the latest 100 completed/failed production heartbeats, including source health, selection counts and rejection summaries. This is the first place to look when the account is quiet but Actions is green.
 
 Never casually reset state, delete posted history to make tests pass, or remove live game-thread refs. Schema migrations must preserve dedupe history and Bluesky refs and should be validated on a copy first.
 
@@ -191,7 +192,7 @@ Important distinctions:
 - new thread: earliest published available core writer gets root;
 - existing thread: root is immutable and new stories append;
 - legacy migration: gamePk group can reuse an existing date/opponent thread;
-- doubleheader: separate gamePk values should separate stories based on which game had most recently started.
+- doubleheader: separate gamePk values should separate stories; explicit Game 1/Game 2/opener/nightcap cues take precedence when both games had already started.
 
 If schedule matching is incorrect, do not delete a live Bluesky thread. Fix the matcher/test and preserve existing refs.
 

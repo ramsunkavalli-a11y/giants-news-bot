@@ -8,7 +8,7 @@ Automated, curated San Francisco Giants news feed for Bluesky. The bot discovers
 
 - **Entrypoint:** `python v2_bot.py`
 - **Workflow:** `.github/workflows/giants-news-bot.yml`
-- **Persistent state:** `state.json`
+- **Persistent state:** `state.json` (posted history, game-thread refs, and a bounded run-health heartbeat)
 - **Standalone cap:** 3 stories per run
 - **Standalone freshness:** 72 hours
 - **Game-story freshness:** 30 hours
@@ -116,6 +116,7 @@ Game stories use a separate lane so readers can get several useful perspectives 
 
 - The bot queries the free MLB StatsAPI schedule for Giants games and, when the opponent can be identified, assigns coverage to the closest actual previously started game and its `gamePk`.
 - That prevents a delayed next-day story from inventing a new game thread and gives doubleheaders distinct identities.
+- When a headline explicitly says Game 1/Game 2, opener, or nightcap, that cue overrides arrival time so postgame stories published after a doubleheader do not collapse into the second game.
 - If schedule matching is unavailable, the older Pacific baseball-day + opponent heuristic remains a nonblocking fallback.
 - Existing legacy date/opponent thread keys are reused when a new `gamePk` match points to the same game, so live Bluesky thread roots are preserved during migration.
 - Core game writers are Andrew Baggarly, Alex Pavlovic, Shayna Rubin, Susan Slusser, Justice delos Santos, John Shea, and Maria Guardado.
@@ -123,6 +124,7 @@ Game stories use a separate lane so readers can get several useful perspectives 
 - Other eligible game stories become chronological replies.
 - Once a Bluesky thread root exists, it is never replaced; later discoveries append to that thread.
 - Root/parent Bluesky refs are persisted in `state.json` so later runs can continue the same thread.
+- `run_history` in `state.json` keeps the latest 100 production heartbeats, including source failures, selected counts, schedule-grounded counts, and failed-post errors.
 - Game stories do not count against the 3-story standalone cap.
 
 ## Local development

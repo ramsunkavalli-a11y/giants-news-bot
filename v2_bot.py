@@ -55,6 +55,7 @@ def load_state(path: str) -> dict:
             "posted_urls": {},
             "posted_stories": [],
             "game_threads": {},
+            "run_history": [],
         }
     try:
         with open(path, "r", encoding="utf-8") as handle:
@@ -69,17 +70,79 @@ def load_state(path: str) -> dict:
     posted_urls = state.get("posted_urls", {})
     posted_stories = state.get("posted_stories", [])
     game_threads = state.get("game_threads", {})
+    run_history = state.get("run_history", [])
 
     return {
         "posted_urls": posted_urls if isinstance(posted_urls, dict) else {},
         "posted_stories": posted_stories if isinstance(posted_stories, list) else [],
         "game_threads": game_threads if isinstance(game_threads, dict) else {},
+        "run_history": run_history if isinstance(run_history, list) else [],
     }
 
 
 def save_state(path: str, state: dict) -> None:
     with open(path, "w", encoding="utf-8") as handle:
         json.dump(state, handle, indent=2, sort_keys=True, ensure_ascii=False)
+
+
+def record_run(
+    state: dict,
+    *,
+    started_at: str,
+    finished_at: str,
+    status: str,
+    health: dict,
+    selection: dict,
+    game_selection: dict,
+    error: str = "",
+) -> None:
+    """Persist a compact production heartbeat alongside posting state.
+
+    Diagnostics artifacts are useful for a single run, but they expire and are
+    awkward to inspect without an authenticated Actions session. A bounded
+    history in state.json makes a silent source outage, zero-selection run, or
+    posting failure visible in the repository itself.
+    """
+    history = state.setdefault("run_history", [])
+    if not isinstance(history, list):
+        history = []
+        state["run_history"] = history
+
+    record = {
+        "started_at": started_at,
+        "finished_at": finished_at,
+        "status": status,
+        "discovered": sum(
+            int(item.get("count", 0) or 0)
+            for item in health.values()
+            if isinstance(item, dict) and item.get("ok")
+        ),
+        "sources_ok": sum(
+            1 for item in health.values()
+            if isinstance(item, dict) and item.get("ok")
+        ),
+        "sources_failed": sum(
+            1 for item in health.values()
+            if isinstance(item, dict) and not item.get("ok")
+        ),
+        "standalone_selected": len(selection.get("selected", []) or []),
+        "game_threads_selected": len(game_selection.get("threads", []) or []),
+        "game_stories_selected": sum(
+            len(thread.get("articles", []) or [])
+            for thread in game_selection.get("threads", []) or []
+        ),
+        "schedule_grounded_threads": sum(
+            1
+            for thread in game_selection.get("threads", []) or []
+            if thread.get("schedule_grounded")
+        ),
+        "selection_reasons": selection.get("reasons", {}),
+        "game_selection_reasons": game_selection.get("reasons", {}),
+    }
+    if error:
+        record["error"] = error[:500]
+    history.append(record)
+    state["run_history"] = history[-100:]
 
 
 def prune_state(state: dict, keep_days: int) -> None:
@@ -111,6 +174,18 @@ def prune_state(state: dict, keep_days: int) -> None:
             dt = parse_dt(item.get("updated_at", "") or item.get("created_at", ""))
             if dt is not None and dt < cutoff:
                 threads.pop(key, None)
+
+    history = state.get("run_history", [])
+    if isinstance(history, list):
+        state["run_history"] = [
+            item for item in history
+            if isinstance(item, dict)
+            and (
+                (dt := parse_dt(item.get("finished_at", "") or item.get("timestamp", "")))
+                is None
+                or dt >= cutoff
+            )
+        ][-100:]
 
 
 def discover_articles() -> tuple[list[dict], dict]:
@@ -294,6 +369,7 @@ def _set_thread_state(
     existing = threads.get(key, {}) if isinstance(threads.get(key), dict) else {}
     threads[key] = {
         "game_pk": thread.get("game_pk", 0) or existing.get("game_pk", 0),
+        "game_number": thread.get("game_number", 0) or existing.get("game_number", 0),
         "game_day": thread.get("game_day", ""),
         "opponent": thread.get("opponent", "") or existing.get("opponent", ""),
         "root": root,
@@ -329,6 +405,7 @@ def _state_with_planned_game_stories(state: dict, game_selection: dict, now: dat
 
 
 def main() -> None:
+    started_at = datetime.now(timezone.utc).isoformat()
     settings = Settings()
     state = load_state(settings.state_file)
     prune_state(state, settings.keep_posted_days)
@@ -381,6 +458,7 @@ def main() -> None:
             {
                 "key": thread["key"],
                 "game_pk": thread.get("game_pk", 0),
+                "game_number": thread.get("game_number", 0),
                 "game_day": thread["game_day"],
                 "opponent": thread["opponent"],
                 "schedule_grounded": thread.get("schedule_grounded", False),
@@ -444,70 +522,104 @@ def main() -> None:
         return
 
     if not candidates and not game_candidates:
+        record_run(
+            state,
+            started_at=started_at,
+            finished_at=datetime.now(timezone.utc).isoformat(),
+            status="completed",
+            health=health,
+            selection=selection,
+            game_selection=game_selection,
+        )
         save_state(settings.state_file, state)
         return
-    if not settings.bsky_identifier or not settings.bsky_app_password:
-        raise RuntimeError(
-            "BSKY_IDENTIFIER and BSKY_APP_PASSWORD are required when not DRY_RUN"
-        )
+    try:
+        if not settings.bsky_identifier or not settings.bsky_app_password:
+            raise RuntimeError(
+                "BSKY_IDENTIFIER and BSKY_APP_PASSWORD are required when not DRY_RUN"
+            )
 
-    session = requests.Session()
-    did, jwt = bsky_login(
-        session,
-        settings.bsky_pds,
-        settings.bsky_identifier,
-        settings.bsky_app_password,
-        settings.request_timeout,
-    )
-
-    for article, candidate, _ in candidates:
-        post_to_bluesky(
+        session = requests.Session()
+        did, jwt = bsky_login(
             session,
-            candidate,
             settings.bsky_pds,
-            did,
-            jwt,
+            settings.bsky_identifier,
+            settings.bsky_app_password,
             settings.request_timeout,
         )
-        mark_posted(state, article)
-        save_state(settings.state_file, state)
-        log(f"posted standalone {candidate.post_url}")
-        time.sleep(0.8)
 
-    for thread in game_candidates:
-        state_key = _existing_thread_key(state, thread)
-        existing = state.get("game_threads", {}).get(state_key, {})
-        root = existing.get("root") if _valid_ref(existing.get("root")) else None
-        parent = existing.get("parent") if _valid_ref(existing.get("parent")) else root
-
-        for article, candidate, _ in thread["posts"]:
-            if root:
-                ref = post_to_bluesky(
-                    session,
-                    candidate,
-                    settings.bsky_pds,
-                    did,
-                    jwt,
-                    settings.request_timeout,
-                    reply_root=root,
-                    reply_parent=parent or root,
-                )
-            else:
-                ref = post_to_bluesky(
-                    session,
-                    candidate,
-                    settings.bsky_pds,
-                    did,
-                    jwt,
-                    settings.request_timeout,
-                )
-                root = ref
-            parent = ref
-            _set_thread_state(state, state_key, thread, root, parent)
-            mark_posted(state, article, kind="game_story", game_key=state_key)
+        for article, candidate, _ in candidates:
+            post_to_bluesky(
+                session,
+                candidate,
+                settings.bsky_pds,
+                did,
+                jwt,
+                settings.request_timeout,
+            )
+            mark_posted(state, article)
             save_state(settings.state_file, state)
-            log(f"posted game_thread={state_key} {candidate.post_url}")
+            log(f"posted standalone {candidate.post_url}")
             time.sleep(0.8)
+
+        for thread in game_candidates:
+            state_key = _existing_thread_key(state, thread)
+            existing = state.get("game_threads", {}).get(state_key, {})
+            root = existing.get("root") if _valid_ref(existing.get("root")) else None
+            parent = existing.get("parent") if _valid_ref(existing.get("parent")) else root
+
+            for article, candidate, _ in thread["posts"]:
+                if root:
+                    ref = post_to_bluesky(
+                        session,
+                        candidate,
+                        settings.bsky_pds,
+                        did,
+                        jwt,
+                        settings.request_timeout,
+                        reply_root=root,
+                        reply_parent=parent or root,
+                    )
+                else:
+                    ref = post_to_bluesky(
+                        session,
+                        candidate,
+                        settings.bsky_pds,
+                        did,
+                        jwt,
+                        settings.request_timeout,
+                    )
+                    root = ref
+                parent = ref
+                _set_thread_state(state, state_key, thread, root, parent)
+                mark_posted(state, article, kind="game_story", game_key=state_key)
+                save_state(settings.state_file, state)
+                log(f"posted game_thread={state_key} {candidate.post_url}")
+                time.sleep(0.8)
+
+        record_run(
+            state,
+            started_at=started_at,
+            finished_at=datetime.now(timezone.utc).isoformat(),
+            status="completed",
+            health=health,
+            selection=selection,
+            game_selection=game_selection,
+        )
+        save_state(settings.state_file, state)
+    except Exception as exc:
+        record_run(
+            state,
+            started_at=started_at,
+            finished_at=datetime.now(timezone.utc).isoformat(),
+            status="failed",
+            health=health,
+            selection=selection,
+            game_selection=game_selection,
+            error=f"{type(exc).__name__}: {exc}",
+        )
+        save_state(settings.state_file, state)
+        raise
 
 
 if __name__ == "__main__":

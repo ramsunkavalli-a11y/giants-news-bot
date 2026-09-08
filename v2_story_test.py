@@ -76,6 +76,14 @@ class StoryDedupeTests(unittest.TestCase):
             "SF Giants announce partnership with controversial prediction market Kalshi",
         ))
 
+    def test_injury_reports_cluster_using_shared_url_slug_evidence(self):
+        self.assertTrue(same_story(
+            "For 2nd straight night, Giants lose starter to throwing arm injury",
+            "Giants' Carson Whisenhunt has torn UCL, Tommy John surgery recommended",
+            url_a="https://www.mlb.com/giants/news/carson-whisenhunt-has-torn-ucl-in-elbow",
+            url_b="https://www.nytimes.com/athletic/7539206/2026/08/25/giants-carson-whisenhunt-torn-ucl-tommy-john-surgery-recommended/",
+        ))
+
     def test_player_bereavement_update_clusters(self):
         self.assertTrue(same_story(
             "Giants’ Bryce Eldridge headed to bereavement list, will miss series against Reds",

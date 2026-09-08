@@ -174,7 +174,7 @@ Title/summary patterns identify genuine game recaps and postgame analysis. Low-v
 
 ### Schedule grounding — `v2_mlb_schedule.py`
 
-The schedule adapter uses the free MLB StatsAPI schedule endpoint for Giants team ID **137** and returns game metadata including `gamePk`, official date, start time and opponent.
+The schedule adapter uses the free MLB StatsAPI schedule endpoint for Giants team ID **137** and returns game metadata including `gamePk`, doubleheader game number, official date, start time and opponent.
 
 For eligible game coverage, `v2_game_threads.py` attempts to:
 
@@ -250,7 +250,7 @@ Important persistent concepts:
 }
 ```
 
-`posted_urls` prevents exact reposts. `posted_stories` supports role-aware historical event dedupe and recent source-count rotation. `game_threads` stores Bluesky refs and game identity; new entries can include `game_pk`.
+`posted_urls` prevents exact reposts. `posted_stories` supports role-aware historical event dedupe and recent source-count rotation. `game_threads` stores Bluesky refs and game identity; new entries can include `game_pk` and `game_number`. `run_history` stores a bounded production heartbeat so successful no-op runs and source failures remain observable after Actions artifacts expire.
 
 State changes only after live posting. Dry-run validation uses a copy and verifies byte-for-byte immutability.
 

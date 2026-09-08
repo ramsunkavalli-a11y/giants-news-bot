@@ -4,6 +4,7 @@ import re
 from dataclasses import dataclass, field
 from datetime import datetime
 from typing import Iterable
+from urllib.parse import urlparse
 
 # Deliberately event-level. Generic team/player words are not enough to make two
 # articles duplicates; we want to suppress the same news event, not different
@@ -19,10 +20,14 @@ EVENT_TOKENS = {
     "allstar", "surgery", "injury", "il", "retire", "trade", "promote", "callup",
     "suspend", "extension", "sign", "waiver", "dfa", "release", "hire", "fire",
     "host", "fracture", "rehab", "return", "debut", "roster", "deadline", "partnership",
-    "bereavement",
+    "bereavement", "torn", "ucl", "tommyjohn",
 }
 EVENT_FAMILIES = {
     "promote": "callup",
+    "surgery": "injury",
+    "torn": "injury",
+    "ucl": "injury",
+    "tommyjohn": "injury",
 }
 
 PHRASE_REPLACEMENTS = (
@@ -34,6 +39,7 @@ PHRASE_REPLACEMENTS = (
     (r"recalled? from (?:triple[- ]a|aaa)", "callup"),
     (r"placed on (?:the )?il", " il "),
     (r"designated for assignment", " dfa "),
+    (r"tommy[- ]john", "tommyjohn"),
 )
 
 TOKEN_ALIASES = {
@@ -48,7 +54,7 @@ TOKEN_ALIASES = {
     "returns": "return", "returned": "return", "returning": "return",
     "debuted": "debut", "debuts": "debut",
     "hosts": "host", "hosting": "host", "hosted": "host",
-    "injured": "injury", "injuries": "injury",
+    "injured": "injury", "injuries": "injury", "torn": "injury",
     "partner": "partnership", "partners": "partnership", "partnered": "partnership",
 }
 
@@ -123,10 +129,36 @@ def story_role(article: dict) -> str:
     return "news"
 
 
-def same_story(title_a: str, title_b: str) -> bool:
+def _url_slug_tokens(url: str) -> set[str]:
+    path = urlparse(str(url or "")).path
+    parts = [part for part in path.split("/") if part]
+    if not parts:
+        return set()
+    slug = parts[-1]
+    if re.fullmatch(r"\d+", slug) and len(parts) > 1:
+        slug = parts[-2]
+    slug = re.sub(r"\.(?:html?|php)$", "", slug, flags=re.I)
+    slug = re.sub(r"[-_]?\d{5,}$", "", slug)
+    return story_tokens(slug)
+
+
+def _article_tokens(title: str, url: str = "") -> set[str]:
+    # Publisher feeds sometimes use deliberately vague display headlines. The
+    # article slug is a useful second signal for the same player/event, but it
+    # is never used by itself because publisher slugs can be noisy.
+    return story_tokens(title) | _url_slug_tokens(url)
+
+
+def same_story(
+    title_a: str,
+    title_b: str,
+    *,
+    url_a: str = "",
+    url_b: str = "",
+) -> bool:
     """Conservative event-level duplicate test for news headlines."""
-    a = story_tokens(title_a)
-    b = story_tokens(title_b)
+    a = _article_tokens(title_a, url_a)
+    b = _article_tokens(title_b, url_b)
     if not a or not b:
         return False
     overlap = a & b
@@ -167,7 +199,16 @@ class StoryCluster:
 
     def matches(self, article: dict) -> bool:
         title = article.get("title", "")
-        return any(same_story(title, member.get("title", "")) for member in self.members)
+        url = article.get("url", "")
+        return any(
+            same_story(
+                title,
+                member.get("title", ""),
+                url_a=url,
+                url_b=member.get("url", ""),
+            )
+            for member in self.members
+        )
 
     def add(self, article: dict) -> None:
         self.members.append(article)

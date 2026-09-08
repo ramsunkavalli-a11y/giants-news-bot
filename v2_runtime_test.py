@@ -15,6 +15,7 @@ from v2_bot import (
     clean_card_summary,
     load_state,
     mark_posted,
+    record_run,
     _state_with_planned_game_stories,
 )
 from v2_selector import canonicalize_url, select_articles
@@ -227,7 +228,36 @@ class RuntimeSmokeTests(unittest.TestCase):
             self.assertEqual(state["posted_urls"], {})
             self.assertEqual(state["posted_stories"], [])
             self.assertEqual(state["game_threads"], {})
-            self.assertEqual(set(state), {"posted_urls", "posted_stories", "game_threads"})
+            self.assertEqual(state["run_history"], [])
+            self.assertEqual(
+                set(state),
+                {"posted_urls", "posted_stories", "game_threads", "run_history"},
+            )
+
+    def test_record_run_persists_compact_health_heartbeat(self):
+        state = {"run_history": []}
+        record_run(
+            state,
+            started_at="2026-08-25T00:00:00+00:00",
+            finished_at="2026-08-25T00:00:10+00:00",
+            status="failed",
+            health={
+                "mlb": {"ok": True, "count": 4},
+                "radar": {"ok": False, "error": "timeout"},
+            },
+            selection={"selected": [{"url": "https://example.com/a"}], "reasons": {"selected": 1}},
+            game_selection={
+                "threads": [{"articles": [{"url": "https://example.com/game"}], "schedule_grounded": False}],
+                "reasons": {"selected_game_stories": 1},
+            },
+            error="RuntimeError: post failed",
+        )
+        self.assertEqual(len(state["run_history"]), 1)
+        self.assertEqual(state["run_history"][0]["status"], "failed")
+        self.assertEqual(state["run_history"][0]["discovered"], 4)
+        self.assertEqual(state["run_history"][0]["sources_failed"], 1)
+        self.assertEqual(state["run_history"][0]["game_stories_selected"], 1)
+        self.assertIn("post failed", state["run_history"][0]["error"])
 
     def test_load_state_drops_retired_crawler_caches(self):
         with tempfile.TemporaryDirectory() as directory:
@@ -244,7 +274,10 @@ class RuntimeSmokeTests(unittest.TestCase):
                     handle,
                 )
             state = load_state(path)
-            self.assertEqual(set(state), {"posted_urls", "posted_stories", "game_threads"})
+            self.assertEqual(
+                set(state),
+                {"posted_urls", "posted_stories", "game_threads", "run_history"},
+            )
             self.assertIn("https://example.com/a", state["posted_urls"])
             self.assertEqual(state["posted_stories"][0]["title"], "Example")
             self.assertIn("game:2026-08-16:test", state["game_threads"])

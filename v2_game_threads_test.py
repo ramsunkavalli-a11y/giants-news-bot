@@ -3,6 +3,7 @@ import unittest
 from v2_game_threads import (
     baseball_day,
     extract_opponent,
+    extract_game_number,
     game_thread_key,
     group_game_articles,
     is_game_story,
@@ -24,6 +25,16 @@ class GameThreadTests(unittest.TestCase):
     def test_extracts_opponent(self):
         article = {"title": "What we learned as Giants bats fall flat in loss to Rockies"}
         self.assertEqual(extract_opponent(article), "rockies")
+
+    def test_extracts_doubleheader_game_number(self):
+        self.assertEqual(
+            extract_game_number({"title": "Giants fall in Game 1 of doubleheader"}),
+            1,
+        )
+        self.assertEqual(
+            extract_game_number({"title": "Giants win the nightcap"}),
+            2,
+        )
 
     def test_recognizes_game_story_even_if_quality_was_high(self):
         article = {
@@ -165,34 +176,56 @@ class GameThreadTests(unittest.TestCase):
         self.assertEqual(groups[0]["game_day"], "2026-08-16")
         self.assertEqual(groups[0]["key"], "game:900001")
 
-    def test_doubleheader_articles_map_to_most_recent_started_game(self):
+    def test_doubleheader_articles_use_explicit_game_number_after_both_started(self):
         schedule = [
             {
                 "game_pk": 910001,
+                "game_number": 1,
                 "official_date": "2026-09-05",
                 "game_date": "2026-09-05T18:00:00Z",
                 "opponent": "dodgers",
             },
             {
                 "game_pk": 910002,
+                "game_number": 2,
                 "official_date": "2026-09-05",
                 "game_date": "2026-09-05T23:00:00Z",
                 "opponent": "dodgers",
             },
         ]
-        between_games = {
-            "title": "Giants beat Dodgers in opener",
-            "published": "2026-09-05T21:30:00Z",
+        game_one = {
+            "title": "Giants fall to Dodgers in Game 1 of doubleheader",
+            "published": "2026-09-06T03:30:00Z",
         }
-        after_nightcap = {
-            "title": "Giants lose to Dodgers in nightcap",
+        game_two = {
+            "title": "Giants lose to Dodgers in Game 2 of doubleheader",
             "published": "2026-09-06T03:00:00Z",
         }
-        groups = group_game_articles([between_games, after_nightcap], schedule_games=schedule)
+        groups = group_game_articles([game_one, game_two], schedule_games=schedule)
         by_pk = {group["game_pk"]: group for group in groups}
         self.assertEqual(set(by_pk), {910001, 910002})
-        self.assertEqual(by_pk[910001]["articles"][0]["title"], between_games["title"])
-        self.assertEqual(by_pk[910002]["articles"][0]["title"], after_nightcap["title"])
+        self.assertEqual(by_pk[910001]["articles"][0]["title"], game_one["title"])
+        self.assertEqual(by_pk[910002]["articles"][0]["title"], game_two["title"])
+
+    def test_fallback_doubleheader_cues_keep_games_separate(self):
+        articles = [
+            {
+                "title": "Giants lose in Game 1 to Dodgers",
+                "published": "2026-09-05T22:00:00Z",
+            },
+            {
+                "title": "Giants win Game 2 against Dodgers",
+                "published": "2026-09-06T03:00:00Z",
+            },
+        ]
+        groups = group_game_articles(articles)
+        self.assertEqual(
+            {group["key"] for group in groups},
+            {
+                "game:2026-09-05:dodgers:game1",
+                "game:2026-09-05:dodgers:game2",
+            },
+        )
 
 
 if __name__ == "__main__":

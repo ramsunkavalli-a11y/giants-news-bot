@@ -15,6 +15,7 @@ class FakeResponse:
                 "date": "2026-08-16",
                 "games": [{
                     "gamePk": 900001,
+                    "gameNumber": 1,
                     "officialDate": "2026-08-16",
                     "gameDate": "2026-08-16T20:05:00Z",
                     "status": {
@@ -50,6 +51,7 @@ class ScheduleTests(unittest.TestCase):
         self.assertEqual(session.last_params["teamId"], 137)
         self.assertEqual(len(games), 1)
         self.assertEqual(games[0]["game_pk"], 900001)
+        self.assertEqual(games[0]["game_number"], 1)
         self.assertEqual(games[0]["official_date"], "2026-08-16")
         self.assertEqual(games[0]["opponent"], "rockies")
 

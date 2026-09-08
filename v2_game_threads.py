@@ -130,6 +130,22 @@ SEASON_OUTLOOK_RE = re.compile(
     r"\b\d{2,3}-loss season\b|\bseason looms\b|\bseason outlook\b",
     flags=re.I,
 )
+GAME_NUMBER_PATTERNS = (
+    (
+        1,
+        re.compile(
+            r"\b(?:game|gm)\s*(?:1|one)\b|\b(?:first game|game one|opener)\b",
+            re.I,
+        ),
+    ),
+    (
+        2,
+        re.compile(
+            r"\b(?:game|gm)\s*(?:2|two)\b|\b(?:second game|game two|nightcap)\b",
+            re.I,
+        ),
+    ),
+)
 
 
 def _parse_dt(value: str) -> datetime | None:
@@ -232,9 +248,27 @@ def extract_opponent(article: dict) -> str:
     return ""
 
 
-def game_thread_key(game_day: str, opponent: str = "", game_pk: int = 0) -> str:
+def extract_game_number(article: dict) -> int:
+    text = " ".join(
+        str(article.get(field, "") or "")
+        for field in ("title", "summary")
+    )
+    for number, pattern in GAME_NUMBER_PATTERNS:
+        if pattern.search(text):
+            return number
+    return 0
+
+
+def game_thread_key(
+    game_day: str,
+    opponent: str = "",
+    game_pk: int = 0,
+    game_number: int = 0,
+) -> str:
     if game_pk:
         return f"game:{game_pk}"
+    if game_number:
+        return f"game:{game_day}:{opponent or 'unknown'}:game{game_number}"
     return f"game:{game_day}:{opponent or 'unknown'}"
 
 
@@ -279,6 +313,7 @@ def _schedule_games_for_articles(articles: list[dict]) -> list[dict]:
 def _match_schedule_game(article: dict, games: list[dict]) -> dict | None:
     article_dt = _article_dt(article)
     opponent = extract_opponent(article)
+    requested_game_number = extract_game_number(article)
     if article_dt is None or not opponent:
         return None
 
@@ -296,6 +331,19 @@ def _match_schedule_game(article: dict, games: list[dict]) -> dict | None:
 
     if not candidates:
         return None
+    if requested_game_number:
+        numbered = [
+            item for item in candidates
+            if int(item[1].get("game_number") or 0) == requested_game_number
+        ]
+        if numbered:
+            candidates = numbered
+        elif len(candidates) > 1:
+            # Older test fixtures and some StatsAPI responses omit the ordinal,
+            # so the explicit opener/nightcap cue still disambiguates by start
+            # time when there are two same-day games.
+            candidates.sort(key=lambda item: item[1].get("game_date", ""))
+            return candidates[0 if requested_game_number == 1 else -1][1]
     candidates.sort(key=lambda item: (item[0], -int(item[1].get("game_pk") or 0)))
     return candidates[0][1]
 
@@ -308,7 +356,9 @@ def group_game_articles(
     """Group by real MLB game when supplied; otherwise use the legacy heuristic."""
     games = schedule_games or []
     grounded: dict[int, list[dict]] = defaultdict(list)
-    fallback: dict[str, dict[str, list[dict]]] = defaultdict(lambda: defaultdict(list))
+    fallback: dict[str, dict[tuple[str, int], list[dict]]] = defaultdict(
+        lambda: defaultdict(list)
+    )
     game_meta: dict[int, dict] = {}
 
     for article in articles:
@@ -322,7 +372,7 @@ def group_game_articles(
         day = baseball_day(article)
         if not day:
             continue
-        fallback[day][extract_opponent(article)].append(article)
+        fallback[day][(extract_opponent(article), extract_game_number(article))].append(article)
 
     groups: list[dict] = []
     for game_pk, members in grounded.items():
@@ -330,6 +380,7 @@ def group_game_articles(
         groups.append({
             "key": game_thread_key(game.get("official_date", ""), game.get("opponent", ""), game_pk),
             "game_pk": game_pk,
+            "game_number": int(game.get("game_number") or 0),
             "game_day": game.get("official_date", ""),
             "opponent": game.get("opponent", ""),
             "schedule_grounded": True,
@@ -337,17 +388,20 @@ def group_game_articles(
         })
 
     for day, opponent_groups in fallback.items():
-        known = [opponent for opponent in opponent_groups if opponent]
-        unknown = opponent_groups.pop("", [])
-        if unknown and len(known) == 1:
-            opponent_groups[known[0]].extend(unknown)
-        elif unknown:
-            opponent_groups[""] = unknown
+        known = [key for key in opponent_groups if key[0]]
+        unknown_keys = [key for key in opponent_groups if not key[0]]
+        for unknown_key in unknown_keys:
+            unknown = opponent_groups.pop(unknown_key)
+            if unknown and len(known) == 1:
+                opponent_groups[known[0]].extend(unknown)
+            elif unknown:
+                opponent_groups[unknown_key].extend(unknown)
 
-        for opponent, members in opponent_groups.items():
+        for (opponent, game_number), members in opponent_groups.items():
             groups.append({
-                "key": game_thread_key(day, opponent),
+                "key": game_thread_key(day, opponent, game_number=game_number),
                 "game_pk": 0,
+                "game_number": game_number,
                 "game_day": day,
                 "opponent": opponent,
                 "schedule_grounded": False,
@@ -444,6 +498,7 @@ def select_game_threads(
         public_threads.append({
             "key": thread["key"],
             "game_pk": thread.get("game_pk", 0),
+            "game_number": thread.get("game_number", 0),
             "game_day": thread["game_day"],
             "opponent": thread["opponent"],
             "schedule_grounded": thread.get("schedule_grounded", False),

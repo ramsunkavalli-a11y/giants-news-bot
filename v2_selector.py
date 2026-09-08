@@ -377,7 +377,12 @@ def select_articles(
         match = next((
             item for item in history
             if item.get("story_role", "news") == role
-            and same_story(article.get("title", ""), item.get("title", ""))
+            and same_story(
+                article.get("title", ""),
+                item.get("title", ""),
+                url_a=article.get("url", ""),
+                url_b=item.get("url", ""),
+            )
         ), None)
         if match:
             reasons["story_already_posted"] += 1

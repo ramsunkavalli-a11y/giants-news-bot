@@ -1,5 +1,9 @@
 name: Giants News Bot
 
+concurrency:
+  group: giants-news-bot-production
+  cancel-in-progress: false
+
 on:
   schedule:
     # GitHub cron is UTC. Run the weekday cadence at 8:30am / 2:30pm /
@@ -79,11 +83,11 @@ jobs:
 
       - name: Checkout
         if: steps.cadence.outputs.run_bot == 'true'
-        uses: actions/checkout@v4
+        uses: actions/checkout@v7
 
       - name: Set up Python
         if: steps.cadence.outputs.run_bot == 'true'
-        uses: actions/setup-python@v5
+        uses: actions/setup-python@v7
         with:
           python-version: "3.11"
 
@@ -107,7 +111,7 @@ jobs:
 
       - name: Upload diagnostics artifact
         if: always() && steps.cadence.outputs.run_bot == 'true'
-        uses: actions/upload-artifact@v4
+        uses: actions/upload-artifact@v7
         with:
           name: giants-news-diagnostics
           path: diagnostics.json

@@ -84,6 +84,10 @@ def fetch_giants_schedule(
             status = game.get("status", {}) or {}
             games.append({
                 "game_pk": int(game.get("gamePk") or 0),
+                # StatsAPI exposes the ordinal for doubleheaders. Keeping it
+                # lets the grouping layer distinguish Game 1 from Game 2 even
+                # when both postgame articles arrive after the nightcap.
+                "game_number": int(game.get("gameNumber") or 0),
                 "official_date": str(game.get("officialDate") or day.get("date") or ""),
                 "game_date": str(game.get("gameDate") or ""),
                 "opponent_id": opponent_id,
