@@ -112,14 +112,14 @@
       "game_pk": 823175,
       "opponent": "cardinals",
       "parent": {
-        "cid": "bafyreih2345qfv2jfepw4gyv3m43wtd3mxyzfayxlerivkkkqvazpp2you",
-        "uri": "at://did:plc:gkkepfzghvnfrkrohm2c4nwy/app.bsky.feed.post/3muyihh46o32z"
+        "cid": "bafyreie6rjtccr2nz55eowj3kyfjqnky2dtosclt6xqgvaz62mys74k6ny",
+        "uri": "at://did:plc:gkkepfzghvnfrkrohm2c4nwy/app.bsky.feed.post/3mv26lope3x2g"
       },
       "root": {
         "cid": "bafyreiditwzf6dlirzcq6vemgvfgyf5pmosbnx2nn5goj6v3ewfzo7noze",
         "uri": "at://did:plc:gkkepfzghvnfrkrohm2c4nwy/app.bsky.feed.post/3muyihdqiem25"
       },
-      "updated_at": "2026-09-08T07:23:01.907954+00:00"
+      "updated_at": "2026-09-08T23:31:46.017439+00:00"
     },
     "game:823176": {
       "created_at": "2026-08-30T05:37:45.763300+00:00",
@@ -303,24 +303,6 @@
     }
   },
   "posted_stories": [
-    {
-      "author": "Grant Brisbee",
-      "game_key": "",
-      "kind": "standalone",
-      "posted_at": "2026-08-18T21:48:19.725610+00:00",
-      "source": "The Athletic",
-      "title": "Reviewing the Giants' trade deadline deals since their last winning season",
-      "url": "https://www.nytimes.com/athletic/7521984/2026/08/18/sf-giants-trade-deadline-history/"
-    },
-    {
-      "author": "Jane Kenny",
-      "game_key": "",
-      "kind": "standalone",
-      "posted_at": "2026-08-18T21:48:22.341412+00:00",
-      "source": "San Francisco Standard",
-      "title": "The WNBA All-Star Game is coming to San Francisco, and it’s the perfect fit",
-      "url": "https://sfstandard.com/2026/08/18/valkyries-all-star-game-san-francisco-2027/"
-    },
     {
       "author": "Justice delos Santos",
       "game_key": "",
@@ -1760,6 +1742,42 @@
       "source": "Mercury News",
       "title": "September 7, 2026",
       "url": "https://www.mercurynews.com/2026/09/07/"
+    },
+    {
+      "author": "Kerry Crowley",
+      "game_key": "",
+      "kind": "standalone",
+      "posted_at": "2026-09-08T23:31:38.419100+00:00",
+      "source": "San Francisco Standard",
+      "title": "‘Section 415’ podcast: Uncovering the mysteries of Giants ownership",
+      "url": "https://sfstandard.com/section-415/2026/09/08/section-415-podcast-uncovering-mysteries-giants-ownership/"
+    },
+    {
+      "author": "Justice delos Santos",
+      "game_key": "",
+      "kind": "standalone",
+      "posted_at": "2026-09-08T23:31:41.768560+00:00",
+      "source": "Mercury News",
+      "title": "How SF Giants Eldridge has transformed his defense at first base",
+      "url": "https://www.mercurynews.com/2026/09/08/bryce-eldridge-first-base-defense-sf-giants/"
+    },
+    {
+      "author": "Alex Pavlovic",
+      "game_key": "",
+      "kind": "standalone",
+      "posted_at": "2026-09-08T23:31:43.977707+00:00",
+      "source": "NBC Sports Bay Area",
+      "title": "Webb eyeing strong finish",
+      "url": "https://www.nbcsportsbayarea.com/mlb/san-francisco-giants/logan-webb-finish-disappointing-2026-season/1961455/"
+    },
+    {
+      "author": "Andrew Baggarly",
+      "game_key": "game:2026-09-07:unknown",
+      "kind": "game_story",
+      "posted_at": "2026-09-08T23:31:46.017459+00:00",
+      "source": "The Athletic",
+      "title": "Giants respond to official elimination with 11-inning victory over the Cardinals",
+      "url": "https://www.nytimes.com/athletic/7573981/2026/09/08/giants-elimination-win-cardinals/"
     }
   ],
   "posted_urls": {
@@ -1767,7 +1785,6 @@
     "https://blogs.fangraphs.com/the-giants-have-been-way-off-baseruns/": "2026-09-04T18:32:05.621525+00:00",
     "https://omny.fm/shows/the-executives-show/giants-executive-show-larry-baer-on-fan-appreciation-and-exciting-news-about-a-beer-promotion-day-in-partnership-with-knbeer": "2026-08-20T21:54:21.143960+00:00",
     "https://omny.fm/shows/the-executives-show/randy-winn-discusses-giants-top-prospects-bryce-eldridge-and-the-future-of-the-farm-system": "2026-09-03T23:25:04.207830+00:00",
-    "https://sfstandard.com/2026/08/18/valkyries-all-star-game-san-francisco-2027/": "2026-08-18T21:48:22.341412+00:00",
     "https://sfstandard.com/2026/08/20/duane-kuiper-mike-krukow-sf-giants/": "2026-08-20T15:59:11.710152+00:00",
     "https://sfstandard.com/2026/08/21/matt-tugboat-wilkinson-has-elite-nickname-can-great-giants-pitcher/": "2026-08-22T07:11:06.573376+00:00",
     "https://sfstandard.com/2026/08/23/bo-davidson-sf-giants-debut-parks-harber/": "2026-08-23T15:47:31.695606+00:00",
@@ -1779,6 +1796,7 @@
     "https://sfstandard.com/2026/09/04/patrick-bailey-trade-sf-giants-catcher-depth/": "2026-09-04T18:32:08.759540+00:00",
     "https://sfstandard.com/section-415/2026/08/21/section-415-podcast-giants-broadcasts-will-sound-mike-krukow/": "2026-08-21T21:49:17.293755+00:00",
     "https://sfstandard.com/section-415/2026/09/01/section-415-podcast-giants-partnership-kalshi-part-dangerous-trend/": "2026-09-01T23:28:20.207510+00:00",
+    "https://sfstandard.com/section-415/2026/09/08/section-415-podcast-uncovering-mysteries-giants-ownership/": "2026-09-08T23:31:38.419100+00:00",
     "https://www.mercurynews.com/2026/08/18/whisenhunts-troubles-continue-as-sf-giants-blown-out-by-guardians/amp/": "2026-08-19T03:25:48.317036+00:00",
     "https://www.mercurynews.com/2026/08/19/wilkinsons-impressive-debut-houser-and-smiths-strong-outings-lead-way-in-sf-giants-narrow-win-over-guardians/": "2026-08-20T03:25:40.185417+00:00",
     "https://www.mercurynews.com/2026/08/21/devers-homers-in-boston-return-but-sf-giants-fall-to-red-sox-as-webb-endures-shortest-outing-of-year/amp/": "2026-08-22T07:11:07.899843+00:00",
@@ -1808,6 +1826,7 @@
     "https://www.mercurynews.com/2026/09/07/": "2026-09-08T11:39:43.126620+00:00",
     "https://www.mercurynews.com/2026/09/07/how-hot-is-sf-giants-devers-how-hes-sharing-company-with-bonds-mays/": "2026-09-08T07:22:56.167564+00:00",
     "https://www.mercurynews.com/2026/09/07/sf-giants-whitcomb-delivers-11th-inning-walk-off-single-to-defeat-cardinals/": "2026-09-08T07:23:01.907976+00:00",
+    "https://www.mercurynews.com/2026/09/08/bryce-eldridge-first-base-defense-sf-giants/": "2026-09-08T23:31:41.768560+00:00",
     "https://www.mlb.com/giants/news/adrian-houser-placed-on-injured-list-with-right-forearm-strain": "2026-08-27T00:57:43.261305+00:00",
     "https://www.mlb.com/giants/news/carson-whisenhunt-has-torn-ucl-in-elbow": "2026-08-26T03:34:07.300313+00:00",
     "https://www.mlb.com/giants/news/giants-offense-struggles-series-finale-loss-to-pirates": "2026-09-03T23:25:08.303714+00:00",
@@ -1846,6 +1865,7 @@
     "https://www.nbcsportsbayarea.com/mlb/san-francisco-giants/five-prospects-top-100-list/1957627/": "2026-08-21T03:30:57.748719+00:00",
     "https://www.nbcsportsbayarea.com/mlb/san-francisco-giants/jackson-flora-minor-league-debut/1960943/": "2026-09-06T17:38:47.641457+00:00",
     "https://www.nbcsportsbayarea.com/mlb/san-francisco-giants/leadoff-hitter-lineup-2026-season/1958556/": "2026-08-25T16:08:40.955118+00:00",
+    "https://www.nbcsportsbayarea.com/mlb/san-francisco-giants/logan-webb-finish-disappointing-2026-season/1961455/": "2026-09-08T23:31:43.977707+00:00",
     "https://www.nbcsportsbayarea.com/mlb/san-francisco-giants/logan-webb-loss-reds-history-analysis/1958802/": "2026-08-27T00:57:45.120792+00:00",
     "https://www.nbcsportsbayarea.com/mlb/san-francisco-giants/logan-webb-paul-skenes-pittsburgh-pirates/1960214/": "2026-09-02T07:16:37.020236+00:00",
     "https://www.nbcsportsbayarea.com/mlb/san-francisco-giants/logan-webb-tony-vitello-loss-reds-analysis/1958875/": "2026-08-27T00:57:40.595738+00:00",
@@ -1877,7 +1897,6 @@
     "https://www.nbcsportsbayarea.com/mlb/san-francisco-giants/yunior-marte-debut-win-diamondbacks/1959577/": "2026-08-30T05:37:45.763324+00:00",
     "https://www.nbcsportsbayarea.com/mlb/san-francisco-giants/yunior-marte-emotional-debut-brother/1959615/": "2026-08-30T10:36:01.643523+00:00",
     "https://www.nbcsportsbayarea.com/mlb/san-francisco-giants/zack-minasian-defends-bullpen-general-manager/1959020/": "2026-08-28T00:30:30.529190+00:00",
-    "https://www.nytimes.com/athletic/7521984/2026/08/18/sf-giants-trade-deadline-history/": "2026-08-18T21:48:19.725610+00:00",
     "https://www.nytimes.com/athletic/7525965/2026/08/20/giants-matt-tugboat-wilkinson-debut-guardians/": "2026-08-20T15:59:14.041882+00:00",
     "https://www.nytimes.com/athletic/7528049/2026/08/20/growth-opportunities-sf-giants-3-to-watch/": "2026-08-21T03:30:53.098536+00:00",
     "https://www.nytimes.com/athletic/7529461/2026/08/21/rafael-devers-boston-return-sf-giants/": "2026-08-21T21:49:19.492004+00:00",
@@ -1893,6 +1912,7 @@
     "https://www.nytimes.com/athletic/7561417/2026/09/03/sf-giants-win-pirates-rafael-devers-bryce-eldridge/": "2026-09-03T18:50:07.538710+00:00",
     "https://www.nytimes.com/athletic/7563145/2026/09/04/sf-giants-tony-vitello-manager-interview/": "2026-09-04T23:10:02.336750+00:00",
     "https://www.nytimes.com/athletic/7565345/2026/09/04/sf-giants-60-day-injured-list-roster-management/": "2026-09-04T18:32:03.309957+00:00",
+    "https://www.nytimes.com/athletic/7573981/2026/09/08/giants-elimination-win-cardinals/": "2026-09-08T23:31:46.017459+00:00",
     "https://www.sfchronicle.com/sports/giants/article/bruce-maxwell-knee-mlb-kaepernick-22410012.php": "2026-09-01T11:57:39.570273+00:00",
     "https://www.sfchronicle.com/sports/giants/article/buster-posey-tony-vitello-see-giants-manager-s-22410003.php": "2026-08-31T05:52:31.277429+00:00",
     "https://www.sfchronicle.com/sports/giants/article/giants-among-5-teams-new-partnership-kalshi-22402851.php": "2026-08-25T21:53:29.098360+00:00",
@@ -2016,6 +2036,37 @@
       "standalone_selected": 3,
       "started_at": "2026-09-08T18:52:20.760116+00:00",
       "status": "failed"
+    },
+    {
+      "discovered": 152,
+      "finished_at": "2026-09-08T23:31:46.820099+00:00",
+      "game_selection_reasons": {
+        "already_posted": 24,
+        "eligible_game_story": 1,
+        "not_game_story": 120,
+        "quality_low": 3,
+        "schedule_grounded_threads": 1,
+        "selected_game_stories": 1,
+        "selected_game_threads": 1,
+        "stale_game_story": 4
+      },
+      "game_stories_selected": 1,
+      "game_threads_selected": 1,
+      "schedule_grounded_threads": 1,
+      "selection_reasons": {
+        "already_posted": 42,
+        "deferred_for_breaking_news": 1,
+        "eligible": 4,
+        "quality_low": 14,
+        "selected": 3,
+        "source_cap_cluster": 1,
+        "stale": 59
+      },
+      "sources_failed": 0,
+      "sources_ok": 8,
+      "standalone_selected": 3,
+      "started_at": "2026-09-08T23:31:18.464786+00:00",
+      "status": "completed"
     }
   ]
 }
