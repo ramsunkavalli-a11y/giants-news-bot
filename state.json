@@ -1778,6 +1778,15 @@
       "source": "Mercury News",
       "title": "SF Giants’ Whitcomb delivers 11th-inning walk-off single to defeat Cardinals",
       "url": "https://www.mercurynews.com/2026/09/07/sf-giants-whitcomb-delivers-11th-inning-walk-off-single-to-defeat-cardinals/"
+    },
+    {
+      "author": "Justice delos Santos",
+      "game_key": "",
+      "kind": "standalone",
+      "posted_at": "2026-09-08T11:39:43.126620+00:00",
+      "source": "Mercury News",
+      "title": "September 7, 2026",
+      "url": "https://www.mercurynews.com/2026/09/07/"
     }
   ],
   "posted_urls": {
@@ -1824,6 +1833,7 @@
     "https://www.mercurynews.com/2026/09/03/you-have-to-pick-your-poison-devers-eldridge-showing-signs-of-becoming-sf-giants-next-dynamic-duo/": "2026-09-03T18:50:08.810279+00:00",
     "https://www.mercurynews.com/2026/09/04/sf-giants-allow-five-homers-wilkinson-roughed-up-in-loss-to-mets/": "2026-09-05T07:04:15.262624+00:00",
     "https://www.mercurynews.com/2026/09/04/sf-giants-unveil-spring-training-schedule-with-lockout-threat-hanging-over-2027-season/": "2026-09-04T23:09:55.368448+00:00",
+    "https://www.mercurynews.com/2026/09/07/": "2026-09-08T11:39:43.126620+00:00",
     "https://www.mercurynews.com/2026/09/07/how-hot-is-sf-giants-devers-how-hes-sharing-company-with-bonds-mays/": "2026-09-08T07:22:56.167564+00:00",
     "https://www.mercurynews.com/2026/09/07/sf-giants-whitcomb-delivers-11th-inning-walk-off-single-to-defeat-cardinals/": "2026-09-08T07:23:01.907976+00:00",
     "https://www.mlb.com/giants/news/adrian-houser-placed-on-injured-list-with-right-forearm-strain": "2026-08-27T00:57:43.261305+00:00",
@@ -1975,6 +1985,35 @@
       "sources_ok": 8,
       "standalone_selected": 2,
       "started_at": "2026-09-08T07:22:28.889936+00:00",
+      "status": "completed"
+    },
+    {
+      "discovered": 153,
+      "finished_at": "2026-09-08T11:39:43.929218+00:00",
+      "game_selection_reasons": {
+        "already_posted": 23,
+        "not_game_story": 123,
+        "quality_low": 3,
+        "schedule_grounded_threads": 0,
+        "selected_game_stories": 0,
+        "selected_game_threads": 0,
+        "stale_game_story": 4
+      },
+      "game_stories_selected": 0,
+      "game_threads_selected": 0,
+      "schedule_grounded_threads": 0,
+      "selection_reasons": {
+        "already_posted": 48,
+        "deferred_for_breaking_news": 1,
+        "eligible": 1,
+        "quality_low": 14,
+        "selected": 1,
+        "stale": 59
+      },
+      "sources_failed": 0,
+      "sources_ok": 8,
+      "standalone_selected": 1,
+      "started_at": "2026-09-08T11:39:30.601556+00:00",
       "status": "completed"
     }
   ]
