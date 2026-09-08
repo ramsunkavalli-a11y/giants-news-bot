@@ -105,6 +105,22 @@
       },
       "updated_at": "2026-09-04T07:22:18.339619+00:00"
     },
+    "game:2026-09-07:unknown": {
+      "created_at": "2026-09-08T07:22:58.066477+00:00",
+      "game_day": "2026-09-07",
+      "game_number": 1,
+      "game_pk": 823175,
+      "opponent": "cardinals",
+      "parent": {
+        "cid": "bafyreih2345qfv2jfepw4gyv3m43wtd3mxyzfayxlerivkkkqvazpp2you",
+        "uri": "at://did:plc:gkkepfzghvnfrkrohm2c4nwy/app.bsky.feed.post/3muyihh46o32z"
+      },
+      "root": {
+        "cid": "bafyreiditwzf6dlirzcq6vemgvfgyf5pmosbnx2nn5goj6v3ewfzo7noze",
+        "uri": "at://did:plc:gkkepfzghvnfrkrohm2c4nwy/app.bsky.feed.post/3muyihdqiem25"
+      },
+      "updated_at": "2026-09-08T07:23:01.907954+00:00"
+    },
     "game:823176": {
       "created_at": "2026-08-30T05:37:45.763300+00:00",
       "game_day": "2026-08-29",
@@ -287,33 +303,6 @@
     }
   },
   "posted_stories": [
-    {
-      "author": "Dylan Grausz",
-      "game_key": "",
-      "kind": "standalone",
-      "posted_at": "2026-08-18T03:24:07.974331+00:00",
-      "source": "NBC Sports Bay Area",
-      "title": "Mike Krukow believes Tony Vitello returning to Giants in 2027 is a ‘great thing'",
-      "url": "https://www.nbcsportsbayarea.com/mlb/san-francisco-giants/mike-krukow-tony-vitello-returning-2027/1957159/"
-    },
-    {
-      "author": "Brendan Samson",
-      "game_key": "",
-      "kind": "standalone",
-      "posted_at": "2026-08-18T03:24:10.707953+00:00",
-      "source": "MLB.com",
-      "title": "Watch top 50 prospect Level play at High-A for FREE on Thursday",
-      "url": "https://www.mlb.com/giants/news/watch-minor-league-baseball-games-for-free-2026"
-    },
-    {
-      "author": "Tim Kawakami",
-      "game_key": "",
-      "kind": "standalone",
-      "posted_at": "2026-08-18T03:24:16.539880+00:00",
-      "source": "San Francisco Standard",
-      "title": "Kawakami: It’s all about 2027 for Buster Posey’s Giants now, and it’s already happening",
-      "url": "https://sfstandard.com/2026/08/17/buster-posey-sf-giants-tony-vitello-2027/"
-    },
     {
       "author": "Alex Pavlovic",
       "game_key": "",
@@ -1744,6 +1733,51 @@
       "source": "NBC Sports Bay Area",
       "title": "Cesar Perdomo shines before Giants bullpen falters in loss to Mets on Sunday",
       "url": "https://www.nbcsportsbayarea.com/mlb/san-francisco-giants/cesar-perdomo-series-loss-mets/1961155/"
+    },
+    {
+      "author": "Alex Pavlovic",
+      "game_key": "",
+      "kind": "standalone",
+      "posted_at": "2026-09-08T07:22:55.076668+00:00",
+      "source": "NBC Sports Bay Area",
+      "title": "Giants walk off Cardinals",
+      "url": "https://www.nbcsportsbayarea.com/mlb/san-francisco-giants/rafael-devers-bryce-eldridge-observations/1961401/"
+    },
+    {
+      "author": "Justice delos Santos",
+      "game_key": "",
+      "kind": "standalone",
+      "posted_at": "2026-09-08T07:22:56.167564+00:00",
+      "source": "Mercury News",
+      "title": "How hot is SF Giants’ Devers? How he’s sharing company with Bonds, Mays",
+      "url": "https://www.mercurynews.com/2026/09/07/how-hot-is-sf-giants-devers-how-hes-sharing-company-with-bonds-mays/"
+    },
+    {
+      "author": "Maria Guardado",
+      "game_key": "game:2026-09-07:unknown",
+      "kind": "game_story",
+      "posted_at": "2026-09-08T07:22:58.066499+00:00",
+      "source": "MLB.com",
+      "title": "'Rafi gives me more confidence': Devers, Eldridge blossoming into 1-2 punch for Giants",
+      "url": "https://www.mlb.com/giants/news/rafael-devers-giants-win-series-opener-vs-cardinals"
+    },
+    {
+      "author": "",
+      "game_key": "game:2026-09-07:unknown",
+      "kind": "game_story",
+      "posted_at": "2026-09-08T07:22:59.008333+00:00",
+      "source": "San Francisco Chronicle",
+      "title": "Giants eke out win in extras after Logan Webb delivers strong bounce-back start",
+      "url": "https://www.sfchronicle.com/sports/giants/article/giants-eke-win-11-logan-webb-s-strong-22421161.php"
+    },
+    {
+      "author": "Justice delos Santos",
+      "game_key": "game:2026-09-07:unknown",
+      "kind": "game_story",
+      "posted_at": "2026-09-08T07:23:01.907976+00:00",
+      "source": "Mercury News",
+      "title": "SF Giants’ Whitcomb delivers 11th-inning walk-off single to defeat Cardinals",
+      "url": "https://www.mercurynews.com/2026/09/07/sf-giants-whitcomb-delivers-11th-inning-walk-off-single-to-defeat-cardinals/"
     }
   ],
   "posted_urls": {
@@ -1751,7 +1785,6 @@
     "https://blogs.fangraphs.com/the-giants-have-been-way-off-baseruns/": "2026-09-04T18:32:05.621525+00:00",
     "https://omny.fm/shows/the-executives-show/giants-executive-show-larry-baer-on-fan-appreciation-and-exciting-news-about-a-beer-promotion-day-in-partnership-with-knbeer": "2026-08-20T21:54:21.143960+00:00",
     "https://omny.fm/shows/the-executives-show/randy-winn-discusses-giants-top-prospects-bryce-eldridge-and-the-future-of-the-farm-system": "2026-09-03T23:25:04.207830+00:00",
-    "https://sfstandard.com/2026/08/17/buster-posey-sf-giants-tony-vitello-2027/": "2026-08-18T03:24:16.539880+00:00",
     "https://sfstandard.com/2026/08/18/bo-davidson-sf-giants-undrafted-players/": "2026-08-18T15:57:51.601733+00:00",
     "https://sfstandard.com/2026/08/18/valkyries-all-star-game-san-francisco-2027/": "2026-08-18T21:48:22.341412+00:00",
     "https://sfstandard.com/2026/08/20/duane-kuiper-mike-krukow-sf-giants/": "2026-08-20T15:59:11.710152+00:00",
@@ -1791,6 +1824,8 @@
     "https://www.mercurynews.com/2026/09/03/you-have-to-pick-your-poison-devers-eldridge-showing-signs-of-becoming-sf-giants-next-dynamic-duo/": "2026-09-03T18:50:08.810279+00:00",
     "https://www.mercurynews.com/2026/09/04/sf-giants-allow-five-homers-wilkinson-roughed-up-in-loss-to-mets/": "2026-09-05T07:04:15.262624+00:00",
     "https://www.mercurynews.com/2026/09/04/sf-giants-unveil-spring-training-schedule-with-lockout-threat-hanging-over-2027-season/": "2026-09-04T23:09:55.368448+00:00",
+    "https://www.mercurynews.com/2026/09/07/how-hot-is-sf-giants-devers-how-hes-sharing-company-with-bonds-mays/": "2026-09-08T07:22:56.167564+00:00",
+    "https://www.mercurynews.com/2026/09/07/sf-giants-whitcomb-delivers-11th-inning-walk-off-single-to-defeat-cardinals/": "2026-09-08T07:23:01.907976+00:00",
     "https://www.mlb.com/giants/news/adrian-houser-placed-on-injured-list-with-right-forearm-strain": "2026-08-27T00:57:43.261305+00:00",
     "https://www.mlb.com/giants/news/carson-whisenhunt-has-torn-ucl-in-elbow": "2026-08-26T03:34:07.300313+00:00",
     "https://www.mlb.com/giants/news/giants-offense-struggles-series-finale-loss-to-pirates": "2026-09-03T23:25:08.303714+00:00",
@@ -1803,10 +1838,10 @@
     "https://www.mlb.com/giants/news/patrick-bailey-discusses-career-with-giants": "2026-08-19T07:22:03.982355+00:00",
     "https://www.mlb.com/giants/news/peyton-bonds-beginning-career-with-giants-organization": "2026-09-02T18:51:43.267388+00:00",
     "https://www.mlb.com/giants/news/rafael-devers-early-homer-sparks-giants-win-over-pirates": "2026-09-03T07:20:11.344689+00:00",
+    "https://www.mlb.com/giants/news/rafael-devers-giants-win-series-opener-vs-cardinals": "2026-09-08T07:22:58.066499+00:00",
     "https://www.mlb.com/giants/news/rafael-devers-hits-3-run-homer-as-giants-beat-reds": "2026-08-25T07:26:56.792754+00:00",
     "https://www.mlb.com/giants/news/ron-wotus-ejected-before-game-1-of-doubleheader-vs-d-backs": "2026-08-29T22:43:06.267880+00:00",
     "https://www.mlb.com/giants/news/tony-vitello-ejected-in-first-inning-against-reds": "2026-08-27T13:00:23.831536+00:00",
-    "https://www.mlb.com/giants/news/watch-minor-league-baseball-games-for-free-2026": "2026-08-18T03:24:10.707953+00:00",
     "https://www.mlb.com/giants/news/willy-adames-hits-200th-career-home-run-in-cleveland": "2026-08-21T03:30:55.672073+00:00",
     "https://www.mlb.com/giants/news/willy-adames-victor-bericoto-jt-brubaker-placed-on-injured-list": "2026-08-25T03:27:24.306483+00:00",
     "https://www.nbcsportsbayarea.com/mlb/san-francisco-giants/adrian-houser-flexor-arm-injury-update/1958730/": "2026-08-26T07:28:23.384062+00:00",
@@ -1839,8 +1874,8 @@
     "https://www.nbcsportsbayarea.com/mlb/san-francisco-giants/matt-wilkinson-sweep-red-sox/1958235/": "2026-08-24T06:03:10.132738+00:00",
     "https://www.nbcsportsbayarea.com/mlb/san-francisco-giants/matt-wilkinson-tugboat-debut-guardians/1957551/": "2026-08-20T03:25:34.495174+00:00",
     "https://www.nbcsportsbayarea.com/mlb/san-francisco-giants/mike-krukow-catchphrases-origins/1958410/": "2026-08-25T03:27:26.116254+00:00",
-    "https://www.nbcsportsbayarea.com/mlb/san-francisco-giants/mike-krukow-tony-vitello-returning-2027/1957159/": "2026-08-18T03:24:07.974331+00:00",
     "https://www.nbcsportsbayarea.com/mlb/san-francisco-giants/rafael-devers-boston-return-logan-webb/1958062/": "2026-08-23T02:08:51.373827+00:00",
+    "https://www.nbcsportsbayarea.com/mlb/san-francisco-giants/rafael-devers-bryce-eldridge-observations/1961401/": "2026-09-08T07:22:55.076668+00:00",
     "https://www.nbcsportsbayarea.com/mlb/san-francisco-giants/rafael-devers-chase-burns-reds-analysis/1958462/": "2026-08-25T21:53:36.161024+00:00",
     "https://www.nbcsportsbayarea.com/mlb/san-francisco-giants/rafael-devers-drew-cavanaugh-cincinnati-reds/1958708/": "2026-08-26T07:28:21.529748+00:00",
     "https://www.nbcsportsbayarea.com/mlb/san-francisco-giants/rafael-devers-home-run-red-sox/1958025/": "2026-08-22T03:21:55.820245+00:00",
@@ -1881,6 +1916,7 @@
     "https://www.sfchronicle.com/sports/giants/article/buster-posey-tony-vitello-see-giants-manager-s-22410003.php": "2026-08-31T05:52:31.277429+00:00",
     "https://www.sfchronicle.com/sports/giants/article/catcher-susac-rodriguez-cavanaugh-22390558.php": "2026-08-18T15:57:52.683980+00:00",
     "https://www.sfchronicle.com/sports/giants/article/giants-among-5-teams-new-partnership-kalshi-22402851.php": "2026-08-25T21:53:29.098360+00:00",
+    "https://www.sfchronicle.com/sports/giants/article/giants-eke-win-11-logan-webb-s-strong-22421161.php": "2026-09-08T07:22:59.008333+00:00",
     "https://www.sfchronicle.com/sports/giants/article/giants-fans-irate-team-solicited-kalshi-wagers-22417052.php": "2026-09-04T07:22:15.134706+00:00",
     "https://www.sfchronicle.com/sports/giants/article/giants-jonah-cox-offers-positive-offensive-sign-22400166.php": "2026-08-24T02:06:34.171082+00:00",
     "https://www.sfchronicle.com/sports/giants/article/giants-manager-tony-vitello-fondly-recalls-22403948.php": "2026-08-26T16:36:37.506859+00:00",
@@ -1909,5 +1945,37 @@
     "https://www.sfgate.com/giants/article/sf-giants-broadcast-poll-22395459.php": "2026-08-20T03:25:35.396454+00:00",
     "https://www.sfgate.com/giants/article/sf-giants-kalshi-22403647.php": "2026-08-27T13:00:24.777181+00:00",
     "https://www.sfgate.com/giants/article/sf-giants-knbr-beer-22396588.php": "2026-08-21T07:26:02.606218+00:00"
-  }
+  },
+  "run_history": [
+    {
+      "discovered": 152,
+      "finished_at": "2026-09-08T07:23:02.710026+00:00",
+      "game_selection_reasons": {
+        "already_posted": 20,
+        "eligible_game_story": 3,
+        "not_game_story": 122,
+        "quality_low": 3,
+        "schedule_grounded_threads": 1,
+        "selected_game_stories": 3,
+        "selected_game_threads": 2,
+        "stale_game_story": 4
+      },
+      "game_stories_selected": 3,
+      "game_threads_selected": 2,
+      "schedule_grounded_threads": 1,
+      "selection_reasons": {
+        "already_posted": 46,
+        "deferred_for_breaking_news": 1,
+        "eligible": 2,
+        "quality_low": 14,
+        "selected": 2,
+        "stale": 59
+      },
+      "sources_failed": 0,
+      "sources_ok": 8,
+      "standalone_selected": 2,
+      "started_at": "2026-09-08T07:22:28.889936+00:00",
+      "status": "completed"
+    }
+  ]
 }
