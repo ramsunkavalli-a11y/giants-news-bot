@@ -289,15 +289,6 @@
   },
   "posted_stories": [
     {
-      "author": "Shayna Rubin",
-      "game_key": "",
-      "kind": "standalone",
-      "posted_at": "2026-08-19T15:58:25.082601+00:00",
-      "source": "San Francisco Chronicle",
-      "title": "Weather - Page 7",
-      "url": "https://www.sfchronicle.com/weather/?page=7"
-    },
-    {
       "author": "Dylan Grausz",
       "game_key": "",
       "kind": "standalone",
@@ -1772,6 +1763,33 @@
       "source": "San Francisco Standard",
       "title": "Who owns the San Francisco Giants? The answer is more complicated than you think",
       "url": "https://sfstandard.com/2026/09/08/sf-giants-ownership-larry-baer-buster-posey/"
+    },
+    {
+      "author": "Alex Pavlovic",
+      "game_key": "",
+      "kind": "standalone",
+      "posted_at": "2026-09-09T18:46:34.848433+00:00",
+      "source": "NBC Sports Bay Area",
+      "title": "Christian Koss continues to take advantage of his increased Giants role",
+      "url": "https://www.nbcsportsbayarea.com/mlb/san-francisco-giants/christian-koss-increased-role-2026/1961822/"
+    },
+    {
+      "author": "Alex Simon",
+      "game_key": "",
+      "kind": "standalone",
+      "posted_at": "2026-09-09T18:46:35.845874+00:00",
+      "source": "SFGATE",
+      "title": "Legendary SF Giants broadcaster Mike Krukow is getting his own beer",
+      "url": "https://www.sfgate.com/giants/article/mike-krukow-beer-legend-22422336.php"
+    },
+    {
+      "author": "John Shea",
+      "game_key": "",
+      "kind": "standalone",
+      "posted_at": "2026-09-09T18:46:38.685699+00:00",
+      "source": "San Francisco Standard",
+      "title": "Meet the Giants’ new owner: Why Richard Chaifetz bought a small stake",
+      "url": "https://sfstandard.com/2026/09/09/sf-giants-richard-chaifetz-ownership-stake/"
     }
   ],
   "posted_urls": {
@@ -1790,6 +1808,7 @@
     "https://sfstandard.com/2026/09/04/josuar-gonzalez-sf-giants-prospect-luis-hernandez/": "2026-09-04T23:09:58.632085+00:00",
     "https://sfstandard.com/2026/09/04/patrick-bailey-trade-sf-giants-catcher-depth/": "2026-09-04T18:32:08.759540+00:00",
     "https://sfstandard.com/2026/09/08/sf-giants-ownership-larry-baer-buster-posey/": "2026-09-09T11:45:53.273105+00:00",
+    "https://sfstandard.com/2026/09/09/sf-giants-richard-chaifetz-ownership-stake/": "2026-09-09T18:46:38.685699+00:00",
     "https://sfstandard.com/section-415/2026/08/21/section-415-podcast-giants-broadcasts-will-sound-mike-krukow/": "2026-08-21T21:49:17.293755+00:00",
     "https://sfstandard.com/section-415/2026/09/01/section-415-podcast-giants-partnership-kalshi-part-dangerous-trend/": "2026-09-01T23:28:20.207510+00:00",
     "https://sfstandard.com/section-415/2026/09/08/section-415-podcast-uncovering-mysteries-giants-ownership/": "2026-09-08T23:31:38.419100+00:00",
@@ -1854,6 +1873,7 @@
     "https://www.nbcsportsbayarea.com/mlb/san-francisco-giants/bryce-eldridge-rafael-devers-pirates/1960513/": "2026-09-03T07:20:09.084779+00:00",
     "https://www.nbcsportsbayarea.com/mlb/san-francisco-giants/carson-whisenhunt-injury-update-reds/1958489/": "2026-08-25T07:26:58.823674+00:00",
     "https://www.nbcsportsbayarea.com/mlb/san-francisco-giants/cesar-perdomo-series-loss-mets/1961155/": "2026-09-06T22:12:13.759785+00:00",
+    "https://www.nbcsportsbayarea.com/mlb/san-francisco-giants/christian-koss-increased-role-2026/1961822/": "2026-09-09T18:46:34.848433+00:00",
     "https://www.nbcsportsbayarea.com/mlb/san-francisco-giants/drew-gilbert-dugout-antics-2026-season/1957504/": "2026-08-19T21:50:43.527818+00:00",
     "https://www.nbcsportsbayarea.com/mlb/san-francisco-giants/drew-gilbert-energy-maturation-2026/1959252/": "2026-08-28T14:31:38.314310+00:00",
     "https://www.nbcsportsbayarea.com/mlb/san-francisco-giants/erik-miller-red-sox-trade/1958098/": "2026-08-22T20:47:21.092618+00:00",
@@ -1935,8 +1955,8 @@
     "https://www.sfchronicle.com/sports/giants/article/sf-giants-strong-mlb-debut-pitcher-yunior-marte-22409214.php": "2026-08-30T10:35:59.438693+00:00",
     "https://www.sfchronicle.com/sports/giants/article/sf-giants-willy-adames-seeks-september-return-22408533.php": "2026-08-29T03:14:25.936736+00:00",
     "https://www.sfchronicle.com/sports/giants/article/tommy-john-pitcher-giants-22416456.php": "2026-09-04T11:39:05.695525+00:00",
-    "https://www.sfchronicle.com/weather/?page=7": "2026-08-19T15:58:25.082601+00:00",
     "https://www.sfgate.com/giants/article/media-blasts-giants-ad-22416362.php": "2026-09-03T23:25:02.654057+00:00",
+    "https://www.sfgate.com/giants/article/mike-krukow-beer-legend-22422336.php": "2026-09-09T18:46:35.845874+00:00",
     "https://www.sfgate.com/giants/article/sf-giants-broadcast-poll-22395459.php": "2026-08-20T03:25:35.396454+00:00",
     "https://www.sfgate.com/giants/article/sf-giants-kalshi-22403647.php": "2026-08-27T13:00:24.777181+00:00",
     "https://www.sfgate.com/giants/article/sf-giants-knbr-beer-22396588.php": "2026-08-21T07:26:02.606218+00:00"
@@ -2125,6 +2145,37 @@
       "sources_ok": 8,
       "standalone_selected": 2,
       "started_at": "2026-09-09T11:45:30.301250+00:00",
+      "status": "completed"
+    },
+    {
+      "discovered": 148,
+      "finished_at": "2026-09-09T18:46:39.488470+00:00",
+      "game_selection_reasons": {
+        "already_posted": 24,
+        "game_source_duplicates": 0,
+        "not_game_story": 117,
+        "quality_low": 3,
+        "schedule_grounded_threads": 0,
+        "selected_game_stories": 0,
+        "selected_game_threads": 0,
+        "stale_game_story": 4,
+        "unrouted_game_stories": 0
+      },
+      "game_stories_selected": 0,
+      "game_threads_selected": 0,
+      "schedule_grounded_threads": 0,
+      "selection_reasons": {
+        "already_posted": 40,
+        "deferred_for_breaking_news": 1,
+        "eligible": 3,
+        "quality_low": 15,
+        "selected": 3,
+        "stale": 58
+      },
+      "sources_failed": 0,
+      "sources_ok": 8,
+      "standalone_selected": 3,
+      "started_at": "2026-09-09T18:46:14.295403+00:00",
       "status": "completed"
     }
   ]
