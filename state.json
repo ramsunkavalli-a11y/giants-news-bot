@@ -1754,10 +1754,29 @@
       "source": "NBC Sports Bay Area",
       "title": "Giants win series vs. Cards",
       "url": "https://www.nbcsportsbayarea.com/mlb/san-francisco-giants/bryce-eldridge-christian-koss-home-run/1961710/"
+    },
+    {
+      "author": "Eric Longenhagen",
+      "game_key": "",
+      "kind": "standalone",
+      "posted_at": "2026-09-09T11:45:50.521777+00:00",
+      "source": "FanGraphs",
+      "title": "Scouting the Uniformed Debuts of Early-Round Padres and Giants Draft Picks",
+      "url": "https://blogs.fangraphs.com/scouting-the-uniformed-debuts-of-early-round-padres-and-giants-draft-picks/"
+    },
+    {
+      "author": "John Shea",
+      "game_key": "",
+      "kind": "standalone",
+      "posted_at": "2026-09-09T11:45:53.273105+00:00",
+      "source": "San Francisco Standard",
+      "title": "Who owns the San Francisco Giants? The answer is more complicated than you think",
+      "url": "https://sfstandard.com/2026/09/08/sf-giants-ownership-larry-baer-buster-posey/"
     }
   ],
   "posted_urls": {
     "https://blogs.fangraphs.com/erstwhile-sidewinder-javier-lopez-tackles-a-challenging-career-quiz/": "2026-08-28T00:30:36.587672+00:00",
+    "https://blogs.fangraphs.com/scouting-the-uniformed-debuts-of-early-round-padres-and-giants-draft-picks/": "2026-09-09T11:45:50.521777+00:00",
     "https://blogs.fangraphs.com/the-giants-have-been-way-off-baseruns/": "2026-09-04T18:32:05.621525+00:00",
     "https://omny.fm/shows/the-executives-show/giants-executive-show-larry-baer-on-fan-appreciation-and-exciting-news-about-a-beer-promotion-day-in-partnership-with-knbeer": "2026-08-20T21:54:21.143960+00:00",
     "https://omny.fm/shows/the-executives-show/randy-winn-discusses-giants-top-prospects-bryce-eldridge-and-the-future-of-the-farm-system": "2026-09-03T23:25:04.207830+00:00",
@@ -1770,6 +1789,7 @@
     "https://sfstandard.com/2026/08/30/barry-bonds-jeff-kent-sf-giants-hug/": "2026-08-30T18:43:44.919567+00:00",
     "https://sfstandard.com/2026/09/04/josuar-gonzalez-sf-giants-prospect-luis-hernandez/": "2026-09-04T23:09:58.632085+00:00",
     "https://sfstandard.com/2026/09/04/patrick-bailey-trade-sf-giants-catcher-depth/": "2026-09-04T18:32:08.759540+00:00",
+    "https://sfstandard.com/2026/09/08/sf-giants-ownership-larry-baer-buster-posey/": "2026-09-09T11:45:53.273105+00:00",
     "https://sfstandard.com/section-415/2026/08/21/section-415-podcast-giants-broadcasts-will-sound-mike-krukow/": "2026-08-21T21:49:17.293755+00:00",
     "https://sfstandard.com/section-415/2026/09/01/section-415-podcast-giants-partnership-kalshi-part-dangerous-trend/": "2026-09-01T23:28:20.207510+00:00",
     "https://sfstandard.com/section-415/2026/09/08/section-415-podcast-uncovering-mysteries-giants-ownership/": "2026-09-08T23:31:38.419100+00:00",
@@ -2074,6 +2094,37 @@
       "sources_ok": 8,
       "standalone_selected": 3,
       "started_at": "2026-09-09T07:31:12.508255+00:00",
+      "status": "completed"
+    },
+    {
+      "discovered": 149,
+      "finished_at": "2026-09-09T11:45:54.075949+00:00",
+      "game_selection_reasons": {
+        "already_posted": 25,
+        "game_source_duplicates": 0,
+        "not_game_story": 117,
+        "quality_low": 3,
+        "schedule_grounded_threads": 0,
+        "selected_game_stories": 0,
+        "selected_game_threads": 0,
+        "stale_game_story": 4,
+        "unrouted_game_stories": 0
+      },
+      "game_stories_selected": 0,
+      "game_threads_selected": 0,
+      "schedule_grounded_threads": 0,
+      "selection_reasons": {
+        "already_posted": 41,
+        "deferred_for_breaking_news": 1,
+        "eligible": 2,
+        "quality_low": 14,
+        "selected": 2,
+        "stale": 59
+      },
+      "sources_failed": 0,
+      "sources_ok": 8,
+      "standalone_selected": 2,
+      "started_at": "2026-09-09T11:45:30.301250+00:00",
       "status": "completed"
     }
   ]
