@@ -362,7 +362,7 @@ class RuntimeSmokeTests(unittest.TestCase):
         )
         self.assertEqual(clean_card_summary(promo, promo), "")
 
-    def test_existing_unknown_thread_is_reused_when_opponent_becomes_known(self):
+    def test_schedule_backed_game_does_not_reuse_unknown_legacy_thread(self):
         state = {
             "game_threads": {
                 "game:2026-08-15:unknown": {
@@ -372,11 +372,12 @@ class RuntimeSmokeTests(unittest.TestCase):
             }
         }
         thread = {
-            "key": "game:2026-08-15:rockies",
+            "key": "game:824700",
+            "game_pk": 824700,
             "game_day": "2026-08-15",
             "opponent": "rockies",
         }
-        self.assertEqual(_existing_thread_key(state, thread), "game:2026-08-15:unknown")
+        self.assertEqual(_existing_thread_key(state, thread), "game:824700")
 
     def test_unknown_opponent_reuses_only_schedule_grounded_thread_that_day(self):
         state = {

@@ -296,6 +296,39 @@ def order_game_articles(members: list[dict]) -> list[dict]:
     return [root, *replies]
 
 
+def dedupe_game_articles(members: list[dict]) -> tuple[list[dict], list[dict]]:
+    """Keep one strongest story from each publisher for one scheduled game.
+
+    A recap thread is a collection of perspectives, not every CMS update or
+    RSS variant a publisher emits.  The schedule establishes the event; within
+    that event, publisher identity is a safer duplicate boundary than headline
+    word overlap.
+    """
+    winners: dict[str, dict] = {}
+    dropped: list[dict] = []
+    seen_urls: set[str] = set()
+    for article in members:
+        canonical = str(article.get("canonical_url") or article.get("url") or "")
+        if canonical and canonical in seen_urls:
+            dropped.append(article)
+            continue
+        if canonical:
+            seen_urls.add(canonical)
+        # Fixtures and malformed feed entries without a publisher must not
+        # collapse into one another. Real publisher duplicates do share a
+        # source and are intentionally capped.
+        source = str(article.get("source") or canonical or id(article))
+        existing = winners.get(source)
+        if existing is None:
+            winners[source] = article
+        elif candidate_preference_key(article) > candidate_preference_key(existing):
+            winners[source] = article
+            dropped.append(existing)
+        else:
+            dropped.append(article)
+    return list(winners.values()), dropped
+
+
 def _schedule_games_for_articles(articles: list[dict]) -> list[dict]:
     dates = [
         dt.astimezone(PACIFIC).date()
@@ -377,6 +410,7 @@ def group_game_articles(
     groups: list[dict] = []
     for game_pk, members in grounded.items():
         game = game_meta[game_pk]
+        members, duplicates = dedupe_game_articles(members)
         groups.append({
             "key": game_thread_key(game.get("official_date", ""), game.get("opponent", ""), game_pk),
             "game_pk": game_pk,
@@ -384,6 +418,7 @@ def group_game_articles(
             "game_day": game.get("official_date", ""),
             "opponent": game.get("opponent", ""),
             "schedule_grounded": True,
+            "deduplicated_count": len(duplicates),
             "articles": order_game_articles(members),
         })
 
@@ -398,6 +433,7 @@ def group_game_articles(
                 opponent_groups[unknown_key].extend(unknown)
 
         for (opponent, game_number), members in opponent_groups.items():
+            members, duplicates = dedupe_game_articles(members)
             groups.append({
                 "key": game_thread_key(day, opponent, game_number=game_number),
                 "game_pk": 0,
@@ -405,6 +441,7 @@ def group_game_articles(
                 "game_day": day,
                 "opponent": opponent,
                 "schedule_grounded": False,
+                "deduplicated_count": len(duplicates),
                 "articles": order_game_articles(members),
             })
 
@@ -488,7 +525,24 @@ def select_game_threads(
             })
 
     schedule_games = _schedule_games_for_articles(eligible)
-    threads = group_game_articles(eligible, schedule_games=schedule_games)
+    grouped = group_game_articles(eligible, schedule_games=schedule_games)
+    # A date/headline guess is not enough to connect posts on Bluesky.  If the
+    # schedule cannot tie a story to one real game, return it to the standalone
+    # lane instead of creating an "unknown" thread that can absorb coverage of
+    # a different game played around the same time.
+    threads = [thread for thread in grouped if thread.get("schedule_grounded")]
+    unrouted = [
+        {
+            **article,
+            "content_type": "",
+            "section": str(article.get("section", "")).removeprefix("game_thread:"),
+            "quality": "high",
+            "quality_reason": "unrouted_game_coverage",
+        }
+        for thread in grouped
+        if not thread.get("schedule_grounded")
+        for article in thread["articles"]
+    ]
 
     def public(article: dict) -> dict:
         return {key: value for key, value in article.items() if not key.startswith("_")}
@@ -506,6 +560,10 @@ def select_game_threads(
         })
 
     reasons["schedule_grounded_threads"] = sum(1 for thread in threads if thread.get("schedule_grounded"))
+    reasons["game_source_duplicates"] = sum(
+        int(thread.get("deduplicated_count", 0) or 0) for thread in grouped
+    )
+    reasons["unrouted_game_stories"] = len(unrouted)
     reasons["selected_game_stories"] = sum(len(thread["articles"]) for thread in threads)
     reasons["selected_game_threads"] = len(threads)
     return {
@@ -515,5 +573,6 @@ def select_game_threads(
         "reasons": dict(reasons),
         "timestamp_enrichment_attempts": timestamp_enrichments,
         "threads": public_threads,
+        "unrouted_game_articles": [public(article) for article in unrouted],
         "diagnostics": diagnostics,
     }

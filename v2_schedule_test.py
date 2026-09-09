@@ -55,7 +55,7 @@ class ScheduleTests(unittest.TestCase):
         self.assertEqual(games[0]["official_date"], "2026-08-16")
         self.assertEqual(games[0]["opponent"], "rockies")
 
-    def test_new_game_pk_key_reuses_existing_legacy_thread(self):
+    def test_new_game_pk_key_does_not_reuse_existing_legacy_thread(self):
         state = {
             "game_threads": {
                 "game:2026-08-16:rockies": {
@@ -72,7 +72,7 @@ class ScheduleTests(unittest.TestCase):
         }
         self.assertEqual(
             _existing_thread_key(state, thread),
-            "game:2026-08-16:rockies",
+            "game:900001",
         )
 
 

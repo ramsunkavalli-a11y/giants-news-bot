@@ -24,22 +24,37 @@ class RadarTarget:
     author: str
     source: str
     domain: str
+    query_requires_giants: bool = True
 
 
 CORE_WRITER_RADAR_TARGETS = (
     RadarTarget("Susan Slusser", "San Francisco Chronicle", "sfchronicle.com"),
     RadarTarget("Shayna Rubin", "San Francisco Chronicle", "sfchronicle.com"),
+    RadarTarget("John Shea", "San Francisco Chronicle", "sfchronicle.com", query_requires_giants=False),
     RadarTarget("Justice delos Santos", "Mercury News", "mercurynews.com"),
+    RadarTarget("Evan Webeck", "Mercury News", "mercurynews.com"),
+    # FanGraphs' team-category feed does not reliably include prospect pieces
+    # that cover a Giants player alongside another organization.
+    RadarTarget("Eric Longenhagen", "FanGraphs", "blogs.fangraphs.com"),
 )
 
 # Google News occasionally returns publisher section/listing pages for an
 # otherwise precise author query. Those pages can inherit snippets that contain
 # the author and "Giants" even though the result itself is not an article.
 GENERIC_PAGINATION_TITLE_RE = re.compile(r"(?:^|[-–—]\s+)page\s+\d+\s*$", flags=re.I)
+DATE_ARCHIVE_TITLE_RE = re.compile(
+    r"^(?:january|february|march|april|may|june|july|august|september|"
+    r"october|november|december)\s+\d{1,2},\s+\d{4}$",
+    flags=re.I,
+)
 
 
 def google_news_rss_url(target: RadarTarget, hours_back: int = 72) -> str:
-    query = f'site:{target.domain} "{target.author}" "Giants" when:{hours_back}h'
+    # Chronicle's Giants article path is a stronger relevance signal than a
+    # headline keyword. Ownership and front-office posts often omit "Giants"
+    # even though they belong in the dedicated Giants section.
+    terms = f' "Giants"' if target.query_requires_giants else ""
+    query = f'site:{target.domain} "{target.author}"{terms} when:{hours_back}h'
     params = urlencode({"q": query, "hl": "en-US", "gl": "US", "ceid": "US:en"})
     return f"https://news.google.com/rss/search?{params}"
 
@@ -60,7 +75,17 @@ def radar_url_allowed(target: RadarTarget, url: str) -> bool:
         # The Chronicle radar exists specifically for Giants beat coverage.
         # Known valid results use this article subtree; weather, homepage,
         # pagination, and other section pages must never inherit author credit.
-        return path.startswith("/sports/giants/")
+        return path.startswith("/sports/giants/article/")
+
+    if target.domain.lower() == "blogs.fangraphs.com":
+        # Accept individual posts only; author/category archives are discovery
+        # surfaces, not stories that should be sent to Bluesky.
+        return bool(re.fullmatch(r"/[^/]+/?", path)) and not path.startswith("/author/")
+
+    if target.domain.lower() == "mercurynews.com":
+        # A bare date path is a daily archive. Google News can attach a beat
+        # writer's snippet to it, but it is not a postable article.
+        return bool(re.fullmatch(r"/\d{4}/\d{2}/\d{2}/[^/]+/?", path))
 
     return True
 
@@ -70,6 +95,8 @@ def radar_title_allowed(title: str) -> bool:
     if not value:
         return False
     if GENERIC_PAGINATION_TITLE_RE.search(value):
+        return False
+    if DATE_ARCHIVE_TITLE_RE.fullmatch(value):
         return False
     return True
 

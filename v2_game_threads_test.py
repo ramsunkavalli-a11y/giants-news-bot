@@ -1,4 +1,6 @@
 import unittest
+from datetime import datetime, timezone
+from unittest.mock import patch
 
 from v2_game_threads import (
     baseball_day,
@@ -8,6 +10,7 @@ from v2_game_threads import (
     group_game_articles,
     is_game_story,
     order_game_articles,
+    select_game_threads,
 )
 
 
@@ -226,6 +229,24 @@ class GameThreadTests(unittest.TestCase):
                 "game:2026-09-05:dodgers:game2",
             },
         )
+
+    @patch("v2_game_threads._schedule_games_for_articles", return_value=[])
+    def test_unscheduled_game_coverage_is_not_given_a_thread(self, _schedule):
+        now = "2026-09-08T05:00:00Z"
+        result = select_game_threads(
+            [{
+                "title": "Giants win over Cardinals in 11 innings",
+                "url": "https://example.com/recap",
+                "published": now,
+                "source": "Mercury News",
+                "quality": "high",
+            }],
+            {"posted_urls": {}},
+            now=datetime(2026, 9, 8, 6, tzinfo=timezone.utc),
+        )
+        self.assertEqual(result["threads"], [])
+        self.assertEqual(len(result["unrouted_game_articles"]), 1)
+        self.assertEqual(result["unrouted_game_articles"][0]["quality"], "high")
 
 
 if __name__ == "__main__":

@@ -326,20 +326,21 @@ def _existing_thread_key(state: dict, thread: dict) -> str:
     if key in threads:
         return key
 
+    # A schedule-backed game has a stable MLB identifier.  Never attach it to
+    # a date-only/unknown legacy thread: that fallback can represent a
+    # different game and would join unrelated recaps in one conversation.
+    if thread.get("game_pk"):
+        return key
+
     day = thread.get("game_day", "")
     opponent = thread.get("opponent", "")
     legacy_known = f"game:{day}:{opponent}" if day and opponent else ""
     if legacy_known and legacy_known in threads:
         return legacy_known
 
-    unknown = f"game:{day}:unknown"
-    if unknown in threads:
-        return unknown
-
-    # A late article can omit the opponent even though a schedule-grounded
-    # thread for that single Giants game already exists. Reuse that root rather
-    # than splitting one game's coverage across two Bluesky threads. Never
-    # guess when a doubleheader or another ambiguity leaves multiple matches.
+    # Date-only legacy grouping is retained only for existing unscheduled
+    # threads. Never guess when a doubleheader or another ambiguity leaves
+    # multiple matches.
     same_game = [
         candidate_key
         for candidate_key, candidate in threads.items()
@@ -350,10 +351,6 @@ def _existing_thread_key(state: dict, thread: dict) -> str:
     if len(same_game) == 1:
         return same_game[0]
 
-    day_prefix = f"game:{day}:"
-    same_day = [candidate for candidate in threads if candidate.startswith(day_prefix)]
-    if len(same_day) == 1:
-        return same_day[0]
     return key
 
 
@@ -418,7 +415,11 @@ def main() -> None:
         state,
         hours_back=game_hours_back,
     )
+    unrouted_game_articles = game_selection.get("unrouted_game_articles", []) or []
     standalone_articles = [article for article in articles if not is_game_story(article)]
+    # A recap that cannot be tied to one scheduled game is still useful news;
+    # it simply must not be threaded under an inferred game identity.
+    standalone_articles.extend(unrouted_game_articles)
     selection = select_articles(
         standalone_articles,
         _state_with_planned_game_stories(state, game_selection, datetime.now(timezone.utc)),

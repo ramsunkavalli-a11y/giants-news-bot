@@ -34,10 +34,37 @@ class CoreWriterRadarTests(unittest.TestCase):
             "https://www.sfchronicle.com/weather/?page=7",
         ))
 
+    def test_chronicle_author_search_relies_on_giants_article_path_not_headline_keyword(self):
+        from v2_radar import google_news_rss_url
+
+        shea = next(target for target in CORE_WRITER_RADAR_TARGETS if target.author == "John Shea")
+        self.assertFalse(shea.query_requires_giants)
+        self.assertNotIn("%22Giants%22", google_news_rss_url(shea))
+
+    def test_longenhagen_radar_accepts_posts_but_not_author_archive(self):
+        target = next(target for target in CORE_WRITER_RADAR_TARGETS if target.author == "Eric Longenhagen")
+        self.assertTrue(radar_url_allowed(
+            target,
+            "https://blogs.fangraphs.com/scouting-the-uniformed-debuts-of-giants-draft-picks/",
+        ))
+        self.assertFalse(radar_url_allowed(
+            target,
+            "https://blogs.fangraphs.com/author/elongenhagen/",
+        ))
+
+    def test_mercury_radar_rejects_daily_archive(self):
+        target = next(target for target in CORE_WRITER_RADAR_TARGETS if target.author == "Justice delos Santos")
+        self.assertFalse(radar_url_allowed(target, "https://www.mercurynews.com/2026/09/07/"))
+        self.assertTrue(radar_url_allowed(
+            target,
+            "https://www.mercurynews.com/2026/09/07/giants-win-behind-late-rally/",
+        ))
+
     def test_generic_pagination_title_is_rejected(self):
         self.assertFalse(radar_title_allowed("Weather - Page 7"))
         self.assertFalse(radar_title_allowed("Giants - Page 3"))
         self.assertTrue(radar_title_allowed("Giants adjust rotation before Guardians series"))
+        self.assertFalse(radar_title_allowed("September 7, 2026"))
 
     @patch("v2_radar.decode_google_news_url", return_value="https://www.sfchronicle.com/weather/?page=7")
     @patch("v2_radar.feedparser.parse")
