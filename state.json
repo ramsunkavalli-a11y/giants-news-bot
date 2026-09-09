@@ -121,6 +121,22 @@
       },
       "updated_at": "2026-09-08T23:31:46.017439+00:00"
     },
+    "game:823172": {
+      "created_at": "2026-09-09T23:26:13.955097+00:00",
+      "game_day": "2026-09-09",
+      "game_number": 1,
+      "game_pk": 823172,
+      "opponent": "cardinals",
+      "parent": {
+        "cid": "bafyreicv5e634h2waodkvtbgvx2bkywjxz4the42qep4h75tmp2rfpsh2e",
+        "uri": "at://did:plc:gkkepfzghvnfrkrohm2c4nwy/app.bsky.feed.post/3mv4oqpekmj2v"
+      },
+      "root": {
+        "cid": "bafyreicv5e634h2waodkvtbgvx2bkywjxz4the42qep4h75tmp2rfpsh2e",
+        "uri": "at://did:plc:gkkepfzghvnfrkrohm2c4nwy/app.bsky.feed.post/3mv4oqpekmj2v"
+      },
+      "updated_at": "2026-09-09T23:26:13.955097+00:00"
+    },
     "game:823176": {
       "created_at": "2026-08-30T05:37:45.763300+00:00",
       "game_day": "2026-08-29",
@@ -288,15 +304,6 @@
     }
   },
   "posted_stories": [
-    {
-      "author": "Dylan Grausz",
-      "game_key": "",
-      "kind": "standalone",
-      "posted_at": "2026-08-19T21:50:43.527818+00:00",
-      "source": "NBC Sports Bay Area",
-      "title": "Why Giants' Drew Gilbert has toned down his viral dugout antics this season",
-      "url": "https://www.nbcsportsbayarea.com/mlb/san-francisco-giants/drew-gilbert-dugout-antics-2026-season/1957504/"
-    },
     {
       "author": "Alex Pavlovic",
       "game_key": "",
@@ -1790,6 +1797,33 @@
       "source": "San Francisco Standard",
       "title": "Meet the Giants’ new owner: Why Richard Chaifetz bought a small stake",
       "url": "https://sfstandard.com/2026/09/09/sf-giants-richard-chaifetz-ownership-stake/"
+    },
+    {
+      "author": "",
+      "game_key": "",
+      "kind": "standalone",
+      "posted_at": "2026-09-09T23:26:09.265304+00:00",
+      "source": "San Francisco Chronicle",
+      "title": "Giants rookies fuel epic 6-run rally with two outs in eighth to sweep Cardinals",
+      "url": "https://www.sfchronicle.com/sports/giants/article/giants-rookies-fuel-6-run-rally-2-outs-eighth-22424245.php"
+    },
+    {
+      "author": "Alex Pavlovic",
+      "game_key": "",
+      "kind": "standalone",
+      "posted_at": "2026-09-09T23:26:11.632133+00:00",
+      "source": "NBC Sports Bay Area",
+      "title": "Giants sweep Cardinals",
+      "url": "https://www.nbcsportsbayarea.com/mlb/san-francisco-giants/bryce-eldridge-blade-tidwell-cardinals/1961931/"
+    },
+    {
+      "author": "Maria Guardado",
+      "game_key": "game:823172",
+      "kind": "game_story",
+      "posted_at": "2026-09-09T23:26:13.955118+00:00",
+      "source": "MLB.com",
+      "title": "Giants erupt for 6 runs in 8th for comeback win, series sweep vs. Cardinals",
+      "url": "https://www.mlb.com/giants/news/giants-earn-comeback-win-to-sweep-cardinals"
     }
   ],
   "posted_urls": {
@@ -1844,6 +1878,7 @@
     "https://www.mlb.com/giants/news/adrian-houser-placed-on-injured-list-with-right-forearm-strain": "2026-08-27T00:57:43.261305+00:00",
     "https://www.mlb.com/giants/news/bryce-eldridge-hits-a-homer-in-giants-win-over-cardinals": "2026-09-09T07:31:31.714121+00:00",
     "https://www.mlb.com/giants/news/carson-whisenhunt-has-torn-ucl-in-elbow": "2026-08-26T03:34:07.300313+00:00",
+    "https://www.mlb.com/giants/news/giants-earn-comeback-win-to-sweep-cardinals": "2026-09-09T23:26:13.955118+00:00",
     "https://www.mlb.com/giants/news/giants-offense-struggles-series-finale-loss-to-pirates": "2026-09-03T23:25:08.303714+00:00",
     "https://www.mlb.com/giants/news/giants-suffer-defeat-after-allowing-7-runs-in-ninth-inning": "2026-08-27T13:00:26.712033+00:00",
     "https://www.mlb.com/giants/news/jeff-kent-has-number-retired-by-giants": "2026-08-30T05:37:41.239285+00:00",
@@ -1868,13 +1903,13 @@
     "https://www.nbcsportsbayarea.com/mlb/san-francisco-giants/blake-tidwell-mindset-after-pirates-loss/1960704/": "2026-09-03T23:25:01.760905+00:00",
     "https://www.nbcsportsbayarea.com/mlb/san-francisco-giants/brady-singer-drew-gilbert-mike-krukow/1958782/": "2026-08-27T00:57:48.010307+00:00",
     "https://www.nbcsportsbayarea.com/mlb/san-francisco-giants/bryce-eldridge-bereavement-lisit-reds/1958343/": "2026-08-25T21:53:34.211507+00:00",
+    "https://www.nbcsportsbayarea.com/mlb/san-francisco-giants/bryce-eldridge-blade-tidwell-cardinals/1961931/": "2026-09-09T23:26:11.632133+00:00",
     "https://www.nbcsportsbayarea.com/mlb/san-francisco-giants/bryce-eldridge-christian-koss-home-run/1961710/": "2026-09-09T07:31:34.749213+00:00",
     "https://www.nbcsportsbayarea.com/mlb/san-francisco-giants/bryce-eldridge-franchise-history-home-runs/1957446/": "2026-08-20T07:25:00.071272+00:00",
     "https://www.nbcsportsbayarea.com/mlb/san-francisco-giants/bryce-eldridge-rafael-devers-pirates/1960513/": "2026-09-03T07:20:09.084779+00:00",
     "https://www.nbcsportsbayarea.com/mlb/san-francisco-giants/carson-whisenhunt-injury-update-reds/1958489/": "2026-08-25T07:26:58.823674+00:00",
     "https://www.nbcsportsbayarea.com/mlb/san-francisco-giants/cesar-perdomo-series-loss-mets/1961155/": "2026-09-06T22:12:13.759785+00:00",
     "https://www.nbcsportsbayarea.com/mlb/san-francisco-giants/christian-koss-increased-role-2026/1961822/": "2026-09-09T18:46:34.848433+00:00",
-    "https://www.nbcsportsbayarea.com/mlb/san-francisco-giants/drew-gilbert-dugout-antics-2026-season/1957504/": "2026-08-19T21:50:43.527818+00:00",
     "https://www.nbcsportsbayarea.com/mlb/san-francisco-giants/drew-gilbert-energy-maturation-2026/1959252/": "2026-08-28T14:31:38.314310+00:00",
     "https://www.nbcsportsbayarea.com/mlb/san-francisco-giants/erik-miller-red-sox-trade/1958098/": "2026-08-22T20:47:21.092618+00:00",
     "https://www.nbcsportsbayarea.com/mlb/san-francisco-giants/five-prospects-top-100-list/1957627/": "2026-08-21T03:30:57.748719+00:00",
@@ -1935,6 +1970,7 @@
     "https://www.sfchronicle.com/sports/giants/article/giants-fans-irate-team-solicited-kalshi-wagers-22417052.php": "2026-09-04T07:22:15.134706+00:00",
     "https://www.sfchronicle.com/sports/giants/article/giants-jonah-cox-offers-positive-offensive-sign-22400166.php": "2026-08-24T02:06:34.171082+00:00",
     "https://www.sfchronicle.com/sports/giants/article/giants-manager-tony-vitello-fondly-recalls-22403948.php": "2026-08-26T16:36:37.506859+00:00",
+    "https://www.sfchronicle.com/sports/giants/article/giants-rookies-fuel-6-run-rally-2-outs-eighth-22424245.php": "2026-09-09T23:26:09.265304+00:00",
     "https://www.sfchronicle.com/sports/giants/article/giants-shut-willy-adames-rest-lost-season-22406393.php": "2026-08-28T18:57:46.397484+00:00",
     "https://www.sfchronicle.com/sports/giants/article/giants-still-standing-show-mettle-taking-22406395.php": "2026-08-28T05:32:23.764061+00:00",
     "https://www.sfchronicle.com/sports/giants/article/giants-tony-vitello-unleashes-profane-tirade-22405057.php": "2026-08-27T00:57:46.033056+00:00",
@@ -2176,6 +2212,39 @@
       "sources_ok": 8,
       "standalone_selected": 3,
       "started_at": "2026-09-09T18:46:14.295403+00:00",
+      "status": "completed"
+    },
+    {
+      "discovered": 151,
+      "finished_at": "2026-09-09T23:26:14.757344+00:00",
+      "game_selection_reasons": {
+        "already_posted": 23,
+        "eligible_game_story": 1,
+        "game_source_duplicates": 0,
+        "not_game_story": 121,
+        "quality_low": 2,
+        "schedule_grounded_threads": 1,
+        "selected_game_stories": 1,
+        "selected_game_threads": 1,
+        "stale_game_story": 4,
+        "unrouted_game_stories": 0
+      },
+      "game_stories_selected": 1,
+      "game_threads_selected": 1,
+      "schedule_grounded_threads": 1,
+      "selection_reasons": {
+        "already_posted": 43,
+        "deferred_for_breaking_news": 1,
+        "eligible": 5,
+        "quality_low": 16,
+        "selected": 2,
+        "source_cap_cluster": 3,
+        "stale": 56
+      },
+      "sources_failed": 0,
+      "sources_ok": 8,
+      "standalone_selected": 2,
+      "started_at": "2026-09-09T23:25:40.870106+00:00",
       "status": "completed"
     }
   ]
