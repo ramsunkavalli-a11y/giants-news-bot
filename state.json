@@ -1791,6 +1791,24 @@
       "source": "NBC Sports Bay Area",
       "title": "Eldridge, young Giants surging",
       "url": "https://www.nbcsportsbayarea.com/mlb/san-francisco-giants/bryce-eldridge-shay-whitcomb-cardinals/1961991/"
+    },
+    {
+      "author": "",
+      "game_key": "",
+      "kind": "standalone",
+      "posted_at": "2026-09-10T11:43:51.063079+00:00",
+      "source": "San Francisco Chronicle",
+      "title": "After recent ejections, is Giants manager Tony Vitello just getting no respect from MLB umps?",
+      "url": "https://www.sfchronicle.com/sports/giants/article/giants-manager-tony-vitello-getting-no-respect-22423051.php"
+    },
+    {
+      "author": "Alex Pavlovic",
+      "game_key": "",
+      "kind": "standalone",
+      "posted_at": "2026-09-10T11:43:52.721265+00:00",
+      "source": "NBC Sports Bay Area",
+      "title": "Why red-hot Rafael Devers is out of Giants' lineup Wednesday vs. Cardinals",
+      "url": "https://www.nbcsportsbayarea.com/mlb/san-francisco-giants/rafael-devers-lineup-cardinals/1961875/"
     }
   ],
   "posted_urls": {
@@ -1896,6 +1914,7 @@
     "https://www.nbcsportsbayarea.com/mlb/san-francisco-giants/rafael-devers-drew-cavanaugh-cincinnati-reds/1958708/": "2026-08-26T07:28:21.529748+00:00",
     "https://www.nbcsportsbayarea.com/mlb/san-francisco-giants/rafael-devers-home-run-red-sox/1958025/": "2026-08-22T03:21:55.820245+00:00",
     "https://www.nbcsportsbayarea.com/mlb/san-francisco-giants/rafael-devers-homers-new-york-mets/1961039/": "2026-09-06T04:56:03.227033+00:00",
+    "https://www.nbcsportsbayarea.com/mlb/san-francisco-giants/rafael-devers-lineup-cardinals/1961875/": "2026-09-10T11:43:52.721265+00:00",
     "https://www.nbcsportsbayarea.com/mlb/san-francisco-giants/rafael-devers-matt-wilkinson-loss-mets/1960923/": "2026-09-05T07:04:13.896665+00:00",
     "https://www.nbcsportsbayarea.com/mlb/san-francisco-giants/rafael-devers-mike-krukow-leadership/1959349/": "2026-08-28T18:57:45.453739+00:00",
     "https://www.nbcsportsbayarea.com/mlb/san-francisco-giants/rafael-devers-red-sox-loss-analysis/1958045/": "2026-08-23T02:08:53.227325+00:00",
@@ -1935,6 +1954,7 @@
     "https://www.sfchronicle.com/sports/giants/article/giants-fans-irate-team-solicited-kalshi-wagers-22417052.php": "2026-09-04T07:22:15.134706+00:00",
     "https://www.sfchronicle.com/sports/giants/article/giants-jonah-cox-offers-positive-offensive-sign-22400166.php": "2026-08-24T02:06:34.171082+00:00",
     "https://www.sfchronicle.com/sports/giants/article/giants-manager-tony-vitello-fondly-recalls-22403948.php": "2026-08-26T16:36:37.506859+00:00",
+    "https://www.sfchronicle.com/sports/giants/article/giants-manager-tony-vitello-getting-no-respect-22423051.php": "2026-09-10T11:43:51.063079+00:00",
     "https://www.sfchronicle.com/sports/giants/article/giants-rookies-fuel-6-run-rally-2-outs-eighth-22424245.php": "2026-09-09T23:26:09.265304+00:00",
     "https://www.sfchronicle.com/sports/giants/article/giants-shut-willy-adames-rest-lost-season-22406393.php": "2026-08-28T18:57:46.397484+00:00",
     "https://www.sfchronicle.com/sports/giants/article/giants-still-standing-show-mettle-taking-22406395.php": "2026-08-28T05:32:23.764061+00:00",
@@ -2242,6 +2262,37 @@
       "sources_ok": 8,
       "standalone_selected": 3,
       "started_at": "2026-09-10T07:27:28.429409+00:00",
+      "status": "completed"
+    },
+    {
+      "discovered": 153,
+      "finished_at": "2026-09-10T11:43:53.524256+00:00",
+      "game_selection_reasons": {
+        "already_posted": 24,
+        "game_source_duplicates": 0,
+        "not_game_story": 123,
+        "quality_low": 2,
+        "schedule_grounded_threads": 0,
+        "selected_game_stories": 0,
+        "selected_game_threads": 0,
+        "stale_game_story": 4,
+        "unrouted_game_stories": 0
+      },
+      "game_stories_selected": 0,
+      "game_threads_selected": 0,
+      "schedule_grounded_threads": 0,
+      "selection_reasons": {
+        "already_posted": 47,
+        "deferred_for_breaking_news": 1,
+        "eligible": 2,
+        "quality_low": 16,
+        "selected": 2,
+        "stale": 57
+      },
+      "sources_failed": 0,
+      "sources_ok": 8,
+      "standalone_selected": 2,
+      "started_at": "2026-09-10T11:43:28.346250+00:00",
       "status": "completed"
     }
   ]
