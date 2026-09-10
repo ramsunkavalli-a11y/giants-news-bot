@@ -290,33 +290,6 @@
   },
   "posted_stories": [
     {
-      "author": "John Shea",
-      "game_key": "",
-      "kind": "standalone",
-      "posted_at": "2026-08-20T15:59:11.710152+00:00",
-      "source": "San Francisco Standard",
-      "title": "Duane Kuiper ponders his future without Mike Krukow in the booth: ‘This one’s really hard’",
-      "url": "https://sfstandard.com/2026/08/20/duane-kuiper-mike-krukow-sf-giants/"
-    },
-    {
-      "author": "Andrew Baggarly",
-      "game_key": "",
-      "kind": "standalone",
-      "posted_at": "2026-08-20T15:59:14.041882+00:00",
-      "source": "The Athletic",
-      "title": "A tugboat and a train carry Giants to a satisfying night on the mound in Cleveland",
-      "url": "https://www.nytimes.com/athletic/7525965/2026/08/20/giants-matt-tugboat-wilkinson-debut-guardians/"
-    },
-    {
-      "author": "Florito Maniego",
-      "game_key": "",
-      "kind": "standalone",
-      "posted_at": "2026-08-20T15:59:16.037868+00:00",
-      "source": "NBC Sports Bay Area",
-      "title": "Giants star Matt Chapman's season-ending core muscle surgery detailed by doctor",
-      "url": "https://www.nbcsportsbayarea.com/mlb/san-francisco-giants/matt-chapman-injury-surgery-stanford-medicine/1957299/"
-    },
-    {
       "author": "",
       "game_key": "",
       "kind": "standalone",
@@ -1809,6 +1782,33 @@
       "source": "NBC Sports Bay Area",
       "title": "Why red-hot Rafael Devers is out of Giants' lineup Wednesday vs. Cardinals",
       "url": "https://www.nbcsportsbayarea.com/mlb/san-francisco-giants/rafael-devers-lineup-cardinals/1961875/"
+    },
+    {
+      "author": "Grant Brisbee",
+      "game_key": "",
+      "kind": "standalone",
+      "posted_at": "2026-09-10T18:37:16.543706+00:00",
+      "source": "The Athletic",
+      "title": "Bryce Eldridge's rookie season for the Giants puts him in rare, impressive company",
+      "url": "https://www.nytimes.com/athletic/7582259/2026/09/10/sf-giants-bryce-eldridge-rookie-season-analysis/"
+    },
+    {
+      "author": "Maria Guardado",
+      "game_key": "",
+      "kind": "standalone",
+      "posted_at": "2026-09-10T18:37:18.709030+00:00",
+      "source": "MLB.com",
+      "title": "Here are 3 September storylines for Giants’ farm system",
+      "url": "https://www.mlb.com/giants/news/top-storylines-from-each-giants-minor-league-affiliate"
+    },
+    {
+      "author": "Alex Simon",
+      "game_key": "",
+      "kind": "standalone",
+      "posted_at": "2026-09-10T18:37:19.600174+00:00",
+      "source": "SFGATE",
+      "title": "SF Giants are offering to pay their most loyal fans to come to September games",
+      "url": "https://www.sfgate.com/giants/article/sf-giants-pay-fans-22424152.php"
     }
   ],
   "posted_urls": {
@@ -1817,7 +1817,6 @@
     "https://blogs.fangraphs.com/the-giants-have-been-way-off-baseruns/": "2026-09-04T18:32:05.621525+00:00",
     "https://omny.fm/shows/the-executives-show/giants-executive-show-larry-baer-on-fan-appreciation-and-exciting-news-about-a-beer-promotion-day-in-partnership-with-knbeer": "2026-08-20T21:54:21.143960+00:00",
     "https://omny.fm/shows/the-executives-show/randy-winn-discusses-giants-top-prospects-bryce-eldridge-and-the-future-of-the-farm-system": "2026-09-03T23:25:04.207830+00:00",
-    "https://sfstandard.com/2026/08/20/duane-kuiper-mike-krukow-sf-giants/": "2026-08-20T15:59:11.710152+00:00",
     "https://sfstandard.com/2026/08/21/matt-tugboat-wilkinson-has-elite-nickname-can-great-giants-pitcher/": "2026-08-22T07:11:06.573376+00:00",
     "https://sfstandard.com/2026/08/23/bo-davidson-sf-giants-debut-parks-harber/": "2026-08-23T15:47:31.695606+00:00",
     "https://sfstandard.com/2026/08/25/sf-giants-worst-lineup-teams-franchise-history/": "2026-08-25T16:08:46.173263+00:00",
@@ -1875,6 +1874,7 @@
     "https://www.mlb.com/giants/news/rafael-devers-hits-3-run-homer-as-giants-beat-reds": "2026-08-25T07:26:56.792754+00:00",
     "https://www.mlb.com/giants/news/ron-wotus-ejected-before-game-1-of-doubleheader-vs-d-backs": "2026-08-29T22:43:06.267880+00:00",
     "https://www.mlb.com/giants/news/tony-vitello-ejected-in-first-inning-against-reds": "2026-08-27T13:00:23.831536+00:00",
+    "https://www.mlb.com/giants/news/top-storylines-from-each-giants-minor-league-affiliate": "2026-09-10T18:37:18.709030+00:00",
     "https://www.mlb.com/giants/news/willy-adames-hits-200th-career-home-run-in-cleveland": "2026-08-21T03:30:55.672073+00:00",
     "https://www.mlb.com/giants/news/willy-adames-victor-bericoto-jt-brubaker-placed-on-injured-list": "2026-08-25T03:27:24.306483+00:00",
     "https://www.nbcsportsbayarea.com/mlb/san-francisco-giants/adrian-houser-flexor-arm-injury-update/1958730/": "2026-08-26T07:28:23.384062+00:00",
@@ -1903,7 +1903,6 @@
     "https://www.nbcsportsbayarea.com/mlb/san-francisco-giants/logan-webb-paul-skenes-pittsburgh-pirates/1960214/": "2026-09-02T07:16:37.020236+00:00",
     "https://www.nbcsportsbayarea.com/mlb/san-francisco-giants/logan-webb-tony-vitello-loss-reds-analysis/1958875/": "2026-08-27T00:57:40.595738+00:00",
     "https://www.nbcsportsbayarea.com/mlb/san-francisco-giants/marcelo-mayer-debut-red-sox/1957963/": "2026-08-22T07:11:03.540183+00:00",
-    "https://www.nbcsportsbayarea.com/mlb/san-francisco-giants/matt-chapman-injury-surgery-stanford-medicine/1957299/": "2026-08-20T15:59:16.037868+00:00",
     "https://www.nbcsportsbayarea.com/mlb/san-francisco-giants/matt-wilkinson-debut-loss-diamondbacks/1959520/": "2026-08-30T05:37:47.643670+00:00",
     "https://www.nbcsportsbayarea.com/mlb/san-francisco-giants/matt-wilkinson-outing-red-sox/1958333/": "2026-08-24T16:04:09.316583+00:00",
     "https://www.nbcsportsbayarea.com/mlb/san-francisco-giants/matt-wilkinson-sweep-red-sox/1958235/": "2026-08-24T06:03:10.132738+00:00",
@@ -1930,7 +1929,6 @@
     "https://www.nbcsportsbayarea.com/mlb/san-francisco-giants/yunior-marte-debut-win-diamondbacks/1959577/": "2026-08-30T05:37:45.763324+00:00",
     "https://www.nbcsportsbayarea.com/mlb/san-francisco-giants/yunior-marte-emotional-debut-brother/1959615/": "2026-08-30T10:36:01.643523+00:00",
     "https://www.nbcsportsbayarea.com/mlb/san-francisco-giants/zack-minasian-defends-bullpen-general-manager/1959020/": "2026-08-28T00:30:30.529190+00:00",
-    "https://www.nytimes.com/athletic/7525965/2026/08/20/giants-matt-tugboat-wilkinson-debut-guardians/": "2026-08-20T15:59:14.041882+00:00",
     "https://www.nytimes.com/athletic/7528049/2026/08/20/growth-opportunities-sf-giants-3-to-watch/": "2026-08-21T03:30:53.098536+00:00",
     "https://www.nytimes.com/athletic/7529461/2026/08/21/rafael-devers-boston-return-sf-giants/": "2026-08-21T21:49:19.492004+00:00",
     "https://www.nytimes.com/athletic/7535281/2026/08/24/giants-red-sox-sweep-logan-webb/": "2026-08-24T21:53:47.546478+00:00",
@@ -1947,6 +1945,7 @@
     "https://www.nytimes.com/athletic/7565345/2026/09/04/sf-giants-60-day-injured-list-roster-management/": "2026-09-04T18:32:03.309957+00:00",
     "https://www.nytimes.com/athletic/7573981/2026/09/08/giants-elimination-win-cardinals/": "2026-09-08T23:31:46.017459+00:00",
     "https://www.nytimes.com/athletic/7580470/2026/09/09/sf-giants-six-run-rally-sweep-cardinals/": "2026-09-10T07:27:44.988985+00:00",
+    "https://www.nytimes.com/athletic/7582259/2026/09/10/sf-giants-bryce-eldridge-rookie-season-analysis/": "2026-09-10T18:37:16.543706+00:00",
     "https://www.sfchronicle.com/sports/giants/article/bruce-maxwell-knee-mlb-kaepernick-22410012.php": "2026-09-01T11:57:39.570273+00:00",
     "https://www.sfchronicle.com/sports/giants/article/buster-posey-tony-vitello-see-giants-manager-s-22410003.php": "2026-08-31T05:52:31.277429+00:00",
     "https://www.sfchronicle.com/sports/giants/article/giants-among-5-teams-new-partnership-kalshi-22402851.php": "2026-08-25T21:53:29.098360+00:00",
@@ -1980,7 +1979,8 @@
     "https://www.sfgate.com/giants/article/media-blasts-giants-ad-22416362.php": "2026-09-03T23:25:02.654057+00:00",
     "https://www.sfgate.com/giants/article/mike-krukow-beer-legend-22422336.php": "2026-09-09T18:46:35.845874+00:00",
     "https://www.sfgate.com/giants/article/sf-giants-kalshi-22403647.php": "2026-08-27T13:00:24.777181+00:00",
-    "https://www.sfgate.com/giants/article/sf-giants-knbr-beer-22396588.php": "2026-08-21T07:26:02.606218+00:00"
+    "https://www.sfgate.com/giants/article/sf-giants-knbr-beer-22396588.php": "2026-08-21T07:26:02.606218+00:00",
+    "https://www.sfgate.com/giants/article/sf-giants-pay-fans-22424152.php": "2026-09-10T18:37:19.600174+00:00"
   },
   "run_history": [
     {
@@ -2293,6 +2293,38 @@
       "sources_ok": 8,
       "standalone_selected": 2,
       "started_at": "2026-09-10T11:43:28.346250+00:00",
+      "status": "completed"
+    },
+    {
+      "discovered": 155,
+      "finished_at": "2026-09-10T18:37:20.402979+00:00",
+      "game_selection_reasons": {
+        "already_posted": 24,
+        "game_source_duplicates": 0,
+        "not_game_story": 125,
+        "quality_low": 2,
+        "schedule_grounded_threads": 0,
+        "selected_game_stories": 0,
+        "selected_game_threads": 0,
+        "stale_game_story": 4,
+        "unrouted_game_stories": 0
+      },
+      "game_stories_selected": 0,
+      "game_threads_selected": 0,
+      "schedule_grounded_threads": 0,
+      "selection_reasons": {
+        "already_posted": 48,
+        "deferred_for_breaking_news": 1,
+        "eligible": 4,
+        "quality_low": 16,
+        "run_cap": 1,
+        "selected": 3,
+        "stale": 56
+      },
+      "sources_failed": 0,
+      "sources_ok": 8,
+      "standalone_selected": 3,
+      "started_at": "2026-09-10T18:36:52.754081+00:00",
       "status": "completed"
     }
   ]
