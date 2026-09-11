@@ -275,33 +275,6 @@
   },
   "posted_stories": [
     {
-      "author": "Andrew Baggarly",
-      "game_key": "",
-      "kind": "standalone",
-      "posted_at": "2026-08-21T03:30:53.098536+00:00",
-      "source": "The Athletic",
-      "title": "Growth opportunities abound for Giants down the stretch: Here are 3 to watch",
-      "url": "https://www.nytimes.com/athletic/7528049/2026/08/20/growth-opportunities-sf-giants-3-to-watch/"
-    },
-    {
-      "author": "Maria Guardado",
-      "game_key": "",
-      "kind": "standalone",
-      "posted_at": "2026-08-21T03:30:55.672073+00:00",
-      "source": "MLB.com",
-      "title": "Adames milestone 200th blast slightly marred by defensive miscues",
-      "url": "https://www.mlb.com/giants/news/willy-adames-hits-200th-career-home-run-in-cleveland"
-    },
-    {
-      "author": "Ryan Greenberg",
-      "game_key": "",
-      "kind": "standalone",
-      "posted_at": "2026-08-21T03:30:57.748719+00:00",
-      "source": "NBC Sports Bay Area",
-      "title": "Giants' top 100 prospects",
-      "url": "https://www.nbcsportsbayarea.com/mlb/san-francisco-giants/five-prospects-top-100-list/1957627/"
-    },
-    {
       "author": "Alex Simon",
       "game_key": "",
       "kind": "standalone",
@@ -1776,6 +1749,24 @@
       "source": "San Francisco Standard",
       "title": "Opinion: This week’s cartoon: Burning Man comes home",
       "url": "https://sfstandard.com/opinion/2026/09/10/burning-man-cartoon-giants/"
+    },
+    {
+      "author": "",
+      "game_key": "",
+      "kind": "standalone",
+      "posted_at": "2026-09-11T07:25:51.340894+00:00",
+      "source": "San Francisco Chronicle",
+      "title": "Jackson Flora’s playoff debut brings beer chants, 100 mph fastballs and 2 no-hit innings in San Jose",
+      "url": "https://www.sfchronicle.com/sports/giants/article/jackson-flora-s-playoff-debut-beer-chants-22426791.php"
+    },
+    {
+      "author": "Maria Guardado",
+      "game_key": "",
+      "kind": "standalone",
+      "posted_at": "2026-09-11T07:25:53.690982+00:00",
+      "source": "MLB.com",
+      "title": "Cheers! Giants' top pick helps send SJ to championship, earns fans cheap beer",
+      "url": "https://www.mlb.com/giants/news/jackson-flora-san-jose-giants-going-to-2026-cal-league-championship-series"
     }
   ],
   "posted_urls": {
@@ -1832,6 +1823,7 @@
     "https://www.mlb.com/giants/news/giants-earn-comeback-win-to-sweep-cardinals": "2026-09-09T23:26:13.955118+00:00",
     "https://www.mlb.com/giants/news/giants-offense-struggles-series-finale-loss-to-pirates": "2026-09-03T23:25:08.303714+00:00",
     "https://www.mlb.com/giants/news/giants-suffer-defeat-after-allowing-7-runs-in-ninth-inning": "2026-08-27T13:00:26.712033+00:00",
+    "https://www.mlb.com/giants/news/jackson-flora-san-jose-giants-going-to-2026-cal-league-championship-series": "2026-09-11T07:25:53.690982+00:00",
     "https://www.mlb.com/giants/news/jeff-kent-has-number-retired-by-giants": "2026-08-30T05:37:41.239285+00:00",
     "https://www.mlb.com/giants/news/jeff-kent-reacts-to-kaeden-kent-being-traded-to-giants": "2026-08-27T17:52:21.009551+00:00",
     "https://www.mlb.com/giants/news/logan-webb-allows-nine-runs-in-wild-giants-pirates-game": "2026-09-02T07:16:28.784350+00:00",
@@ -1842,7 +1834,6 @@
     "https://www.mlb.com/giants/news/ron-wotus-ejected-before-game-1-of-doubleheader-vs-d-backs": "2026-08-29T22:43:06.267880+00:00",
     "https://www.mlb.com/giants/news/tony-vitello-ejected-in-first-inning-against-reds": "2026-08-27T13:00:23.831536+00:00",
     "https://www.mlb.com/giants/news/top-storylines-from-each-giants-minor-league-affiliate": "2026-09-10T18:37:18.709030+00:00",
-    "https://www.mlb.com/giants/news/willy-adames-hits-200th-career-home-run-in-cleveland": "2026-08-21T03:30:55.672073+00:00",
     "https://www.mlb.com/giants/news/willy-adames-victor-bericoto-jt-brubaker-placed-on-injured-list": "2026-08-25T03:27:24.306483+00:00",
     "https://www.nbcsportsbayarea.com/mlb/san-francisco-giants/adrian-houser-flexor-arm-injury-update/1958730/": "2026-08-26T07:28:23.384062+00:00",
     "https://www.nbcsportsbayarea.com/mlb/san-francisco-giants/adrian-houser-injury-cincinnati-reds/1958686/": "2026-08-26T07:28:19.759209+00:00",
@@ -1862,7 +1853,6 @@
     "https://www.nbcsportsbayarea.com/mlb/san-francisco-giants/christian-koss-increased-role-2026/1961822/": "2026-09-09T18:46:34.848433+00:00",
     "https://www.nbcsportsbayarea.com/mlb/san-francisco-giants/drew-gilbert-energy-maturation-2026/1959252/": "2026-08-28T14:31:38.314310+00:00",
     "https://www.nbcsportsbayarea.com/mlb/san-francisco-giants/erik-miller-red-sox-trade/1958098/": "2026-08-22T20:47:21.092618+00:00",
-    "https://www.nbcsportsbayarea.com/mlb/san-francisco-giants/five-prospects-top-100-list/1957627/": "2026-08-21T03:30:57.748719+00:00",
     "https://www.nbcsportsbayarea.com/mlb/san-francisco-giants/jackson-flora-minor-league-debut/1960943/": "2026-09-06T17:38:47.641457+00:00",
     "https://www.nbcsportsbayarea.com/mlb/san-francisco-giants/leadoff-hitter-lineup-2026-season/1958556/": "2026-08-25T16:08:40.955118+00:00",
     "https://www.nbcsportsbayarea.com/mlb/san-francisco-giants/logan-webb-finish-disappointing-2026-season/1961455/": "2026-09-08T23:31:43.977707+00:00",
@@ -1895,7 +1885,6 @@
     "https://www.nbcsportsbayarea.com/mlb/san-francisco-giants/yunior-marte-debut-win-diamondbacks/1959577/": "2026-08-30T05:37:45.763324+00:00",
     "https://www.nbcsportsbayarea.com/mlb/san-francisco-giants/yunior-marte-emotional-debut-brother/1959615/": "2026-08-30T10:36:01.643523+00:00",
     "https://www.nbcsportsbayarea.com/mlb/san-francisco-giants/zack-minasian-defends-bullpen-general-manager/1959020/": "2026-08-28T00:30:30.529190+00:00",
-    "https://www.nytimes.com/athletic/7528049/2026/08/20/growth-opportunities-sf-giants-3-to-watch/": "2026-08-21T03:30:53.098536+00:00",
     "https://www.nytimes.com/athletic/7529461/2026/08/21/rafael-devers-boston-return-sf-giants/": "2026-08-21T21:49:19.492004+00:00",
     "https://www.nytimes.com/athletic/7535281/2026/08/24/giants-red-sox-sweep-logan-webb/": "2026-08-24T21:53:47.546478+00:00",
     "https://www.nytimes.com/athletic/7537110/2026/08/25/giants-rafael-devers-injury-ravaged-win/": "2026-08-25T16:08:43.167139+00:00",
@@ -1926,6 +1915,7 @@
     "https://www.sfchronicle.com/sports/giants/article/giants-tony-vitello-unleashes-profane-tirade-22405057.php": "2026-08-27T00:57:46.033056+00:00",
     "https://www.sfchronicle.com/sports/giants/article/giants-top-pick-jackson-flora-make-first-start-22413053.php": "2026-09-01T23:28:23.215080+00:00",
     "https://www.sfchronicle.com/sports/giants/article/giants-vitello-gives-rafael-devers-day-end-games-22424244.php": "2026-09-10T07:27:45.944065+00:00",
+    "https://www.sfchronicle.com/sports/giants/article/jackson-flora-s-playoff-debut-beer-chants-22426791.php": "2026-09-11T07:25:51.340894+00:00",
     "https://www.sfchronicle.com/sports/giants/article/jonah-cox-flashes-blade-tidwell-s-walks-hurt-22416405.php": "2026-09-03T23:25:09.201439+00:00",
     "https://www.sfchronicle.com/sports/giants/article/not-giants-agree-100-loss-season-matter-22410923.php": "2026-09-01T07:57:15.098593+00:00",
     "https://www.sfchronicle.com/sports/giants/article/sf-giants-bryce-eldridge-placed-bereavement-list-22400535.php": "2026-08-24T06:03:07.744982+00:00",
@@ -2321,6 +2311,38 @@
       "sources_ok": 8,
       "standalone_selected": 2,
       "started_at": "2026-09-10T23:19:17.016371+00:00",
+      "status": "completed"
+    },
+    {
+      "discovered": 155,
+      "finished_at": "2026-09-11T07:25:54.493920+00:00",
+      "game_selection_reasons": {
+        "already_posted": 25,
+        "game_source_duplicates": 0,
+        "not_game_story": 124,
+        "quality_low": 2,
+        "schedule_grounded_threads": 0,
+        "selected_game_stories": 0,
+        "selected_game_threads": 0,
+        "stale_game_story": 4,
+        "unrouted_game_stories": 0
+      },
+      "game_stories_selected": 0,
+      "game_threads_selected": 0,
+      "schedule_grounded_threads": 0,
+      "selection_reasons": {
+        "already_posted": 48,
+        "deferred_for_breaking_news": 1,
+        "eligible": 3,
+        "quality_low": 15,
+        "selected": 2,
+        "source_cap_cluster": 1,
+        "stale": 57
+      },
+      "sources_failed": 0,
+      "sources_ok": 8,
+      "standalone_selected": 2,
+      "started_at": "2026-09-11T07:25:35.136377+00:00",
       "status": "completed"
     }
   ]
