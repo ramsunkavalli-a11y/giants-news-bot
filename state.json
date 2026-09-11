@@ -1758,9 +1758,37 @@
       "source": "MLB.com",
       "title": "Cheers! Giants' top pick helps send SJ to championship, earns fans cheap beer",
       "url": "https://www.mlb.com/giants/news/jackson-flora-san-jose-giants-going-to-2026-cal-league-championship-series"
+    },
+    {
+      "author": "Eric Longenhagen",
+      "game_key": "",
+      "kind": "standalone",
+      "posted_at": "2026-09-11T18:42:14.693838+00:00",
+      "source": "FanGraphs",
+      "title": "Eric Longenhagen Prospects Chat: 9/11/2026",
+      "url": "https://blogs.fangraphs.com/eric-longenhagen-prospects-chat-9-11-2026/"
+    },
+    {
+      "author": "Alex Pavlovic",
+      "game_key": "",
+      "kind": "standalone",
+      "posted_at": "2026-09-11T18:42:17.277010+00:00",
+      "source": "NBC Sports Bay Area",
+      "title": "Top draft pick Jackson Flora shines, helps San Jose Giants advance in playoffs",
+      "url": "https://www.nbcsportsbayarea.com/mlb/san-francisco-giants/jackson-flora-san-jose-giants/1962614/"
+    },
+    {
+      "author": "Justice delos Santos",
+      "game_key": "",
+      "kind": "standalone",
+      "posted_at": "2026-09-11T18:42:20.446352+00:00",
+      "source": "Mercury News",
+      "title": "‘The sky’s the limit’: SF Giants top pitching prospect Flora dazzles as San Jose advances to championship",
+      "url": "https://www.mercurynews.com/2026/09/10/the-skys-the-limit-sf-giants-top-pitching-prospect-flora-dazzles-as-san-jose-advances-to-championship/"
     }
   ],
   "posted_urls": {
+    "https://blogs.fangraphs.com/eric-longenhagen-prospects-chat-9-11-2026/": "2026-09-11T18:42:14.693838+00:00",
     "https://blogs.fangraphs.com/erstwhile-sidewinder-javier-lopez-tackles-a-challenging-career-quiz/": "2026-08-28T00:30:36.587672+00:00",
     "https://blogs.fangraphs.com/scouting-the-uniformed-debuts-of-early-round-padres-and-giants-draft-picks/": "2026-09-09T11:45:50.521777+00:00",
     "https://blogs.fangraphs.com/the-giants-have-been-way-off-baseruns/": "2026-09-04T18:32:05.621525+00:00",
@@ -1808,6 +1836,7 @@
     "https://www.mercurynews.com/2026/09/07/how-hot-is-sf-giants-devers-how-hes-sharing-company-with-bonds-mays/": "2026-09-08T07:22:56.167564+00:00",
     "https://www.mercurynews.com/2026/09/07/sf-giants-whitcomb-delivers-11th-inning-walk-off-single-to-defeat-cardinals/": "2026-09-08T07:23:01.907976+00:00",
     "https://www.mercurynews.com/2026/09/08/bryce-eldridge-first-base-defense-sf-giants/": "2026-09-08T23:31:41.768560+00:00",
+    "https://www.mercurynews.com/2026/09/10/the-skys-the-limit-sf-giants-top-pitching-prospect-flora-dazzles-as-san-jose-advances-to-championship/": "2026-09-11T18:42:20.446352+00:00",
     "https://www.mlb.com/giants/news/adrian-houser-placed-on-injured-list-with-right-forearm-strain": "2026-08-27T00:57:43.261305+00:00",
     "https://www.mlb.com/giants/news/bryce-eldridge-hits-a-homer-in-giants-win-over-cardinals": "2026-09-09T07:31:31.714121+00:00",
     "https://www.mlb.com/giants/news/carson-whisenhunt-has-torn-ucl-in-elbow": "2026-08-26T03:34:07.300313+00:00",
@@ -1845,6 +1874,7 @@
     "https://www.nbcsportsbayarea.com/mlb/san-francisco-giants/drew-gilbert-energy-maturation-2026/1959252/": "2026-08-28T14:31:38.314310+00:00",
     "https://www.nbcsportsbayarea.com/mlb/san-francisco-giants/erik-miller-red-sox-trade/1958098/": "2026-08-22T20:47:21.092618+00:00",
     "https://www.nbcsportsbayarea.com/mlb/san-francisco-giants/jackson-flora-minor-league-debut/1960943/": "2026-09-06T17:38:47.641457+00:00",
+    "https://www.nbcsportsbayarea.com/mlb/san-francisco-giants/jackson-flora-san-jose-giants/1962614/": "2026-09-11T18:42:17.277010+00:00",
     "https://www.nbcsportsbayarea.com/mlb/san-francisco-giants/leadoff-hitter-lineup-2026-season/1958556/": "2026-08-25T16:08:40.955118+00:00",
     "https://www.nbcsportsbayarea.com/mlb/san-francisco-giants/logan-webb-finish-disappointing-2026-season/1961455/": "2026-09-08T23:31:43.977707+00:00",
     "https://www.nbcsportsbayarea.com/mlb/san-francisco-giants/logan-webb-loss-reds-history-analysis/1958802/": "2026-08-27T00:57:45.120792+00:00",
@@ -2363,6 +2393,39 @@
       "sources_ok": 8,
       "standalone_selected": 0,
       "started_at": "2026-09-11T11:43:31.844472+00:00",
+      "status": "completed"
+    },
+    {
+      "discovered": 154,
+      "finished_at": "2026-09-11T18:42:21.249946+00:00",
+      "game_selection_reasons": {
+        "already_posted": 24,
+        "game_source_duplicates": 0,
+        "not_game_story": 124,
+        "quality_low": 2,
+        "schedule_grounded_threads": 0,
+        "selected_game_stories": 0,
+        "selected_game_threads": 0,
+        "stale_game_story": 4,
+        "unrouted_game_stories": 0
+      },
+      "game_stories_selected": 0,
+      "game_threads_selected": 0,
+      "schedule_grounded_threads": 0,
+      "selection_reasons": {
+        "already_posted": 47,
+        "deferred_for_breaking_news": 1,
+        "eligible": 5,
+        "quality_low": 14,
+        "run_cap": 1,
+        "selected": 3,
+        "stale": 57,
+        "story_already_posted": 1
+      },
+      "sources_failed": 0,
+      "sources_ok": 8,
+      "standalone_selected": 3,
+      "started_at": "2026-09-11T18:41:50.405026+00:00",
       "status": "completed"
     }
   ]
