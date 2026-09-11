@@ -275,15 +275,6 @@
   },
   "posted_stories": [
     {
-      "author": "Alex Simon",
-      "game_key": "",
-      "kind": "standalone",
-      "posted_at": "2026-08-21T07:26:02.606218+00:00",
-      "source": "SFGATE",
-      "title": "SF Giants drop beer prices for a game after KNBR pressure campaign",
-      "url": "https://www.sfgate.com/giants/article/sf-giants-knbr-beer-22396588.php"
-    },
-    {
       "author": "Kerry Crowley",
       "game_key": "",
       "kind": "standalone",
@@ -1934,7 +1925,6 @@
     "https://www.sfgate.com/giants/article/media-blasts-giants-ad-22416362.php": "2026-09-03T23:25:02.654057+00:00",
     "https://www.sfgate.com/giants/article/mike-krukow-beer-legend-22422336.php": "2026-09-09T18:46:35.845874+00:00",
     "https://www.sfgate.com/giants/article/sf-giants-kalshi-22403647.php": "2026-08-27T13:00:24.777181+00:00",
-    "https://www.sfgate.com/giants/article/sf-giants-knbr-beer-22396588.php": "2026-08-21T07:26:02.606218+00:00",
     "https://www.sfgate.com/giants/article/sf-giants-pay-fans-22424152.php": "2026-09-10T18:37:19.600174+00:00"
   },
   "run_history": [
@@ -2343,6 +2333,36 @@
       "sources_ok": 8,
       "standalone_selected": 2,
       "started_at": "2026-09-11T07:25:35.136377+00:00",
+      "status": "completed"
+    },
+    {
+      "discovered": 147,
+      "finished_at": "2026-09-11T11:44:28.131257+00:00",
+      "game_selection_reasons": {
+        "already_posted": 25,
+        "game_source_duplicates": 0,
+        "not_game_story": 116,
+        "quality_low": 2,
+        "schedule_grounded_threads": 0,
+        "selected_game_stories": 0,
+        "selected_game_threads": 0,
+        "stale_game_story": 4,
+        "unrouted_game_stories": 0
+      },
+      "game_stories_selected": 0,
+      "game_threads_selected": 0,
+      "schedule_grounded_threads": 0,
+      "selection_reasons": {
+        "already_posted": 42,
+        "deferred_for_breaking_news": 1,
+        "quality_low": 15,
+        "selected": 0,
+        "stale": 58
+      },
+      "sources_failed": 0,
+      "sources_ok": 8,
+      "standalone_selected": 0,
+      "started_at": "2026-09-11T11:43:31.844472+00:00",
       "status": "completed"
     }
   ]
