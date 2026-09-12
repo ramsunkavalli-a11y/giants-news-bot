@@ -122,6 +122,22 @@
       },
       "updated_at": "2026-09-09T23:26:13.955097+00:00"
     },
+    "game:823173": {
+      "created_at": "2026-09-12T07:18:45.531393+00:00",
+      "game_day": "2026-09-11",
+      "game_number": 1,
+      "game_pk": 823173,
+      "opponent": "padres",
+      "parent": {
+        "cid": "bafyreiglq7qacysshsi5dxfedla4jefc6csznncqlrlsp3a6ag23tjvhwi",
+        "uri": "at://did:plc:gkkepfzghvnfrkrohm2c4nwy/app.bsky.feed.post/3mvck3j26wg23"
+      },
+      "root": {
+        "cid": "bafyreiglq7qacysshsi5dxfedla4jefc6csznncqlrlsp3a6ag23tjvhwi",
+        "uri": "at://did:plc:gkkepfzghvnfrkrohm2c4nwy/app.bsky.feed.post/3mvck3j26wg23"
+      },
+      "updated_at": "2026-09-12T07:18:45.531393+00:00"
+    },
     "game:823176": {
       "created_at": "2026-08-30T05:37:45.763300+00:00",
       "game_day": "2026-08-29",
@@ -256,87 +272,9 @@
         "uri": "at://did:plc:gkkepfzghvnfrkrohm2c4nwy/app.bsky.feed.post/3mts7rwfvc22a"
       },
       "updated_at": "2026-08-24T21:53:47.546454+00:00"
-    },
-    "game:824721": {
-      "created_at": "2026-08-22T03:21:58.783254+00:00",
-      "game_day": "2026-08-21",
-      "game_pk": 824721,
-      "opponent": "red-sox",
-      "parent": {
-        "cid": "bafyreihf5oeja64kbhol3hmqzfoh4qbs5hhtb5v34ayeagm7umcvsb3wj4",
-        "uri": "at://did:plc:gkkepfzghvnfrkrohm2c4nwy/app.bsky.feed.post/3mtnpujwxlq2b"
-      },
-      "root": {
-        "cid": "bafyreidpubhv2cwm3ydsfnrb2ltr6hw7u3d4xd5f6zubuair7p7sv3iysi",
-        "uri": "at://did:plc:gkkepfzghvnfrkrohm2c4nwy/app.bsky.feed.post/3mtnd2rqttr23"
-      },
-      "updated_at": "2026-08-22T07:11:07.899821+00:00"
     }
   },
   "posted_stories": [
-    {
-      "author": "Ali Thanawalla",
-      "game_key": "",
-      "kind": "standalone",
-      "posted_at": "2026-08-22T03:21:55.820245+00:00",
-      "source": "NBC Sports Bay Area",
-      "title": "Watch Giants' Rafael Devers crush homer vs. Red Sox in first game back at Fenway",
-      "url": "https://www.nbcsportsbayarea.com/mlb/san-francisco-giants/rafael-devers-home-run-red-sox/1958025/"
-    },
-    {
-      "author": "Justice delos Santos",
-      "game_key": "",
-      "kind": "standalone",
-      "posted_at": "2026-08-22T03:21:56.881687+00:00",
-      "source": "Mercury News",
-      "title": "Marcelo Mayer’s SF Giants debut delayed by right foot bone bruise",
-      "url": "https://www.mercurynews.com/2026/08/21/marcello-mayers-sf-giants-debut-delayed-by-right-foot-bone-bruise/amp/"
-    },
-    {
-      "author": "",
-      "game_key": "",
-      "kind": "standalone",
-      "posted_at": "2026-08-22T03:21:57.833842+00:00",
-      "source": "San Francisco Chronicle",
-      "title": "Giants’ Marcelo Mayer not yet healthy enough to face former team in Boston",
-      "url": "https://www.sfchronicle.com/sports/giants/article/sf-giants-marcelo-mayer-not-ready-return-injuries-22398521.php"
-    },
-    {
-      "author": "",
-      "game_key": "game:824721",
-      "kind": "game_story",
-      "posted_at": "2026-08-22T03:21:58.783276+00:00",
-      "source": "San Francisco Chronicle",
-      "title": "Giants fall to Red Sox despite Rafael Devers’ homer as Logan Webb falters",
-      "url": "https://www.sfchronicle.com/sports/giants/article/sf-giants-get-homer-rafael-devers-logan-webb-22390562.php"
-    },
-    {
-      "author": "Alex Pavlovic",
-      "game_key": "",
-      "kind": "standalone",
-      "posted_at": "2026-08-22T07:11:03.540183+00:00",
-      "source": "NBC Sports Bay Area",
-      "title": "Why Marcelo Mayer won't make anticipated Giants debut vs. former team Red Sox",
-      "url": "https://www.nbcsportsbayarea.com/mlb/san-francisco-giants/marcelo-mayer-debut-red-sox/1957963/"
-    },
-    {
-      "author": "Kerry Crowley",
-      "game_key": "",
-      "kind": "standalone",
-      "posted_at": "2026-08-22T07:11:06.573376+00:00",
-      "source": "San Francisco Standard",
-      "title": "Matt ‘Tugboat’ Wilkinson has an elite nickname. Can he be a great Giants pitcher too?",
-      "url": "https://sfstandard.com/2026/08/21/matt-tugboat-wilkinson-has-elite-nickname-can-great-giants-pitcher/"
-    },
-    {
-      "author": "Justice delos Santos",
-      "game_key": "game:824721",
-      "kind": "game_story",
-      "posted_at": "2026-08-22T07:11:07.899843+00:00",
-      "source": "Mercury News",
-      "title": "Devers homers in Boston return, but SF Giants fall to Red Sox as Webb endures shortest outing of year",
-      "url": "https://www.mercurynews.com/2026/08/21/devers-homers-in-boston-return-but-sf-giants-fall-to-red-sox-as-webb-endures-shortest-outing-of-year/amp/"
-    },
     {
       "author": "Alex Pavlovic",
       "game_key": "",
@@ -1785,6 +1723,24 @@
       "source": "Mercury News",
       "title": "SF Giants’ Devers named National League Player of the Week",
       "url": "https://www.mercurynews.com/2026/09/08/sf-giants-devers-named-national-league-player-of-the-week/"
+    },
+    {
+      "author": "Alex Pavlovic",
+      "game_key": "",
+      "kind": "standalone",
+      "posted_at": "2026-09-12T07:18:44.440327+00:00",
+      "source": "NBC Sports Bay Area",
+      "title": "Dynamic Devers-Eldridge duo makes Padres' Robbie Ray work for career milestone",
+      "url": "https://www.nbcsportsbayarea.com/mlb/san-francisco-giants/rafael-devers-bryce-eldridge-robbie-ray/1962874/"
+    },
+    {
+      "author": "",
+      "game_key": "game:823173",
+      "kind": "game_story",
+      "posted_at": "2026-09-12T07:18:45.531415+00:00",
+      "source": "San Francisco Chronicle",
+      "title": "Giants’ bid for fourth straight win done in by Padres’ fast start",
+      "url": "https://www.sfchronicle.com/sports/giants/article/sf-giants-bid-fourth-straight-win-comes-short-22428184.php"
     }
   ],
   "posted_urls": {
@@ -1794,7 +1750,6 @@
     "https://blogs.fangraphs.com/the-giants-have-been-way-off-baseruns/": "2026-09-04T18:32:05.621525+00:00",
     "https://omny.fm/shows/the-executives-show/giants-knbr-beer-day-preview-larry-baer-on-mike-krukows-legacy-and-a-special-september-celebration": "2026-09-10T23:19:42.710344+00:00",
     "https://omny.fm/shows/the-executives-show/randy-winn-discusses-giants-top-prospects-bryce-eldridge-and-the-future-of-the-farm-system": "2026-09-03T23:25:04.207830+00:00",
-    "https://sfstandard.com/2026/08/21/matt-tugboat-wilkinson-has-elite-nickname-can-great-giants-pitcher/": "2026-08-22T07:11:06.573376+00:00",
     "https://sfstandard.com/2026/08/23/bo-davidson-sf-giants-debut-parks-harber/": "2026-08-23T15:47:31.695606+00:00",
     "https://sfstandard.com/2026/08/25/sf-giants-worst-lineup-teams-franchise-history/": "2026-08-25T16:08:46.173263+00:00",
     "https://sfstandard.com/2026/08/26/sf-giants-tommy-john-surgery-elbow-injury/": "2026-08-26T16:36:36.584428+00:00",
@@ -1807,8 +1762,6 @@
     "https://sfstandard.com/opinion/2026/09/10/burning-man-cartoon-giants/": "2026-09-10T23:19:45.169717+00:00",
     "https://sfstandard.com/section-415/2026/09/01/section-415-podcast-giants-partnership-kalshi-part-dangerous-trend/": "2026-09-01T23:28:20.207510+00:00",
     "https://sfstandard.com/section-415/2026/09/08/section-415-podcast-uncovering-mysteries-giants-ownership/": "2026-09-08T23:31:38.419100+00:00",
-    "https://www.mercurynews.com/2026/08/21/devers-homers-in-boston-return-but-sf-giants-fall-to-red-sox-as-webb-endures-shortest-outing-of-year/amp/": "2026-08-22T07:11:07.899843+00:00",
-    "https://www.mercurynews.com/2026/08/21/marcello-mayers-sf-giants-debut-delayed-by-right-foot-bone-bruise/amp/": "2026-08-22T03:21:56.881687+00:00",
     "https://www.mercurynews.com/2026/08/22/sf-giants-blow-ninth-inning-lead-in-walk-off-loss-to-red-sox-waste-tidwells-excellent-start/": "2026-08-23T20:46:44.004858+00:00",
     "https://www.mercurynews.com/2026/08/22/sf-giants-blow-ninth-inning-lead-in-walk-off-loss-to-red-sox-waste-tidwells-excellent-start/amp/": "2026-08-23T05:54:56.161973+00:00",
     "https://www.mercurynews.com/2026/08/23/sf-giants-adames-bericoto-leave-sundays-game-vs-red-sox-with-injuries/amp/": "2026-08-24T02:06:36.863137+00:00",
@@ -1880,16 +1833,15 @@
     "https://www.nbcsportsbayarea.com/mlb/san-francisco-giants/logan-webb-loss-reds-history-analysis/1958802/": "2026-08-27T00:57:45.120792+00:00",
     "https://www.nbcsportsbayarea.com/mlb/san-francisco-giants/logan-webb-paul-skenes-pittsburgh-pirates/1960214/": "2026-09-02T07:16:37.020236+00:00",
     "https://www.nbcsportsbayarea.com/mlb/san-francisco-giants/logan-webb-tony-vitello-loss-reds-analysis/1958875/": "2026-08-27T00:57:40.595738+00:00",
-    "https://www.nbcsportsbayarea.com/mlb/san-francisco-giants/marcelo-mayer-debut-red-sox/1957963/": "2026-08-22T07:11:03.540183+00:00",
     "https://www.nbcsportsbayarea.com/mlb/san-francisco-giants/matt-wilkinson-debut-loss-diamondbacks/1959520/": "2026-08-30T05:37:47.643670+00:00",
     "https://www.nbcsportsbayarea.com/mlb/san-francisco-giants/matt-wilkinson-outing-red-sox/1958333/": "2026-08-24T16:04:09.316583+00:00",
     "https://www.nbcsportsbayarea.com/mlb/san-francisco-giants/matt-wilkinson-sweep-red-sox/1958235/": "2026-08-24T06:03:10.132738+00:00",
     "https://www.nbcsportsbayarea.com/mlb/san-francisco-giants/mike-krukow-catchphrases-origins/1958410/": "2026-08-25T03:27:26.116254+00:00",
     "https://www.nbcsportsbayarea.com/mlb/san-francisco-giants/rafael-devers-boston-return-logan-webb/1958062/": "2026-08-23T02:08:51.373827+00:00",
     "https://www.nbcsportsbayarea.com/mlb/san-francisco-giants/rafael-devers-bryce-eldridge-observations/1961401/": "2026-09-08T07:22:55.076668+00:00",
+    "https://www.nbcsportsbayarea.com/mlb/san-francisco-giants/rafael-devers-bryce-eldridge-robbie-ray/1962874/": "2026-09-12T07:18:44.440327+00:00",
     "https://www.nbcsportsbayarea.com/mlb/san-francisco-giants/rafael-devers-chase-burns-reds-analysis/1958462/": "2026-08-25T21:53:36.161024+00:00",
     "https://www.nbcsportsbayarea.com/mlb/san-francisco-giants/rafael-devers-drew-cavanaugh-cincinnati-reds/1958708/": "2026-08-26T07:28:21.529748+00:00",
-    "https://www.nbcsportsbayarea.com/mlb/san-francisco-giants/rafael-devers-home-run-red-sox/1958025/": "2026-08-22T03:21:55.820245+00:00",
     "https://www.nbcsportsbayarea.com/mlb/san-francisco-giants/rafael-devers-homers-new-york-mets/1961039/": "2026-09-06T04:56:03.227033+00:00",
     "https://www.nbcsportsbayarea.com/mlb/san-francisco-giants/rafael-devers-lineup-cardinals/1961875/": "2026-09-10T11:43:52.721265+00:00",
     "https://www.nbcsportsbayarea.com/mlb/san-francisco-giants/rafael-devers-matt-wilkinson-loss-mets/1960923/": "2026-09-05T07:04:13.896665+00:00",
@@ -1939,12 +1891,11 @@
     "https://www.sfchronicle.com/sports/giants/article/jackson-flora-s-playoff-debut-beer-chants-22426791.php": "2026-09-11T07:25:51.340894+00:00",
     "https://www.sfchronicle.com/sports/giants/article/jonah-cox-flashes-blade-tidwell-s-walks-hurt-22416405.php": "2026-09-03T23:25:09.201439+00:00",
     "https://www.sfchronicle.com/sports/giants/article/not-giants-agree-100-loss-season-matter-22410923.php": "2026-09-01T07:57:15.098593+00:00",
+    "https://www.sfchronicle.com/sports/giants/article/sf-giants-bid-fourth-straight-win-comes-short-22428184.php": "2026-09-12T07:18:45.531415+00:00",
     "https://www.sfchronicle.com/sports/giants/article/sf-giants-bryce-eldridge-placed-bereavement-list-22400535.php": "2026-08-24T06:03:07.744982+00:00",
     "https://www.sfchronicle.com/sports/giants/article/sf-giants-coach-ejected-loss-first-game-22409124.php": "2026-08-30T05:37:48.570631+00:00",
-    "https://www.sfchronicle.com/sports/giants/article/sf-giants-get-homer-rafael-devers-logan-webb-22390562.php": "2026-08-22T03:21:58.783276+00:00",
     "https://www.sfchronicle.com/sports/giants/article/sf-giants-lose-pitcher-adrian-houser-apparent-22403130.php": "2026-08-26T07:28:24.437445+00:00",
     "https://www.sfchronicle.com/sports/giants/article/sf-giants-manager-tony-vitello-ejected-loss-22408680.php": "2026-08-29T09:18:17.466232+00:00",
-    "https://www.sfchronicle.com/sports/giants/article/sf-giants-marcelo-mayer-not-ready-return-injuries-22398521.php": "2026-08-22T03:21:57.833842+00:00",
     "https://www.sfchronicle.com/sports/giants/article/sf-giants-ninth-inning-letdown-leads-win-red-sox-22390564.php": "2026-08-23T05:54:57.065145+00:00",
     "https://www.sfchronicle.com/sports/giants/article/sf-giants-pitcher-carson-whisenhunt-exits-22402031.php": "2026-08-25T07:26:59.839719+00:00",
     "https://www.sfchronicle.com/sports/giants/article/sf-giants-rebound-feel-good-win-pirates-crushing-22415343.php": "2026-09-03T07:20:12.294100+00:00",
@@ -2458,6 +2409,40 @@
       "sources_ok": 8,
       "standalone_selected": 2,
       "started_at": "2026-09-11T23:27:22.859130+00:00",
+      "status": "completed"
+    },
+    {
+      "discovered": 153,
+      "finished_at": "2026-09-12T07:18:46.334328+00:00",
+      "game_selection_reasons": {
+        "already_posted": 24,
+        "eligible_game_story": 2,
+        "game_source_duplicates": 0,
+        "not_game_story": 121,
+        "quality_low": 2,
+        "schedule_grounded_threads": 1,
+        "selected_game_stories": 1,
+        "selected_game_threads": 1,
+        "stale_game_story": 4,
+        "unrouted_game_stories": 1
+      },
+      "game_stories_selected": 1,
+      "game_threads_selected": 1,
+      "schedule_grounded_threads": 1,
+      "selection_reasons": {
+        "already_posted": 47,
+        "deferred_for_breaking_news": 1,
+        "eligible": 3,
+        "quality_low": 14,
+        "selected": 1,
+        "source_cap_cluster": 1,
+        "stale": 57,
+        "story_already_posted": 1
+      },
+      "sources_failed": 0,
+      "sources_ok": 8,
+      "standalone_selected": 1,
+      "started_at": "2026-09-12T07:18:07.478579+00:00",
       "status": "completed"
     }
   ]
