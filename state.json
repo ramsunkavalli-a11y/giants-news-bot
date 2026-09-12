@@ -1759,6 +1759,15 @@
       "source": "NBC Sports Bay Area",
       "title": "Devers hits grand slam in loss",
       "url": "https://www.nbcsportsbayarea.com/mlb/san-francisco-giants/observations-rafael-devers-grand-slam-robbie-ray-padres/1962823/"
+    },
+    {
+      "author": "",
+      "game_key": "",
+      "kind": "standalone",
+      "posted_at": "2026-09-12T17:47:37.248950+00:00",
+      "source": "NBC Sports Bay Area",
+      "title": "The other side of Robbie Ray trade with Padres is looking pretty good for Giants",
+      "url": "https://www.nbcsportsbayarea.com/mlb/san-francisco-giants/robbie-ray-trade-padres-analysis/1962901/"
     }
   ],
   "posted_urls": {
@@ -1867,6 +1876,7 @@
     "https://www.nbcsportsbayarea.com/mlb/san-francisco-giants/rafael-devers-matt-wilkinson-loss-mets/1960923/": "2026-09-05T07:04:13.896665+00:00",
     "https://www.nbcsportsbayarea.com/mlb/san-francisco-giants/rafael-devers-mike-krukow-leadership/1959349/": "2026-08-28T18:57:45.453739+00:00",
     "https://www.nbcsportsbayarea.com/mlb/san-francisco-giants/rafael-devers-red-sox-loss-analysis/1958045/": "2026-08-23T02:08:53.227325+00:00",
+    "https://www.nbcsportsbayarea.com/mlb/san-francisco-giants/robbie-ray-trade-padres-analysis/1962901/": "2026-09-12T17:47:37.248950+00:00",
     "https://www.nbcsportsbayarea.com/mlb/san-francisco-giants/ron-wotus-ejection-alan-porter/1959510/": "2026-08-30T05:37:43.881240+00:00",
     "https://www.nbcsportsbayarea.com/mlb/san-francisco-giants/ryan-walker-joel-kuhnel-roster-moves/1960997/": "2026-09-06T09:34:48.461814+00:00",
     "https://www.nbcsportsbayarea.com/mlb/san-francisco-giants/takeaways-landen-roupp-win-diamondbacks/1959104/": "2026-08-28T05:32:22.707445+00:00",
@@ -2496,6 +2506,38 @@
       "sources_ok": 8,
       "standalone_selected": 2,
       "started_at": "2026-09-12T11:10:43.531908+00:00",
+      "status": "completed"
+    },
+    {
+      "discovered": 155,
+      "finished_at": "2026-09-12T17:47:38.051514+00:00",
+      "game_selection_reasons": {
+        "already_posted": 27,
+        "game_source_duplicates": 0,
+        "not_game_story": 122,
+        "quality_low": 2,
+        "schedule_grounded_threads": 0,
+        "selected_game_stories": 0,
+        "selected_game_threads": 0,
+        "stale_game_story": 4,
+        "unrouted_game_stories": 0
+      },
+      "game_stories_selected": 0,
+      "game_threads_selected": 0,
+      "schedule_grounded_threads": 0,
+      "selection_reasons": {
+        "already_posted": 48,
+        "deferred_for_breaking_news": 1,
+        "eligible": 2,
+        "quality_low": 14,
+        "selected": 1,
+        "stale": 57,
+        "story_already_posted": 1
+      },
+      "sources_failed": 0,
+      "sources_ok": 8,
+      "standalone_selected": 1,
+      "started_at": "2026-09-12T17:47:09.160018+00:00",
       "status": "completed"
     }
   ]
