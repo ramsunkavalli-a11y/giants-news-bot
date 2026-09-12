@@ -1741,6 +1741,24 @@
       "source": "San Francisco Chronicle",
       "title": "Giants’ bid for fourth straight win done in by Padres’ fast start",
       "url": "https://www.sfchronicle.com/sports/giants/article/sf-giants-bid-fourth-straight-win-comes-short-22428184.php"
+    },
+    {
+      "author": "Maria Guardado",
+      "game_key": "",
+      "kind": "standalone",
+      "posted_at": "2026-09-12T11:10:56.828992+00:00",
+      "source": "MLB.com",
+      "title": "Devers lives up to 'Swing of the Day' with grand slam",
+      "url": "https://www.mlb.com/giants/news/rafael-devers-hits-9th-career-grand-slam-in-giants-loss-to-padres"
+    },
+    {
+      "author": "Will Simonds",
+      "game_key": "",
+      "kind": "standalone",
+      "posted_at": "2026-09-12T11:10:58.860520+00:00",
+      "source": "NBC Sports Bay Area",
+      "title": "Devers hits grand slam in loss",
+      "url": "https://www.nbcsportsbayarea.com/mlb/san-francisco-giants/observations-rafael-devers-grand-slam-robbie-ray-padres/1962823/"
     }
   ],
   "posted_urls": {
@@ -1804,6 +1822,7 @@
     "https://www.mlb.com/giants/news/rafael-devers-early-homer-sparks-giants-win-over-pirates": "2026-09-03T07:20:11.344689+00:00",
     "https://www.mlb.com/giants/news/rafael-devers-giants-win-series-opener-vs-cardinals": "2026-09-08T07:22:58.066499+00:00",
     "https://www.mlb.com/giants/news/rafael-devers-hits-3-run-homer-as-giants-beat-reds": "2026-08-25T07:26:56.792754+00:00",
+    "https://www.mlb.com/giants/news/rafael-devers-hits-9th-career-grand-slam-in-giants-loss-to-padres": "2026-09-12T11:10:56.828992+00:00",
     "https://www.mlb.com/giants/news/ron-wotus-ejected-before-game-1-of-doubleheader-vs-d-backs": "2026-08-29T22:43:06.267880+00:00",
     "https://www.mlb.com/giants/news/tony-vitello-ejected-in-first-inning-against-reds": "2026-08-27T13:00:23.831536+00:00",
     "https://www.mlb.com/giants/news/top-storylines-from-each-giants-minor-league-affiliate": "2026-09-10T18:37:18.709030+00:00",
@@ -1837,6 +1856,7 @@
     "https://www.nbcsportsbayarea.com/mlb/san-francisco-giants/matt-wilkinson-outing-red-sox/1958333/": "2026-08-24T16:04:09.316583+00:00",
     "https://www.nbcsportsbayarea.com/mlb/san-francisco-giants/matt-wilkinson-sweep-red-sox/1958235/": "2026-08-24T06:03:10.132738+00:00",
     "https://www.nbcsportsbayarea.com/mlb/san-francisco-giants/mike-krukow-catchphrases-origins/1958410/": "2026-08-25T03:27:26.116254+00:00",
+    "https://www.nbcsportsbayarea.com/mlb/san-francisco-giants/observations-rafael-devers-grand-slam-robbie-ray-padres/1962823/": "2026-09-12T11:10:58.860520+00:00",
     "https://www.nbcsportsbayarea.com/mlb/san-francisco-giants/rafael-devers-boston-return-logan-webb/1958062/": "2026-08-23T02:08:51.373827+00:00",
     "https://www.nbcsportsbayarea.com/mlb/san-francisco-giants/rafael-devers-bryce-eldridge-observations/1961401/": "2026-09-08T07:22:55.076668+00:00",
     "https://www.nbcsportsbayarea.com/mlb/san-francisco-giants/rafael-devers-bryce-eldridge-robbie-ray/1962874/": "2026-09-12T07:18:44.440327+00:00",
@@ -2443,6 +2463,39 @@
       "sources_ok": 8,
       "standalone_selected": 1,
       "started_at": "2026-09-12T07:18:07.478579+00:00",
+      "status": "completed"
+    },
+    {
+      "discovered": 153,
+      "finished_at": "2026-09-12T11:10:59.663774+00:00",
+      "game_selection_reasons": {
+        "already_posted": 25,
+        "eligible_game_story": 2,
+        "game_source_duplicates": 0,
+        "not_game_story": 120,
+        "quality_low": 2,
+        "schedule_grounded_threads": 0,
+        "selected_game_stories": 0,
+        "selected_game_threads": 0,
+        "stale_game_story": 4,
+        "unrouted_game_stories": 2
+      },
+      "game_stories_selected": 0,
+      "game_threads_selected": 0,
+      "schedule_grounded_threads": 0,
+      "selection_reasons": {
+        "already_posted": 47,
+        "deferred_for_breaking_news": 1,
+        "eligible": 3,
+        "quality_low": 14,
+        "selected": 2,
+        "stale": 57,
+        "story_already_posted": 1
+      },
+      "sources_failed": 0,
+      "sources_ok": 8,
+      "standalone_selected": 2,
+      "started_at": "2026-09-12T11:10:43.531908+00:00",
       "status": "completed"
     }
   ]
