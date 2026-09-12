@@ -279,15 +279,6 @@
       "author": "Alex Pavlovic",
       "game_key": "",
       "kind": "standalone",
-      "posted_at": "2026-08-22T20:47:21.092618+00:00",
-      "source": "NBC Sports Bay Area",
-      "title": "Erik Miller has been good fit for Red Sox after ‘surprising' Giants trade",
-      "url": "https://www.nbcsportsbayarea.com/mlb/san-francisco-giants/erik-miller-red-sox-trade/1958098/"
-    },
-    {
-      "author": "Alex Pavlovic",
-      "game_key": "",
-      "kind": "standalone",
       "posted_at": "2026-08-23T02:08:51.373827+00:00",
       "source": "NBC Sports Bay Area",
       "title": "Devers unfazed in Boston",
@@ -1768,6 +1759,15 @@
       "source": "NBC Sports Bay Area",
       "title": "The other side of Robbie Ray trade with Padres is looking pretty good for Giants",
       "url": "https://www.nbcsportsbayarea.com/mlb/san-francisco-giants/robbie-ray-trade-padres-analysis/1962901/"
+    },
+    {
+      "author": "John Shea",
+      "game_key": "",
+      "kind": "standalone",
+      "posted_at": "2026-09-12T22:26:52.906809+00:00",
+      "source": "San Francisco Standard",
+      "title": "Giants outfield prospect Scott Bandura to join team in San Francisco",
+      "url": "https://sfstandard.com/2026/09/12/scott-bandura-sf-giants-promotion-call-up/"
     }
   ],
   "posted_urls": {
@@ -1786,6 +1786,7 @@
     "https://sfstandard.com/2026/09/04/patrick-bailey-trade-sf-giants-catcher-depth/": "2026-09-04T18:32:08.759540+00:00",
     "https://sfstandard.com/2026/09/08/sf-giants-ownership-larry-baer-buster-posey/": "2026-09-09T11:45:53.273105+00:00",
     "https://sfstandard.com/2026/09/09/sf-giants-richard-chaifetz-ownership-stake/": "2026-09-09T18:46:38.685699+00:00",
+    "https://sfstandard.com/2026/09/12/scott-bandura-sf-giants-promotion-call-up/": "2026-09-12T22:26:52.906809+00:00",
     "https://sfstandard.com/opinion/2026/09/10/burning-man-cartoon-giants/": "2026-09-10T23:19:45.169717+00:00",
     "https://sfstandard.com/section-415/2026/09/01/section-415-podcast-giants-partnership-kalshi-part-dangerous-trend/": "2026-09-01T23:28:20.207510+00:00",
     "https://sfstandard.com/section-415/2026/09/08/section-415-podcast-uncovering-mysteries-giants-ownership/": "2026-09-08T23:31:38.419100+00:00",
@@ -1853,7 +1854,6 @@
     "https://www.nbcsportsbayarea.com/mlb/san-francisco-giants/cesar-perdomo-series-loss-mets/1961155/": "2026-09-06T22:12:13.759785+00:00",
     "https://www.nbcsportsbayarea.com/mlb/san-francisco-giants/christian-koss-increased-role-2026/1961822/": "2026-09-09T18:46:34.848433+00:00",
     "https://www.nbcsportsbayarea.com/mlb/san-francisco-giants/drew-gilbert-energy-maturation-2026/1959252/": "2026-08-28T14:31:38.314310+00:00",
-    "https://www.nbcsportsbayarea.com/mlb/san-francisco-giants/erik-miller-red-sox-trade/1958098/": "2026-08-22T20:47:21.092618+00:00",
     "https://www.nbcsportsbayarea.com/mlb/san-francisco-giants/jackson-flora-minor-league-debut/1960943/": "2026-09-06T17:38:47.641457+00:00",
     "https://www.nbcsportsbayarea.com/mlb/san-francisco-giants/jackson-flora-san-jose-giants/1962614/": "2026-09-11T18:42:17.277010+00:00",
     "https://www.nbcsportsbayarea.com/mlb/san-francisco-giants/leadoff-hitter-lineup-2026-season/1958556/": "2026-08-25T16:08:40.955118+00:00",
@@ -2538,6 +2538,38 @@
       "sources_ok": 8,
       "standalone_selected": 1,
       "started_at": "2026-09-12T17:47:09.160018+00:00",
+      "status": "completed"
+    },
+    {
+      "discovered": 154,
+      "finished_at": "2026-09-12T22:26:53.710454+00:00",
+      "game_selection_reasons": {
+        "already_posted": 27,
+        "game_source_duplicates": 0,
+        "not_game_story": 121,
+        "quality_low": 2,
+        "schedule_grounded_threads": 0,
+        "selected_game_stories": 0,
+        "selected_game_threads": 0,
+        "stale_game_story": 4,
+        "unrouted_game_stories": 0
+      },
+      "game_stories_selected": 0,
+      "game_threads_selected": 0,
+      "schedule_grounded_threads": 0,
+      "selection_reasons": {
+        "already_posted": 46,
+        "deferred_for_breaking_news": 2,
+        "eligible": 2,
+        "quality_low": 14,
+        "selected": 1,
+        "stale": 57,
+        "story_already_posted": 1
+      },
+      "sources_failed": 0,
+      "sources_ok": 8,
+      "standalone_selected": 1,
+      "started_at": "2026-09-12T22:26:22.515991+00:00",
       "status": "completed"
     }
   ]
