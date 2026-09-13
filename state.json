@@ -261,24 +261,6 @@
   },
   "posted_stories": [
     {
-      "author": "John Shea",
-      "game_key": "",
-      "kind": "standalone",
-      "posted_at": "2026-08-23T15:47:31.695606+00:00",
-      "source": "San Francisco Standard",
-      "title": "How MLB’s looming lockout will shape the Giants’ decisions on prospect promotions",
-      "url": "https://sfstandard.com/2026/08/23/bo-davidson-sf-giants-debut-parks-harber/"
-    },
-    {
-      "author": "Alex Pavlovic",
-      "game_key": "",
-      "kind": "standalone",
-      "posted_at": "2026-08-23T15:47:33.946614+00:00",
-      "source": "NBC Sports Bay Area",
-      "title": "Giants waste pitching performances",
-      "url": "https://www.nbcsportsbayarea.com/mlb/san-francisco-giants/blade-tidwell-dylan-dmith-red-sox/1958142/"
-    },
-    {
       "author": "Justice delos Santos",
       "game_key": "game:824718",
       "kind": "game_story",
@@ -1726,6 +1708,24 @@
       "source": "NBC Sports Bay Area",
       "title": "Giants' comeback falls short",
       "url": "https://www.nbcsportsbayarea.com/mlb/san-francisco-giants/rafael-devers-comeback-rally-loss-padres/1962932/"
+    },
+    {
+      "author": "Grant Brisbee",
+      "game_key": "",
+      "kind": "standalone",
+      "posted_at": "2026-09-13T18:17:41.651339+00:00",
+      "source": "The Athletic",
+      "title": "How the Giants who were dealt away at the trade deadline are doing",
+      "url": "https://www.nytimes.com/athletic/7588953/2026/09/13/giants-trade-deadline-update-mahle/"
+    },
+    {
+      "author": "John Shea",
+      "game_key": "",
+      "kind": "standalone",
+      "posted_at": "2026-09-13T18:17:44.886650+00:00",
+      "source": "San Francisco Standard",
+      "title": "Giants ace Logan Webb got his ‘butt kicked’ this year. He wants to keep pitching anyway",
+      "url": "https://sfstandard.com/2026/09/13/logan-webb-sf-giants-2026-season/"
     }
   ],
   "posted_urls": {
@@ -1735,7 +1735,6 @@
     "https://blogs.fangraphs.com/the-giants-have-been-way-off-baseruns/": "2026-09-04T18:32:05.621525+00:00",
     "https://omny.fm/shows/the-executives-show/giants-knbr-beer-day-preview-larry-baer-on-mike-krukows-legacy-and-a-special-september-celebration": "2026-09-10T23:19:42.710344+00:00",
     "https://omny.fm/shows/the-executives-show/randy-winn-discusses-giants-top-prospects-bryce-eldridge-and-the-future-of-the-farm-system": "2026-09-03T23:25:04.207830+00:00",
-    "https://sfstandard.com/2026/08/23/bo-davidson-sf-giants-debut-parks-harber/": "2026-08-23T15:47:31.695606+00:00",
     "https://sfstandard.com/2026/08/25/sf-giants-worst-lineup-teams-franchise-history/": "2026-08-25T16:08:46.173263+00:00",
     "https://sfstandard.com/2026/08/26/sf-giants-tommy-john-surgery-elbow-injury/": "2026-08-26T16:36:36.584428+00:00",
     "https://sfstandard.com/2026/08/27/sf-giants-ninth-inning-collapse-tony-vitello/": "2026-08-28T00:30:34.082451+00:00",
@@ -1745,6 +1744,7 @@
     "https://sfstandard.com/2026/09/08/sf-giants-ownership-larry-baer-buster-posey/": "2026-09-09T11:45:53.273105+00:00",
     "https://sfstandard.com/2026/09/09/sf-giants-richard-chaifetz-ownership-stake/": "2026-09-09T18:46:38.685699+00:00",
     "https://sfstandard.com/2026/09/12/scott-bandura-sf-giants-promotion-call-up/": "2026-09-12T22:26:52.906809+00:00",
+    "https://sfstandard.com/2026/09/13/logan-webb-sf-giants-2026-season/": "2026-09-13T18:17:44.886650+00:00",
     "https://sfstandard.com/opinion/2026/09/10/burning-man-cartoon-giants/": "2026-09-10T23:19:45.169717+00:00",
     "https://sfstandard.com/section-415/2026/09/01/section-415-podcast-giants-partnership-kalshi-part-dangerous-trend/": "2026-09-01T23:28:20.207510+00:00",
     "https://sfstandard.com/section-415/2026/09/08/section-415-podcast-uncovering-mysteries-giants-ownership/": "2026-09-08T23:31:38.419100+00:00",
@@ -1797,7 +1797,6 @@
     "https://www.nbcsportsbayarea.com/mlb/san-francisco-giants/adrian-houser-flexor-arm-injury-update/1958730/": "2026-08-26T07:28:23.384062+00:00",
     "https://www.nbcsportsbayarea.com/mlb/san-francisco-giants/adrian-houser-injury-cincinnati-reds/1958686/": "2026-08-26T07:28:19.759209+00:00",
     "https://www.nbcsportsbayarea.com/mlb/san-francisco-giants/anthony-molina-adversity-former-team-braves/1959911/": "2026-09-01T07:57:14.160615+00:00",
-    "https://www.nbcsportsbayarea.com/mlb/san-francisco-giants/blade-tidwell-dylan-dmith-red-sox/1958142/": "2026-08-23T15:47:33.946614+00:00",
     "https://www.nbcsportsbayarea.com/mlb/san-francisco-giants/blade-tidwell-loss-pirates/1960655/": "2026-09-03T23:25:06.296369+00:00",
     "https://www.nbcsportsbayarea.com/mlb/san-francisco-giants/blake-tidwell-mindset-after-pirates-loss/1960704/": "2026-09-03T23:25:01.760905+00:00",
     "https://www.nbcsportsbayarea.com/mlb/san-francisco-giants/brady-singer-drew-gilbert-mike-krukow/1958782/": "2026-08-27T00:57:48.010307+00:00",
@@ -1858,6 +1857,7 @@
     "https://www.nytimes.com/athletic/7573981/2026/09/08/giants-elimination-win-cardinals/": "2026-09-08T23:31:46.017459+00:00",
     "https://www.nytimes.com/athletic/7580470/2026/09/09/sf-giants-six-run-rally-sweep-cardinals/": "2026-09-10T07:27:44.988985+00:00",
     "https://www.nytimes.com/athletic/7582259/2026/09/10/sf-giants-bryce-eldridge-rookie-season-analysis/": "2026-09-10T18:37:16.543706+00:00",
+    "https://www.nytimes.com/athletic/7588953/2026/09/13/giants-trade-deadline-update-mahle/": "2026-09-13T18:17:41.651339+00:00",
     "https://www.sfchronicle.com/sports/giants/article/bruce-maxwell-knee-mlb-kaepernick-22410012.php": "2026-09-01T11:57:39.570273+00:00",
     "https://www.sfchronicle.com/sports/giants/article/buster-posey-tony-vitello-see-giants-manager-s-22410003.php": "2026-08-31T05:52:31.277429+00:00",
     "https://www.sfchronicle.com/sports/giants/article/giants-among-5-teams-new-partnership-kalshi-22402851.php": "2026-08-25T21:53:29.098360+00:00",
@@ -2590,6 +2590,38 @@
       "sources_ok": 8,
       "standalone_selected": 0,
       "started_at": "2026-09-13T10:28:05.817716+00:00",
+      "status": "completed"
+    },
+    {
+      "discovered": 153,
+      "finished_at": "2026-09-13T18:17:45.689246+00:00",
+      "game_selection_reasons": {
+        "already_posted": 27,
+        "game_source_duplicates": 0,
+        "not_game_story": 120,
+        "quality_low": 2,
+        "schedule_grounded_threads": 0,
+        "selected_game_stories": 0,
+        "selected_game_threads": 0,
+        "stale_game_story": 4,
+        "unrouted_game_stories": 0
+      },
+      "game_stories_selected": 0,
+      "game_threads_selected": 0,
+      "schedule_grounded_threads": 0,
+      "selection_reasons": {
+        "already_posted": 44,
+        "deferred_for_breaking_news": 2,
+        "eligible": 3,
+        "quality_low": 14,
+        "selected": 2,
+        "stale": 57,
+        "story_already_posted": 1
+      },
+      "sources_failed": 0,
+      "sources_ok": 8,
+      "standalone_selected": 2,
+      "started_at": "2026-09-13T18:17:27.895844+00:00",
       "status": "completed"
     }
   ]
