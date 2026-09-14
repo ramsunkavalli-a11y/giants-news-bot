@@ -262,24 +262,6 @@
   },
   "posted_stories": [
     {
-      "author": "",
-      "game_key": "",
-      "kind": "standalone",
-      "posted_at": "2026-08-24T06:03:07.744982+00:00",
-      "source": "San Francisco Chronicle",
-      "title": "Giants’ Bryce Eldridge headed to bereavement list, will miss series against Reds",
-      "url": "https://www.sfchronicle.com/sports/giants/article/sf-giants-bryce-eldridge-placed-bereavement-list-22400535.php"
-    },
-    {
-      "author": "Alex Pavlovic",
-      "game_key": "",
-      "kind": "standalone",
-      "posted_at": "2026-08-24T06:03:10.132738+00:00",
-      "source": "NBC Sports Bay Area",
-      "title": "Red Sox sweep Giants",
-      "url": "https://www.nbcsportsbayarea.com/mlb/san-francisco-giants/matt-wilkinson-sweep-red-sox/1958235/"
-    },
-    {
       "author": "Alex Pavlovic",
       "game_key": "",
       "kind": "standalone",
@@ -1808,7 +1790,6 @@
     "https://www.nbcsportsbayarea.com/mlb/san-francisco-giants/logan-webb-tony-vitello-loss-reds-analysis/1958875/": "2026-08-27T00:57:40.595738+00:00",
     "https://www.nbcsportsbayarea.com/mlb/san-francisco-giants/matt-wilkinson-debut-loss-diamondbacks/1959520/": "2026-08-30T05:37:47.643670+00:00",
     "https://www.nbcsportsbayarea.com/mlb/san-francisco-giants/matt-wilkinson-outing-red-sox/1958333/": "2026-08-24T16:04:09.316583+00:00",
-    "https://www.nbcsportsbayarea.com/mlb/san-francisco-giants/matt-wilkinson-sweep-red-sox/1958235/": "2026-08-24T06:03:10.132738+00:00",
     "https://www.nbcsportsbayarea.com/mlb/san-francisco-giants/mike-krukow-catchphrases-origins/1958410/": "2026-08-25T03:27:26.116254+00:00",
     "https://www.nbcsportsbayarea.com/mlb/san-francisco-giants/observations-rafael-devers-grand-slam-robbie-ray-padres/1962823/": "2026-09-12T11:10:58.860520+00:00",
     "https://www.nbcsportsbayarea.com/mlb/san-francisco-giants/rafael-devers-bryce-eldridge-observations/1961401/": "2026-09-08T07:22:55.076668+00:00",
@@ -1868,7 +1849,6 @@
     "https://www.sfchronicle.com/sports/giants/article/jonah-cox-flashes-blade-tidwell-s-walks-hurt-22416405.php": "2026-09-03T23:25:09.201439+00:00",
     "https://www.sfchronicle.com/sports/giants/article/not-giants-agree-100-loss-season-matter-22410923.php": "2026-09-01T07:57:15.098593+00:00",
     "https://www.sfchronicle.com/sports/giants/article/sf-giants-bid-fourth-straight-win-comes-short-22428184.php": "2026-09-12T07:18:45.531415+00:00",
-    "https://www.sfchronicle.com/sports/giants/article/sf-giants-bryce-eldridge-placed-bereavement-list-22400535.php": "2026-08-24T06:03:07.744982+00:00",
     "https://www.sfchronicle.com/sports/giants/article/sf-giants-coach-ejected-loss-first-game-22409124.php": "2026-08-30T05:37:48.570631+00:00",
     "https://www.sfchronicle.com/sports/giants/article/sf-giants-get-another-home-run-rafael-devers-loss-22428990.php": "2026-09-13T05:06:23.069891+00:00",
     "https://www.sfchronicle.com/sports/giants/article/sf-giants-lose-pitcher-adrian-houser-apparent-22403130.php": "2026-08-26T07:28:24.437445+00:00",
@@ -2679,6 +2659,38 @@
       "sources_ok": 8,
       "standalone_selected": 1,
       "started_at": "2026-09-14T05:14:25.097562+00:00",
+      "status": "completed"
+    },
+    {
+      "discovered": 154,
+      "finished_at": "2026-09-14T10:52:23.087003+00:00",
+      "game_selection_reasons": {
+        "already_posted": 26,
+        "game_source_duplicates": 0,
+        "not_game_story": 122,
+        "quality_low": 2,
+        "schedule_grounded_threads": 0,
+        "selected_game_stories": 0,
+        "selected_game_threads": 0,
+        "stale_game_story": 4,
+        "unrouted_game_stories": 0
+      },
+      "game_stories_selected": 0,
+      "game_threads_selected": 0,
+      "schedule_grounded_threads": 0,
+      "selection_reasons": {
+        "already_posted": 43,
+        "deferred_for_breaking_news": 1,
+        "eligible": 8,
+        "quality_low": 13,
+        "selected": 0,
+        "stale": 57,
+        "story_already_posted": 8
+      },
+      "sources_failed": 0,
+      "sources_ok": 8,
+      "standalone_selected": 0,
+      "started_at": "2026-09-14T10:52:03.489771+00:00",
       "status": "completed"
     }
   ]
