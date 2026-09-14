@@ -98,14 +98,14 @@
       "game_pk": 823171,
       "opponent": "padres",
       "parent": {
-        "cid": "bafyreibzj6flevoaq2nu63fnsvob47xfjmqcr5vyrcwmunbj3o45rjbw6m",
-        "uri": "at://did:plc:gkkepfzghvnfrkrohm2c4nwy/app.bsky.feed.post/3mvhe3ukond2g"
+        "cid": "bafyreia62bdpbshacoer5z656iv4nv4rt5yfwpddmjn6qj7nxtayzykdxu",
+        "uri": "at://did:plc:gkkepfzghvnfrkrohm2c4nwy/app.bsky.feed.post/3mvivdkhou62a"
       },
       "root": {
         "cid": "bafyreibzj6flevoaq2nu63fnsvob47xfjmqcr5vyrcwmunbj3o45rjbw6m",
         "uri": "at://did:plc:gkkepfzghvnfrkrohm2c4nwy/app.bsky.feed.post/3mvhe3ukond2g"
       },
-      "updated_at": "2026-09-14T05:14:54.454127+00:00"
+      "updated_at": "2026-09-14T19:56:05.793200+00:00"
     },
     "game:823172": {
       "created_at": "2026-09-09T23:26:13.955097+00:00",
@@ -261,15 +261,6 @@
     }
   },
   "posted_stories": [
-    {
-      "author": "Alex Pavlovic",
-      "game_key": "",
-      "kind": "standalone",
-      "posted_at": "2026-08-24T16:04:09.316583+00:00",
-      "source": "NBC Sports Bay Area",
-      "title": "Matt Wilkinson's latest Giants start a learning experience; Jonah Cox snaps skid",
-      "url": "https://www.nbcsportsbayarea.com/mlb/san-francisco-giants/matt-wilkinson-outing-red-sox/1958333/"
-    },
     {
       "author": "Grant Brisbee",
       "game_key": "game:824720",
@@ -1700,6 +1691,24 @@
       "source": "NBC Sports Bay Area",
       "title": "What we learned as Logan Webb puts Giants in early hole during loss to Padres",
       "url": "https://www.nbcsportsbayarea.com/mlb/san-francisco-giants/logan-webb-san-diego-padres-2/1963153/"
+    },
+    {
+      "author": "Kerry Crowley",
+      "game_key": "",
+      "kind": "standalone",
+      "posted_at": "2026-09-14T19:56:01.127175+00:00",
+      "source": "San Francisco Standard",
+      "title": "Who’s left? Why the Giants’ lineup has never looked like this",
+      "url": "https://sfstandard.com/2026/09/14/who-s-left-giants-lineup-has-never-looked/"
+    },
+    {
+      "author": "Justice delos Santos",
+      "game_key": "game:823171",
+      "kind": "game_story",
+      "posted_at": "2026-09-14T19:56:05.793223+00:00",
+      "source": "Mercury News",
+      "title": "SF Giants swept by Padres as Webb roughed up, but Bandura reaches twice in debut",
+      "url": "https://www.mercurynews.com/2026/09/13/sf-giants-swept-by-padres-as-webb-roughed-up-but-bandura-reaches-twice-in-debut/"
     }
   ],
   "posted_urls": {
@@ -1719,6 +1728,7 @@
     "https://sfstandard.com/2026/09/09/sf-giants-richard-chaifetz-ownership-stake/": "2026-09-09T18:46:38.685699+00:00",
     "https://sfstandard.com/2026/09/12/scott-bandura-sf-giants-promotion-call-up/": "2026-09-12T22:26:52.906809+00:00",
     "https://sfstandard.com/2026/09/13/logan-webb-sf-giants-2026-season/": "2026-09-13T18:17:44.886650+00:00",
+    "https://sfstandard.com/2026/09/14/who-s-left-giants-lineup-has-never-looked/": "2026-09-14T19:56:01.127175+00:00",
     "https://sfstandard.com/opinion/2026/09/10/burning-man-cartoon-giants/": "2026-09-10T23:19:45.169717+00:00",
     "https://sfstandard.com/section-415/2026/09/01/section-415-podcast-giants-partnership-kalshi-part-dangerous-trend/": "2026-09-01T23:28:20.207510+00:00",
     "https://sfstandard.com/section-415/2026/09/08/section-415-podcast-uncovering-mysteries-giants-ownership/": "2026-09-08T23:31:38.419100+00:00",
@@ -1746,6 +1756,7 @@
     "https://www.mercurynews.com/2026/09/08/bryce-eldridge-first-base-defense-sf-giants/": "2026-09-08T23:31:41.768560+00:00",
     "https://www.mercurynews.com/2026/09/08/sf-giants-devers-named-national-league-player-of-the-week/": "2026-09-11T23:27:41.979460+00:00",
     "https://www.mercurynews.com/2026/09/10/the-skys-the-limit-sf-giants-top-pitching-prospect-flora-dazzles-as-san-jose-advances-to-championship/": "2026-09-11T18:42:20.446352+00:00",
+    "https://www.mercurynews.com/2026/09/13/sf-giants-swept-by-padres-as-webb-roughed-up-but-bandura-reaches-twice-in-debut/": "2026-09-14T19:56:05.793223+00:00",
     "https://www.mlb.com/giants/news/adrian-houser-placed-on-injured-list-with-right-forearm-strain": "2026-08-27T00:57:43.261305+00:00",
     "https://www.mlb.com/giants/news/bryce-eldridge-hits-a-homer-in-giants-win-over-cardinals": "2026-09-09T07:31:31.714121+00:00",
     "https://www.mlb.com/giants/news/carson-whisenhunt-has-torn-ucl-in-elbow": "2026-08-26T03:34:07.300313+00:00",
@@ -1789,7 +1800,6 @@
     "https://www.nbcsportsbayarea.com/mlb/san-francisco-giants/logan-webb-san-diego-padres-2/1963153/": "2026-09-14T05:14:54.454150+00:00",
     "https://www.nbcsportsbayarea.com/mlb/san-francisco-giants/logan-webb-tony-vitello-loss-reds-analysis/1958875/": "2026-08-27T00:57:40.595738+00:00",
     "https://www.nbcsportsbayarea.com/mlb/san-francisco-giants/matt-wilkinson-debut-loss-diamondbacks/1959520/": "2026-08-30T05:37:47.643670+00:00",
-    "https://www.nbcsportsbayarea.com/mlb/san-francisco-giants/matt-wilkinson-outing-red-sox/1958333/": "2026-08-24T16:04:09.316583+00:00",
     "https://www.nbcsportsbayarea.com/mlb/san-francisco-giants/mike-krukow-catchphrases-origins/1958410/": "2026-08-25T03:27:26.116254+00:00",
     "https://www.nbcsportsbayarea.com/mlb/san-francisco-giants/observations-rafael-devers-grand-slam-robbie-ray-padres/1962823/": "2026-09-12T11:10:58.860520+00:00",
     "https://www.nbcsportsbayarea.com/mlb/san-francisco-giants/rafael-devers-bryce-eldridge-observations/1961401/": "2026-09-08T07:22:55.076668+00:00",
@@ -2691,6 +2701,39 @@
       "sources_ok": 8,
       "standalone_selected": 0,
       "started_at": "2026-09-14T10:52:03.489771+00:00",
+      "status": "completed"
+    },
+    {
+      "discovered": 153,
+      "finished_at": "2026-09-14T19:56:06.596337+00:00",
+      "game_selection_reasons": {
+        "already_posted": 25,
+        "eligible_game_story": 1,
+        "game_source_duplicates": 0,
+        "not_game_story": 121,
+        "quality_low": 2,
+        "schedule_grounded_threads": 1,
+        "selected_game_stories": 1,
+        "selected_game_threads": 1,
+        "stale_game_story": 4,
+        "unrouted_game_stories": 0
+      },
+      "game_stories_selected": 1,
+      "game_threads_selected": 1,
+      "schedule_grounded_threads": 1,
+      "selection_reasons": {
+        "already_posted": 40,
+        "deferred_for_breaking_news": 1,
+        "eligible": 8,
+        "quality_low": 14,
+        "selected": 1,
+        "stale": 58,
+        "story_already_posted": 7
+      },
+      "sources_failed": 0,
+      "sources_ok": 8,
+      "standalone_selected": 1,
+      "started_at": "2026-09-14T19:55:24.450457+00:00",
       "status": "completed"
     }
   ]
