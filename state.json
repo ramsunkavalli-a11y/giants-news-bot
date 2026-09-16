@@ -91,6 +91,22 @@
       },
       "updated_at": "2026-09-08T23:31:46.017439+00:00"
     },
+    "game:823004": {
+      "created_at": "2026-09-16T23:43:55.850927+00:00",
+      "game_day": "2026-09-16",
+      "game_number": 1,
+      "game_pk": 823004,
+      "opponent": "cardinals",
+      "parent": {
+        "cid": "bafyreiheudowqtawb2745ibzjrkrfclge5da5b37x5ueegcltbqd6jsuwe",
+        "uri": "at://did:plc:gkkepfzghvnfrkrohm2c4nwy/app.bsky.feed.post/3mvocys4ydg2g"
+      },
+      "root": {
+        "cid": "bafyreiheudowqtawb2745ibzjrkrfclge5da5b37x5ueegcltbqd6jsuwe",
+        "uri": "at://did:plc:gkkepfzghvnfrkrohm2c4nwy/app.bsky.feed.post/3mvocys4ydg2g"
+      },
+      "updated_at": "2026-09-16T23:43:55.850927+00:00"
+    },
     "game:823171": {
       "created_at": "2026-09-14T05:14:54.454127+00:00",
       "game_day": "2026-09-13",
@@ -1562,6 +1578,24 @@
       "source": "NBC Sports Bay Area",
       "title": "How Mike Krukow believes Bryce Eldridge's success is elevating Giants teammates",
       "url": "https://www.nbcsportsbayarea.com/mlb/san-francisco-giants/mike-krukow-bryce-eldridge-teammates/1963647/"
+    },
+    {
+      "author": "Vince Lontz",
+      "game_key": "",
+      "kind": "standalone",
+      "posted_at": "2026-09-16T23:43:53.437368+00:00",
+      "source": "NBC Sports Bay Area",
+      "title": "Giants' minor-league system earns impressive A+ grade from Baseball America",
+      "url": "https://www.nbcsportsbayarea.com/mlb/san-francisco-giants/giants-minor-league-system/1963701/"
+    },
+    {
+      "author": "Nick Avila",
+      "game_key": "game:823004",
+      "kind": "game_story",
+      "posted_at": "2026-09-16T23:43:55.850945+00:00",
+      "source": "NBC Sports Bay Area",
+      "title": "How Joel Kuhnel made MLB history with save in Giants' win vs. Cardinals",
+      "url": "https://www.nbcsportsbayarea.com/mlb/san-francisco-giants/joel-kuhnel-save-history-cardinals/1963762/"
     }
   ],
   "posted_urls": {
@@ -1636,9 +1670,11 @@
     "https://www.nbcsportsbayarea.com/mlb/san-francisco-giants/cesar-perdomo-series-loss-mets/1961155/": "2026-09-06T22:12:13.759785+00:00",
     "https://www.nbcsportsbayarea.com/mlb/san-francisco-giants/christian-koss-increased-role-2026/1961822/": "2026-09-09T18:46:34.848433+00:00",
     "https://www.nbcsportsbayarea.com/mlb/san-francisco-giants/drew-gilbert-energy-maturation-2026/1959252/": "2026-08-28T14:31:38.314310+00:00",
+    "https://www.nbcsportsbayarea.com/mlb/san-francisco-giants/giants-minor-league-system/1963701/": "2026-09-16T23:43:53.437368+00:00",
     "https://www.nbcsportsbayarea.com/mlb/san-francisco-giants/giants-news/giants-arizona-fall-league/1963446/": "2026-09-15T19:08:46.846830+00:00",
     "https://www.nbcsportsbayarea.com/mlb/san-francisco-giants/jackson-flora-minor-league-debut/1960943/": "2026-09-06T17:38:47.641457+00:00",
     "https://www.nbcsportsbayarea.com/mlb/san-francisco-giants/jackson-flora-san-jose-giants/1962614/": "2026-09-11T18:42:17.277010+00:00",
+    "https://www.nbcsportsbayarea.com/mlb/san-francisco-giants/joel-kuhnel-save-history-cardinals/1963762/": "2026-09-16T23:43:55.850945+00:00",
     "https://www.nbcsportsbayarea.com/mlb/san-francisco-giants/logan-webb-finish-disappointing-2026-season/1961455/": "2026-09-08T23:31:43.977707+00:00",
     "https://www.nbcsportsbayarea.com/mlb/san-francisco-giants/logan-webb-loss-reds-history-analysis/1958802/": "2026-08-27T00:57:45.120792+00:00",
     "https://www.nbcsportsbayarea.com/mlb/san-francisco-giants/logan-webb-paul-skenes-pittsburgh-pirates/1960214/": "2026-09-02T07:16:37.020236+00:00",
@@ -2831,6 +2867,38 @@
       "sources_ok": 8,
       "standalone_selected": 1,
       "started_at": "2026-09-16T19:00:12.024697+00:00",
+      "status": "completed"
+    },
+    {
+      "discovered": 155,
+      "finished_at": "2026-09-16T23:43:56.654249+00:00",
+      "game_selection_reasons": {
+        "already_posted": 19,
+        "eligible_game_story": 2,
+        "game_source_duplicates": 1,
+        "not_game_story": 129,
+        "schedule_grounded_threads": 1,
+        "selected_game_stories": 1,
+        "selected_game_threads": 1,
+        "stale_game_story": 5,
+        "unrouted_game_stories": 0
+      },
+      "game_stories_selected": 1,
+      "game_threads_selected": 1,
+      "schedule_grounded_threads": 1,
+      "selection_reasons": {
+        "already_posted": 43,
+        "deferred_for_breaking_news": 1,
+        "eligible": 8,
+        "quality_low": 17,
+        "selected": 1,
+        "stale": 60,
+        "story_already_posted": 7
+      },
+      "sources_failed": 0,
+      "sources_ok": 8,
+      "standalone_selected": 1,
+      "started_at": "2026-09-16T23:43:27.367523+00:00",
       "status": "completed"
     }
   ]
