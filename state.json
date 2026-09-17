@@ -1539,6 +1539,33 @@
       "source": "San Francisco Standard",
       "title": "Kawakami: How Buster Posey is dealing with this lousy Giants season and approaching 2027",
       "url": "https://sfstandard.com/2026/09/17/buster-posey-sf-giants-2027-plans-strategy/"
+    },
+    {
+      "author": "Alex Simon",
+      "game_key": "",
+      "kind": "standalone",
+      "posted_at": "2026-09-17T23:36:28.032901+00:00",
+      "source": "SFGATE",
+      "title": "As awful season nears end, Buster Posey addresses future in top SF Giants role",
+      "url": "https://www.sfgate.com/giants/article/buster-posey-exec-future-22437061.php"
+    },
+    {
+      "author": "Nick Avila",
+      "game_key": "",
+      "kind": "standalone",
+      "posted_at": "2026-09-17T23:36:30.309804+00:00",
+      "source": "NBC Sports Bay Area",
+      "title": "Buster Posey letting himself ‘dream' as Giants' farm system takes flight",
+      "url": "https://www.nbcsportsbayarea.com/mlb/san-francisco-giants/buster-posey-giants-farm-system/1964037/"
+    },
+    {
+      "author": "Justice delos Santos",
+      "game_key": "",
+      "kind": "standalone",
+      "posted_at": "2026-09-17T23:36:32.019534+00:00",
+      "source": "Mercury News",
+      "title": "‘He’s got so many tools’: How SF Giants’ Cox is making a speedy impression",
+      "url": "https://www.mercurynews.com/2026/09/17/sf-giants-jonah-cox-vitello-stolen-base-rookie-mlb/"
     }
   ],
   "posted_urls": {
@@ -1586,6 +1613,7 @@
     "https://www.mercurynews.com/2026/09/13/sf-giants-swept-by-padres-as-webb-roughed-up-but-bandura-reaches-twice-in-debut/": "2026-09-14T19:56:05.793223+00:00",
     "https://www.mercurynews.com/2026/09/14/logan-webb-sf-giants-shut-down-2026-season/": "2026-09-15T23:35:44.348174+00:00",
     "https://www.mercurynews.com/2026/09/15/sf-giants-avoid-100-loss-season-with-blowout-victory-over-cardinals-bryce-eldridge-turner-hill/": "2026-09-17T07:56:05.206793+00:00",
+    "https://www.mercurynews.com/2026/09/17/sf-giants-jonah-cox-vitello-stolen-base-rookie-mlb/": "2026-09-17T23:36:32.019534+00:00",
     "https://www.mlb.com/giants/news/bryce-eldridge-hits-a-homer-in-giants-win-over-cardinals": "2026-09-09T07:31:31.714121+00:00",
     "https://www.mlb.com/giants/news/giants-earn-comeback-win-to-sweep-cardinals": "2026-09-09T23:26:13.955118+00:00",
     "https://www.mlb.com/giants/news/giants-offense-struggles-series-finale-loss-to-pirates": "2026-09-03T23:25:08.303714+00:00",
@@ -1606,6 +1634,7 @@
     "https://www.nbcsportsbayarea.com/mlb/san-francisco-giants/bryce-eldridge-christian-koss-home-run/1961710/": "2026-09-09T07:31:34.749213+00:00",
     "https://www.nbcsportsbayarea.com/mlb/san-francisco-giants/bryce-eldridge-rafael-devers-pirates/1960513/": "2026-09-03T07:20:09.084779+00:00",
     "https://www.nbcsportsbayarea.com/mlb/san-francisco-giants/bryce-eldridge-shay-whitcomb-cardinals/1961991/": "2026-09-10T07:27:47.964584+00:00",
+    "https://www.nbcsportsbayarea.com/mlb/san-francisco-giants/buster-posey-giants-farm-system/1964037/": "2026-09-17T23:36:30.309804+00:00",
     "https://www.nbcsportsbayarea.com/mlb/san-francisco-giants/buster-posey-tony-vitello-tim-kawakami/1963851/": "2026-09-17T07:56:04.149610+00:00",
     "https://www.nbcsportsbayarea.com/mlb/san-francisco-giants/cesar-perdomo-series-loss-mets/1961155/": "2026-09-06T22:12:13.759785+00:00",
     "https://www.nbcsportsbayarea.com/mlb/san-francisco-giants/christian-koss-increased-role-2026/1961822/": "2026-09-09T18:46:34.848433+00:00",
@@ -1685,6 +1714,7 @@
     "https://www.sfchronicle.com/sports/giants/article/sf-giants-strong-mlb-debut-pitcher-yunior-marte-22409214.php": "2026-08-30T10:35:59.438693+00:00",
     "https://www.sfchronicle.com/sports/giants/article/sf-giants-willy-adames-seeks-september-return-22408533.php": "2026-08-29T03:14:25.936736+00:00",
     "https://www.sfchronicle.com/sports/giants/article/tommy-john-pitcher-giants-22416456.php": "2026-09-04T11:39:05.695525+00:00",
+    "https://www.sfgate.com/giants/article/buster-posey-exec-future-22437061.php": "2026-09-17T23:36:28.032901+00:00",
     "https://www.sfgate.com/giants/article/media-blasts-giants-ad-22416362.php": "2026-09-03T23:25:02.654057+00:00",
     "https://www.sfgate.com/giants/article/mike-krukow-beer-legend-22422336.php": "2026-09-09T18:46:35.845874+00:00",
     "https://www.sfgate.com/giants/article/sf-giants-chicken-tenders-22433120.php": "2026-09-17T11:59:37.599139+00:00",
@@ -2935,6 +2965,39 @@
       "sources_ok": 8,
       "standalone_selected": 3,
       "started_at": "2026-09-17T19:10:19.707764+00:00",
+      "status": "completed"
+    },
+    {
+      "discovered": 161,
+      "finished_at": "2026-09-17T23:36:32.822950+00:00",
+      "game_selection_reasons": {
+        "already_posted": 20,
+        "game_source_duplicates": 0,
+        "not_game_story": 136,
+        "schedule_grounded_threads": 0,
+        "selected_game_stories": 0,
+        "selected_game_threads": 0,
+        "stale_game_story": 5,
+        "unrouted_game_stories": 0
+      },
+      "game_stories_selected": 0,
+      "game_threads_selected": 0,
+      "schedule_grounded_threads": 0,
+      "selection_reasons": {
+        "already_posted": 46,
+        "deferred_for_breaking_news": 1,
+        "eligible": 8,
+        "quality_low": 18,
+        "run_cap": 1,
+        "selected": 3,
+        "source_cap_cluster": 3,
+        "stale": 63,
+        "story_duplicate": 1
+      },
+      "sources_failed": 0,
+      "sources_ok": 8,
+      "standalone_selected": 3,
+      "started_at": "2026-09-17T23:36:14.081352+00:00",
       "status": "completed"
     }
   ]
