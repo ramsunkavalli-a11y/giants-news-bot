@@ -1539,6 +1539,15 @@
       "source": "Mercury News",
       "title": "SF Giants’ All-Star reliever Rodríguez to pitch in Arizona Fall League",
       "url": "https://www.mercurynews.com/2026/09/15/sf-giants-all-star-reliever-rodriguez-to-pitch-in-arizona-fall-league/"
+    },
+    {
+      "author": "Taylor Wirth",
+      "game_key": "",
+      "kind": "standalone",
+      "posted_at": "2026-09-18T11:41:28.121197+00:00",
+      "source": "NBC Sports Bay Area",
+      "title": "Buster Posey shares honest reflection on criticism faced as Giants executive",
+      "url": "https://www.nbcsportsbayarea.com/mlb/san-francisco-giants/buster-posey-reflects-criticism/1963922/"
     }
   ],
   "posted_urls": {
@@ -1606,6 +1615,7 @@
     "https://www.nbcsportsbayarea.com/mlb/san-francisco-giants/bryce-eldridge-rafael-devers-pirates/1960513/": "2026-09-03T07:20:09.084779+00:00",
     "https://www.nbcsportsbayarea.com/mlb/san-francisco-giants/bryce-eldridge-shay-whitcomb-cardinals/1961991/": "2026-09-10T07:27:47.964584+00:00",
     "https://www.nbcsportsbayarea.com/mlb/san-francisco-giants/buster-posey-giants-farm-system/1964037/": "2026-09-17T23:36:30.309804+00:00",
+    "https://www.nbcsportsbayarea.com/mlb/san-francisco-giants/buster-posey-reflects-criticism/1963922/": "2026-09-18T11:41:28.121197+00:00",
     "https://www.nbcsportsbayarea.com/mlb/san-francisco-giants/buster-posey-tony-vitello-tim-kawakami/1963851/": "2026-09-17T07:56:04.149610+00:00",
     "https://www.nbcsportsbayarea.com/mlb/san-francisco-giants/cesar-perdomo-series-loss-mets/1961155/": "2026-09-06T22:12:13.759785+00:00",
     "https://www.nbcsportsbayarea.com/mlb/san-francisco-giants/christian-koss-increased-role-2026/1961822/": "2026-09-09T18:46:34.848433+00:00",
@@ -3000,6 +3010,38 @@
       "sources_ok": 8,
       "standalone_selected": 3,
       "started_at": "2026-09-18T07:33:39.766249+00:00",
+      "status": "completed"
+    },
+    {
+      "discovered": 161,
+      "finished_at": "2026-09-18T11:41:28.924003+00:00",
+      "game_selection_reasons": {
+        "already_posted": 20,
+        "game_source_duplicates": 0,
+        "not_game_story": 137,
+        "schedule_grounded_threads": 0,
+        "selected_game_stories": 0,
+        "selected_game_threads": 0,
+        "stale_game_story": 4,
+        "unrouted_game_stories": 0
+      },
+      "game_stories_selected": 0,
+      "game_threads_selected": 0,
+      "schedule_grounded_threads": 0,
+      "selection_reasons": {
+        "already_posted": 51,
+        "deferred_for_breaking_news": 1,
+        "eligible": 3,
+        "quality_low": 18,
+        "selected": 1,
+        "source_cap_cluster": 1,
+        "stale": 64,
+        "story_already_posted": 1
+      },
+      "sources_failed": 0,
+      "sources_ok": 8,
+      "standalone_selected": 1,
+      "started_at": "2026-09-18T11:41:03.061714+00:00",
       "status": "completed"
     }
   ]
