@@ -204,15 +204,6 @@
   },
   "posted_stories": [
     {
-      "author": "Justice delos Santos",
-      "game_key": "",
-      "kind": "standalone",
-      "posted_at": "2026-08-29T12:48:38.962262+00:00",
-      "source": "Mercury News",
-      "title": "SF Giants’ Adames discusses ‘disappointing’ season, recovery timeline",
-      "url": "https://www.mercurynews.com/2026/08/28/sf-giants-adames-discusses-disappointing-season-recovery-timeline/"
-    },
-    {
       "author": "Maria Guardado",
       "game_key": "",
       "kind": "standalone",
@@ -1525,6 +1516,24 @@
       "source": "NBC Sports Bay Area",
       "title": "Mike Krukow reflects on narrating MVP Baseball video game with Duane Kuiper",
       "url": "https://www.nbcsportsbayarea.com/mlb/san-francisco-giants/krukow-reflects-on-mvp-baseball-games/1962041/"
+    },
+    {
+      "author": "Justice delos Santos",
+      "game_key": "",
+      "kind": "standalone",
+      "posted_at": "2026-09-19T18:09:23.520527+00:00",
+      "source": "Mercury News",
+      "title": "‘We were fully supportive’: Why SF Giants’ Rodríguez pushed to pitch in Arizona Fall League",
+      "url": "https://www.mercurynews.com/2026/09/19/we-were-full-supportive-why-sf-giants-rodriguez-pushed-to-pitch-in-arizona-fall-league/"
+    },
+    {
+      "author": "",
+      "game_key": "",
+      "kind": "standalone",
+      "posted_at": "2026-09-19T18:09:24.416374+00:00",
+      "source": "The Athletic",
+      "title": "Giants notes: Competition for Randy Rodriguez, a head wound for Bryce Eldridge",
+      "url": "https://www.nytimes.com/athletic/7609499/2026/09/19/giants-randy-rodriguez-bryce-eldridge/"
     }
   ],
   "posted_urls": {
@@ -1548,7 +1557,6 @@
     "https://sfstandard.com/opinion/2026/09/10/burning-man-cartoon-giants/": "2026-09-10T23:19:45.169717+00:00",
     "https://sfstandard.com/section-415/2026/09/01/section-415-podcast-giants-partnership-kalshi-part-dangerous-trend/": "2026-09-01T23:28:20.207510+00:00",
     "https://sfstandard.com/section-415/2026/09/08/section-415-podcast-uncovering-mysteries-giants-ownership/": "2026-09-08T23:31:38.419100+00:00",
-    "https://www.mercurynews.com/2026/08/28/sf-giants-adames-discusses-disappointing-season-recovery-timeline/": "2026-08-29T12:48:38.962262+00:00",
     "https://www.mercurynews.com/2026/08/29/martes-strong-debut-eldridges-big-day-lead-sf-giants-to-win-in-game-2-of-doubleheader-vs-diamondbacks/": "2026-08-30T10:35:58.482231+00:00",
     "https://www.mercurynews.com/2026/08/29/sf-giants-wotus-ejected-before-game-1-of-doubleheader-following-contentious-lineup-exchange/": "2026-08-30T10:36:02.787689+00:00",
     "https://www.mercurynews.com/2026/08/31/sf-giants-peyton-bonds-barry-bobby-draft-pick-mlb-home-run-king/": "2026-08-31T20:58:24.739378+00:00",
@@ -1573,6 +1581,7 @@
     "https://www.mercurynews.com/2026/09/17/sf-giants-jonah-cox-vitello-stolen-base-rookie-mlb/": "2026-09-17T23:36:32.019534+00:00",
     "https://www.mercurynews.com/2026/09/18/sf-giants-allow-five-homers-including-four-in-one-inning-in-loss-to-dodgers/": "2026-09-19T07:29:31.289436+00:00",
     "https://www.mercurynews.com/2026/09/18/sf-giants-bryce-eldridge-scratched-from-lineup-due-to-head-laceration/": "2026-09-19T11:24:05.989691+00:00",
+    "https://www.mercurynews.com/2026/09/19/we-were-full-supportive-why-sf-giants-rodriguez-pushed-to-pitch-in-arizona-fall-league/": "2026-09-19T18:09:23.520527+00:00",
     "https://www.mlb.com/giants/news/bryce-eldridge-hits-a-homer-in-giants-win-over-cardinals": "2026-09-09T07:31:31.714121+00:00",
     "https://www.mlb.com/giants/news/giants-earn-comeback-win-to-sweep-cardinals": "2026-09-09T23:26:13.955118+00:00",
     "https://www.mlb.com/giants/news/giants-offense-struggles-series-finale-loss-to-pirates": "2026-09-03T23:25:08.303714+00:00",
@@ -1649,6 +1658,7 @@
     "https://www.nytimes.com/athletic/7602282/2026/09/17/sf-giants-buster-posey-contract-trade-free-agency/": "2026-09-18T07:34:06.699735+00:00",
     "https://www.nytimes.com/athletic/7602367/2026/09/18/sf-giants-trade-proposal-tony-vitello-interview/": "2026-09-18T18:36:31.773726+00:00",
     "https://www.nytimes.com/athletic/7604713/2026/09/17/sf-giants-anthony-molina-role/": "2026-09-17T19:10:45.672090+00:00",
+    "https://www.nytimes.com/athletic/7609499/2026/09/19/giants-randy-rodriguez-bryce-eldridge/": "2026-09-19T18:09:24.416374+00:00",
     "https://www.sfchronicle.com/sports/giants/article/another-giants-rookie-debuts-tying-franchise-22430259.php": "2026-09-14T05:14:51.914094+00:00",
     "https://www.sfchronicle.com/sports/giants/article/bruce-maxwell-knee-mlb-kaepernick-22410012.php": "2026-09-01T11:57:39.570273+00:00",
     "https://www.sfchronicle.com/sports/giants/article/buster-posey-tony-vitello-see-giants-manager-s-22410003.php": "2026-08-31T05:52:31.277429+00:00",
@@ -3147,6 +3157,37 @@
       "sources_ok": 8,
       "standalone_selected": 2,
       "started_at": "2026-09-19T11:23:46.233385+00:00",
+      "status": "completed"
+    },
+    {
+      "discovered": 165,
+      "finished_at": "2026-09-19T18:09:25.219876+00:00",
+      "game_selection_reasons": {
+        "already_posted": 19,
+        "game_source_duplicates": 0,
+        "not_game_story": 140,
+        "schedule_grounded_threads": 0,
+        "selected_game_stories": 0,
+        "selected_game_threads": 0,
+        "stale_game_story": 6,
+        "unrouted_game_stories": 0
+      },
+      "game_stories_selected": 0,
+      "game_threads_selected": 0,
+      "schedule_grounded_threads": 0,
+      "selection_reasons": {
+        "already_posted": 55,
+        "deferred_for_breaking_news": 1,
+        "eligible": 5,
+        "quality_low": 18,
+        "selected": 2,
+        "stale": 61,
+        "story_already_posted": 3
+      },
+      "sources_failed": 0,
+      "sources_ok": 8,
+      "standalone_selected": 2,
+      "started_at": "2026-09-19T18:09:03.409790+00:00",
       "status": "completed"
     }
   ]
