@@ -3189,6 +3189,37 @@
       "standalone_selected": 2,
       "started_at": "2026-09-19T18:09:03.409790+00:00",
       "status": "completed"
+    },
+    {
+      "discovered": 163,
+      "finished_at": "2026-09-19T22:23:32.364116+00:00",
+      "game_selection_reasons": {
+        "already_posted": 19,
+        "game_source_duplicates": 0,
+        "not_game_story": 139,
+        "schedule_grounded_threads": 0,
+        "selected_game_stories": 0,
+        "selected_game_threads": 0,
+        "stale_game_story": 5,
+        "unrouted_game_stories": 0
+      },
+      "game_stories_selected": 0,
+      "game_threads_selected": 0,
+      "schedule_grounded_threads": 0,
+      "selection_reasons": {
+        "already_posted": 56,
+        "deferred_for_breaking_news": 1,
+        "eligible": 4,
+        "quality_low": 17,
+        "selected": 0,
+        "stale": 61,
+        "story_already_posted": 4
+      },
+      "sources_failed": 0,
+      "sources_ok": 8,
+      "standalone_selected": 0,
+      "started_at": "2026-09-19T22:23:08.326692+00:00",
+      "status": "completed"
     }
   ]
 }
