@@ -110,21 +110,6 @@
       },
       "updated_at": "2026-09-12T07:18:45.531393+00:00"
     },
-    "game:823176": {
-      "created_at": "2026-08-30T05:37:45.763300+00:00",
-      "game_day": "2026-08-29",
-      "game_pk": 823177,
-      "opponent": "diamondbacks",
-      "parent": {
-        "cid": "bafyreifajr3z3rbijgrodlv27bplhxm6q4tlf24vnxuzywtaspgjlebnau",
-        "uri": "at://did:plc:gkkepfzghvnfrkrohm2c4nwy/app.bsky.feed.post/3muc72cwsbr24"
-      },
-      "root": {
-        "cid": "bafyreifq6ef5ousdzqrfrhxfyxlzyonrdz2on3tk5mpx5xzr2rxvmfqq6y",
-        "uri": "at://did:plc:gkkepfzghvnfrkrohm2c4nwy/app.bsky.feed.post/3muboewnsi22y"
-      },
-      "updated_at": "2026-08-30T10:36:02.787676+00:00"
-    },
     "game:823340": {
       "created_at": "2026-09-02T07:16:34.456748+00:00",
       "game_day": "2026-09-01",
@@ -200,45 +185,25 @@
         "uri": "at://did:plc:gkkepfzghvnfrkrohm2c4nwy/app.bsky.feed.post/3mvu5x74u652a"
       },
       "updated_at": "2026-09-19T07:29:33.911699+00:00"
+    },
+    "game:823899": {
+      "created_at": "2026-09-20T18:16:09.941728+00:00",
+      "game_day": "2026-09-19",
+      "game_number": 1,
+      "game_pk": 823899,
+      "opponent": "dodgers",
+      "parent": {
+        "cid": "bafyreigngjh6xcaofh2qzhp2ynbhxcrv5pu22pcdw4vfq7ofm7lnfinu3u",
+        "uri": "at://did:plc:gkkepfzghvnfrkrohm2c4nwy/app.bsky.feed.post/3mvxskfbdlf2y"
+      },
+      "root": {
+        "cid": "bafyreigngjh6xcaofh2qzhp2ynbhxcrv5pu22pcdw4vfq7ofm7lnfinu3u",
+        "uri": "at://did:plc:gkkepfzghvnfrkrohm2c4nwy/app.bsky.feed.post/3mvxskfbdlf2y"
+      },
+      "updated_at": "2026-09-20T18:16:09.941728+00:00"
     }
   },
   "posted_stories": [
-    {
-      "author": "Justice delos Santos",
-      "game_key": "game:823176",
-      "kind": "game_story",
-      "posted_at": "2026-08-30T10:35:58.482231+00:00",
-      "source": "Mercury News",
-      "title": "Marte’s strong debut, Eldridge’s big day lead SF Giants to win in Game 2 of doubleheader vs. Diamondbacks",
-      "url": "https://www.mercurynews.com/2026/08/29/martes-strong-debut-eldridges-big-day-lead-sf-giants-to-win-in-game-2-of-doubleheader-vs-diamondbacks/"
-    },
-    {
-      "author": "",
-      "game_key": "game:823176",
-      "kind": "game_story",
-      "posted_at": "2026-08-30T10:35:59.438693+00:00",
-      "source": "San Francisco Chronicle",
-      "title": "Giants’ parade of rookies continues, with Yunior Marte stepping up in win over Arizona",
-      "url": "https://www.sfchronicle.com/sports/giants/article/sf-giants-strong-mlb-debut-pitcher-yunior-marte-22409214.php"
-    },
-    {
-      "author": "Tristi Rodriguez",
-      "game_key": "game:823176",
-      "kind": "game_story",
-      "posted_at": "2026-08-30T10:36:01.643523+00:00",
-      "source": "NBC Sports Bay Area",
-      "title": "Yunior Marte dedicates emotional MLB debut to late brother after Giants' win",
-      "url": "https://www.nbcsportsbayarea.com/mlb/san-francisco-giants/yunior-marte-emotional-debut-brother/1959615/"
-    },
-    {
-      "author": "Justice delos Santos",
-      "game_key": "game:823176",
-      "kind": "game_story",
-      "posted_at": "2026-08-30T10:36:02.787689+00:00",
-      "source": "Mercury News",
-      "title": "Following Wotus’s pregame ejection, SF Giants fall to Diamondbacks in Game 1 of doubleheader",
-      "url": "https://www.mercurynews.com/2026/08/29/sf-giants-wotus-ejected-before-game-1-of-doubleheader-following-contentious-lineup-exchange/"
-    },
     {
       "author": "John Shea",
       "game_key": "",
@@ -1507,6 +1472,42 @@
       "source": "MLB.com",
       "title": "Giants' limited bullpen options put Vitello in tough spot",
       "url": "https://www.mlb.com/giants/news/philip-abner-has-rough-outing-for-second-game-in-a-row"
+    },
+    {
+      "author": "Alex Pavlovic",
+      "game_key": "",
+      "kind": "standalone",
+      "posted_at": "2026-09-20T18:16:02.460225+00:00",
+      "source": "NBC Sports Bay Area",
+      "title": "Giants legend Duane Kuiper reveals throat cancer diagnosis, undergoing treatment",
+      "url": "https://www.nbcsportsbayarea.com/mlb/san-francisco-giants/duane-kuiper-throat-cancer-diagnosis/1964462/"
+    },
+    {
+      "author": "Kerry Crowley",
+      "game_key": "",
+      "kind": "standalone",
+      "posted_at": "2026-09-20T18:16:05.946909+00:00",
+      "source": "San Francisco Standard",
+      "title": "Giants broadcaster Duane Kuiper diagnosed with throat cancer",
+      "url": "https://sfstandard.com/2026/09/20/duane-kuiper-cancer-diagnosis-mike-krukow/"
+    },
+    {
+      "author": "",
+      "game_key": "",
+      "kind": "standalone",
+      "posted_at": "2026-09-20T18:16:06.902198+00:00",
+      "source": "The Athletic",
+      "title": "Giants doomed at Dodger Stadium by another disastrous dugout decision",
+      "url": "https://www.nytimes.com/athletic/7612009/2026/09/20/giants-loss-dodgers-vitello-bullpen/"
+    },
+    {
+      "author": "Justice delos Santos",
+      "game_key": "game:823899",
+      "kind": "game_story",
+      "posted_at": "2026-09-20T18:16:09.941739+00:00",
+      "source": "Mercury News",
+      "title": "Vitello’s risky bullpen gambit dooms SF Giants in loss to Dodgers",
+      "url": "https://www.mercurynews.com/2026/09/19/tony-vitello-philip-abner-risky-bullpen-gambit-dooms-sf-giants-in-loss-to-dodgers/"
     }
   ],
   "posted_urls": {
@@ -1527,11 +1528,10 @@
     "https://sfstandard.com/2026/09/15/greg-papa-tim-flannery-music-concert/": "2026-09-17T07:56:08.680067+00:00",
     "https://sfstandard.com/2026/09/17/buster-posey-sf-giants-2027-plans-strategy/": "2026-09-17T19:10:48.959865+00:00",
     "https://sfstandard.com/2026/09/18/bryce-eldridge-rafael-devers-sf-giants-future/": "2026-09-18T18:36:30.680281+00:00",
+    "https://sfstandard.com/2026/09/20/duane-kuiper-cancer-diagnosis-mike-krukow/": "2026-09-20T18:16:05.946909+00:00",
     "https://sfstandard.com/opinion/2026/09/10/burning-man-cartoon-giants/": "2026-09-10T23:19:45.169717+00:00",
     "https://sfstandard.com/section-415/2026/09/01/section-415-podcast-giants-partnership-kalshi-part-dangerous-trend/": "2026-09-01T23:28:20.207510+00:00",
     "https://sfstandard.com/section-415/2026/09/08/section-415-podcast-uncovering-mysteries-giants-ownership/": "2026-09-08T23:31:38.419100+00:00",
-    "https://www.mercurynews.com/2026/08/29/martes-strong-debut-eldridges-big-day-lead-sf-giants-to-win-in-game-2-of-doubleheader-vs-diamondbacks/": "2026-08-30T10:35:58.482231+00:00",
-    "https://www.mercurynews.com/2026/08/29/sf-giants-wotus-ejected-before-game-1-of-doubleheader-following-contentious-lineup-exchange/": "2026-08-30T10:36:02.787689+00:00",
     "https://www.mercurynews.com/2026/08/31/sf-giants-peyton-bonds-barry-bobby-draft-pick-mlb-home-run-king/": "2026-08-31T20:58:24.739378+00:00",
     "https://www.mercurynews.com/2026/09/01/sf-giants-erase-six-run-deficit-still-lose-in-walk-off-fashion-to-pirates/": "2026-09-02T07:16:29.865555+00:00",
     "https://www.mercurynews.com/2026/09/01/sf-giants-finalizing-minor-league-deal-with-son-of-dusty-baker-report/": "2026-09-01T23:28:22.268705+00:00",
@@ -1554,6 +1554,7 @@
     "https://www.mercurynews.com/2026/09/17/sf-giants-jonah-cox-vitello-stolen-base-rookie-mlb/": "2026-09-17T23:36:32.019534+00:00",
     "https://www.mercurynews.com/2026/09/18/sf-giants-allow-five-homers-including-four-in-one-inning-in-loss-to-dodgers/": "2026-09-19T07:29:31.289436+00:00",
     "https://www.mercurynews.com/2026/09/18/sf-giants-bryce-eldridge-scratched-from-lineup-due-to-head-laceration/": "2026-09-19T11:24:05.989691+00:00",
+    "https://www.mercurynews.com/2026/09/19/tony-vitello-philip-abner-risky-bullpen-gambit-dooms-sf-giants-in-loss-to-dodgers/": "2026-09-20T18:16:09.941739+00:00",
     "https://www.mercurynews.com/2026/09/19/we-were-full-supportive-why-sf-giants-rodriguez-pushed-to-pitch-in-arizona-fall-league/": "2026-09-19T18:09:23.520527+00:00",
     "https://www.mlb.com/giants/news/bryce-eldridge-hits-a-homer-in-giants-win-over-cardinals": "2026-09-09T07:31:31.714121+00:00",
     "https://www.mlb.com/giants/news/bryce-eldridge-out-for-second-straight-game-with-head-laceration": "2026-09-20T05:08:50.330486+00:00",
@@ -1580,6 +1581,7 @@
     "https://www.nbcsportsbayarea.com/mlb/san-francisco-giants/buster-posey-tony-vitello-tim-kawakami/1963851/": "2026-09-17T07:56:04.149610+00:00",
     "https://www.nbcsportsbayarea.com/mlb/san-francisco-giants/cesar-perdomo-series-loss-mets/1961155/": "2026-09-06T22:12:13.759785+00:00",
     "https://www.nbcsportsbayarea.com/mlb/san-francisco-giants/christian-koss-increased-role-2026/1961822/": "2026-09-09T18:46:34.848433+00:00",
+    "https://www.nbcsportsbayarea.com/mlb/san-francisco-giants/duane-kuiper-throat-cancer-diagnosis/1964462/": "2026-09-20T18:16:02.460225+00:00",
     "https://www.nbcsportsbayarea.com/mlb/san-francisco-giants/eldridge-in-elite-company/1963790/": "2026-09-17T11:59:39.208144+00:00",
     "https://www.nbcsportsbayarea.com/mlb/san-francisco-giants/giants-minor-league-system/1963701/": "2026-09-16T23:43:53.437368+00:00",
     "https://www.nbcsportsbayarea.com/mlb/san-francisco-giants/giants-news/giants-arizona-fall-league/1963446/": "2026-09-15T19:08:46.846830+00:00",
@@ -1611,7 +1613,6 @@
     "https://www.nbcsportsbayarea.com/mlb/san-francisco-giants/tony-vitello-ejected-new-york-mets/1961023/": "2026-09-05T22:09:20.096263+00:00",
     "https://www.nbcsportsbayarea.com/mlb/san-francisco-giants/tony-vitello-explanation-ejection-win-mets/1961068/": "2026-09-06T04:56:05.268024+00:00",
     "https://www.nbcsportsbayarea.com/mlb/san-francisco-giants/victor-bericoto-bullpen-recap-loss-dodgers/1964387/": "2026-09-20T05:08:47.839358+00:00",
-    "https://www.nbcsportsbayarea.com/mlb/san-francisco-giants/yunior-marte-emotional-debut-brother/1959615/": "2026-08-30T10:36:01.643523+00:00",
     "https://www.nytimes.com/athletic/7550660/2026/08/31/sf-giants-stats-facts/": "2026-08-31T20:58:26.660696+00:00",
     "https://www.nytimes.com/athletic/7557005/2026/09/02/sf-giants-outfield-depth-chart-bo-davidson/": "2026-09-02T18:51:45.550543+00:00",
     "https://www.nytimes.com/athletic/7557208/2026/09/01/sf-giants-franchise-bloodlines-darren-baker/": "2026-09-02T07:16:32.299016+00:00",
@@ -1630,6 +1631,7 @@
     "https://www.nytimes.com/athletic/7602367/2026/09/18/sf-giants-trade-proposal-tony-vitello-interview/": "2026-09-18T18:36:31.773726+00:00",
     "https://www.nytimes.com/athletic/7604713/2026/09/17/sf-giants-anthony-molina-role/": "2026-09-17T19:10:45.672090+00:00",
     "https://www.nytimes.com/athletic/7609499/2026/09/19/giants-randy-rodriguez-bryce-eldridge/": "2026-09-19T18:09:24.416374+00:00",
+    "https://www.nytimes.com/athletic/7612009/2026/09/20/giants-loss-dodgers-vitello-bullpen/": "2026-09-20T18:16:06.902198+00:00",
     "https://www.sfchronicle.com/sports/giants/article/another-giants-rookie-debuts-tying-franchise-22430259.php": "2026-09-14T05:14:51.914094+00:00",
     "https://www.sfchronicle.com/sports/giants/article/bruce-maxwell-knee-mlb-kaepernick-22410012.php": "2026-09-01T11:57:39.570273+00:00",
     "https://www.sfchronicle.com/sports/giants/article/buster-posey-tony-vitello-see-giants-manager-s-22410003.php": "2026-08-31T05:52:31.277429+00:00",
@@ -1648,7 +1650,6 @@
     "https://www.sfchronicle.com/sports/giants/article/sf-giants-get-another-home-run-rafael-devers-loss-22428990.php": "2026-09-13T05:06:23.069891+00:00",
     "https://www.sfchronicle.com/sports/giants/article/sf-giants-rebound-feel-good-win-pirates-crushing-22415343.php": "2026-09-03T07:20:12.294100+00:00",
     "https://www.sfchronicle.com/sports/giants/article/sf-giants-rookies-castoffs-stepping-up-finding-22423074.php": "2026-09-09T07:31:32.622719+00:00",
-    "https://www.sfchronicle.com/sports/giants/article/sf-giants-strong-mlb-debut-pitcher-yunior-marte-22409214.php": "2026-08-30T10:35:59.438693+00:00",
     "https://www.sfchronicle.com/sports/giants/article/tommy-john-pitcher-giants-22416456.php": "2026-09-04T11:39:05.695525+00:00",
     "https://www.sfgate.com/giants/article/buster-posey-exec-future-22437061.php": "2026-09-17T23:36:28.032901+00:00",
     "https://www.sfgate.com/giants/article/media-blasts-giants-ad-22416362.php": "2026-09-03T23:25:02.654057+00:00",
@@ -3251,6 +3252,38 @@
       "sources_ok": 8,
       "standalone_selected": 1,
       "started_at": "2026-09-20T09:56:48.654277+00:00",
+      "status": "completed"
+    },
+    {
+      "discovered": 165,
+      "finished_at": "2026-09-20T18:16:10.743889+00:00",
+      "game_selection_reasons": {
+        "already_posted": 18,
+        "eligible_game_story": 1,
+        "game_source_duplicates": 0,
+        "not_game_story": 141,
+        "schedule_grounded_threads": 1,
+        "selected_game_stories": 1,
+        "selected_game_threads": 1,
+        "stale_game_story": 5,
+        "unrouted_game_stories": 0
+      },
+      "game_stories_selected": 1,
+      "game_threads_selected": 1,
+      "schedule_grounded_threads": 1,
+      "selection_reasons": {
+        "already_posted": 56,
+        "deferred_for_breaking_news": 1,
+        "eligible": 6,
+        "quality_low": 17,
+        "selected": 3,
+        "stale": 61,
+        "story_already_posted": 3
+      },
+      "sources_failed": 0,
+      "sources_ok": 8,
+      "standalone_selected": 3,
+      "started_at": "2026-09-20T18:15:38.295733+00:00",
       "status": "completed"
     }
   ]
