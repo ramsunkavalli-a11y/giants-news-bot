@@ -207,15 +207,6 @@
       "author": "Maria Guardado",
       "game_key": "",
       "kind": "standalone",
-      "posted_at": "2026-08-29T22:43:06.267880+00:00",
-      "source": "MLB.com",
-      "title": "Wotus ejected during lineup card exchange after heated conversation",
-      "url": "https://www.mlb.com/giants/news/ron-wotus-ejected-before-game-1-of-doubleheader-vs-d-backs"
-    },
-    {
-      "author": "Maria Guardado",
-      "game_key": "",
-      "kind": "standalone",
       "posted_at": "2026-08-30T05:37:41.239285+00:00",
       "source": "MLB.com",
       "title": "Kent joins Giants royalty with number retirement, and has more than just a hug for Bonds",
@@ -1534,6 +1525,24 @@
       "source": "The Athletic",
       "title": "Giants notes: Competition for Randy Rodriguez, a head wound for Bryce Eldridge",
       "url": "https://www.nytimes.com/athletic/7609499/2026/09/19/giants-randy-rodriguez-bryce-eldridge/"
+    },
+    {
+      "author": "Will Simonds",
+      "game_key": "",
+      "kind": "standalone",
+      "posted_at": "2026-09-20T05:08:47.839358+00:00",
+      "source": "NBC Sports Bay Area",
+      "title": "Victor Bericoto's big night not enough as Giants' bullpen falters vs. Dodgers",
+      "url": "https://www.nbcsportsbayarea.com/mlb/san-francisco-giants/victor-bericoto-bullpen-recap-loss-dodgers/1964387/"
+    },
+    {
+      "author": "Maria Guardado",
+      "game_key": "",
+      "kind": "standalone",
+      "posted_at": "2026-09-20T05:08:50.330486+00:00",
+      "source": "MLB.com",
+      "title": "Eldridge (head laceration) out of lineup for second straight game",
+      "url": "https://www.mlb.com/giants/news/bryce-eldridge-out-for-second-straight-game-with-head-laceration"
     }
   ],
   "posted_urls": {
@@ -1583,6 +1592,7 @@
     "https://www.mercurynews.com/2026/09/18/sf-giants-bryce-eldridge-scratched-from-lineup-due-to-head-laceration/": "2026-09-19T11:24:05.989691+00:00",
     "https://www.mercurynews.com/2026/09/19/we-were-full-supportive-why-sf-giants-rodriguez-pushed-to-pitch-in-arizona-fall-league/": "2026-09-19T18:09:23.520527+00:00",
     "https://www.mlb.com/giants/news/bryce-eldridge-hits-a-homer-in-giants-win-over-cardinals": "2026-09-09T07:31:31.714121+00:00",
+    "https://www.mlb.com/giants/news/bryce-eldridge-out-for-second-straight-game-with-head-laceration": "2026-09-20T05:08:50.330486+00:00",
     "https://www.mlb.com/giants/news/giants-earn-comeback-win-to-sweep-cardinals": "2026-09-09T23:26:13.955118+00:00",
     "https://www.mlb.com/giants/news/giants-offense-struggles-series-finale-loss-to-pirates": "2026-09-03T23:25:08.303714+00:00",
     "https://www.mlb.com/giants/news/jackson-flora-san-jose-giants-going-to-2026-cal-league-championship-series": "2026-09-11T07:25:53.690982+00:00",
@@ -1592,7 +1602,6 @@
     "https://www.mlb.com/giants/news/rafael-devers-early-homer-sparks-giants-win-over-pirates": "2026-09-03T07:20:11.344689+00:00",
     "https://www.mlb.com/giants/news/rafael-devers-giants-win-series-opener-vs-cardinals": "2026-09-08T07:22:58.066499+00:00",
     "https://www.mlb.com/giants/news/rafael-devers-hits-9th-career-grand-slam-in-giants-loss-to-padres": "2026-09-12T11:10:56.828992+00:00",
-    "https://www.mlb.com/giants/news/ron-wotus-ejected-before-game-1-of-doubleheader-vs-d-backs": "2026-08-29T22:43:06.267880+00:00",
     "https://www.mlb.com/giants/news/top-storylines-from-each-giants-minor-league-affiliate": "2026-09-10T18:37:18.709030+00:00",
     "https://www.nbcsportsbayarea.com/mlb/san-francisco-giants/anthony-molina-adversity-former-team-braves/1959911/": "2026-09-01T07:57:14.160615+00:00",
     "https://www.nbcsportsbayarea.com/mlb/san-francisco-giants/blade-tidwell-loss-pirates/1960655/": "2026-09-03T23:25:06.296369+00:00",
@@ -1639,6 +1648,7 @@
     "https://www.nbcsportsbayarea.com/mlb/san-francisco-giants/ryan-walker-joel-kuhnel-roster-moves/1960997/": "2026-09-06T09:34:48.461814+00:00",
     "https://www.nbcsportsbayarea.com/mlb/san-francisco-giants/tony-vitello-ejected-new-york-mets/1961023/": "2026-09-05T22:09:20.096263+00:00",
     "https://www.nbcsportsbayarea.com/mlb/san-francisco-giants/tony-vitello-explanation-ejection-win-mets/1961068/": "2026-09-06T04:56:05.268024+00:00",
+    "https://www.nbcsportsbayarea.com/mlb/san-francisco-giants/victor-bericoto-bullpen-recap-loss-dodgers/1964387/": "2026-09-20T05:08:47.839358+00:00",
     "https://www.nbcsportsbayarea.com/mlb/san-francisco-giants/yunior-marte-debut-win-diamondbacks/1959577/": "2026-08-30T05:37:45.763324+00:00",
     "https://www.nbcsportsbayarea.com/mlb/san-francisco-giants/yunior-marte-emotional-debut-brother/1959615/": "2026-08-30T10:36:01.643523+00:00",
     "https://www.nytimes.com/athletic/7550660/2026/08/31/sf-giants-stats-facts/": "2026-08-31T20:58:26.660696+00:00",
@@ -3219,6 +3229,37 @@
       "sources_ok": 8,
       "standalone_selected": 0,
       "started_at": "2026-09-19T22:23:08.326692+00:00",
+      "status": "completed"
+    },
+    {
+      "discovered": 164,
+      "finished_at": "2026-09-20T05:08:51.133971+00:00",
+      "game_selection_reasons": {
+        "already_posted": 18,
+        "game_source_duplicates": 0,
+        "not_game_story": 141,
+        "schedule_grounded_threads": 0,
+        "selected_game_stories": 0,
+        "selected_game_threads": 0,
+        "stale_game_story": 5,
+        "unrouted_game_stories": 0
+      },
+      "game_stories_selected": 0,
+      "game_threads_selected": 0,
+      "schedule_grounded_threads": 0,
+      "selection_reasons": {
+        "already_posted": 56,
+        "deferred_for_breaking_news": 1,
+        "eligible": 6,
+        "quality_low": 17,
+        "selected": 2,
+        "stale": 61,
+        "story_already_posted": 4
+      },
+      "sources_failed": 0,
+      "sources_ok": 8,
+      "standalone_selected": 2,
+      "started_at": "2026-09-20T05:08:22.790305+00:00",
       "status": "completed"
     }
   ]
