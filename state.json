@@ -205,15 +205,6 @@
   },
   "posted_stories": [
     {
-      "author": "John Shea",
-      "game_key": "",
-      "kind": "standalone",
-      "posted_at": "2026-08-30T18:43:44.919567+00:00",
-      "source": "San Francisco Standard",
-      "title": "Barry Bonds and Jeff Kent explain their healing hug: ‘Replaying the whole dugout thing’",
-      "url": "https://sfstandard.com/2026/08/30/barry-bonds-jeff-kent-sf-giants-hug/"
-    },
-    {
       "author": "",
       "game_key": "",
       "kind": "standalone",
@@ -1508,6 +1499,24 @@
       "source": "Mercury News",
       "title": "Vitello’s risky bullpen gambit dooms SF Giants in loss to Dodgers",
       "url": "https://www.mercurynews.com/2026/09/19/tony-vitello-philip-abner-risky-bullpen-gambit-dooms-sf-giants-in-loss-to-dodgers/"
+    },
+    {
+      "author": "",
+      "game_key": "",
+      "kind": "standalone",
+      "posted_at": "2026-09-20T22:35:24.216853+00:00",
+      "source": "San Francisco Chronicle",
+      "title": "Giants announcer Duane Kuiper divulges he’s being treated for throat cancer",
+      "url": "https://www.sfchronicle.com/sports/giants/article/giants-announcer-duane-kuiper-divulges-he-s-22440818.php"
+    },
+    {
+      "author": "",
+      "game_key": "",
+      "kind": "standalone",
+      "posted_at": "2026-09-20T22:35:25.111745+00:00",
+      "source": "The Athletic",
+      "title": "Giants broadcaster Duane Kuiper diagnosed with throat cancer, started treatment last week",
+      "url": "https://www.nytimes.com/athletic/7614219/2026/09/20/duane-kuiper-sf-giants-throat-cancer-treatment/"
     }
   ],
   "posted_urls": {
@@ -1517,7 +1526,6 @@
     "https://blogs.fangraphs.com/the-giants-have-been-way-off-baseruns/": "2026-09-04T18:32:05.621525+00:00",
     "https://omny.fm/shows/the-executives-show/giants-knbr-beer-day-preview-larry-baer-on-mike-krukows-legacy-and-a-special-september-celebration": "2026-09-10T23:19:42.710344+00:00",
     "https://omny.fm/shows/the-executives-show/randy-winn-discusses-giants-top-prospects-bryce-eldridge-and-the-future-of-the-farm-system": "2026-09-03T23:25:04.207830+00:00",
-    "https://sfstandard.com/2026/08/30/barry-bonds-jeff-kent-sf-giants-hug/": "2026-08-30T18:43:44.919567+00:00",
     "https://sfstandard.com/2026/09/04/josuar-gonzalez-sf-giants-prospect-luis-hernandez/": "2026-09-04T23:09:58.632085+00:00",
     "https://sfstandard.com/2026/09/04/patrick-bailey-trade-sf-giants-catcher-depth/": "2026-09-04T18:32:08.759540+00:00",
     "https://sfstandard.com/2026/09/08/sf-giants-ownership-larry-baer-buster-posey/": "2026-09-09T11:45:53.273105+00:00",
@@ -1632,9 +1640,11 @@
     "https://www.nytimes.com/athletic/7604713/2026/09/17/sf-giants-anthony-molina-role/": "2026-09-17T19:10:45.672090+00:00",
     "https://www.nytimes.com/athletic/7609499/2026/09/19/giants-randy-rodriguez-bryce-eldridge/": "2026-09-19T18:09:24.416374+00:00",
     "https://www.nytimes.com/athletic/7612009/2026/09/20/giants-loss-dodgers-vitello-bullpen/": "2026-09-20T18:16:06.902198+00:00",
+    "https://www.nytimes.com/athletic/7614219/2026/09/20/duane-kuiper-sf-giants-throat-cancer-treatment/": "2026-09-20T22:35:25.111745+00:00",
     "https://www.sfchronicle.com/sports/giants/article/another-giants-rookie-debuts-tying-franchise-22430259.php": "2026-09-14T05:14:51.914094+00:00",
     "https://www.sfchronicle.com/sports/giants/article/bruce-maxwell-knee-mlb-kaepernick-22410012.php": "2026-09-01T11:57:39.570273+00:00",
     "https://www.sfchronicle.com/sports/giants/article/buster-posey-tony-vitello-see-giants-manager-s-22410003.php": "2026-08-31T05:52:31.277429+00:00",
+    "https://www.sfchronicle.com/sports/giants/article/giants-announcer-duane-kuiper-divulges-he-s-22440818.php": "2026-09-20T22:35:24.216853+00:00",
     "https://www.sfchronicle.com/sports/giants/article/giants-buster-posey-sees-baserunning-22425947.php": "2026-09-11T23:27:38.294518+00:00",
     "https://www.sfchronicle.com/sports/giants/article/giants-eke-win-11-logan-webb-s-strong-22421161.php": "2026-09-08T07:22:59.008333+00:00",
     "https://www.sfchronicle.com/sports/giants/article/giants-fans-irate-team-solicited-kalshi-wagers-22417052.php": "2026-09-04T07:22:15.134706+00:00",
@@ -3284,6 +3294,37 @@
       "sources_ok": 8,
       "standalone_selected": 3,
       "started_at": "2026-09-20T18:15:38.295733+00:00",
+      "status": "completed"
+    },
+    {
+      "discovered": 167,
+      "finished_at": "2026-09-20T22:35:25.914968+00:00",
+      "game_selection_reasons": {
+        "already_posted": 18,
+        "game_source_duplicates": 0,
+        "not_game_story": 144,
+        "schedule_grounded_threads": 0,
+        "selected_game_stories": 0,
+        "selected_game_threads": 0,
+        "stale_game_story": 5,
+        "unrouted_game_stories": 0
+      },
+      "game_stories_selected": 0,
+      "game_threads_selected": 0,
+      "schedule_grounded_threads": 0,
+      "selection_reasons": {
+        "already_posted": 58,
+        "deferred_for_breaking_news": 1,
+        "eligible": 8,
+        "quality_low": 18,
+        "selected": 2,
+        "stale": 59,
+        "story_already_posted": 6
+      },
+      "sources_failed": 0,
+      "sources_ok": 8,
+      "standalone_selected": 2,
+      "started_at": "2026-09-20T22:35:03.829542+00:00",
       "status": "completed"
     }
   ]
