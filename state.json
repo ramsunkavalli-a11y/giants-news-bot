@@ -204,51 +204,6 @@
   },
   "posted_stories": [
     {
-      "author": "Maria Guardado",
-      "game_key": "",
-      "kind": "standalone",
-      "posted_at": "2026-08-30T05:37:41.239285+00:00",
-      "source": "MLB.com",
-      "title": "Kent joins Giants royalty with number retirement, and has more than just a hug for Bonds",
-      "url": "https://www.mlb.com/giants/news/jeff-kent-has-number-retired-by-giants"
-    },
-    {
-      "author": "Angelina Martin",
-      "game_key": "",
-      "kind": "standalone",
-      "posted_at": "2026-08-30T05:37:43.881240+00:00",
-      "source": "NBC Sports Bay Area",
-      "title": "Wotus ejected before game",
-      "url": "https://www.nbcsportsbayarea.com/mlb/san-francisco-giants/ron-wotus-ejection-alan-porter/1959510/"
-    },
-    {
-      "author": "Tristi Rodriguez",
-      "game_key": "game:823176",
-      "kind": "game_story",
-      "posted_at": "2026-08-30T05:37:45.763324+00:00",
-      "source": "NBC Sports Bay Area",
-      "title": "What we learned as Yunior Marte's strong MLB debut fuels Giants' win vs. D-backs",
-      "url": "https://www.nbcsportsbayarea.com/mlb/san-francisco-giants/yunior-marte-debut-win-diamondbacks/1959577/"
-    },
-    {
-      "author": "Tristi Rodriguez",
-      "game_key": "game:823176",
-      "kind": "game_story",
-      "posted_at": "2026-08-30T05:37:47.643670+00:00",
-      "source": "NBC Sports Bay Area",
-      "title": "What we learned as Giants waste Matt Wilkinson's solid Oracle Park debut in loss",
-      "url": "https://www.nbcsportsbayarea.com/mlb/san-francisco-giants/matt-wilkinson-debut-loss-diamondbacks/1959520/"
-    },
-    {
-      "author": "",
-      "game_key": "game:823176",
-      "kind": "game_story",
-      "posted_at": "2026-08-30T05:37:48.570631+00:00",
-      "source": "San Francisco Chronicle",
-      "title": "Giants’ frustrations with umpires lead to pregame ejection for coach before loss",
-      "url": "https://www.sfchronicle.com/sports/giants/article/sf-giants-coach-ejected-loss-first-game-22409124.php"
-    },
-    {
       "author": "Justice delos Santos",
       "game_key": "game:823176",
       "kind": "game_story",
@@ -1543,6 +1498,15 @@
       "source": "MLB.com",
       "title": "Eldridge (head laceration) out of lineup for second straight game",
       "url": "https://www.mlb.com/giants/news/bryce-eldridge-out-for-second-straight-game-with-head-laceration"
+    },
+    {
+      "author": "Maria Guardado",
+      "game_key": "",
+      "kind": "standalone",
+      "posted_at": "2026-09-20T09:57:11.491184+00:00",
+      "source": "MLB.com",
+      "title": "Giants' limited bullpen options put Vitello in tough spot",
+      "url": "https://www.mlb.com/giants/news/philip-abner-has-rough-outing-for-second-game-in-a-row"
     }
   ],
   "posted_urls": {
@@ -1596,9 +1560,9 @@
     "https://www.mlb.com/giants/news/giants-earn-comeback-win-to-sweep-cardinals": "2026-09-09T23:26:13.955118+00:00",
     "https://www.mlb.com/giants/news/giants-offense-struggles-series-finale-loss-to-pirates": "2026-09-03T23:25:08.303714+00:00",
     "https://www.mlb.com/giants/news/jackson-flora-san-jose-giants-going-to-2026-cal-league-championship-series": "2026-09-11T07:25:53.690982+00:00",
-    "https://www.mlb.com/giants/news/jeff-kent-has-number-retired-by-giants": "2026-08-30T05:37:41.239285+00:00",
     "https://www.mlb.com/giants/news/logan-webb-allows-nine-runs-in-wild-giants-pirates-game": "2026-09-02T07:16:28.784350+00:00",
     "https://www.mlb.com/giants/news/peyton-bonds-beginning-career-with-giants-organization": "2026-09-02T18:51:43.267388+00:00",
+    "https://www.mlb.com/giants/news/philip-abner-has-rough-outing-for-second-game-in-a-row": "2026-09-20T09:57:11.491184+00:00",
     "https://www.mlb.com/giants/news/rafael-devers-early-homer-sparks-giants-win-over-pirates": "2026-09-03T07:20:11.344689+00:00",
     "https://www.mlb.com/giants/news/rafael-devers-giants-win-series-opener-vs-cardinals": "2026-09-08T07:22:58.066499+00:00",
     "https://www.mlb.com/giants/news/rafael-devers-hits-9th-career-grand-slam-in-giants-loss-to-padres": "2026-09-12T11:10:56.828992+00:00",
@@ -1628,7 +1592,6 @@
     "https://www.nbcsportsbayarea.com/mlb/san-francisco-giants/logan-webb-finish-disappointing-2026-season/1961455/": "2026-09-08T23:31:43.977707+00:00",
     "https://www.nbcsportsbayarea.com/mlb/san-francisco-giants/logan-webb-paul-skenes-pittsburgh-pirates/1960214/": "2026-09-02T07:16:37.020236+00:00",
     "https://www.nbcsportsbayarea.com/mlb/san-francisco-giants/logan-webb-san-diego-padres-2/1963153/": "2026-09-14T05:14:54.454150+00:00",
-    "https://www.nbcsportsbayarea.com/mlb/san-francisco-giants/matt-wilkinson-debut-loss-diamondbacks/1959520/": "2026-08-30T05:37:47.643670+00:00",
     "https://www.nbcsportsbayarea.com/mlb/san-francisco-giants/mike-krukow-bryce-eldridge-teammates/1963647/": "2026-09-16T19:00:43.293859+00:00",
     "https://www.nbcsportsbayarea.com/mlb/san-francisco-giants/mike-krukow-duane-kuiper-hall-of-fame/1963842/": "2026-09-17T19:10:44.724320+00:00",
     "https://www.nbcsportsbayarea.com/mlb/san-francisco-giants/observations-five-home-runs-loss-dodgers/1964320/": "2026-09-19T07:29:33.911721+00:00",
@@ -1644,12 +1607,10 @@
     "https://www.nbcsportsbayarea.com/mlb/san-francisco-giants/rafael-devers-matt-wilkinson-loss-mets/1960923/": "2026-09-05T07:04:13.896665+00:00",
     "https://www.nbcsportsbayarea.com/mlb/san-francisco-giants/road-series-win-cardinals/1963688/": "2026-09-17T07:56:11.084129+00:00",
     "https://www.nbcsportsbayarea.com/mlb/san-francisco-giants/robbie-ray-trade-padres-analysis/1962901/": "2026-09-12T17:47:37.248950+00:00",
-    "https://www.nbcsportsbayarea.com/mlb/san-francisco-giants/ron-wotus-ejection-alan-porter/1959510/": "2026-08-30T05:37:43.881240+00:00",
     "https://www.nbcsportsbayarea.com/mlb/san-francisco-giants/ryan-walker-joel-kuhnel-roster-moves/1960997/": "2026-09-06T09:34:48.461814+00:00",
     "https://www.nbcsportsbayarea.com/mlb/san-francisco-giants/tony-vitello-ejected-new-york-mets/1961023/": "2026-09-05T22:09:20.096263+00:00",
     "https://www.nbcsportsbayarea.com/mlb/san-francisco-giants/tony-vitello-explanation-ejection-win-mets/1961068/": "2026-09-06T04:56:05.268024+00:00",
     "https://www.nbcsportsbayarea.com/mlb/san-francisco-giants/victor-bericoto-bullpen-recap-loss-dodgers/1964387/": "2026-09-20T05:08:47.839358+00:00",
-    "https://www.nbcsportsbayarea.com/mlb/san-francisco-giants/yunior-marte-debut-win-diamondbacks/1959577/": "2026-08-30T05:37:45.763324+00:00",
     "https://www.nbcsportsbayarea.com/mlb/san-francisco-giants/yunior-marte-emotional-debut-brother/1959615/": "2026-08-30T10:36:01.643523+00:00",
     "https://www.nytimes.com/athletic/7550660/2026/08/31/sf-giants-stats-facts/": "2026-08-31T20:58:26.660696+00:00",
     "https://www.nytimes.com/athletic/7557005/2026/09/02/sf-giants-outfield-depth-chart-bo-davidson/": "2026-09-02T18:51:45.550543+00:00",
@@ -1684,7 +1645,6 @@
     "https://www.sfchronicle.com/sports/giants/article/jonah-cox-flashes-blade-tidwell-s-walks-hurt-22416405.php": "2026-09-03T23:25:09.201439+00:00",
     "https://www.sfchronicle.com/sports/giants/article/not-giants-agree-100-loss-season-matter-22410923.php": "2026-09-01T07:57:15.098593+00:00",
     "https://www.sfchronicle.com/sports/giants/article/sf-giants-bid-fourth-straight-win-comes-short-22428184.php": "2026-09-12T07:18:45.531415+00:00",
-    "https://www.sfchronicle.com/sports/giants/article/sf-giants-coach-ejected-loss-first-game-22409124.php": "2026-08-30T05:37:48.570631+00:00",
     "https://www.sfchronicle.com/sports/giants/article/sf-giants-get-another-home-run-rafael-devers-loss-22428990.php": "2026-09-13T05:06:23.069891+00:00",
     "https://www.sfchronicle.com/sports/giants/article/sf-giants-rebound-feel-good-win-pirates-crushing-22415343.php": "2026-09-03T07:20:12.294100+00:00",
     "https://www.sfchronicle.com/sports/giants/article/sf-giants-rookies-castoffs-stepping-up-finding-22423074.php": "2026-09-09T07:31:32.622719+00:00",
@@ -3260,6 +3220,37 @@
       "sources_ok": 8,
       "standalone_selected": 2,
       "started_at": "2026-09-20T05:08:22.790305+00:00",
+      "status": "completed"
+    },
+    {
+      "discovered": 164,
+      "finished_at": "2026-09-20T09:57:12.294884+00:00",
+      "game_selection_reasons": {
+        "already_posted": 18,
+        "game_source_duplicates": 0,
+        "not_game_story": 141,
+        "schedule_grounded_threads": 0,
+        "selected_game_stories": 0,
+        "selected_game_threads": 0,
+        "stale_game_story": 5,
+        "unrouted_game_stories": 0
+      },
+      "game_stories_selected": 0,
+      "game_threads_selected": 0,
+      "schedule_grounded_threads": 0,
+      "selection_reasons": {
+        "already_posted": 57,
+        "deferred_for_breaking_news": 1,
+        "eligible": 5,
+        "quality_low": 17,
+        "selected": 1,
+        "stale": 61,
+        "story_already_posted": 4
+      },
+      "sources_failed": 0,
+      "sources_ok": 8,
+      "standalone_selected": 1,
+      "started_at": "2026-09-20T09:56:48.654277+00:00",
       "status": "completed"
     }
   ]
