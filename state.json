@@ -221,15 +221,6 @@
   },
   "posted_stories": [
     {
-      "author": "",
-      "game_key": "",
-      "kind": "standalone",
-      "posted_at": "2026-08-31T05:52:31.277429+00:00",
-      "source": "San Francisco Chronicle",
-      "title": "What Buster Posey and Tony Vitello are saying about the Giants manager’s future",
-      "url": "https://www.sfchronicle.com/sports/giants/article/buster-posey-tony-vitello-see-giants-manager-s-22410003.php"
-    },
-    {
       "author": "Justice delos Santos",
       "game_key": "",
       "kind": "standalone",
@@ -1689,7 +1680,6 @@
     "https://www.nytimes.com/athletic/7614219/2026/09/20/duane-kuiper-sf-giants-throat-cancer-treatment/": "2026-09-20T22:35:25.111745+00:00",
     "https://www.sfchronicle.com/sports/giants/article/another-giants-rookie-debuts-tying-franchise-22430259.php": "2026-09-14T05:14:51.914094+00:00",
     "https://www.sfchronicle.com/sports/giants/article/bruce-maxwell-knee-mlb-kaepernick-22410012.php": "2026-09-01T11:57:39.570273+00:00",
-    "https://www.sfchronicle.com/sports/giants/article/buster-posey-tony-vitello-see-giants-manager-s-22410003.php": "2026-08-31T05:52:31.277429+00:00",
     "https://www.sfchronicle.com/sports/giants/article/giants-announcer-duane-kuiper-divulges-he-s-22440818.php": "2026-09-20T22:35:24.216853+00:00",
     "https://www.sfchronicle.com/sports/giants/article/giants-buster-posey-sees-baserunning-22425947.php": "2026-09-11T23:27:38.294518+00:00",
     "https://www.sfchronicle.com/sports/giants/article/giants-eke-win-11-logan-webb-s-strong-22421161.php": "2026-09-08T07:22:59.008333+00:00",
@@ -3403,6 +3393,37 @@
       "sources_ok": 8,
       "standalone_selected": 2,
       "started_at": "2026-09-21T05:13:55.516355+00:00",
+      "status": "completed"
+    },
+    {
+      "discovered": 168,
+      "finished_at": "2026-09-21T10:57:27.891442+00:00",
+      "game_selection_reasons": {
+        "already_posted": 19,
+        "game_source_duplicates": 0,
+        "not_game_story": 144,
+        "schedule_grounded_threads": 0,
+        "selected_game_stories": 0,
+        "selected_game_threads": 0,
+        "stale_game_story": 5,
+        "unrouted_game_stories": 0
+      },
+      "game_stories_selected": 0,
+      "game_threads_selected": 0,
+      "schedule_grounded_threads": 0,
+      "selection_reasons": {
+        "already_posted": 62,
+        "deferred_for_breaking_news": 1,
+        "eligible": 6,
+        "quality_low": 18,
+        "selected": 0,
+        "stale": 57,
+        "story_already_posted": 6
+      },
+      "sources_failed": 0,
+      "sources_ok": 8,
+      "standalone_selected": 0,
+      "started_at": "2026-09-21T10:56:57.090844+00:00",
       "status": "completed"
     }
   ]
