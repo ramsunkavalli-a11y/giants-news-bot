@@ -6,6 +6,7 @@ import re
 import time
 from dataclasses import asdict
 from datetime import datetime, timedelta, timezone
+from urllib.parse import urlparse
 
 import requests
 from bs4 import BeautifulSoup
@@ -16,6 +17,7 @@ from models import Candidate
 from v2_game_threads import is_game_story, select_game_threads
 from v2_knbr import discover_knbr_executive_show
 from v2_probe import (
+    make_article,
     discover_athletic,
     discover_fangraphs,
     discover_mlb,
@@ -43,6 +45,18 @@ PROMO_SUMMARY_PATTERNS = (
     "subscribe to get it regularly",
     "subscribe to our newsletter",
 )
+
+MANUAL_STORY_PUBLISHERS = {
+    "mercurynews.com": ("Mercury News", "unknown"),
+    "sfchronicle.com": ("San Francisco Chronicle", "paywalled"),
+    "sfstandard.com": ("San Francisco Standard", "free"),
+    "nbcsportsbayarea.com": ("NBC Sports Bay Area", "free"),
+    "nytimes.com": ("The Athletic", "paywalled"),
+    "mlb.com": ("MLB.com", "free"),
+    "sfgate.com": ("SFGATE", "free"),
+    "blogs.fangraphs.com": ("FanGraphs", "free"),
+    "omny.fm": ("KNBR", "free"),
+}
 
 
 def log(message: str) -> None:
@@ -188,6 +202,53 @@ def prune_state(state: dict, keep_days: int) -> None:
         ][-100:]
 
 
+def _manual_story_article(environ: dict[str, str] | None = None) -> dict | None:
+    """Build one explicitly requested story from a strict publisher allowlist."""
+    env = environ if environ is not None else os.environ
+    url = str(env.get("MANUAL_STORY_URL", "") or "").strip()
+    title = str(env.get("MANUAL_STORY_TITLE", "") or "").strip()
+    author = str(env.get("MANUAL_STORY_AUTHOR", "") or "").strip()
+
+    if not url and not title and not author:
+        return None
+    if not url or not title:
+        raise ValueError("MANUAL_STORY_URL and MANUAL_STORY_TITLE must be provided together")
+
+    parsed = urlparse(url)
+    host = (parsed.hostname or "").lower()
+    if parsed.scheme.lower() != "https" or not host or parsed.username or parsed.password:
+        raise ValueError("manual story URL must be a public HTTPS URL")
+
+    publisher = next(
+        (
+            value
+            for domain, value in MANUAL_STORY_PUBLISHERS.items()
+            if host == domain or host.endswith("." + domain)
+        ),
+        None,
+    )
+    if publisher is None:
+        raise ValueError(f"manual story publisher is not trusted: {host}")
+    if publisher[0] == "The Athletic" and not parsed.path.startswith("/athletic/"):
+        raise ValueError("nytimes.com manual stories must use an /athletic/ article URL")
+
+    article = asdict(make_article(
+        source=publisher[0],
+        title=title,
+        url=url,
+        published=datetime.now(timezone.utc).isoformat(),
+        author=author,
+        section="manual workflow dispatch",
+        access=publisher[1],
+    ))
+    article.update({
+        "quality": "high",
+        "quality_reason": "manual_trusted_story",
+        "_manual_priority": True,
+    })
+    return article
+
+
 def discover_articles() -> tuple[list[dict], dict]:
     articles: list[dict] = []
     health: dict[str, dict] = {}
@@ -199,6 +260,13 @@ def discover_articles() -> tuple[list[dict], dict]:
             articles.extend(asdict(item) for item in items)
         except Exception as exc:
             health[name] = {"ok": False, "error": f"{type(exc).__name__}: {exc}"}
+
+    manual = _manual_story_article()
+    if manual:
+        # Insert last so an explicit dispatch replaces the same URL discovered
+        # by a feed, while normal URL and same-story history still apply.
+        articles.append(manual)
+        health["manual_story"] = {"ok": True, "count": 1}
     unique = {item.get("url", ""): item for item in articles if item.get("url")}
     return list(unique.values()), health
 

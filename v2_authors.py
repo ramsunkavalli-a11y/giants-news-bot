@@ -17,6 +17,7 @@ AUTHOR_PRIORS = {
     "kerry crowley": {"preference": "good", "scope": "giants_specific"},
     "tim kawakami": {"preference": "good", "scope": "giants_specific"},
     "eric longenhagen": {"preference": "elite", "scope": "giants_specific"},
+    "dieter kurtenbach": {"preference": "good", "scope": "giants_specific"},
 
     # National reporters: high-value when the article itself is Giants-specific.
     "jeff passan": {"preference": "national", "scope": "giants_specific"},
@@ -66,6 +67,7 @@ AUTHOR_ALIASES = {
     "crowley": "kerry crowley",
     "kawakami": "tim kawakami",
     "longenhagen": "eric longenhagen",
+    "kurtenbach": "dieter kurtenbach",
     "passan": "jeff passan",
     "olney": "buster olney",
     "heyman": "jon heyman",

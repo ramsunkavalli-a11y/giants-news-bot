@@ -33,6 +33,7 @@ CORE_WRITER_RADAR_TARGETS = (
     RadarTarget("John Shea", "San Francisco Chronicle", "sfchronicle.com", query_requires_giants=False),
     RadarTarget("Justice delos Santos", "Mercury News", "mercurynews.com"),
     RadarTarget("Evan Webeck", "Mercury News", "mercurynews.com"),
+    RadarTarget("Dieter Kurtenbach", "Mercury News", "mercurynews.com"),
     # FanGraphs' team-category feed does not reliably include prospect pieces
     # that cover a Giants player alongside another organization.
     RadarTarget("Eric Longenhagen", "FanGraphs", "blogs.fangraphs.com"),

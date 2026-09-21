@@ -61,6 +61,15 @@ LOW_VALUE_PATTERNS = (
     "every team",
     "for every team",
     "all 30 teams",
+    "submit giants questions",
+    "submit your giants questions",
+)
+
+LOW_VALUE_TITLE_RE = re.compile(
+    r"^opinion:\s*this week['’]s cartoon\b|"
+    r"\bsubmit (?:your )?(?:sf )?giants questions\b|"
+    r"\bprospects chat:\s*\d{1,2}/\d{1,2}/\d{4}\b",
+    flags=re.I,
 )
 
 DERIVATIVE_PATTERNS = (
@@ -100,6 +109,14 @@ GAME_STORY_PATTERNS = (
 RESULT_VERBS = re.compile(
     r"\b(?:lead|leads|lift|lifts|power|powers|propel|propels|beat|beats|edge|edges|"
     r"defeat|defeats|top|tops|rout|routs)\b.*\b(?:over|past)\b",
+    flags=re.I,
+)
+
+VAGUE_GAME_RECAP_RE = re.compile(
+    r"^giants\s+(?:win|won|lose|loses|lost)\s+(?:the\s+)?"
+    r"(?:series|series opener|series finale|opener|finale|rubber match)\b|"
+    r"^giants['’] comeback falls short\b|"
+    r"^[A-Z][\w'’.-]+\s+and\s+[A-Z][\w'’.-]+\s+save Giants$",
     flags=re.I,
 )
 
@@ -245,6 +262,8 @@ def classify(source: str, title: str, author: str = "") -> tuple[str, str, str]:
         return "low", "mlb_non_guardado", preference
     if source == "NBC Sports Bay Area" and NBC_BROADCASTER_REACTION_RE.search(title):
         return "low", "broadcaster_quote_repackaging", preference
+    if LOW_VALUE_TITLE_RE.search(title):
+        return "low", "commodity_or_generic_content", preference
     if any(pattern in blob for pattern in LOW_VALUE_PATTERNS):
         return "low", "commodity_or_generic_content", preference
     if any(pattern in blob for pattern in DERIVATIVE_PATTERNS):
@@ -252,7 +271,11 @@ def classify(source: str, title: str, author: str = "") -> tuple[str, str, str]:
     if source == "FanGraphs" and blob.startswith("sunday notes:"):
         return "low", "broad_recurring_roundup", preference
 
-    if any(pattern in blob for pattern in GAME_STORY_PATTERNS) or RESULT_VERBS.search(title):
+    if (
+        any(pattern in blob for pattern in GAME_STORY_PATTERNS)
+        or RESULT_VERBS.search(title)
+        or VAGUE_GAME_RECAP_RE.search(title)
+    ):
         return "medium", "game_story_or_postgame_analysis", preference
 
     if preference == "elite":

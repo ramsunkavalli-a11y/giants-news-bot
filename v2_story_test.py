@@ -23,6 +23,17 @@ class StoryDedupeTests(unittest.TestCase):
             "SF Giants announcer Mike Krukow to retire at end of season",
         ))
 
+    def test_duane_kuiper_cancer_headline_variants_cluster(self):
+        headlines = [
+            "Giants legend Duane Kuiper reveals throat cancer diagnosis, undergoing treatment",
+            "Giants broadcaster Duane Kuiper diagnosed with throat cancer",
+            "Giants announcer Duane Kuiper divulges he’s being treated for throat cancer",
+            "Giants broadcaster Duane Kuiper diagnosed with throat cancer, started treatment last week",
+        ]
+        for left in headlines:
+            for right in headlines:
+                self.assertTrue(same_story(left, right), (left, right))
+
     def test_wilkinson_transaction_wording_clusters(self):
         brisbee = "The Giants promoted Matt 'Tugboat' Wilkinson, who has a chance to be a fan favorite"
         slusser = "Giants call up Matt ‘Tugboat’ Wilkinson with eye toward 2027 rotation options"

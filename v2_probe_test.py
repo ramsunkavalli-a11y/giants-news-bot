@@ -65,6 +65,38 @@ class ProbeEditorialClassificationTests(unittest.TestCase):
         )
         self.assertEqual(quality, "high")
 
+    def test_submission_prompt_is_low_value(self):
+        quality, reason, _ = classify(
+            "The Athletic",
+            "Submit Giants questions for Andrew Baggarly's next Mailbagg",
+            "Andrew Baggarly",
+        )
+        self.assertEqual((quality, reason), ("low", "commodity_or_generic_content"))
+
+    def test_dated_prospects_chat_is_low_value(self):
+        quality, reason, _ = classify(
+            "FanGraphs",
+            "Eric Longenhagen Prospects Chat: 9/11/2026",
+            "Eric Longenhagen",
+        )
+        self.assertEqual((quality, reason), ("low", "commodity_or_generic_content"))
+
+    def test_weekly_cartoon_is_low_value(self):
+        quality, reason, _ = classify(
+            "San Francisco Standard",
+            "Opinion: This week’s cartoon: Burning Man comes home",
+            "",
+        )
+        self.assertEqual((quality, reason), ("low", "commodity_or_generic_content"))
+
+    def test_vague_result_headline_is_game_coverage(self):
+        quality, reason, _ = classify(
+            "NBC Sports Bay Area",
+            "Giants lose series opener",
+            "",
+        )
+        self.assertEqual((quality, reason), ("medium", "game_story_or_postgame_analysis"))
+
     @patch("v2_probe.articles_from_feed")
     def test_sf_standard_uses_dedicated_giants_feed(self, articles_from_feed):
         articles_from_feed.return_value = []

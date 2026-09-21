@@ -36,7 +36,20 @@ on:
     # Weekend 10:30pm PT (next UTC calendar day).
     - cron: "30 05 * * 0,1"
     - cron: "30 06 * * 0,1"
-  workflow_dispatch: {}
+  workflow_dispatch:
+    inputs:
+      manual_url:
+        description: "Optional trusted-publisher article URL (requires title)"
+        required: false
+        type: string
+      manual_title:
+        description: "Exact article headline (requires URL)"
+        required: false
+        type: string
+      manual_author:
+        description: "Optional article byline"
+        required: false
+        type: string
 
 permissions:
   contents: write
@@ -107,6 +120,9 @@ jobs:
           MAX_POSTS_PER_RUN: "3"
           DIAGNOSTICS_ENABLED: "1"
           DIAGNOSTICS_FILE: diagnostics.json
+          MANUAL_STORY_URL: ${{ inputs.manual_url || '' }}
+          MANUAL_STORY_TITLE: ${{ inputs.manual_title || '' }}
+          MANUAL_STORY_AUTHOR: ${{ inputs.manual_author || '' }}
         run: python v2_bot.py
 
       - name: Upload diagnostics artifact

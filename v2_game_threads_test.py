@@ -70,6 +70,22 @@ class GameThreadTests(unittest.TestCase):
         }
         self.assertFalse(is_game_story(article))
 
+    def test_vague_recent_recap_headlines_route_as_game_stories(self):
+        for title in (
+            "Giants lose series opener",
+            "Giants win series vs. Cards",
+            "Giants' comeback falls short",
+            "Blade and Bryce save Giants",
+        ):
+            with self.subTest(title=title):
+                self.assertTrue(is_game_story({"title": title, "quality": "high"}))
+
+    def test_non_game_lose_language_is_not_routed(self):
+        self.assertFalse(is_game_story({
+            "title": "Giants lose confidence in costly roster plan",
+            "quality": "high",
+        }))
+
     def test_first_published_core_writer_gets_root_regardless_of_tier(self):
         articles = [
             {

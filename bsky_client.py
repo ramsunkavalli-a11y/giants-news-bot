@@ -221,14 +221,19 @@ def upload_image_blob(
     if not aspect_ratio:
         return None
 
-    up = session.post(
-        f"{pds}/xrpc/com.atproto.repo.uploadBlob",
-        headers={"Authorization": f"Bearer {jwt}", "Content-Type": content_type},
-        data=blob_bytes,
-        timeout=timeout,
-    )
-    up.raise_for_status()
-    blob = up.json().get("blob")
+    try:
+        up = session.post(
+            f"{pds}/xrpc/com.atproto.repo.uploadBlob",
+            headers={"Authorization": f"Bearer {jwt}", "Content-Type": content_type},
+            data=blob_bytes,
+            timeout=timeout,
+        )
+        up.raise_for_status()
+        blob = up.json().get("blob")
+    except Exception:
+        # Images are cosmetic. A transient uploadBlob failure must not prevent
+        # the article itself from being posted as a text link.
+        return None
     if not blob:
         return None
     return blob, aspect_ratio

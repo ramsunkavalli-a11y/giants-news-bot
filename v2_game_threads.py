@@ -94,6 +94,13 @@ GIANTS_RESULT = re.compile(
     r"\b(?:win|loss|victory|defeat)\b.*\bgiants\b)",
     flags=re.I,
 )
+VAGUE_GAME_RECAP_RE = re.compile(
+    r"^giants\s+(?:win|won|lose|loses|lost)\s+(?:the\s+)?"
+    r"(?:series|series opener|series finale|opener|finale|rubber match)\b|"
+    r"^giants['’] comeback falls short\b|"
+    r"^[A-Z][\w'’.-]+\s+and\s+[A-Z][\w'’.-]+\s+save Giants$",
+    flags=re.I,
+)
 
 # Common completed-game headline constructions that do not literally say
 # "win" or "loss". Requiring a recognized opponent keeps phrases such as
@@ -209,6 +216,7 @@ def is_game_story(article: dict) -> bool:
         or any(pattern in title_lower for pattern in TITLE_RESULT_PATTERNS)
         or bool(RESULT_VERBS.search(title))
         or bool(GIANTS_RESULT.search(title))
+        or bool(VAGUE_GAME_RECAP_RE.search(title))
         or (
             bool(COMPLETED_GAME_RESULT.search(title))
             and bool(extract_opponent({"title": title}))

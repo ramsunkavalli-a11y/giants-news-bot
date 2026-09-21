@@ -114,6 +114,16 @@ Normal process:
 
 Do **not** manually dispatch production just to prove a merge worked. A manual production dispatch can create live Bluesky posts.
 
+### Manual trusted-story dispatch
+
+Use the **Run workflow** form when a specific eligible story was missed by normal discovery:
+
+1. enter `manual_url` and `manual_title` together;
+2. optionally enter `manual_author` only when the byline is known;
+3. verify the URL is the direct HTTPS publisher URL, then run the workflow.
+
+The accepted hostname is mapped to its production source rather than trusted from operator input. The supplied story gets first consideration, but posted-URL and same-event history remain active. An unapproved hostname or a partial URL/title pair fails the run before posting. Leaving all three fields blank performs the normal manual scan.
+
 ## State management
 
 `state.json` is production data. Important fields:
@@ -204,7 +214,7 @@ Current presentation is headline-first text + exact-hostname rich-text link + op
 - KNBR Executive Show: `Listen at <hostname> →`
 - Only the hostname is linked, avoiding Bluesky's misleading-link warning.
 - Images are native `app.bsky.embed.images` with aspect ratio when available.
-- Missing/blocked images should degrade to text + direct link, not suppress the story.
+- Missing/blocked images and failed Bluesky image uploads degrade to text + direct link; they do not suppress the story.
 
 ## Adding a new source
 

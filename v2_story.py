@@ -21,6 +21,7 @@ EVENT_TOKENS = {
     "suspend", "extension", "sign", "waiver", "dfa", "release", "hire", "fire",
     "host", "fracture", "rehab", "return", "debut", "roster", "deadline", "partnership",
     "bereavement", "torn", "ucl", "tommyjohn",
+    "cancer", "diagnose", "treatment",
 }
 EVENT_FAMILIES = {
     "promote": "callup",
@@ -28,6 +29,8 @@ EVENT_FAMILIES = {
     "torn": "injury",
     "ucl": "injury",
     "tommyjohn": "injury",
+    "diagnose": "cancer",
+    "treatment": "cancer",
 }
 
 PHRASE_REPLACEMENTS = (
@@ -56,6 +59,8 @@ TOKEN_ALIASES = {
     "hosts": "host", "hosting": "host", "hosted": "host",
     "injured": "injury", "injuries": "injury", "torn": "injury",
     "partner": "partnership", "partners": "partnership", "partnered": "partnership",
+    "diagnosed": "diagnose", "diagnosis": "diagnose", "diagnoses": "diagnose",
+    "treated": "treatment", "treating": "treatment", "treatments": "treatment",
 }
 
 AUTHOR_RANK = {
@@ -184,7 +189,9 @@ def same_story(
 
 def candidate_preference_key(article: dict) -> tuple:
     """Best version of one event. Author dominates; source penalty is mild."""
-    author = AUTHOR_RANK.get(article.get("author_preference", ""), 1)
+    # A trusted manual dispatch is an explicit editorial choice, but it still
+    # passes URL and same-story history checks before reaching this ranking.
+    author = 10 if article.get("_manual_priority") else AUTHOR_RANK.get(article.get("author_preference", ""), 1)
     source = SOURCE_RANK.get(article.get("source_preference", ""), 1)
     dt = article.get("_published_dt")
     timestamp = dt.timestamp() if isinstance(dt, datetime) else 0.0

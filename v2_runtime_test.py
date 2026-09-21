@@ -10,6 +10,7 @@ from PIL import Image
 from bsky_client import build_post_text, post_to_bluesky
 from models import Candidate
 from v2_bot import (
+    _manual_story_article,
     _existing_thread_key,
     _set_thread_state,
     clean_card_summary,
@@ -48,10 +49,11 @@ def jpeg_bytes(width=1200, height=675):
 
 
 class FakeSession:
-    def __init__(self, *, image_available=False, image_bytes=None):
+    def __init__(self, *, image_available=False, image_bytes=None, image_upload_fails=False):
         self.last_payload = None
         self.image_available = image_available
         self.image_bytes = image_bytes if image_bytes is not None else jpeg_bytes()
+        self.image_upload_fails = image_upload_fails
 
     def get(self, url, **kwargs):
         if not self.image_available:
@@ -64,6 +66,8 @@ class FakeSession:
 
     def post(self, url, **kwargs):
         if url.endswith("/xrpc/com.atproto.repo.uploadBlob"):
+            if self.image_upload_fails:
+                raise RuntimeError("temporary uploadBlob failure")
             return FakeResponse({"blob": {"$type": "blob", "ref": {"$link": "bafyimage"}}})
         self.last_payload = kwargs.get("json")
         return FakeResponse({
@@ -220,6 +224,43 @@ class RuntimeSmokeTests(unittest.TestCase):
         record = session.last_payload["record"]
         self.assertNotIn("embed", record)
         self.assertTrue(record["text"].endswith("Read at www.mlb.com →"))
+
+    def test_image_upload_failure_degrades_to_text_link(self):
+        session = FakeSession(image_available=True, image_upload_fails=True)
+        candidate = Candidate(
+            source="Mercury News",
+            url="https://www.mercurynews.com/2026/09/21/example/",
+            title="Example Giants story",
+            image_url="https://example.com/image.jpg",
+        )
+        post_to_bluesky(session, candidate, "https://bsky.social", "did:plc:test", "jwt", 5)
+        record = session.last_payload["record"]
+        self.assertNotIn("embed", record)
+        self.assertTrue(record["text"].endswith("Read at www.mercurynews.com →"))
+
+    def test_manual_mercury_story_is_trusted_and_prioritized(self):
+        article = _manual_story_article({
+            "MANUAL_STORY_URL": (
+                "https://www.mercurynews.com/2026/09/21/"
+                "sf-giants-outfield-prospect-bo-davidson-to-join-team-in-san-francisco/"
+            ),
+            "MANUAL_STORY_TITLE": "SF Giants outfield prospect Bo Davidson to join team in San Francisco",
+            "MANUAL_STORY_AUTHOR": "",
+        })
+        self.assertEqual(article["source"], "Mercury News")
+        self.assertEqual(article["quality_reason"], "manual_trusted_story")
+        self.assertTrue(article["_manual_priority"])
+
+    def test_manual_story_requires_url_and_title_together(self):
+        with self.assertRaisesRegex(ValueError, "provided together"):
+            _manual_story_article({"MANUAL_STORY_URL": "https://www.mercurynews.com/story/"})
+
+    def test_manual_story_rejects_untrusted_publisher(self):
+        with self.assertRaisesRegex(ValueError, "not trusted"):
+            _manual_story_article({
+                "MANUAL_STORY_URL": "https://example.com/giants-story",
+                "MANUAL_STORY_TITLE": "Giants story",
+            })
 
     def test_missing_state_initializes_game_threads(self):
         with tempfile.TemporaryDirectory() as directory:

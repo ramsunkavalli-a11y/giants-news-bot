@@ -74,11 +74,17 @@ SF Chronicle and Mercury News are important, but their pages/feeds are unreliabl
 
 - Susan Slusser — SF Chronicle
 - Shayna Rubin — SF Chronicle
+- John Shea — SF Chronicle
 - Justice delos Santos — Mercury News
+- Evan Webeck — Mercury News
+- Dieter Kurtenbach — Mercury News
+- Eric Longenhagen — FanGraphs
 
 For each writer the bot queries Google News RSS with the exact author + exact publisher domain + Giants, decodes the Google wrapper URL, verifies the resulting publisher domain, limits the results, rejects ambiguous multi-target attribution, and uses visible page metadata as an additional veto when available. A co-byline is valid when the targeted core writer is explicitly one of the visible authors; a contradictory byline still rejects the result.
 
 This is intentionally **not** broad Google News discovery. Broad Google results are diagnostic only.
+
+For a specific missed story, the production workflow also accepts a direct trusted-publisher URL plus exact title and optional author. This is an editorial override for discovery only: hostname validation, exact-URL history, same-event dedupe, and normal posting state remain enforced.
 
 ### Trusted but inactive names
 

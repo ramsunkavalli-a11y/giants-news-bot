@@ -38,7 +38,7 @@ The SF Standard's broad Sports RSS is intentionally not used because it mixes Gi
 
 MLB.com's Giants feed mixes team beat reporting with staff packages, national prospect content, promotional streams, and unsigned commodity pages. Production therefore treats **Maria Guardado as the only eligible MLB.com byline**; other MLB.com authors and unsigned feed items are low-value at the source-classification boundary.
 
-Chronicle and Mercury pages are unreliable from GitHub runners, so the bot uses tightly scoped Google News RSS queries only for named core writers at those publishers, decodes the wrapper URL, verifies the publisher domain, and then sends the result through the same V2 filters as every other candidate. Co-bylines are allowed when the targeted writer is explicitly one of the visible authors. **Broad Google News search is diagnostic only and is not a production source.**
+Chronicle and Mercury pages are unreliable from GitHub runners, so the bot uses tightly scoped Google News RSS queries only for named writers at those publishers, decodes the wrapper URL, verifies the publisher domain, and then sends the result through the same V2 filters as every other candidate. Mercury coverage includes Justice delos Santos, Evan Webeck, and Dieter Kurtenbach. Co-bylines are allowed when the targeted writer is explicitly one of the visible authors. **Broad Google News search is diagnostic only and is not a production source.**
 
 The KNBR integration is deliberately narrow: only the Giants playlist of **The Executive Show** is active. It is not a general KNBR scraper and should not surface 49ers Executive Show episodes.
 
@@ -74,7 +74,7 @@ A failed article-page fetch must not turn an otherwise valid structured-feed ite
 
 ## Editorial behavior
 
-The bot is intended to surface original reporting, breaking news, transactions, injuries, prospect coverage, meaningful analysis/features, and trusted beat reporting. It downweights or rejects commodity score recaps, broad multi-team rankings/listicles, recurring evergreen pages, promo/stream/highlight pages, video-only content, and derivative articles that mainly summarize another outlet.
+The bot is intended to surface original reporting, breaking news, transactions, injuries, prospect coverage, meaningful analysis/features, and trusted beat reporting. It downweights or rejects commodity score recaps, broad multi-team rankings/listicles, recurring chats, mailbag submission prompts, weekly cartoons, promo/stream/highlight pages, video-only content, and derivative articles that mainly summarize another outlet.
 
 Cross-publisher duplicates are clustered deterministically. For event-driven news such as a call-up, the selector can keep **one event/reporting representative plus one genuinely differentiated analysis representative**. For comparable routine event reporting, recent publication representation over a 14-day window is used as a tie-breaker so the same outlet does not automatically win every transaction. Meaningful quality gaps and a substantial early-reporting lead still override that rotation.
 
@@ -106,7 +106,7 @@ KNBR · The Executive Show
 Listen at omny.fm →
 ```
 
-On the final line, only the exact destination hostname is a Bluesky rich-text link to the direct publisher/audio URL. Matching the visible linked hostname to the destination avoids Bluesky's external-link mismatch warning. If a usable image is available, it is uploaded as a **native Bluesky image** beneath the text. The bot deliberately does **not** use external link cards: they caused duplicate headlines, raw-URL fallbacks, and redundant publisher footer boxes. If no usable image is available, the post remains text + clickable publisher-domain link only.
+On the final line, only the exact destination hostname is a Bluesky rich-text link to the direct publisher/audio URL. Matching the visible linked hostname to the destination avoids Bluesky's external-link mismatch warning. If a usable image is available, it is uploaded as a **native Bluesky image** beneath the text. The bot deliberately does **not** use external link cards: they caused duplicate headlines, raw-URL fallbacks, and redundant publisher footer boxes. If an image is missing, invalid, too large, or its upload fails, the post remains text + clickable publisher-domain link only.
 
 Use the display name **SF Chronicle** in the metadata line. The Athletic is displayed as **The Athletic ($)**.
 
@@ -152,6 +152,10 @@ Useful environment variables:
 | `REQUEST_TIMEOUT` | HTTP timeout, default 15 seconds |
 | `KEEP_POSTED_DAYS` | State retention window, default 21 days |
 | `BSKY_PDS` | Bluesky PDS, default `https://bsky.social` |
+
+### Manual trusted story
+
+The production workflow's **Run workflow** form accepts an optional article URL, exact headline, and byline. URL and headline must be supplied together. The URL must be HTTPS and belong to an approved production publisher; the bot infers the source from the hostname. The story receives first consideration in that run, but exact-URL and same-event history still prevent a duplicate post.
 
 ## Repository map
 

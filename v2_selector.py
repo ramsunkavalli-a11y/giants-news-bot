@@ -24,7 +24,10 @@ TRACKING_KEYS = {
 }
 LOW_VALUE_TITLE_RE = re.compile(
     r"\bhighlights\b|\bwatch\b.*\b(?:homer|home run|highlights?|clip|video)\b|"
-    r"\branking every mlb\b|\bfarm system,\s*1-30\b|\bfarm system ranking by\b",
+    r"\branking every mlb\b|\bfarm system,\s*1-30\b|\bfarm system ranking by\b|"
+    r"^opinion:\s*this week['’]s cartoon\b|"
+    r"\bsubmit (?:your )?(?:sf )?giants questions\b|"
+    r"\bprospects chat:\s*\d{1,2}/\d{1,2}/\d{4}\b",
     flags=re.I,
 )
 BREAKING_NEWS_TITLE_RE = re.compile(
