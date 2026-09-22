@@ -221,24 +221,6 @@
   },
   "posted_stories": [
     {
-      "author": "Justice delos Santos",
-      "game_key": "",
-      "kind": "standalone",
-      "posted_at": "2026-08-31T20:58:24.739378+00:00",
-      "source": "Mercury News",
-      "title": "His last name is SF Giants royalty, but Peyton Bonds hopes to forge his own path",
-      "url": "https://www.mercurynews.com/2026/08/31/sf-giants-peyton-bonds-barry-bobby-draft-pick-mlb-home-run-king/"
-    },
-    {
-      "author": "Grant Brisbee",
-      "game_key": "",
-      "kind": "standalone",
-      "posted_at": "2026-08-31T20:58:26.660696+00:00",
-      "source": "The Athletic",
-      "title": "The statistics where the San Francisco Giants' rank last around the league",
-      "url": "https://www.nytimes.com/athletic/7550660/2026/08/31/sf-giants-stats-facts/"
-    },
-    {
       "author": "Will Simonds",
       "game_key": "",
       "kind": "standalone",
@@ -1596,6 +1578,33 @@
       "source": "San Francisco Chronicle",
       "title": "Mike Krukow opens up on life after baseball — and first meeting Duane Kuiper",
       "url": "https://www.sfchronicle.com/sports/giants/article/mike-krukow-farewell-baseball-22436764.php"
+    },
+    {
+      "author": "Alex Pavlovic",
+      "game_key": "",
+      "kind": "standalone",
+      "posted_at": "2026-09-22T00:13:44.364499+00:00",
+      "source": "NBC Sports Bay Area",
+      "title": "Giants promote top outfield prospect Bo Davidson, who will make MLB debut Monday",
+      "url": "https://www.nbcsportsbayarea.com/mlb/san-francisco-giants/bo-davidson-promotion-debut/1965101/"
+    },
+    {
+      "author": "",
+      "game_key": "",
+      "kind": "standalone",
+      "posted_at": "2026-09-22T00:13:45.439855+00:00",
+      "source": "San Francisco Chronicle",
+      "title": "Giants’ Marcelo Mayer, family thrilled he'll get second chance after struggles in Boston",
+      "url": "https://www.sfchronicle.com/sports/giants/article/giants-infielder-marcelo-mayer-top-prospect-22440835.php"
+    },
+    {
+      "author": "Dieter Kurtenbach",
+      "game_key": "",
+      "kind": "standalone",
+      "posted_at": "2026-09-22T00:13:48.543699+00:00",
+      "source": "Mercury News",
+      "title": "Kurtenbach: Brock Purdy is making easy work of the hardest job in sports",
+      "url": "https://www.mercurynews.com/2026/09/20/49ers-brock-purdy-dolphins-kyle-shanahan-nfl-levis-stadium-kurtenbach-0920/"
     }
   ],
   "posted_urls": {
@@ -1619,7 +1628,6 @@
     "https://sfstandard.com/opinion/2026/09/10/burning-man-cartoon-giants/": "2026-09-10T23:19:45.169717+00:00",
     "https://sfstandard.com/section-415/2026/09/01/section-415-podcast-giants-partnership-kalshi-part-dangerous-trend/": "2026-09-01T23:28:20.207510+00:00",
     "https://sfstandard.com/section-415/2026/09/08/section-415-podcast-uncovering-mysteries-giants-ownership/": "2026-09-08T23:31:38.419100+00:00",
-    "https://www.mercurynews.com/2026/08/31/sf-giants-peyton-bonds-barry-bobby-draft-pick-mlb-home-run-king/": "2026-08-31T20:58:24.739378+00:00",
     "https://www.mercurynews.com/2026/09/01/sf-giants-erase-six-run-deficit-still-lose-in-walk-off-fashion-to-pirates/": "2026-09-02T07:16:29.865555+00:00",
     "https://www.mercurynews.com/2026/09/01/sf-giants-finalizing-minor-league-deal-with-son-of-dusty-baker-report/": "2026-09-01T23:28:22.268705+00:00",
     "https://www.mercurynews.com/2026/09/01/sf-giants-top-pitching-prospect-jackson-flora-to-make-pro-debut-for-san-jose/": "2026-09-02T11:38:54.984292+00:00",
@@ -1644,6 +1652,7 @@
     "https://www.mercurynews.com/2026/09/19/sf-giants-bryce-eldridge-in-concussion-protocol-to-miss-sundays-series-finale/": "2026-09-21T05:14:19.416456+00:00",
     "https://www.mercurynews.com/2026/09/19/tony-vitello-philip-abner-risky-bullpen-gambit-dooms-sf-giants-in-loss-to-dodgers/": "2026-09-20T18:16:09.941739+00:00",
     "https://www.mercurynews.com/2026/09/19/we-were-full-supportive-why-sf-giants-rodriguez-pushed-to-pitch-in-arizona-fall-league/": "2026-09-19T18:09:23.520527+00:00",
+    "https://www.mercurynews.com/2026/09/20/49ers-brock-purdy-dolphins-kyle-shanahan-nfl-levis-stadium-kurtenbach-0920/": "2026-09-22T00:13:48.543699+00:00",
     "https://www.mercurynews.com/2026/09/20/matt-wilkinson-impressive-five-shutout-innings-cant-prevent-sf-giants-from-being-swept-by-dodgers/": "2026-09-21T20:05:33.792303+00:00",
     "https://www.mlb.com/giants/news/bryce-eldridge-hits-a-homer-in-giants-win-over-cardinals": "2026-09-09T07:31:31.714121+00:00",
     "https://www.mlb.com/giants/news/bryce-eldridge-out-for-second-straight-game-with-head-laceration": "2026-09-20T05:08:50.330486+00:00",
@@ -1661,6 +1670,7 @@
     "https://www.nbcsportsbayarea.com/mlb/san-francisco-giants/anthony-molina-adversity-former-team-braves/1959911/": "2026-09-01T07:57:14.160615+00:00",
     "https://www.nbcsportsbayarea.com/mlb/san-francisco-giants/blade-tidwell-loss-pirates/1960655/": "2026-09-03T23:25:06.296369+00:00",
     "https://www.nbcsportsbayarea.com/mlb/san-francisco-giants/blake-tidwell-mindset-after-pirates-loss/1960704/": "2026-09-03T23:25:01.760905+00:00",
+    "https://www.nbcsportsbayarea.com/mlb/san-francisco-giants/bo-davidson-promotion-debut/1965101/": "2026-09-22T00:13:44.364499+00:00",
     "https://www.nbcsportsbayarea.com/mlb/san-francisco-giants/bryce-eldridge-blade-tidwell-cardinals/1961931/": "2026-09-09T23:26:11.632133+00:00",
     "https://www.nbcsportsbayarea.com/mlb/san-francisco-giants/bryce-eldridge-blade-tidwell-st-louis-cardinals/1963586/": "2026-09-16T07:50:56.231725+00:00",
     "https://www.nbcsportsbayarea.com/mlb/san-francisco-giants/bryce-eldridge-christian-koss-home-run/1961710/": "2026-09-09T07:31:34.749213+00:00",
@@ -1705,7 +1715,6 @@
     "https://www.nbcsportsbayarea.com/mlb/san-francisco-giants/tony-vitello-ejected-new-york-mets/1961023/": "2026-09-05T22:09:20.096263+00:00",
     "https://www.nbcsportsbayarea.com/mlb/san-francisco-giants/tony-vitello-explanation-ejection-win-mets/1961068/": "2026-09-06T04:56:05.268024+00:00",
     "https://www.nbcsportsbayarea.com/mlb/san-francisco-giants/victor-bericoto-bullpen-recap-loss-dodgers/1964387/": "2026-09-20T05:08:47.839358+00:00",
-    "https://www.nytimes.com/athletic/7550660/2026/08/31/sf-giants-stats-facts/": "2026-08-31T20:58:26.660696+00:00",
     "https://www.nytimes.com/athletic/7557005/2026/09/02/sf-giants-outfield-depth-chart-bo-davidson/": "2026-09-02T18:51:45.550543+00:00",
     "https://www.nytimes.com/athletic/7557208/2026/09/01/sf-giants-franchise-bloodlines-darren-baker/": "2026-09-02T07:16:32.299016+00:00",
     "https://www.nytimes.com/athletic/7557933/2026/09/01/pirates-giants-combine-for-35-hits/": "2026-09-02T07:16:34.456769+00:00",
@@ -1732,6 +1741,7 @@
     "https://www.sfchronicle.com/sports/giants/article/giants-buster-posey-sees-baserunning-22425947.php": "2026-09-11T23:27:38.294518+00:00",
     "https://www.sfchronicle.com/sports/giants/article/giants-eke-win-11-logan-webb-s-strong-22421161.php": "2026-09-08T07:22:59.008333+00:00",
     "https://www.sfchronicle.com/sports/giants/article/giants-fans-irate-team-solicited-kalshi-wagers-22417052.php": "2026-09-04T07:22:15.134706+00:00",
+    "https://www.sfchronicle.com/sports/giants/article/giants-infielder-marcelo-mayer-top-prospect-22440835.php": "2026-09-22T00:13:45.439855+00:00",
     "https://www.sfchronicle.com/sports/giants/article/giants-manager-tony-vitello-getting-no-respect-22423051.php": "2026-09-10T11:43:51.063079+00:00",
     "https://www.sfchronicle.com/sports/giants/article/giants-rookies-fuel-6-run-rally-2-outs-eighth-22424245.php": "2026-09-09T23:26:09.265304+00:00",
     "https://www.sfchronicle.com/sports/giants/article/giants-send-rehabbing-closer-dakota-jordan-22433173.php": "2026-09-15T19:08:44.034814+00:00",
@@ -3538,6 +3548,38 @@
       "sources_ok": 8,
       "standalone_selected": 1,
       "started_at": "2026-09-21T20:46:11.407031+00:00",
+      "status": "completed"
+    },
+    {
+      "discovered": 172,
+      "finished_at": "2026-09-22T00:13:49.346075+00:00",
+      "game_selection_reasons": {
+        "already_posted": 17,
+        "game_source_duplicates": 0,
+        "not_game_story": 150,
+        "schedule_grounded_threads": 0,
+        "selected_game_stories": 0,
+        "selected_game_threads": 0,
+        "stale_game_story": 5,
+        "unrouted_game_stories": 0
+      },
+      "game_stories_selected": 0,
+      "game_threads_selected": 0,
+      "schedule_grounded_threads": 0,
+      "selection_reasons": {
+        "already_posted": 61,
+        "deferred_for_breaking_news": 1,
+        "eligible": 12,
+        "quality_low": 20,
+        "selected": 3,
+        "source_cap_cluster": 2,
+        "stale": 56,
+        "story_already_posted": 7
+      },
+      "sources_failed": 0,
+      "sources_ok": 8,
+      "standalone_selected": 3,
+      "started_at": "2026-09-22T00:13:22.010893+00:00",
       "status": "completed"
     }
   ]
