@@ -1630,6 +1630,24 @@
       "source": "MLB.com",
       "title": "All-Star closer among Giants’ AFL contingent",
       "url": "https://www.mlb.com/giants/news/randy-rodriguez-going-to-arizona-fall-league-for-giants"
+    },
+    {
+      "author": "Gabe Fernandez",
+      "game_key": "",
+      "kind": "standalone",
+      "posted_at": "2026-09-22T19:02:09.613466+00:00",
+      "source": "SFGATE",
+      "title": "SF Giants accidentally post nude player during clubhouse celebrations",
+      "url": "https://www.sfgate.com/giants/article/giants-nude-player-celebrations-22443935.php"
+    },
+    {
+      "author": "John Shea",
+      "game_key": "",
+      "kind": "standalone",
+      "posted_at": "2026-09-22T19:02:12.693289+00:00",
+      "source": "San Francisco Standard",
+      "title": "The final week of the Giants’ season: It’s all about Kruk and Kuip",
+      "url": "https://sfstandard.com/2026/09/22/duane-kuiper-mike-krukow-sf-giants-broadcasting/"
     }
   ],
   "posted_urls": {
@@ -1650,6 +1668,7 @@
     "https://sfstandard.com/2026/09/17/buster-posey-sf-giants-2027-plans-strategy/": "2026-09-17T19:10:48.959865+00:00",
     "https://sfstandard.com/2026/09/18/bryce-eldridge-rafael-devers-sf-giants-future/": "2026-09-18T18:36:30.680281+00:00",
     "https://sfstandard.com/2026/09/20/duane-kuiper-cancer-diagnosis-mike-krukow/": "2026-09-20T18:16:05.946909+00:00",
+    "https://sfstandard.com/2026/09/22/duane-kuiper-mike-krukow-sf-giants-broadcasting/": "2026-09-22T19:02:12.693289+00:00",
     "https://sfstandard.com/opinion/2026/09/10/burning-man-cartoon-giants/": "2026-09-10T23:19:45.169717+00:00",
     "https://sfstandard.com/section-415/2026/09/01/section-415-podcast-giants-partnership-kalshi-part-dangerous-trend/": "2026-09-01T23:28:20.207510+00:00",
     "https://sfstandard.com/section-415/2026/09/08/section-415-podcast-uncovering-mysteries-giants-ownership/": "2026-09-08T23:31:38.419100+00:00",
@@ -1784,6 +1803,7 @@
     "https://www.sfchronicle.com/sports/giants/article/sf-giants-top-twins-lost-pitcher-blade-tidwell-22442689.php": "2026-09-22T07:53:46.134221+00:00",
     "https://www.sfchronicle.com/sports/giants/article/tommy-john-pitcher-giants-22416456.php": "2026-09-04T11:39:05.695525+00:00",
     "https://www.sfgate.com/giants/article/buster-posey-exec-future-22437061.php": "2026-09-17T23:36:28.032901+00:00",
+    "https://www.sfgate.com/giants/article/giants-nude-player-celebrations-22443935.php": "2026-09-22T19:02:09.613466+00:00",
     "https://www.sfgate.com/giants/article/media-blasts-giants-ad-22416362.php": "2026-09-03T23:25:02.654057+00:00",
     "https://www.sfgate.com/giants/article/mike-krukow-beer-legend-22422336.php": "2026-09-09T18:46:35.845874+00:00",
     "https://www.sfgate.com/giants/article/sf-giants-chicken-tenders-22433120.php": "2026-09-17T11:59:37.599139+00:00",
@@ -3704,6 +3724,38 @@
       "sources_ok": 8,
       "standalone_selected": 1,
       "started_at": "2026-09-22T11:59:49.532535+00:00",
+      "status": "completed"
+    },
+    {
+      "discovered": 169,
+      "finished_at": "2026-09-22T19:02:13.497542+00:00",
+      "game_selection_reasons": {
+        "already_posted": 18,
+        "eligible_game_story": 1,
+        "game_source_duplicates": 0,
+        "not_game_story": 145,
+        "schedule_grounded_threads": 0,
+        "selected_game_stories": 0,
+        "selected_game_threads": 0,
+        "stale_game_story": 5,
+        "unrouted_game_stories": 1
+      },
+      "game_stories_selected": 0,
+      "game_threads_selected": 0,
+      "schedule_grounded_threads": 0,
+      "selection_reasons": {
+        "already_posted": 62,
+        "deferred_for_breaking_news": 1,
+        "eligible": 11,
+        "quality_low": 19,
+        "selected": 2,
+        "stale": 53,
+        "story_already_posted": 9
+      },
+      "sources_failed": 0,
+      "sources_ok": 8,
+      "standalone_selected": 2,
+      "started_at": "2026-09-22T19:01:50.967638+00:00",
       "status": "completed"
     }
   ]
