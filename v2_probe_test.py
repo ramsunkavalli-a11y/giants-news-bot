@@ -97,6 +97,14 @@ class ProbeEditorialClassificationTests(unittest.TestCase):
         )
         self.assertEqual((quality, reason), ("medium", "game_story_or_postgame_analysis"))
 
+    def test_49ers_column_is_low_value_for_giants_bot(self):
+        quality, reason, _ = classify(
+            "Mercury News",
+            "Kurtenbach: Brock Purdy is making easy work of the hardest job in sports",
+            "Dieter Kurtenbach",
+        )
+        self.assertEqual((quality, reason), ("low", "other_sport_content"))
+
     @patch("v2_probe.articles_from_feed")
     def test_sf_standard_uses_dedicated_giants_feed(self, articles_from_feed):
         articles_from_feed.return_value = []

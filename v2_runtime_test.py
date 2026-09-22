@@ -357,6 +357,23 @@ class RuntimeSmokeTests(unittest.TestCase):
         self.assertEqual(selection["selected"], [])
         self.assertEqual(selection["reasons"].get("quality_low"), 1)
 
+    def test_49ers_story_is_rejected_at_selection_boundary(self):
+        now = datetime(2026, 9, 21, 20, 0, tzinfo=timezone.utc)
+        article = {
+            "source": "Mercury News",
+            "title": "Kurtenbach: Brock Purdy is making easy work of the hardest job in sports",
+            "url": "https://www.mercurynews.com/2026/09/20/49ers-brock-purdy-nfl/",
+            "published": now.isoformat(),
+            "quality": "high",
+        }
+        selection = select_articles(
+            [article],
+            {"posted_urls": {}, "posted_stories": [], "game_threads": {}},
+            now=now,
+        )
+        self.assertEqual(selection["selected"], [])
+        self.assertEqual(selection["reasons"].get("quality_low"), 1)
+
     def test_mercury_amp_url_matches_canonical_article_url(self):
         canonical = "https://www.mercurynews.com/2026/08/22/example-story/"
         amp = "https://www.mercurynews.com/2026/08/22/example-story/amp/"

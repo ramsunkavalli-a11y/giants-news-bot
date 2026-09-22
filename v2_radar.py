@@ -48,6 +48,10 @@ DATE_ARCHIVE_TITLE_RE = re.compile(
     r"october|november|december)\s+\d{1,2},\s+\d{4}$",
     flags=re.I,
 )
+OTHER_SPORT_RE = re.compile(
+    r"\b(?:49ers|niners|warriors|sharks|valkyries|nfl|nba|nhl|wnba)\b",
+    flags=re.I,
+)
 
 
 def google_news_rss_url(target: RadarTarget, hours_back: int = 72) -> str:
@@ -99,6 +103,16 @@ def radar_title_allowed(title: str) -> bool:
         return False
     if DATE_ARCHIVE_TITLE_RE.fullmatch(value):
         return False
+    return True
+
+
+def radar_story_allowed(target: RadarTarget, title: str, url: str) -> bool:
+    """Require article-level team evidence; a Google query is not evidence."""
+    if OTHER_SPORT_RE.search(title):
+        return False
+    if target.domain.lower() == "mercurynews.com" and target.query_requires_giants:
+        path_text = re.sub(r"[-_/]+", " ", urlparse(url or "").path)
+        return bool(re.search(r"\bgiants\b", f"{title} {path_text}", flags=re.I))
     return True
 
 
@@ -164,7 +178,7 @@ def _feed_records(target: RadarTarget, hours_back: int) -> list[dict]:
             google_source or target.source,
         )
         summary = clean(getattr(entry, "summary", "") or "")
-        if not radar_title_allowed(title):
+        if not radar_title_allowed(title) or not radar_story_allowed(target, title, direct_url):
             continue
         records.append({
             "target": target,

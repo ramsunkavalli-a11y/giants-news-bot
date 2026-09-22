@@ -11,6 +11,7 @@ from v2_radar import (
     domain_matches,
     metadata_byline_includes_target,
     radar_title_allowed,
+    radar_story_allowed,
     radar_url_allowed,
     strip_google_source_suffix,
     unique_author_records,
@@ -59,6 +60,45 @@ class CoreWriterRadarTests(unittest.TestCase):
             target,
             "https://www.mercurynews.com/2026/09/07/giants-win-behind-late-rally/",
         ))
+
+    def test_mercury_radar_requires_article_level_giants_evidence(self):
+        target = next(target for target in CORE_WRITER_RADAR_TARGETS if target.author == "Dieter Kurtenbach")
+        self.assertFalse(radar_story_allowed(
+            target,
+            "Kurtenbach: Brock Purdy is making easy work of the hardest job in sports",
+            "https://www.mercurynews.com/2026/09/20/49ers-brock-purdy-dolphins-nfl/",
+        ))
+        self.assertTrue(radar_story_allowed(
+            target,
+            "Kurtenbach: The Giants finally have an identity",
+            "https://www.mercurynews.com/2026/09/20/sf-giants-identity/",
+        ))
+
+    @patch(
+        "v2_radar.decode_google_news_url",
+        return_value=(
+            "https://www.mercurynews.com/2026/09/20/"
+            "49ers-brock-purdy-dolphins-kyle-shanahan-nfl-levis-stadium-kurtenbach-0920/"
+        ),
+    )
+    @patch("v2_radar.feedparser.parse")
+    def test_google_query_false_positive_for_49ers_is_rejected(self, feed_parse, _decode):
+        target = next(target for target in CORE_WRITER_RADAR_TARGETS if target.author == "Dieter Kurtenbach")
+        feed_parse.return_value = SimpleNamespace(
+            status=200,
+            bozo=False,
+            entries=[SimpleNamespace(
+                link="https://news.google.com/rss/articles/fake",
+                title=(
+                    "Kurtenbach: Brock Purdy is making easy work of the hardest job in sports "
+                    "- The Mercury News"
+                ),
+                summary="A Google snippet that happens to mention the Giants.",
+                published="Sun, 20 Sep 2026 15:50:00 GMT",
+                source={"title": "The Mercury News"},
+            )],
+        )
+        self.assertEqual(_feed_records(target, 72), [])
 
     def test_generic_pagination_title_is_rejected(self):
         self.assertFalse(radar_title_allowed("Weather - Page 7"))

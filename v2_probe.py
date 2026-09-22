@@ -72,6 +72,12 @@ LOW_VALUE_TITLE_RE = re.compile(
     flags=re.I,
 )
 
+OTHER_SPORT_TITLE_RE = re.compile(
+    r"\b(?:49ers|niners|warriors|sharks|valkyries|nfl|nba|nhl|wnba|"
+    r"brock purdy|kyle shanahan)\b",
+    flags=re.I,
+)
+
 DERIVATIVE_PATTERNS = (
     "where giants' farm system ranks in",
     "where the giants' farm system ranks in",
@@ -262,6 +268,8 @@ def classify(source: str, title: str, author: str = "") -> tuple[str, str, str]:
         return "low", "mlb_non_guardado", preference
     if source == "NBC Sports Bay Area" and NBC_BROADCASTER_REACTION_RE.search(title):
         return "low", "broadcaster_quote_repackaging", preference
+    if OTHER_SPORT_TITLE_RE.search(title):
+        return "low", "other_sport_content", preference
     if LOW_VALUE_TITLE_RE.search(title):
         return "low", "commodity_or_generic_content", preference
     if any(pattern in blob for pattern in LOW_VALUE_PATTERNS):

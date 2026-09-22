@@ -30,6 +30,11 @@ LOW_VALUE_TITLE_RE = re.compile(
     r"\bprospects chat:\s*\d{1,2}/\d{1,2}/\d{4}\b",
     flags=re.I,
 )
+OTHER_SPORT_TITLE_RE = re.compile(
+    r"\b(?:49ers|niners|warriors|sharks|valkyries|nfl|nba|nhl|wnba|"
+    r"brock purdy|kyle shanahan)\b",
+    flags=re.I,
+)
 BREAKING_NEWS_TITLE_RE = re.compile(
     r"\b(?:injur(?:y|ies)|injured|il|bereavement|waiver|dfa|designated for assignment|"
     r"roster moves?|transactions?|placed on|land on)\b",
@@ -336,7 +341,8 @@ def select_articles(
 
         # Safety boundary: discovery adapters should already classify commodity
         # pages as low value, but do not let known broad/highlight patterns through.
-        if LOW_VALUE_TITLE_RE.search(title or ""):
+        sport_blob = f"{title} {urlparse(url or '').path.replace('-', ' ')}"
+        if LOW_VALUE_TITLE_RE.search(title or "") or OTHER_SPORT_TITLE_RE.search(sport_blob):
             reason = "quality_low"
         elif defer_features and DEFERRABLE_FEATURE_TITLE_RE.search(title or ""):
             reason = "deferred_for_breaking_news"
