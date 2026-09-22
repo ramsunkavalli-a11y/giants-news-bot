@@ -237,33 +237,6 @@
   },
   "posted_stories": [
     {
-      "author": "Will Simonds",
-      "game_key": "",
-      "kind": "standalone",
-      "posted_at": "2026-09-01T07:57:14.160615+00:00",
-      "source": "NBC Sports Bay Area",
-      "title": "Molina deals vs. Braves",
-      "url": "https://www.nbcsportsbayarea.com/mlb/san-francisco-giants/anthony-molina-adversity-former-team-braves/1959911/"
-    },
-    {
-      "author": "",
-      "game_key": "",
-      "kind": "standalone",
-      "posted_at": "2026-09-01T07:57:15.098593+00:00",
-      "source": "San Francisco Chronicle",
-      "title": "Not all Giants agree on whether a 100-loss season would matter: ‘What’s the point of the discussion?’",
-      "url": "https://www.sfchronicle.com/sports/giants/article/not-giants-agree-100-loss-season-matter-22410923.php"
-    },
-    {
-      "author": "",
-      "game_key": "",
-      "kind": "standalone",
-      "posted_at": "2026-09-01T11:57:39.570273+00:00",
-      "source": "San Francisco Chronicle",
-      "title": "How A’s catcher Bruce Maxwell brought taking a knee to MLB and what happened afterwards",
-      "url": "https://www.sfchronicle.com/sports/giants/article/bruce-maxwell-knee-mlb-kaepernick-22410012.php"
-    },
-    {
       "author": "Kerry Crowley",
       "game_key": "",
       "kind": "standalone",
@@ -1648,6 +1621,15 @@
       "source": "San Francisco Chronicle",
       "title": "Giants pick up victory over Twins, but Blade Tidwell’s exit may be cause for concern",
       "url": "https://www.sfchronicle.com/sports/giants/article/sf-giants-top-twins-lost-pitcher-blade-tidwell-22442689.php"
+    },
+    {
+      "author": "Maria Guardado",
+      "game_key": "",
+      "kind": "standalone",
+      "posted_at": "2026-09-22T12:00:07.735130+00:00",
+      "source": "MLB.com",
+      "title": "All-Star closer among Giants’ AFL contingent",
+      "url": "https://www.mlb.com/giants/news/randy-rodriguez-going-to-arizona-fall-league-for-giants"
     }
   ],
   "posted_urls": {
@@ -1711,8 +1693,8 @@
     "https://www.mlb.com/giants/news/rafael-devers-early-homer-sparks-giants-win-over-pirates": "2026-09-03T07:20:11.344689+00:00",
     "https://www.mlb.com/giants/news/rafael-devers-giants-win-series-opener-vs-cardinals": "2026-09-08T07:22:58.066499+00:00",
     "https://www.mlb.com/giants/news/rafael-devers-hits-9th-career-grand-slam-in-giants-loss-to-padres": "2026-09-12T11:10:56.828992+00:00",
+    "https://www.mlb.com/giants/news/randy-rodriguez-going-to-arizona-fall-league-for-giants": "2026-09-22T12:00:07.735130+00:00",
     "https://www.mlb.com/giants/news/top-storylines-from-each-giants-minor-league-affiliate": "2026-09-10T18:37:18.709030+00:00",
-    "https://www.nbcsportsbayarea.com/mlb/san-francisco-giants/anthony-molina-adversity-former-team-braves/1959911/": "2026-09-01T07:57:14.160615+00:00",
     "https://www.nbcsportsbayarea.com/mlb/san-francisco-giants/blade-tidwell-loss-pirates/1960655/": "2026-09-03T23:25:06.296369+00:00",
     "https://www.nbcsportsbayarea.com/mlb/san-francisco-giants/blake-tidwell-mindset-after-pirates-loss/1960704/": "2026-09-03T23:25:01.760905+00:00",
     "https://www.nbcsportsbayarea.com/mlb/san-francisco-giants/bo-davidson-promotion-debut/1965101/": "2026-09-22T00:13:44.364499+00:00",
@@ -1781,7 +1763,6 @@
     "https://www.nytimes.com/athletic/7614219/2026/09/20/duane-kuiper-sf-giants-throat-cancer-treatment/": "2026-09-20T22:35:25.111745+00:00",
     "https://www.nytimes.com/athletic/7616196/2026/09/21/giants-miserable-road-schedule-dodgers-sweep/": "2026-09-21T20:05:30.619152+00:00",
     "https://www.sfchronicle.com/sports/giants/article/another-giants-rookie-debuts-tying-franchise-22430259.php": "2026-09-14T05:14:51.914094+00:00",
-    "https://www.sfchronicle.com/sports/giants/article/bruce-maxwell-knee-mlb-kaepernick-22410012.php": "2026-09-01T11:57:39.570273+00:00",
     "https://www.sfchronicle.com/sports/giants/article/giants-announcer-duane-kuiper-divulges-he-s-22440818.php": "2026-09-20T22:35:24.216853+00:00",
     "https://www.sfchronicle.com/sports/giants/article/giants-buster-posey-sees-baserunning-22425947.php": "2026-09-11T23:27:38.294518+00:00",
     "https://www.sfchronicle.com/sports/giants/article/giants-eke-win-11-logan-webb-s-strong-22421161.php": "2026-09-08T07:22:59.008333+00:00",
@@ -1796,7 +1777,6 @@
     "https://www.sfchronicle.com/sports/giants/article/jonah-cox-flashes-blade-tidwell-s-walks-hurt-22416405.php": "2026-09-03T23:25:09.201439+00:00",
     "https://www.sfchronicle.com/sports/giants/article/mike-krukow-1985-team-vitello-22436775.php": "2026-09-21T20:05:31.512673+00:00",
     "https://www.sfchronicle.com/sports/giants/article/mike-krukow-farewell-baseball-22436764.php": "2026-09-21T20:46:25.558210+00:00",
-    "https://www.sfchronicle.com/sports/giants/article/not-giants-agree-100-loss-season-matter-22410923.php": "2026-09-01T07:57:15.098593+00:00",
     "https://www.sfchronicle.com/sports/giants/article/sf-giants-bid-fourth-straight-win-comes-short-22428184.php": "2026-09-12T07:18:45.531415+00:00",
     "https://www.sfchronicle.com/sports/giants/article/sf-giants-get-another-home-run-rafael-devers-loss-22428990.php": "2026-09-13T05:06:23.069891+00:00",
     "https://www.sfchronicle.com/sports/giants/article/sf-giants-rebound-feel-good-win-pirates-crushing-22415343.php": "2026-09-03T07:20:12.294100+00:00",
@@ -3692,6 +3672,38 @@
       "sources_ok": 8,
       "standalone_selected": 1,
       "started_at": "2026-09-22T07:53:28.076650+00:00",
+      "status": "completed"
+    },
+    {
+      "discovered": 170,
+      "finished_at": "2026-09-22T12:00:08.539650+00:00",
+      "game_selection_reasons": {
+        "already_posted": 18,
+        "eligible_game_story": 1,
+        "game_source_duplicates": 0,
+        "not_game_story": 146,
+        "schedule_grounded_threads": 0,
+        "selected_game_stories": 0,
+        "selected_game_threads": 0,
+        "stale_game_story": 5,
+        "unrouted_game_stories": 1
+      },
+      "game_stories_selected": 0,
+      "game_threads_selected": 0,
+      "schedule_grounded_threads": 0,
+      "selection_reasons": {
+        "already_posted": 62,
+        "deferred_for_breaking_news": 1,
+        "eligible": 11,
+        "quality_low": 19,
+        "selected": 1,
+        "stale": 54,
+        "story_already_posted": 10
+      },
+      "sources_failed": 0,
+      "sources_ok": 8,
+      "standalone_selected": 1,
+      "started_at": "2026-09-22T11:59:49.532535+00:00",
       "status": "completed"
     }
   ]
