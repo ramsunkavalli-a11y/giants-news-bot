@@ -62,6 +62,22 @@
       },
       "updated_at": "2026-09-17T07:56:11.084107+00:00"
     },
+    "game:823169": {
+      "created_at": "2026-09-22T07:53:46.134200+00:00",
+      "game_day": "2026-09-21",
+      "game_number": 1,
+      "game_pk": 823169,
+      "opponent": "twins",
+      "parent": {
+        "cid": "bafyreia2t5eca2bdl6ulmhawe7pjiqz2jofz6ecxz2e3agkqgukow66y4u",
+        "uri": "at://did:plc:gkkepfzghvnfrkrohm2c4nwy/app.bsky.feed.post/3mw3qpcwyzq2q"
+      },
+      "root": {
+        "cid": "bafyreia2t5eca2bdl6ulmhawe7pjiqz2jofz6ecxz2e3agkqgukow66y4u",
+        "uri": "at://did:plc:gkkepfzghvnfrkrohm2c4nwy/app.bsky.feed.post/3mw3qpcwyzq2q"
+      },
+      "updated_at": "2026-09-22T07:53:46.134200+00:00"
+    },
     "game:823171": {
       "created_at": "2026-09-14T05:14:54.454127+00:00",
       "game_day": "2026-09-13",
@@ -1614,6 +1630,24 @@
       "source": "Mercury News",
       "title": "SF Giants outfield prospect Bo Davidson to join team in San Francisco",
       "url": "https://www.mercurynews.com/2026/09/21/sf-giants-outfield-prospect-bo-davidson-to-join-team-in-san-francisco/"
+    },
+    {
+      "author": "Maria Guardado",
+      "game_key": "",
+      "kind": "standalone",
+      "posted_at": "2026-09-22T07:53:45.077671+00:00",
+      "source": "MLB.com",
+      "title": "Tidwell leaves start with right elbow discomfort, will get MRI on Tuesday",
+      "url": "https://www.mlb.com/giants/news/blade-tidwell-leaves-start-against-twins-with-right-elbow-injury"
+    },
+    {
+      "author": "",
+      "game_key": "game:823169",
+      "kind": "game_story",
+      "posted_at": "2026-09-22T07:53:46.134221+00:00",
+      "source": "San Francisco Chronicle",
+      "title": "Giants pick up victory over Twins, but Blade Tidwell’s exit may be cause for concern",
+      "url": "https://www.sfchronicle.com/sports/giants/article/sf-giants-top-twins-lost-pitcher-blade-tidwell-22442689.php"
     }
   ],
   "posted_urls": {
@@ -1664,6 +1698,7 @@
     "https://www.mercurynews.com/2026/09/20/49ers-brock-purdy-dolphins-kyle-shanahan-nfl-levis-stadium-kurtenbach-0920/": "2026-09-22T00:13:48.543699+00:00",
     "https://www.mercurynews.com/2026/09/20/matt-wilkinson-impressive-five-shutout-innings-cant-prevent-sf-giants-from-being-swept-by-dodgers/": "2026-09-21T20:05:33.792303+00:00",
     "https://www.mercurynews.com/2026/09/21/sf-giants-outfield-prospect-bo-davidson-to-join-team-in-san-francisco/": "2026-09-22T00:38:06.775845+00:00",
+    "https://www.mlb.com/giants/news/blade-tidwell-leaves-start-against-twins-with-right-elbow-injury": "2026-09-22T07:53:45.077671+00:00",
     "https://www.mlb.com/giants/news/bryce-eldridge-hits-a-homer-in-giants-win-over-cardinals": "2026-09-09T07:31:31.714121+00:00",
     "https://www.mlb.com/giants/news/bryce-eldridge-out-for-second-straight-game-with-head-laceration": "2026-09-20T05:08:50.330486+00:00",
     "https://www.mlb.com/giants/news/giants-earn-comeback-win-to-sweep-cardinals": "2026-09-09T23:26:13.955118+00:00",
@@ -1766,6 +1801,7 @@
     "https://www.sfchronicle.com/sports/giants/article/sf-giants-get-another-home-run-rafael-devers-loss-22428990.php": "2026-09-13T05:06:23.069891+00:00",
     "https://www.sfchronicle.com/sports/giants/article/sf-giants-rebound-feel-good-win-pirates-crushing-22415343.php": "2026-09-03T07:20:12.294100+00:00",
     "https://www.sfchronicle.com/sports/giants/article/sf-giants-rookies-castoffs-stepping-up-finding-22423074.php": "2026-09-09T07:31:32.622719+00:00",
+    "https://www.sfchronicle.com/sports/giants/article/sf-giants-top-twins-lost-pitcher-blade-tidwell-22442689.php": "2026-09-22T07:53:46.134221+00:00",
     "https://www.sfchronicle.com/sports/giants/article/tommy-john-pitcher-giants-22416456.php": "2026-09-04T11:39:05.695525+00:00",
     "https://www.sfgate.com/giants/article/buster-posey-exec-future-22437061.php": "2026-09-17T23:36:28.032901+00:00",
     "https://www.sfgate.com/giants/article/media-blasts-giants-ad-22416362.php": "2026-09-03T23:25:02.654057+00:00",
@@ -3622,6 +3658,40 @@
       "sources_ok": 9,
       "standalone_selected": 1,
       "started_at": "2026-09-22T00:37:41.591139+00:00",
+      "status": "completed"
+    },
+    {
+      "discovered": 170,
+      "finished_at": "2026-09-22T07:53:46.937516+00:00",
+      "game_selection_reasons": {
+        "already_posted": 16,
+        "eligible_game_story": 2,
+        "game_source_duplicates": 0,
+        "not_game_story": 147,
+        "schedule_grounded_threads": 1,
+        "selected_game_stories": 1,
+        "selected_game_threads": 1,
+        "stale_game_story": 5,
+        "unrouted_game_stories": 1
+      },
+      "game_stories_selected": 1,
+      "game_threads_selected": 1,
+      "schedule_grounded_threads": 1,
+      "selection_reasons": {
+        "already_posted": 61,
+        "deferred_for_breaking_news": 1,
+        "eligible": 12,
+        "quality_low": 19,
+        "selected": 1,
+        "source_cap_cluster": 1,
+        "stale": 55,
+        "story_already_posted": 9,
+        "story_duplicate": 1
+      },
+      "sources_failed": 0,
+      "sources_ok": 8,
+      "standalone_selected": 1,
+      "started_at": "2026-09-22T07:53:28.076650+00:00",
       "status": "completed"
     }
   ]
