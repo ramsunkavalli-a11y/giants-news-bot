@@ -1605,6 +1605,15 @@
       "source": "Mercury News",
       "title": "Kurtenbach: Brock Purdy is making easy work of the hardest job in sports",
       "url": "https://www.mercurynews.com/2026/09/20/49ers-brock-purdy-dolphins-kyle-shanahan-nfl-levis-stadium-kurtenbach-0920/"
+    },
+    {
+      "author": "",
+      "game_key": "",
+      "kind": "standalone",
+      "posted_at": "2026-09-22T00:38:06.775845+00:00",
+      "source": "Mercury News",
+      "title": "SF Giants outfield prospect Bo Davidson to join team in San Francisco",
+      "url": "https://www.mercurynews.com/2026/09/21/sf-giants-outfield-prospect-bo-davidson-to-join-team-in-san-francisco/"
     }
   ],
   "posted_urls": {
@@ -1654,6 +1663,7 @@
     "https://www.mercurynews.com/2026/09/19/we-were-full-supportive-why-sf-giants-rodriguez-pushed-to-pitch-in-arizona-fall-league/": "2026-09-19T18:09:23.520527+00:00",
     "https://www.mercurynews.com/2026/09/20/49ers-brock-purdy-dolphins-kyle-shanahan-nfl-levis-stadium-kurtenbach-0920/": "2026-09-22T00:13:48.543699+00:00",
     "https://www.mercurynews.com/2026/09/20/matt-wilkinson-impressive-five-shutout-innings-cant-prevent-sf-giants-from-being-swept-by-dodgers/": "2026-09-21T20:05:33.792303+00:00",
+    "https://www.mercurynews.com/2026/09/21/sf-giants-outfield-prospect-bo-davidson-to-join-team-in-san-francisco/": "2026-09-22T00:38:06.775845+00:00",
     "https://www.mlb.com/giants/news/bryce-eldridge-hits-a-homer-in-giants-win-over-cardinals": "2026-09-09T07:31:31.714121+00:00",
     "https://www.mlb.com/giants/news/bryce-eldridge-out-for-second-straight-game-with-head-laceration": "2026-09-20T05:08:50.330486+00:00",
     "https://www.mlb.com/giants/news/giants-earn-comeback-win-to-sweep-cardinals": "2026-09-09T23:26:13.955118+00:00",
@@ -3580,6 +3590,38 @@
       "sources_ok": 8,
       "standalone_selected": 3,
       "started_at": "2026-09-22T00:13:22.010893+00:00",
+      "status": "completed"
+    },
+    {
+      "discovered": 173,
+      "finished_at": "2026-09-22T00:38:07.580019+00:00",
+      "game_selection_reasons": {
+        "already_posted": 17,
+        "game_source_duplicates": 0,
+        "not_game_story": 151,
+        "schedule_grounded_threads": 0,
+        "selected_game_stories": 0,
+        "selected_game_threads": 0,
+        "stale_game_story": 5,
+        "unrouted_game_stories": 0
+      },
+      "game_stories_selected": 0,
+      "game_threads_selected": 0,
+      "schedule_grounded_threads": 0,
+      "selection_reasons": {
+        "already_posted": 64,
+        "deferred_for_breaking_news": 1,
+        "eligible": 10,
+        "quality_low": 20,
+        "selected": 1,
+        "source_cap_cluster": 2,
+        "stale": 56,
+        "story_already_posted": 7
+      },
+      "sources_failed": 0,
+      "sources_ok": 9,
+      "standalone_selected": 1,
+      "started_at": "2026-09-22T00:37:41.591139+00:00",
       "status": "completed"
     }
   ]
