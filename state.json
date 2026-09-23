@@ -238,15 +238,6 @@
   },
   "posted_stories": [
     {
-      "author": "Justice delos Santos",
-      "game_key": "",
-      "kind": "standalone",
-      "posted_at": "2026-09-02T11:38:54.984292+00:00",
-      "source": "Mercury News",
-      "title": "SF Giants’ top pitching prospect Jackson Flora to make pro debut for San Jose",
-      "url": "https://www.mercurynews.com/2026/09/01/sf-giants-top-pitching-prospect-jackson-flora-to-make-pro-debut-for-san-jose/"
-    },
-    {
       "author": "Maria Guardado",
       "game_key": "",
       "kind": "standalone",
@@ -1604,6 +1595,15 @@
       "source": "NBC Sports Bay Area",
       "title": "What we learned as Giants' offense wastes several chances in loss to Twins",
       "url": "https://www.nbcsportsbayarea.com/mlb/san-francisco-giants/anthony-molina-minnesota-twins/1965403/"
+    },
+    {
+      "author": "",
+      "game_key": "",
+      "kind": "standalone",
+      "posted_at": "2026-09-23T12:01:25.504405+00:00",
+      "source": "San Francisco Chronicle",
+      "title": "Mike Krukow’s message to Giants fans? ‘You did more for me than I’ve ever done for you’",
+      "url": "https://www.sfchronicle.com/sports/giants/article/mike-krukow-fans-22436779.php"
     }
   ],
   "posted_urls": {
@@ -1627,7 +1627,6 @@
     "https://sfstandard.com/2026/09/22/duane-kuiper-mike-krukow-sf-giants-broadcasting/": "2026-09-22T19:02:12.693289+00:00",
     "https://sfstandard.com/opinion/2026/09/10/burning-man-cartoon-giants/": "2026-09-10T23:19:45.169717+00:00",
     "https://sfstandard.com/section-415/2026/09/08/section-415-podcast-uncovering-mysteries-giants-ownership/": "2026-09-08T23:31:38.419100+00:00",
-    "https://www.mercurynews.com/2026/09/01/sf-giants-top-pitching-prospect-jackson-flora-to-make-pro-debut-for-san-jose/": "2026-09-02T11:38:54.984292+00:00",
     "https://www.mercurynews.com/2026/09/02/devers-stays-hot-eldridge-hill-drive-in-two-apiece-as-sf-giants-beat-pirates-in-10-innings/": "2026-09-03T07:20:06.748651+00:00",
     "https://www.mercurynews.com/2026/09/03/walks-doom-sf-giants-in-series-finale-defeat-vs-pirates/": "2026-09-04T07:22:18.339639+00:00",
     "https://www.mercurynews.com/2026/09/03/you-have-to-pick-your-poison-devers-eldridge-showing-signs-of-becoming-sf-giants-next-dynamic-duo/": "2026-09-03T18:50:08.810279+00:00",
@@ -1746,6 +1745,7 @@
     "https://www.sfchronicle.com/sports/giants/article/jackson-flora-s-playoff-debut-beer-chants-22426791.php": "2026-09-11T07:25:51.340894+00:00",
     "https://www.sfchronicle.com/sports/giants/article/jonah-cox-flashes-blade-tidwell-s-walks-hurt-22416405.php": "2026-09-03T23:25:09.201439+00:00",
     "https://www.sfchronicle.com/sports/giants/article/mike-krukow-1985-team-vitello-22436775.php": "2026-09-21T20:05:31.512673+00:00",
+    "https://www.sfchronicle.com/sports/giants/article/mike-krukow-fans-22436779.php": "2026-09-23T12:01:25.504405+00:00",
     "https://www.sfchronicle.com/sports/giants/article/mike-krukow-farewell-baseball-22436764.php": "2026-09-21T20:46:25.558210+00:00",
     "https://www.sfchronicle.com/sports/giants/article/sf-giants-bid-fourth-straight-win-comes-short-22428184.php": "2026-09-12T07:18:45.531415+00:00",
     "https://www.sfchronicle.com/sports/giants/article/sf-giants-get-another-home-run-rafael-devers-loss-22428990.php": "2026-09-13T05:06:23.069891+00:00",
@@ -3772,6 +3772,39 @@
       "sources_ok": 8,
       "standalone_selected": 1,
       "started_at": "2026-09-23T07:54:44.209314+00:00",
+      "status": "completed"
+    },
+    {
+      "discovered": 167,
+      "finished_at": "2026-09-23T12:01:26.307184+00:00",
+      "game_selection_reasons": {
+        "already_posted": 15,
+        "eligible_game_story": 1,
+        "game_source_duplicates": 0,
+        "not_game_story": 145,
+        "schedule_grounded_threads": 0,
+        "selected_game_stories": 0,
+        "selected_game_threads": 0,
+        "stale_game_story": 6,
+        "unrouted_game_stories": 1
+      },
+      "game_stories_selected": 0,
+      "game_threads_selected": 0,
+      "schedule_grounded_threads": 0,
+      "selection_reasons": {
+        "already_posted": 62,
+        "deferred_for_breaking_news": 1,
+        "eligible": 11,
+        "quality_low": 19,
+        "selected": 1,
+        "source_cap_cluster": 1,
+        "stale": 53,
+        "story_already_posted": 9
+      },
+      "sources_failed": 0,
+      "sources_ok": 8,
+      "standalone_selected": 1,
+      "started_at": "2026-09-23T12:01:02.750885+00:00",
       "status": "completed"
     }
   ]
