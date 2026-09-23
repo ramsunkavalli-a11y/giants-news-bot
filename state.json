@@ -69,14 +69,14 @@
       "game_pk": 823166,
       "opponent": "twins",
       "parent": {
-        "cid": "bafyreidbctagxruapxiyhqtsdshgayk4ptlqac24wkbuz7gz33b3zznd7u",
-        "uri": "at://did:plc:gkkepfzghvnfrkrohm2c4nwy/app.bsky.feed.post/3mw6bajljt52t"
+        "cid": "bafyreiel5m7jryu6dy4dhgagzshlvwjxo4d55z5nclzslhu3qpdi2m2gra",
+        "uri": "at://did:plc:gkkepfzghvnfrkrohm2c4nwy/app.bsky.feed.post/3mw7gwtzkig2o"
       },
       "root": {
         "cid": "bafyreidbctagxruapxiyhqtsdshgayk4ptlqac24wkbuz7gz33b3zznd7u",
         "uri": "at://did:plc:gkkepfzghvnfrkrohm2c4nwy/app.bsky.feed.post/3mw6bajljt52t"
       },
-      "updated_at": "2026-09-23T07:55:03.378801+00:00"
+      "updated_at": "2026-09-23T19:09:40.456692+00:00"
     },
     "game:823169": {
       "created_at": "2026-09-22T07:53:46.134200+00:00",
@@ -237,24 +237,6 @@
     }
   },
   "posted_stories": [
-    {
-      "author": "Maria Guardado",
-      "game_key": "",
-      "kind": "standalone",
-      "posted_at": "2026-09-02T18:51:43.267388+00:00",
-      "source": "MLB.com",
-      "title": "Another Bonds is kicking off his career with the Giants",
-      "url": "https://www.mlb.com/giants/news/peyton-bonds-beginning-career-with-giants-organization"
-    },
-    {
-      "author": "Grant Brisbee",
-      "game_key": "",
-      "kind": "standalone",
-      "posted_at": "2026-09-02T18:51:45.550543+00:00",
-      "source": "The Athletic",
-      "title": "The Giants have too many outfielders, which is a good problem to have",
-      "url": "https://www.nytimes.com/athletic/7557005/2026/09/02/sf-giants-outfield-depth-chart-bo-davidson/"
-    },
     {
       "author": "Justice delos Santos",
       "game_key": "",
@@ -1604,6 +1586,33 @@
       "source": "San Francisco Chronicle",
       "title": "Mike Krukow’s message to Giants fans? ‘You did more for me than I’ve ever done for you’",
       "url": "https://www.sfchronicle.com/sports/giants/article/mike-krukow-fans-22436779.php"
+    },
+    {
+      "author": "",
+      "game_key": "",
+      "kind": "standalone",
+      "posted_at": "2026-09-23T19:09:38.436617+00:00",
+      "source": "The Athletic",
+      "title": "Giants broadcaster Mike Krukow raves about Twins' Brooks Lee. He's known him since birth",
+      "url": "https://www.nytimes.com/athletic/7622228/2026/09/23/brooks-lee-mike-krukow-family-connection-twins-giants/"
+    },
+    {
+      "author": "",
+      "game_key": "",
+      "kind": "standalone",
+      "posted_at": "2026-09-23T19:09:39.375995+00:00",
+      "source": "San Francisco Chronicle",
+      "title": "Giants’ Jung Hoo Lee, Bryce Eldridge land on IL; Marcelo Mayer activated",
+      "url": "https://www.sfchronicle.com/sports/giants/article/sf-giants-place-jung-hoo-lee-bryce-eldridge-22442692.php"
+    },
+    {
+      "author": "",
+      "game_key": "game:823166",
+      "kind": "game_story",
+      "posted_at": "2026-09-23T19:09:40.456715+00:00",
+      "source": "San Francisco Chronicle",
+      "title": "Giants’ Anthony Molina offers another solid pitching performance in loss to Twins",
+      "url": "https://www.sfchronicle.com/sports/giants/article/sf-giants-fall-twins-pitcher-anthony-molina-22443800.php"
     }
   ],
   "posted_urls": {
@@ -1658,7 +1667,6 @@
     "https://www.mlb.com/giants/news/giants-offense-struggles-series-finale-loss-to-pirates": "2026-09-03T23:25:08.303714+00:00",
     "https://www.mlb.com/giants/news/jackson-flora-san-jose-giants-going-to-2026-cal-league-championship-series": "2026-09-11T07:25:53.690982+00:00",
     "https://www.mlb.com/giants/news/matt-wilkinson-throws-5-scoreless-innings-vs-dodgers": "2026-09-21T05:14:14.323602+00:00",
-    "https://www.mlb.com/giants/news/peyton-bonds-beginning-career-with-giants-organization": "2026-09-02T18:51:43.267388+00:00",
     "https://www.mlb.com/giants/news/philip-abner-has-rough-outing-for-second-game-in-a-row": "2026-09-20T09:57:11.491184+00:00",
     "https://www.mlb.com/giants/news/rafael-devers-early-homer-sparks-giants-win-over-pirates": "2026-09-03T07:20:11.344689+00:00",
     "https://www.mlb.com/giants/news/rafael-devers-giants-win-series-opener-vs-cardinals": "2026-09-08T07:22:58.066499+00:00",
@@ -1713,7 +1721,6 @@
     "https://www.nbcsportsbayarea.com/mlb/san-francisco-giants/tony-vitello-ejected-new-york-mets/1961023/": "2026-09-05T22:09:20.096263+00:00",
     "https://www.nbcsportsbayarea.com/mlb/san-francisco-giants/tony-vitello-explanation-ejection-win-mets/1961068/": "2026-09-06T04:56:05.268024+00:00",
     "https://www.nbcsportsbayarea.com/mlb/san-francisco-giants/victor-bericoto-bullpen-recap-loss-dodgers/1964387/": "2026-09-20T05:08:47.839358+00:00",
-    "https://www.nytimes.com/athletic/7557005/2026/09/02/sf-giants-outfield-depth-chart-bo-davidson/": "2026-09-02T18:51:45.550543+00:00",
     "https://www.nytimes.com/athletic/7561417/2026/09/03/sf-giants-win-pirates-rafael-devers-bryce-eldridge/": "2026-09-03T18:50:07.538710+00:00",
     "https://www.nytimes.com/athletic/7563145/2026/09/04/sf-giants-tony-vitello-manager-interview/": "2026-09-04T23:10:02.336750+00:00",
     "https://www.nytimes.com/athletic/7565345/2026/09/04/sf-giants-60-day-injured-list-roster-management/": "2026-09-04T18:32:03.309957+00:00",
@@ -1731,6 +1738,7 @@
     "https://www.nytimes.com/athletic/7612009/2026/09/20/giants-loss-dodgers-vitello-bullpen/": "2026-09-20T18:16:06.902198+00:00",
     "https://www.nytimes.com/athletic/7614219/2026/09/20/duane-kuiper-sf-giants-throat-cancer-treatment/": "2026-09-20T22:35:25.111745+00:00",
     "https://www.nytimes.com/athletic/7616196/2026/09/21/giants-miserable-road-schedule-dodgers-sweep/": "2026-09-21T20:05:30.619152+00:00",
+    "https://www.nytimes.com/athletic/7622228/2026/09/23/brooks-lee-mike-krukow-family-connection-twins-giants/": "2026-09-23T19:09:38.436617+00:00",
     "https://www.sfchronicle.com/sports/giants/article/another-giants-rookie-debuts-tying-franchise-22430259.php": "2026-09-14T05:14:51.914094+00:00",
     "https://www.sfchronicle.com/sports/giants/article/giants-announcer-duane-kuiper-divulges-he-s-22440818.php": "2026-09-20T22:35:24.216853+00:00",
     "https://www.sfchronicle.com/sports/giants/article/giants-broadcaster-mike-krukow-wins-bill-rigney-22444592.php": "2026-09-23T07:55:00.996539+00:00",
@@ -1748,7 +1756,9 @@
     "https://www.sfchronicle.com/sports/giants/article/mike-krukow-fans-22436779.php": "2026-09-23T12:01:25.504405+00:00",
     "https://www.sfchronicle.com/sports/giants/article/mike-krukow-farewell-baseball-22436764.php": "2026-09-21T20:46:25.558210+00:00",
     "https://www.sfchronicle.com/sports/giants/article/sf-giants-bid-fourth-straight-win-comes-short-22428184.php": "2026-09-12T07:18:45.531415+00:00",
+    "https://www.sfchronicle.com/sports/giants/article/sf-giants-fall-twins-pitcher-anthony-molina-22443800.php": "2026-09-23T19:09:40.456715+00:00",
     "https://www.sfchronicle.com/sports/giants/article/sf-giants-get-another-home-run-rafael-devers-loss-22428990.php": "2026-09-13T05:06:23.069891+00:00",
+    "https://www.sfchronicle.com/sports/giants/article/sf-giants-place-jung-hoo-lee-bryce-eldridge-22442692.php": "2026-09-23T19:09:39.375995+00:00",
     "https://www.sfchronicle.com/sports/giants/article/sf-giants-rebound-feel-good-win-pirates-crushing-22415343.php": "2026-09-03T07:20:12.294100+00:00",
     "https://www.sfchronicle.com/sports/giants/article/sf-giants-rookies-castoffs-stepping-up-finding-22423074.php": "2026-09-09T07:31:32.622719+00:00",
     "https://www.sfchronicle.com/sports/giants/article/sf-giants-top-twins-lost-pitcher-blade-tidwell-22442689.php": "2026-09-22T07:53:46.134221+00:00",
@@ -3805,6 +3815,38 @@
       "sources_ok": 8,
       "standalone_selected": 1,
       "started_at": "2026-09-23T12:01:02.750885+00:00",
+      "status": "completed"
+    },
+    {
+      "discovered": 167,
+      "finished_at": "2026-09-23T19:09:41.261108+00:00",
+      "game_selection_reasons": {
+        "already_posted": 15,
+        "eligible_game_story": 1,
+        "game_source_duplicates": 0,
+        "not_game_story": 144,
+        "schedule_grounded_threads": 1,
+        "selected_game_stories": 1,
+        "selected_game_threads": 1,
+        "stale_game_story": 7,
+        "unrouted_game_stories": 0
+      },
+      "game_stories_selected": 1,
+      "game_threads_selected": 1,
+      "schedule_grounded_threads": 1,
+      "selection_reasons": {
+        "already_posted": 60,
+        "deferred_for_breaking_news": 1,
+        "eligible": 10,
+        "quality_low": 18,
+        "selected": 2,
+        "stale": 55,
+        "story_already_posted": 8
+      },
+      "sources_failed": 0,
+      "sources_ok": 8,
+      "standalone_selected": 2,
+      "started_at": "2026-09-23T19:09:04.734213+00:00",
       "status": "completed"
     }
   ]
