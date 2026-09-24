@@ -239,24 +239,6 @@
   },
   "posted_stories": [
     {
-      "author": "Andrew Baggarly",
-      "game_key": "",
-      "kind": "standalone",
-      "posted_at": "2026-09-03T18:50:07.538710+00:00",
-      "source": "The Athletic",
-      "title": "Pirates sidestep red-hot Rafael Devers; Bryce Eldridge wins it for Giants in 10th",
-      "url": "https://www.nytimes.com/athletic/7561417/2026/09/03/sf-giants-win-pirates-rafael-devers-bryce-eldridge/"
-    },
-    {
-      "author": "Justice delos Santos",
-      "game_key": "",
-      "kind": "standalone",
-      "posted_at": "2026-09-03T18:50:08.810279+00:00",
-      "source": "Mercury News",
-      "title": "‘You have to pick your poison’: Devers, Eldridge showing signs of becoming SF Giants’ next dynamic duo",
-      "url": "https://www.mercurynews.com/2026/09/03/you-have-to-pick-your-poison-devers-eldridge-showing-signs-of-becoming-sf-giants-next-dynamic-duo/"
-    },
-    {
       "author": "Dylan Grausz",
       "game_key": "",
       "kind": "standalone",
@@ -1614,6 +1596,33 @@
       "source": "San Francisco Chronicle",
       "title": "Giants fall to Twins, clinching losing record at Oracle Park; Bo Davidson injured",
       "url": "https://www.sfchronicle.com/sports/giants/article/giants-fall-twins-clinching-losing-record-sf-bo-22446034.php"
+    },
+    {
+      "author": "Taylor Wirth",
+      "game_key": "",
+      "kind": "standalone",
+      "posted_at": "2026-09-24T19:24:32.365936+00:00",
+      "source": "NBC Sports Bay Area",
+      "title": "Giants amazingly claim Camilo Doval off waivers after trading him last summer",
+      "url": "https://www.nbcsportsbayarea.com/mlb/san-francisco-giants/camilo-doval-claimed-waivers-pirates/1965801/"
+    },
+    {
+      "author": "The Executive Show",
+      "game_key": "",
+      "kind": "standalone",
+      "posted_at": "2026-09-24T19:24:34.475256+00:00",
+      "source": "KNBR",
+      "title": "Giants skipper Tony V on the Giants season & Mike Krukow",
+      "url": "https://omny.fm/shows/the-executives-show/giants-skipper-tony-v-on-the-giants-season-mike-krukow"
+    },
+    {
+      "author": "Ryan Young",
+      "game_key": "",
+      "kind": "standalone",
+      "posted_at": "2026-09-24T19:24:37.334301+00:00",
+      "source": "San Francisco Standard",
+      "title": "Inside Mike Krukow’s booth during his last days with the Giants: ‘Time of my life’",
+      "url": "https://sfstandard.com/2026/09/24/mike-krukow-sf-giants-broadcast-tribute/"
     }
   ],
   "posted_urls": {
@@ -1622,6 +1631,7 @@
     "https://blogs.fangraphs.com/scouting-the-uniformed-debuts-of-early-round-padres-and-giants-draft-picks/": "2026-09-09T11:45:50.521777+00:00",
     "https://blogs.fangraphs.com/the-giants-have-been-way-off-baseruns/": "2026-09-04T18:32:05.621525+00:00",
     "https://omny.fm/shows/the-executives-show/giants-knbr-beer-day-preview-larry-baer-on-mike-krukows-legacy-and-a-special-september-celebration": "2026-09-10T23:19:42.710344+00:00",
+    "https://omny.fm/shows/the-executives-show/giants-skipper-tony-v-on-the-giants-season-mike-krukow": "2026-09-24T19:24:34.475256+00:00",
     "https://omny.fm/shows/the-executives-show/randy-winn-discusses-giants-top-prospects-bryce-eldridge-and-the-future-of-the-farm-system": "2026-09-03T23:25:04.207830+00:00",
     "https://sfstandard.com/2026/09/04/josuar-gonzalez-sf-giants-prospect-luis-hernandez/": "2026-09-04T23:09:58.632085+00:00",
     "https://sfstandard.com/2026/09/04/patrick-bailey-trade-sf-giants-catcher-depth/": "2026-09-04T18:32:08.759540+00:00",
@@ -1635,10 +1645,10 @@
     "https://sfstandard.com/2026/09/18/bryce-eldridge-rafael-devers-sf-giants-future/": "2026-09-18T18:36:30.680281+00:00",
     "https://sfstandard.com/2026/09/20/duane-kuiper-cancer-diagnosis-mike-krukow/": "2026-09-20T18:16:05.946909+00:00",
     "https://sfstandard.com/2026/09/22/duane-kuiper-mike-krukow-sf-giants-broadcasting/": "2026-09-22T19:02:12.693289+00:00",
+    "https://sfstandard.com/2026/09/24/mike-krukow-sf-giants-broadcast-tribute/": "2026-09-24T19:24:37.334301+00:00",
     "https://sfstandard.com/opinion/2026/09/10/burning-man-cartoon-giants/": "2026-09-10T23:19:45.169717+00:00",
     "https://sfstandard.com/section-415/2026/09/08/section-415-podcast-uncovering-mysteries-giants-ownership/": "2026-09-08T23:31:38.419100+00:00",
     "https://www.mercurynews.com/2026/09/03/walks-doom-sf-giants-in-series-finale-defeat-vs-pirates/": "2026-09-04T07:22:18.339639+00:00",
-    "https://www.mercurynews.com/2026/09/03/you-have-to-pick-your-poison-devers-eldridge-showing-signs-of-becoming-sf-giants-next-dynamic-duo/": "2026-09-03T18:50:08.810279+00:00",
     "https://www.mercurynews.com/2026/09/04/sf-giants-allow-five-homers-wilkinson-roughed-up-in-loss-to-mets/": "2026-09-05T07:04:15.262624+00:00",
     "https://www.mercurynews.com/2026/09/04/sf-giants-unveil-spring-training-schedule-with-lockout-threat-hanging-over-2027-season/": "2026-09-04T23:09:55.368448+00:00",
     "https://www.mercurynews.com/2026/09/07/": "2026-09-08T11:39:43.126620+00:00",
@@ -1683,6 +1693,7 @@
     "https://www.nbcsportsbayarea.com/mlb/san-francisco-giants/buster-posey-giants-farm-system/1964037/": "2026-09-17T23:36:30.309804+00:00",
     "https://www.nbcsportsbayarea.com/mlb/san-francisco-giants/buster-posey-reflects-criticism/1963922/": "2026-09-18T11:41:28.121197+00:00",
     "https://www.nbcsportsbayarea.com/mlb/san-francisco-giants/buster-posey-tony-vitello-tim-kawakami/1963851/": "2026-09-17T07:56:04.149610+00:00",
+    "https://www.nbcsportsbayarea.com/mlb/san-francisco-giants/camilo-doval-claimed-waivers-pirates/1965801/": "2026-09-24T19:24:32.365936+00:00",
     "https://www.nbcsportsbayarea.com/mlb/san-francisco-giants/cesar-perdomo-outing-loss-twins/1965584/": "2026-09-23T23:51:49.430921+00:00",
     "https://www.nbcsportsbayarea.com/mlb/san-francisco-giants/cesar-perdomo-series-loss-mets/1961155/": "2026-09-06T22:12:13.759785+00:00",
     "https://www.nbcsportsbayarea.com/mlb/san-francisco-giants/christian-koss-increased-role-2026/1961822/": "2026-09-09T18:46:34.848433+00:00",
@@ -1721,7 +1732,6 @@
     "https://www.nbcsportsbayarea.com/mlb/san-francisco-giants/tony-vitello-ejected-new-york-mets/1961023/": "2026-09-05T22:09:20.096263+00:00",
     "https://www.nbcsportsbayarea.com/mlb/san-francisco-giants/tony-vitello-explanation-ejection-win-mets/1961068/": "2026-09-06T04:56:05.268024+00:00",
     "https://www.nbcsportsbayarea.com/mlb/san-francisco-giants/victor-bericoto-bullpen-recap-loss-dodgers/1964387/": "2026-09-20T05:08:47.839358+00:00",
-    "https://www.nytimes.com/athletic/7561417/2026/09/03/sf-giants-win-pirates-rafael-devers-bryce-eldridge/": "2026-09-03T18:50:07.538710+00:00",
     "https://www.nytimes.com/athletic/7563145/2026/09/04/sf-giants-tony-vitello-manager-interview/": "2026-09-04T23:10:02.336750+00:00",
     "https://www.nytimes.com/athletic/7565345/2026/09/04/sf-giants-60-day-injured-list-roster-management/": "2026-09-04T18:32:03.309957+00:00",
     "https://www.nytimes.com/athletic/7573981/2026/09/08/giants-elimination-win-cardinals/": "2026-09-08T23:31:46.017459+00:00",
@@ -3943,6 +3953,38 @@
       "sources_ok": 8,
       "standalone_selected": 0,
       "started_at": "2026-09-24T12:06:57.477605+00:00",
+      "status": "completed"
+    },
+    {
+      "discovered": 165,
+      "finished_at": "2026-09-24T19:24:38.138830+00:00",
+      "game_selection_reasons": {
+        "already_posted": 13,
+        "game_source_duplicates": 0,
+        "not_game_story": 145,
+        "schedule_grounded_threads": 0,
+        "selected_game_stories": 0,
+        "selected_game_threads": 0,
+        "stale_game_story": 7,
+        "unrouted_game_stories": 0
+      },
+      "game_stories_selected": 0,
+      "game_threads_selected": 0,
+      "schedule_grounded_threads": 0,
+      "selection_reasons": {
+        "already_posted": 59,
+        "deferred_for_breaking_news": 1,
+        "eligible": 11,
+        "quality_low": 18,
+        "run_cap": 1,
+        "selected": 3,
+        "stale": 56,
+        "story_already_posted": 7
+      },
+      "sources_failed": 0,
+      "sources_ok": 8,
+      "standalone_selected": 3,
+      "started_at": "2026-09-24T19:24:13.507961+00:00",
       "status": "completed"
     }
   ]
