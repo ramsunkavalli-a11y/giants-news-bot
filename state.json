@@ -1,20 +1,5 @@
 {
   "game_threads": {
-    "game:2026-09-02:unknown": {
-      "created_at": "2026-09-03T07:20:09.084760+00:00",
-      "game_day": "2026-09-02",
-      "game_pk": 823339,
-      "opponent": "pirates",
-      "parent": {
-        "cid": "bafyreihoyjfm4jmijtza6r6s6wbit6sxd27aqsy7so74o3l2vgki27ofjm",
-        "uri": "at://did:plc:gkkepfzghvnfrkrohm2c4nwy/app.bsky.feed.post/3mulvxsmqip24"
-      },
-      "root": {
-        "cid": "bafyreiegoun55u74zb2xwhyyy6sj2demhfnai4h6i7bailqk3fz6i3vwda",
-        "uri": "at://did:plc:gkkepfzghvnfrkrohm2c4nwy/app.bsky.feed.post/3mulvxp52j22c"
-      },
-      "updated_at": "2026-09-03T07:20:12.294081+00:00"
-    },
     "game:2026-09-03:unknown": {
       "created_at": "2026-09-03T23:25:06.296348+00:00",
       "game_day": "2026-09-03",
@@ -85,14 +70,14 @@
       "game_pk": 823168,
       "opponent": "twins",
       "parent": {
-        "cid": "bafyreihyeac7ealgkuedbfb4ryvcfiwkvsbjvhhskihosswaotz5sh5uiy",
-        "uri": "at://did:plc:gkkepfzghvnfrkrohm2c4nwy/app.bsky.feed.post/3mw7wpe7wmx24"
+        "cid": "bafyreif3nlikaanxeirn36d26l4hildykdkagj3momkg2izqrvba74nj3q",
+        "uri": "at://did:plc:gkkepfzghvnfrkrohm2c4nwy/app.bsky.feed.post/3mwar67z47v2t"
       },
       "root": {
         "cid": "bafyreihyeac7ealgkuedbfb4ryvcfiwkvsbjvhhskihosswaotz5sh5uiy",
         "uri": "at://did:plc:gkkepfzghvnfrkrohm2c4nwy/app.bsky.feed.post/3mw7wpe7wmx24"
       },
-      "updated_at": "2026-09-23T23:51:49.430901+00:00"
+      "updated_at": "2026-09-24T07:45:25.050145+00:00"
     },
     "game:823169": {
       "created_at": "2026-09-22T07:53:46.134200+00:00",
@@ -253,42 +238,6 @@
     }
   },
   "posted_stories": [
-    {
-      "author": "Justice delos Santos",
-      "game_key": "",
-      "kind": "standalone",
-      "posted_at": "2026-09-03T07:20:06.748651+00:00",
-      "source": "Mercury News",
-      "title": "Devers stays hot, Eldridge, Hill drive in two apiece as SF Giants beat Pirates in 10 innings",
-      "url": "https://www.mercurynews.com/2026/09/02/devers-stays-hot-eldridge-hill-drive-in-two-apiece-as-sf-giants-beat-pirates-in-10-innings/"
-    },
-    {
-      "author": "Alex Pavlovic",
-      "game_key": "game:2026-09-02:unknown",
-      "kind": "game_story",
-      "posted_at": "2026-09-03T07:20:09.084779+00:00",
-      "source": "NBC Sports Bay Area",
-      "title": "Eldridge clutch in Giants' win",
-      "url": "https://www.nbcsportsbayarea.com/mlb/san-francisco-giants/bryce-eldridge-rafael-devers-pirates/1960513/"
-    },
-    {
-      "author": "Maria Guardado",
-      "game_key": "game:2026-09-02:unknown",
-      "kind": "game_story",
-      "posted_at": "2026-09-03T07:20:11.344689+00:00",
-      "source": "MLB.com",
-      "title": "Devers continues to deliver as Giants bounce back",
-      "url": "https://www.mlb.com/giants/news/rafael-devers-early-homer-sparks-giants-win-over-pirates"
-    },
-    {
-      "author": "",
-      "game_key": "game:2026-09-02:unknown",
-      "kind": "game_story",
-      "posted_at": "2026-09-03T07:20:12.294100+00:00",
-      "source": "San Francisco Chronicle",
-      "title": "Giants bounce back with feel-good win over Pirates after crushing loss",
-      "url": "https://www.sfchronicle.com/sports/giants/article/sf-giants-rebound-feel-good-win-pirates-crushing-22415343.php"
-    },
     {
       "author": "Andrew Baggarly",
       "game_key": "",
@@ -1656,6 +1605,15 @@
       "source": "NBC Sports Bay Area",
       "title": "What we learned as Cesar Perdomo solid again in the Giants' loss to Twins",
       "url": "https://www.nbcsportsbayarea.com/mlb/san-francisco-giants/cesar-perdomo-outing-loss-twins/1965584/"
+    },
+    {
+      "author": "",
+      "game_key": "game:823168",
+      "kind": "game_story",
+      "posted_at": "2026-09-24T07:45:25.050194+00:00",
+      "source": "San Francisco Chronicle",
+      "title": "Giants fall to Twins, clinching losing record at Oracle Park; Bo Davidson injured",
+      "url": "https://www.sfchronicle.com/sports/giants/article/giants-fall-twins-clinching-losing-record-sf-bo-22446034.php"
     }
   ],
   "posted_urls": {
@@ -1679,7 +1637,6 @@
     "https://sfstandard.com/2026/09/22/duane-kuiper-mike-krukow-sf-giants-broadcasting/": "2026-09-22T19:02:12.693289+00:00",
     "https://sfstandard.com/opinion/2026/09/10/burning-man-cartoon-giants/": "2026-09-10T23:19:45.169717+00:00",
     "https://sfstandard.com/section-415/2026/09/08/section-415-podcast-uncovering-mysteries-giants-ownership/": "2026-09-08T23:31:38.419100+00:00",
-    "https://www.mercurynews.com/2026/09/02/devers-stays-hot-eldridge-hill-drive-in-two-apiece-as-sf-giants-beat-pirates-in-10-innings/": "2026-09-03T07:20:06.748651+00:00",
     "https://www.mercurynews.com/2026/09/03/walks-doom-sf-giants-in-series-finale-defeat-vs-pirates/": "2026-09-04T07:22:18.339639+00:00",
     "https://www.mercurynews.com/2026/09/03/you-have-to-pick-your-poison-devers-eldridge-showing-signs-of-becoming-sf-giants-next-dynamic-duo/": "2026-09-03T18:50:08.810279+00:00",
     "https://www.mercurynews.com/2026/09/04/sf-giants-allow-five-homers-wilkinson-roughed-up-in-loss-to-mets/": "2026-09-05T07:04:15.262624+00:00",
@@ -1711,7 +1668,6 @@
     "https://www.mlb.com/giants/news/jackson-flora-san-jose-giants-going-to-2026-cal-league-championship-series": "2026-09-11T07:25:53.690982+00:00",
     "https://www.mlb.com/giants/news/matt-wilkinson-throws-5-scoreless-innings-vs-dodgers": "2026-09-21T05:14:14.323602+00:00",
     "https://www.mlb.com/giants/news/philip-abner-has-rough-outing-for-second-game-in-a-row": "2026-09-20T09:57:11.491184+00:00",
-    "https://www.mlb.com/giants/news/rafael-devers-early-homer-sparks-giants-win-over-pirates": "2026-09-03T07:20:11.344689+00:00",
     "https://www.mlb.com/giants/news/rafael-devers-giants-win-series-opener-vs-cardinals": "2026-09-08T07:22:58.066499+00:00",
     "https://www.mlb.com/giants/news/rafael-devers-hits-9th-career-grand-slam-in-giants-loss-to-padres": "2026-09-12T11:10:56.828992+00:00",
     "https://www.mlb.com/giants/news/randy-rodriguez-going-to-arizona-fall-league-for-giants": "2026-09-22T12:00:07.735130+00:00",
@@ -1723,7 +1679,6 @@
     "https://www.nbcsportsbayarea.com/mlb/san-francisco-giants/bryce-eldridge-blade-tidwell-cardinals/1961931/": "2026-09-09T23:26:11.632133+00:00",
     "https://www.nbcsportsbayarea.com/mlb/san-francisco-giants/bryce-eldridge-blade-tidwell-st-louis-cardinals/1963586/": "2026-09-16T07:50:56.231725+00:00",
     "https://www.nbcsportsbayarea.com/mlb/san-francisco-giants/bryce-eldridge-christian-koss-home-run/1961710/": "2026-09-09T07:31:34.749213+00:00",
-    "https://www.nbcsportsbayarea.com/mlb/san-francisco-giants/bryce-eldridge-rafael-devers-pirates/1960513/": "2026-09-03T07:20:09.084779+00:00",
     "https://www.nbcsportsbayarea.com/mlb/san-francisco-giants/bryce-eldridge-shay-whitcomb-cardinals/1961991/": "2026-09-10T07:27:47.964584+00:00",
     "https://www.nbcsportsbayarea.com/mlb/san-francisco-giants/buster-posey-giants-farm-system/1964037/": "2026-09-17T23:36:30.309804+00:00",
     "https://www.nbcsportsbayarea.com/mlb/san-francisco-giants/buster-posey-reflects-criticism/1963922/": "2026-09-18T11:41:28.121197+00:00",
@@ -1789,6 +1744,7 @@
     "https://www.sfchronicle.com/sports/giants/article/giants-broadcaster-mike-krukow-wins-bill-rigney-22444592.php": "2026-09-23T07:55:00.996539+00:00",
     "https://www.sfchronicle.com/sports/giants/article/giants-buster-posey-sees-baserunning-22425947.php": "2026-09-11T23:27:38.294518+00:00",
     "https://www.sfchronicle.com/sports/giants/article/giants-eke-win-11-logan-webb-s-strong-22421161.php": "2026-09-08T07:22:59.008333+00:00",
+    "https://www.sfchronicle.com/sports/giants/article/giants-fall-twins-clinching-losing-record-sf-bo-22446034.php": "2026-09-24T07:45:25.050194+00:00",
     "https://www.sfchronicle.com/sports/giants/article/giants-fans-irate-team-solicited-kalshi-wagers-22417052.php": "2026-09-04T07:22:15.134706+00:00",
     "https://www.sfchronicle.com/sports/giants/article/giants-infielder-marcelo-mayer-top-prospect-22440835.php": "2026-09-22T00:13:45.439855+00:00",
     "https://www.sfchronicle.com/sports/giants/article/giants-manager-tony-vitello-getting-no-respect-22423051.php": "2026-09-10T11:43:51.063079+00:00",
@@ -1804,7 +1760,6 @@
     "https://www.sfchronicle.com/sports/giants/article/sf-giants-fall-twins-pitcher-anthony-molina-22443800.php": "2026-09-23T19:09:40.456715+00:00",
     "https://www.sfchronicle.com/sports/giants/article/sf-giants-get-another-home-run-rafael-devers-loss-22428990.php": "2026-09-13T05:06:23.069891+00:00",
     "https://www.sfchronicle.com/sports/giants/article/sf-giants-place-jung-hoo-lee-bryce-eldridge-22442692.php": "2026-09-23T19:09:39.375995+00:00",
-    "https://www.sfchronicle.com/sports/giants/article/sf-giants-rebound-feel-good-win-pirates-crushing-22415343.php": "2026-09-03T07:20:12.294100+00:00",
     "https://www.sfchronicle.com/sports/giants/article/sf-giants-rookies-castoffs-stepping-up-finding-22423074.php": "2026-09-09T07:31:32.622719+00:00",
     "https://www.sfchronicle.com/sports/giants/article/sf-giants-top-twins-lost-pitcher-blade-tidwell-22442689.php": "2026-09-22T07:53:46.134221+00:00",
     "https://www.sfchronicle.com/sports/giants/article/tommy-john-pitcher-giants-22416456.php": "2026-09-04T11:39:05.695525+00:00",
@@ -3925,6 +3880,38 @@
       "sources_ok": 8,
       "standalone_selected": 2,
       "started_at": "2026-09-23T23:51:14.854001+00:00",
+      "status": "completed"
+    },
+    {
+      "discovered": 165,
+      "finished_at": "2026-09-24T07:45:25.854538+00:00",
+      "game_selection_reasons": {
+        "already_posted": 13,
+        "eligible_game_story": 1,
+        "game_source_duplicates": 0,
+        "not_game_story": 144,
+        "schedule_grounded_threads": 1,
+        "selected_game_stories": 1,
+        "selected_game_threads": 1,
+        "stale_game_story": 7,
+        "unrouted_game_stories": 0
+      },
+      "game_stories_selected": 1,
+      "game_threads_selected": 1,
+      "schedule_grounded_threads": 1,
+      "selection_reasons": {
+        "already_posted": 63,
+        "deferred_for_breaking_news": 1,
+        "eligible": 7,
+        "quality_low": 18,
+        "selected": 0,
+        "stale": 55,
+        "story_already_posted": 7
+      },
+      "sources_failed": 0,
+      "sources_ok": 8,
+      "standalone_selected": 0,
+      "started_at": "2026-09-24T07:45:03.733967+00:00",
       "status": "completed"
     }
   ]
