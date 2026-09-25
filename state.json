@@ -224,15 +224,6 @@
   },
   "posted_stories": [
     {
-      "author": "",
-      "game_key": "",
-      "kind": "standalone",
-      "posted_at": "2026-09-04T11:39:05.695525+00:00",
-      "source": "San Francisco Chronicle",
-      "title": "Giants’ Tommy John outbreak raises hard questions in an era of endangered arms",
-      "url": "https://www.sfchronicle.com/sports/giants/article/tommy-john-pitcher-giants-22416456.php"
-    },
-    {
       "author": "Grant Brisbee",
       "game_key": "",
       "kind": "standalone",
@@ -1718,7 +1709,6 @@
     "https://www.sfchronicle.com/sports/giants/article/sf-giants-place-jung-hoo-lee-bryce-eldridge-22442692.php": "2026-09-23T19:09:39.375995+00:00",
     "https://www.sfchronicle.com/sports/giants/article/sf-giants-rookies-castoffs-stepping-up-finding-22423074.php": "2026-09-09T07:31:32.622719+00:00",
     "https://www.sfchronicle.com/sports/giants/article/sf-giants-top-twins-lost-pitcher-blade-tidwell-22442689.php": "2026-09-22T07:53:46.134221+00:00",
-    "https://www.sfchronicle.com/sports/giants/article/tommy-john-pitcher-giants-22416456.php": "2026-09-04T11:39:05.695525+00:00",
     "https://www.sfgate.com/giants/article/buster-posey-exec-future-22437061.php": "2026-09-17T23:36:28.032901+00:00",
     "https://www.sfgate.com/giants/article/giants-nude-player-celebrations-22443935.php": "2026-09-22T19:02:09.613466+00:00",
     "https://www.sfgate.com/giants/article/krukow-kuiper-hall-costas-22446111.php": "2026-09-23T23:51:44.741945+00:00",
@@ -3993,6 +3983,37 @@
       "sources_ok": 8,
       "standalone_selected": 1,
       "started_at": "2026-09-25T08:05:43.336449+00:00",
+      "status": "completed"
+    },
+    {
+      "discovered": 167,
+      "finished_at": "2026-09-25T12:07:10.222948+00:00",
+      "game_selection_reasons": {
+        "already_posted": 14,
+        "game_source_duplicates": 0,
+        "not_game_story": 147,
+        "schedule_grounded_threads": 0,
+        "selected_game_stories": 0,
+        "selected_game_threads": 0,
+        "stale_game_story": 6,
+        "unrouted_game_stories": 0
+      },
+      "game_stories_selected": 0,
+      "game_threads_selected": 0,
+      "schedule_grounded_threads": 0,
+      "selection_reasons": {
+        "already_posted": 61,
+        "deferred_for_breaking_news": 2,
+        "eligible": 5,
+        "quality_low": 17,
+        "selected": 0,
+        "stale": 62,
+        "story_already_posted": 5
+      },
+      "sources_failed": 0,
+      "sources_ok": 8,
+      "standalone_selected": 0,
+      "started_at": "2026-09-25T12:06:50.326145+00:00",
       "status": "completed"
     }
   ]
