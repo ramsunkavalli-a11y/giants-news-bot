@@ -224,33 +224,6 @@
   },
   "posted_stories": [
     {
-      "author": "Grant Brisbee",
-      "game_key": "",
-      "kind": "standalone",
-      "posted_at": "2026-09-04T18:32:03.309957+00:00",
-      "source": "The Athletic",
-      "title": "Why the Giants' crowded 60-day IL list will create roster madness this winter",
-      "url": "https://www.nytimes.com/athletic/7565345/2026/09/04/sf-giants-60-day-injured-list-roster-management/"
-    },
-    {
-      "author": "Jay Jaffe",
-      "game_key": "",
-      "kind": "standalone",
-      "posted_at": "2026-09-04T18:32:05.621525+00:00",
-      "source": "FanGraphs",
-      "title": "The Giants Have Been Way Off BaseRuns",
-      "url": "https://blogs.fangraphs.com/the-giants-have-been-way-off-baseruns/"
-    },
-    {
-      "author": "Kerry Crowley",
-      "game_key": "",
-      "kind": "standalone",
-      "posted_at": "2026-09-04T18:32:08.759540+00:00",
-      "source": "San Francisco Standard",
-      "title": "Revisiting the Patrick Bailey trade: How Buster Posey’s bold move looks 4 months later",
-      "url": "https://sfstandard.com/2026/09/04/patrick-bailey-trade-sf-giants-catcher-depth/"
-    },
-    {
       "author": "Justice delos Santos",
       "game_key": "",
       "kind": "standalone",
@@ -1563,18 +1536,35 @@
       "source": "FanGraphs",
       "title": "Notes From Star-Studded Rockies-A’s Instructional League",
       "url": "https://blogs.fangraphs.com/notes-from-star-studded-rockies-as-instructional-league/"
+    },
+    {
+      "author": "Kerry Crowley",
+      "game_key": "",
+      "kind": "standalone",
+      "posted_at": "2026-09-25T19:26:01.436138+00:00",
+      "source": "San Francisco Standard",
+      "title": "‘Section 415’: Despite criticism, Kalshi isn’t deterred from partnering with the Giants",
+      "url": "https://sfstandard.com/section-415/2026/09/25/section-415-despite-criticism-kalshi-isn-t-deterred-partnering-giants/"
+    },
+    {
+      "author": "Eric Longenhagen",
+      "game_key": "",
+      "kind": "standalone",
+      "posted_at": "2026-09-25T19:26:02.371243+00:00",
+      "source": "FanGraphs",
+      "title": "Eric Longenhagen Prospects Chat: 9/25",
+      "url": "https://blogs.fangraphs.com/eric-longenhagen-prospects-chat-9-25/"
     }
   ],
   "posted_urls": {
     "https://blogs.fangraphs.com/eric-longenhagen-prospects-chat-9-11-2026/": "2026-09-11T18:42:14.693838+00:00",
+    "https://blogs.fangraphs.com/eric-longenhagen-prospects-chat-9-25/": "2026-09-25T19:26:02.371243+00:00",
     "https://blogs.fangraphs.com/notes-from-star-studded-rockies-as-instructional-league/": "2026-09-25T08:06:14.575622+00:00",
     "https://blogs.fangraphs.com/san-franciscos-40-man-cleanup-will-be-a-giant-pain/": "2026-09-18T18:36:27.418759+00:00",
     "https://blogs.fangraphs.com/scouting-the-uniformed-debuts-of-early-round-padres-and-giants-draft-picks/": "2026-09-09T11:45:50.521777+00:00",
-    "https://blogs.fangraphs.com/the-giants-have-been-way-off-baseruns/": "2026-09-04T18:32:05.621525+00:00",
     "https://omny.fm/shows/the-executives-show/giants-knbr-beer-day-preview-larry-baer-on-mike-krukows-legacy-and-a-special-september-celebration": "2026-09-10T23:19:42.710344+00:00",
     "https://omny.fm/shows/the-executives-show/giants-skipper-tony-v-on-the-giants-season-mike-krukow": "2026-09-24T19:24:34.475256+00:00",
     "https://sfstandard.com/2026/09/04/josuar-gonzalez-sf-giants-prospect-luis-hernandez/": "2026-09-04T23:09:58.632085+00:00",
-    "https://sfstandard.com/2026/09/04/patrick-bailey-trade-sf-giants-catcher-depth/": "2026-09-04T18:32:08.759540+00:00",
     "https://sfstandard.com/2026/09/08/sf-giants-ownership-larry-baer-buster-posey/": "2026-09-09T11:45:53.273105+00:00",
     "https://sfstandard.com/2026/09/09/sf-giants-richard-chaifetz-ownership-stake/": "2026-09-09T18:46:38.685699+00:00",
     "https://sfstandard.com/2026/09/12/scott-bandura-sf-giants-promotion-call-up/": "2026-09-12T22:26:52.906809+00:00",
@@ -1588,6 +1578,7 @@
     "https://sfstandard.com/2026/09/24/mike-krukow-sf-giants-broadcast-tribute/": "2026-09-24T19:24:37.334301+00:00",
     "https://sfstandard.com/opinion/2026/09/10/burning-man-cartoon-giants/": "2026-09-10T23:19:45.169717+00:00",
     "https://sfstandard.com/section-415/2026/09/08/section-415-podcast-uncovering-mysteries-giants-ownership/": "2026-09-08T23:31:38.419100+00:00",
+    "https://sfstandard.com/section-415/2026/09/25/section-415-despite-criticism-kalshi-isn-t-deterred-partnering-giants/": "2026-09-25T19:26:01.436138+00:00",
     "https://www.mercurynews.com/2026/09/04/sf-giants-allow-five-homers-wilkinson-roughed-up-in-loss-to-mets/": "2026-09-05T07:04:15.262624+00:00",
     "https://www.mercurynews.com/2026/09/04/sf-giants-unveil-spring-training-schedule-with-lockout-threat-hanging-over-2027-season/": "2026-09-04T23:09:55.368448+00:00",
     "https://www.mercurynews.com/2026/09/07/": "2026-09-08T11:39:43.126620+00:00",
@@ -1670,7 +1661,6 @@
     "https://www.nbcsportsbayarea.com/mlb/san-francisco-giants/tony-vitello-explanation-ejection-win-mets/1961068/": "2026-09-06T04:56:05.268024+00:00",
     "https://www.nbcsportsbayarea.com/mlb/san-francisco-giants/victor-bericoto-bullpen-recap-loss-dodgers/1964387/": "2026-09-20T05:08:47.839358+00:00",
     "https://www.nytimes.com/athletic/7563145/2026/09/04/sf-giants-tony-vitello-manager-interview/": "2026-09-04T23:10:02.336750+00:00",
-    "https://www.nytimes.com/athletic/7565345/2026/09/04/sf-giants-60-day-injured-list-roster-management/": "2026-09-04T18:32:03.309957+00:00",
     "https://www.nytimes.com/athletic/7573981/2026/09/08/giants-elimination-win-cardinals/": "2026-09-08T23:31:46.017459+00:00",
     "https://www.nytimes.com/athletic/7580470/2026/09/09/sf-giants-six-run-rally-sweep-cardinals/": "2026-09-10T07:27:44.988985+00:00",
     "https://www.nytimes.com/athletic/7582259/2026/09/10/sf-giants-bryce-eldridge-rookie-season-analysis/": "2026-09-10T18:37:16.543706+00:00",
@@ -4014,6 +4004,38 @@
       "sources_ok": 8,
       "standalone_selected": 0,
       "started_at": "2026-09-25T12:06:50.326145+00:00",
+      "status": "completed"
+    },
+    {
+      "discovered": 168,
+      "finished_at": "2026-09-25T19:26:03.175804+00:00",
+      "game_selection_reasons": {
+        "already_posted": 14,
+        "game_source_duplicates": 0,
+        "not_game_story": 148,
+        "schedule_grounded_threads": 0,
+        "selected_game_stories": 0,
+        "selected_game_threads": 0,
+        "stale_game_story": 6,
+        "unrouted_game_stories": 0
+      },
+      "game_stories_selected": 0,
+      "game_threads_selected": 0,
+      "schedule_grounded_threads": 0,
+      "selection_reasons": {
+        "already_posted": 58,
+        "deferred_for_breaking_news": 2,
+        "eligible": 9,
+        "quality_low": 17,
+        "selected": 2,
+        "source_cap_cluster": 1,
+        "stale": 62,
+        "story_already_posted": 6
+      },
+      "sources_failed": 0,
+      "sources_ok": 8,
+      "standalone_selected": 2,
+      "started_at": "2026-09-25T19:25:36.835699+00:00",
       "status": "completed"
     }
   ]
