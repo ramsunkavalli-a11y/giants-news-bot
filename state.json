@@ -1582,6 +1582,33 @@
       "source": "NBC Sports Bay Area",
       "title": "Camilo Doval hoping to remain with Giants upon return to end 2026 MLB season",
       "url": "https://www.nbcsportsbayarea.com/mlb/san-francisco-giants/camilo-doval-remain-return-closer/1966219/"
+    },
+    {
+      "author": "Pratham Valluri",
+      "game_key": "",
+      "kind": "standalone",
+      "posted_at": "2026-09-26T18:40:32.368865+00:00",
+      "source": "NBC Sports Bay Area",
+      "title": "Tony Vitello shares realistic expectations for Matt Wilkinson's future potential",
+      "url": "https://www.nbcsportsbayarea.com/mlb/san-francisco-giants/tony-vitello-expectations-matt-wilkinson/1966120/"
+    },
+    {
+      "author": "John Shea",
+      "game_key": "",
+      "kind": "standalone",
+      "posted_at": "2026-09-26T18:40:35.784397+00:00",
+      "source": "San Francisco Standard",
+      "title": "Logan Webb wins the Willie Mac Award, but the 2027 Giants will belong to Bryce Eldridge",
+      "url": "https://sfstandard.com/2026/09/26/bryce-eldridge-sf-giants-logan-webb-willie-mac/"
+    },
+    {
+      "author": "",
+      "game_key": "",
+      "kind": "standalone",
+      "posted_at": "2026-09-26T18:40:36.879176+00:00",
+      "source": "San Francisco Chronicle",
+      "title": "Giants pitcher Logan Webb latest winner of team’s Willie Mac Award",
+      "url": "https://www.sfchronicle.com/sports/giants/article/logan-webb-wins-willie-mac-award-team-s-22449851.php"
     }
   ],
   "posted_urls": {
@@ -1605,6 +1632,7 @@
     "https://sfstandard.com/2026/09/24/mike-krukow-sf-giants-broadcast-tribute/": "2026-09-24T19:24:37.334301+00:00",
     "https://sfstandard.com/2026/09/25/epic-bay-area-sports-weekend-year-starts-now/": "2026-09-26T00:00:40.424826+00:00",
     "https://sfstandard.com/2026/09/25/viral-giants-mom-defends-husband/": "2026-09-26T07:56:51.714017+00:00",
+    "https://sfstandard.com/2026/09/26/bryce-eldridge-sf-giants-logan-webb-willie-mac/": "2026-09-26T18:40:35.784397+00:00",
     "https://sfstandard.com/opinion/2026/09/10/burning-man-cartoon-giants/": "2026-09-10T23:19:45.169717+00:00",
     "https://sfstandard.com/section-415/2026/09/08/section-415-podcast-uncovering-mysteries-giants-ownership/": "2026-09-08T23:31:38.419100+00:00",
     "https://sfstandard.com/section-415/2026/09/25/section-415-despite-criticism-kalshi-isn-t-deterred-partnering-giants/": "2026-09-25T19:26:01.436138+00:00",
@@ -1689,6 +1717,7 @@
     "https://www.nbcsportsbayarea.com/mlb/san-francisco-giants/robbie-ray-trade-padres-analysis/1962901/": "2026-09-12T17:47:37.248950+00:00",
     "https://www.nbcsportsbayarea.com/mlb/san-francisco-giants/ryan-walker-joel-kuhnel-roster-moves/1960997/": "2026-09-06T09:34:48.461814+00:00",
     "https://www.nbcsportsbayarea.com/mlb/san-francisco-giants/tony-vitello-ejected-new-york-mets/1961023/": "2026-09-05T22:09:20.096263+00:00",
+    "https://www.nbcsportsbayarea.com/mlb/san-francisco-giants/tony-vitello-expectations-matt-wilkinson/1966120/": "2026-09-26T18:40:32.368865+00:00",
     "https://www.nbcsportsbayarea.com/mlb/san-francisco-giants/tony-vitello-explanation-ejection-win-mets/1961068/": "2026-09-06T04:56:05.268024+00:00",
     "https://www.nbcsportsbayarea.com/mlb/san-francisco-giants/victor-bericoto-bullpen-recap-loss-dodgers/1964387/": "2026-09-20T05:08:47.839358+00:00",
     "https://www.nytimes.com/athletic/7573981/2026/09/08/giants-elimination-win-cardinals/": "2026-09-08T23:31:46.017459+00:00",
@@ -1720,6 +1749,7 @@
     "https://www.sfchronicle.com/sports/giants/article/giants-vitello-gives-rafael-devers-day-end-games-22424244.php": "2026-09-10T07:27:45.944065+00:00",
     "https://www.sfchronicle.com/sports/giants/article/hall-fame-isn-t-allowing-giants-krukow-22447621.php": "2026-09-24T23:57:24.780984+00:00",
     "https://www.sfchronicle.com/sports/giants/article/jackson-flora-s-playoff-debut-beer-chants-22426791.php": "2026-09-11T07:25:51.340894+00:00",
+    "https://www.sfchronicle.com/sports/giants/article/logan-webb-wins-willie-mac-award-team-s-22449851.php": "2026-09-26T18:40:36.879176+00:00",
     "https://www.sfchronicle.com/sports/giants/article/mike-krukow-1985-team-vitello-22436775.php": "2026-09-21T20:05:31.512673+00:00",
     "https://www.sfchronicle.com/sports/giants/article/mike-krukow-fans-22436779.php": "2026-09-23T12:01:25.504405+00:00",
     "https://www.sfchronicle.com/sports/giants/article/mike-krukow-farewell-baseball-22436764.php": "2026-09-21T20:46:25.558210+00:00",
@@ -4164,6 +4194,37 @@
       "sources_ok": 8,
       "standalone_selected": 3,
       "started_at": "2026-09-26T11:42:27.408499+00:00",
+      "status": "completed"
+    },
+    {
+      "discovered": 159,
+      "finished_at": "2026-09-26T18:40:37.684127+00:00",
+      "game_selection_reasons": {
+        "already_posted": 13,
+        "game_source_duplicates": 0,
+        "not_game_story": 140,
+        "schedule_grounded_threads": 0,
+        "selected_game_stories": 0,
+        "selected_game_threads": 0,
+        "stale_game_story": 6,
+        "unrouted_game_stories": 0
+      },
+      "game_stories_selected": 0,
+      "game_threads_selected": 0,
+      "schedule_grounded_threads": 0,
+      "selection_reasons": {
+        "already_posted": 52,
+        "deferred_for_breaking_news": 2,
+        "eligible": 5,
+        "quality_low": 16,
+        "selected": 3,
+        "stale": 65,
+        "story_already_posted": 2
+      },
+      "sources_failed": 0,
+      "sources_ok": 8,
+      "standalone_selected": 3,
+      "started_at": "2026-09-26T18:40:14.901964+00:00",
       "status": "completed"
     }
   ]
