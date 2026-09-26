@@ -1555,6 +1555,33 @@
       "source": "NBC Sports Bay Area",
       "title": "What we learned as Giants dominated by Tarik Skubal in shutout loss to Dodgers",
       "url": "https://www.nbcsportsbayarea.com/mlb/san-francisco-giants/giants-observations-tarik-skubal-shutout-loss-dodgers/1966279/"
+    },
+    {
+      "author": "",
+      "game_key": "",
+      "kind": "standalone",
+      "posted_at": "2026-09-26T11:42:41.931182+00:00",
+      "source": "San Francisco Chronicle",
+      "title": "Giants offense held in check as Tarik Skubal dominates in L.A. win",
+      "url": "https://www.sfchronicle.com/sports/giants/article/sf-giants-offense-held-check-tarik-skubal-22449692.php"
+    },
+    {
+      "author": "Maria Guardado",
+      "game_key": "",
+      "kind": "standalone",
+      "posted_at": "2026-09-26T11:42:44.449091+00:00",
+      "source": "MLB.com",
+      "title": "Doval thrilled to be back with Giants: 'I haven't stopped smiling'",
+      "url": "https://www.mlb.com/giants/news/giants-claim-camilo-doval-off-waivers"
+    },
+    {
+      "author": "Alex Pavlovic",
+      "game_key": "",
+      "kind": "standalone",
+      "posted_at": "2026-09-26T11:42:46.935677+00:00",
+      "source": "NBC Sports Bay Area",
+      "title": "Camilo Doval hoping to remain with Giants upon return to end 2026 MLB season",
+      "url": "https://www.nbcsportsbayarea.com/mlb/san-francisco-giants/camilo-doval-remain-return-closer/1966219/"
     }
   ],
   "posted_urls": {
@@ -1604,6 +1631,7 @@
     "https://www.mlb.com/giants/news/blade-tidwell-leaves-start-against-twins-with-right-elbow-injury": "2026-09-22T07:53:45.077671+00:00",
     "https://www.mlb.com/giants/news/bryce-eldridge-hits-a-homer-in-giants-win-over-cardinals": "2026-09-09T07:31:31.714121+00:00",
     "https://www.mlb.com/giants/news/bryce-eldridge-out-for-second-straight-game-with-head-laceration": "2026-09-20T05:08:50.330486+00:00",
+    "https://www.mlb.com/giants/news/giants-claim-camilo-doval-off-waivers": "2026-09-26T11:42:44.449091+00:00",
     "https://www.mlb.com/giants/news/giants-earn-comeback-win-to-sweep-cardinals": "2026-09-09T23:26:13.955118+00:00",
     "https://www.mlb.com/giants/news/jackson-flora-san-jose-giants-going-to-2026-cal-league-championship-series": "2026-09-11T07:25:53.690982+00:00",
     "https://www.mlb.com/giants/news/logan-webb-wins-willie-mac-award": "2026-09-26T07:56:46.013399+00:00",
@@ -1623,6 +1651,7 @@
     "https://www.nbcsportsbayarea.com/mlb/san-francisco-giants/buster-posey-reflects-criticism/1963922/": "2026-09-18T11:41:28.121197+00:00",
     "https://www.nbcsportsbayarea.com/mlb/san-francisco-giants/buster-posey-tony-vitello-tim-kawakami/1963851/": "2026-09-17T07:56:04.149610+00:00",
     "https://www.nbcsportsbayarea.com/mlb/san-francisco-giants/camilo-doval-claimed-waivers-pirates/1965801/": "2026-09-24T19:24:32.365936+00:00",
+    "https://www.nbcsportsbayarea.com/mlb/san-francisco-giants/camilo-doval-remain-return-closer/1966219/": "2026-09-26T11:42:46.935677+00:00",
     "https://www.nbcsportsbayarea.com/mlb/san-francisco-giants/cesar-perdomo-outing-loss-twins/1965584/": "2026-09-23T23:51:49.430921+00:00",
     "https://www.nbcsportsbayarea.com/mlb/san-francisco-giants/cesar-perdomo-series-loss-mets/1961155/": "2026-09-06T22:12:13.759785+00:00",
     "https://www.nbcsportsbayarea.com/mlb/san-francisco-giants/christian-koss-increased-role-2026/1961822/": "2026-09-09T18:46:34.848433+00:00",
@@ -1697,6 +1726,7 @@
     "https://www.sfchronicle.com/sports/giants/article/sf-giants-bid-fourth-straight-win-comes-short-22428184.php": "2026-09-12T07:18:45.531415+00:00",
     "https://www.sfchronicle.com/sports/giants/article/sf-giants-fall-twins-pitcher-anthony-molina-22443800.php": "2026-09-23T19:09:40.456715+00:00",
     "https://www.sfchronicle.com/sports/giants/article/sf-giants-get-another-home-run-rafael-devers-loss-22428990.php": "2026-09-13T05:06:23.069891+00:00",
+    "https://www.sfchronicle.com/sports/giants/article/sf-giants-offense-held-check-tarik-skubal-22449692.php": "2026-09-26T11:42:41.931182+00:00",
     "https://www.sfchronicle.com/sports/giants/article/sf-giants-place-jung-hoo-lee-bryce-eldridge-22442692.php": "2026-09-23T19:09:39.375995+00:00",
     "https://www.sfchronicle.com/sports/giants/article/sf-giants-rookies-castoffs-stepping-up-finding-22423074.php": "2026-09-09T07:31:32.622719+00:00",
     "https://www.sfchronicle.com/sports/giants/article/sf-giants-top-twins-lost-pitcher-blade-tidwell-22442689.php": "2026-09-22T07:53:46.134221+00:00",
@@ -4101,6 +4131,39 @@
       "sources_ok": 8,
       "standalone_selected": 3,
       "started_at": "2026-09-26T07:56:22.796016+00:00",
+      "status": "completed"
+    },
+    {
+      "discovered": 160,
+      "finished_at": "2026-09-26T11:42:47.740370+00:00",
+      "game_selection_reasons": {
+        "already_posted": 12,
+        "eligible_game_story": 1,
+        "game_source_duplicates": 0,
+        "not_game_story": 141,
+        "schedule_grounded_threads": 0,
+        "selected_game_stories": 0,
+        "selected_game_threads": 0,
+        "stale_game_story": 6,
+        "unrouted_game_stories": 1
+      },
+      "game_stories_selected": 0,
+      "game_threads_selected": 0,
+      "schedule_grounded_threads": 0,
+      "selection_reasons": {
+        "already_posted": 54,
+        "deferred_for_breaking_news": 2,
+        "eligible": 6,
+        "quality_low": 16,
+        "run_cap": 1,
+        "selected": 3,
+        "stale": 64,
+        "story_already_posted": 2
+      },
+      "sources_failed": 0,
+      "sources_ok": 8,
+      "standalone_selected": 3,
+      "started_at": "2026-09-26T11:42:27.408499+00:00",
       "status": "completed"
     }
   ]
