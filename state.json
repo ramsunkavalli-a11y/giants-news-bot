@@ -228,15 +228,6 @@
       "author": "Ali Thanawalla",
       "game_key": "",
       "kind": "standalone",
-      "posted_at": "2026-09-05T22:09:20.096263+00:00",
-      "source": "NBC Sports Bay Area",
-      "title": "Giants' Tony Vitello ejected again after a questionable replay review ruling",
-      "url": "https://www.nbcsportsbayarea.com/mlb/san-francisco-giants/tony-vitello-ejected-new-york-mets/1961023/"
-    },
-    {
-      "author": "Ali Thanawalla",
-      "game_key": "",
-      "kind": "standalone",
       "posted_at": "2026-09-06T04:56:03.227033+00:00",
       "source": "NBC Sports Bay Area",
       "title": "Devers hits two more homers",
@@ -1609,6 +1600,15 @@
       "source": "San Francisco Chronicle",
       "title": "Giants pitcher Logan Webb latest winner of team’s Willie Mac Award",
       "url": "https://www.sfchronicle.com/sports/giants/article/logan-webb-wins-willie-mac-award-team-s-22449851.php"
+    },
+    {
+      "author": "Tristi Rodriguez",
+      "game_key": "",
+      "kind": "standalone",
+      "posted_at": "2026-09-26T23:04:10.207144+00:00",
+      "source": "NBC Sports Bay Area",
+      "title": "Dodgers broadcasters honor Krukow",
+      "url": "https://www.nbcsportsbayarea.com/mlb/san-francisco-giants/dodgers-mike-krukow-retirement-heartwarming/1966341/"
     }
   ],
   "posted_urls": {
@@ -1683,6 +1683,7 @@
     "https://www.nbcsportsbayarea.com/mlb/san-francisco-giants/cesar-perdomo-outing-loss-twins/1965584/": "2026-09-23T23:51:49.430921+00:00",
     "https://www.nbcsportsbayarea.com/mlb/san-francisco-giants/cesar-perdomo-series-loss-mets/1961155/": "2026-09-06T22:12:13.759785+00:00",
     "https://www.nbcsportsbayarea.com/mlb/san-francisco-giants/christian-koss-increased-role-2026/1961822/": "2026-09-09T18:46:34.848433+00:00",
+    "https://www.nbcsportsbayarea.com/mlb/san-francisco-giants/dodgers-mike-krukow-retirement-heartwarming/1966341/": "2026-09-26T23:04:10.207144+00:00",
     "https://www.nbcsportsbayarea.com/mlb/san-francisco-giants/drew-gilbert-bo-davidson-blade-tidwell-twins/1965184/": "2026-09-22T23:42:25.542109+00:00",
     "https://www.nbcsportsbayarea.com/mlb/san-francisco-giants/duane-kuiper-mike-krukow-booth-experience/1965032/": "2026-09-21T20:05:29.583038+00:00",
     "https://www.nbcsportsbayarea.com/mlb/san-francisco-giants/duane-kuiper-throat-cancer-diagnosis/1964462/": "2026-09-20T18:16:02.460225+00:00",
@@ -1716,7 +1717,6 @@
     "https://www.nbcsportsbayarea.com/mlb/san-francisco-giants/road-series-win-cardinals/1963688/": "2026-09-17T07:56:11.084129+00:00",
     "https://www.nbcsportsbayarea.com/mlb/san-francisco-giants/robbie-ray-trade-padres-analysis/1962901/": "2026-09-12T17:47:37.248950+00:00",
     "https://www.nbcsportsbayarea.com/mlb/san-francisco-giants/ryan-walker-joel-kuhnel-roster-moves/1960997/": "2026-09-06T09:34:48.461814+00:00",
-    "https://www.nbcsportsbayarea.com/mlb/san-francisco-giants/tony-vitello-ejected-new-york-mets/1961023/": "2026-09-05T22:09:20.096263+00:00",
     "https://www.nbcsportsbayarea.com/mlb/san-francisco-giants/tony-vitello-expectations-matt-wilkinson/1966120/": "2026-09-26T18:40:32.368865+00:00",
     "https://www.nbcsportsbayarea.com/mlb/san-francisco-giants/tony-vitello-explanation-ejection-win-mets/1961068/": "2026-09-06T04:56:05.268024+00:00",
     "https://www.nbcsportsbayarea.com/mlb/san-francisco-giants/victor-bericoto-bullpen-recap-loss-dodgers/1964387/": "2026-09-20T05:08:47.839358+00:00",
@@ -4225,6 +4225,37 @@
       "sources_ok": 8,
       "standalone_selected": 3,
       "started_at": "2026-09-26T18:40:14.901964+00:00",
+      "status": "completed"
+    },
+    {
+      "discovered": 152,
+      "finished_at": "2026-09-26T23:04:11.013467+00:00",
+      "game_selection_reasons": {
+        "already_posted": 11,
+        "game_source_duplicates": 0,
+        "not_game_story": 135,
+        "schedule_grounded_threads": 0,
+        "selected_game_stories": 0,
+        "selected_game_threads": 0,
+        "stale_game_story": 6,
+        "unrouted_game_stories": 0
+      },
+      "game_stories_selected": 0,
+      "game_threads_selected": 0,
+      "schedule_grounded_threads": 0,
+      "selection_reasons": {
+        "already_posted": 51,
+        "deferred_for_breaking_news": 1,
+        "eligible": 2,
+        "quality_low": 16,
+        "selected": 1,
+        "stale": 65,
+        "story_already_posted": 1
+      },
+      "sources_failed": 0,
+      "sources_ok": 8,
+      "standalone_selected": 1,
+      "started_at": "2026-09-26T23:03:03.351742+00:00",
       "status": "completed"
     }
   ]
