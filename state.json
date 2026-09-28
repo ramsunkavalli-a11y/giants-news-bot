@@ -1656,11 +1656,39 @@
       "source": "Mercury News",
       "title": "SF Giants end disastrous first season under Vitello with extra-innings loss to Dodgers",
       "url": "https://www.mercurynews.com/2026/09/27/sf-giants-conclude-disastrous-first-season-under-vitello-with-loss-in-10-innings-vs-dodgers/"
+    },
+    {
+      "author": "",
+      "game_key": "",
+      "kind": "standalone",
+      "posted_at": "2026-09-28T21:20:02.503680+00:00",
+      "source": "The Athletic",
+      "title": "Mike Krukow made Giants fans appreciate the future, even one without him behind the mic",
+      "url": "https://www.nytimes.com/athletic/7640616/2026/09/28/mike-krukow-sf-giants-career-appreciation/"
+    },
+    {
+      "author": "Eric Longenhagen",
+      "game_key": "",
+      "kind": "standalone",
+      "posted_at": "2026-09-28T21:20:04.690250+00:00",
+      "source": "FanGraphs",
+      "title": "Joe Musgrove Thrives in Rehab Outing, Plus More Arizona Scouting Notes",
+      "url": "https://blogs.fangraphs.com/joe-musgrove-thrives-in-rehab-outing-plus-more-arizona-scouting-notes/"
+    },
+    {
+      "author": "Benjamin Fanjoy",
+      "game_key": "",
+      "kind": "standalone",
+      "posted_at": "2026-09-28T21:20:07.536539+00:00",
+      "source": "San Francisco Standard",
+      "title": "The Giants wave goodbye to a legendary broadcaster and a terrible season",
+      "url": "https://sfstandard.com/2026/09/28/mike-krukow-sf-giants-tribute/"
     }
   ],
   "posted_urls": {
     "https://blogs.fangraphs.com/eric-longenhagen-prospects-chat-9-11-2026/": "2026-09-11T18:42:14.693838+00:00",
     "https://blogs.fangraphs.com/eric-longenhagen-prospects-chat-9-25/": "2026-09-25T19:26:02.371243+00:00",
+    "https://blogs.fangraphs.com/joe-musgrove-thrives-in-rehab-outing-plus-more-arizona-scouting-notes/": "2026-09-28T21:20:04.690250+00:00",
     "https://blogs.fangraphs.com/notes-from-star-studded-rockies-as-instructional-league/": "2026-09-25T08:06:14.575622+00:00",
     "https://blogs.fangraphs.com/san-franciscos-40-man-cleanup-will-be-a-giant-pain/": "2026-09-18T18:36:27.418759+00:00",
     "https://blogs.fangraphs.com/scouting-the-uniformed-debuts-of-early-round-padres-and-giants-draft-picks/": "2026-09-09T11:45:50.521777+00:00",
@@ -1680,6 +1708,7 @@
     "https://sfstandard.com/2026/09/25/epic-bay-area-sports-weekend-year-starts-now/": "2026-09-26T00:00:40.424826+00:00",
     "https://sfstandard.com/2026/09/25/viral-giants-mom-defends-husband/": "2026-09-26T07:56:51.714017+00:00",
     "https://sfstandard.com/2026/09/26/bryce-eldridge-sf-giants-logan-webb-willie-mac/": "2026-09-26T18:40:35.784397+00:00",
+    "https://sfstandard.com/2026/09/28/mike-krukow-sf-giants-tribute/": "2026-09-28T21:20:07.536539+00:00",
     "https://sfstandard.com/opinion/2026/09/10/burning-man-cartoon-giants/": "2026-09-10T23:19:45.169717+00:00",
     "https://sfstandard.com/section-415/2026/09/08/section-415-podcast-uncovering-mysteries-giants-ownership/": "2026-09-08T23:31:38.419100+00:00",
     "https://sfstandard.com/section-415/2026/09/25/section-415-despite-criticism-kalshi-isn-t-deterred-partnering-giants/": "2026-09-25T19:26:01.436138+00:00",
@@ -1783,6 +1812,7 @@
     "https://www.nytimes.com/athletic/7622511/2026/09/25/sf-giants-roster-turnover-injuries-trades-fire-trucks/": "2026-09-28T05:41:04.495637+00:00",
     "https://www.nytimes.com/athletic/7626721/2026/09/24/sf-giants-camilo-doval-waivers/": "2026-09-24T23:57:25.708462+00:00",
     "https://www.nytimes.com/athletic/7636930/2026/09/27/sf-giants-tony-vitello-ejection/": "2026-09-27T23:12:50.562871+00:00",
+    "https://www.nytimes.com/athletic/7640616/2026/09/28/mike-krukow-sf-giants-career-appreciation/": "2026-09-28T21:20:02.503680+00:00",
     "https://www.sfchronicle.com/sports/giants/article/another-giants-rookie-debuts-tying-franchise-22430259.php": "2026-09-14T05:14:51.914094+00:00",
     "https://www.sfchronicle.com/sports/giants/article/giants-announcer-duane-kuiper-divulges-he-s-22440818.php": "2026-09-20T22:35:24.216853+00:00",
     "https://www.sfchronicle.com/sports/giants/article/giants-broadcaster-mike-krukow-wins-bill-rigney-22444592.php": "2026-09-23T07:55:00.996539+00:00",
@@ -4497,6 +4527,37 @@
       "sources_ok": 8,
       "standalone_selected": 0,
       "started_at": "2026-09-28T11:52:27.296176+00:00",
+      "status": "completed"
+    },
+    {
+      "discovered": 160,
+      "finished_at": "2026-09-28T21:20:08.341425+00:00",
+      "game_selection_reasons": {
+        "already_posted": 13,
+        "game_source_duplicates": 0,
+        "not_game_story": 141,
+        "schedule_grounded_threads": 0,
+        "selected_game_stories": 0,
+        "selected_game_threads": 0,
+        "stale_game_story": 6,
+        "unrouted_game_stories": 0
+      },
+      "game_stories_selected": 0,
+      "game_threads_selected": 0,
+      "schedule_grounded_threads": 0,
+      "selection_reasons": {
+        "already_posted": 56,
+        "deferred_for_breaking_news": 2,
+        "eligible": 12,
+        "quality_low": 14,
+        "selected": 3,
+        "stale": 57,
+        "story_already_posted": 9
+      },
+      "sources_failed": 0,
+      "sources_ok": 8,
+      "standalone_selected": 3,
+      "started_at": "2026-09-28T21:19:39.084967+00:00",
       "status": "completed"
     }
   ]
