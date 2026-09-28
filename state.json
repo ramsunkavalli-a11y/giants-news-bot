@@ -1620,6 +1620,33 @@
       "source": "San Francisco Chronicle",
       "title": "Tony Vitello tossed for majors-high 7th time as Giants fall to Dodgers in finale",
       "url": "https://www.sfchronicle.com/sports/giants/article/tony-vitello-tossed-mlb-high-7th-time-giants-22451573.php"
+    },
+    {
+      "author": "",
+      "game_key": "",
+      "kind": "standalone",
+      "posted_at": "2026-09-28T05:41:02.524067+00:00",
+      "source": "San Francisco Chronicle",
+      "title": "Mike Krukow signs off in last Giants broadcast with Duane Kuiper: ‘My friend, it’s been a blast’",
+      "url": "https://www.sfchronicle.com/sports/giants/article/giants-give-mike-krukow-emotional-sendoff-finale-22451590.php"
+    },
+    {
+      "author": "Alex Simon",
+      "game_key": "",
+      "kind": "standalone",
+      "posted_at": "2026-09-28T05:41:03.441061+00:00",
+      "source": "SFGATE",
+      "title": "SF Giants fans pay tribute to Mike Krukow at his final game",
+      "url": "https://www.sfgate.com/giants/article/sf-giants-fans-krukow-tribute-22443910.php"
+    },
+    {
+      "author": "",
+      "game_key": "",
+      "kind": "standalone",
+      "posted_at": "2026-09-28T05:41:04.495637+00:00",
+      "source": "The Athletic",
+      "title": "Injuries, trades, fire trucks: How the Giants turned over an entire roster (almost) in 2026",
+      "url": "https://www.nytimes.com/athletic/7622511/2026/09/25/sf-giants-roster-turnover-injuries-trades-fire-trucks/"
     }
   ],
   "posted_urls": {
@@ -1743,6 +1770,7 @@
     "https://www.nytimes.com/athletic/7614219/2026/09/20/duane-kuiper-sf-giants-throat-cancer-treatment/": "2026-09-20T22:35:25.111745+00:00",
     "https://www.nytimes.com/athletic/7616196/2026/09/21/giants-miserable-road-schedule-dodgers-sweep/": "2026-09-21T20:05:30.619152+00:00",
     "https://www.nytimes.com/athletic/7622228/2026/09/23/brooks-lee-mike-krukow-family-connection-twins-giants/": "2026-09-23T19:09:38.436617+00:00",
+    "https://www.nytimes.com/athletic/7622511/2026/09/25/sf-giants-roster-turnover-injuries-trades-fire-trucks/": "2026-09-28T05:41:04.495637+00:00",
     "https://www.nytimes.com/athletic/7626721/2026/09/24/sf-giants-camilo-doval-waivers/": "2026-09-24T23:57:25.708462+00:00",
     "https://www.nytimes.com/athletic/7636930/2026/09/27/sf-giants-tony-vitello-ejection/": "2026-09-27T23:12:50.562871+00:00",
     "https://www.sfchronicle.com/sports/giants/article/another-giants-rookie-debuts-tying-franchise-22430259.php": "2026-09-14T05:14:51.914094+00:00",
@@ -1751,6 +1779,7 @@
     "https://www.sfchronicle.com/sports/giants/article/giants-buster-posey-sees-baserunning-22425947.php": "2026-09-11T23:27:38.294518+00:00",
     "https://www.sfchronicle.com/sports/giants/article/giants-eke-win-11-logan-webb-s-strong-22421161.php": "2026-09-08T07:22:59.008333+00:00",
     "https://www.sfchronicle.com/sports/giants/article/giants-fall-twins-clinching-losing-record-sf-bo-22446034.php": "2026-09-24T07:45:25.050194+00:00",
+    "https://www.sfchronicle.com/sports/giants/article/giants-give-mike-krukow-emotional-sendoff-finale-22451590.php": "2026-09-28T05:41:02.524067+00:00",
     "https://www.sfchronicle.com/sports/giants/article/giants-infielder-marcelo-mayer-top-prospect-22440835.php": "2026-09-22T00:13:45.439855+00:00",
     "https://www.sfchronicle.com/sports/giants/article/giants-manager-tony-vitello-getting-no-respect-22423051.php": "2026-09-10T11:43:51.063079+00:00",
     "https://www.sfchronicle.com/sports/giants/article/giants-rookies-fuel-6-run-rally-2-outs-eighth-22424245.php": "2026-09-09T23:26:09.265304+00:00",
@@ -1776,6 +1805,7 @@
     "https://www.sfgate.com/giants/article/kuiper-krukow-tribute-last-game-22451594.php": "2026-09-27T23:12:51.524599+00:00",
     "https://www.sfgate.com/giants/article/mike-krukow-beer-legend-22422336.php": "2026-09-09T18:46:35.845874+00:00",
     "https://www.sfgate.com/giants/article/sf-giants-chicken-tenders-22433120.php": "2026-09-17T11:59:37.599139+00:00",
+    "https://www.sfgate.com/giants/article/sf-giants-fans-krukow-tribute-22443910.php": "2026-09-28T05:41:03.441061+00:00",
     "https://www.sfgate.com/giants/article/sf-giants-pay-fans-22424152.php": "2026-09-10T18:37:19.600174+00:00",
     "https://www.sfgate.com/giants/article/sf-giants-viral-mom-husband-22451456.php": "2026-09-27T19:09:27.965504+00:00"
   },
@@ -4394,6 +4424,37 @@
       "sources_ok": 8,
       "standalone_selected": 3,
       "started_at": "2026-09-27T23:12:30.989609+00:00",
+      "status": "completed"
+    },
+    {
+      "discovered": 158,
+      "finished_at": "2026-09-28T05:41:05.298817+00:00",
+      "game_selection_reasons": {
+        "already_posted": 13,
+        "game_source_duplicates": 0,
+        "not_game_story": 139,
+        "schedule_grounded_threads": 0,
+        "selected_game_stories": 0,
+        "selected_game_threads": 0,
+        "stale_game_story": 6,
+        "unrouted_game_stories": 0
+      },
+      "game_stories_selected": 0,
+      "game_threads_selected": 0,
+      "schedule_grounded_threads": 0,
+      "selection_reasons": {
+        "already_posted": 55,
+        "deferred_for_breaking_news": 2,
+        "eligible": 9,
+        "quality_low": 13,
+        "selected": 3,
+        "stale": 60,
+        "story_already_posted": 6
+      },
+      "sources_failed": 0,
+      "sources_ok": 8,
+      "standalone_selected": 3,
+      "started_at": "2026-09-28T05:40:42.021020+00:00",
       "status": "completed"
     }
   ]
