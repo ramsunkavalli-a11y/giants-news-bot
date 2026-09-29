@@ -227,15 +227,6 @@
   },
   "posted_stories": [
     {
-      "author": "Justice delos Santos",
-      "game_key": "",
-      "kind": "standalone",
-      "posted_at": "2026-09-08T11:39:43.126620+00:00",
-      "source": "Mercury News",
-      "title": "September 7, 2026",
-      "url": "https://www.mercurynews.com/2026/09/07/"
-    },
-    {
       "author": "Kerry Crowley",
       "game_key": "",
       "kind": "standalone",
@@ -1638,6 +1629,24 @@
       "source": "San Francisco Standard",
       "title": "The Giants wave goodbye to a legendary broadcaster and a terrible season",
       "url": "https://sfstandard.com/2026/09/28/mike-krukow-sf-giants-tribute/"
+    },
+    {
+      "author": "Emily Dreyfuss",
+      "game_key": "",
+      "kind": "standalone",
+      "posted_at": "2026-09-29T13:15:12.060256+00:00",
+      "source": "San Francisco Standard",
+      "title": "Giants ‘mom of the year’ viral clip and our broken internet",
+      "url": "https://sfstandard.com/pacific-standard-time/2026/09/29/giants-mom-year-viral-clip-our-broken-internet/"
+    },
+    {
+      "author": "",
+      "game_key": "",
+      "kind": "standalone",
+      "posted_at": "2026-09-29T13:15:13.017561+00:00",
+      "source": "San Francisco Chronicle",
+      "title": "After 2026 disaster, Giants have to prove they learned from losing games, irking fans",
+      "url": "https://www.sfchronicle.com/sports/giants/article/losing-games-irking-fans-2026-22453146.php"
     }
   ],
   "posted_urls": {
@@ -1665,9 +1674,9 @@
     "https://sfstandard.com/2026/09/26/bryce-eldridge-sf-giants-logan-webb-willie-mac/": "2026-09-26T18:40:35.784397+00:00",
     "https://sfstandard.com/2026/09/28/mike-krukow-sf-giants-tribute/": "2026-09-28T21:20:07.536539+00:00",
     "https://sfstandard.com/opinion/2026/09/10/burning-man-cartoon-giants/": "2026-09-10T23:19:45.169717+00:00",
+    "https://sfstandard.com/pacific-standard-time/2026/09/29/giants-mom-year-viral-clip-our-broken-internet/": "2026-09-29T13:15:12.060256+00:00",
     "https://sfstandard.com/section-415/2026/09/08/section-415-podcast-uncovering-mysteries-giants-ownership/": "2026-09-08T23:31:38.419100+00:00",
     "https://sfstandard.com/section-415/2026/09/25/section-415-despite-criticism-kalshi-isn-t-deterred-partnering-giants/": "2026-09-25T19:26:01.436138+00:00",
-    "https://www.mercurynews.com/2026/09/07/": "2026-09-08T11:39:43.126620+00:00",
     "https://www.mercurynews.com/2026/09/08/bryce-eldridge-first-base-defense-sf-giants/": "2026-09-08T23:31:41.768560+00:00",
     "https://www.mercurynews.com/2026/09/08/sf-giants-devers-named-national-league-player-of-the-week/": "2026-09-11T23:27:41.979460+00:00",
     "https://www.mercurynews.com/2026/09/10/the-skys-the-limit-sf-giants-top-pitching-prospect-flora-dazzles-as-san-jose-advances-to-championship/": "2026-09-11T18:42:20.446352+00:00",
@@ -1778,6 +1787,7 @@
     "https://www.sfchronicle.com/sports/giants/article/hall-fame-isn-t-allowing-giants-krukow-22447621.php": "2026-09-24T23:57:24.780984+00:00",
     "https://www.sfchronicle.com/sports/giants/article/jackson-flora-s-playoff-debut-beer-chants-22426791.php": "2026-09-11T07:25:51.340894+00:00",
     "https://www.sfchronicle.com/sports/giants/article/logan-webb-wins-willie-mac-award-team-s-22449851.php": "2026-09-26T18:40:36.879176+00:00",
+    "https://www.sfchronicle.com/sports/giants/article/losing-games-irking-fans-2026-22453146.php": "2026-09-29T13:15:13.017561+00:00",
     "https://www.sfchronicle.com/sports/giants/article/mike-krukow-1985-team-vitello-22436775.php": "2026-09-21T20:05:31.512673+00:00",
     "https://www.sfchronicle.com/sports/giants/article/mike-krukow-fans-22436779.php": "2026-09-23T12:01:25.504405+00:00",
     "https://www.sfchronicle.com/sports/giants/article/mike-krukow-farewell-baseball-22436764.php": "2026-09-21T20:46:25.558210+00:00",
@@ -1800,35 +1810,6 @@
     "https://www.sfgate.com/giants/article/sf-giants-viral-mom-husband-22451456.php": "2026-09-27T19:09:27.965504+00:00"
   },
   "run_history": [
-    {
-      "discovered": 153,
-      "finished_at": "2026-09-08T11:39:43.929218+00:00",
-      "game_selection_reasons": {
-        "already_posted": 23,
-        "not_game_story": 123,
-        "quality_low": 3,
-        "schedule_grounded_threads": 0,
-        "selected_game_stories": 0,
-        "selected_game_threads": 0,
-        "stale_game_story": 4
-      },
-      "game_stories_selected": 0,
-      "game_threads_selected": 0,
-      "schedule_grounded_threads": 0,
-      "selection_reasons": {
-        "already_posted": 48,
-        "deferred_for_breaking_news": 1,
-        "eligible": 1,
-        "quality_low": 14,
-        "selected": 1,
-        "stale": 59
-      },
-      "sources_failed": 0,
-      "sources_ok": 8,
-      "standalone_selected": 1,
-      "started_at": "2026-09-08T11:39:30.601556+00:00",
-      "status": "completed"
-    },
     {
       "discovered": 152,
       "error": "HTTPError: 502 Server Error: Bad Gateway for url: https://bsky.social/xrpc/com.atproto.repo.uploadBlob",
@@ -4540,6 +4521,37 @@
       "sources_ok": 8,
       "standalone_selected": 0,
       "started_at": "2026-09-29T08:54:36.782415+00:00",
+      "status": "completed"
+    },
+    {
+      "discovered": 158,
+      "finished_at": "2026-09-29T13:15:13.822901+00:00",
+      "game_selection_reasons": {
+        "already_posted": 13,
+        "game_source_duplicates": 0,
+        "not_game_story": 139,
+        "schedule_grounded_threads": 0,
+        "selected_game_stories": 0,
+        "selected_game_threads": 0,
+        "stale_game_story": 6,
+        "unrouted_game_stories": 0
+      },
+      "game_stories_selected": 0,
+      "game_threads_selected": 0,
+      "schedule_grounded_threads": 0,
+      "selection_reasons": {
+        "already_posted": 57,
+        "deferred_for_breaking_news": 2,
+        "eligible": 9,
+        "quality_low": 14,
+        "selected": 2,
+        "stale": 57,
+        "story_already_posted": 7
+      },
+      "sources_failed": 0,
+      "sources_ok": 8,
+      "standalone_selected": 2,
+      "started_at": "2026-09-29T13:14:47.240420+00:00",
       "status": "completed"
     }
   ]
