@@ -1647,6 +1647,15 @@
       "source": "San Francisco Chronicle",
       "title": "After 2026 disaster, Giants have to prove they learned from losing games, irking fans",
       "url": "https://www.sfchronicle.com/sports/giants/article/losing-games-irking-fans-2026-22453146.php"
+    },
+    {
+      "author": "John Shea",
+      "game_key": "",
+      "kind": "standalone",
+      "posted_at": "2026-09-29T20:07:34.956280+00:00",
+      "source": "San Francisco Standard",
+      "title": "Buster Posey outlines plan to fix Giants after disastrous season: ‘I’ll take the blame’",
+      "url": "https://sfstandard.com/2026/09/29/buster-posey-sf-giants-2027-plan/"
     }
   ],
   "posted_urls": {
@@ -1673,6 +1682,7 @@
     "https://sfstandard.com/2026/09/25/viral-giants-mom-defends-husband/": "2026-09-26T07:56:51.714017+00:00",
     "https://sfstandard.com/2026/09/26/bryce-eldridge-sf-giants-logan-webb-willie-mac/": "2026-09-26T18:40:35.784397+00:00",
     "https://sfstandard.com/2026/09/28/mike-krukow-sf-giants-tribute/": "2026-09-28T21:20:07.536539+00:00",
+    "https://sfstandard.com/2026/09/29/buster-posey-sf-giants-2027-plan/": "2026-09-29T20:07:34.956280+00:00",
     "https://sfstandard.com/opinion/2026/09/10/burning-man-cartoon-giants/": "2026-09-10T23:19:45.169717+00:00",
     "https://sfstandard.com/pacific-standard-time/2026/09/29/giants-mom-year-viral-clip-our-broken-internet/": "2026-09-29T13:15:12.060256+00:00",
     "https://sfstandard.com/section-415/2026/09/08/section-415-podcast-uncovering-mysteries-giants-ownership/": "2026-09-08T23:31:38.419100+00:00",
@@ -1810,37 +1820,6 @@
     "https://www.sfgate.com/giants/article/sf-giants-viral-mom-husband-22451456.php": "2026-09-27T19:09:27.965504+00:00"
   },
   "run_history": [
-    {
-      "discovered": 152,
-      "error": "HTTPError: 502 Server Error: Bad Gateway for url: https://bsky.social/xrpc/com.atproto.repo.uploadBlob",
-      "finished_at": "2026-09-08T18:52:53.956415+00:00",
-      "game_selection_reasons": {
-        "already_posted": 23,
-        "eligible_game_story": 1,
-        "not_game_story": 121,
-        "quality_low": 3,
-        "schedule_grounded_threads": 1,
-        "selected_game_stories": 1,
-        "selected_game_threads": 1,
-        "stale_game_story": 4
-      },
-      "game_stories_selected": 1,
-      "game_threads_selected": 1,
-      "schedule_grounded_threads": 1,
-      "selection_reasons": {
-        "already_posted": 45,
-        "deferred_for_breaking_news": 1,
-        "eligible": 3,
-        "quality_low": 14,
-        "selected": 3,
-        "stale": 58
-      },
-      "sources_failed": 0,
-      "sources_ok": 8,
-      "standalone_selected": 3,
-      "started_at": "2026-09-08T18:52:20.760116+00:00",
-      "status": "failed"
-    },
     {
       "discovered": 152,
       "finished_at": "2026-09-08T23:31:46.820099+00:00",
@@ -4552,6 +4531,37 @@
       "sources_ok": 8,
       "standalone_selected": 2,
       "started_at": "2026-09-29T13:14:47.240420+00:00",
+      "status": "completed"
+    },
+    {
+      "discovered": 158,
+      "finished_at": "2026-09-29T20:07:35.761443+00:00",
+      "game_selection_reasons": {
+        "already_posted": 13,
+        "game_source_duplicates": 0,
+        "not_game_story": 139,
+        "schedule_grounded_threads": 0,
+        "selected_game_stories": 0,
+        "selected_game_threads": 0,
+        "stale_game_story": 6,
+        "unrouted_game_stories": 0
+      },
+      "game_stories_selected": 0,
+      "game_threads_selected": 0,
+      "schedule_grounded_threads": 0,
+      "selection_reasons": {
+        "already_posted": 58,
+        "deferred_for_breaking_news": 2,
+        "eligible": 8,
+        "quality_low": 14,
+        "selected": 1,
+        "stale": 57,
+        "story_already_posted": 7
+      },
+      "sources_failed": 0,
+      "sources_ok": 8,
+      "standalone_selected": 1,
+      "started_at": "2026-09-29T20:07:09.761141+00:00",
       "status": "completed"
     }
   ]
