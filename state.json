@@ -211,33 +211,6 @@
   },
   "posted_stories": [
     {
-      "author": "Alex Pavlovic",
-      "game_key": "",
-      "kind": "standalone",
-      "posted_at": "2026-09-09T18:46:34.848433+00:00",
-      "source": "NBC Sports Bay Area",
-      "title": "Christian Koss continues to take advantage of his increased Giants role",
-      "url": "https://www.nbcsportsbayarea.com/mlb/san-francisco-giants/christian-koss-increased-role-2026/1961822/"
-    },
-    {
-      "author": "Alex Simon",
-      "game_key": "",
-      "kind": "standalone",
-      "posted_at": "2026-09-09T18:46:35.845874+00:00",
-      "source": "SFGATE",
-      "title": "Legendary SF Giants broadcaster Mike Krukow is getting his own beer",
-      "url": "https://www.sfgate.com/giants/article/mike-krukow-beer-legend-22422336.php"
-    },
-    {
-      "author": "John Shea",
-      "game_key": "",
-      "kind": "standalone",
-      "posted_at": "2026-09-09T18:46:38.685699+00:00",
-      "source": "San Francisco Standard",
-      "title": "Meet the Giants’ new owner: Why Richard Chaifetz bought a small stake",
-      "url": "https://sfstandard.com/2026/09/09/sf-giants-richard-chaifetz-ownership-stake/"
-    },
-    {
       "author": "",
       "game_key": "",
       "kind": "standalone",
@@ -1631,6 +1604,24 @@
       "source": "Mercury News",
       "title": "Why pitching will be SF Giants’ top priority after 97-loss season",
       "url": "https://www.mercurynews.com/2026/09/28/sf-giants-pitching-offseason-buster-posey-zach-minasian/"
+    },
+    {
+      "author": "Dave Tobener",
+      "game_key": "",
+      "kind": "standalone",
+      "posted_at": "2026-09-30T20:12:35.991364+00:00",
+      "source": "SFGATE",
+      "title": "Buster Posey can’t stop making his bad SF Giants bets even worse",
+      "url": "https://www.sfgate.com/giants/article/sf-giants-buster-posey-season-22456150.php"
+    },
+    {
+      "author": "John Shea",
+      "game_key": "",
+      "kind": "standalone",
+      "posted_at": "2026-09-30T20:12:39.044568+00:00",
+      "source": "San Francisco Standard",
+      "title": "The Giants always want to contend. Next year, that should change",
+      "url": "https://sfstandard.com/2026/09/30/sf-giants-rebuilding-prospects-buster-posey/"
     }
   ],
   "posted_urls": {
@@ -1641,7 +1632,6 @@
     "https://blogs.fangraphs.com/san-franciscos-40-man-cleanup-will-be-a-giant-pain/": "2026-09-18T18:36:27.418759+00:00",
     "https://omny.fm/shows/the-executives-show/giants-knbr-beer-day-preview-larry-baer-on-mike-krukows-legacy-and-a-special-september-celebration": "2026-09-10T23:19:42.710344+00:00",
     "https://omny.fm/shows/the-executives-show/giants-skipper-tony-v-on-the-giants-season-mike-krukow": "2026-09-24T19:24:34.475256+00:00",
-    "https://sfstandard.com/2026/09/09/sf-giants-richard-chaifetz-ownership-stake/": "2026-09-09T18:46:38.685699+00:00",
     "https://sfstandard.com/2026/09/12/scott-bandura-sf-giants-promotion-call-up/": "2026-09-12T22:26:52.906809+00:00",
     "https://sfstandard.com/2026/09/13/logan-webb-sf-giants-2026-season/": "2026-09-13T18:17:44.886650+00:00",
     "https://sfstandard.com/2026/09/14/who-s-left-giants-lineup-has-never-looked/": "2026-09-14T19:56:01.127175+00:00",
@@ -1656,6 +1646,7 @@
     "https://sfstandard.com/2026/09/26/bryce-eldridge-sf-giants-logan-webb-willie-mac/": "2026-09-26T18:40:35.784397+00:00",
     "https://sfstandard.com/2026/09/28/mike-krukow-sf-giants-tribute/": "2026-09-28T21:20:07.536539+00:00",
     "https://sfstandard.com/2026/09/29/buster-posey-sf-giants-2027-plan/": "2026-09-29T20:07:34.956280+00:00",
+    "https://sfstandard.com/2026/09/30/sf-giants-rebuilding-prospects-buster-posey/": "2026-09-30T20:12:39.044568+00:00",
     "https://sfstandard.com/opinion/2026/09/10/burning-man-cartoon-giants/": "2026-09-10T23:19:45.169717+00:00",
     "https://sfstandard.com/pacific-standard-time/2026/09/29/giants-mom-year-viral-clip-our-broken-internet/": "2026-09-29T13:15:12.060256+00:00",
     "https://sfstandard.com/section-415/2026/09/25/section-415-despite-criticism-kalshi-isn-t-deterred-partnering-giants/": "2026-09-25T19:26:01.436138+00:00",
@@ -1702,7 +1693,6 @@
     "https://www.nbcsportsbayarea.com/mlb/san-francisco-giants/camilo-doval-claimed-waivers-pirates/1965801/": "2026-09-24T19:24:32.365936+00:00",
     "https://www.nbcsportsbayarea.com/mlb/san-francisco-giants/camilo-doval-remain-return-closer/1966219/": "2026-09-26T11:42:46.935677+00:00",
     "https://www.nbcsportsbayarea.com/mlb/san-francisco-giants/cesar-perdomo-outing-loss-twins/1965584/": "2026-09-23T23:51:49.430921+00:00",
-    "https://www.nbcsportsbayarea.com/mlb/san-francisco-giants/christian-koss-increased-role-2026/1961822/": "2026-09-09T18:46:34.848433+00:00",
     "https://www.nbcsportsbayarea.com/mlb/san-francisco-giants/dodgers-mike-krukow-retirement-heartwarming/1966341/": "2026-09-26T23:04:10.207144+00:00",
     "https://www.nbcsportsbayarea.com/mlb/san-francisco-giants/drew-gilbert-bo-davidson-blade-tidwell-twins/1965184/": "2026-09-22T23:42:25.542109+00:00",
     "https://www.nbcsportsbayarea.com/mlb/san-francisco-giants/duane-kuiper-mike-krukow-booth-experience/1965032/": "2026-09-21T20:05:29.583038+00:00",
@@ -1786,7 +1776,7 @@
     "https://www.sfgate.com/giants/article/giants-nude-player-celebrations-22443935.php": "2026-09-22T19:02:09.613466+00:00",
     "https://www.sfgate.com/giants/article/krukow-kuiper-hall-costas-22446111.php": "2026-09-23T23:51:44.741945+00:00",
     "https://www.sfgate.com/giants/article/kuiper-krukow-tribute-last-game-22451594.php": "2026-09-27T23:12:51.524599+00:00",
-    "https://www.sfgate.com/giants/article/mike-krukow-beer-legend-22422336.php": "2026-09-09T18:46:35.845874+00:00",
+    "https://www.sfgate.com/giants/article/sf-giants-buster-posey-season-22456150.php": "2026-09-30T20:12:35.991364+00:00",
     "https://www.sfgate.com/giants/article/sf-giants-chicken-tenders-22433120.php": "2026-09-17T11:59:37.599139+00:00",
     "https://www.sfgate.com/giants/article/sf-giants-fans-krukow-tribute-22443910.php": "2026-09-28T05:41:03.441061+00:00",
     "https://www.sfgate.com/giants/article/sf-giants-pay-fans-22424152.php": "2026-09-10T18:37:19.600174+00:00",
@@ -1794,37 +1784,6 @@
     "https://www.sfgate.com/giants/article/sf-giants-viral-mom-husband-22451456.php": "2026-09-27T19:09:27.965504+00:00"
   },
   "run_history": [
-    {
-      "discovered": 148,
-      "finished_at": "2026-09-09T18:46:39.488470+00:00",
-      "game_selection_reasons": {
-        "already_posted": 24,
-        "game_source_duplicates": 0,
-        "not_game_story": 117,
-        "quality_low": 3,
-        "schedule_grounded_threads": 0,
-        "selected_game_stories": 0,
-        "selected_game_threads": 0,
-        "stale_game_story": 4,
-        "unrouted_game_stories": 0
-      },
-      "game_stories_selected": 0,
-      "game_threads_selected": 0,
-      "schedule_grounded_threads": 0,
-      "selection_reasons": {
-        "already_posted": 40,
-        "deferred_for_breaking_news": 1,
-        "eligible": 3,
-        "quality_low": 15,
-        "selected": 3,
-        "stale": 58
-      },
-      "sources_failed": 0,
-      "sources_ok": 8,
-      "standalone_selected": 3,
-      "started_at": "2026-09-09T18:46:14.295403+00:00",
-      "status": "completed"
-    },
     {
       "discovered": 151,
       "finished_at": "2026-09-09T23:26:14.757344+00:00",
@@ -4540,6 +4499,38 @@
       "sources_ok": 8,
       "standalone_selected": 2,
       "started_at": "2026-09-30T12:55:59.241548+00:00",
+      "status": "completed"
+    },
+    {
+      "discovered": 158,
+      "finished_at": "2026-09-30T20:12:39.849665+00:00",
+      "game_selection_reasons": {
+        "already_posted": 10,
+        "game_source_duplicates": 0,
+        "not_game_story": 141,
+        "quality_low": 1,
+        "schedule_grounded_threads": 0,
+        "selected_game_stories": 0,
+        "selected_game_threads": 0,
+        "stale_game_story": 6,
+        "unrouted_game_stories": 0
+      },
+      "game_stories_selected": 0,
+      "game_threads_selected": 0,
+      "schedule_grounded_threads": 0,
+      "selection_reasons": {
+        "already_posted": 62,
+        "deferred_for_breaking_news": 2,
+        "eligible": 6,
+        "quality_low": 14,
+        "selected": 2,
+        "stale": 57,
+        "story_already_posted": 4
+      },
+      "sources_failed": 0,
+      "sources_ok": 8,
+      "standalone_selected": 2,
+      "started_at": "2026-09-30T20:12:16.398326+00:00",
       "status": "completed"
     }
   ]
