@@ -211,33 +211,6 @@
   },
   "posted_stories": [
     {
-      "author": "Maria Guardado",
-      "game_key": "",
-      "kind": "standalone",
-      "posted_at": "2026-09-09T07:31:31.714121+00:00",
-      "source": "MLB.com",
-      "title": "Eldridge continues power surge behind Roupp's quality start",
-      "url": "https://www.mlb.com/giants/news/bryce-eldridge-hits-a-homer-in-giants-win-over-cardinals"
-    },
-    {
-      "author": "",
-      "game_key": "",
-      "kind": "standalone",
-      "posted_at": "2026-09-09T07:31:32.622719+00:00",
-      "source": "San Francisco Chronicle",
-      "title": "Giants’ big cast of rookies, castoffs has team playing with some spark",
-      "url": "https://www.sfchronicle.com/sports/giants/article/sf-giants-rookies-castoffs-stepping-up-finding-22423074.php"
-    },
-    {
-      "author": "Alex Pavlovic",
-      "game_key": "",
-      "kind": "standalone",
-      "posted_at": "2026-09-09T07:31:34.749213+00:00",
-      "source": "NBC Sports Bay Area",
-      "title": "Giants win series vs. Cards",
-      "url": "https://www.nbcsportsbayarea.com/mlb/san-francisco-giants/bryce-eldridge-christian-koss-home-run/1961710/"
-    },
-    {
       "author": "Eric Longenhagen",
       "game_key": "",
       "kind": "standalone",
@@ -1631,6 +1604,33 @@
       "source": "San Francisco Chronicle",
       "title": "Giants brass accepts responsibility for 97 losses, vague on fixes, Pride protest",
       "url": "https://www.sfchronicle.com/sports/giants/article/giants-brass-frank-97-loss-season-vague-fixes-22454731.php"
+    },
+    {
+      "author": "Maria Guardado",
+      "game_key": "",
+      "kind": "standalone",
+      "posted_at": "2026-09-30T08:54:06.960304+00:00",
+      "source": "MLB.com",
+      "title": "Giants stamp commitment to Vitello as Posey reflects on tough 2026",
+      "url": "https://www.mlb.com/giants/news/buster-posey-reflects-on-giants-2026-season"
+    },
+    {
+      "author": "Alex Pavlovic",
+      "game_key": "",
+      "kind": "standalone",
+      "posted_at": "2026-09-30T08:54:09.013084+00:00",
+      "source": "NBC Sports Bay Area",
+      "title": "Harrison Bader injury update",
+      "url": "https://www.nbcsportsbayarea.com/mlb/san-francisco-giants/harrison-bader-foot-injury-scooter-crash/1967460/"
+    },
+    {
+      "author": "Dieter Kurtenbach",
+      "game_key": "",
+      "kind": "standalone",
+      "posted_at": "2026-09-30T08:54:11.936310+00:00",
+      "source": "Mercury News",
+      "title": "Kurtenbach: Posey, SF Giants sell pure delusion after 97-loss season",
+      "url": "https://www.mercurynews.com/2026/09/29/sf-giants-buster-posey-tony-vitello-zack-minasian-willy-adames-oracle-park-kurtenbach-0929/"
     }
   ],
   "posted_urls": {
@@ -1678,9 +1678,10 @@
     "https://www.mercurynews.com/2026/09/21/sf-giants-outfield-prospect-bo-davidson-to-join-team-in-san-francisco/": "2026-09-22T00:38:06.775845+00:00",
     "https://www.mercurynews.com/2026/09/23/cesar-perdomo-bo-davidson-sf-giants-lose-to-minnesota-twins/": "2026-09-24T23:57:29.727942+00:00",
     "https://www.mercurynews.com/2026/09/27/sf-giants-conclude-disastrous-first-season-under-vitello-with-loss-in-10-innings-vs-dodgers/": "2026-09-28T11:52:44.893994+00:00",
+    "https://www.mercurynews.com/2026/09/29/sf-giants-buster-posey-tony-vitello-zack-minasian-willy-adames-oracle-park-kurtenbach-0929/": "2026-09-30T08:54:11.936310+00:00",
     "https://www.mlb.com/giants/news/blade-tidwell-leaves-start-against-twins-with-right-elbow-injury": "2026-09-22T07:53:45.077671+00:00",
-    "https://www.mlb.com/giants/news/bryce-eldridge-hits-a-homer-in-giants-win-over-cardinals": "2026-09-09T07:31:31.714121+00:00",
     "https://www.mlb.com/giants/news/bryce-eldridge-out-for-second-straight-game-with-head-laceration": "2026-09-20T05:08:50.330486+00:00",
+    "https://www.mlb.com/giants/news/buster-posey-reflects-on-giants-2026-season": "2026-09-30T08:54:06.960304+00:00",
     "https://www.mlb.com/giants/news/giants-claim-camilo-doval-off-waivers": "2026-09-26T11:42:44.449091+00:00",
     "https://www.mlb.com/giants/news/giants-earn-comeback-win-to-sweep-cardinals": "2026-09-09T23:26:13.955118+00:00",
     "https://www.mlb.com/giants/news/jackson-flora-san-jose-giants-going-to-2026-cal-league-championship-series": "2026-09-11T07:25:53.690982+00:00",
@@ -1695,7 +1696,6 @@
     "https://www.nbcsportsbayarea.com/mlb/san-francisco-giants/bo-davidson-promotion-debut/1965101/": "2026-09-22T00:13:44.364499+00:00",
     "https://www.nbcsportsbayarea.com/mlb/san-francisco-giants/bryce-eldridge-blade-tidwell-cardinals/1961931/": "2026-09-09T23:26:11.632133+00:00",
     "https://www.nbcsportsbayarea.com/mlb/san-francisco-giants/bryce-eldridge-blade-tidwell-st-louis-cardinals/1963586/": "2026-09-16T07:50:56.231725+00:00",
-    "https://www.nbcsportsbayarea.com/mlb/san-francisco-giants/bryce-eldridge-christian-koss-home-run/1961710/": "2026-09-09T07:31:34.749213+00:00",
     "https://www.nbcsportsbayarea.com/mlb/san-francisco-giants/bryce-eldridge-shay-whitcomb-cardinals/1961991/": "2026-09-10T07:27:47.964584+00:00",
     "https://www.nbcsportsbayarea.com/mlb/san-francisco-giants/buster-posey-giants-farm-system/1964037/": "2026-09-17T23:36:30.309804+00:00",
     "https://www.nbcsportsbayarea.com/mlb/san-francisco-giants/buster-posey-reflects-criticism/1963922/": "2026-09-18T11:41:28.121197+00:00",
@@ -1713,6 +1713,7 @@
     "https://www.nbcsportsbayarea.com/mlb/san-francisco-giants/giants-minor-league-system/1963701/": "2026-09-16T23:43:53.437368+00:00",
     "https://www.nbcsportsbayarea.com/mlb/san-francisco-giants/giants-news/giants-arizona-fall-league/1963446/": "2026-09-15T19:08:46.846830+00:00",
     "https://www.nbcsportsbayarea.com/mlb/san-francisco-giants/giants-observations-tarik-skubal-shutout-loss-dodgers/1966279/": "2026-09-26T07:56:54.067960+00:00",
+    "https://www.nbcsportsbayarea.com/mlb/san-francisco-giants/harrison-bader-foot-injury-scooter-crash/1967460/": "2026-09-30T08:54:09.013084+00:00",
     "https://www.nbcsportsbayarea.com/mlb/san-francisco-giants/historic-roster-churn-2026-season/1965549/": "2026-09-23T23:51:46.873269+00:00",
     "https://www.nbcsportsbayarea.com/mlb/san-francisco-giants/jackson-flora-double-a-debut/1964147/": "2026-09-18T23:28:42.719664+00:00",
     "https://www.nbcsportsbayarea.com/mlb/san-francisco-giants/jackson-flora-san-jose-giants/1962614/": "2026-09-11T18:42:17.277010+00:00",
@@ -1779,7 +1780,6 @@
     "https://www.sfchronicle.com/sports/giants/article/sf-giants-get-another-home-run-rafael-devers-loss-22428990.php": "2026-09-13T05:06:23.069891+00:00",
     "https://www.sfchronicle.com/sports/giants/article/sf-giants-offense-held-check-tarik-skubal-22449692.php": "2026-09-26T11:42:41.931182+00:00",
     "https://www.sfchronicle.com/sports/giants/article/sf-giants-place-jung-hoo-lee-bryce-eldridge-22442692.php": "2026-09-23T19:09:39.375995+00:00",
-    "https://www.sfchronicle.com/sports/giants/article/sf-giants-rookies-castoffs-stepping-up-finding-22423074.php": "2026-09-09T07:31:32.622719+00:00",
     "https://www.sfchronicle.com/sports/giants/article/sf-giants-top-twins-lost-pitcher-blade-tidwell-22442689.php": "2026-09-22T07:53:46.134221+00:00",
     "https://www.sfchronicle.com/sports/giants/article/tony-vitello-tossed-mlb-high-7th-time-giants-22451573.php": "2026-09-27T23:12:52.485363+00:00",
     "https://www.sfgate.com/giants/article/buster-posey-exec-future-22437061.php": "2026-09-17T23:36:28.032901+00:00",
@@ -1794,39 +1794,6 @@
     "https://www.sfgate.com/giants/article/sf-giants-viral-mom-husband-22451456.php": "2026-09-27T19:09:27.965504+00:00"
   },
   "run_history": [
-    {
-      "discovered": 149,
-      "finished_at": "2026-09-09T07:31:35.551901+00:00",
-      "game_selection_reasons": {
-        "already_posted": 23,
-        "eligible_game_story": 2,
-        "game_source_duplicates": 0,
-        "not_game_story": 117,
-        "quality_low": 3,
-        "schedule_grounded_threads": 0,
-        "selected_game_stories": 0,
-        "selected_game_threads": 0,
-        "stale_game_story": 4,
-        "unrouted_game_stories": 2
-      },
-      "game_stories_selected": 0,
-      "game_threads_selected": 0,
-      "schedule_grounded_threads": 0,
-      "selection_reasons": {
-        "already_posted": 40,
-        "deferred_for_breaking_news": 1,
-        "eligible": 5,
-        "quality_low": 14,
-        "run_cap": 2,
-        "selected": 3,
-        "stale": 59
-      },
-      "sources_failed": 0,
-      "sources_ok": 8,
-      "standalone_selected": 3,
-      "started_at": "2026-09-09T07:31:12.508255+00:00",
-      "status": "completed"
-    },
     {
       "discovered": 149,
       "finished_at": "2026-09-09T11:45:54.075949+00:00",
@@ -4539,6 +4506,39 @@
       "sources_ok": 8,
       "standalone_selected": 3,
       "started_at": "2026-09-30T00:39:34.489164+00:00",
+      "status": "completed"
+    },
+    {
+      "discovered": 158,
+      "finished_at": "2026-09-30T08:54:12.741676+00:00",
+      "game_selection_reasons": {
+        "already_posted": 10,
+        "game_source_duplicates": 0,
+        "not_game_story": 140,
+        "quality_low": 1,
+        "schedule_grounded_threads": 0,
+        "selected_game_stories": 0,
+        "selected_game_threads": 0,
+        "stale_game_story": 7,
+        "unrouted_game_stories": 0
+      },
+      "game_stories_selected": 0,
+      "game_threads_selected": 0,
+      "schedule_grounded_threads": 0,
+      "selection_reasons": {
+        "already_posted": 59,
+        "deferred_for_breaking_news": 2,
+        "eligible": 9,
+        "quality_low": 14,
+        "selected": 3,
+        "source_cap_cluster": 1,
+        "stale": 56,
+        "story_already_posted": 5
+      },
+      "sources_failed": 0,
+      "sources_ok": 8,
+      "standalone_selected": 3,
+      "started_at": "2026-09-30T08:53:43.945811+00:00",
       "status": "completed"
     }
   ]
