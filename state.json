@@ -211,24 +211,6 @@
   },
   "posted_stories": [
     {
-      "author": "Eric Longenhagen",
-      "game_key": "",
-      "kind": "standalone",
-      "posted_at": "2026-09-09T11:45:50.521777+00:00",
-      "source": "FanGraphs",
-      "title": "Scouting the Uniformed Debuts of Early-Round Padres and Giants Draft Picks",
-      "url": "https://blogs.fangraphs.com/scouting-the-uniformed-debuts-of-early-round-padres-and-giants-draft-picks/"
-    },
-    {
-      "author": "John Shea",
-      "game_key": "",
-      "kind": "standalone",
-      "posted_at": "2026-09-09T11:45:53.273105+00:00",
-      "source": "San Francisco Standard",
-      "title": "Who owns the San Francisco Giants? The answer is more complicated than you think",
-      "url": "https://sfstandard.com/2026/09/08/sf-giants-ownership-larry-baer-buster-posey/"
-    },
-    {
       "author": "Alex Pavlovic",
       "game_key": "",
       "kind": "standalone",
@@ -1631,6 +1613,24 @@
       "source": "Mercury News",
       "title": "Kurtenbach: Posey, SF Giants sell pure delusion after 97-loss season",
       "url": "https://www.mercurynews.com/2026/09/29/sf-giants-buster-posey-tony-vitello-zack-minasian-willy-adames-oracle-park-kurtenbach-0929/"
+    },
+    {
+      "author": "",
+      "game_key": "",
+      "kind": "standalone",
+      "posted_at": "2026-09-30T12:56:22.172421+00:00",
+      "source": "The Athletic",
+      "title": "Buster Posey says Giants can contend in 2027, but whom is he convincing?",
+      "url": "https://www.nytimes.com/athletic/7644566/2026/09/30/buster-posey-sf-giants-contend-2027/"
+    },
+    {
+      "author": "Justice delos Santos",
+      "game_key": "",
+      "kind": "standalone",
+      "posted_at": "2026-09-30T12:56:25.450144+00:00",
+      "source": "Mercury News",
+      "title": "Why pitching will be SF Giants’ top priority after 97-loss season",
+      "url": "https://www.mercurynews.com/2026/09/28/sf-giants-pitching-offseason-buster-posey-zach-minasian/"
     }
   ],
   "posted_urls": {
@@ -1639,10 +1639,8 @@
     "https://blogs.fangraphs.com/joe-musgrove-thrives-in-rehab-outing-plus-more-arizona-scouting-notes/": "2026-09-28T21:20:04.690250+00:00",
     "https://blogs.fangraphs.com/notes-from-star-studded-rockies-as-instructional-league/": "2026-09-25T08:06:14.575622+00:00",
     "https://blogs.fangraphs.com/san-franciscos-40-man-cleanup-will-be-a-giant-pain/": "2026-09-18T18:36:27.418759+00:00",
-    "https://blogs.fangraphs.com/scouting-the-uniformed-debuts-of-early-round-padres-and-giants-draft-picks/": "2026-09-09T11:45:50.521777+00:00",
     "https://omny.fm/shows/the-executives-show/giants-knbr-beer-day-preview-larry-baer-on-mike-krukows-legacy-and-a-special-september-celebration": "2026-09-10T23:19:42.710344+00:00",
     "https://omny.fm/shows/the-executives-show/giants-skipper-tony-v-on-the-giants-season-mike-krukow": "2026-09-24T19:24:34.475256+00:00",
-    "https://sfstandard.com/2026/09/08/sf-giants-ownership-larry-baer-buster-posey/": "2026-09-09T11:45:53.273105+00:00",
     "https://sfstandard.com/2026/09/09/sf-giants-richard-chaifetz-ownership-stake/": "2026-09-09T18:46:38.685699+00:00",
     "https://sfstandard.com/2026/09/12/scott-bandura-sf-giants-promotion-call-up/": "2026-09-12T22:26:52.906809+00:00",
     "https://sfstandard.com/2026/09/13/logan-webb-sf-giants-2026-season/": "2026-09-13T18:17:44.886650+00:00",
@@ -1678,6 +1676,7 @@
     "https://www.mercurynews.com/2026/09/21/sf-giants-outfield-prospect-bo-davidson-to-join-team-in-san-francisco/": "2026-09-22T00:38:06.775845+00:00",
     "https://www.mercurynews.com/2026/09/23/cesar-perdomo-bo-davidson-sf-giants-lose-to-minnesota-twins/": "2026-09-24T23:57:29.727942+00:00",
     "https://www.mercurynews.com/2026/09/27/sf-giants-conclude-disastrous-first-season-under-vitello-with-loss-in-10-innings-vs-dodgers/": "2026-09-28T11:52:44.893994+00:00",
+    "https://www.mercurynews.com/2026/09/28/sf-giants-pitching-offseason-buster-posey-zach-minasian/": "2026-09-30T12:56:25.450144+00:00",
     "https://www.mercurynews.com/2026/09/29/sf-giants-buster-posey-tony-vitello-zack-minasian-willy-adames-oracle-park-kurtenbach-0929/": "2026-09-30T08:54:11.936310+00:00",
     "https://www.mlb.com/giants/news/blade-tidwell-leaves-start-against-twins-with-right-elbow-injury": "2026-09-22T07:53:45.077671+00:00",
     "https://www.mlb.com/giants/news/bryce-eldridge-out-for-second-straight-game-with-head-laceration": "2026-09-20T05:08:50.330486+00:00",
@@ -1756,6 +1755,7 @@
     "https://www.nytimes.com/athletic/7626721/2026/09/24/sf-giants-camilo-doval-waivers/": "2026-09-24T23:57:25.708462+00:00",
     "https://www.nytimes.com/athletic/7636930/2026/09/27/sf-giants-tony-vitello-ejection/": "2026-09-27T23:12:50.562871+00:00",
     "https://www.nytimes.com/athletic/7640616/2026/09/28/mike-krukow-sf-giants-career-appreciation/": "2026-09-28T21:20:02.503680+00:00",
+    "https://www.nytimes.com/athletic/7644566/2026/09/30/buster-posey-sf-giants-contend-2027/": "2026-09-30T12:56:22.172421+00:00",
     "https://www.sfchronicle.com/sports/giants/article/another-giants-rookie-debuts-tying-franchise-22430259.php": "2026-09-14T05:14:51.914094+00:00",
     "https://www.sfchronicle.com/sports/giants/article/giants-announcer-duane-kuiper-divulges-he-s-22440818.php": "2026-09-20T22:35:24.216853+00:00",
     "https://www.sfchronicle.com/sports/giants/article/giants-brass-frank-97-loss-season-vague-fixes-22454731.php": "2026-09-30T00:39:59.570323+00:00",
@@ -1794,37 +1794,6 @@
     "https://www.sfgate.com/giants/article/sf-giants-viral-mom-husband-22451456.php": "2026-09-27T19:09:27.965504+00:00"
   },
   "run_history": [
-    {
-      "discovered": 149,
-      "finished_at": "2026-09-09T11:45:54.075949+00:00",
-      "game_selection_reasons": {
-        "already_posted": 25,
-        "game_source_duplicates": 0,
-        "not_game_story": 117,
-        "quality_low": 3,
-        "schedule_grounded_threads": 0,
-        "selected_game_stories": 0,
-        "selected_game_threads": 0,
-        "stale_game_story": 4,
-        "unrouted_game_stories": 0
-      },
-      "game_stories_selected": 0,
-      "game_threads_selected": 0,
-      "schedule_grounded_threads": 0,
-      "selection_reasons": {
-        "already_posted": 41,
-        "deferred_for_breaking_news": 1,
-        "eligible": 2,
-        "quality_low": 14,
-        "selected": 2,
-        "stale": 59
-      },
-      "sources_failed": 0,
-      "sources_ok": 8,
-      "standalone_selected": 2,
-      "started_at": "2026-09-09T11:45:30.301250+00:00",
-      "status": "completed"
-    },
     {
       "discovered": 148,
       "finished_at": "2026-09-09T18:46:39.488470+00:00",
@@ -4539,6 +4508,38 @@
       "sources_ok": 8,
       "standalone_selected": 3,
       "started_at": "2026-09-30T08:53:43.945811+00:00",
+      "status": "completed"
+    },
+    {
+      "discovered": 158,
+      "finished_at": "2026-09-30T12:56:26.255188+00:00",
+      "game_selection_reasons": {
+        "already_posted": 10,
+        "game_source_duplicates": 0,
+        "not_game_story": 141,
+        "quality_low": 1,
+        "schedule_grounded_threads": 0,
+        "selected_game_stories": 0,
+        "selected_game_threads": 0,
+        "stale_game_story": 6,
+        "unrouted_game_stories": 0
+      },
+      "game_stories_selected": 0,
+      "game_threads_selected": 0,
+      "schedule_grounded_threads": 0,
+      "selection_reasons": {
+        "already_posted": 62,
+        "deferred_for_breaking_news": 2,
+        "eligible": 6,
+        "quality_low": 14,
+        "selected": 2,
+        "stale": 57,
+        "story_already_posted": 4
+      },
+      "sources_failed": 0,
+      "sources_ok": 8,
+      "standalone_selected": 2,
+      "started_at": "2026-09-30T12:55:59.241548+00:00",
       "status": "completed"
     }
   ]
