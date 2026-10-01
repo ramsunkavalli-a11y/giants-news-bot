@@ -195,24 +195,6 @@
   },
   "posted_stories": [
     {
-      "author": "",
-      "game_key": "",
-      "kind": "standalone",
-      "posted_at": "2026-09-10T11:43:51.063079+00:00",
-      "source": "San Francisco Chronicle",
-      "title": "After recent ejections, is Giants manager Tony Vitello just getting no respect from MLB umps?",
-      "url": "https://www.sfchronicle.com/sports/giants/article/giants-manager-tony-vitello-getting-no-respect-22423051.php"
-    },
-    {
-      "author": "Alex Pavlovic",
-      "game_key": "",
-      "kind": "standalone",
-      "posted_at": "2026-09-10T11:43:52.721265+00:00",
-      "source": "NBC Sports Bay Area",
-      "title": "Why red-hot Rafael Devers is out of Giants' lineup Wednesday vs. Cardinals",
-      "url": "https://www.nbcsportsbayarea.com/mlb/san-francisco-giants/rafael-devers-lineup-cardinals/1961875/"
-    },
-    {
       "author": "Grant Brisbee",
       "game_key": "",
       "kind": "standalone",
@@ -1570,6 +1552,15 @@
       "source": "FanGraphs",
       "title": "Two Huge Innings Catapult White Sox Into ALDS",
       "url": "https://blogs.fangraphs.com/two-huge-innings-catapult-white-sox-into-alds/"
+    },
+    {
+      "author": "Alex Simon",
+      "game_key": "",
+      "kind": "standalone",
+      "posted_at": "2026-10-01T13:47:50.076409+00:00",
+      "source": "SFGATE",
+      "title": "How will the SF Giants replace Mike Krukow? We spoke to several candidates.",
+      "url": "https://www.sfgate.com/giants/article/giants-mike-krukow-replacement-22455689.php"
     }
   ],
   "posted_urls": {
@@ -1668,7 +1659,6 @@
     "https://www.nbcsportsbayarea.com/mlb/san-francisco-giants/rafael-devers-comeback-rally-loss-padres/1962932/": "2026-09-13T05:06:25.414449+00:00",
     "https://www.nbcsportsbayarea.com/mlb/san-francisco-giants/rafael-devers-core-surgery-recovery-timeline/1963546/": "2026-09-18T07:34:05.771240+00:00",
     "https://www.nbcsportsbayarea.com/mlb/san-francisco-giants/rafael-devers-injury-core-surgery/1963077/": "2026-09-13T22:30:59.389744+00:00",
-    "https://www.nbcsportsbayarea.com/mlb/san-francisco-giants/rafael-devers-lineup-cardinals/1961875/": "2026-09-10T11:43:52.721265+00:00",
     "https://www.nbcsportsbayarea.com/mlb/san-francisco-giants/road-series-win-cardinals/1963688/": "2026-09-17T07:56:11.084129+00:00",
     "https://www.nbcsportsbayarea.com/mlb/san-francisco-giants/robbie-ray-trade-padres-analysis/1962901/": "2026-09-12T17:47:37.248950+00:00",
     "https://www.nbcsportsbayarea.com/mlb/san-francisco-giants/tony-vitello-expectations-matt-wilkinson/1966120/": "2026-09-26T18:40:32.368865+00:00",
@@ -1700,7 +1690,6 @@
     "https://www.sfchronicle.com/sports/giants/article/giants-fall-twins-clinching-losing-record-sf-bo-22446034.php": "2026-09-24T07:45:25.050194+00:00",
     "https://www.sfchronicle.com/sports/giants/article/giants-give-mike-krukow-emotional-sendoff-finale-22451590.php": "2026-09-28T05:41:02.524067+00:00",
     "https://www.sfchronicle.com/sports/giants/article/giants-infielder-marcelo-mayer-top-prospect-22440835.php": "2026-09-22T00:13:45.439855+00:00",
-    "https://www.sfchronicle.com/sports/giants/article/giants-manager-tony-vitello-getting-no-respect-22423051.php": "2026-09-10T11:43:51.063079+00:00",
     "https://www.sfchronicle.com/sports/giants/article/giants-send-rehabbing-closer-dakota-jordan-22433173.php": "2026-09-15T19:08:44.034814+00:00",
     "https://www.sfchronicle.com/sports/giants/article/hall-fame-isn-t-allowing-giants-krukow-22447621.php": "2026-09-24T23:57:24.780984+00:00",
     "https://www.sfchronicle.com/sports/giants/article/jackson-flora-s-playoff-debut-beer-chants-22426791.php": "2026-09-11T07:25:51.340894+00:00",
@@ -1717,6 +1706,7 @@
     "https://www.sfchronicle.com/sports/giants/article/sf-giants-top-twins-lost-pitcher-blade-tidwell-22442689.php": "2026-09-22T07:53:46.134221+00:00",
     "https://www.sfchronicle.com/sports/giants/article/tony-vitello-tossed-mlb-high-7th-time-giants-22451573.php": "2026-09-27T23:12:52.485363+00:00",
     "https://www.sfgate.com/giants/article/buster-posey-exec-future-22437061.php": "2026-09-17T23:36:28.032901+00:00",
+    "https://www.sfgate.com/giants/article/giants-mike-krukow-replacement-22455689.php": "2026-10-01T13:47:50.076409+00:00",
     "https://www.sfgate.com/giants/article/giants-nude-player-celebrations-22443935.php": "2026-09-22T19:02:09.613466+00:00",
     "https://www.sfgate.com/giants/article/krukow-kuiper-hall-costas-22446111.php": "2026-09-23T23:51:44.741945+00:00",
     "https://www.sfgate.com/giants/article/kuiper-krukow-tribute-last-game-22451594.php": "2026-09-27T23:12:51.524599+00:00",
@@ -1728,37 +1718,6 @@
     "https://www.sfgate.com/giants/article/sf-giants-viral-mom-husband-22451456.php": "2026-09-27T19:09:27.965504+00:00"
   },
   "run_history": [
-    {
-      "discovered": 153,
-      "finished_at": "2026-09-10T11:43:53.524256+00:00",
-      "game_selection_reasons": {
-        "already_posted": 24,
-        "game_source_duplicates": 0,
-        "not_game_story": 123,
-        "quality_low": 2,
-        "schedule_grounded_threads": 0,
-        "selected_game_stories": 0,
-        "selected_game_threads": 0,
-        "stale_game_story": 4,
-        "unrouted_game_stories": 0
-      },
-      "game_stories_selected": 0,
-      "game_threads_selected": 0,
-      "schedule_grounded_threads": 0,
-      "selection_reasons": {
-        "already_posted": 47,
-        "deferred_for_breaking_news": 1,
-        "eligible": 2,
-        "quality_low": 16,
-        "selected": 2,
-        "stale": 57
-      },
-      "sources_failed": 0,
-      "sources_ok": 8,
-      "standalone_selected": 2,
-      "started_at": "2026-09-10T11:43:28.346250+00:00",
-      "status": "completed"
-    },
     {
       "discovered": 155,
       "finished_at": "2026-09-10T18:37:20.402979+00:00",
@@ -4473,6 +4432,37 @@
       "sources_ok": 8,
       "standalone_selected": 1,
       "started_at": "2026-10-01T09:17:45.432514+00:00",
+      "status": "completed"
+    },
+    {
+      "discovered": 154,
+      "finished_at": "2026-10-01T13:47:50.881464+00:00",
+      "game_selection_reasons": {
+        "already_posted": 8,
+        "game_source_duplicates": 0,
+        "not_game_story": 139,
+        "quality_low": 1,
+        "schedule_grounded_threads": 0,
+        "selected_game_stories": 0,
+        "selected_game_threads": 0,
+        "stale_game_story": 6,
+        "unrouted_game_stories": 0
+      },
+      "game_stories_selected": 0,
+      "game_threads_selected": 0,
+      "schedule_grounded_threads": 0,
+      "selection_reasons": {
+        "already_posted": 62,
+        "deferred_for_breaking_news": 2,
+        "eligible": 1,
+        "quality_low": 15,
+        "selected": 1,
+        "stale": 59
+      },
+      "sources_failed": 0,
+      "sources_ok": 8,
+      "standalone_selected": 1,
+      "started_at": "2026-10-01T13:47:30.216371+00:00",
       "status": "completed"
     }
   ]
