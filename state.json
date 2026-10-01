@@ -195,33 +195,6 @@
   },
   "posted_stories": [
     {
-      "author": "Andrew Baggarly",
-      "game_key": "",
-      "kind": "standalone",
-      "posted_at": "2026-09-10T07:27:44.988985+00:00",
-      "source": "The Athletic",
-      "title": "Finally! Giants stage 6-run rally against Cardinals, complete first conventional series sweep",
-      "url": "https://www.nytimes.com/athletic/7580470/2026/09/09/sf-giants-six-run-rally-sweep-cardinals/"
-    },
-    {
-      "author": "",
-      "game_key": "",
-      "kind": "standalone",
-      "posted_at": "2026-09-10T07:27:45.944065+00:00",
-      "source": "San Francisco Chronicle",
-      "title": "Giants’ Tony Vitello gives streaking Rafael Devers day off to end games streak at 309",
-      "url": "https://www.sfchronicle.com/sports/giants/article/giants-vitello-gives-rafael-devers-day-end-games-22424244.php"
-    },
-    {
-      "author": "Alex Pavlovic",
-      "game_key": "",
-      "kind": "standalone",
-      "posted_at": "2026-09-10T07:27:47.964584+00:00",
-      "source": "NBC Sports Bay Area",
-      "title": "Eldridge, young Giants surging",
-      "url": "https://www.nbcsportsbayarea.com/mlb/san-francisco-giants/bryce-eldridge-shay-whitcomb-cardinals/1961991/"
-    },
-    {
       "author": "",
       "game_key": "",
       "kind": "standalone",
@@ -1588,6 +1561,15 @@
       "source": "The Athletic",
       "title": "In good times and bad, Mike Krukow and Duane Kuiper were the soul of Giants baseball",
       "url": "https://www.nytimes.com/athletic/7638793/2026/09/28/sf-giants-mike-krukow-retirement-ceremony/"
+    },
+    {
+      "author": "Eric Longenhagen",
+      "game_key": "",
+      "kind": "standalone",
+      "posted_at": "2026-10-01T09:18:06.049107+00:00",
+      "source": "FanGraphs",
+      "title": "Two Huge Innings Catapult White Sox Into ALDS",
+      "url": "https://blogs.fangraphs.com/two-huge-innings-catapult-white-sox-into-alds/"
     }
   ],
   "posted_urls": {
@@ -1596,6 +1578,7 @@
     "https://blogs.fangraphs.com/joe-musgrove-thrives-in-rehab-outing-plus-more-arizona-scouting-notes/": "2026-09-28T21:20:04.690250+00:00",
     "https://blogs.fangraphs.com/notes-from-star-studded-rockies-as-instructional-league/": "2026-09-25T08:06:14.575622+00:00",
     "https://blogs.fangraphs.com/san-franciscos-40-man-cleanup-will-be-a-giant-pain/": "2026-09-18T18:36:27.418759+00:00",
+    "https://blogs.fangraphs.com/two-huge-innings-catapult-white-sox-into-alds/": "2026-10-01T09:18:06.049107+00:00",
     "https://omny.fm/shows/the-executives-show/giants-knbr-beer-day-preview-larry-baer-on-mike-krukows-legacy-and-a-special-september-celebration": "2026-09-10T23:19:42.710344+00:00",
     "https://omny.fm/shows/the-executives-show/giants-skipper-tony-v-on-the-giants-season-mike-krukow": "2026-09-24T19:24:34.475256+00:00",
     "https://sfstandard.com/2026/09/12/scott-bandura-sf-giants-promotion-call-up/": "2026-09-12T22:26:52.906809+00:00",
@@ -1650,7 +1633,6 @@
     "https://www.nbcsportsbayarea.com/mlb/san-francisco-giants/anthony-molina-minnesota-twins/1965403/": "2026-09-23T07:55:03.378823+00:00",
     "https://www.nbcsportsbayarea.com/mlb/san-francisco-giants/bo-davidson-promotion-debut/1965101/": "2026-09-22T00:13:44.364499+00:00",
     "https://www.nbcsportsbayarea.com/mlb/san-francisco-giants/bryce-eldridge-blade-tidwell-st-louis-cardinals/1963586/": "2026-09-16T07:50:56.231725+00:00",
-    "https://www.nbcsportsbayarea.com/mlb/san-francisco-giants/bryce-eldridge-shay-whitcomb-cardinals/1961991/": "2026-09-10T07:27:47.964584+00:00",
     "https://www.nbcsportsbayarea.com/mlb/san-francisco-giants/buster-posey-giants-farm-system/1964037/": "2026-09-17T23:36:30.309804+00:00",
     "https://www.nbcsportsbayarea.com/mlb/san-francisco-giants/buster-posey-reflects-criticism/1963922/": "2026-09-18T11:41:28.121197+00:00",
     "https://www.nbcsportsbayarea.com/mlb/san-francisco-giants/buster-posey-tony-vitello-tim-kawakami/1963851/": "2026-09-17T07:56:04.149610+00:00",
@@ -1691,7 +1673,6 @@
     "https://www.nbcsportsbayarea.com/mlb/san-francisco-giants/robbie-ray-trade-padres-analysis/1962901/": "2026-09-12T17:47:37.248950+00:00",
     "https://www.nbcsportsbayarea.com/mlb/san-francisco-giants/tony-vitello-expectations-matt-wilkinson/1966120/": "2026-09-26T18:40:32.368865+00:00",
     "https://www.nbcsportsbayarea.com/mlb/san-francisco-giants/victor-bericoto-bullpen-recap-loss-dodgers/1964387/": "2026-09-20T05:08:47.839358+00:00",
-    "https://www.nytimes.com/athletic/7580470/2026/09/09/sf-giants-six-run-rally-sweep-cardinals/": "2026-09-10T07:27:44.988985+00:00",
     "https://www.nytimes.com/athletic/7582259/2026/09/10/sf-giants-bryce-eldridge-rookie-season-analysis/": "2026-09-10T18:37:16.543706+00:00",
     "https://www.nytimes.com/athletic/7588953/2026/09/13/giants-trade-deadline-update-mahle/": "2026-09-13T18:17:41.651339+00:00",
     "https://www.nytimes.com/athletic/7590851/2026/09/13/sf-giants-rafael-devers-injury/": "2026-09-13T22:30:56.919411+00:00",
@@ -1721,7 +1702,6 @@
     "https://www.sfchronicle.com/sports/giants/article/giants-infielder-marcelo-mayer-top-prospect-22440835.php": "2026-09-22T00:13:45.439855+00:00",
     "https://www.sfchronicle.com/sports/giants/article/giants-manager-tony-vitello-getting-no-respect-22423051.php": "2026-09-10T11:43:51.063079+00:00",
     "https://www.sfchronicle.com/sports/giants/article/giants-send-rehabbing-closer-dakota-jordan-22433173.php": "2026-09-15T19:08:44.034814+00:00",
-    "https://www.sfchronicle.com/sports/giants/article/giants-vitello-gives-rafael-devers-day-end-games-22424244.php": "2026-09-10T07:27:45.944065+00:00",
     "https://www.sfchronicle.com/sports/giants/article/hall-fame-isn-t-allowing-giants-krukow-22447621.php": "2026-09-24T23:57:24.780984+00:00",
     "https://www.sfchronicle.com/sports/giants/article/jackson-flora-s-playoff-debut-beer-chants-22426791.php": "2026-09-11T07:25:51.340894+00:00",
     "https://www.sfchronicle.com/sports/giants/article/logan-webb-wins-willie-mac-award-team-s-22449851.php": "2026-09-26T18:40:36.879176+00:00",
@@ -1748,38 +1728,6 @@
     "https://www.sfgate.com/giants/article/sf-giants-viral-mom-husband-22451456.php": "2026-09-27T19:09:27.965504+00:00"
   },
   "run_history": [
-    {
-      "discovered": 153,
-      "finished_at": "2026-09-10T07:27:48.767152+00:00",
-      "game_selection_reasons": {
-        "already_posted": 24,
-        "game_source_duplicates": 0,
-        "not_game_story": 123,
-        "quality_low": 2,
-        "schedule_grounded_threads": 0,
-        "selected_game_stories": 0,
-        "selected_game_threads": 0,
-        "stale_game_story": 4,
-        "unrouted_game_stories": 0
-      },
-      "game_stories_selected": 0,
-      "game_threads_selected": 0,
-      "schedule_grounded_threads": 0,
-      "selection_reasons": {
-        "already_posted": 44,
-        "deferred_for_breaking_news": 1,
-        "eligible": 5,
-        "quality_low": 16,
-        "selected": 3,
-        "source_cap_cluster": 2,
-        "stale": 57
-      },
-      "sources_failed": 0,
-      "sources_ok": 8,
-      "standalone_selected": 3,
-      "started_at": "2026-09-10T07:27:28.429409+00:00",
-      "status": "completed"
-    },
     {
       "discovered": 153,
       "finished_at": "2026-09-10T11:43:53.524256+00:00",
@@ -4494,6 +4442,37 @@
       "sources_ok": 8,
       "standalone_selected": 1,
       "started_at": "2026-10-01T00:42:33.021865+00:00",
+      "status": "completed"
+    },
+    {
+      "discovered": 154,
+      "finished_at": "2026-10-01T09:18:06.854179+00:00",
+      "game_selection_reasons": {
+        "already_posted": 8,
+        "game_source_duplicates": 0,
+        "not_game_story": 139,
+        "quality_low": 1,
+        "schedule_grounded_threads": 0,
+        "selected_game_stories": 0,
+        "selected_game_threads": 0,
+        "stale_game_story": 6,
+        "unrouted_game_stories": 0
+      },
+      "game_stories_selected": 0,
+      "game_threads_selected": 0,
+      "schedule_grounded_threads": 0,
+      "selection_reasons": {
+        "already_posted": 61,
+        "deferred_for_breaking_news": 2,
+        "eligible": 1,
+        "quality_low": 15,
+        "selected": 1,
+        "stale": 60
+      },
+      "sources_failed": 0,
+      "sources_ok": 8,
+      "standalone_selected": 1,
+      "started_at": "2026-10-01T09:17:45.432514+00:00",
       "status": "completed"
     }
   ]
