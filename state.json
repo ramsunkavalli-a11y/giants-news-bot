@@ -195,33 +195,6 @@
   },
   "posted_stories": [
     {
-      "author": "Grant Brisbee",
-      "game_key": "",
-      "kind": "standalone",
-      "posted_at": "2026-09-10T18:37:16.543706+00:00",
-      "source": "The Athletic",
-      "title": "Bryce Eldridge's rookie season for the Giants puts him in rare, impressive company",
-      "url": "https://www.nytimes.com/athletic/7582259/2026/09/10/sf-giants-bryce-eldridge-rookie-season-analysis/"
-    },
-    {
-      "author": "Maria Guardado",
-      "game_key": "",
-      "kind": "standalone",
-      "posted_at": "2026-09-10T18:37:18.709030+00:00",
-      "source": "MLB.com",
-      "title": "Here are 3 September storylines for Giants’ farm system",
-      "url": "https://www.mlb.com/giants/news/top-storylines-from-each-giants-minor-league-affiliate"
-    },
-    {
-      "author": "Alex Simon",
-      "game_key": "",
-      "kind": "standalone",
-      "posted_at": "2026-09-10T18:37:19.600174+00:00",
-      "source": "SFGATE",
-      "title": "SF Giants are offering to pay their most loyal fans to come to September games",
-      "url": "https://www.sfgate.com/giants/article/sf-giants-pay-fans-22424152.php"
-    },
-    {
       "author": "The Executive Show",
       "game_key": "",
       "kind": "standalone",
@@ -1561,6 +1534,24 @@
       "source": "SFGATE",
       "title": "How will the SF Giants replace Mike Krukow? We spoke to several candidates.",
       "url": "https://www.sfgate.com/giants/article/giants-mike-krukow-replacement-22455689.php"
+    },
+    {
+      "author": "Kerry Crowley",
+      "game_key": "",
+      "kind": "standalone",
+      "posted_at": "2026-10-01T20:25:40.262587+00:00",
+      "source": "San Francisco Standard",
+      "title": "‘Section 415’ podcast: How 2026 compares with the Giants’ worst seasons ever",
+      "url": "https://sfstandard.com/section-415/2026/10/01/section-415-podcast-2026-compares-giants-worst-seasons-ever/"
+    },
+    {
+      "author": "Alex Pavlovic",
+      "game_key": "",
+      "kind": "standalone",
+      "posted_at": "2026-10-01T20:25:42.192899+00:00",
+      "source": "NBC Sports Bay Area",
+      "title": "Posey to address bullpen",
+      "url": "https://www.nbcsportsbayarea.com/mlb/san-francisco-giants/buster-posey-offseason-bullpen-puzzle/1967880/"
     }
   ],
   "posted_urls": {
@@ -1590,6 +1581,7 @@
     "https://sfstandard.com/opinion/2026/09/10/burning-man-cartoon-giants/": "2026-09-10T23:19:45.169717+00:00",
     "https://sfstandard.com/pacific-standard-time/2026/09/29/giants-mom-year-viral-clip-our-broken-internet/": "2026-09-29T13:15:12.060256+00:00",
     "https://sfstandard.com/section-415/2026/09/25/section-415-despite-criticism-kalshi-isn-t-deterred-partnering-giants/": "2026-09-25T19:26:01.436138+00:00",
+    "https://sfstandard.com/section-415/2026/10/01/section-415-podcast-2026-compares-giants-worst-seasons-ever/": "2026-10-01T20:25:40.262587+00:00",
     "https://www.mercurynews.com/2026/09/08/sf-giants-devers-named-national-league-player-of-the-week/": "2026-09-11T23:27:41.979460+00:00",
     "https://www.mercurynews.com/2026/09/10/the-skys-the-limit-sf-giants-top-pitching-prospect-flora-dazzles-as-san-jose-advances-to-championship/": "2026-09-11T18:42:20.446352+00:00",
     "https://www.mercurynews.com/2026/09/13/sf-giants-swept-by-padres-as-webb-roughed-up-but-bandura-reaches-twice-in-debut/": "2026-09-14T19:56:05.793223+00:00",
@@ -1620,11 +1612,11 @@
     "https://www.mlb.com/giants/news/rafael-devers-hits-9th-career-grand-slam-in-giants-loss-to-padres": "2026-09-12T11:10:56.828992+00:00",
     "https://www.mlb.com/giants/news/randy-rodriguez-going-to-arizona-fall-league-for-giants": "2026-09-22T12:00:07.735130+00:00",
     "https://www.mlb.com/giants/news/tony-vitello-gets-ejected-from-giants-final-2026-game": "2026-09-27T23:12:49.601865+00:00",
-    "https://www.mlb.com/giants/news/top-storylines-from-each-giants-minor-league-affiliate": "2026-09-10T18:37:18.709030+00:00",
     "https://www.nbcsportsbayarea.com/mlb/san-francisco-giants/anthony-molina-minnesota-twins/1965403/": "2026-09-23T07:55:03.378823+00:00",
     "https://www.nbcsportsbayarea.com/mlb/san-francisco-giants/bo-davidson-promotion-debut/1965101/": "2026-09-22T00:13:44.364499+00:00",
     "https://www.nbcsportsbayarea.com/mlb/san-francisco-giants/bryce-eldridge-blade-tidwell-st-louis-cardinals/1963586/": "2026-09-16T07:50:56.231725+00:00",
     "https://www.nbcsportsbayarea.com/mlb/san-francisco-giants/buster-posey-giants-farm-system/1964037/": "2026-09-17T23:36:30.309804+00:00",
+    "https://www.nbcsportsbayarea.com/mlb/san-francisco-giants/buster-posey-offseason-bullpen-puzzle/1967880/": "2026-10-01T20:25:42.192899+00:00",
     "https://www.nbcsportsbayarea.com/mlb/san-francisco-giants/buster-posey-reflects-criticism/1963922/": "2026-09-18T11:41:28.121197+00:00",
     "https://www.nbcsportsbayarea.com/mlb/san-francisco-giants/buster-posey-tony-vitello-tim-kawakami/1963851/": "2026-09-17T07:56:04.149610+00:00",
     "https://www.nbcsportsbayarea.com/mlb/san-francisco-giants/camilo-doval-claimed-waivers-pirates/1965801/": "2026-09-24T19:24:32.365936+00:00",
@@ -1663,7 +1655,6 @@
     "https://www.nbcsportsbayarea.com/mlb/san-francisco-giants/robbie-ray-trade-padres-analysis/1962901/": "2026-09-12T17:47:37.248950+00:00",
     "https://www.nbcsportsbayarea.com/mlb/san-francisco-giants/tony-vitello-expectations-matt-wilkinson/1966120/": "2026-09-26T18:40:32.368865+00:00",
     "https://www.nbcsportsbayarea.com/mlb/san-francisco-giants/victor-bericoto-bullpen-recap-loss-dodgers/1964387/": "2026-09-20T05:08:47.839358+00:00",
-    "https://www.nytimes.com/athletic/7582259/2026/09/10/sf-giants-bryce-eldridge-rookie-season-analysis/": "2026-09-10T18:37:16.543706+00:00",
     "https://www.nytimes.com/athletic/7588953/2026/09/13/giants-trade-deadline-update-mahle/": "2026-09-13T18:17:41.651339+00:00",
     "https://www.nytimes.com/athletic/7590851/2026/09/13/sf-giants-rafael-devers-injury/": "2026-09-13T22:30:56.919411+00:00",
     "https://www.nytimes.com/athletic/7594902/2026/09/15/rafael-devers-sf-giants-season-analysis/": "2026-09-15T19:08:49.236979+00:00",
@@ -1713,43 +1704,10 @@
     "https://www.sfgate.com/giants/article/sf-giants-buster-posey-season-22456150.php": "2026-09-30T20:12:35.991364+00:00",
     "https://www.sfgate.com/giants/article/sf-giants-chicken-tenders-22433120.php": "2026-09-17T11:59:37.599139+00:00",
     "https://www.sfgate.com/giants/article/sf-giants-fans-krukow-tribute-22443910.php": "2026-09-28T05:41:03.441061+00:00",
-    "https://www.sfgate.com/giants/article/sf-giants-pay-fans-22424152.php": "2026-09-10T18:37:19.600174+00:00",
     "https://www.sfgate.com/giants/article/sf-giants-pride-night-22455246.php": "2026-09-30T00:39:58.647122+00:00",
     "https://www.sfgate.com/giants/article/sf-giants-viral-mom-husband-22451456.php": "2026-09-27T19:09:27.965504+00:00"
   },
   "run_history": [
-    {
-      "discovered": 155,
-      "finished_at": "2026-09-10T18:37:20.402979+00:00",
-      "game_selection_reasons": {
-        "already_posted": 24,
-        "game_source_duplicates": 0,
-        "not_game_story": 125,
-        "quality_low": 2,
-        "schedule_grounded_threads": 0,
-        "selected_game_stories": 0,
-        "selected_game_threads": 0,
-        "stale_game_story": 4,
-        "unrouted_game_stories": 0
-      },
-      "game_stories_selected": 0,
-      "game_threads_selected": 0,
-      "schedule_grounded_threads": 0,
-      "selection_reasons": {
-        "already_posted": 48,
-        "deferred_for_breaking_news": 1,
-        "eligible": 4,
-        "quality_low": 16,
-        "run_cap": 1,
-        "selected": 3,
-        "stale": 56
-      },
-      "sources_failed": 0,
-      "sources_ok": 8,
-      "standalone_selected": 3,
-      "started_at": "2026-09-10T18:36:52.754081+00:00",
-      "status": "completed"
-    },
     {
       "discovered": 154,
       "finished_at": "2026-09-10T23:19:45.972686+00:00",
@@ -4463,6 +4421,37 @@
       "sources_ok": 8,
       "standalone_selected": 1,
       "started_at": "2026-10-01T13:47:30.216371+00:00",
+      "status": "completed"
+    },
+    {
+      "discovered": 152,
+      "finished_at": "2026-10-01T20:25:42.997886+00:00",
+      "game_selection_reasons": {
+        "already_posted": 7,
+        "game_source_duplicates": 0,
+        "not_game_story": 138,
+        "quality_low": 1,
+        "schedule_grounded_threads": 0,
+        "selected_game_stories": 0,
+        "selected_game_threads": 0,
+        "stale_game_story": 6,
+        "unrouted_game_stories": 0
+      },
+      "game_stories_selected": 0,
+      "game_threads_selected": 0,
+      "schedule_grounded_threads": 0,
+      "selection_reasons": {
+        "already_posted": 59,
+        "deferred_for_breaking_news": 2,
+        "eligible": 2,
+        "quality_low": 15,
+        "selected": 2,
+        "stale": 60
+      },
+      "sources_failed": 0,
+      "sources_ok": 8,
+      "standalone_selected": 2,
+      "started_at": "2026-10-01T20:25:09.848418+00:00",
       "status": "completed"
     }
   ]
