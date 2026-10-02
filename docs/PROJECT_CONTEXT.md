@@ -16,7 +16,7 @@ Production runs `v2_bot.py` from `.github/workflows/giants-news-bot.yml`.
 
 ### Current offseason policy (October 2, 2026)
 
-Production defaults to `SEASON_MODE=offseason`, configurable with a GitHub repository variable. Three checks/day retain all the daytime/evening windows below and suppress only the late-night window. Selection is capped at two standalone stories/run and four routine stories per Pacific calendar day; confirmed moves and injury news bypass the daily routine cap. Manual trusted stories also bypass that daily cap but retain dedupe and the run cap. No minimum volume is required.
+Production defaults to `SEASON_MODE=offseason`, configurable with a GitHub repository variable. Three checks/day retain all the daytime/evening windows below and suppress only the late-night window. Selection is capped at two standalone stories/run and six routine stories per Pacific calendar day; confirmed moves and injury news bypass the daily routine cap. Manual trusted stories also bypass that daily cap but retain dedupe and the run cap. No minimum volume is required.
 
 Confirmed transactions, contracts, coaching moves and injuries rank first, then Giants development, pitching/payroll plans, roster deadlines and season reviews. Hypothetical trade proposals/mock trades are excluded. Attributed market reporting remains eligible with the publisher’s qualifiers. FanGraphs needs explicit article-level Giants evidence, including mixed-team scouting; an author/query/tag alone cannot establish relevance. Short-date prospect chats are rejected.
 

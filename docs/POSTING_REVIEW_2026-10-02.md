@@ -38,7 +38,7 @@ Visible posts by publication (matched to state through direct article URLs):
 - Explicit `SEASON_MODE=offseason` production default; repository variable can override it. Local default remains `inseason` for compatibility.
 - **Weekdays:** 8:30 AM, 2:30 PM, 7:30 PM Pacific.
 - **Weekends:** 8:30 AM, 1:30 PM, 5:30 PM Pacific.
-- **Two standalone stories per run; four routine stories per Pacific calendar day.** Confirmed moves/injury news can bypass the routine daily budget, but remain subject to run/source/event caps. Manual trusted stories retain priority and their daily-budget exception; dedupe still applies.
+- **Two standalone stories per run; six routine stories per Pacific calendar day.** Confirmed moves/injury news can bypass the routine daily budget, but remain subject to run/source/event caps. Manual trusted stories retain priority and their daily-budget exception; dedupe still applies.
 - Keep 72-hour standalone freshness, 30-hour game freshness, source diversity, exact URL history, differentiated analysis and existing game refs.
 - Set the repository variable `SEASON_MODE=inseason` when Giants game coverage resumes, including any October postseason participation. This restores the late-night checks and three-story run cap. A generic calendar cannot reliably decide whether the Giants are still playing.
 - Polls are collection windows, not guaranteed post times; Actions can be delayed.

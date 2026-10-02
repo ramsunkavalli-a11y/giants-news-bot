@@ -133,7 +133,7 @@ jobs:
           HOURS_BACK: "72"
           GAME_HOURS_BACK: "30"
           MAX_POSTS_PER_RUN: "3"
-          OFFSEASON_DAILY_LIMIT: "4"
+          OFFSEASON_DAILY_LIMIT: "6"
           DIAGNOSTICS_ENABLED: "1"
           DIAGNOSTICS_FILE: diagnostics.json
           MANUAL_STORY_URL: ${{ inputs.manual_url || '' }}

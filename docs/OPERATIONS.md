@@ -53,12 +53,12 @@ HOURS_BACK=72
 GAME_HOURS_BACK=30
 MAX_POSTS_PER_RUN=3
 SEASON_MODE=offseason
-OFFSEASON_DAILY_LIMIT=4
+OFFSEASON_DAILY_LIMIT=6
 DIAGNOSTICS_ENABLED=1
 DIAGNOSTICS_FILE=diagnostics.json
 ```
 
-Offseason clamps the run cap to two, orders confirmed moves/injury news before development and season analysis, and allows four routine standalone stories per Pacific day. Confirmed news and manual editorial overrides bypass that daily routine limit; URL/event history and the run cap still apply. Quiet runs are expected. Invalid season modes fail before discovery. Other environment-backed settings are in `config.py`.
+Offseason clamps the run cap to two, orders confirmed moves/injury news before development and season analysis, and allows six routine standalone stories per Pacific day. Confirmed news and manual editorial overrides bypass that daily routine limit; URL/event history and the run cap still apply. Quiet runs are expected. Invalid season modes fail before discovery. Other environment-backed settings are in `config.py`.
 
 ## Safe local/test execution
 

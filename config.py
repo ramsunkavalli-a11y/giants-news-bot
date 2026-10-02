@@ -20,7 +20,7 @@ class Settings:
     diagnostics_file: str = os.getenv("DIAGNOSTICS_FILE", "diagnostics.json")
     max_posts_per_run: int = int(os.getenv("MAX_POSTS_PER_RUN", "3"))
     season_mode: str = os.getenv("SEASON_MODE", "inseason").strip().lower()
-    offseason_daily_limit: int = int(os.getenv("OFFSEASON_DAILY_LIMIT", "4"))
+    offseason_daily_limit: int = int(os.getenv("OFFSEASON_DAILY_LIMIT", "6"))
     hours_back: int = int(os.getenv("HOURS_BACK", "72"))
     keep_posted_days: int = int(os.getenv("KEEP_POSTED_DAYS", "21"))
     bsky_pds: str = os.getenv("BSKY_PDS", "https://bsky.social")

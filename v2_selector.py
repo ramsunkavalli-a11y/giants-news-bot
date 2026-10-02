@@ -311,7 +311,7 @@ def select_articles(
     max_posts: int = 5,
     now: datetime | None = None,
     season_mode: str = "inseason",
-    offseason_daily_limit: int = 4,
+    offseason_daily_limit: int = 6,
 ) -> dict:
     if season_mode not in {"inseason", "offseason"}:
         raise ValueError("season_mode must be inseason or offseason")

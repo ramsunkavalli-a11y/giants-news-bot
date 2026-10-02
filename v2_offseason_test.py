@@ -42,7 +42,7 @@ class OffseasonTests(unittest.TestCase):
 
     def test_routine_daily_budget_preserves_confirmed_news(self):
         history = [{**article(f"Giants scouting report {i}"), "posted_at": NOW.isoformat(),
-                    "kind": "standalone"} for i in range(4)]
+                    "kind": "standalone"} for i in range(6)]
         move = article("Giants claim reliever off waivers", "MLB.com")
         result = self.select([article("Giants offseason payroll questions"), move], history)
         self.assertEqual([x["title"] for x in result["selected"]], [move["title"]])

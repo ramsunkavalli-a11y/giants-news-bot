@@ -10,7 +10,7 @@ Automated, curated San Francisco Giants news feed for Bluesky. The bot discovers
 - **Workflow:** `.github/workflows/giants-news-bot.yml`
 - **Persistent state:** `state.json` (posted history, game-thread refs, and a bounded run-health heartbeat)
 - **Season mode:** production defaults to `offseason`; repository variable `SEASON_MODE=inseason` restores game-season cadence and limits
-- **Standalone cap:** offseason 2/run and 4 routine stories/Pacific day; confirmed moves/injury news bypass the daily routine cap; inseason 3/run
+- **Standalone cap:** offseason 2/run and 6 routine stories/Pacific day; confirmed moves/injury news bypass the daily routine cap; inseason 3/run
 - **Standalone freshness:** 72 hours
 - **Game-story freshness:** 30 hours
 - **Dry run:** never mutates production state or posts to Bluesky
@@ -156,7 +156,7 @@ Useful environment variables:
 | `GAME_HOURS_BACK` | 30-hour game-story window in production |
 | `MAX_POSTS_PER_RUN` | 3 inseason; offseason clamps to at most 2 |
 | `SEASON_MODE` | `inseason` or `offseason`; production default is offseason |
-| `OFFSEASON_DAILY_LIMIT` | 4 routine standalone stories per Pacific calendar day |
+| `OFFSEASON_DAILY_LIMIT` | 6 routine standalone stories per Pacific calendar day |
 | `DRY_RUN` | `1` prints actions without posting or mutating state |
 | `STATE_FILE` | Alternate state path for tests/replays |
 | `DIAGNOSTICS_ENABLED` | Write selection/discovery diagnostics |
