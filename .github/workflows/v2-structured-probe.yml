@@ -16,6 +16,8 @@ permissions:
 jobs:
   probe:
     runs-on: ubuntu-latest
+    env:
+      SEASON_MODE: offseason
     steps:
       - name: Checkout
         uses: actions/checkout@v7
@@ -42,6 +44,7 @@ jobs:
           v2_knbr_test.py
           v2_radar_test.py
           v2_runtime_test.py
+          v2_offseason_test.py
 
       - name: Run structured discovery probe
         run: python v2_probe.py
@@ -77,6 +80,8 @@ jobs:
           HOURS_BACK: "72"
           GAME_HOURS_BACK: "30"
           MAX_POSTS_PER_RUN: "3"
+          SEASON_MODE: offseason
+          OFFSEASON_DAILY_LIMIT: "4"
           DIAGNOSTICS_ENABLED: "1"
           DIAGNOSTICS_FILE: v2-runtime-diagnostics.json
         run: |

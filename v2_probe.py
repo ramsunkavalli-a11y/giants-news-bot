@@ -11,6 +11,7 @@ import requests
 from bs4 import BeautifulSoup
 
 from v2_authors import author_prior, source_prior
+from v2_editorial import SEASON_REVIEW_RE, RECURRING_CHAT_RE, fangraphs_giants_evidence
 
 UA = "Mozilla/5.0 GiantsNewsBotV2Probe/0.7"
 TIMEOUT = 20
@@ -270,7 +271,7 @@ def classify(source: str, title: str, author: str = "") -> tuple[str, str, str]:
         return "low", "broadcaster_quote_repackaging", preference
     if OTHER_SPORT_TITLE_RE.search(title):
         return "low", "other_sport_content", preference
-    if LOW_VALUE_TITLE_RE.search(title):
+    if LOW_VALUE_TITLE_RE.search(title) or RECURRING_CHAT_RE.search(title):
         return "low", "commodity_or_generic_content", preference
     if any(pattern in blob for pattern in LOW_VALUE_PATTERNS):
         return "low", "commodity_or_generic_content", preference
@@ -279,7 +280,7 @@ def classify(source: str, title: str, author: str = "") -> tuple[str, str, str]:
     if source == "FanGraphs" and blob.startswith("sunday notes:"):
         return "low", "broad_recurring_roundup", preference
 
-    if (
+    if not SEASON_REVIEW_RE.search(title) and (
         any(pattern in blob for pattern in GAME_STORY_PATTERNS)
         or RESULT_VERBS.search(title)
         or VAGUE_GAME_RECAP_RE.search(title)
@@ -351,6 +352,8 @@ def articles_from_feed(
         if not title or not url or url in seen:
             continue
         if require_giants_relevance and not giants_relevant(f"{title} {summary}"):
+            continue
+        if source == "FanGraphs" and not fangraphs_giants_evidence({"title": title, "summary": summary, "url": url}):
             continue
         seen.add(url)
         out.append(make_article(

@@ -57,6 +57,10 @@ permissions:
 jobs:
   run:
     runs-on: ubuntu-latest
+    env:
+      # Explicit team mode: set repository variable SEASON_MODE=inseason when
+      # Giants game coverage resumes (including a postseason run).
+      SEASON_MODE: ${{ vars.SEASON_MODE || 'offseason' }}
     steps:
       - name: Pacific-time cadence gate
         id: cadence
@@ -91,6 +95,17 @@ jobs:
               ;;
           esac
 
+          # Keep three daytime/evening checks in the offseason, including the
+          # Thursday Executive Show window. Suppress only the late-night slot.
+          if [ "$SEASON_MODE" = "offseason" ]; then
+            case "$offset|$schedule" in
+              "-0700|30 06 * * 2-6"|"-0800|30 07 * * 2-6"|\
+              "-0700|30 05 * * 0,1"|"-0800|30 06 * * 0,1")
+                run_bot=false
+                ;;
+            esac
+          fi
+
           echo "run_bot=$run_bot" >> "$GITHUB_OUTPUT"
           echo "event_schedule=$schedule pacific_offset=$offset run_bot=$run_bot"
 
@@ -118,6 +133,7 @@ jobs:
           HOURS_BACK: "72"
           GAME_HOURS_BACK: "30"
           MAX_POSTS_PER_RUN: "3"
+          OFFSEASON_DAILY_LIMIT: "4"
           DIAGNOSTICS_ENABLED: "1"
           DIAGNOSTICS_FILE: diagnostics.json
           MANUAL_STORY_URL: ${{ inputs.manual_url || '' }}

@@ -115,6 +115,8 @@ Low-value material includes commodity recaps, generic multi-team pieces/rankings
 
 The selector also maintains a last-mile safety filter for known broad/highlight title patterns so an adapter classification miss does not automatically become a post.
 
+Shared rules in `v2_editorial.py` keep season reviews out of the game lane, require explicit article-level Giants evidence for FanGraphs, reject recurring prospect chats, and establish offseason priorities. `v2_selector.py` applies the explicit season mode, two-story offseason run cap and four-story Pacific-day routine budget, with confirmed moves/injuries and manual stories exempt from the daily budget. Feature deferral counts fresh, unposted event clusters rather than the raw backlog of injury headlines.
+
 ## 4. Story/event clustering — `v2_story.py`
 
 The system recognizes the same news event without treating every article about the same player as identical.

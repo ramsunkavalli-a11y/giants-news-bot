@@ -14,7 +14,17 @@ Cost should remain essentially zero while the account is small. Prefer mature pu
 
 Production runs `v2_bot.py` from `.github/workflows/giants-news-bot.yml`.
 
-### Cadence
+### Current offseason policy (October 2, 2026)
+
+Production defaults to `SEASON_MODE=offseason`, configurable with a GitHub repository variable. Three checks/day retain all the daytime/evening windows below and suppress only the late-night window. Selection is capped at two standalone stories/run and four routine stories per Pacific calendar day; confirmed moves and injury news bypass the daily routine cap. Manual trusted stories also bypass that daily cap but retain dedupe and the run cap. No minimum volume is required.
+
+Confirmed transactions, contracts, coaching moves and injuries rank first, then Giants development, pitching/payroll plans, roster deadlines and season reviews. Hypothetical trade proposals/mock trades are excluded. Attributed market reporting remains eligible with the publisher’s qualifiers. FanGraphs needs explicit article-level Giants evidence, including mixed-team scouting; an author/query/tag alone cannot establish relevance. Short-date prospect chats are rejected.
+
+The 72-hour standalone window and game-thread behavior remain in place. Season reviews belong in the standalone lane even if their phrasing resembles a game recap. Set the repository variable `SEASON_MODE=inseason` when Giants game coverage resumes; mode is explicit to accommodate October postseason runs. Local default mode is inseason.
+
+See [the two-week posting review](POSTING_REVIEW_2026-10-02.md) for evidence and follow-up priorities.
+
+### Inseason cadence
 
 Pacific local time:
 
@@ -25,7 +35,7 @@ The weekend shifts earlier because Giants weekends contain more day games and th
 
 ### Volume/freshness
 
-- Standalone stories: maximum **3 per run**.
+- Inseason standalone stories: maximum **3 per run**; offseason uses the limits above.
 - Standalone discovery window: **72 hours**.
 - Game-story window: **30 hours**.
 - Game-thread replies are separate from the standalone cap.

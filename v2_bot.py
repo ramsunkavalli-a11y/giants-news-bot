@@ -151,6 +151,7 @@ def record_run(
             if thread.get("schedule_grounded")
         ),
         "selection_reasons": selection.get("reasons", {}),
+        "season_mode": selection.get("season_mode", "inseason"),
         "game_selection_reasons": game_selection.get("reasons", {}),
     }
     if error:
@@ -493,6 +494,8 @@ def main() -> None:
         _state_with_planned_game_stories(state, game_selection, datetime.now(timezone.utc)),
         hours_back=settings.hours_back,
         max_posts=settings.max_posts_per_run,
+        season_mode=settings.season_mode,
+        offseason_daily_limit=settings.offseason_daily_limit,
     )
 
     candidates = _prepare_posts(selection["selected"], settings.request_timeout)

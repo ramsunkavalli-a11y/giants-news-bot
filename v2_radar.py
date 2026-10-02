@@ -13,6 +13,7 @@ except Exception:
     gnewsdecoder = None
 
 from v2_authors import normalize_author
+from v2_editorial import fangraphs_giants_evidence
 from v2_probe import Article, clean, make_article, structured_meta_author
 
 UA = "Mozilla/5.0 GiantsNewsBotV2Radar/1.3"
@@ -106,10 +107,12 @@ def radar_title_allowed(title: str) -> bool:
     return True
 
 
-def radar_story_allowed(target: RadarTarget, title: str, url: str) -> bool:
+def radar_story_allowed(target: RadarTarget, title: str, url: str, summary: str = "") -> bool:
     """Require article-level team evidence; a Google query is not evidence."""
     if OTHER_SPORT_RE.search(title):
         return False
+    if target.source == "FanGraphs":
+        return fangraphs_giants_evidence({"title": title, "url": url, "summary": summary})
     if target.domain.lower() == "mercurynews.com" and target.query_requires_giants:
         path_text = re.sub(r"[-_/]+", " ", urlparse(url or "").path)
         return bool(re.search(r"\bgiants\b", f"{title} {path_text}", flags=re.I))
@@ -178,7 +181,7 @@ def _feed_records(target: RadarTarget, hours_back: int) -> list[dict]:
             google_source or target.source,
         )
         summary = clean(getattr(entry, "summary", "") or "")
-        if not radar_title_allowed(title) or not radar_story_allowed(target, title, direct_url):
+        if not radar_title_allowed(title) or not radar_story_allowed(target, title, direct_url, summary):
             continue
         records.append({
             "target": target,
