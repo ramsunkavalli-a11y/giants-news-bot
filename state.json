@@ -195,24 +195,6 @@
   },
   "posted_stories": [
     {
-      "author": "",
-      "game_key": "",
-      "kind": "standalone",
-      "posted_at": "2026-09-11T07:25:51.340894+00:00",
-      "source": "San Francisco Chronicle",
-      "title": "Jackson Flora’s playoff debut brings beer chants, 100 mph fastballs and 2 no-hit innings in San Jose",
-      "url": "https://www.sfchronicle.com/sports/giants/article/jackson-flora-s-playoff-debut-beer-chants-22426791.php"
-    },
-    {
-      "author": "Maria Guardado",
-      "game_key": "",
-      "kind": "standalone",
-      "posted_at": "2026-09-11T07:25:53.690982+00:00",
-      "source": "MLB.com",
-      "title": "Cheers! Giants' top pick helps send SJ to championship, earns fans cheap beer",
-      "url": "https://www.mlb.com/giants/news/jackson-flora-san-jose-giants-going-to-2026-cal-league-championship-series"
-    },
-    {
       "author": "Eric Longenhagen",
       "game_key": "",
       "kind": "standalone",
@@ -1585,7 +1567,6 @@
     "https://www.mlb.com/giants/news/bryce-eldridge-out-for-second-straight-game-with-head-laceration": "2026-09-20T05:08:50.330486+00:00",
     "https://www.mlb.com/giants/news/buster-posey-reflects-on-giants-2026-season": "2026-09-30T08:54:06.960304+00:00",
     "https://www.mlb.com/giants/news/giants-claim-camilo-doval-off-waivers": "2026-09-26T11:42:44.449091+00:00",
-    "https://www.mlb.com/giants/news/jackson-flora-san-jose-giants-going-to-2026-cal-league-championship-series": "2026-09-11T07:25:53.690982+00:00",
     "https://www.mlb.com/giants/news/logan-webb-wins-willie-mac-award": "2026-09-26T07:56:46.013399+00:00",
     "https://www.mlb.com/giants/news/matt-wilkinson-throws-5-scoreless-innings-vs-dodgers": "2026-09-21T05:14:14.323602+00:00",
     "https://www.mlb.com/giants/news/philip-abner-has-rough-outing-for-second-game-in-a-row": "2026-09-20T09:57:11.491184+00:00",
@@ -1663,7 +1644,6 @@
     "https://www.sfchronicle.com/sports/giants/article/giants-infielder-marcelo-mayer-top-prospect-22440835.php": "2026-09-22T00:13:45.439855+00:00",
     "https://www.sfchronicle.com/sports/giants/article/giants-send-rehabbing-closer-dakota-jordan-22433173.php": "2026-09-15T19:08:44.034814+00:00",
     "https://www.sfchronicle.com/sports/giants/article/hall-fame-isn-t-allowing-giants-krukow-22447621.php": "2026-09-24T23:57:24.780984+00:00",
-    "https://www.sfchronicle.com/sports/giants/article/jackson-flora-s-playoff-debut-beer-chants-22426791.php": "2026-09-11T07:25:51.340894+00:00",
     "https://www.sfchronicle.com/sports/giants/article/logan-webb-wins-willie-mac-award-team-s-22449851.php": "2026-09-26T18:40:36.879176+00:00",
     "https://www.sfchronicle.com/sports/giants/article/losing-games-irking-fans-2026-22453146.php": "2026-09-29T13:15:13.017561+00:00",
     "https://www.sfchronicle.com/sports/giants/article/mike-krukow-1985-team-vitello-22436775.php": "2026-09-21T20:05:31.512673+00:00",
@@ -1688,38 +1668,6 @@
     "https://www.sfgate.com/giants/article/sf-giants-viral-mom-husband-22451456.php": "2026-09-27T19:09:27.965504+00:00"
   },
   "run_history": [
-    {
-      "discovered": 155,
-      "finished_at": "2026-09-11T07:25:54.493920+00:00",
-      "game_selection_reasons": {
-        "already_posted": 25,
-        "game_source_duplicates": 0,
-        "not_game_story": 124,
-        "quality_low": 2,
-        "schedule_grounded_threads": 0,
-        "selected_game_stories": 0,
-        "selected_game_threads": 0,
-        "stale_game_story": 4,
-        "unrouted_game_stories": 0
-      },
-      "game_stories_selected": 0,
-      "game_threads_selected": 0,
-      "schedule_grounded_threads": 0,
-      "selection_reasons": {
-        "already_posted": 48,
-        "deferred_for_breaking_news": 1,
-        "eligible": 3,
-        "quality_low": 15,
-        "selected": 2,
-        "source_cap_cluster": 1,
-        "stale": 57
-      },
-      "sources_failed": 0,
-      "sources_ok": 8,
-      "standalone_selected": 2,
-      "started_at": "2026-09-11T07:25:35.136377+00:00",
-      "status": "completed"
-    },
     {
       "discovered": 147,
       "finished_at": "2026-09-11T11:44:28.131257+00:00",
@@ -4431,6 +4379,36 @@
       "sources_ok": 8,
       "standalone_selected": 0,
       "started_at": "2026-10-02T00:59:33.213833+00:00",
+      "status": "completed"
+    },
+    {
+      "discovered": 152,
+      "finished_at": "2026-10-02T08:51:16.924777+00:00",
+      "game_selection_reasons": {
+        "already_posted": 7,
+        "game_source_duplicates": 0,
+        "not_game_story": 138,
+        "quality_low": 1,
+        "schedule_grounded_threads": 0,
+        "selected_game_stories": 0,
+        "selected_game_threads": 0,
+        "stale_game_story": 6,
+        "unrouted_game_stories": 0
+      },
+      "game_stories_selected": 0,
+      "game_threads_selected": 0,
+      "schedule_grounded_threads": 0,
+      "selection_reasons": {
+        "already_posted": 60,
+        "deferred_for_breaking_news": 2,
+        "quality_low": 15,
+        "selected": 0,
+        "stale": 61
+      },
+      "sources_failed": 0,
+      "sources_ok": 8,
+      "standalone_selected": 0,
+      "started_at": "2026-10-02T08:50:56.342386+00:00",
       "status": "completed"
     }
   ]
