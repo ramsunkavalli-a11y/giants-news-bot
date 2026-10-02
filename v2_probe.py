@@ -432,6 +432,30 @@ def discover_mlb() -> list[Article]:
     )
 
 
+def discover_baggarly() -> list[Article]:
+    """Official author feed establishes attribution without blocked page fetches."""
+    feed = parse_feed("https://www.nytimes.com/athletic/rss/author/andrew-baggarly/")
+    if clean(feed.feed.get("title", "")).lower() != "andrew baggarly - the athletic":
+        raise RuntimeError("Baggarly RSS did not identify the expected author feed")
+    out = []
+    seen = set()
+    for entry in feed.entries[:100]:
+        title = clean(entry.get("title", ""))
+        summary = clean(entry.get("summary", ""))
+        url = entry.get("link", "")
+        parsed = urlparse(url)
+        if (not title or url in seen or parsed.scheme != "https"
+                or parsed.hostname != "www.nytimes.com" or not parsed.path.startswith("/athletic/")
+                or not giants_relevant(f"{title} {summary}")):
+            continue
+        seen.add(url)
+        out.append(make_article(source="The Athletic", title=title, url=url,
+                                published=entry.get("published", "") or entry.get("updated", ""),
+                                author="Andrew Baggarly", summary=summary,
+                                section="Official Andrew Baggarly author RSS", access="paywalled"))
+    return out
+
+
 def discover_sfgate() -> list[Article]:
     return articles_from_feed(
         source="SFGATE",

@@ -20,6 +20,12 @@ Required GitHub Actions secrets:
 
 The default Bluesky PDS is `https://bsky.social` and can be overridden with `BSKY_PDS`.
 
+## Baggarly frequent checks
+
+The same production workflow adds a Baggarly-only RSS check every 15 minutes (minutes 7/22/37/52). The gate exports `fast_lane=1`; regular/manual runs export `0`. All runs share production concurrency and state, so no second posting process can race the main scan. Quiet fast checks do not commit state; failures are visible in Actions. Diagnostics are retained for three days. See [FAST_POSTING.md](FAST_POSTING.md) for author attribution, budget/dedupe behavior and timing limits.
+
+For a safe local verification: `FAST_LANE=1 DRY_RUN=1 SEASON_MODE=offseason python v2_bot.py`. CI runs this against copied production state and verifies immutability.
+
 ## Schedule
 
 All intended times are **America/Los_Angeles** local time.

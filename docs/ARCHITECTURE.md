@@ -99,6 +99,10 @@ Safety constraints:
 - challenge/blank metadata does not independently veto a tightly attributed result;
 - broad Google News never enters production selection.
 
+### Baggarly author discovery
+
+`discover_baggarly()` validates the official Athletic author RSS title and publisher article URLs, establishes the named author from that scoped feed, and filters national stories away. Normal discovery appends it after the Athletic team feed so verified author records replace anonymous records for the same URL. Fast discovery calls only this adapter. `FAST_LANE=1` uses six-hour freshness and leaves state untouched when there are no posts. Baggarly is exempt from the daily routine budget; his own event/role history and URLs still dedupe, while earlier cross-publisher coverage does not block his author slot.
+
 ## 2. Candidate/article models
 
 `v2_probe.Article` is the discovery representation. `models.Candidate` is the posting/runtime representation.

@@ -9,6 +9,7 @@ Automated, curated San Francisco Giants news feed for Bluesky. The bot discovers
 - **Entrypoint:** `python v2_bot.py`
 - **Workflow:** `.github/workflows/giants-news-bot.yml`
 - **Persistent state:** `state.json` (posted history, game-thread refs, and a bounded run-health heartbeat)
+- **Baggarly checks:** official author RSS every 15 minutes; Giants stories bypass the routine daily budget (see [fast posting](docs/FAST_POSTING.md))
 - **Season mode:** production defaults to `offseason`; repository variable `SEASON_MODE=inseason` restores game-season cadence and limits
 - **Standalone cap:** offseason 2/run and 6 routine stories/Pacific day; confirmed moves/injury news bypass the daily routine cap; inseason 3/run
 - **Standalone freshness:** 72 hours
@@ -27,7 +28,7 @@ The design principle is **structured discovery, own the last mile**. Prefer a pu
 | Publication | Production discovery |
 | --- | --- |
 | SF Standard | Dedicated San Francisco Giants tag RSS |
-| The Athletic | Giants RSS |
+| The Athletic | Giants RSS + official Andrew Baggarly author RSS |
 | MLB.com | Giants RSS; Maria Guardado bylines only |
 | SFGATE | Giants RSS |
 | FanGraphs | Giants category RSS |
@@ -157,6 +158,7 @@ Useful environment variables:
 | `MAX_POSTS_PER_RUN` | 3 inseason; offseason clamps to at most 2 |
 | `SEASON_MODE` | `inseason` or `offseason`; production default is offseason |
 | `OFFSEASON_DAILY_LIMIT` | 6 routine standalone stories per Pacific calendar day |
+| `FAST_LANE` | `1` scans only Baggarly’s author RSS with six-hour freshness |
 | `DRY_RUN` | `1` prints actions without posting or mutating state |
 | `STATE_FILE` | Alternate state path for tests/replays |
 | `DIAGNOSTICS_ENABLED` | Write selection/discovery diagnostics |

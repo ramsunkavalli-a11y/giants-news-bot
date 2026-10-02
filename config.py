@@ -15,6 +15,7 @@ class Settings:
 
     request_timeout: int = int(os.getenv("REQUEST_TIMEOUT", "15"))
     dry_run: bool = _env_bool("DRY_RUN")
+    fast_lane: bool = _env_bool("FAST_LANE")
     state_file: str = os.getenv("STATE_FILE", "state.json")
     diagnostics_enabled: bool = _env_bool("DIAGNOSTICS_ENABLED")
     diagnostics_file: str = os.getenv("DIAGNOSTICS_FILE", "diagnostics.json")

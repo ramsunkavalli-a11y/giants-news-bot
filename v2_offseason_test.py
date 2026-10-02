@@ -158,6 +158,8 @@ class OffseasonTests(unittest.TestCase):
         block = workflow.read_text(encoding="utf-8").split("        run: |\n", 1)[1].split("\n      - name: Checkout", 1)[0]
         script = "\n".join(line[10:] for line in block.splitlines())
         cases = [
+            ("-0700", "7,22,37,52 * * * *", True, True),
+            ("-0800", "7,22,37,52 * * * *", True, True),
             ("-0700", "30 15 * * *", True, True),
             ("-0800", "30 16 * * *", True, True),
             ("-0700", "30 16 * * *", False, False),

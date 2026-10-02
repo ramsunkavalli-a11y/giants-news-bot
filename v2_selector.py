@@ -11,7 +11,7 @@ from bs4 import BeautifulSoup
 from dateutil import parser as dtparser
 from v2_editorial import (
     HYPOTHETICAL_TRADE_RE, RECURRING_CHAT_RE, fangraphs_giants_evidence,
-    is_confirmed_move, offseason_priority,
+    is_confirmed_move, is_priority_author, offseason_priority,
 )
 
 from v2_story import (
@@ -329,6 +329,7 @@ def select_articles(
         and dt <= now
         and dt.astimezone(pacific).date() == local_day
         and not is_confirmed_move(item)
+        and not is_priority_author(item)
     )
     routine_remaining = max(0, offseason_daily_limit - routine_posted_today)
     cutoff = now - timedelta(hours=hours_back)
@@ -405,6 +406,10 @@ def select_articles(
         match = next((
             item for item in history
             if item.get("story_role", "news") == role
+            # The user specifically follows Baggarly's original coverage. An
+            # earlier outlet does not consume his slot; his own event coverage
+            # and exact URLs still dedupe normally.
+            and (not is_priority_author(article) or is_priority_author(item))
             and same_story(
                 article.get("title", ""),
                 item.get("title", ""),
@@ -490,7 +495,7 @@ def select_articles(
                 diagnostics.append({"source": source, "title": chosen.get("title", ""),
                                     "url": chosen.get("url", ""), "reason": "deferred_for_breaking_news"})
                 continue
-            routine = not is_confirmed_move(chosen)
+            routine = not is_confirmed_move(chosen) and not is_priority_author(chosen)
             if offseason and routine and routine_remaining <= 0 and not chosen.get("_manual_priority"):
                 reasons["offseason_daily_cap"] += 1
                 diagnostics.append({"source": source, "title": chosen.get("title", ""),

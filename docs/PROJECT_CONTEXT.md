@@ -24,6 +24,10 @@ The 72-hour standalone window and game-thread behavior remain in place. Season r
 
 See [the two-week posting review](POSTING_REVIEW_2026-10-02.md) for evidence and follow-up priorities.
 
+### Baggarly near-publication checks
+
+In addition to curated scans, production polls the official Andrew Baggarly author RSS every 15 minutes (minutes 7/22/37/52, all hours). `FAST_LANE=1` limits discovery to that source and six-hour freshness. His eligible Giants coverage bypasses the routine daily budget; an earlier outlet’s story does not consume his author slot. Exact URL and his own event/role history still dedupe. Quiet fast checks do not write state or crowd out normal heartbeats. Only Baggarly is enabled; [FAST_POSTING.md](FAST_POSTING.md) records other verified RSS options and timing limits.
+
 ### Inseason cadence
 
 Pacific local time:

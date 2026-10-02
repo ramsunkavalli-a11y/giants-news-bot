@@ -3,6 +3,7 @@ from __future__ import annotations
 
 import re
 from urllib.parse import urlparse
+from v2_authors import normalize_author
 
 SEASON_REVIEW_RE = re.compile(
     r"\boff[- ]?season\b|\bseason (?:review|outlook|takeaways|in review)\b|"
@@ -50,9 +51,16 @@ def is_confirmed_move(article: dict) -> bool:
     return bool(CONFIRMED_MOVE_RE.search(title)) and not SPECULATIVE_RE.search(title)
 
 
+def is_priority_author(article: dict) -> bool:
+    return (article.get("source") == "The Athletic"
+            and normalize_author(str(article.get("author", "") or "")) == "andrew baggarly")
+
+
 def offseason_priority(article: dict) -> int:
     if article.get("_manual_priority"):
         return -1
+    if is_priority_author(article):
+        return 0
     if is_confirmed_move(article):
         return 0
     title = str(article.get("title", "") or "")
