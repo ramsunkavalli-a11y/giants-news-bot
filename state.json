@@ -195,24 +195,6 @@
   },
   "posted_stories": [
     {
-      "author": "The Executive Show",
-      "game_key": "",
-      "kind": "standalone",
-      "posted_at": "2026-09-10T23:19:42.710344+00:00",
-      "source": "KNBR",
-      "title": "Giants KNBR Beer Day Preview: Larry Baer on Mike Krukow's Legacy and a Special September Celebration",
-      "url": "https://omny.fm/shows/the-executives-show/giants-knbr-beer-day-preview-larry-baer-on-mike-krukows-legacy-and-a-special-september-celebration"
-    },
-    {
-      "author": "Jonathan Rosen",
-      "game_key": "",
-      "kind": "standalone",
-      "posted_at": "2026-09-10T23:19:45.169717+00:00",
-      "source": "San Francisco Standard",
-      "title": "Opinion: This week’s cartoon: Burning Man comes home",
-      "url": "https://sfstandard.com/opinion/2026/09/10/burning-man-cartoon-giants/"
-    },
-    {
       "author": "",
       "game_key": "",
       "kind": "standalone",
@@ -1561,7 +1543,6 @@
     "https://blogs.fangraphs.com/notes-from-star-studded-rockies-as-instructional-league/": "2026-09-25T08:06:14.575622+00:00",
     "https://blogs.fangraphs.com/san-franciscos-40-man-cleanup-will-be-a-giant-pain/": "2026-09-18T18:36:27.418759+00:00",
     "https://blogs.fangraphs.com/two-huge-innings-catapult-white-sox-into-alds/": "2026-10-01T09:18:06.049107+00:00",
-    "https://omny.fm/shows/the-executives-show/giants-knbr-beer-day-preview-larry-baer-on-mike-krukows-legacy-and-a-special-september-celebration": "2026-09-10T23:19:42.710344+00:00",
     "https://omny.fm/shows/the-executives-show/giants-skipper-tony-v-on-the-giants-season-mike-krukow": "2026-09-24T19:24:34.475256+00:00",
     "https://sfstandard.com/2026/09/12/scott-bandura-sf-giants-promotion-call-up/": "2026-09-12T22:26:52.906809+00:00",
     "https://sfstandard.com/2026/09/13/logan-webb-sf-giants-2026-season/": "2026-09-13T18:17:44.886650+00:00",
@@ -1578,7 +1559,6 @@
     "https://sfstandard.com/2026/09/28/mike-krukow-sf-giants-tribute/": "2026-09-28T21:20:07.536539+00:00",
     "https://sfstandard.com/2026/09/29/buster-posey-sf-giants-2027-plan/": "2026-09-29T20:07:34.956280+00:00",
     "https://sfstandard.com/2026/09/30/sf-giants-rebuilding-prospects-buster-posey/": "2026-09-30T20:12:39.044568+00:00",
-    "https://sfstandard.com/opinion/2026/09/10/burning-man-cartoon-giants/": "2026-09-10T23:19:45.169717+00:00",
     "https://sfstandard.com/pacific-standard-time/2026/09/29/giants-mom-year-viral-clip-our-broken-internet/": "2026-09-29T13:15:12.060256+00:00",
     "https://sfstandard.com/section-415/2026/09/25/section-415-despite-criticism-kalshi-isn-t-deterred-partnering-giants/": "2026-09-25T19:26:01.436138+00:00",
     "https://sfstandard.com/section-415/2026/10/01/section-415-podcast-2026-compares-giants-worst-seasons-ever/": "2026-10-01T20:25:40.262587+00:00",
@@ -1708,37 +1688,6 @@
     "https://www.sfgate.com/giants/article/sf-giants-viral-mom-husband-22451456.php": "2026-09-27T19:09:27.965504+00:00"
   },
   "run_history": [
-    {
-      "discovered": 154,
-      "finished_at": "2026-09-10T23:19:45.972686+00:00",
-      "game_selection_reasons": {
-        "already_posted": 26,
-        "game_source_duplicates": 0,
-        "not_game_story": 122,
-        "quality_low": 2,
-        "schedule_grounded_threads": 0,
-        "selected_game_stories": 0,
-        "selected_game_threads": 0,
-        "stale_game_story": 4,
-        "unrouted_game_stories": 0
-      },
-      "game_stories_selected": 0,
-      "game_threads_selected": 0,
-      "schedule_grounded_threads": 0,
-      "selection_reasons": {
-        "already_posted": 47,
-        "deferred_for_breaking_news": 1,
-        "eligible": 2,
-        "quality_low": 16,
-        "selected": 2,
-        "stale": 56
-      },
-      "sources_failed": 0,
-      "sources_ok": 8,
-      "standalone_selected": 2,
-      "started_at": "2026-09-10T23:19:17.016371+00:00",
-      "status": "completed"
-    },
     {
       "discovered": 155,
       "finished_at": "2026-09-11T07:25:54.493920+00:00",
@@ -4452,6 +4401,36 @@
       "sources_ok": 8,
       "standalone_selected": 2,
       "started_at": "2026-10-01T20:25:09.848418+00:00",
+      "status": "completed"
+    },
+    {
+      "discovered": 152,
+      "finished_at": "2026-10-02T00:59:54.000032+00:00",
+      "game_selection_reasons": {
+        "already_posted": 7,
+        "game_source_duplicates": 0,
+        "not_game_story": 138,
+        "quality_low": 1,
+        "schedule_grounded_threads": 0,
+        "selected_game_stories": 0,
+        "selected_game_threads": 0,
+        "stale_game_story": 6,
+        "unrouted_game_stories": 0
+      },
+      "game_stories_selected": 0,
+      "game_threads_selected": 0,
+      "schedule_grounded_threads": 0,
+      "selection_reasons": {
+        "already_posted": 60,
+        "deferred_for_breaking_news": 2,
+        "quality_low": 15,
+        "selected": 0,
+        "stale": 61
+      },
+      "sources_failed": 0,
+      "sources_ok": 8,
+      "standalone_selected": 0,
+      "started_at": "2026-10-02T00:59:33.213833+00:00",
       "status": "completed"
     }
   ]
