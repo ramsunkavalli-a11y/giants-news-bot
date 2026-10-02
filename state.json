@@ -1516,6 +1516,15 @@
       "source": "NBC Sports Bay Area",
       "title": "Posey to address bullpen",
       "url": "https://www.nbcsportsbayarea.com/mlb/san-francisco-giants/buster-posey-offseason-bullpen-puzzle/1967880/"
+    },
+    {
+      "author": "Alex Simon",
+      "game_key": "",
+      "kind": "standalone",
+      "posted_at": "2026-10-02T13:04:19.988698+00:00",
+      "source": "SFGATE",
+      "title": "Momo's says 80% of annual revenue would be jeopardized by long MLB lockout",
+      "url": "https://www.sfgate.com/giants/article/oracle-park-momos-lockout-22453051.php"
     }
   ],
   "posted_urls": {
@@ -1661,6 +1670,7 @@
     "https://www.sfgate.com/giants/article/giants-nude-player-celebrations-22443935.php": "2026-09-22T19:02:09.613466+00:00",
     "https://www.sfgate.com/giants/article/krukow-kuiper-hall-costas-22446111.php": "2026-09-23T23:51:44.741945+00:00",
     "https://www.sfgate.com/giants/article/kuiper-krukow-tribute-last-game-22451594.php": "2026-09-27T23:12:51.524599+00:00",
+    "https://www.sfgate.com/giants/article/oracle-park-momos-lockout-22453051.php": "2026-10-02T13:04:19.988698+00:00",
     "https://www.sfgate.com/giants/article/sf-giants-buster-posey-season-22456150.php": "2026-09-30T20:12:35.991364+00:00",
     "https://www.sfgate.com/giants/article/sf-giants-chicken-tenders-22433120.php": "2026-09-17T11:59:37.599139+00:00",
     "https://www.sfgate.com/giants/article/sf-giants-fans-krukow-tribute-22443910.php": "2026-09-28T05:41:03.441061+00:00",
@@ -1668,36 +1678,6 @@
     "https://www.sfgate.com/giants/article/sf-giants-viral-mom-husband-22451456.php": "2026-09-27T19:09:27.965504+00:00"
   },
   "run_history": [
-    {
-      "discovered": 147,
-      "finished_at": "2026-09-11T11:44:28.131257+00:00",
-      "game_selection_reasons": {
-        "already_posted": 25,
-        "game_source_duplicates": 0,
-        "not_game_story": 116,
-        "quality_low": 2,
-        "schedule_grounded_threads": 0,
-        "selected_game_stories": 0,
-        "selected_game_threads": 0,
-        "stale_game_story": 4,
-        "unrouted_game_stories": 0
-      },
-      "game_stories_selected": 0,
-      "game_threads_selected": 0,
-      "schedule_grounded_threads": 0,
-      "selection_reasons": {
-        "already_posted": 42,
-        "deferred_for_breaking_news": 1,
-        "quality_low": 15,
-        "selected": 0,
-        "stale": 58
-      },
-      "sources_failed": 0,
-      "sources_ok": 8,
-      "standalone_selected": 0,
-      "started_at": "2026-09-11T11:43:31.844472+00:00",
-      "status": "completed"
-    },
     {
       "discovered": 154,
       "finished_at": "2026-09-11T18:42:21.249946+00:00",
@@ -4409,6 +4389,37 @@
       "sources_ok": 8,
       "standalone_selected": 0,
       "started_at": "2026-10-02T08:50:56.342386+00:00",
+      "status": "completed"
+    },
+    {
+      "discovered": 152,
+      "finished_at": "2026-10-02T13:04:20.794395+00:00",
+      "game_selection_reasons": {
+        "already_posted": 7,
+        "game_source_duplicates": 0,
+        "not_game_story": 138,
+        "quality_low": 1,
+        "schedule_grounded_threads": 0,
+        "selected_game_stories": 0,
+        "selected_game_threads": 0,
+        "stale_game_story": 6,
+        "unrouted_game_stories": 0
+      },
+      "game_stories_selected": 0,
+      "game_threads_selected": 0,
+      "schedule_grounded_threads": 0,
+      "selection_reasons": {
+        "already_posted": 60,
+        "deferred_for_breaking_news": 2,
+        "eligible": 1,
+        "quality_low": 15,
+        "selected": 1,
+        "stale": 60
+      },
+      "sources_failed": 0,
+      "sources_ok": 8,
+      "standalone_selected": 1,
+      "started_at": "2026-10-02T13:03:52.992456+00:00",
       "status": "completed"
     }
   ]
