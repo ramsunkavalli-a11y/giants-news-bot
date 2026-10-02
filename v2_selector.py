@@ -11,7 +11,7 @@ from bs4 import BeautifulSoup
 from dateutil import parser as dtparser
 from v2_editorial import (
     HYPOTHETICAL_TRADE_RE, RECURRING_CHAT_RE, fangraphs_giants_evidence,
-    is_confirmed_move, is_priority_author, offseason_priority,
+    is_confirmed_move, is_priority_author, offseason_priority, priority_author_key,
 )
 
 from v2_story import (
@@ -278,7 +278,19 @@ def _choose_news_winner(members: list[dict], source_counts: Counter) -> tuple[di
     return chosen, chosen is not ranked[0]
 
 
-def _role_representatives(cluster, source_counts: Counter) -> tuple[list[dict], list[dict], bool]:
+def _role_representatives(cluster, source_counts: Counter, *, fast_lane: bool = False) -> tuple[list[dict], list[dict], bool]:
+    if fast_lane:
+        # Hourly checks follow each named writer rather than rotating away
+        # their same-event reporting in favor of another followed writer.
+        winners = {}
+        duplicates = []
+        for item in sorted(cluster.members, key=candidate_preference_key, reverse=True):
+            key = (priority_author_key(item), story_role(item))
+            if key in winners:
+                duplicates.append(item)
+            else:
+                winners[key] = item
+        return list(winners.values()), duplicates, False
     by_role = {"news": [], "analysis": []}
     for member in cluster.members:
         by_role.setdefault(story_role(member), []).append(member)
@@ -312,12 +324,15 @@ def select_articles(
     now: datetime | None = None,
     season_mode: str = "inseason",
     offseason_daily_limit: int = 6,
+    fast_lane: bool = False,
 ) -> dict:
     if season_mode not in {"inseason", "offseason"}:
         raise ValueError("season_mode must be inseason or offseason")
     now = now or datetime.now(timezone.utc)
     offseason = season_mode == "offseason"
-    if offseason:
+    if fast_lane:
+        max_posts = min(max_posts, 3)
+    elif offseason:
         max_posts = min(max_posts, 2)
     pacific = ZoneInfo("America/Los_Angeles")
     local_day = now.astimezone(pacific).date()
@@ -359,7 +374,9 @@ def select_articles(
         # Safety boundary: discovery adapters should already classify commodity
         # pages as low value, but do not let known broad/highlight patterns through.
         sport_blob = f"{title} {urlparse(url or '').path.replace('-', ' ')}"
-        if (LOW_VALUE_TITLE_RE.search(title or "") or RECURRING_CHAT_RE.search(title or "")
+        if fast_lane and not is_priority_author(article):
+            reason = "not_hourly_author"
+        elif (LOW_VALUE_TITLE_RE.search(title or "") or RECURRING_CHAT_RE.search(title or "")
                 or OTHER_SPORT_TITLE_RE.search(sport_blob)):
             reason = "quality_low"
         elif source == "FanGraphs" and not fangraphs_giants_evidence(article):
@@ -406,10 +423,11 @@ def select_articles(
         match = next((
             item for item in history
             if item.get("story_role", "news") == role
-            # The user specifically follows Baggarly's original coverage. An
-            # earlier outlet does not consume his slot; his own event coverage
+            # The user follows these writers' original coverage. Another
+            # writer does not consume their slot; their own event coverage
             # and exact URLs still dedupe normally.
-            and (not is_priority_author(article) or is_priority_author(item))
+            and (not is_priority_author(article)
+                 or priority_author_key(article) == priority_author_key(item))
             and same_story(
                 article.get("title", ""),
                 item.get("title", ""),
@@ -451,7 +469,7 @@ def select_articles(
     summaries: list[dict] = []
 
     for cluster in clusters:
-        representatives, duplicates, rotated = _role_representatives(cluster, source_counts)
+        representatives, duplicates, rotated = _role_representatives(cluster, source_counts, fast_lane=fast_lane)
         if not representatives:
             continue
 

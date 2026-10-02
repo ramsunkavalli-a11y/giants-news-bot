@@ -99,9 +99,9 @@ Safety constraints:
 - challenge/blank metadata does not independently veto a tightly attributed result;
 - broad Google News never enters production selection.
 
-### Baggarly author discovery
+### Hourly author discovery
 
-`discover_baggarly()` validates the official Athletic author RSS title and publisher article URLs, establishes the named author from that scoped feed, and filters national stories away. Normal discovery appends it after the Athletic team feed so verified author records replace anonymous records for the same URL. Fast discovery calls only this adapter. `FAST_LANE=1` uses six-hour freshness and leaves state untouched when there are no posts. Baggarly is exempt from the daily routine budget; his own event/role history and URLs still dedupe, while earlier cross-publisher coverage does not block his author slot.
+`discover_baggarly()` validates the official Athletic author RSS title and publisher article URLs, establishes the named author from that scoped feed, and filters national stories away. Normal discovery appends it after the Athletic team feed so verified author records replace anonymous records for the same URL. Hourly discovery uses this adapter plus `discover_pavlovic()` and `discover_guardado()`, which filter publisher Giants RSS by normalized byline and validate article URLs. Guardado’s observed publisher byline typo is an explicit alias. `FAST_LANE=1` uses six-hour freshness and leaves state untouched when there are no posts. All three writers are exempt from the daily routine budget; their own event/role history and URLs still dedupe, while another writer’s coverage does not block their author slot. The hourly selector permits one standalone per writer, up to three total, including independent coverage of the same event. Partial feed failures are isolated and reported in diagnostics; complete failure raises an error.
 
 ## 2. Candidate/article models
 

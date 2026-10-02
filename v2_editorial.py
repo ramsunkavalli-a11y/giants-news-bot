@@ -51,9 +51,21 @@ def is_confirmed_move(article: dict) -> bool:
     return bool(CONFIRMED_MOVE_RE.search(title)) and not SPECULATIVE_RE.search(title)
 
 
+PRIORITY_AUTHORS = {
+    "The Athletic": "andrew baggarly",
+    "NBC Sports Bay Area": "alex pavlovic",
+    "MLB.com": "maria guardado",
+}
+
+
+def priority_author_key(article: dict) -> str:
+    expected = PRIORITY_AUTHORS.get(article.get("source", ""), "")
+    parts = re.split(r",| & | and ", str(article.get("author", "") or ""), flags=re.I)
+    return expected if expected and expected in {normalize_author(part) for part in parts} else ""
+
+
 def is_priority_author(article: dict) -> bool:
-    return (article.get("source") == "The Athletic"
-            and normalize_author(str(article.get("author", "") or "")) == "andrew baggarly")
+    return bool(priority_author_key(article))
 
 
 def offseason_priority(article: dict) -> int:

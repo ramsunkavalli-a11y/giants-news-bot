@@ -6,8 +6,8 @@ concurrency:
 
 on:
   schedule:
-    # Baggarly-only checks, every 15 minutes, away from the top of the hour.
-    - cron: "7,22,37,52 * * * *"
+    # Baggarly, Pavlovic and Guardado RSS checks once per hour.
+    - cron: "7 * * * *"
     # GitHub cron is UTC. Run the weekday cadence at 8:30am / 2:30pm /
     # 7:30pm / 11:30pm PT, and shift weekends earlier for day-game coverage:
     # 8:30am / 1:30pm / 5:30pm / 10:30pm PT. Each slot includes both PDT
@@ -68,10 +68,10 @@ jobs:
         id: cadence
         shell: bash
         run: |
-          if [ "${{ github.event.schedule }}" = "7,22,37,52 * * * *" ]; then
+          if [ "${{ github.event.schedule }}" = "7 * * * *" ]; then
             echo "run_bot=true" >> "$GITHUB_OUTPUT"
             echo "fast_lane=1" >> "$GITHUB_OUTPUT"
-            echo "Baggarly-only RSS check."
+            echo "Hourly Baggarly/Pavlovic/Guardado RSS check."
             exit 0
           fi
           echo "fast_lane=0" >> "$GITHUB_OUTPUT"

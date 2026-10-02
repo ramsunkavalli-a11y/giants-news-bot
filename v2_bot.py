@@ -20,6 +20,8 @@ from v2_probe import (
     make_article,
     discover_athletic,
     discover_baggarly,
+    discover_pavlovic,
+    discover_guardado,
     discover_fangraphs,
     discover_mlb,
     discover_nbc,
@@ -40,6 +42,8 @@ DISCOVERERS = [
     discover_core_writer_radar,
     discover_baggarly,
 ]
+
+FAST_DISCOVERERS = [discover_baggarly, discover_pavlovic, discover_guardado]
 
 PROMO_SUMMARY_PATTERNS = (
     "this story was excerpted from",
@@ -256,7 +260,7 @@ def _manual_story_article(environ: dict[str, str] | None = None) -> dict | None:
 def discover_articles(*, fast_lane: bool = False) -> tuple[list[dict], dict]:
     articles: list[dict] = []
     health: dict[str, dict] = {}
-    for discover in ([discover_baggarly] if fast_lane else DISCOVERERS):
+    for discover in (FAST_DISCOVERERS if fast_lane else DISCOVERERS):
         name = discover.__name__.replace("discover_", "")
         try:
             items = discover()
@@ -266,7 +270,7 @@ def discover_articles(*, fast_lane: bool = False) -> tuple[list[dict], dict]:
             health[name] = {"ok": False, "error": f"{type(exc).__name__}: {exc}"}
 
     if fast_lane and not any(item.get("ok") for item in health.values()):
-        raise RuntimeError(f"Baggarly fast discovery failed: {health}")
+        raise RuntimeError(f"Hourly author discovery failed: {health}")
     manual = None if fast_lane else _manual_story_article()
     if manual:
         # Insert last so an explicit dispatch replaces the same URL discovered
@@ -505,6 +509,7 @@ def main() -> None:
         max_posts=settings.max_posts_per_run,
         season_mode=settings.season_mode,
         offseason_daily_limit=settings.offseason_daily_limit,
+        fast_lane=settings.fast_lane,
     )
     selection["fast_lane"] = settings.fast_lane
 
@@ -605,7 +610,7 @@ def main() -> None:
         return
 
     if not candidates and not game_candidates:
-        # Normal scans retain health heartbeats. Quiet 15-minute checks must
+        # Normal scans retain health heartbeats. Quiet hourly checks must
         # not churn production state or crowd out weeks of useful run history.
         if settings.fast_lane:
             return

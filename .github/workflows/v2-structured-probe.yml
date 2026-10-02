@@ -93,7 +93,7 @@ jobs:
       - name: Run Athletic RSS probe
         run: python v2_athletic_probe.py
 
-      - name: Dry run Baggarly-only polling
+      - name: Dry run hourly author polling
         env:
           STATE_FILE: /tmp/main-state.json
           DRY_RUN: "1"

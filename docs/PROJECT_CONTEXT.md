@@ -24,9 +24,9 @@ The 72-hour standalone window and game-thread behavior remain in place. Season r
 
 See [the two-week posting review](POSTING_REVIEW_2026-10-02.md) for evidence and follow-up priorities.
 
-### Baggarly near-publication checks
+### Hourly beat-writer checks
 
-In addition to curated scans, production polls the official Andrew Baggarly author RSS every 15 minutes (minutes 7/22/37/52, all hours). `FAST_LANE=1` limits discovery to that source and six-hour freshness. His eligible Giants coverage bypasses the routine daily budget; an earlier outlet’s story does not consume his author slot. Exact URL and his own event/role history still dedupe. Quiet fast checks do not write state or crowd out normal heartbeats. Only Baggarly is enabled; [FAST_POSTING.md](FAST_POSTING.md) records other verified RSS options and timing limits.
+In addition to curated scans, production checks Andrew Baggarly, Alex Pavlovic and Maria Guardado RSS once per hour (minute 7, all hours). `FAST_LANE=1` limits discovery to those writers and six-hour freshness. Their eligible Giants coverage bypasses the routine daily budget, with up to three standalone stories per hourly check, one per writer. Exact URLs and each writer’s own event/role history still dedupe; another writer’s coverage does not consume their slot. Quiet hourly checks do not write state or crowd out normal heartbeats. [FAST_POSTING.md](FAST_POSTING.md) records feed attribution, other verified RSS options and timing limits.
 
 ### Inseason cadence
 

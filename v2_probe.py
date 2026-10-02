@@ -10,7 +10,7 @@ import feedparser
 import requests
 from bs4 import BeautifulSoup
 
-from v2_authors import author_prior, source_prior
+from v2_authors import author_prior, normalize_author, source_prior
 from v2_editorial import SEASON_REVIEW_RE, RECURRING_CHAT_RE, fangraphs_giants_evidence
 
 UA = "Mozilla/5.0 GiantsNewsBotV2Probe/0.7"
@@ -453,6 +453,50 @@ def discover_baggarly() -> list[Article]:
                                 published=entry.get("published", "") or entry.get("updated", ""),
                                 author="Andrew Baggarly", summary=summary,
                                 section="Official Andrew Baggarly author RSS", access="paywalled"))
+    return out
+
+
+def discover_pavlovic() -> list[Article]:
+    """Use NBC's Giants RSS byline/time metadata for the hourly author lane."""
+    feed = parse_feed("https://www.nbcsportsbayarea.com/feed/?category_name=san-francisco-giants")
+    out = []
+    for entry in feed.entries[:50]:
+        if normalize_author(entry_author(entry)) != "alex pavlovic":
+            continue
+        url = entry.get("link", "")
+        parsed = urlparse(url)
+        path = parsed.path.rstrip("/")
+        if (parsed.scheme != "https" or parsed.hostname != "www.nbcsportsbayarea.com"
+                or not path.startswith("/mlb/san-francisco-giants/")
+                or "/video/" in path or not path.rsplit("/", 1)[-1].isdigit()):
+            continue
+        title = clean(entry.get("title", ""))
+        if not title:
+            continue
+        out.append(make_article(source="NBC Sports Bay Area", title=title, url=url,
+                                author="Alex Pavlovic", published=entry.get("published", "") or entry.get("updated", ""),
+                                summary=clean(entry.get("summary", "")), section="Giants RSS + Pavlovic byline", access="free"))
+    return out
+
+
+def discover_guardado() -> list[Article]:
+    """Select Guardado only from MLB's structured Giants feed."""
+    feed = parse_feed("https://www.mlb.com/giants/feeds/news/rss.xml")
+    out = []
+    for entry in feed.entries[:30]:
+        if normalize_author(entry_author(entry)) != "maria guardado":
+            continue
+        url = entry.get("link", "")
+        parsed = urlparse(url)
+        if (parsed.scheme != "https" or parsed.hostname not in {"www.mlb.com", "mlb.com"}
+                or not parsed.path.startswith("/giants/news/")):
+            continue
+        title = clean(entry.get("title", ""))
+        if not title:
+            continue
+        out.append(make_article(source="MLB.com", title=title, url=url,
+                                author="Maria Guardado", published=entry.get("published", "") or entry.get("updated", ""),
+                                summary=clean(entry.get("summary", "")), section="Giants RSS + Guardado byline", access="free"))
     return out
 
 
