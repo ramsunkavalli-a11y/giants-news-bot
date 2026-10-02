@@ -195,33 +195,6 @@
   },
   "posted_stories": [
     {
-      "author": "Eric Longenhagen",
-      "game_key": "",
-      "kind": "standalone",
-      "posted_at": "2026-09-11T18:42:14.693838+00:00",
-      "source": "FanGraphs",
-      "title": "Eric Longenhagen Prospects Chat: 9/11/2026",
-      "url": "https://blogs.fangraphs.com/eric-longenhagen-prospects-chat-9-11-2026/"
-    },
-    {
-      "author": "Alex Pavlovic",
-      "game_key": "",
-      "kind": "standalone",
-      "posted_at": "2026-09-11T18:42:17.277010+00:00",
-      "source": "NBC Sports Bay Area",
-      "title": "Top draft pick Jackson Flora shines, helps San Jose Giants advance in playoffs",
-      "url": "https://www.nbcsportsbayarea.com/mlb/san-francisco-giants/jackson-flora-san-jose-giants/1962614/"
-    },
-    {
-      "author": "Justice delos Santos",
-      "game_key": "",
-      "kind": "standalone",
-      "posted_at": "2026-09-11T18:42:20.446352+00:00",
-      "source": "Mercury News",
-      "title": "‘The sky’s the limit’: SF Giants top pitching prospect Flora dazzles as San Jose advances to championship",
-      "url": "https://www.mercurynews.com/2026/09/10/the-skys-the-limit-sf-giants-top-pitching-prospect-flora-dazzles-as-san-jose-advances-to-championship/"
-    },
-    {
       "author": "",
       "game_key": "",
       "kind": "standalone",
@@ -1528,7 +1501,6 @@
     }
   ],
   "posted_urls": {
-    "https://blogs.fangraphs.com/eric-longenhagen-prospects-chat-9-11-2026/": "2026-09-11T18:42:14.693838+00:00",
     "https://blogs.fangraphs.com/eric-longenhagen-prospects-chat-9-25/": "2026-09-25T19:26:02.371243+00:00",
     "https://blogs.fangraphs.com/joe-musgrove-thrives-in-rehab-outing-plus-more-arizona-scouting-notes/": "2026-09-28T21:20:04.690250+00:00",
     "https://blogs.fangraphs.com/notes-from-star-studded-rockies-as-instructional-league/": "2026-09-25T08:06:14.575622+00:00",
@@ -1554,7 +1526,6 @@
     "https://sfstandard.com/section-415/2026/09/25/section-415-despite-criticism-kalshi-isn-t-deterred-partnering-giants/": "2026-09-25T19:26:01.436138+00:00",
     "https://sfstandard.com/section-415/2026/10/01/section-415-podcast-2026-compares-giants-worst-seasons-ever/": "2026-10-01T20:25:40.262587+00:00",
     "https://www.mercurynews.com/2026/09/08/sf-giants-devers-named-national-league-player-of-the-week/": "2026-09-11T23:27:41.979460+00:00",
-    "https://www.mercurynews.com/2026/09/10/the-skys-the-limit-sf-giants-top-pitching-prospect-flora-dazzles-as-san-jose-advances-to-championship/": "2026-09-11T18:42:20.446352+00:00",
     "https://www.mercurynews.com/2026/09/13/sf-giants-swept-by-padres-as-webb-roughed-up-but-bandura-reaches-twice-in-debut/": "2026-09-14T19:56:05.793223+00:00",
     "https://www.mercurynews.com/2026/09/14/logan-webb-sf-giants-shut-down-2026-season/": "2026-09-15T23:35:44.348174+00:00",
     "https://www.mercurynews.com/2026/09/15/sf-giants-all-star-reliever-rodriguez-to-pitch-in-arizona-fall-league/": "2026-09-18T07:34:07.853335+00:00",
@@ -1604,7 +1575,6 @@
     "https://www.nbcsportsbayarea.com/mlb/san-francisco-giants/harrison-bader-foot-injury-scooter-crash/1967460/": "2026-09-30T08:54:09.013084+00:00",
     "https://www.nbcsportsbayarea.com/mlb/san-francisco-giants/historic-roster-churn-2026-season/1965549/": "2026-09-23T23:51:46.873269+00:00",
     "https://www.nbcsportsbayarea.com/mlb/san-francisco-giants/jackson-flora-double-a-debut/1964147/": "2026-09-18T23:28:42.719664+00:00",
-    "https://www.nbcsportsbayarea.com/mlb/san-francisco-giants/jackson-flora-san-jose-giants/1962614/": "2026-09-11T18:42:17.277010+00:00",
     "https://www.nbcsportsbayarea.com/mlb/san-francisco-giants/joel-kuhnel-save-history-cardinals/1963762/": "2026-09-16T23:43:55.850945+00:00",
     "https://www.nbcsportsbayarea.com/mlb/san-francisco-giants/krukow-reflects-on-mvp-baseball-games/1962041/": "2026-09-19T11:24:08.382151+00:00",
     "https://www.nbcsportsbayarea.com/mlb/san-francisco-giants/logan-webb-2026-willie-mac-award-winner/1966224/": "2026-09-26T07:56:48.533511+00:00",
@@ -1678,39 +1648,6 @@
     "https://www.sfgate.com/giants/article/sf-giants-viral-mom-husband-22451456.php": "2026-09-27T19:09:27.965504+00:00"
   },
   "run_history": [
-    {
-      "discovered": 154,
-      "finished_at": "2026-09-11T18:42:21.249946+00:00",
-      "game_selection_reasons": {
-        "already_posted": 24,
-        "game_source_duplicates": 0,
-        "not_game_story": 124,
-        "quality_low": 2,
-        "schedule_grounded_threads": 0,
-        "selected_game_stories": 0,
-        "selected_game_threads": 0,
-        "stale_game_story": 4,
-        "unrouted_game_stories": 0
-      },
-      "game_stories_selected": 0,
-      "game_threads_selected": 0,
-      "schedule_grounded_threads": 0,
-      "selection_reasons": {
-        "already_posted": 47,
-        "deferred_for_breaking_news": 1,
-        "eligible": 5,
-        "quality_low": 14,
-        "run_cap": 1,
-        "selected": 3,
-        "stale": 57,
-        "story_already_posted": 1
-      },
-      "sources_failed": 0,
-      "sources_ok": 8,
-      "standalone_selected": 3,
-      "started_at": "2026-09-11T18:41:50.405026+00:00",
-      "status": "completed"
-    },
     {
       "discovered": 154,
       "finished_at": "2026-09-11T23:27:42.781834+00:00",
@@ -4420,6 +4357,36 @@
       "sources_ok": 8,
       "standalone_selected": 1,
       "started_at": "2026-10-02T13:03:52.992456+00:00",
+      "status": "completed"
+    },
+    {
+      "discovered": 152,
+      "finished_at": "2026-10-02T20:05:09.423864+00:00",
+      "game_selection_reasons": {
+        "already_posted": 7,
+        "game_source_duplicates": 0,
+        "not_game_story": 138,
+        "quality_low": 1,
+        "schedule_grounded_threads": 0,
+        "selected_game_stories": 0,
+        "selected_game_threads": 0,
+        "stale_game_story": 6,
+        "unrouted_game_stories": 0
+      },
+      "game_stories_selected": 0,
+      "game_threads_selected": 0,
+      "schedule_grounded_threads": 0,
+      "selection_reasons": {
+        "already_posted": 60,
+        "deferred_for_breaking_news": 2,
+        "quality_low": 17,
+        "selected": 0,
+        "stale": 59
+      },
+      "sources_failed": 0,
+      "sources_ok": 8,
+      "standalone_selected": 0,
+      "started_at": "2026-10-02T20:04:53.287401+00:00",
       "status": "completed"
     }
   ]
