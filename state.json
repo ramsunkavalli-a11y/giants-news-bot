@@ -179,15 +179,6 @@
   },
   "posted_stories": [
     {
-      "author": "John Shea",
-      "game_key": "",
-      "kind": "standalone",
-      "posted_at": "2026-09-12T22:26:52.906809+00:00",
-      "source": "San Francisco Standard",
-      "title": "Giants outfield prospect Scott Bandura to join team in San Francisco",
-      "url": "https://sfstandard.com/2026/09/12/scott-bandura-sf-giants-promotion-call-up/"
-    },
-    {
       "author": "",
       "game_key": "",
       "kind": "standalone",
@@ -1438,7 +1429,6 @@
     "https://blogs.fangraphs.com/san-franciscos-40-man-cleanup-will-be-a-giant-pain/": "2026-09-18T18:36:27.418759+00:00",
     "https://blogs.fangraphs.com/two-huge-innings-catapult-white-sox-into-alds/": "2026-10-01T09:18:06.049107+00:00",
     "https://omny.fm/shows/the-executives-show/giants-skipper-tony-v-on-the-giants-season-mike-krukow": "2026-09-24T19:24:34.475256+00:00",
-    "https://sfstandard.com/2026/09/12/scott-bandura-sf-giants-promotion-call-up/": "2026-09-12T22:26:52.906809+00:00",
     "https://sfstandard.com/2026/09/13/logan-webb-sf-giants-2026-season/": "2026-09-13T18:17:44.886650+00:00",
     "https://sfstandard.com/2026/09/14/who-s-left-giants-lineup-has-never-looked/": "2026-09-14T19:56:01.127175+00:00",
     "https://sfstandard.com/2026/09/15/greg-papa-tim-flannery-music-concert/": "2026-09-17T07:56:08.680067+00:00",
@@ -1572,38 +1562,6 @@
     "https://www.sfgate.com/giants/article/sf-giants-viral-mom-husband-22451456.php": "2026-09-27T19:09:27.965504+00:00"
   },
   "run_history": [
-    {
-      "discovered": 154,
-      "finished_at": "2026-09-12T22:26:53.710454+00:00",
-      "game_selection_reasons": {
-        "already_posted": 27,
-        "game_source_duplicates": 0,
-        "not_game_story": 121,
-        "quality_low": 2,
-        "schedule_grounded_threads": 0,
-        "selected_game_stories": 0,
-        "selected_game_threads": 0,
-        "stale_game_story": 4,
-        "unrouted_game_stories": 0
-      },
-      "game_stories_selected": 0,
-      "game_threads_selected": 0,
-      "schedule_grounded_threads": 0,
-      "selection_reasons": {
-        "already_posted": 46,
-        "deferred_for_breaking_news": 2,
-        "eligible": 2,
-        "quality_low": 14,
-        "selected": 1,
-        "stale": 57,
-        "story_already_posted": 1
-      },
-      "sources_failed": 0,
-      "sources_ok": 8,
-      "standalone_selected": 1,
-      "started_at": "2026-09-12T22:26:22.515991+00:00",
-      "status": "completed"
-    },
     {
       "discovered": 152,
       "finished_at": "2026-09-13T05:06:26.217425+00:00",
@@ -4301,6 +4259,36 @@
       "sources_ok": 8,
       "standalone_selected": 0,
       "started_at": "2026-10-03T18:46:31.206784+00:00",
+      "status": "completed"
+    },
+    {
+      "discovered": 148,
+      "finished_at": "2026-10-03T23:13:41.065705+00:00",
+      "game_selection_reasons": {
+        "already_posted": 7,
+        "game_source_duplicates": 0,
+        "not_game_story": 134,
+        "quality_low": 1,
+        "schedule_grounded_threads": 0,
+        "selected_game_stories": 0,
+        "selected_game_threads": 0,
+        "stale_game_story": 6,
+        "unrouted_game_stories": 0
+      },
+      "game_stories_selected": 0,
+      "game_threads_selected": 0,
+      "schedule_grounded_threads": 0,
+      "selection_reasons": {
+        "already_posted": 56,
+        "deferred_for_breaking_news": 2,
+        "quality_low": 17,
+        "selected": 0,
+        "stale": 59
+      },
+      "sources_failed": 0,
+      "sources_ok": 8,
+      "standalone_selected": 0,
+      "started_at": "2026-10-03T23:13:30.425610+00:00",
       "status": "completed"
     }
   ]
