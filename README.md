@@ -9,12 +9,15 @@ Automated, curated San Francisco Giants news feed for Bluesky. The bot discovers
 - **Entrypoint:** `python v2_bot.py`
 - **Workflow:** `.github/workflows/giants-news-bot.yml`
 - **Persistent state:** `state.json` (posted history, game-thread refs, and a bounded run-health heartbeat)
-- **Standalone cap:** 3 stories per run
+- **Hourly author checks:** Baggarly, Pavlovic and Guardado RSS once per hour; their Giants stories bypass the routine daily budget (see [fast posting](docs/FAST_POSTING.md))
+- **Season mode:** production defaults to `offseason`; repository variable `SEASON_MODE=inseason` restores game-season cadence and limits
+- **Standalone cap:** offseason 2/run and 6 routine stories/Pacific day; confirmed moves/injury news bypass the daily routine cap; inseason 3/run
 - **Standalone freshness:** 72 hours
 - **Game-story freshness:** 30 hours
 - **Dry run:** never mutates production state or posts to Bluesky
-- **Weekday cadence, Pacific:** 8:30 AM / 2:30 PM / 7:30 PM / 11:30 PM
-- **Weekend cadence, Pacific:** 8:30 AM / 1:30 PM / 5:30 PM / 10:30 PM
+- **Offseason weekday cadence, Pacific:** 8:30 AM / 2:30 PM / 7:30 PM
+- **Offseason weekend cadence, Pacific:** 8:30 AM / 1:30 PM / 5:30 PM
+- **Inseason late checks:** additionally 11:30 PM weekdays / 10:30 PM weekends
 
 GitHub cron is UTC, so the production workflow schedules both PDT and PST equivalents and uses an `America/Los_Angeles` gate to keep those local times stable through daylight-saving changes.
 
@@ -25,7 +28,7 @@ The design principle is **structured discovery, own the last mile**. Prefer a pu
 | Publication | Production discovery |
 | --- | --- |
 | SF Standard | Dedicated San Francisco Giants tag RSS |
-| The Athletic | Giants RSS |
+| The Athletic | Giants RSS + official Andrew Baggarly author RSS |
 | MLB.com | Giants RSS; Maria Guardado bylines only |
 | SFGATE | Giants RSS |
 | FanGraphs | Giants category RSS |
@@ -79,6 +82,14 @@ The bot is intended to surface original reporting, breaking news, transactions, 
 Cross-publisher duplicates are clustered deterministically. For event-driven news such as a call-up, the selector can keep **one event/reporting representative plus one genuinely differentiated analysis representative**. For comparable routine event reporting, recent publication representation over a 14-day window is used as a tie-breaker so the same outlet does not automatically win every transaction. Meaningful quality gaps and a substantial early-reporting lead still override that rotation.
 
 The best representative(s) of an event are chosen **before** the one-source-per-run diversity rule is applied; the selector does not fall through to a weaker duplicate merely to fill a slot.
+
+## Offseason approach
+
+In `offseason` mode, confirmed roster moves, contracts, coaching changes, and injury news get first consideration, followed by Giants prospects/scouting, Fall League and winter-ball development, arbitration, Rule 5/40-man decisions, pitching/payroll plans, and season reviews. Other useful features remain eligible. Hypothetical trade proposals and mock trades are excluded; attributed market reporting keeps its original headline qualifiers. There is no minimum posting quota.
+
+Keep the existing 72-hour freshness window and source/role diversity. Season reviews stay in the standalone lane, even when a feed calls them “what we learned.” Recent game coverage still follows the existing schedule-grounded routing. FanGraphs items need explicit Giants/San Francisco evidence in the headline, slug, or first 600 characters of the structured summary; a team tag, author, or search query is insufficient. Mixed-team scouting with explicit Giants evidence remains eligible.
+
+Mode is explicit because a generic MLB calendar cannot determine whether the Giants are still playing in October. Set the GitHub repository variable `SEASON_MODE` to `inseason` when Giants game coverage resumes; use `offseason` for this period. Local runs default to `inseason` for compatibility; pass `SEASON_MODE=offseason` to test current production policy. Manual trusted stories retain priority and may bypass the routine daily cap, while URL/event history remains enforced.
 
 ## Bluesky presentation
 
@@ -144,7 +155,10 @@ Useful environment variables:
 | --- | --- |
 | `HOURS_BACK` | 72-hour standalone discovery window |
 | `GAME_HOURS_BACK` | 30-hour game-story window in production |
-| `MAX_POSTS_PER_RUN` | 3 standalone posts/run |
+| `MAX_POSTS_PER_RUN` | 3 inseason; offseason clamps to at most 2 |
+| `SEASON_MODE` | `inseason` or `offseason`; production default is offseason |
+| `OFFSEASON_DAILY_LIMIT` | 6 routine standalone stories per Pacific calendar day |
+| `FAST_LANE` | `1` scans Baggarly, Pavlovic and Guardado RSS hourly with six-hour freshness |
 | `DRY_RUN` | `1` prints actions without posting or mutating state |
 | `STATE_FILE` | Alternate state path for tests/replays |
 | `DIAGNOSTICS_ENABLED` | Write selection/discovery diagnostics |
@@ -163,6 +177,7 @@ The production workflow's **Run workflow** form accepts an optional article URL,
 - `v2_probe.py` — **production structured article adapters** plus structured-discovery diagnostic entrypoint
 - `v2_knbr.py` — dedicated KNBR Executive Show/Omny discovery
 - `v2_radar.py` — tightly scoped Chronicle/Mercury core-writer radar
+- `v2_editorial.py` — shared season-review, Giants-evidence, and offseason priority rules
 - `v2_selector.py` — freshness, historical dedupe, role-aware event selection, comparable-source rotation
 - `v2_story.py` — story/event clustering, event-family normalization, news-vs-analysis role logic
 - `v2_game_threads.py` — game detection, schedule-aware grouping, root/reply ordering

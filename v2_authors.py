@@ -53,6 +53,8 @@ SOURCE_PRIORS = {
 }
 
 AUTHOR_ALIASES = {
+    # Observed typo in the official MLB Giants RSS byline.
+    "maria guarado": "maria guardado",
     "baggarly": "andrew baggarly",
     "brisbee": "grant brisbee",
     "pavlovic": "alex pavlovic",

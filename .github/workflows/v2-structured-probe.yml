@@ -16,6 +16,8 @@ permissions:
 jobs:
   probe:
     runs-on: ubuntu-latest
+    env:
+      SEASON_MODE: offseason
     steps:
       - name: Checkout
         uses: actions/checkout@v7
@@ -42,6 +44,8 @@ jobs:
           v2_knbr_test.py
           v2_radar_test.py
           v2_runtime_test.py
+          v2_offseason_test.py
+          v2_fast_test.py
 
       - name: Run structured discovery probe
         run: python v2_probe.py
@@ -77,6 +81,8 @@ jobs:
           HOURS_BACK: "72"
           GAME_HOURS_BACK: "30"
           MAX_POSTS_PER_RUN: "3"
+          SEASON_MODE: offseason
+          OFFSEASON_DAILY_LIMIT: "6"
           DIAGNOSTICS_ENABLED: "1"
           DIAGNOSTICS_FILE: v2-runtime-diagnostics.json
         run: |
@@ -86,6 +92,16 @@ jobs:
 
       - name: Run Athletic RSS probe
         run: python v2_athletic_probe.py
+
+      - name: Dry run hourly author polling
+        env:
+          STATE_FILE: /tmp/main-state.json
+          DRY_RUN: "1"
+          FAST_LANE: "1"
+          DIAGNOSTICS_FILE: v2-fast-diagnostics.json
+        run: |
+          python v2_bot.py
+          cmp /tmp/main-state-before.json /tmp/main-state.json
 
       - name: Run Athletic structured metadata probe
         run: python v2_athletic_meta_probe.py
@@ -106,6 +122,7 @@ jobs:
             v2-selection.json
             v2-selection-fresh.json
             v2-runtime-diagnostics.json
+            v2-fast-diagnostics.json
             v2-athletic-probe.json
             v2-athletic-meta-probe.json
             v2-source-diag.json

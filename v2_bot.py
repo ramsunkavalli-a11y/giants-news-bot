@@ -19,6 +19,9 @@ from v2_knbr import discover_knbr_executive_show
 from v2_probe import (
     make_article,
     discover_athletic,
+    discover_baggarly,
+    discover_pavlovic,
+    discover_guardado,
     discover_fangraphs,
     discover_mlb,
     discover_nbc,
@@ -37,7 +40,10 @@ DISCOVERERS = [
     discover_nbc,
     discover_knbr_executive_show,
     discover_core_writer_radar,
+    discover_baggarly,
 ]
+
+FAST_DISCOVERERS = [discover_baggarly, discover_pavlovic, discover_guardado]
 
 PROMO_SUMMARY_PATTERNS = (
     "this story was excerpted from",
@@ -151,6 +157,8 @@ def record_run(
             if thread.get("schedule_grounded")
         ),
         "selection_reasons": selection.get("reasons", {}),
+        "season_mode": selection.get("season_mode", "inseason"),
+        "fast_lane": selection.get("fast_lane", False),
         "game_selection_reasons": game_selection.get("reasons", {}),
     }
     if error:
@@ -249,10 +257,10 @@ def _manual_story_article(environ: dict[str, str] | None = None) -> dict | None:
     return article
 
 
-def discover_articles() -> tuple[list[dict], dict]:
+def discover_articles(*, fast_lane: bool = False) -> tuple[list[dict], dict]:
     articles: list[dict] = []
     health: dict[str, dict] = {}
-    for discover in DISCOVERERS:
+    for discover in (FAST_DISCOVERERS if fast_lane else DISCOVERERS):
         name = discover.__name__.replace("discover_", "")
         try:
             items = discover()
@@ -261,7 +269,9 @@ def discover_articles() -> tuple[list[dict], dict]:
         except Exception as exc:
             health[name] = {"ok": False, "error": f"{type(exc).__name__}: {exc}"}
 
-    manual = _manual_story_article()
+    if fast_lane and not any(item.get("ok") for item in health.values()):
+        raise RuntimeError(f"Hourly author discovery failed: {health}")
+    manual = None if fast_lane else _manual_story_article()
     if manual:
         # Insert last so an explicit dispatch replaces the same URL discovered
         # by a feed, while normal URL and same-story history still apply.
@@ -475,8 +485,12 @@ def main() -> None:
     state = load_state(settings.state_file)
     prune_state(state, settings.keep_posted_days)
 
-    articles, health = discover_articles()
+    articles, health = discover_articles(fast_lane=settings.fast_lane)
     game_hours_back = int(os.getenv("GAME_HOURS_BACK", "30"))
+    # Frequent checks catch new publications rather than backfilling old work.
+    hours_back = min(settings.hours_back, 6) if settings.fast_lane else settings.hours_back
+    if settings.fast_lane:
+        game_hours_back = min(game_hours_back, 6)
 
     game_selection = select_game_threads(
         articles,
@@ -491,9 +505,13 @@ def main() -> None:
     selection = select_articles(
         standalone_articles,
         _state_with_planned_game_stories(state, game_selection, datetime.now(timezone.utc)),
-        hours_back=settings.hours_back,
+        hours_back=hours_back,
         max_posts=settings.max_posts_per_run,
+        season_mode=settings.season_mode,
+        offseason_daily_limit=settings.offseason_daily_limit,
+        fast_lane=settings.fast_lane,
     )
+    selection["fast_lane"] = settings.fast_lane
 
     candidates = _prepare_posts(selection["selected"], settings.request_timeout)
     game_candidates = []
@@ -506,6 +524,7 @@ def main() -> None:
     diagnostics = {
         "timestamp": datetime.now(timezone.utc).isoformat(),
         "dry_run": settings.dry_run,
+        "fast_lane": settings.fast_lane,
         "health": health,
         "selection": selection,
         "game_selection": game_selection,
@@ -591,6 +610,10 @@ def main() -> None:
         return
 
     if not candidates and not game_candidates:
+        # Normal scans retain health heartbeats. Quiet hourly checks must
+        # not churn production state or crowd out weeks of useful run history.
+        if settings.fast_lane:
+            return
         record_run(
             state,
             started_at=started_at,

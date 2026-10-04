@@ -4,10 +4,15 @@ import re
 from collections import Counter
 from datetime import datetime, timedelta, timezone
 from urllib.parse import parse_qsl, urlencode, urlparse, urlunparse
+from zoneinfo import ZoneInfo
 
 import requests
 from bs4 import BeautifulSoup
 from dateutil import parser as dtparser
+from v2_editorial import (
+    HYPOTHETICAL_TRADE_RE, RECURRING_CHAT_RE, fangraphs_giants_evidence,
+    is_confirmed_move, is_priority_author, offseason_priority, priority_author_key,
+)
 
 from v2_story import (
     candidate_preference_key,
@@ -273,7 +278,19 @@ def _choose_news_winner(members: list[dict], source_counts: Counter) -> tuple[di
     return chosen, chosen is not ranked[0]
 
 
-def _role_representatives(cluster, source_counts: Counter) -> tuple[list[dict], list[dict], bool]:
+def _role_representatives(cluster, source_counts: Counter, *, fast_lane: bool = False) -> tuple[list[dict], list[dict], bool]:
+    if fast_lane:
+        # Hourly checks follow each named writer rather than rotating away
+        # their same-event reporting in favor of another followed writer.
+        winners = {}
+        duplicates = []
+        for item in sorted(cluster.members, key=candidate_preference_key, reverse=True):
+            key = (priority_author_key(item), story_role(item))
+            if key in winners:
+                duplicates.append(item)
+            else:
+                winners[key] = item
+        return list(winners.values()), duplicates, False
     by_role = {"news": [], "analysis": []}
     for member in cluster.members:
         by_role.setdefault(story_role(member), []).append(member)
@@ -305,8 +322,31 @@ def select_articles(
     hours_back: int = 72,
     max_posts: int = 5,
     now: datetime | None = None,
+    season_mode: str = "inseason",
+    offseason_daily_limit: int = 6,
+    fast_lane: bool = False,
 ) -> dict:
+    if season_mode not in {"inseason", "offseason"}:
+        raise ValueError("season_mode must be inseason or offseason")
     now = now or datetime.now(timezone.utc)
+    offseason = season_mode == "offseason"
+    if fast_lane:
+        max_posts = min(max_posts, 3)
+    elif offseason:
+        max_posts = min(max_posts, 2)
+    pacific = ZoneInfo("America/Los_Angeles")
+    local_day = now.astimezone(pacific).date()
+    routine_posted_today = sum(
+        1 for item in state.get("posted_stories", []) or []
+        if isinstance(item, dict)
+        and item.get("kind", "standalone") == "standalone"
+        and (dt := parse_dt(item.get("posted_at", ""))) is not None
+        and dt <= now
+        and dt.astimezone(pacific).date() == local_day
+        and not is_confirmed_move(item)
+        and not is_priority_author(item)
+    )
+    routine_remaining = max(0, offseason_daily_limit - routine_posted_today)
     cutoff = now - timedelta(hours=hours_back)
     posted_raw = state.get("posted_urls", {})
     if isinstance(posted_raw, dict):
@@ -323,14 +363,6 @@ def select_articles(
     diagnostics: list[dict] = []
     eligible: list[dict] = []
     timestamp_enrichments = 0
-    breaking_news_count = sum(
-        1
-        for article in articles
-        if article.get("quality") == "high"
-        and BREAKING_NEWS_TITLE_RE.search(str(article.get("title", "") or ""))
-    )
-    defer_features = breaking_news_count >= 2
-
     for raw in articles:
         article = dict(raw)
         source = article.get("source", "")
@@ -342,10 +374,15 @@ def select_articles(
         # Safety boundary: discovery adapters should already classify commodity
         # pages as low value, but do not let known broad/highlight patterns through.
         sport_blob = f"{title} {urlparse(url or '').path.replace('-', ' ')}"
-        if LOW_VALUE_TITLE_RE.search(title or "") or OTHER_SPORT_TITLE_RE.search(sport_blob):
+        if fast_lane and not is_priority_author(article):
+            reason = "not_hourly_author"
+        elif (LOW_VALUE_TITLE_RE.search(title or "") or RECURRING_CHAT_RE.search(title or "")
+                or OTHER_SPORT_TITLE_RE.search(sport_blob)):
             reason = "quality_low"
-        elif defer_features and DEFERRABLE_FEATURE_TITLE_RE.search(title or ""):
-            reason = "deferred_for_breaking_news"
+        elif source == "FanGraphs" and not fangraphs_giants_evidence(article):
+            reason = "not_giants_focused"
+        elif offseason and HYPOTHETICAL_TRADE_RE.search(title or ""):
+            reason = "offseason_hypothetical"
         elif article.get("quality") != "high":
             reason = f"quality_{article.get('quality') or 'unknown'}"
         elif not canonical:
@@ -386,6 +423,11 @@ def select_articles(
         match = next((
             item for item in history
             if item.get("story_role", "news") == role
+            # The user follows these writers' original coverage. Another
+            # writer does not consume their slot; their own event coverage
+            # and exact URLs still dedupe normally.
+            and (not is_priority_author(article)
+                 or priority_author_key(article) == priority_author_key(item))
             and same_story(
                 article.get("title", ""),
                 item.get("title", ""),
@@ -409,7 +451,17 @@ def select_articles(
 
     clusters = cluster_articles(fresh)
     floor = datetime.min.replace(tzinfo=timezone.utc)
+    # Count fresh, unposted events rather than the raw feed backlog. Old injury
+    # headlines used to indefinitely defer unrelated new features.
+    breaking_news_count = sum(
+        any(BREAKING_NEWS_TITLE_RE.search(str(item.get("title", "") or ""))
+            for item in cluster.members)
+        for cluster in clusters
+    )
+    defer_features = breaking_news_count >= 2 and not offseason
     clusters.sort(key=lambda cluster: cluster.newest_dt or floor, reverse=True)
+    if offseason:
+        clusters.sort(key=lambda cluster: min(offseason_priority(item) for item in cluster.members))
 
     selected: list[dict] = []
     overflow: list[dict] = []
@@ -417,7 +469,7 @@ def select_articles(
     summaries: list[dict] = []
 
     for cluster in clusters:
-        representatives, duplicates, rotated = _role_representatives(cluster, source_counts)
+        representatives, duplicates, rotated = _role_representatives(cluster, source_counts, fast_lane=fast_lane)
         if not representatives:
             continue
 
@@ -456,6 +508,17 @@ def select_articles(
 
         for chosen in representatives:
             source = chosen.get("source", "")
+            if defer_features and DEFERRABLE_FEATURE_TITLE_RE.search(chosen.get("title", "")):
+                reasons["deferred_for_breaking_news"] += 1
+                diagnostics.append({"source": source, "title": chosen.get("title", ""),
+                                    "url": chosen.get("url", ""), "reason": "deferred_for_breaking_news"})
+                continue
+            routine = not is_confirmed_move(chosen) and not is_priority_author(chosen)
+            if offseason and routine and routine_remaining <= 0 and not chosen.get("_manual_priority"):
+                reasons["offseason_daily_cap"] += 1
+                diagnostics.append({"source": source, "title": chosen.get("title", ""),
+                                    "url": chosen.get("url", ""), "reason": "offseason_daily_cap"})
+                continue
             if source in used_sources:
                 reasons["source_cap_cluster"] += 1
                 diagnostics.append({
@@ -473,6 +536,8 @@ def select_articles(
             chosen["selection_preference"] = list(candidate_preference_key(chosen)[:-1])
             chosen["story_role"] = story_role(chosen)
             selected.append(chosen)
+            if offseason and routine:
+                routine_remaining = max(0, routine_remaining - 1)
             used_sources.add(source)
             source_counts[source] += 1
             if rotated and story_role(chosen) == "news":
@@ -488,6 +553,9 @@ def select_articles(
         "hours_back": hours_back,
         "cutoff": cutoff.isoformat(),
         "max_posts": max_posts,
+        "season_mode": season_mode,
+        "offseason_daily_limit": offseason_daily_limit if offseason else None,
+        "routine_posted_today": routine_posted_today,
         "production_posted_url_count": len(posted),
         "recent_posted_story_count": len(history),
         "recent_source_counts": dict(source_counts),
