@@ -179,24 +179,6 @@
   },
   "posted_stories": [
     {
-      "author": "Andrew Baggarly",
-      "game_key": "",
-      "kind": "standalone",
-      "posted_at": "2026-09-13T22:30:56.919411+00:00",
-      "source": "The Athletic",
-      "title": "Giants' Rafael Devers to miss rest of season due to core muscle injury",
-      "url": "https://www.nytimes.com/athletic/7590851/2026/09/13/sf-giants-rafael-devers-injury/"
-    },
-    {
-      "author": "Alex Pavlovic",
-      "game_key": "",
-      "kind": "standalone",
-      "posted_at": "2026-09-13T22:30:59.389744+00:00",
-      "source": "NBC Sports Bay Area",
-      "title": "Why Giants shut Rafael Devers down in the middle of his historic offensive tear",
-      "url": "https://www.nbcsportsbayarea.com/mlb/san-francisco-giants/rafael-devers-injury-core-surgery/1963077/"
-    },
-    {
       "author": "",
       "game_key": "",
       "kind": "standalone",
@@ -1469,11 +1451,9 @@
     "https://www.nbcsportsbayarea.com/mlb/san-francisco-giants/observations-five-home-runs-loss-dodgers/1964320/": "2026-09-19T07:29:33.911721+00:00",
     "https://www.nbcsportsbayarea.com/mlb/san-francisco-giants/quinn-mathews-landen-roupp-cardinals/1963352/": "2026-09-15T07:58:31.597709+00:00",
     "https://www.nbcsportsbayarea.com/mlb/san-francisco-giants/rafael-devers-core-surgery-recovery-timeline/1963546/": "2026-09-18T07:34:05.771240+00:00",
-    "https://www.nbcsportsbayarea.com/mlb/san-francisco-giants/rafael-devers-injury-core-surgery/1963077/": "2026-09-13T22:30:59.389744+00:00",
     "https://www.nbcsportsbayarea.com/mlb/san-francisco-giants/road-series-win-cardinals/1963688/": "2026-09-17T07:56:11.084129+00:00",
     "https://www.nbcsportsbayarea.com/mlb/san-francisco-giants/tony-vitello-expectations-matt-wilkinson/1966120/": "2026-09-26T18:40:32.368865+00:00",
     "https://www.nbcsportsbayarea.com/mlb/san-francisco-giants/victor-bericoto-bullpen-recap-loss-dodgers/1964387/": "2026-09-20T05:08:47.839358+00:00",
-    "https://www.nytimes.com/athletic/7590851/2026/09/13/sf-giants-rafael-devers-injury/": "2026-09-13T22:30:56.919411+00:00",
     "https://www.nytimes.com/athletic/7594902/2026/09/15/rafael-devers-sf-giants-season-analysis/": "2026-09-15T19:08:49.236979+00:00",
     "https://www.nytimes.com/athletic/7595497/2026/09/14/sf-giants-mailbag-questions/": "2026-09-15T07:58:29.359101+00:00",
     "https://www.nytimes.com/athletic/7602282/2026/09/17/sf-giants-buster-posey-contract-trade-free-agency/": "2026-09-18T07:34:06.699735+00:00",
@@ -1522,39 +1502,6 @@
     "https://www.sfgate.com/giants/article/sf-giants-viral-mom-husband-22451456.php": "2026-09-27T19:09:27.965504+00:00"
   },
   "run_history": [
-    {
-      "discovered": 156,
-      "finished_at": "2026-09-13T22:31:00.193214+00:00",
-      "game_selection_reasons": {
-        "already_posted": 26,
-        "game_source_duplicates": 0,
-        "not_game_story": 124,
-        "quality_low": 2,
-        "schedule_grounded_threads": 0,
-        "selected_game_stories": 0,
-        "selected_game_threads": 0,
-        "stale_game_story": 4,
-        "unrouted_game_stories": 0
-      },
-      "game_stories_selected": 0,
-      "game_threads_selected": 0,
-      "schedule_grounded_threads": 0,
-      "selection_reasons": {
-        "already_posted": 45,
-        "deferred_for_breaking_news": 1,
-        "eligible": 7,
-        "quality_low": 14,
-        "selected": 2,
-        "stale": 57,
-        "story_already_posted": 2,
-        "story_duplicate": 3
-      },
-      "sources_failed": 0,
-      "sources_ok": 8,
-      "standalone_selected": 2,
-      "started_at": "2026-09-13T22:30:29.742935+00:00",
-      "status": "completed"
-    },
     {
       "discovered": 156,
       "finished_at": "2026-09-14T05:14:55.257446+00:00",
@@ -4242,6 +4189,36 @@
       "sources_ok": 8,
       "standalone_selected": 0,
       "started_at": "2026-10-04T18:43:18.180911+00:00",
+      "status": "completed"
+    },
+    {
+      "discovered": 148,
+      "finished_at": "2026-10-04T23:24:01.781488+00:00",
+      "game_selection_reasons": {
+        "already_posted": 7,
+        "game_source_duplicates": 0,
+        "not_game_story": 134,
+        "quality_low": 1,
+        "schedule_grounded_threads": 0,
+        "selected_game_stories": 0,
+        "selected_game_threads": 0,
+        "stale_game_story": 6,
+        "unrouted_game_stories": 0
+      },
+      "game_stories_selected": 0,
+      "game_threads_selected": 0,
+      "schedule_grounded_threads": 0,
+      "selection_reasons": {
+        "already_posted": 53,
+        "deferred_for_breaking_news": 2,
+        "quality_low": 18,
+        "selected": 0,
+        "stale": 61
+      },
+      "sources_failed": 0,
+      "sources_ok": 8,
+      "standalone_selected": 0,
+      "started_at": "2026-10-04T23:23:45.910187+00:00",
       "status": "completed"
     }
   ]
