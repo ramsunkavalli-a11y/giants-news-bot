@@ -163,33 +163,6 @@
   },
   "posted_stories": [
     {
-      "author": "",
-      "game_key": "",
-      "kind": "standalone",
-      "posted_at": "2026-09-15T19:08:44.034814+00:00",
-      "source": "San Francisco Chronicle",
-      "title": "Giants’ AFL assignments include rehabbing closer, Dakota Jordan and Kaeden Kent",
-      "url": "https://www.sfchronicle.com/sports/giants/article/giants-send-rehabbing-closer-dakota-jordan-22433173.php"
-    },
-    {
-      "author": "Ryan Greenberg",
-      "game_key": "",
-      "kind": "standalone",
-      "posted_at": "2026-09-15T19:08:46.846830+00:00",
-      "source": "NBC Sports Bay Area",
-      "title": "Giants sending rehabbing MLB reliever, top prospect to Arizona Fall League",
-      "url": "https://www.nbcsportsbayarea.com/mlb/san-francisco-giants/giants-news/giants-arizona-fall-league/1963446/"
-    },
-    {
-      "author": "Grant Brisbee",
-      "game_key": "",
-      "kind": "standalone",
-      "posted_at": "2026-09-15T19:08:49.236979+00:00",
-      "source": "The Athletic",
-      "title": "Rafael Devers didn’t hit 40 home runs. He gave the Giants something more important",
-      "url": "https://www.nytimes.com/athletic/7594902/2026/09/15/rafael-devers-sf-giants-season-analysis/"
-    },
-    {
       "author": "Justice delos Santos",
       "game_key": "",
       "kind": "standalone",
@@ -1381,7 +1354,6 @@
     "https://www.nbcsportsbayarea.com/mlb/san-francisco-giants/eldridge-in-elite-company/1963790/": "2026-09-17T11:59:39.208144+00:00",
     "https://www.nbcsportsbayarea.com/mlb/san-francisco-giants/farm-system-top-honor-mlb-pipeline/1967449/": "2026-09-30T00:39:57.721387+00:00",
     "https://www.nbcsportsbayarea.com/mlb/san-francisco-giants/giants-minor-league-system/1963701/": "2026-09-16T23:43:53.437368+00:00",
-    "https://www.nbcsportsbayarea.com/mlb/san-francisco-giants/giants-news/giants-arizona-fall-league/1963446/": "2026-09-15T19:08:46.846830+00:00",
     "https://www.nbcsportsbayarea.com/mlb/san-francisco-giants/giants-observations-tarik-skubal-shutout-loss-dodgers/1966279/": "2026-09-26T07:56:54.067960+00:00",
     "https://www.nbcsportsbayarea.com/mlb/san-francisco-giants/harrison-bader-foot-injury-scooter-crash/1967460/": "2026-09-30T08:54:09.013084+00:00",
     "https://www.nbcsportsbayarea.com/mlb/san-francisco-giants/historic-roster-churn-2026-season/1965549/": "2026-09-23T23:51:46.873269+00:00",
@@ -1399,7 +1371,6 @@
     "https://www.nbcsportsbayarea.com/mlb/san-francisco-giants/road-series-win-cardinals/1963688/": "2026-09-17T07:56:11.084129+00:00",
     "https://www.nbcsportsbayarea.com/mlb/san-francisco-giants/tony-vitello-expectations-matt-wilkinson/1966120/": "2026-09-26T18:40:32.368865+00:00",
     "https://www.nbcsportsbayarea.com/mlb/san-francisco-giants/victor-bericoto-bullpen-recap-loss-dodgers/1964387/": "2026-09-20T05:08:47.839358+00:00",
-    "https://www.nytimes.com/athletic/7594902/2026/09/15/rafael-devers-sf-giants-season-analysis/": "2026-09-15T19:08:49.236979+00:00",
     "https://www.nytimes.com/athletic/7602282/2026/09/17/sf-giants-buster-posey-contract-trade-free-agency/": "2026-09-18T07:34:06.699735+00:00",
     "https://www.nytimes.com/athletic/7602367/2026/09/18/sf-giants-trade-proposal-tony-vitello-interview/": "2026-09-18T18:36:31.773726+00:00",
     "https://www.nytimes.com/athletic/7604713/2026/09/17/sf-giants-anthony-molina-role/": "2026-09-17T19:10:45.672090+00:00",
@@ -1421,7 +1392,6 @@
     "https://www.sfchronicle.com/sports/giants/article/giants-fall-twins-clinching-losing-record-sf-bo-22446034.php": "2026-09-24T07:45:25.050194+00:00",
     "https://www.sfchronicle.com/sports/giants/article/giants-give-mike-krukow-emotional-sendoff-finale-22451590.php": "2026-09-28T05:41:02.524067+00:00",
     "https://www.sfchronicle.com/sports/giants/article/giants-infielder-marcelo-mayer-top-prospect-22440835.php": "2026-09-22T00:13:45.439855+00:00",
-    "https://www.sfchronicle.com/sports/giants/article/giants-send-rehabbing-closer-dakota-jordan-22433173.php": "2026-09-15T19:08:44.034814+00:00",
     "https://www.sfchronicle.com/sports/giants/article/hall-fame-isn-t-allowing-giants-krukow-22447621.php": "2026-09-24T23:57:24.780984+00:00",
     "https://www.sfchronicle.com/sports/giants/article/logan-webb-wins-willie-mac-award-team-s-22449851.php": "2026-09-26T18:40:36.879176+00:00",
     "https://www.sfchronicle.com/sports/giants/article/losing-games-irking-fans-2026-22453146.php": "2026-09-29T13:15:13.017561+00:00",
@@ -1446,39 +1416,6 @@
     "https://www.sfgate.com/giants/article/sf-giants-viral-mom-husband-22451456.php": "2026-09-27T19:09:27.965504+00:00"
   },
   "run_history": [
-    {
-      "discovered": 155,
-      "finished_at": "2026-09-15T19:08:50.039581+00:00",
-      "game_selection_reasons": {
-        "already_posted": 20,
-        "game_source_duplicates": 0,
-        "not_game_story": 128,
-        "quality_low": 2,
-        "schedule_grounded_threads": 0,
-        "selected_game_stories": 0,
-        "selected_game_threads": 0,
-        "stale_game_story": 5,
-        "unrouted_game_stories": 0
-      },
-      "game_stories_selected": 0,
-      "game_threads_selected": 0,
-      "schedule_grounded_threads": 0,
-      "selection_reasons": {
-        "already_posted": 41,
-        "deferred_for_breaking_news": 1,
-        "eligible": 14,
-        "quality_low": 15,
-        "run_cap": 1,
-        "selected": 3,
-        "stale": 57,
-        "story_already_posted": 10
-      },
-      "sources_failed": 0,
-      "sources_ok": 8,
-      "standalone_selected": 3,
-      "started_at": "2026-09-15T19:08:13.383370+00:00",
-      "status": "completed"
-    },
     {
       "discovered": 153,
       "finished_at": "2026-09-15T23:35:45.150456+00:00",
@@ -4151,6 +4088,36 @@
       "sources_ok": 8,
       "standalone_selected": 1,
       "started_at": "2026-10-06T13:32:29.922731+00:00",
+      "status": "completed"
+    },
+    {
+      "discovered": 148,
+      "finished_at": "2026-10-06T20:28:16.530182+00:00",
+      "game_selection_reasons": {
+        "already_posted": 6,
+        "game_source_duplicates": 0,
+        "not_game_story": 133,
+        "quality_low": 2,
+        "schedule_grounded_threads": 0,
+        "selected_game_stories": 0,
+        "selected_game_threads": 0,
+        "stale_game_story": 7,
+        "unrouted_game_stories": 0
+      },
+      "game_stories_selected": 0,
+      "game_threads_selected": 0,
+      "schedule_grounded_threads": 0,
+      "selection_reasons": {
+        "already_posted": 53,
+        "deferred_for_breaking_news": 2,
+        "quality_low": 17,
+        "selected": 0,
+        "stale": 61
+      },
+      "sources_failed": 0,
+      "sources_ok": 8,
+      "standalone_selected": 0,
+      "started_at": "2026-10-06T20:28:01.340785+00:00",
       "status": "completed"
     }
   ]
