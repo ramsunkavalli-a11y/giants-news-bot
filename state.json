@@ -163,15 +163,6 @@
   },
   "posted_stories": [
     {
-      "author": "Angelina Martin",
-      "game_key": "",
-      "kind": "standalone",
-      "posted_at": "2026-09-16T07:50:56.231725+00:00",
-      "source": "NBC Sports Bay Area",
-      "title": "Blade and Bryce save Giants",
-      "url": "https://www.nbcsportsbayarea.com/mlb/san-francisco-giants/bryce-eldridge-blade-tidwell-st-louis-cardinals/1963586/"
-    },
-    {
       "author": "Vince Lontz",
       "game_key": "",
       "kind": "standalone",
@@ -1329,7 +1320,6 @@
     "https://www.mlb.com/giants/news/tony-vitello-gets-ejected-from-giants-final-2026-game": "2026-09-27T23:12:49.601865+00:00",
     "https://www.nbcsportsbayarea.com/mlb/san-francisco-giants/anthony-molina-minnesota-twins/1965403/": "2026-09-23T07:55:03.378823+00:00",
     "https://www.nbcsportsbayarea.com/mlb/san-francisco-giants/bo-davidson-promotion-debut/1965101/": "2026-09-22T00:13:44.364499+00:00",
-    "https://www.nbcsportsbayarea.com/mlb/san-francisco-giants/bryce-eldridge-blade-tidwell-st-louis-cardinals/1963586/": "2026-09-16T07:50:56.231725+00:00",
     "https://www.nbcsportsbayarea.com/mlb/san-francisco-giants/buster-posey-giants-farm-system/1964037/": "2026-09-17T23:36:30.309804+00:00",
     "https://www.nbcsportsbayarea.com/mlb/san-francisco-giants/buster-posey-offseason-bullpen-puzzle/1967880/": "2026-10-01T20:25:42.192899+00:00",
     "https://www.nbcsportsbayarea.com/mlb/san-francisco-giants/buster-posey-reflects-criticism/1963922/": "2026-09-18T11:41:28.121197+00:00",
@@ -1406,38 +1396,6 @@
     "https://www.sfgate.com/giants/article/sf-giants-viral-mom-husband-22451456.php": "2026-09-27T19:09:27.965504+00:00"
   },
   "run_history": [
-    {
-      "discovered": 152,
-      "finished_at": "2026-09-16T07:50:57.035062+00:00",
-      "game_selection_reasons": {
-        "already_posted": 18,
-        "game_source_duplicates": 0,
-        "not_game_story": 128,
-        "quality_low": 1,
-        "schedule_grounded_threads": 0,
-        "selected_game_stories": 0,
-        "selected_game_threads": 0,
-        "stale_game_story": 5,
-        "unrouted_game_stories": 0
-      },
-      "game_stories_selected": 0,
-      "game_threads_selected": 0,
-      "schedule_grounded_threads": 0,
-      "selection_reasons": {
-        "already_posted": 42,
-        "deferred_for_breaking_news": 1,
-        "eligible": 11,
-        "quality_low": 16,
-        "selected": 1,
-        "stale": 58,
-        "story_already_posted": 10
-      },
-      "sources_failed": 0,
-      "sources_ok": 8,
-      "standalone_selected": 1,
-      "started_at": "2026-09-16T07:50:39.160108+00:00",
-      "status": "completed"
-    },
     {
       "discovered": 152,
       "finished_at": "2026-09-16T11:58:17.651930+00:00",
@@ -4106,6 +4064,36 @@
       "sources_ok": 8,
       "standalone_selected": 0,
       "started_at": "2026-10-07T00:53:49.968649+00:00",
+      "status": "completed"
+    },
+    {
+      "discovered": 148,
+      "finished_at": "2026-10-07T09:06:01.957489+00:00",
+      "game_selection_reasons": {
+        "already_posted": 6,
+        "game_source_duplicates": 0,
+        "not_game_story": 133,
+        "quality_low": 2,
+        "schedule_grounded_threads": 0,
+        "selected_game_stories": 0,
+        "selected_game_threads": 0,
+        "stale_game_story": 7,
+        "unrouted_game_stories": 0
+      },
+      "game_stories_selected": 0,
+      "game_threads_selected": 0,
+      "schedule_grounded_threads": 0,
+      "selection_reasons": {
+        "already_posted": 53,
+        "deferred_for_breaking_news": 2,
+        "quality_low": 17,
+        "selected": 0,
+        "stale": 61
+      },
+      "sources_failed": 0,
+      "sources_ok": 8,
+      "standalone_selected": 0,
+      "started_at": "2026-10-07T09:05:47.582193+00:00",
       "status": "completed"
     }
   ]
