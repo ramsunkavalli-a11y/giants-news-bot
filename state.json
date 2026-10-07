@@ -163,15 +163,6 @@
   },
   "posted_stories": [
     {
-      "author": "Justice delos Santos",
-      "game_key": "",
-      "kind": "standalone",
-      "posted_at": "2026-09-15T23:35:44.348174+00:00",
-      "source": "Mercury News",
-      "title": "Should SF Giants shut down Webb? Why they’re talking about it",
-      "url": "https://www.mercurynews.com/2026/09/14/logan-webb-sf-giants-shut-down-2026-season/"
-    },
-    {
       "author": "Angelina Martin",
       "game_key": "",
       "kind": "standalone",
@@ -1312,7 +1303,6 @@
     "https://sfstandard.com/pacific-standard-time/2026/09/29/giants-mom-year-viral-clip-our-broken-internet/": "2026-09-29T13:15:12.060256+00:00",
     "https://sfstandard.com/section-415/2026/09/25/section-415-despite-criticism-kalshi-isn-t-deterred-partnering-giants/": "2026-09-25T19:26:01.436138+00:00",
     "https://sfstandard.com/section-415/2026/10/01/section-415-podcast-2026-compares-giants-worst-seasons-ever/": "2026-10-01T20:25:40.262587+00:00",
-    "https://www.mercurynews.com/2026/09/14/logan-webb-sf-giants-shut-down-2026-season/": "2026-09-15T23:35:44.348174+00:00",
     "https://www.mercurynews.com/2026/09/15/sf-giants-all-star-reliever-rodriguez-to-pitch-in-arizona-fall-league/": "2026-09-18T07:34:07.853335+00:00",
     "https://www.mercurynews.com/2026/09/15/sf-giants-avoid-100-loss-season-with-blowout-victory-over-cardinals-bryce-eldridge-turner-hill/": "2026-09-17T07:56:05.206793+00:00",
     "https://www.mercurynews.com/2026/09/17/sf-giants-jonah-cox-vitello-stolen-base-rookie-mlb/": "2026-09-17T23:36:32.019534+00:00",
@@ -1416,38 +1406,6 @@
     "https://www.sfgate.com/giants/article/sf-giants-viral-mom-husband-22451456.php": "2026-09-27T19:09:27.965504+00:00"
   },
   "run_history": [
-    {
-      "discovered": 153,
-      "finished_at": "2026-09-15T23:35:45.150456+00:00",
-      "game_selection_reasons": {
-        "already_posted": 19,
-        "game_source_duplicates": 0,
-        "not_game_story": 127,
-        "quality_low": 2,
-        "schedule_grounded_threads": 0,
-        "selected_game_stories": 0,
-        "selected_game_threads": 0,
-        "stale_game_story": 5,
-        "unrouted_game_stories": 0
-      },
-      "game_stories_selected": 0,
-      "game_threads_selected": 0,
-      "schedule_grounded_threads": 0,
-      "selection_reasons": {
-        "already_posted": 42,
-        "deferred_for_breaking_news": 1,
-        "eligible": 12,
-        "quality_low": 15,
-        "selected": 1,
-        "stale": 57,
-        "story_already_posted": 11
-      },
-      "sources_failed": 0,
-      "sources_ok": 8,
-      "standalone_selected": 1,
-      "started_at": "2026-09-15T23:35:13.282947+00:00",
-      "status": "completed"
-    },
     {
       "discovered": 152,
       "finished_at": "2026-09-16T07:50:57.035062+00:00",
@@ -4118,6 +4076,36 @@
       "sources_ok": 8,
       "standalone_selected": 0,
       "started_at": "2026-10-06T20:28:01.340785+00:00",
+      "status": "completed"
+    },
+    {
+      "discovered": 148,
+      "finished_at": "2026-10-07T00:53:59.953850+00:00",
+      "game_selection_reasons": {
+        "already_posted": 6,
+        "game_source_duplicates": 0,
+        "not_game_story": 133,
+        "quality_low": 2,
+        "schedule_grounded_threads": 0,
+        "selected_game_stories": 0,
+        "selected_game_threads": 0,
+        "stale_game_story": 7,
+        "unrouted_game_stories": 0
+      },
+      "game_stories_selected": 0,
+      "game_threads_selected": 0,
+      "schedule_grounded_threads": 0,
+      "selection_reasons": {
+        "already_posted": 53,
+        "deferred_for_breaking_news": 2,
+        "quality_low": 17,
+        "selected": 0,
+        "stale": 61
+      },
+      "sources_failed": 0,
+      "sources_ok": 8,
+      "standalone_selected": 0,
+      "started_at": "2026-10-07T00:53:49.968649+00:00",
       "status": "completed"
     }
   ]
