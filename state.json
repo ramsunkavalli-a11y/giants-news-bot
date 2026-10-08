@@ -147,33 +147,6 @@
   },
   "posted_stories": [
     {
-      "author": "Alex Pavlovic",
-      "game_key": "",
-      "kind": "standalone",
-      "posted_at": "2026-09-17T19:10:44.724320+00:00",
-      "source": "NBC Sports Bay Area",
-      "title": "Could Hall of Fame come calling for Mike Krukow, Duane Kuiper as Giants duo?",
-      "url": "https://www.nbcsportsbayarea.com/mlb/san-francisco-giants/mike-krukow-duane-kuiper-hall-of-fame/1963842/"
-    },
-    {
-      "author": "",
-      "game_key": "",
-      "kind": "standalone",
-      "posted_at": "2026-09-17T19:10:45.672090+00:00",
-      "source": "The Athletic",
-      "title": "Giants pitcher Anthony Molina might be exactly what the team needed",
-      "url": "https://www.nytimes.com/athletic/7604713/2026/09/17/sf-giants-anthony-molina-role/"
-    },
-    {
-      "author": "Tim Kawakami",
-      "game_key": "",
-      "kind": "standalone",
-      "posted_at": "2026-09-17T19:10:48.959865+00:00",
-      "source": "San Francisco Standard",
-      "title": "Kawakami: How Buster Posey is dealing with this lousy Giants season and approaching 2027",
-      "url": "https://sfstandard.com/2026/09/17/buster-posey-sf-giants-2027-plans-strategy/"
-    },
-    {
       "author": "Alex Simon",
       "game_key": "",
       "kind": "standalone",
@@ -1189,17 +1162,26 @@
       "source": "NBC Sports Bay Area",
       "title": "Giants snap Dodgers' three-year streak for MLB-worst stat in 2026 season",
       "url": "https://www.nbcsportsbayarea.com/mlb/san-francisco-giants/injured-list-league-leaders-2026/1969597/"
+    },
+    {
+      "author": "Brendan Gawlowski",
+      "game_key": "",
+      "kind": "standalone",
+      "posted_at": "2026-10-08T20:45:45.686438+00:00",
+      "source": "FanGraphs",
+      "title": "Fall Instructional League Notes: Royals, Giants, Padres",
+      "url": "https://blogs.fangraphs.com/fall-instructional-league-notes-royals-giants-padres/"
     }
   ],
   "posted_urls": {
     "https://blogs.fangraphs.com/eric-longenhagen-prospects-chat-9-25/": "2026-09-25T19:26:02.371243+00:00",
+    "https://blogs.fangraphs.com/fall-instructional-league-notes-royals-giants-padres/": "2026-10-08T20:45:45.686438+00:00",
     "https://blogs.fangraphs.com/i-90-blue-bloods-clash-guardians-vs-white-sox-alds-preview/": "2026-10-03T00:37:01.307716+00:00",
     "https://blogs.fangraphs.com/joe-musgrove-thrives-in-rehab-outing-plus-more-arizona-scouting-notes/": "2026-09-28T21:20:04.690250+00:00",
     "https://blogs.fangraphs.com/notes-from-star-studded-rockies-as-instructional-league/": "2026-09-25T08:06:14.575622+00:00",
     "https://blogs.fangraphs.com/san-franciscos-40-man-cleanup-will-be-a-giant-pain/": "2026-09-18T18:36:27.418759+00:00",
     "https://blogs.fangraphs.com/two-huge-innings-catapult-white-sox-into-alds/": "2026-10-01T09:18:06.049107+00:00",
     "https://omny.fm/shows/the-executives-show/giants-skipper-tony-v-on-the-giants-season-mike-krukow": "2026-09-24T19:24:34.475256+00:00",
-    "https://sfstandard.com/2026/09/17/buster-posey-sf-giants-2027-plans-strategy/": "2026-09-17T19:10:48.959865+00:00",
     "https://sfstandard.com/2026/09/18/bryce-eldridge-rafael-devers-sf-giants-future/": "2026-09-18T18:36:30.680281+00:00",
     "https://sfstandard.com/2026/09/20/duane-kuiper-cancer-diagnosis-mike-krukow/": "2026-09-20T18:16:05.946909+00:00",
     "https://sfstandard.com/2026/09/22/duane-kuiper-mike-krukow-sf-giants-broadcasting/": "2026-09-22T19:02:12.693289+00:00",
@@ -1261,14 +1243,12 @@
     "https://www.nbcsportsbayarea.com/mlb/san-francisco-giants/logan-webb-blister-injury-ending-season/1964273/": "2026-09-19T07:29:28.557764+00:00",
     "https://www.nbcsportsbayarea.com/mlb/san-francisco-giants/matt-wilkinson-camilo-doval-dodgers/1966368/": "2026-09-27T05:31:13.771725+00:00",
     "https://www.nbcsportsbayarea.com/mlb/san-francisco-giants/matt-wilkinson-shines-in-giants-loss-dodgers/1964723/": "2026-09-21T05:14:22.092223+00:00",
-    "https://www.nbcsportsbayarea.com/mlb/san-francisco-giants/mike-krukow-duane-kuiper-hall-of-fame/1963842/": "2026-09-17T19:10:44.724320+00:00",
     "https://www.nbcsportsbayarea.com/mlb/san-francisco-giants/observations-five-home-runs-loss-dodgers/1964320/": "2026-09-19T07:29:33.911721+00:00",
     "https://www.nbcsportsbayarea.com/mlb/san-francisco-giants/rafael-devers-core-surgery-recovery-timeline/1963546/": "2026-09-18T07:34:05.771240+00:00",
     "https://www.nbcsportsbayarea.com/mlb/san-francisco-giants/tony-vitello-expectations-matt-wilkinson/1966120/": "2026-09-26T18:40:32.368865+00:00",
     "https://www.nbcsportsbayarea.com/mlb/san-francisco-giants/victor-bericoto-bullpen-recap-loss-dodgers/1964387/": "2026-09-20T05:08:47.839358+00:00",
     "https://www.nytimes.com/athletic/7602282/2026/09/17/sf-giants-buster-posey-contract-trade-free-agency/": "2026-09-18T07:34:06.699735+00:00",
     "https://www.nytimes.com/athletic/7602367/2026/09/18/sf-giants-trade-proposal-tony-vitello-interview/": "2026-09-18T18:36:31.773726+00:00",
-    "https://www.nytimes.com/athletic/7604713/2026/09/17/sf-giants-anthony-molina-role/": "2026-09-17T19:10:45.672090+00:00",
     "https://www.nytimes.com/athletic/7609499/2026/09/19/giants-randy-rodriguez-bryce-eldridge/": "2026-09-19T18:09:24.416374+00:00",
     "https://www.nytimes.com/athletic/7612009/2026/09/20/giants-loss-dodgers-vitello-bullpen/": "2026-09-20T18:16:06.902198+00:00",
     "https://www.nytimes.com/athletic/7614219/2026/09/20/duane-kuiper-sf-giants-throat-cancer-treatment/": "2026-09-20T22:35:25.111745+00:00",
@@ -1310,38 +1290,6 @@
     "https://www.sfgate.com/giants/article/sf-giants-viral-mom-husband-22451456.php": "2026-09-27T19:09:27.965504+00:00"
   },
   "run_history": [
-    {
-      "discovered": 161,
-      "finished_at": "2026-09-17T19:10:49.762767+00:00",
-      "game_selection_reasons": {
-        "already_posted": 20,
-        "game_source_duplicates": 0,
-        "not_game_story": 136,
-        "schedule_grounded_threads": 0,
-        "selected_game_stories": 0,
-        "selected_game_threads": 0,
-        "stale_game_story": 5,
-        "unrouted_game_stories": 0
-      },
-      "game_stories_selected": 0,
-      "game_threads_selected": 0,
-      "schedule_grounded_threads": 0,
-      "selection_reasons": {
-        "already_posted": 44,
-        "deferred_for_breaking_news": 1,
-        "eligible": 9,
-        "quality_low": 18,
-        "selected": 3,
-        "source_cap_cluster": 3,
-        "stale": 64,
-        "story_already_posted": 3
-      },
-      "sources_failed": 0,
-      "sources_ok": 8,
-      "standalone_selected": 3,
-      "started_at": "2026-09-17T19:10:19.707764+00:00",
-      "status": "completed"
-    },
     {
       "discovered": 161,
       "finished_at": "2026-09-17T23:36:32.822950+00:00",
@@ -4000,6 +3948,37 @@
       "sources_ok": 8,
       "standalone_selected": 0,
       "started_at": "2026-10-08T13:54:29.071021+00:00",
+      "status": "completed"
+    },
+    {
+      "discovered": 148,
+      "finished_at": "2026-10-08T20:45:46.490975+00:00",
+      "game_selection_reasons": {
+        "already_posted": 6,
+        "game_source_duplicates": 0,
+        "not_game_story": 132,
+        "quality_low": 3,
+        "schedule_grounded_threads": 0,
+        "selected_game_stories": 0,
+        "selected_game_threads": 0,
+        "stale_game_story": 7,
+        "unrouted_game_stories": 0
+      },
+      "game_stories_selected": 0,
+      "game_threads_selected": 0,
+      "schedule_grounded_threads": 0,
+      "selection_reasons": {
+        "already_posted": 53,
+        "deferred_for_breaking_news": 2,
+        "eligible": 1,
+        "quality_low": 16,
+        "selected": 1,
+        "stale": 60
+      },
+      "sources_failed": 0,
+      "sources_ok": 8,
+      "standalone_selected": 1,
+      "started_at": "2026-10-08T20:45:30.879658+00:00",
       "status": "completed"
     }
   ]
