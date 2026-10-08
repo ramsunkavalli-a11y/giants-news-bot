@@ -147,24 +147,6 @@
   },
   "posted_stories": [
     {
-      "author": "Alex Simon",
-      "game_key": "",
-      "kind": "standalone",
-      "posted_at": "2026-09-17T11:59:37.599139+00:00",
-      "source": "SFGATE",
-      "title": "A deeply serious look at the SF Giants' growing chicken tender problem",
-      "url": "https://www.sfgate.com/giants/article/sf-giants-chicken-tenders-22433120.php"
-    },
-    {
-      "author": "Vince Lontz",
-      "game_key": "",
-      "kind": "standalone",
-      "posted_at": "2026-09-17T11:59:39.208144+00:00",
-      "source": "NBC Sports Bay Area",
-      "title": "Bryce Eldridge's age-21 season stats put him in elite company with MLB stars",
-      "url": "https://www.nbcsportsbayarea.com/mlb/san-francisco-giants/eldridge-in-elite-company/1963790/"
-    },
-    {
       "author": "Alex Pavlovic",
       "game_key": "",
       "kind": "standalone",
@@ -1268,7 +1250,6 @@
     "https://www.nbcsportsbayarea.com/mlb/san-francisco-giants/drew-gilbert-bo-davidson-blade-tidwell-twins/1965184/": "2026-09-22T23:42:25.542109+00:00",
     "https://www.nbcsportsbayarea.com/mlb/san-francisco-giants/duane-kuiper-mike-krukow-booth-experience/1965032/": "2026-09-21T20:05:29.583038+00:00",
     "https://www.nbcsportsbayarea.com/mlb/san-francisco-giants/duane-kuiper-throat-cancer-diagnosis/1964462/": "2026-09-20T18:16:02.460225+00:00",
-    "https://www.nbcsportsbayarea.com/mlb/san-francisco-giants/eldridge-in-elite-company/1963790/": "2026-09-17T11:59:39.208144+00:00",
     "https://www.nbcsportsbayarea.com/mlb/san-francisco-giants/farm-system-top-honor-mlb-pipeline/1967449/": "2026-09-30T00:39:57.721387+00:00",
     "https://www.nbcsportsbayarea.com/mlb/san-francisco-giants/giants-observations-tarik-skubal-shutout-loss-dodgers/1966279/": "2026-09-26T07:56:54.067960+00:00",
     "https://www.nbcsportsbayarea.com/mlb/san-francisco-giants/harrison-bader-foot-injury-scooter-crash/1967460/": "2026-09-30T08:54:09.013084+00:00",
@@ -1324,43 +1305,11 @@
     "https://www.sfgate.com/giants/article/kuiper-krukow-tribute-last-game-22451594.php": "2026-09-27T23:12:51.524599+00:00",
     "https://www.sfgate.com/giants/article/oracle-park-momos-lockout-22453051.php": "2026-10-02T13:04:19.988698+00:00",
     "https://www.sfgate.com/giants/article/sf-giants-buster-posey-season-22456150.php": "2026-09-30T20:12:35.991364+00:00",
-    "https://www.sfgate.com/giants/article/sf-giants-chicken-tenders-22433120.php": "2026-09-17T11:59:37.599139+00:00",
     "https://www.sfgate.com/giants/article/sf-giants-fans-krukow-tribute-22443910.php": "2026-09-28T05:41:03.441061+00:00",
     "https://www.sfgate.com/giants/article/sf-giants-pride-night-22455246.php": "2026-09-30T00:39:58.647122+00:00",
     "https://www.sfgate.com/giants/article/sf-giants-viral-mom-husband-22451456.php": "2026-09-27T19:09:27.965504+00:00"
   },
   "run_history": [
-    {
-      "discovered": 157,
-      "finished_at": "2026-09-17T11:59:40.011805+00:00",
-      "game_selection_reasons": {
-        "already_posted": 20,
-        "game_source_duplicates": 0,
-        "not_game_story": 132,
-        "schedule_grounded_threads": 0,
-        "selected_game_stories": 0,
-        "selected_game_threads": 0,
-        "stale_game_story": 5,
-        "unrouted_game_stories": 0
-      },
-      "game_stories_selected": 0,
-      "game_threads_selected": 0,
-      "schedule_grounded_threads": 0,
-      "selection_reasons": {
-        "already_posted": 46,
-        "deferred_for_breaking_news": 1,
-        "eligible": 5,
-        "quality_low": 18,
-        "selected": 2,
-        "stale": 62,
-        "story_already_posted": 3
-      },
-      "sources_failed": 0,
-      "sources_ok": 8,
-      "standalone_selected": 2,
-      "started_at": "2026-09-17T11:59:22.576285+00:00",
-      "status": "completed"
-    },
     {
       "discovered": 161,
       "finished_at": "2026-09-17T19:10:49.762767+00:00",
@@ -4021,6 +3970,36 @@
       "sources_ok": 8,
       "standalone_selected": 0,
       "started_at": "2026-10-08T09:20:36.615612+00:00",
+      "status": "completed"
+    },
+    {
+      "discovered": 147,
+      "finished_at": "2026-10-08T13:54:41.256844+00:00",
+      "game_selection_reasons": {
+        "already_posted": 6,
+        "game_source_duplicates": 0,
+        "not_game_story": 131,
+        "quality_low": 3,
+        "schedule_grounded_threads": 0,
+        "selected_game_stories": 0,
+        "selected_game_threads": 0,
+        "stale_game_story": 7,
+        "unrouted_game_stories": 0
+      },
+      "game_stories_selected": 0,
+      "game_threads_selected": 0,
+      "schedule_grounded_threads": 0,
+      "selection_reasons": {
+        "already_posted": 54,
+        "deferred_for_breaking_news": 2,
+        "quality_low": 16,
+        "selected": 0,
+        "stale": 59
+      },
+      "sources_failed": 0,
+      "sources_ok": 8,
+      "standalone_selected": 0,
+      "started_at": "2026-10-08T13:54:29.071021+00:00",
       "status": "completed"
     }
   ]
