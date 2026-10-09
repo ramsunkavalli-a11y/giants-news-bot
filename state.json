@@ -147,33 +147,6 @@
   },
   "posted_stories": [
     {
-      "author": "Alex Simon",
-      "game_key": "",
-      "kind": "standalone",
-      "posted_at": "2026-09-17T23:36:28.032901+00:00",
-      "source": "SFGATE",
-      "title": "As awful season nears end, Buster Posey addresses future in top SF Giants role",
-      "url": "https://www.sfgate.com/giants/article/buster-posey-exec-future-22437061.php"
-    },
-    {
-      "author": "Nick Avila",
-      "game_key": "",
-      "kind": "standalone",
-      "posted_at": "2026-09-17T23:36:30.309804+00:00",
-      "source": "NBC Sports Bay Area",
-      "title": "Buster Posey letting himself ‘dream' as Giants' farm system takes flight",
-      "url": "https://www.nbcsportsbayarea.com/mlb/san-francisco-giants/buster-posey-giants-farm-system/1964037/"
-    },
-    {
-      "author": "Justice delos Santos",
-      "game_key": "",
-      "kind": "standalone",
-      "posted_at": "2026-09-17T23:36:32.019534+00:00",
-      "source": "Mercury News",
-      "title": "‘He’s got so many tools’: How SF Giants’ Cox is making a speedy impression",
-      "url": "https://www.mercurynews.com/2026/09/17/sf-giants-jonah-cox-vitello-stolen-base-rookie-mlb/"
-    },
-    {
       "author": "",
       "game_key": "",
       "kind": "standalone",
@@ -1197,7 +1170,6 @@
     "https://sfstandard.com/section-415/2026/09/25/section-415-despite-criticism-kalshi-isn-t-deterred-partnering-giants/": "2026-09-25T19:26:01.436138+00:00",
     "https://sfstandard.com/section-415/2026/10/01/section-415-podcast-2026-compares-giants-worst-seasons-ever/": "2026-10-01T20:25:40.262587+00:00",
     "https://www.mercurynews.com/2026/09/15/sf-giants-all-star-reliever-rodriguez-to-pitch-in-arizona-fall-league/": "2026-09-18T07:34:07.853335+00:00",
-    "https://www.mercurynews.com/2026/09/17/sf-giants-jonah-cox-vitello-stolen-base-rookie-mlb/": "2026-09-17T23:36:32.019534+00:00",
     "https://www.mercurynews.com/2026/09/18/sf-giants-allow-five-homers-including-four-in-one-inning-in-loss-to-dodgers/": "2026-09-19T07:29:31.289436+00:00",
     "https://www.mercurynews.com/2026/09/18/sf-giants-bryce-eldridge-scratched-from-lineup-due-to-head-laceration/": "2026-09-19T11:24:05.989691+00:00",
     "https://www.mercurynews.com/2026/09/19/sf-giants-bryce-eldridge-in-concussion-protocol-to-miss-sundays-series-finale/": "2026-09-21T05:14:19.416456+00:00",
@@ -1222,7 +1194,6 @@
     "https://www.mlb.com/giants/news/tony-vitello-gets-ejected-from-giants-final-2026-game": "2026-09-27T23:12:49.601865+00:00",
     "https://www.nbcsportsbayarea.com/mlb/san-francisco-giants/anthony-molina-minnesota-twins/1965403/": "2026-09-23T07:55:03.378823+00:00",
     "https://www.nbcsportsbayarea.com/mlb/san-francisco-giants/bo-davidson-promotion-debut/1965101/": "2026-09-22T00:13:44.364499+00:00",
-    "https://www.nbcsportsbayarea.com/mlb/san-francisco-giants/buster-posey-giants-farm-system/1964037/": "2026-09-17T23:36:30.309804+00:00",
     "https://www.nbcsportsbayarea.com/mlb/san-francisco-giants/buster-posey-offseason-bullpen-puzzle/1967880/": "2026-10-01T20:25:42.192899+00:00",
     "https://www.nbcsportsbayarea.com/mlb/san-francisco-giants/buster-posey-reflects-criticism/1963922/": "2026-09-18T11:41:28.121197+00:00",
     "https://www.nbcsportsbayarea.com/mlb/san-francisco-giants/camilo-doval-claimed-waivers-pirates/1965801/": "2026-09-24T19:24:32.365936+00:00",
@@ -1278,7 +1249,6 @@
     "https://www.sfchronicle.com/sports/giants/article/sf-giants-place-jung-hoo-lee-bryce-eldridge-22442692.php": "2026-09-23T19:09:39.375995+00:00",
     "https://www.sfchronicle.com/sports/giants/article/sf-giants-top-twins-lost-pitcher-blade-tidwell-22442689.php": "2026-09-22T07:53:46.134221+00:00",
     "https://www.sfchronicle.com/sports/giants/article/tony-vitello-tossed-mlb-high-7th-time-giants-22451573.php": "2026-09-27T23:12:52.485363+00:00",
-    "https://www.sfgate.com/giants/article/buster-posey-exec-future-22437061.php": "2026-09-17T23:36:28.032901+00:00",
     "https://www.sfgate.com/giants/article/giants-mike-krukow-replacement-22455689.php": "2026-10-01T13:47:50.076409+00:00",
     "https://www.sfgate.com/giants/article/giants-nude-player-celebrations-22443935.php": "2026-09-22T19:02:09.613466+00:00",
     "https://www.sfgate.com/giants/article/krukow-kuiper-hall-costas-22446111.php": "2026-09-23T23:51:44.741945+00:00",
@@ -1290,39 +1260,6 @@
     "https://www.sfgate.com/giants/article/sf-giants-viral-mom-husband-22451456.php": "2026-09-27T19:09:27.965504+00:00"
   },
   "run_history": [
-    {
-      "discovered": 161,
-      "finished_at": "2026-09-17T23:36:32.822950+00:00",
-      "game_selection_reasons": {
-        "already_posted": 20,
-        "game_source_duplicates": 0,
-        "not_game_story": 136,
-        "schedule_grounded_threads": 0,
-        "selected_game_stories": 0,
-        "selected_game_threads": 0,
-        "stale_game_story": 5,
-        "unrouted_game_stories": 0
-      },
-      "game_stories_selected": 0,
-      "game_threads_selected": 0,
-      "schedule_grounded_threads": 0,
-      "selection_reasons": {
-        "already_posted": 46,
-        "deferred_for_breaking_news": 1,
-        "eligible": 8,
-        "quality_low": 18,
-        "run_cap": 1,
-        "selected": 3,
-        "source_cap_cluster": 3,
-        "stale": 63,
-        "story_duplicate": 1
-      },
-      "sources_failed": 0,
-      "sources_ok": 8,
-      "standalone_selected": 3,
-      "started_at": "2026-09-17T23:36:14.081352+00:00",
-      "status": "completed"
-    },
     {
       "discovered": 162,
       "finished_at": "2026-09-18T07:34:08.655976+00:00",
@@ -3979,6 +3916,36 @@
       "sources_ok": 8,
       "standalone_selected": 1,
       "started_at": "2026-10-08T20:45:30.879658+00:00",
+      "status": "completed"
+    },
+    {
+      "discovered": 148,
+      "finished_at": "2026-10-09T01:19:59.177713+00:00",
+      "game_selection_reasons": {
+        "already_posted": 6,
+        "game_source_duplicates": 0,
+        "not_game_story": 132,
+        "quality_low": 3,
+        "schedule_grounded_threads": 0,
+        "selected_game_stories": 0,
+        "selected_game_threads": 0,
+        "stale_game_story": 7,
+        "unrouted_game_stories": 0
+      },
+      "game_stories_selected": 0,
+      "game_threads_selected": 0,
+      "schedule_grounded_threads": 0,
+      "selection_reasons": {
+        "already_posted": 53,
+        "deferred_for_breaking_news": 2,
+        "quality_low": 16,
+        "selected": 0,
+        "stale": 61
+      },
+      "sources_failed": 0,
+      "sources_ok": 8,
+      "standalone_selected": 0,
+      "started_at": "2026-10-09T01:19:37.733685+00:00",
       "status": "completed"
     }
   ]
