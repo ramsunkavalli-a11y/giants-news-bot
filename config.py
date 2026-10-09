@@ -15,12 +15,21 @@ class Settings:
 
     request_timeout: int = int(os.getenv("REQUEST_TIMEOUT", "15"))
     dry_run: bool = _env_bool("DRY_RUN")
+    fast_lane: bool = _env_bool("FAST_LANE")
     state_file: str = os.getenv("STATE_FILE", "state.json")
     diagnostics_enabled: bool = _env_bool("DIAGNOSTICS_ENABLED")
     diagnostics_file: str = os.getenv("DIAGNOSTICS_FILE", "diagnostics.json")
     max_posts_per_run: int = int(os.getenv("MAX_POSTS_PER_RUN", "3"))
+    season_mode: str = os.getenv("SEASON_MODE", "inseason").strip().lower()
+    offseason_daily_limit: int = int(os.getenv("OFFSEASON_DAILY_LIMIT", "6"))
     hours_back: int = int(os.getenv("HOURS_BACK", "72"))
     keep_posted_days: int = int(os.getenv("KEEP_POSTED_DAYS", "21"))
     bsky_pds: str = os.getenv("BSKY_PDS", "https://bsky.social")
     bsky_identifier: str = os.getenv("BSKY_IDENTIFIER", "")
     bsky_app_password: str = os.getenv("BSKY_APP_PASSWORD", "")
+
+    def __post_init__(self):
+        if self.season_mode not in {"inseason", "offseason"}:
+            raise ValueError("SEASON_MODE must be inseason or offseason")
+        if self.offseason_daily_limit < 0:
+            raise ValueError("OFFSEASON_DAILY_LIMIT must be nonnegative")

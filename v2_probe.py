@@ -10,7 +10,8 @@ import feedparser
 import requests
 from bs4 import BeautifulSoup
 
-from v2_authors import author_prior, source_prior
+from v2_authors import author_prior, normalize_author, source_prior
+from v2_editorial import SEASON_REVIEW_RE, RECURRING_CHAT_RE, fangraphs_giants_evidence
 
 UA = "Mozilla/5.0 GiantsNewsBotV2Probe/0.7"
 TIMEOUT = 20
@@ -270,7 +271,7 @@ def classify(source: str, title: str, author: str = "") -> tuple[str, str, str]:
         return "low", "broadcaster_quote_repackaging", preference
     if OTHER_SPORT_TITLE_RE.search(title):
         return "low", "other_sport_content", preference
-    if LOW_VALUE_TITLE_RE.search(title):
+    if LOW_VALUE_TITLE_RE.search(title) or RECURRING_CHAT_RE.search(title):
         return "low", "commodity_or_generic_content", preference
     if any(pattern in blob for pattern in LOW_VALUE_PATTERNS):
         return "low", "commodity_or_generic_content", preference
@@ -279,7 +280,7 @@ def classify(source: str, title: str, author: str = "") -> tuple[str, str, str]:
     if source == "FanGraphs" and blob.startswith("sunday notes:"):
         return "low", "broad_recurring_roundup", preference
 
-    if (
+    if not SEASON_REVIEW_RE.search(title) and (
         any(pattern in blob for pattern in GAME_STORY_PATTERNS)
         or RESULT_VERBS.search(title)
         or VAGUE_GAME_RECAP_RE.search(title)
@@ -351,6 +352,8 @@ def articles_from_feed(
         if not title or not url or url in seen:
             continue
         if require_giants_relevance and not giants_relevant(f"{title} {summary}"):
+            continue
+        if source == "FanGraphs" and not fangraphs_giants_evidence({"title": title, "summary": summary, "url": url}):
             continue
         seen.add(url)
         out.append(make_article(
@@ -427,6 +430,74 @@ def discover_mlb() -> list[Article]:
         limit=30,
         require_giants_relevance=False,
     )
+
+
+def discover_baggarly() -> list[Article]:
+    """Official author feed establishes attribution without blocked page fetches."""
+    feed = parse_feed("https://www.nytimes.com/athletic/rss/author/andrew-baggarly/")
+    if clean(feed.feed.get("title", "")).lower() != "andrew baggarly - the athletic":
+        raise RuntimeError("Baggarly RSS did not identify the expected author feed")
+    out = []
+    seen = set()
+    for entry in feed.entries[:100]:
+        title = clean(entry.get("title", ""))
+        summary = clean(entry.get("summary", ""))
+        url = entry.get("link", "")
+        parsed = urlparse(url)
+        if (not title or url in seen or parsed.scheme != "https"
+                or parsed.hostname != "www.nytimes.com" or not parsed.path.startswith("/athletic/")
+                or not giants_relevant(f"{title} {summary}")):
+            continue
+        seen.add(url)
+        out.append(make_article(source="The Athletic", title=title, url=url,
+                                published=entry.get("published", "") or entry.get("updated", ""),
+                                author="Andrew Baggarly", summary=summary,
+                                section="Official Andrew Baggarly author RSS", access="paywalled"))
+    return out
+
+
+def discover_pavlovic() -> list[Article]:
+    """Use NBC's Giants RSS byline/time metadata for the hourly author lane."""
+    feed = parse_feed("https://www.nbcsportsbayarea.com/feed/?category_name=san-francisco-giants")
+    out = []
+    for entry in feed.entries[:50]:
+        if normalize_author(entry_author(entry)) != "alex pavlovic":
+            continue
+        url = entry.get("link", "")
+        parsed = urlparse(url)
+        path = parsed.path.rstrip("/")
+        if (parsed.scheme != "https" or parsed.hostname != "www.nbcsportsbayarea.com"
+                or not path.startswith("/mlb/san-francisco-giants/")
+                or "/video/" in path or not path.rsplit("/", 1)[-1].isdigit()):
+            continue
+        title = clean(entry.get("title", ""))
+        if not title:
+            continue
+        out.append(make_article(source="NBC Sports Bay Area", title=title, url=url,
+                                author="Alex Pavlovic", published=entry.get("published", "") or entry.get("updated", ""),
+                                summary=clean(entry.get("summary", "")), section="Giants RSS + Pavlovic byline", access="free"))
+    return out
+
+
+def discover_guardado() -> list[Article]:
+    """Select Guardado only from MLB's structured Giants feed."""
+    feed = parse_feed("https://www.mlb.com/giants/feeds/news/rss.xml")
+    out = []
+    for entry in feed.entries[:30]:
+        if normalize_author(entry_author(entry)) != "maria guardado":
+            continue
+        url = entry.get("link", "")
+        parsed = urlparse(url)
+        if (parsed.scheme != "https" or parsed.hostname not in {"www.mlb.com", "mlb.com"}
+                or not parsed.path.startswith("/giants/news/")):
+            continue
+        title = clean(entry.get("title", ""))
+        if not title:
+            continue
+        out.append(make_article(source="MLB.com", title=title, url=url,
+                                author="Maria Guardado", published=entry.get("published", "") or entry.get("updated", ""),
+                                summary=clean(entry.get("summary", "")), section="Giants RSS + Guardado byline", access="free"))
+    return out
 
 
 def discover_sfgate() -> list[Article]:

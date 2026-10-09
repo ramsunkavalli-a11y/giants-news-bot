@@ -2,6 +2,7 @@ from __future__ import annotations
 
 import argparse
 import json
+from config import Settings
 
 from v2_selector import select_articles
 
@@ -12,15 +13,19 @@ def load_json(path: str):
 
 
 def main() -> None:
+    settings = Settings()
     parser = argparse.ArgumentParser()
     parser.add_argument("--probe", default="v2-probe.json")
     parser.add_argument("--state", required=True)
     parser.add_argument("--output", default="v2-selection.json")
+    parser.add_argument("--season-mode", choices=("inseason", "offseason"), default=settings.season_mode)
     args = parser.parse_args()
 
     probe = load_json(args.probe)
     state = load_json(args.state)
-    result = select_articles(probe.get("articles", []), state)
+    result = select_articles(probe.get("articles", []), state,
+                             hours_back=settings.hours_back, max_posts=settings.max_posts_per_run,
+                             season_mode=args.season_mode, offseason_daily_limit=settings.offseason_daily_limit)
 
     with open(args.output, "w", encoding="utf-8") as handle:
         json.dump(result, handle, indent=2, ensure_ascii=False)
