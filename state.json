@@ -134,24 +134,6 @@
       "author": "Justice delos Santos",
       "game_key": "",
       "kind": "standalone",
-      "posted_at": "2026-09-19T11:24:05.989691+00:00",
-      "source": "Mercury News",
-      "title": "SF Giants’ Bryce Eldridge scratched after bumping head at team hotel",
-      "url": "https://www.mercurynews.com/2026/09/18/sf-giants-bryce-eldridge-scratched-from-lineup-due-to-head-laceration/"
-    },
-    {
-      "author": "Dylan Grausz",
-      "game_key": "",
-      "kind": "standalone",
-      "posted_at": "2026-09-19T11:24:08.382151+00:00",
-      "source": "NBC Sports Bay Area",
-      "title": "Mike Krukow reflects on narrating MVP Baseball video game with Duane Kuiper",
-      "url": "https://www.nbcsportsbayarea.com/mlb/san-francisco-giants/krukow-reflects-on-mvp-baseball-games/1962041/"
-    },
-    {
-      "author": "Justice delos Santos",
-      "game_key": "",
-      "kind": "standalone",
       "posted_at": "2026-09-19T18:09:23.520527+00:00",
       "source": "Mercury News",
       "title": "‘We were fully supportive’: Why SF Giants’ Rodríguez pushed to pitch in Arizona Fall League",
@@ -1062,7 +1044,6 @@
     "https://sfstandard.com/pacific-standard-time/2026/09/29/giants-mom-year-viral-clip-our-broken-internet/": "2026-09-29T13:15:12.060256+00:00",
     "https://sfstandard.com/section-415/2026/09/25/section-415-despite-criticism-kalshi-isn-t-deterred-partnering-giants/": "2026-09-25T19:26:01.436138+00:00",
     "https://sfstandard.com/section-415/2026/10/01/section-415-podcast-2026-compares-giants-worst-seasons-ever/": "2026-10-01T20:25:40.262587+00:00",
-    "https://www.mercurynews.com/2026/09/18/sf-giants-bryce-eldridge-scratched-from-lineup-due-to-head-laceration/": "2026-09-19T11:24:05.989691+00:00",
     "https://www.mercurynews.com/2026/09/19/sf-giants-bryce-eldridge-in-concussion-protocol-to-miss-sundays-series-finale/": "2026-09-21T05:14:19.416456+00:00",
     "https://www.mercurynews.com/2026/09/19/tony-vitello-philip-abner-risky-bullpen-gambit-dooms-sf-giants-in-loss-to-dodgers/": "2026-09-20T18:16:09.941739+00:00",
     "https://www.mercurynews.com/2026/09/19/we-were-full-supportive-why-sf-giants-rodriguez-pushed-to-pitch-in-arizona-fall-league/": "2026-09-19T18:09:23.520527+00:00",
@@ -1098,7 +1079,6 @@
     "https://www.nbcsportsbayarea.com/mlb/san-francisco-giants/harrison-bader-foot-injury-scooter-crash/1967460/": "2026-09-30T08:54:09.013084+00:00",
     "https://www.nbcsportsbayarea.com/mlb/san-francisco-giants/historic-roster-churn-2026-season/1965549/": "2026-09-23T23:51:46.873269+00:00",
     "https://www.nbcsportsbayarea.com/mlb/san-francisco-giants/injured-list-league-leaders-2026/1969597/": "2026-10-08T01:10:45.574950+00:00",
-    "https://www.nbcsportsbayarea.com/mlb/san-francisco-giants/krukow-reflects-on-mvp-baseball-games/1962041/": "2026-09-19T11:24:08.382151+00:00",
     "https://www.nbcsportsbayarea.com/mlb/san-francisco-giants/logan-webb-2026-willie-mac-award-winner/1966224/": "2026-09-26T07:56:48.533511+00:00",
     "https://www.nbcsportsbayarea.com/mlb/san-francisco-giants/matt-wilkinson-camilo-doval-dodgers/1966368/": "2026-09-27T05:31:13.771725+00:00",
     "https://www.nbcsportsbayarea.com/mlb/san-francisco-giants/matt-wilkinson-shines-in-giants-loss-dodgers/1964723/": "2026-09-21T05:14:22.092223+00:00",
@@ -1144,37 +1124,6 @@
     "https://www.sfgate.com/giants/article/sf-giants-viral-mom-husband-22451456.php": "2026-09-27T19:09:27.965504+00:00"
   },
   "run_history": [
-    {
-      "discovered": 164,
-      "finished_at": "2026-09-19T11:24:09.185849+00:00",
-      "game_selection_reasons": {
-        "already_posted": 19,
-        "game_source_duplicates": 0,
-        "not_game_story": 139,
-        "schedule_grounded_threads": 0,
-        "selected_game_stories": 0,
-        "selected_game_threads": 0,
-        "stale_game_story": 6,
-        "unrouted_game_stories": 0
-      },
-      "game_stories_selected": 0,
-      "game_threads_selected": 0,
-      "schedule_grounded_threads": 0,
-      "selection_reasons": {
-        "already_posted": 53,
-        "deferred_for_breaking_news": 1,
-        "eligible": 5,
-        "quality_low": 18,
-        "selected": 2,
-        "stale": 62,
-        "story_already_posted": 3
-      },
-      "sources_failed": 0,
-      "sources_ok": 8,
-      "standalone_selected": 2,
-      "started_at": "2026-09-19T11:23:46.233385+00:00",
-      "status": "completed"
-    },
     {
       "discovered": 165,
       "finished_at": "2026-09-19T18:09:25.219876+00:00",
@@ -3819,6 +3768,36 @@
       "sources_ok": 8,
       "standalone_selected": 0,
       "started_at": "2026-10-10T08:49:27.068535+00:00",
+      "status": "completed"
+    },
+    {
+      "discovered": 148,
+      "finished_at": "2026-10-10T12:58:04.000659+00:00",
+      "game_selection_reasons": {
+        "already_posted": 5,
+        "game_source_duplicates": 0,
+        "not_game_story": 132,
+        "quality_low": 3,
+        "schedule_grounded_threads": 0,
+        "selected_game_stories": 0,
+        "selected_game_threads": 0,
+        "stale_game_story": 8,
+        "unrouted_game_stories": 0
+      },
+      "game_stories_selected": 0,
+      "game_threads_selected": 0,
+      "schedule_grounded_threads": 0,
+      "selection_reasons": {
+        "already_posted": 50,
+        "deferred_for_breaking_news": 2,
+        "quality_low": 16,
+        "selected": 0,
+        "stale": 64
+      },
+      "sources_failed": 0,
+      "sources_ok": 8,
+      "standalone_selected": 0,
+      "started_at": "2026-10-10T12:57:42.942588+00:00",
       "status": "completed"
     }
   ]
