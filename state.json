@@ -99,42 +99,6 @@
   },
   "posted_stories": [
     {
-      "author": "Alex Pavlovic",
-      "game_key": "",
-      "kind": "standalone",
-      "posted_at": "2026-09-22T00:13:44.364499+00:00",
-      "source": "NBC Sports Bay Area",
-      "title": "Giants promote top outfield prospect Bo Davidson, who will make MLB debut Monday",
-      "url": "https://www.nbcsportsbayarea.com/mlb/san-francisco-giants/bo-davidson-promotion-debut/1965101/"
-    },
-    {
-      "author": "",
-      "game_key": "",
-      "kind": "standalone",
-      "posted_at": "2026-09-22T00:13:45.439855+00:00",
-      "source": "San Francisco Chronicle",
-      "title": "Giants’ Marcelo Mayer, family thrilled he'll get second chance after struggles in Boston",
-      "url": "https://www.sfchronicle.com/sports/giants/article/giants-infielder-marcelo-mayer-top-prospect-22440835.php"
-    },
-    {
-      "author": "Dieter Kurtenbach",
-      "game_key": "",
-      "kind": "standalone",
-      "posted_at": "2026-09-22T00:13:48.543699+00:00",
-      "source": "Mercury News",
-      "title": "Kurtenbach: Brock Purdy is making easy work of the hardest job in sports",
-      "url": "https://www.mercurynews.com/2026/09/20/49ers-brock-purdy-dolphins-kyle-shanahan-nfl-levis-stadium-kurtenbach-0920/"
-    },
-    {
-      "author": "",
-      "game_key": "",
-      "kind": "standalone",
-      "posted_at": "2026-09-22T00:38:06.775845+00:00",
-      "source": "Mercury News",
-      "title": "SF Giants outfield prospect Bo Davidson to join team in San Francisco",
-      "url": "https://www.mercurynews.com/2026/09/21/sf-giants-outfield-prospect-bo-davidson-to-join-team-in-san-francisco/"
-    },
-    {
       "author": "Maria Guardado",
       "game_key": "",
       "kind": "standalone",
@@ -849,8 +813,6 @@
     "https://sfstandard.com/pacific-standard-time/2026/09/29/giants-mom-year-viral-clip-our-broken-internet/": "2026-09-29T13:15:12.060256+00:00",
     "https://sfstandard.com/section-415/2026/09/25/section-415-despite-criticism-kalshi-isn-t-deterred-partnering-giants/": "2026-09-25T19:26:01.436138+00:00",
     "https://sfstandard.com/section-415/2026/10/01/section-415-podcast-2026-compares-giants-worst-seasons-ever/": "2026-10-01T20:25:40.262587+00:00",
-    "https://www.mercurynews.com/2026/09/20/49ers-brock-purdy-dolphins-kyle-shanahan-nfl-levis-stadium-kurtenbach-0920/": "2026-09-22T00:13:48.543699+00:00",
-    "https://www.mercurynews.com/2026/09/21/sf-giants-outfield-prospect-bo-davidson-to-join-team-in-san-francisco/": "2026-09-22T00:38:06.775845+00:00",
     "https://www.mercurynews.com/2026/09/23/cesar-perdomo-bo-davidson-sf-giants-lose-to-minnesota-twins/": "2026-09-24T23:57:29.727942+00:00",
     "https://www.mercurynews.com/2026/09/27/sf-giants-conclude-disastrous-first-season-under-vitello-with-loss-in-10-innings-vs-dodgers/": "2026-09-28T11:52:44.893994+00:00",
     "https://www.mercurynews.com/2026/09/28/sf-giants-pitching-offseason-buster-posey-zach-minasian/": "2026-09-30T12:56:25.450144+00:00",
@@ -864,7 +826,6 @@
     "https://www.mlb.com/giants/news/randy-rodriguez-going-to-arizona-fall-league-for-giants": "2026-09-22T12:00:07.735130+00:00",
     "https://www.mlb.com/giants/news/tony-vitello-gets-ejected-from-giants-final-2026-game": "2026-09-27T23:12:49.601865+00:00",
     "https://www.nbcsportsbayarea.com/mlb/san-francisco-giants/anthony-molina-minnesota-twins/1965403/": "2026-09-23T07:55:03.378823+00:00",
-    "https://www.nbcsportsbayarea.com/mlb/san-francisco-giants/bo-davidson-promotion-debut/1965101/": "2026-09-22T00:13:44.364499+00:00",
     "https://www.nbcsportsbayarea.com/mlb/san-francisco-giants/buster-posey-offseason-bullpen-puzzle/1967880/": "2026-10-01T20:25:42.192899+00:00",
     "https://www.nbcsportsbayarea.com/mlb/san-francisco-giants/camilo-doval-claimed-waivers-pirates/1965801/": "2026-09-24T19:24:32.365936+00:00",
     "https://www.nbcsportsbayarea.com/mlb/san-francisco-giants/camilo-doval-remain-return-closer/1966219/": "2026-09-26T11:42:46.935677+00:00",
@@ -891,7 +852,6 @@
     "https://www.sfchronicle.com/sports/giants/article/giants-broadcaster-mike-krukow-wins-bill-rigney-22444592.php": "2026-09-23T07:55:00.996539+00:00",
     "https://www.sfchronicle.com/sports/giants/article/giants-fall-twins-clinching-losing-record-sf-bo-22446034.php": "2026-09-24T07:45:25.050194+00:00",
     "https://www.sfchronicle.com/sports/giants/article/giants-give-mike-krukow-emotional-sendoff-finale-22451590.php": "2026-09-28T05:41:02.524067+00:00",
-    "https://www.sfchronicle.com/sports/giants/article/giants-infielder-marcelo-mayer-top-prospect-22440835.php": "2026-09-22T00:13:45.439855+00:00",
     "https://www.sfchronicle.com/sports/giants/article/hall-fame-isn-t-allowing-giants-krukow-22447621.php": "2026-09-24T23:57:24.780984+00:00",
     "https://www.sfchronicle.com/sports/giants/article/logan-webb-wins-willie-mac-award-team-s-22449851.php": "2026-09-26T18:40:36.879176+00:00",
     "https://www.sfchronicle.com/sports/giants/article/losing-games-irking-fans-2026-22453146.php": "2026-09-29T13:15:13.017561+00:00",
@@ -912,70 +872,6 @@
     "https://www.sfgate.com/giants/article/sf-giants-viral-mom-husband-22451456.php": "2026-09-27T19:09:27.965504+00:00"
   },
   "run_history": [
-    {
-      "discovered": 172,
-      "finished_at": "2026-09-22T00:13:49.346075+00:00",
-      "game_selection_reasons": {
-        "already_posted": 17,
-        "game_source_duplicates": 0,
-        "not_game_story": 150,
-        "schedule_grounded_threads": 0,
-        "selected_game_stories": 0,
-        "selected_game_threads": 0,
-        "stale_game_story": 5,
-        "unrouted_game_stories": 0
-      },
-      "game_stories_selected": 0,
-      "game_threads_selected": 0,
-      "schedule_grounded_threads": 0,
-      "selection_reasons": {
-        "already_posted": 61,
-        "deferred_for_breaking_news": 1,
-        "eligible": 12,
-        "quality_low": 20,
-        "selected": 3,
-        "source_cap_cluster": 2,
-        "stale": 56,
-        "story_already_posted": 7
-      },
-      "sources_failed": 0,
-      "sources_ok": 8,
-      "standalone_selected": 3,
-      "started_at": "2026-09-22T00:13:22.010893+00:00",
-      "status": "completed"
-    },
-    {
-      "discovered": 173,
-      "finished_at": "2026-09-22T00:38:07.580019+00:00",
-      "game_selection_reasons": {
-        "already_posted": 17,
-        "game_source_duplicates": 0,
-        "not_game_story": 151,
-        "schedule_grounded_threads": 0,
-        "selected_game_stories": 0,
-        "selected_game_threads": 0,
-        "stale_game_story": 5,
-        "unrouted_game_stories": 0
-      },
-      "game_stories_selected": 0,
-      "game_threads_selected": 0,
-      "schedule_grounded_threads": 0,
-      "selection_reasons": {
-        "already_posted": 64,
-        "deferred_for_breaking_news": 1,
-        "eligible": 10,
-        "quality_low": 20,
-        "selected": 1,
-        "source_cap_cluster": 2,
-        "stale": 56,
-        "story_already_posted": 7
-      },
-      "sources_failed": 0,
-      "sources_ok": 9,
-      "standalone_selected": 1,
-      "started_at": "2026-09-22T00:37:41.591139+00:00",
-      "status": "completed"
-    },
     {
       "discovered": 170,
       "finished_at": "2026-09-22T07:53:46.937516+00:00",
@@ -3543,6 +3439,36 @@
       "sources_ok": 8,
       "standalone_selected": 0,
       "started_at": "2026-10-12T22:32:44.303993+00:00",
+      "status": "completed"
+    },
+    {
+      "discovered": 148,
+      "finished_at": "2026-10-13T02:40:21.513026+00:00",
+      "game_selection_reasons": {
+        "already_posted": 5,
+        "game_source_duplicates": 0,
+        "not_game_story": 133,
+        "quality_low": 3,
+        "schedule_grounded_threads": 0,
+        "selected_game_stories": 0,
+        "selected_game_threads": 0,
+        "stale_game_story": 7,
+        "unrouted_game_stories": 0
+      },
+      "game_stories_selected": 0,
+      "game_threads_selected": 0,
+      "schedule_grounded_threads": 0,
+      "selection_reasons": {
+        "already_posted": 46,
+        "deferred_for_breaking_news": 2,
+        "quality_low": 16,
+        "selected": 0,
+        "stale": 69
+      },
+      "sources_failed": 0,
+      "sources_ok": 8,
+      "standalone_selected": 0,
+      "started_at": "2026-10-13T02:39:52.345132+00:00",
       "status": "completed"
     }
   ]
