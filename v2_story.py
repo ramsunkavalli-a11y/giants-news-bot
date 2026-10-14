@@ -21,7 +21,7 @@ EVENT_TOKENS = {
     "suspend", "extension", "sign", "waiver", "dfa", "release", "hire", "fire",
     "host", "fracture", "rehab", "return", "debut", "roster", "deadline", "partnership",
     "bereavement", "torn", "ucl", "tommyjohn",
-    "cancer", "diagnose", "treatment",
+    "cancer", "diagnose", "treatment", "williemac",
 }
 EVENT_FAMILIES = {
     "promote": "callup",
@@ -34,6 +34,8 @@ EVENT_FAMILIES = {
 }
 
 PHRASE_REPLACEMENTS = (
+    (r"willie mac(?: award)?", "williemac"),
+    (r"claim(?:s|ed|ing)? (.{0,60}?)off waivers", r"waiver \1"),
     (r"all[- ]star", "allstar"),
     (r"season[- ]ending", "seasonending"),
     (r"called? up", "callup"),
@@ -46,6 +48,7 @@ PHRASE_REPLACEMENTS = (
 )
 
 TOKEN_ALIASES = {
+    "waivers": "waiver",
     "retirement": "retire", "retires": "retire", "retired": "retire", "retiring": "retire",
     "traded": "trade", "trades": "trade", "trading": "trade", "acquire": "trade",
     "acquires": "trade", "acquired": "trade", "deal": "trade",
