@@ -54,24 +54,6 @@
       "author": "Kerry Crowley",
       "game_key": "",
       "kind": "standalone",
-      "posted_at": "2026-09-25T19:26:01.436138+00:00",
-      "source": "San Francisco Standard",
-      "title": "‘Section 415’: Despite criticism, Kalshi isn’t deterred from partnering with the Giants",
-      "url": "https://sfstandard.com/section-415/2026/09/25/section-415-despite-criticism-kalshi-isn-t-deterred-partnering-giants/"
-    },
-    {
-      "author": "Eric Longenhagen",
-      "game_key": "",
-      "kind": "standalone",
-      "posted_at": "2026-09-25T19:26:02.371243+00:00",
-      "source": "FanGraphs",
-      "title": "Eric Longenhagen Prospects Chat: 9/25",
-      "url": "https://blogs.fangraphs.com/eric-longenhagen-prospects-chat-9-25/"
-    },
-    {
-      "author": "Kerry Crowley",
-      "game_key": "",
-      "kind": "standalone",
       "posted_at": "2026-09-26T00:00:40.424826+00:00",
       "source": "San Francisco Standard",
       "title": "The most epic Bay Area sports weekend of the year starts now",
@@ -565,7 +547,6 @@
     }
   ],
   "posted_urls": {
-    "https://blogs.fangraphs.com/eric-longenhagen-prospects-chat-9-25/": "2026-09-25T19:26:02.371243+00:00",
     "https://blogs.fangraphs.com/fall-instructional-league-notes-royals-giants-padres/": "2026-10-08T20:45:45.686438+00:00",
     "https://blogs.fangraphs.com/i-90-blue-bloods-clash-guardians-vs-white-sox-alds-preview/": "2026-10-03T00:37:01.307716+00:00",
     "https://blogs.fangraphs.com/joe-musgrove-thrives-in-rehab-outing-plus-more-arizona-scouting-notes/": "2026-09-28T21:20:04.690250+00:00",
@@ -580,7 +561,6 @@
     "https://sfstandard.com/2026/10/09/sf-giants-40-man-roster-projection-buster-posey/": "2026-10-09T13:39:08.404655+00:00",
     "https://sfstandard.com/2026/10/16/even-year-magic-vs-2020s-dominance-did-giants-dodgers-have-better-run/": "2026-10-16T18:54:47.717989+00:00",
     "https://sfstandard.com/pacific-standard-time/2026/09/29/giants-mom-year-viral-clip-our-broken-internet/": "2026-09-29T13:15:12.060256+00:00",
-    "https://sfstandard.com/section-415/2026/09/25/section-415-despite-criticism-kalshi-isn-t-deterred-partnering-giants/": "2026-09-25T19:26:01.436138+00:00",
     "https://sfstandard.com/section-415/2026/10/01/section-415-podcast-2026-compares-giants-worst-seasons-ever/": "2026-10-01T20:25:40.262587+00:00",
     "https://www.mercurynews.com/2026/09/27/sf-giants-conclude-disastrous-first-season-under-vitello-with-loss-in-10-innings-vs-dodgers/": "2026-09-28T11:52:44.893994+00:00",
     "https://www.mercurynews.com/2026/09/28/sf-giants-pitching-offseason-buster-posey-zach-minasian/": "2026-09-30T12:56:25.450144+00:00",
@@ -624,38 +604,6 @@
     "https://www.sfgate.com/giants/article/sf-giants-viral-mom-husband-22451456.php": "2026-09-27T19:09:27.965504+00:00"
   },
   "run_history": [
-    {
-      "discovered": 168,
-      "finished_at": "2026-09-25T19:26:03.175804+00:00",
-      "game_selection_reasons": {
-        "already_posted": 14,
-        "game_source_duplicates": 0,
-        "not_game_story": 148,
-        "schedule_grounded_threads": 0,
-        "selected_game_stories": 0,
-        "selected_game_threads": 0,
-        "stale_game_story": 6,
-        "unrouted_game_stories": 0
-      },
-      "game_stories_selected": 0,
-      "game_threads_selected": 0,
-      "schedule_grounded_threads": 0,
-      "selection_reasons": {
-        "already_posted": 58,
-        "deferred_for_breaking_news": 2,
-        "eligible": 9,
-        "quality_low": 17,
-        "selected": 2,
-        "source_cap_cluster": 1,
-        "stale": 62,
-        "story_already_posted": 6
-      },
-      "sources_failed": 0,
-      "sources_ok": 8,
-      "standalone_selected": 2,
-      "started_at": "2026-09-25T19:25:36.835699+00:00",
-      "status": "completed"
-    },
     {
       "discovered": 168,
       "finished_at": "2026-09-26T00:00:41.229887+00:00",
@@ -3225,6 +3173,36 @@
       "sources_ok": 8,
       "standalone_selected": 1,
       "started_at": "2026-10-16T18:54:16.882284+00:00",
+      "status": "completed"
+    },
+    {
+      "discovered": 148,
+      "finished_at": "2026-10-16T23:45:44.755448+00:00",
+      "game_selection_reasons": {
+        "already_posted": 2,
+        "game_source_duplicates": 0,
+        "not_game_story": 133,
+        "quality_low": 3,
+        "schedule_grounded_threads": 0,
+        "selected_game_stories": 0,
+        "selected_game_threads": 0,
+        "stale_game_story": 10,
+        "unrouted_game_stories": 0
+      },
+      "game_stories_selected": 0,
+      "game_threads_selected": 0,
+      "schedule_grounded_threads": 0,
+      "selection_reasons": {
+        "already_posted": 40,
+        "deferred_for_breaking_news": 2,
+        "quality_low": 16,
+        "selected": 0,
+        "stale": 75
+      },
+      "sources_failed": 0,
+      "sources_ok": 8,
+      "standalone_selected": 0,
+      "started_at": "2026-10-16T23:45:16.927357+00:00",
       "status": "completed"
     }
   ]
