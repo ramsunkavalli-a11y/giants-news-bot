@@ -31,61 +31,9 @@
         "uri": "at://did:plc:gkkepfzghvnfrkrohm2c4nwy/app.bsky.feed.post/3mwi32zhfcy2x"
       },
       "updated_at": "2026-09-27T05:31:13.771699+00:00"
-    },
-    "game:823167": {
-      "created_at": "2026-09-26T07:56:54.067938+00:00",
-      "game_day": "2026-09-25",
-      "game_number": 1,
-      "game_pk": 823167,
-      "opponent": "dodgers",
-      "parent": {
-        "cid": "bafyreibmnmwvd2fleml75lmicbuyqc67np55o2q53wvetakldr6g74m32i",
-        "uri": "at://did:plc:gkkepfzghvnfrkrohm2c4nwy/app.bsky.feed.post/3mwfsqlctec2y"
-      },
-      "root": {
-        "cid": "bafyreibmnmwvd2fleml75lmicbuyqc67np55o2q53wvetakldr6g74m32i",
-        "uri": "at://did:plc:gkkepfzghvnfrkrohm2c4nwy/app.bsky.feed.post/3mwfsqlctec2y"
-      },
-      "updated_at": "2026-09-26T07:56:54.067938+00:00"
     }
   },
   "posted_stories": [
-    {
-      "author": "Maria Guardado",
-      "game_key": "",
-      "kind": "standalone",
-      "posted_at": "2026-09-26T07:56:46.013399+00:00",
-      "source": "MLB.com",
-      "title": "Clubhouse leader Webb honored to win Willie Mac Award",
-      "url": "https://www.mlb.com/giants/news/logan-webb-wins-willie-mac-award"
-    },
-    {
-      "author": "Alex Pavlovic",
-      "game_key": "",
-      "kind": "standalone",
-      "posted_at": "2026-09-26T07:56:48.533511+00:00",
-      "source": "NBC Sports Bay Area",
-      "title": "Logan Webb named Giants' 2026 Willie Mac Award winner despite disappointing year",
-      "url": "https://www.nbcsportsbayarea.com/mlb/san-francisco-giants/logan-webb-2026-willie-mac-award-winner/1966224/"
-    },
-    {
-      "author": "Jennifer Wadsworth",
-      "game_key": "",
-      "kind": "standalone",
-      "posted_at": "2026-09-26T07:56:51.714017+00:00",
-      "source": "San Francisco Standard",
-      "title": "The Giants ‘mom of the year’ defends husband after viral clip",
-      "url": "https://sfstandard.com/2026/09/25/viral-giants-mom-defends-husband/"
-    },
-    {
-      "author": "Alex Pavlovic",
-      "game_key": "game:823167",
-      "kind": "game_story",
-      "posted_at": "2026-09-26T07:56:54.067960+00:00",
-      "source": "NBC Sports Bay Area",
-      "title": "What we learned as Giants dominated by Tarik Skubal in shutout loss to Dodgers",
-      "url": "https://www.nbcsportsbayarea.com/mlb/san-francisco-giants/giants-observations-tarik-skubal-shutout-loss-dodgers/1966279/"
-    },
     {
       "author": "",
       "game_key": "",
@@ -542,7 +490,6 @@
     "https://blogs.fangraphs.com/i-90-blue-bloods-clash-guardians-vs-white-sox-alds-preview/": "2026-10-03T00:37:01.307716+00:00",
     "https://blogs.fangraphs.com/joe-musgrove-thrives-in-rehab-outing-plus-more-arizona-scouting-notes/": "2026-09-28T21:20:04.690250+00:00",
     "https://blogs.fangraphs.com/two-huge-innings-catapult-white-sox-into-alds/": "2026-10-01T09:18:06.049107+00:00",
-    "https://sfstandard.com/2026/09/25/viral-giants-mom-defends-husband/": "2026-09-26T07:56:51.714017+00:00",
     "https://sfstandard.com/2026/09/26/bryce-eldridge-sf-giants-logan-webb-willie-mac/": "2026-09-26T18:40:35.784397+00:00",
     "https://sfstandard.com/2026/09/28/mike-krukow-sf-giants-tribute/": "2026-09-28T21:20:07.536539+00:00",
     "https://sfstandard.com/2026/09/29/buster-posey-sf-giants-2027-plan/": "2026-09-29T20:07:34.956280+00:00",
@@ -559,17 +506,14 @@
     "https://www.mlb.com/giants/news/giants-claim-camilo-doval-off-waivers": "2026-09-26T11:42:44.449091+00:00",
     "https://www.mlb.com/giants/news/giants-prospects-who-could-contribute-in-2027": "2026-10-14T19:35:38.717209+00:00",
     "https://www.mlb.com/giants/news/giants-sticking-with-willy-adames-at-shortstop": "2026-10-10T19:26:17.619006+00:00",
-    "https://www.mlb.com/giants/news/logan-webb-wins-willie-mac-award": "2026-09-26T07:56:46.013399+00:00",
     "https://www.mlb.com/giants/news/questions-facing-giants-in-2026-27-offseason": "2026-10-07T20:42:32.928859+00:00",
     "https://www.mlb.com/giants/news/tony-vitello-gets-ejected-from-giants-final-2026-game": "2026-09-27T23:12:49.601865+00:00",
     "https://www.nbcsportsbayarea.com/mlb/san-francisco-giants/buster-posey-offseason-bullpen-puzzle/1967880/": "2026-10-01T20:25:42.192899+00:00",
     "https://www.nbcsportsbayarea.com/mlb/san-francisco-giants/camilo-doval-remain-return-closer/1966219/": "2026-09-26T11:42:46.935677+00:00",
     "https://www.nbcsportsbayarea.com/mlb/san-francisco-giants/dodgers-mike-krukow-retirement-heartwarming/1966341/": "2026-09-26T23:04:10.207144+00:00",
     "https://www.nbcsportsbayarea.com/mlb/san-francisco-giants/farm-system-top-honor-mlb-pipeline/1967449/": "2026-09-30T00:39:57.721387+00:00",
-    "https://www.nbcsportsbayarea.com/mlb/san-francisco-giants/giants-observations-tarik-skubal-shutout-loss-dodgers/1966279/": "2026-09-26T07:56:54.067960+00:00",
     "https://www.nbcsportsbayarea.com/mlb/san-francisco-giants/harrison-bader-foot-injury-scooter-crash/1967460/": "2026-09-30T08:54:09.013084+00:00",
     "https://www.nbcsportsbayarea.com/mlb/san-francisco-giants/injured-list-league-leaders-2026/1969597/": "2026-10-08T01:10:45.574950+00:00",
-    "https://www.nbcsportsbayarea.com/mlb/san-francisco-giants/logan-webb-2026-willie-mac-award-winner/1966224/": "2026-09-26T07:56:48.533511+00:00",
     "https://www.nbcsportsbayarea.com/mlb/san-francisco-giants/matt-wilkinson-camilo-doval-dodgers/1966368/": "2026-09-27T05:31:13.771725+00:00",
     "https://www.nbcsportsbayarea.com/mlb/san-francisco-giants/tony-vitello-expectations-matt-wilkinson/1966120/": "2026-09-26T18:40:32.368865+00:00",
     "https://www.nytimes.com/athletic/7622511/2026/09/25/sf-giants-roster-turnover-injuries-trades-fire-trucks/": "2026-09-28T05:41:04.495637+00:00",
@@ -594,39 +538,6 @@
     "https://www.sfgate.com/giants/article/sf-giants-viral-mom-husband-22451456.php": "2026-09-27T19:09:27.965504+00:00"
   },
   "run_history": [
-    {
-      "discovered": 159,
-      "finished_at": "2026-09-26T07:56:54.871053+00:00",
-      "game_selection_reasons": {
-        "already_posted": 11,
-        "eligible_game_story": 1,
-        "game_source_duplicates": 0,
-        "not_game_story": 141,
-        "schedule_grounded_threads": 1,
-        "selected_game_stories": 1,
-        "selected_game_threads": 1,
-        "stale_game_story": 6,
-        "unrouted_game_stories": 0
-      },
-      "game_stories_selected": 1,
-      "game_threads_selected": 1,
-      "schedule_grounded_threads": 1,
-      "selection_reasons": {
-        "already_posted": 51,
-        "deferred_for_breaking_news": 2,
-        "eligible": 8,
-        "quality_low": 16,
-        "selected": 3,
-        "source_cap_cluster": 3,
-        "stale": 64,
-        "story_already_posted": 2
-      },
-      "sources_failed": 0,
-      "sources_ok": 8,
-      "standalone_selected": 3,
-      "started_at": "2026-09-26T07:56:22.796016+00:00",
-      "status": "completed"
-    },
     {
       "discovered": 160,
       "finished_at": "2026-09-26T11:42:47.740370+00:00",
@@ -3192,6 +3103,36 @@
       "sources_ok": 8,
       "standalone_selected": 0,
       "started_at": "2026-10-17T07:07:54.367188+00:00",
+      "status": "completed"
+    },
+    {
+      "discovered": 148,
+      "finished_at": "2026-10-17T11:05:58.576934+00:00",
+      "game_selection_reasons": {
+        "already_posted": 1,
+        "game_source_duplicates": 0,
+        "not_game_story": 133,
+        "quality_low": 3,
+        "schedule_grounded_threads": 0,
+        "selected_game_stories": 0,
+        "selected_game_threads": 0,
+        "stale_game_story": 11,
+        "unrouted_game_stories": 0
+      },
+      "game_stories_selected": 0,
+      "game_threads_selected": 0,
+      "schedule_grounded_threads": 0,
+      "selection_reasons": {
+        "already_posted": 37,
+        "deferred_for_breaking_news": 2,
+        "quality_low": 16,
+        "selected": 0,
+        "stale": 78
+      },
+      "sources_failed": 0,
+      "sources_ok": 8,
+      "standalone_selected": 0,
+      "started_at": "2026-10-17T11:05:31.579302+00:00",
       "status": "completed"
     }
   ]
