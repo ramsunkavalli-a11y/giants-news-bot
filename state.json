@@ -35,33 +35,6 @@
   },
   "posted_stories": [
     {
-      "author": "",
-      "game_key": "",
-      "kind": "standalone",
-      "posted_at": "2026-09-26T11:42:41.931182+00:00",
-      "source": "San Francisco Chronicle",
-      "title": "Giants offense held in check as Tarik Skubal dominates in L.A. win",
-      "url": "https://www.sfchronicle.com/sports/giants/article/sf-giants-offense-held-check-tarik-skubal-22449692.php"
-    },
-    {
-      "author": "Maria Guardado",
-      "game_key": "",
-      "kind": "standalone",
-      "posted_at": "2026-09-26T11:42:44.449091+00:00",
-      "source": "MLB.com",
-      "title": "Doval thrilled to be back with Giants: 'I haven't stopped smiling'",
-      "url": "https://www.mlb.com/giants/news/giants-claim-camilo-doval-off-waivers"
-    },
-    {
-      "author": "Alex Pavlovic",
-      "game_key": "",
-      "kind": "standalone",
-      "posted_at": "2026-09-26T11:42:46.935677+00:00",
-      "source": "NBC Sports Bay Area",
-      "title": "Camilo Doval hoping to remain with Giants upon return to end 2026 MLB season",
-      "url": "https://www.nbcsportsbayarea.com/mlb/san-francisco-giants/camilo-doval-remain-return-closer/1966219/"
-    },
-    {
       "author": "Pratham Valluri",
       "game_key": "",
       "kind": "standalone",
@@ -483,6 +456,15 @@
       "source": "San Francisco Standard",
       "title": "Even-year magic vs. 2020s dominance: Did the Giants or Dodgers have the better run?",
       "url": "https://sfstandard.com/2026/10/16/even-year-magic-vs-2020s-dominance-did-giants-dodgers-have-better-run/"
+    },
+    {
+      "author": "Maria Guardado",
+      "game_key": "",
+      "kind": "standalone",
+      "posted_at": "2026-10-17T17:53:54.737727+00:00",
+      "source": "MLB.com",
+      "title": "All-Star Rodríguez back on mound in Fall League after 13-month absence",
+      "url": "https://www.mlb.com/giants/news/randy-rodriguez-rehabbing-in-arizona-fall-league"
     }
   ],
   "posted_urls": {
@@ -503,13 +485,12 @@
     "https://www.mercurynews.com/2026/09/28/sf-giants-pitching-offseason-buster-posey-zach-minasian/": "2026-09-30T12:56:25.450144+00:00",
     "https://www.mercurynews.com/2026/09/29/sf-giants-buster-posey-tony-vitello-zack-minasian-willy-adames-oracle-park-kurtenbach-0929/": "2026-09-30T08:54:11.936310+00:00",
     "https://www.mlb.com/giants/news/buster-posey-reflects-on-giants-2026-season": "2026-09-30T08:54:06.960304+00:00",
-    "https://www.mlb.com/giants/news/giants-claim-camilo-doval-off-waivers": "2026-09-26T11:42:44.449091+00:00",
     "https://www.mlb.com/giants/news/giants-prospects-who-could-contribute-in-2027": "2026-10-14T19:35:38.717209+00:00",
     "https://www.mlb.com/giants/news/giants-sticking-with-willy-adames-at-shortstop": "2026-10-10T19:26:17.619006+00:00",
     "https://www.mlb.com/giants/news/questions-facing-giants-in-2026-27-offseason": "2026-10-07T20:42:32.928859+00:00",
+    "https://www.mlb.com/giants/news/randy-rodriguez-rehabbing-in-arizona-fall-league": "2026-10-17T17:53:54.737727+00:00",
     "https://www.mlb.com/giants/news/tony-vitello-gets-ejected-from-giants-final-2026-game": "2026-09-27T23:12:49.601865+00:00",
     "https://www.nbcsportsbayarea.com/mlb/san-francisco-giants/buster-posey-offseason-bullpen-puzzle/1967880/": "2026-10-01T20:25:42.192899+00:00",
-    "https://www.nbcsportsbayarea.com/mlb/san-francisco-giants/camilo-doval-remain-return-closer/1966219/": "2026-09-26T11:42:46.935677+00:00",
     "https://www.nbcsportsbayarea.com/mlb/san-francisco-giants/dodgers-mike-krukow-retirement-heartwarming/1966341/": "2026-09-26T23:04:10.207144+00:00",
     "https://www.nbcsportsbayarea.com/mlb/san-francisco-giants/farm-system-top-honor-mlb-pipeline/1967449/": "2026-09-30T00:39:57.721387+00:00",
     "https://www.nbcsportsbayarea.com/mlb/san-francisco-giants/harrison-bader-foot-injury-scooter-crash/1967460/": "2026-09-30T08:54:09.013084+00:00",
@@ -526,7 +507,6 @@
     "https://www.sfchronicle.com/sports/giants/article/giants-give-mike-krukow-emotional-sendoff-finale-22451590.php": "2026-09-28T05:41:02.524067+00:00",
     "https://www.sfchronicle.com/sports/giants/article/logan-webb-wins-willie-mac-award-team-s-22449851.php": "2026-09-26T18:40:36.879176+00:00",
     "https://www.sfchronicle.com/sports/giants/article/losing-games-irking-fans-2026-22453146.php": "2026-09-29T13:15:13.017561+00:00",
-    "https://www.sfchronicle.com/sports/giants/article/sf-giants-offense-held-check-tarik-skubal-22449692.php": "2026-09-26T11:42:41.931182+00:00",
     "https://www.sfchronicle.com/sports/giants/article/tony-vitello-tossed-mlb-high-7th-time-giants-22451573.php": "2026-09-27T23:12:52.485363+00:00",
     "https://www.sfgate.com/giants/article/banana-ball-oracle-park-2027-22479501.php": "2026-10-16T07:27:08.330900+00:00",
     "https://www.sfgate.com/giants/article/giants-mike-krukow-replacement-22455689.php": "2026-10-01T13:47:50.076409+00:00",
@@ -538,39 +518,6 @@
     "https://www.sfgate.com/giants/article/sf-giants-viral-mom-husband-22451456.php": "2026-09-27T19:09:27.965504+00:00"
   },
   "run_history": [
-    {
-      "discovered": 160,
-      "finished_at": "2026-09-26T11:42:47.740370+00:00",
-      "game_selection_reasons": {
-        "already_posted": 12,
-        "eligible_game_story": 1,
-        "game_source_duplicates": 0,
-        "not_game_story": 141,
-        "schedule_grounded_threads": 0,
-        "selected_game_stories": 0,
-        "selected_game_threads": 0,
-        "stale_game_story": 6,
-        "unrouted_game_stories": 1
-      },
-      "game_stories_selected": 0,
-      "game_threads_selected": 0,
-      "schedule_grounded_threads": 0,
-      "selection_reasons": {
-        "already_posted": 54,
-        "deferred_for_breaking_news": 2,
-        "eligible": 6,
-        "quality_low": 16,
-        "run_cap": 1,
-        "selected": 3,
-        "stale": 64,
-        "story_already_posted": 2
-      },
-      "sources_failed": 0,
-      "sources_ok": 8,
-      "standalone_selected": 3,
-      "started_at": "2026-09-26T11:42:27.408499+00:00",
-      "status": "completed"
-    },
     {
       "discovered": 159,
       "finished_at": "2026-09-26T18:40:37.684127+00:00",
@@ -3133,6 +3080,38 @@
       "sources_ok": 8,
       "standalone_selected": 0,
       "started_at": "2026-10-17T11:05:31.579302+00:00",
+      "status": "completed"
+    },
+    {
+      "discovered": 148,
+      "finished_at": "2026-10-17T17:53:55.539983+00:00",
+      "game_selection_reasons": {
+        "already_posted": 1,
+        "game_source_duplicates": 0,
+        "not_game_story": 133,
+        "quality_low": 3,
+        "schedule_grounded_threads": 0,
+        "selected_game_stories": 0,
+        "selected_game_threads": 0,
+        "stale_game_story": 11,
+        "unrouted_game_stories": 0
+      },
+      "game_stories_selected": 0,
+      "game_threads_selected": 0,
+      "schedule_grounded_threads": 0,
+      "selection_reasons": {
+        "already_posted": 35,
+        "deferred_for_breaking_news": 2,
+        "eligible": 1,
+        "missing_published": 1,
+        "quality_low": 15,
+        "selected": 1,
+        "stale": 79
+      },
+      "sources_failed": 0,
+      "sources_ok": 8,
+      "standalone_selected": 1,
+      "started_at": "2026-10-17T17:53:28.368402+00:00",
       "status": "completed"
     }
   ]
