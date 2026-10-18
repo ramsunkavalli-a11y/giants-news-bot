@@ -35,15 +35,6 @@
   },
   "posted_stories": [
     {
-      "author": "Tristi Rodriguez",
-      "game_key": "",
-      "kind": "standalone",
-      "posted_at": "2026-09-26T23:04:10.207144+00:00",
-      "source": "NBC Sports Bay Area",
-      "title": "Dodgers broadcasters honor Krukow",
-      "url": "https://www.nbcsportsbayarea.com/mlb/san-francisco-giants/dodgers-mike-krukow-retirement-heartwarming/1966341/"
-    },
-    {
       "author": "Alex Pavlovic",
       "game_key": "game:823165",
       "kind": "game_story",
@@ -463,7 +454,6 @@
     "https://www.mlb.com/giants/news/randy-rodriguez-rehabbing-in-arizona-fall-league": "2026-10-17T17:53:54.737727+00:00",
     "https://www.mlb.com/giants/news/tony-vitello-gets-ejected-from-giants-final-2026-game": "2026-09-27T23:12:49.601865+00:00",
     "https://www.nbcsportsbayarea.com/mlb/san-francisco-giants/buster-posey-offseason-bullpen-puzzle/1967880/": "2026-10-01T20:25:42.192899+00:00",
-    "https://www.nbcsportsbayarea.com/mlb/san-francisco-giants/dodgers-mike-krukow-retirement-heartwarming/1966341/": "2026-09-26T23:04:10.207144+00:00",
     "https://www.nbcsportsbayarea.com/mlb/san-francisco-giants/farm-system-top-honor-mlb-pipeline/1967449/": "2026-09-30T00:39:57.721387+00:00",
     "https://www.nbcsportsbayarea.com/mlb/san-francisco-giants/harrison-bader-foot-injury-scooter-crash/1967460/": "2026-09-30T08:54:09.013084+00:00",
     "https://www.nbcsportsbayarea.com/mlb/san-francisco-giants/injured-list-league-leaders-2026/1969597/": "2026-10-08T01:10:45.574950+00:00",
@@ -488,37 +478,6 @@
     "https://www.sfgate.com/giants/article/sf-giants-viral-mom-husband-22451456.php": "2026-09-27T19:09:27.965504+00:00"
   },
   "run_history": [
-    {
-      "discovered": 152,
-      "finished_at": "2026-09-26T23:04:11.013467+00:00",
-      "game_selection_reasons": {
-        "already_posted": 11,
-        "game_source_duplicates": 0,
-        "not_game_story": 135,
-        "schedule_grounded_threads": 0,
-        "selected_game_stories": 0,
-        "selected_game_threads": 0,
-        "stale_game_story": 6,
-        "unrouted_game_stories": 0
-      },
-      "game_stories_selected": 0,
-      "game_threads_selected": 0,
-      "schedule_grounded_threads": 0,
-      "selection_reasons": {
-        "already_posted": 51,
-        "deferred_for_breaking_news": 1,
-        "eligible": 2,
-        "quality_low": 16,
-        "selected": 1,
-        "stale": 65,
-        "story_already_posted": 1
-      },
-      "sources_failed": 0,
-      "sources_ok": 8,
-      "standalone_selected": 1,
-      "started_at": "2026-09-26T23:03:03.351742+00:00",
-      "status": "completed"
-    },
     {
       "discovered": 158,
       "finished_at": "2026-09-27T05:31:14.575225+00:00",
@@ -3082,6 +3041,37 @@
       "sources_ok": 8,
       "standalone_selected": 0,
       "started_at": "2026-10-17T22:29:52.264062+00:00",
+      "status": "completed"
+    },
+    {
+      "discovered": 148,
+      "finished_at": "2026-10-18T04:54:10.068722+00:00",
+      "game_selection_reasons": {
+        "already_posted": 1,
+        "game_source_duplicates": 0,
+        "not_game_story": 132,
+        "quality_low": 4,
+        "schedule_grounded_threads": 0,
+        "selected_game_stories": 0,
+        "selected_game_threads": 0,
+        "stale_game_story": 11,
+        "unrouted_game_stories": 0
+      },
+      "game_stories_selected": 0,
+      "game_threads_selected": 0,
+      "schedule_grounded_threads": 0,
+      "selection_reasons": {
+        "already_posted": 33,
+        "deferred_for_breaking_news": 2,
+        "missing_published": 3,
+        "quality_low": 15,
+        "selected": 0,
+        "stale": 79
+      },
+      "sources_failed": 0,
+      "sources_ok": 8,
+      "standalone_selected": 0,
+      "started_at": "2026-10-18T04:53:36.218213+00:00",
       "status": "completed"
     }
   ]
