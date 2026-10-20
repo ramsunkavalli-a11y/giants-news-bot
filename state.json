@@ -316,37 +316,6 @@
   },
   "run_history": [
     {
-      "discovered": 157,
-      "finished_at": "2026-09-29T08:54:54.615777+00:00",
-      "game_selection_reasons": {
-        "already_posted": 13,
-        "game_source_duplicates": 0,
-        "not_game_story": 138,
-        "schedule_grounded_threads": 0,
-        "selected_game_stories": 0,
-        "selected_game_threads": 0,
-        "stale_game_story": 6,
-        "unrouted_game_stories": 0
-      },
-      "game_stories_selected": 0,
-      "game_threads_selected": 0,
-      "schedule_grounded_threads": 0,
-      "selection_reasons": {
-        "already_posted": 58,
-        "deferred_for_breaking_news": 2,
-        "eligible": 7,
-        "quality_low": 14,
-        "selected": 0,
-        "stale": 57,
-        "story_already_posted": 7
-      },
-      "sources_failed": 0,
-      "sources_ok": 8,
-      "standalone_selected": 0,
-      "started_at": "2026-09-29T08:54:36.782415+00:00",
-      "status": "completed"
-    },
-    {
       "discovered": 158,
       "finished_at": "2026-09-29T13:15:13.822901+00:00",
       "game_selection_reasons": {
@@ -2898,6 +2867,36 @@
       "sources_ok": 8,
       "standalone_selected": 0,
       "started_at": "2026-10-20T07:51:22.354423+00:00",
+      "status": "completed"
+    },
+    {
+      "discovered": 148,
+      "finished_at": "2026-10-20T11:59:06.292344+00:00",
+      "game_selection_reasons": {
+        "game_source_duplicates": 0,
+        "not_game_story": 132,
+        "quality_low": 4,
+        "schedule_grounded_threads": 0,
+        "selected_game_stories": 0,
+        "selected_game_threads": 0,
+        "stale_game_story": 12,
+        "unrouted_game_stories": 0
+      },
+      "game_stories_selected": 0,
+      "game_threads_selected": 0,
+      "schedule_grounded_threads": 0,
+      "selection_reasons": {
+        "already_posted": 25,
+        "deferred_for_breaking_news": 2,
+        "missing_published": 3,
+        "quality_low": 15,
+        "selected": 0,
+        "stale": 87
+      },
+      "sources_failed": 0,
+      "sources_ok": 8,
+      "standalone_selected": 0,
+      "started_at": "2026-10-20T11:58:57.341610+00:00",
       "status": "completed"
     }
   ]
