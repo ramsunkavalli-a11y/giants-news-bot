@@ -2,24 +2,6 @@
   "game_threads": {},
   "posted_stories": [
     {
-      "author": "Emily Dreyfuss",
-      "game_key": "",
-      "kind": "standalone",
-      "posted_at": "2026-09-29T13:15:12.060256+00:00",
-      "source": "San Francisco Standard",
-      "title": "Giants ‘mom of the year’ viral clip and our broken internet",
-      "url": "https://sfstandard.com/pacific-standard-time/2026/09/29/giants-mom-year-viral-clip-our-broken-internet/"
-    },
-    {
-      "author": "",
-      "game_key": "",
-      "kind": "standalone",
-      "posted_at": "2026-09-29T13:15:13.017561+00:00",
-      "source": "San Francisco Chronicle",
-      "title": "After 2026 disaster, Giants have to prove they learned from losing games, irking fans",
-      "url": "https://www.sfchronicle.com/sports/giants/article/losing-games-irking-fans-2026-22453146.php"
-    },
-    {
       "author": "John Shea",
       "game_key": "",
       "kind": "standalone",
@@ -290,7 +272,6 @@
     "https://sfstandard.com/2026/10/06/tony-vitello-sf-giants-manager-greg-vitello/": "2026-10-06T13:32:39.881746+00:00",
     "https://sfstandard.com/2026/10/09/sf-giants-40-man-roster-projection-buster-posey/": "2026-10-09T13:39:08.404655+00:00",
     "https://sfstandard.com/2026/10/16/even-year-magic-vs-2020s-dominance-did-giants-dodgers-have-better-run/": "2026-10-16T18:54:47.717989+00:00",
-    "https://sfstandard.com/pacific-standard-time/2026/09/29/giants-mom-year-viral-clip-our-broken-internet/": "2026-09-29T13:15:12.060256+00:00",
     "https://sfstandard.com/section-415/2026/10/01/section-415-podcast-2026-compares-giants-worst-seasons-ever/": "2026-10-01T20:25:40.262587+00:00",
     "https://www.mercurynews.com/2026/09/28/sf-giants-pitching-offseason-buster-posey-zach-minasian/": "2026-09-30T12:56:25.450144+00:00",
     "https://www.mercurynews.com/2026/09/29/sf-giants-buster-posey-tony-vitello-zack-minasian-willy-adames-oracle-park-kurtenbach-0929/": "2026-09-30T08:54:11.936310+00:00",
@@ -307,7 +288,6 @@
     "https://www.nytimes.com/athletic/7644566/2026/09/30/buster-posey-sf-giants-contend-2027/": "2026-09-30T12:56:22.172421+00:00",
     "https://www.nytimes.com/athletic/7663125/2026/10/05/sf-giants-offseason-checklist-pitching/": "2026-10-05T22:06:56.003064+00:00",
     "https://www.sfchronicle.com/sports/giants/article/giants-brass-frank-97-loss-season-vague-fixes-22454731.php": "2026-09-30T00:39:59.570323+00:00",
-    "https://www.sfchronicle.com/sports/giants/article/losing-games-irking-fans-2026-22453146.php": "2026-09-29T13:15:13.017561+00:00",
     "https://www.sfgate.com/giants/article/banana-ball-oracle-park-2027-22479501.php": "2026-10-16T07:27:08.330900+00:00",
     "https://www.sfgate.com/giants/article/giants-mike-krukow-replacement-22455689.php": "2026-10-01T13:47:50.076409+00:00",
     "https://www.sfgate.com/giants/article/oracle-park-momos-lockout-22453051.php": "2026-10-02T13:04:19.988698+00:00",
@@ -315,37 +295,6 @@
     "https://www.sfgate.com/giants/article/sf-giants-pride-night-22455246.php": "2026-09-30T00:39:58.647122+00:00"
   },
   "run_history": [
-    {
-      "discovered": 158,
-      "finished_at": "2026-09-29T13:15:13.822901+00:00",
-      "game_selection_reasons": {
-        "already_posted": 13,
-        "game_source_duplicates": 0,
-        "not_game_story": 139,
-        "schedule_grounded_threads": 0,
-        "selected_game_stories": 0,
-        "selected_game_threads": 0,
-        "stale_game_story": 6,
-        "unrouted_game_stories": 0
-      },
-      "game_stories_selected": 0,
-      "game_threads_selected": 0,
-      "schedule_grounded_threads": 0,
-      "selection_reasons": {
-        "already_posted": 57,
-        "deferred_for_breaking_news": 2,
-        "eligible": 9,
-        "quality_low": 14,
-        "selected": 2,
-        "stale": 57,
-        "story_already_posted": 7
-      },
-      "sources_failed": 0,
-      "sources_ok": 8,
-      "standalone_selected": 2,
-      "started_at": "2026-09-29T13:14:47.240420+00:00",
-      "status": "completed"
-    },
     {
       "discovered": 158,
       "finished_at": "2026-09-29T20:07:35.761443+00:00",
@@ -2897,6 +2846,36 @@
       "sources_ok": 8,
       "standalone_selected": 0,
       "started_at": "2026-10-20T11:58:57.341610+00:00",
+      "status": "completed"
+    },
+    {
+      "discovered": 148,
+      "finished_at": "2026-10-20T19:29:22.603864+00:00",
+      "game_selection_reasons": {
+        "game_source_duplicates": 0,
+        "not_game_story": 132,
+        "quality_low": 4,
+        "schedule_grounded_threads": 0,
+        "selected_game_stories": 0,
+        "selected_game_threads": 0,
+        "stale_game_story": 12,
+        "unrouted_game_stories": 0
+      },
+      "game_stories_selected": 0,
+      "game_threads_selected": 0,
+      "schedule_grounded_threads": 0,
+      "selection_reasons": {
+        "already_posted": 24,
+        "deferred_for_breaking_news": 2,
+        "missing_published": 3,
+        "quality_low": 15,
+        "selected": 0,
+        "stale": 88
+      },
+      "sources_failed": 0,
+      "sources_ok": 8,
+      "standalone_selected": 0,
+      "started_at": "2026-10-20T19:28:56.008508+00:00",
       "status": "completed"
     }
   ]
