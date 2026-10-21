@@ -2,33 +2,6 @@
   "game_threads": {},
   "posted_stories": [
     {
-      "author": "Kevin Topley",
-      "game_key": "",
-      "kind": "standalone",
-      "posted_at": "2026-09-30T00:39:57.721387+00:00",
-      "source": "NBC Sports Bay Area",
-      "title": "Giants' farm system earns top honor from MLB Pipeline after massive jump in 2026",
-      "url": "https://www.nbcsportsbayarea.com/mlb/san-francisco-giants/farm-system-top-honor-mlb-pipeline/1967449/"
-    },
-    {
-      "author": "Alex Simon",
-      "game_key": "",
-      "kind": "standalone",
-      "posted_at": "2026-09-30T00:39:58.647122+00:00",
-      "source": "SFGATE",
-      "title": "Months after protest, SF Giants won't commit to wearing Pride Night hats again",
-      "url": "https://www.sfgate.com/giants/article/sf-giants-pride-night-22455246.php"
-    },
-    {
-      "author": "",
-      "game_key": "",
-      "kind": "standalone",
-      "posted_at": "2026-09-30T00:39:59.570323+00:00",
-      "source": "San Francisco Chronicle",
-      "title": "Giants brass accepts responsibility for 97 losses, vague on fixes, Pride protest",
-      "url": "https://www.sfchronicle.com/sports/giants/article/giants-brass-frank-97-loss-season-vague-fixes-22454731.php"
-    },
-    {
       "author": "Maria Guardado",
       "game_key": "",
       "kind": "standalone",
@@ -271,54 +244,17 @@
     "https://www.mlb.com/giants/news/questions-facing-giants-in-2026-27-offseason": "2026-10-07T20:42:32.928859+00:00",
     "https://www.mlb.com/giants/news/randy-rodriguez-rehabbing-in-arizona-fall-league": "2026-10-17T17:53:54.737727+00:00",
     "https://www.nbcsportsbayarea.com/mlb/san-francisco-giants/buster-posey-offseason-bullpen-puzzle/1967880/": "2026-10-01T20:25:42.192899+00:00",
-    "https://www.nbcsportsbayarea.com/mlb/san-francisco-giants/farm-system-top-honor-mlb-pipeline/1967449/": "2026-09-30T00:39:57.721387+00:00",
     "https://www.nbcsportsbayarea.com/mlb/san-francisco-giants/harrison-bader-foot-injury-scooter-crash/1967460/": "2026-09-30T08:54:09.013084+00:00",
     "https://www.nbcsportsbayarea.com/mlb/san-francisco-giants/injured-list-league-leaders-2026/1969597/": "2026-10-08T01:10:45.574950+00:00",
     "https://www.nytimes.com/athletic/7638793/2026/09/28/sf-giants-mike-krukow-retirement-ceremony/": "2026-10-01T00:42:50.117199+00:00",
     "https://www.nytimes.com/athletic/7644566/2026/09/30/buster-posey-sf-giants-contend-2027/": "2026-09-30T12:56:22.172421+00:00",
     "https://www.nytimes.com/athletic/7663125/2026/10/05/sf-giants-offseason-checklist-pitching/": "2026-10-05T22:06:56.003064+00:00",
-    "https://www.sfchronicle.com/sports/giants/article/giants-brass-frank-97-loss-season-vague-fixes-22454731.php": "2026-09-30T00:39:59.570323+00:00",
     "https://www.sfgate.com/giants/article/banana-ball-oracle-park-2027-22479501.php": "2026-10-16T07:27:08.330900+00:00",
     "https://www.sfgate.com/giants/article/giants-mike-krukow-replacement-22455689.php": "2026-10-01T13:47:50.076409+00:00",
     "https://www.sfgate.com/giants/article/oracle-park-momos-lockout-22453051.php": "2026-10-02T13:04:19.988698+00:00",
-    "https://www.sfgate.com/giants/article/sf-giants-buster-posey-season-22456150.php": "2026-09-30T20:12:35.991364+00:00",
-    "https://www.sfgate.com/giants/article/sf-giants-pride-night-22455246.php": "2026-09-30T00:39:58.647122+00:00"
+    "https://www.sfgate.com/giants/article/sf-giants-buster-posey-season-22456150.php": "2026-09-30T20:12:35.991364+00:00"
   },
   "run_history": [
-    {
-      "discovered": 157,
-      "finished_at": "2026-09-30T00:40:00.373475+00:00",
-      "game_selection_reasons": {
-        "already_posted": 10,
-        "game_source_duplicates": 0,
-        "not_game_story": 139,
-        "quality_low": 1,
-        "schedule_grounded_threads": 0,
-        "selected_game_stories": 0,
-        "selected_game_threads": 0,
-        "stale_game_story": 7,
-        "unrouted_game_stories": 0
-      },
-      "game_stories_selected": 0,
-      "game_threads_selected": 0,
-      "schedule_grounded_threads": 0,
-      "selection_reasons": {
-        "already_posted": 57,
-        "deferred_for_breaking_news": 2,
-        "eligible": 10,
-        "quality_low": 14,
-        "run_cap": 1,
-        "selected": 3,
-        "source_cap_cluster": 1,
-        "stale": 56,
-        "story_already_posted": 5
-      },
-      "sources_failed": 0,
-      "sources_ok": 8,
-      "standalone_selected": 3,
-      "started_at": "2026-09-30T00:39:34.489164+00:00",
-      "status": "completed"
-    },
     {
       "discovered": 158,
       "finished_at": "2026-09-30T08:54:12.741676+00:00",
@@ -2865,6 +2801,36 @@
       "sources_ok": 8,
       "standalone_selected": 0,
       "started_at": "2026-10-21T00:01:05.866627+00:00",
+      "status": "completed"
+    },
+    {
+      "discovered": 148,
+      "finished_at": "2026-10-21T07:55:24.358384+00:00",
+      "game_selection_reasons": {
+        "game_source_duplicates": 0,
+        "not_game_story": 132,
+        "quality_low": 4,
+        "schedule_grounded_threads": 0,
+        "selected_game_stories": 0,
+        "selected_game_threads": 0,
+        "stale_game_story": 12,
+        "unrouted_game_stories": 0
+      },
+      "game_stories_selected": 0,
+      "game_threads_selected": 0,
+      "schedule_grounded_threads": 0,
+      "selection_reasons": {
+        "already_posted": 21,
+        "deferred_for_breaking_news": 2,
+        "missing_published": 4,
+        "quality_low": 15,
+        "selected": 0,
+        "stale": 90
+      },
+      "sources_failed": 0,
+      "sources_ok": 8,
+      "standalone_selected": 0,
+      "started_at": "2026-10-21T07:55:08.129228+00:00",
       "status": "completed"
     }
   ]
