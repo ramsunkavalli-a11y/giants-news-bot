@@ -2,15 +2,6 @@
   "game_threads": {},
   "posted_stories": [
     {
-      "author": "Alex Simon",
-      "game_key": "",
-      "kind": "standalone",
-      "posted_at": "2026-10-01T13:47:50.076409+00:00",
-      "source": "SFGATE",
-      "title": "How will the SF Giants replace Mike Krukow? We spoke to several candidates.",
-      "url": "https://www.sfgate.com/giants/article/giants-mike-krukow-replacement-22455689.php"
-    },
-    {
       "author": "Kerry Crowley",
       "game_key": "",
       "kind": "standalone",
@@ -171,41 +162,9 @@
     "https://www.nbcsportsbayarea.com/mlb/san-francisco-giants/injured-list-league-leaders-2026/1969597/": "2026-10-08T01:10:45.574950+00:00",
     "https://www.nytimes.com/athletic/7663125/2026/10/05/sf-giants-offseason-checklist-pitching/": "2026-10-05T22:06:56.003064+00:00",
     "https://www.sfgate.com/giants/article/banana-ball-oracle-park-2027-22479501.php": "2026-10-16T07:27:08.330900+00:00",
-    "https://www.sfgate.com/giants/article/giants-mike-krukow-replacement-22455689.php": "2026-10-01T13:47:50.076409+00:00",
     "https://www.sfgate.com/giants/article/oracle-park-momos-lockout-22453051.php": "2026-10-02T13:04:19.988698+00:00"
   },
   "run_history": [
-    {
-      "discovered": 154,
-      "finished_at": "2026-10-01T13:47:50.881464+00:00",
-      "game_selection_reasons": {
-        "already_posted": 8,
-        "game_source_duplicates": 0,
-        "not_game_story": 139,
-        "quality_low": 1,
-        "schedule_grounded_threads": 0,
-        "selected_game_stories": 0,
-        "selected_game_threads": 0,
-        "stale_game_story": 6,
-        "unrouted_game_stories": 0
-      },
-      "game_stories_selected": 0,
-      "game_threads_selected": 0,
-      "schedule_grounded_threads": 0,
-      "selection_reasons": {
-        "already_posted": 62,
-        "deferred_for_breaking_news": 2,
-        "eligible": 1,
-        "quality_low": 15,
-        "selected": 1,
-        "stale": 59
-      },
-      "sources_failed": 0,
-      "sources_ok": 8,
-      "standalone_selected": 1,
-      "started_at": "2026-10-01T13:47:30.216371+00:00",
-      "status": "completed"
-    },
     {
       "discovered": 152,
       "finished_at": "2026-10-01T20:25:42.997886+00:00",
@@ -2742,6 +2701,36 @@
       "sources_ok": 8,
       "standalone_selected": 0,
       "started_at": "2026-10-22T12:16:36.345388+00:00",
+      "status": "completed"
+    },
+    {
+      "discovered": 148,
+      "finished_at": "2026-10-22T19:21:13.321479+00:00",
+      "game_selection_reasons": {
+        "game_source_duplicates": 0,
+        "not_game_story": 132,
+        "quality_low": 4,
+        "schedule_grounded_threads": 0,
+        "selected_game_stories": 0,
+        "selected_game_threads": 0,
+        "stale_game_story": 12,
+        "unrouted_game_stories": 0
+      },
+      "game_stories_selected": 0,
+      "game_threads_selected": 0,
+      "schedule_grounded_threads": 0,
+      "selection_reasons": {
+        "already_posted": 15,
+        "deferred_for_breaking_news": 1,
+        "missing_published": 5,
+        "quality_low": 16,
+        "selected": 0,
+        "stale": 95
+      },
+      "sources_failed": 0,
+      "sources_ok": 8,
+      "standalone_selected": 0,
+      "started_at": "2026-10-22T19:20:53.542381+00:00",
       "status": "completed"
     }
   ]
