@@ -2,24 +2,6 @@
   "game_threads": {},
   "posted_stories": [
     {
-      "author": "Dave Tobener",
-      "game_key": "",
-      "kind": "standalone",
-      "posted_at": "2026-09-30T20:12:35.991364+00:00",
-      "source": "SFGATE",
-      "title": "Buster Posey can’t stop making his bad SF Giants bets even worse",
-      "url": "https://www.sfgate.com/giants/article/sf-giants-buster-posey-season-22456150.php"
-    },
-    {
-      "author": "John Shea",
-      "game_key": "",
-      "kind": "standalone",
-      "posted_at": "2026-09-30T20:12:39.044568+00:00",
-      "source": "San Francisco Standard",
-      "title": "The Giants always want to contend. Next year, that should change",
-      "url": "https://sfstandard.com/2026/09/30/sf-giants-rebuilding-prospects-buster-posey/"
-    },
-    {
       "author": "",
       "game_key": "",
       "kind": "standalone",
@@ -195,7 +177,6 @@
     "https://blogs.fangraphs.com/fall-instructional-league-notes-royals-giants-padres/": "2026-10-08T20:45:45.686438+00:00",
     "https://blogs.fangraphs.com/i-90-blue-bloods-clash-guardians-vs-white-sox-alds-preview/": "2026-10-03T00:37:01.307716+00:00",
     "https://blogs.fangraphs.com/two-huge-innings-catapult-white-sox-into-alds/": "2026-10-01T09:18:06.049107+00:00",
-    "https://sfstandard.com/2026/09/30/sf-giants-rebuilding-prospects-buster-posey/": "2026-09-30T20:12:39.044568+00:00",
     "https://sfstandard.com/2026/10/06/tony-vitello-sf-giants-manager-greg-vitello/": "2026-10-06T13:32:39.881746+00:00",
     "https://sfstandard.com/2026/10/09/sf-giants-40-man-roster-projection-buster-posey/": "2026-10-09T13:39:08.404655+00:00",
     "https://sfstandard.com/2026/10/16/even-year-magic-vs-2020s-dominance-did-giants-dodgers-have-better-run/": "2026-10-16T18:54:47.717989+00:00",
@@ -211,42 +192,9 @@
     "https://www.nytimes.com/athletic/7663125/2026/10/05/sf-giants-offseason-checklist-pitching/": "2026-10-05T22:06:56.003064+00:00",
     "https://www.sfgate.com/giants/article/banana-ball-oracle-park-2027-22479501.php": "2026-10-16T07:27:08.330900+00:00",
     "https://www.sfgate.com/giants/article/giants-mike-krukow-replacement-22455689.php": "2026-10-01T13:47:50.076409+00:00",
-    "https://www.sfgate.com/giants/article/oracle-park-momos-lockout-22453051.php": "2026-10-02T13:04:19.988698+00:00",
-    "https://www.sfgate.com/giants/article/sf-giants-buster-posey-season-22456150.php": "2026-09-30T20:12:35.991364+00:00"
+    "https://www.sfgate.com/giants/article/oracle-park-momos-lockout-22453051.php": "2026-10-02T13:04:19.988698+00:00"
   },
   "run_history": [
-    {
-      "discovered": 158,
-      "finished_at": "2026-09-30T20:12:39.849665+00:00",
-      "game_selection_reasons": {
-        "already_posted": 10,
-        "game_source_duplicates": 0,
-        "not_game_story": 141,
-        "quality_low": 1,
-        "schedule_grounded_threads": 0,
-        "selected_game_stories": 0,
-        "selected_game_threads": 0,
-        "stale_game_story": 6,
-        "unrouted_game_stories": 0
-      },
-      "game_stories_selected": 0,
-      "game_threads_selected": 0,
-      "schedule_grounded_threads": 0,
-      "selection_reasons": {
-        "already_posted": 62,
-        "deferred_for_breaking_news": 2,
-        "eligible": 6,
-        "quality_low": 14,
-        "selected": 2,
-        "stale": 57,
-        "story_already_posted": 4
-      },
-      "sources_failed": 0,
-      "sources_ok": 8,
-      "standalone_selected": 2,
-      "started_at": "2026-09-30T20:12:16.398326+00:00",
-      "status": "completed"
-    },
     {
       "discovered": 156,
       "finished_at": "2026-10-01T00:42:50.922097+00:00",
@@ -2787,6 +2735,36 @@
       "sources_ok": 8,
       "standalone_selected": 0,
       "started_at": "2026-10-21T19:27:47.334571+00:00",
+      "status": "completed"
+    },
+    {
+      "discovered": 148,
+      "finished_at": "2026-10-22T00:06:19.954227+00:00",
+      "game_selection_reasons": {
+        "game_source_duplicates": 0,
+        "not_game_story": 132,
+        "quality_low": 4,
+        "schedule_grounded_threads": 0,
+        "selected_game_stories": 0,
+        "selected_game_threads": 0,
+        "stale_game_story": 12,
+        "unrouted_game_stories": 0
+      },
+      "game_stories_selected": 0,
+      "game_threads_selected": 0,
+      "schedule_grounded_threads": 0,
+      "selection_reasons": {
+        "already_posted": 17,
+        "deferred_for_breaking_news": 2,
+        "missing_published": 5,
+        "quality_low": 15,
+        "selected": 0,
+        "stale": 93
+      },
+      "sources_failed": 0,
+      "sources_ok": 8,
+      "standalone_selected": 0,
+      "started_at": "2026-10-22T00:05:55.146787+00:00",
       "status": "completed"
     }
   ]
