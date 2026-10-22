@@ -2,15 +2,6 @@
   "game_threads": {},
   "posted_stories": [
     {
-      "author": "Eric Longenhagen",
-      "game_key": "",
-      "kind": "standalone",
-      "posted_at": "2026-10-01T09:18:06.049107+00:00",
-      "source": "FanGraphs",
-      "title": "Two Huge Innings Catapult White Sox Into ALDS",
-      "url": "https://blogs.fangraphs.com/two-huge-innings-catapult-white-sox-into-alds/"
-    },
-    {
       "author": "Alex Simon",
       "game_key": "",
       "kind": "standalone",
@@ -167,7 +158,6 @@
   "posted_urls": {
     "https://blogs.fangraphs.com/fall-instructional-league-notes-royals-giants-padres/": "2026-10-08T20:45:45.686438+00:00",
     "https://blogs.fangraphs.com/i-90-blue-bloods-clash-guardians-vs-white-sox-alds-preview/": "2026-10-03T00:37:01.307716+00:00",
-    "https://blogs.fangraphs.com/two-huge-innings-catapult-white-sox-into-alds/": "2026-10-01T09:18:06.049107+00:00",
     "https://sfstandard.com/2026/10/06/tony-vitello-sf-giants-manager-greg-vitello/": "2026-10-06T13:32:39.881746+00:00",
     "https://sfstandard.com/2026/10/09/sf-giants-40-man-roster-projection-buster-posey/": "2026-10-09T13:39:08.404655+00:00",
     "https://sfstandard.com/2026/10/16/even-year-magic-vs-2020s-dominance-did-giants-dodgers-have-better-run/": "2026-10-16T18:54:47.717989+00:00",
@@ -185,37 +175,6 @@
     "https://www.sfgate.com/giants/article/oracle-park-momos-lockout-22453051.php": "2026-10-02T13:04:19.988698+00:00"
   },
   "run_history": [
-    {
-      "discovered": 154,
-      "finished_at": "2026-10-01T09:18:06.854179+00:00",
-      "game_selection_reasons": {
-        "already_posted": 8,
-        "game_source_duplicates": 0,
-        "not_game_story": 139,
-        "quality_low": 1,
-        "schedule_grounded_threads": 0,
-        "selected_game_stories": 0,
-        "selected_game_threads": 0,
-        "stale_game_story": 6,
-        "unrouted_game_stories": 0
-      },
-      "game_stories_selected": 0,
-      "game_threads_selected": 0,
-      "schedule_grounded_threads": 0,
-      "selection_reasons": {
-        "already_posted": 61,
-        "deferred_for_breaking_news": 2,
-        "eligible": 1,
-        "quality_low": 15,
-        "selected": 1,
-        "stale": 60
-      },
-      "sources_failed": 0,
-      "sources_ok": 8,
-      "standalone_selected": 1,
-      "started_at": "2026-10-01T09:17:45.432514+00:00",
-      "status": "completed"
-    },
     {
       "discovered": 154,
       "finished_at": "2026-10-01T13:47:50.881464+00:00",
@@ -2753,6 +2712,36 @@
       "sources_ok": 8,
       "standalone_selected": 0,
       "started_at": "2026-10-22T07:51:35.831063+00:00",
+      "status": "completed"
+    },
+    {
+      "discovered": 148,
+      "finished_at": "2026-10-22T12:16:51.551103+00:00",
+      "game_selection_reasons": {
+        "game_source_duplicates": 0,
+        "not_game_story": 132,
+        "quality_low": 4,
+        "schedule_grounded_threads": 0,
+        "selected_game_stories": 0,
+        "selected_game_threads": 0,
+        "stale_game_story": 12,
+        "unrouted_game_stories": 0
+      },
+      "game_stories_selected": 0,
+      "game_threads_selected": 0,
+      "schedule_grounded_threads": 0,
+      "selection_reasons": {
+        "already_posted": 16,
+        "deferred_for_breaking_news": 1,
+        "missing_published": 5,
+        "quality_low": 16,
+        "selected": 0,
+        "stale": 94
+      },
+      "sources_failed": 0,
+      "sources_ok": 8,
+      "standalone_selected": 0,
+      "started_at": "2026-10-22T12:16:36.345388+00:00",
       "status": "completed"
     }
   ]
