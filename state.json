@@ -2,15 +2,6 @@
   "game_threads": {},
   "posted_stories": [
     {
-      "author": "Alex Simon",
-      "game_key": "",
-      "kind": "standalone",
-      "posted_at": "2026-10-02T13:04:19.988698+00:00",
-      "source": "SFGATE",
-      "title": "Momo's says 80% of annual revenue would be jeopardized by long MLB lockout",
-      "url": "https://www.sfgate.com/giants/article/oracle-park-momos-lockout-22453051.php"
-    },
-    {
       "author": "Eric Longenhagen",
       "game_key": "",
       "kind": "standalone",
@@ -141,41 +132,9 @@
     "https://www.mlb.com/giants/news/randy-rodriguez-rehabbing-in-arizona-fall-league": "2026-10-17T17:53:54.737727+00:00",
     "https://www.nbcsportsbayarea.com/mlb/san-francisco-giants/injured-list-league-leaders-2026/1969597/": "2026-10-08T01:10:45.574950+00:00",
     "https://www.nytimes.com/athletic/7663125/2026/10/05/sf-giants-offseason-checklist-pitching/": "2026-10-05T22:06:56.003064+00:00",
-    "https://www.sfgate.com/giants/article/banana-ball-oracle-park-2027-22479501.php": "2026-10-16T07:27:08.330900+00:00",
-    "https://www.sfgate.com/giants/article/oracle-park-momos-lockout-22453051.php": "2026-10-02T13:04:19.988698+00:00"
+    "https://www.sfgate.com/giants/article/banana-ball-oracle-park-2027-22479501.php": "2026-10-16T07:27:08.330900+00:00"
   },
   "run_history": [
-    {
-      "discovered": 152,
-      "finished_at": "2026-10-02T13:04:20.794395+00:00",
-      "game_selection_reasons": {
-        "already_posted": 7,
-        "game_source_duplicates": 0,
-        "not_game_story": 138,
-        "quality_low": 1,
-        "schedule_grounded_threads": 0,
-        "selected_game_stories": 0,
-        "selected_game_threads": 0,
-        "stale_game_story": 6,
-        "unrouted_game_stories": 0
-      },
-      "game_stories_selected": 0,
-      "game_threads_selected": 0,
-      "schedule_grounded_threads": 0,
-      "selection_reasons": {
-        "already_posted": 60,
-        "deferred_for_breaking_news": 2,
-        "eligible": 1,
-        "quality_low": 15,
-        "selected": 1,
-        "stale": 60
-      },
-      "sources_failed": 0,
-      "sources_ok": 8,
-      "standalone_selected": 1,
-      "started_at": "2026-10-02T13:03:52.992456+00:00",
-      "status": "completed"
-    },
     {
       "discovered": 152,
       "finished_at": "2026-10-02T20:05:09.423864+00:00",
@@ -2710,6 +2669,36 @@
       "sources_ok": 8,
       "standalone_selected": 0,
       "started_at": "2026-10-23T11:57:56.104610+00:00",
+      "status": "completed"
+    },
+    {
+      "discovered": 148,
+      "finished_at": "2026-10-23T19:26:57.573608+00:00",
+      "game_selection_reasons": {
+        "game_source_duplicates": 0,
+        "not_game_story": 132,
+        "quality_low": 4,
+        "schedule_grounded_threads": 0,
+        "selected_game_stories": 0,
+        "selected_game_threads": 0,
+        "stale_game_story": 12,
+        "unrouted_game_stories": 0
+      },
+      "game_stories_selected": 0,
+      "game_threads_selected": 0,
+      "schedule_grounded_threads": 0,
+      "selection_reasons": {
+        "already_posted": 12,
+        "deferred_for_breaking_news": 1,
+        "missing_published": 6,
+        "quality_low": 16,
+        "selected": 0,
+        "stale": 97
+      },
+      "sources_failed": 0,
+      "sources_ok": 8,
+      "standalone_selected": 0,
+      "started_at": "2026-10-23T19:26:42.110149+00:00",
       "status": "completed"
     }
   ]
