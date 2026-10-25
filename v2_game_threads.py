@@ -9,6 +9,7 @@ from zoneinfo import ZoneInfo
 from dateutil import parser as dtparser
 
 from v2_authors import is_core_game_writer
+from v2_editorial import SEASON_REVIEW_RE
 from v2_mlb_schedule import fetch_giants_schedule
 from v2_story import candidate_preference_key
 
@@ -185,6 +186,10 @@ def _looks_like_reaction_title(title: str) -> bool:
 
 
 def is_game_story(article: dict) -> bool:
+    # Season analysis can inherit a recap label from a feed's "what we learned"
+    # rule. Its explicit subject must take precedence over that inferred label.
+    if SEASON_REVIEW_RE.search(str(article.get("title", "") or "")):
+        return False
     if article.get("content_type") == "game_story":
         return True
     if article.get("quality_reason") == "game_story_or_postgame_analysis":

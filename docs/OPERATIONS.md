@@ -20,9 +20,17 @@ Required GitHub Actions secrets:
 
 The default Bluesky PDS is `https://bsky.social` and can be overridden with `BSKY_PDS`.
 
+## Hourly author checks
+
+The same production workflow checks Baggarly, Pavlovic and Guardado RSS once per hour (minute 7). The gate exports `fast_lane=1`; regular/manual runs export `0`. All runs share production concurrency and state, so no second posting process can race the main scan. Quiet fast checks do not commit state; failures are visible in Actions. Diagnostics are retained for three days. See [FAST_POSTING.md](FAST_POSTING.md) for author attribution, budget/dedupe behavior and timing limits.
+
+For a safe local verification: `FAST_LANE=1 DRY_RUN=1 SEASON_MODE=offseason python v2_bot.py`. CI runs this against copied production state and verifies immutability.
+
 ## Schedule
 
 All intended times are **America/Los_Angeles** local time.
+
+Production now defaults to `offseason` via the workflow environment. Set the GitHub repository variable `SEASON_MODE=inseason` to restore the full four-check cadence when Giants games resume. Offseason suppresses only the final late-night window below, yielding three checks/day and preserving the Thursday morning Executive Show check. Scheduled UTC entries remain registered for both modes. Manual dispatch runs immediately.
 
 ### Monday–Friday
 
@@ -50,11 +58,13 @@ The existing Thursday 8:30 AM poll is the expected collection point for most KNB
 HOURS_BACK=72
 GAME_HOURS_BACK=30
 MAX_POSTS_PER_RUN=3
+SEASON_MODE=offseason
+OFFSEASON_DAILY_LIMIT=6
 DIAGNOSTICS_ENABLED=1
 DIAGNOSTICS_FILE=diagnostics.json
 ```
 
-Other environment-backed settings are in `config.py`.
+Offseason clamps the run cap to two, orders confirmed moves/injury news before development and season analysis, and allows six routine standalone stories per Pacific day. Confirmed news and manual editorial overrides bypass that daily routine limit; URL/event history and the run cap still apply. Quiet runs are expected. Invalid season modes fail before discovery. Other environment-backed settings are in `config.py`.
 
 ## Safe local/test execution
 
@@ -62,7 +72,7 @@ Other environment-backed settings are in `config.py`.
 python -m venv .venv
 source .venv/bin/activate
 pip install -r requirements.txt
-DRY_RUN=1 DIAGNOSTICS_ENABLED=1 HOURS_BACK=72 GAME_HOURS_BACK=30 MAX_POSTS_PER_RUN=3 python v2_bot.py
+SEASON_MODE=offseason DRY_RUN=1 DIAGNOSTICS_ENABLED=1 HOURS_BACK=72 GAME_HOURS_BACK=30 MAX_POSTS_PER_RUN=3 python v2_bot.py
 ```
 
 Use an alternate state file for state experiments:
