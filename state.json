@@ -117,6 +117,15 @@
       "source": "MLB.com",
       "title": "JHL calls '26 a 'rollercoaster season,' but Giants see improvement",
       "url": "https://www.mlb.com/giants/news/jung-hoo-lee-makes-progress-in-2026-season"
+    },
+    {
+      "author": "Andrew Baggarly",
+      "game_key": "",
+      "kind": "standalone",
+      "posted_at": "2026-10-26T19:13:53.043056+00:00",
+      "source": "The Athletic",
+      "title": "Inside Buster Posey's new pitching plan: 'We have to make an effort to increase stuff'",
+      "url": "https://www.nytimes.com/athletic/7722423/2026/10/26/inside-buster-poseys-new-pitching-plan-we-have-to-make-an-effort-to-increase-stuff/"
     }
   ],
   "posted_urls": {
@@ -132,6 +141,7 @@
     "https://www.mlb.com/giants/news/randy-rodriguez-rehabbing-in-arizona-fall-league": "2026-10-17T17:53:54.737727+00:00",
     "https://www.nbcsportsbayarea.com/mlb/san-francisco-giants/injured-list-league-leaders-2026/1969597/": "2026-10-08T01:10:45.574950+00:00",
     "https://www.nytimes.com/athletic/7663125/2026/10/05/sf-giants-offseason-checklist-pitching/": "2026-10-05T22:06:56.003064+00:00",
+    "https://www.nytimes.com/athletic/7722423/2026/10/26/inside-buster-poseys-new-pitching-plan-we-have-to-make-an-effort-to-increase-stuff/": "2026-10-26T19:13:53.043056+00:00",
     "https://www.sfgate.com/giants/article/banana-ball-oracle-park-2027-22479501.php": "2026-10-16T07:27:08.330900+00:00"
   },
   "run_history": [
@@ -2699,6 +2709,37 @@
       "sources_ok": 8,
       "standalone_selected": 0,
       "started_at": "2026-10-26T19:11:12.845775+00:00",
+      "status": "completed"
+    },
+    {
+      "discovered": 149,
+      "finished_at": "2026-10-26T19:13:53.845658+00:00",
+      "game_selection_reasons": {
+        "game_source_duplicates": 0,
+        "not_game_story": 133,
+        "quality_low": 4,
+        "schedule_grounded_threads": 0,
+        "selected_game_stories": 0,
+        "selected_game_threads": 0,
+        "stale_game_story": 12,
+        "unrouted_game_stories": 0
+      },
+      "game_stories_selected": 0,
+      "game_threads_selected": 0,
+      "schedule_grounded_threads": 0,
+      "selection_reasons": {
+        "already_posted": 13,
+        "deferred_for_breaking_news": 1,
+        "eligible": 1,
+        "missing_published": 6,
+        "quality_low": 16,
+        "selected": 1,
+        "stale": 96
+      },
+      "sources_failed": 0,
+      "sources_ok": 9,
+      "standalone_selected": 1,
+      "started_at": "2026-10-26T19:13:24.834556+00:00",
       "status": "completed"
     }
   ]
