@@ -35,6 +35,46 @@ class CoreWriterRadarTests(unittest.TestCase):
             "https://www.sfchronicle.com/weather/?page=7",
         ))
 
+    def test_athletic_radar_requires_athletic_article_path(self):
+        baggarly = next(target for target in CORE_WRITER_RADAR_TARGETS if target.author == "Andrew Baggarly")
+        self.assertTrue(radar_url_allowed(
+            baggarly,
+            "https://www.nytimes.com/athletic/7722423/2026/10/26/giants-story/",
+        ))
+        self.assertFalse(radar_url_allowed(
+            baggarly,
+            "https://www.nytimes.com/wirecutter/reviews/baseball-gloves/",
+        ))
+
+    @patch("v2_radar.structured_meta_author", return_value="Andrew Baggarly")
+    @patch("v2_radar.decode_google_news_url", return_value=(
+        "https://www.nytimes.com/athletic/7722423/2026/10/26/giants-pitching-plan/"
+    ))
+    @patch("v2_radar.feedparser.parse")
+    def test_athletic_writer_radar_recovers_fresh_giants_article(
+        self, feed_parse, _decode, _meta,
+    ):
+        baggarly_feed = SimpleNamespace(
+            status=200,
+            bozo=False,
+            entries=[SimpleNamespace(
+                link="https://news.google.com/rss/articles/fake",
+                title="Inside Buster Posey's new pitching plan - The Athletic",
+                summary="Posey is making an effort to increase stuff.",
+                published="Sun, 26 Oct 2026 18:00:00 GMT",
+                source={"title": "The Athletic"},
+            )],
+        )
+        empty_feed = SimpleNamespace(status=200, bozo=False, entries=[])
+        feed_parse.side_effect = lambda url, **_kwargs: (
+            baggarly_feed if "Andrew+Baggarly" in url else empty_feed
+        )
+
+        articles = discover_core_writer_radar()
+        baggarly = [article for article in articles if article.author == "Andrew Baggarly"]
+        self.assertEqual(len(baggarly), 1)
+        self.assertEqual(baggarly[0].source, "The Athletic")
+
     def test_chronicle_author_search_relies_on_giants_article_path_not_headline_keyword(self):
         from v2_radar import google_news_rss_url
 

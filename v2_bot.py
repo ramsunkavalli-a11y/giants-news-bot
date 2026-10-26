@@ -249,14 +249,45 @@ def _manual_story_article(environ: dict[str, str] | None = None) -> dict | None:
     return article
 
 
-def discover_articles() -> tuple[list[dict], dict]:
+def discover_articles(
+    *,
+    now: datetime | None = None,
+    freshness_window_hours: int = 72,
+) -> tuple[list[dict], dict]:
+    """Discover stories and expose silently stale high-volume feeds."""
+    now = now or datetime.now(timezone.utc)
+    freshness_cutoff = now - timedelta(hours=freshness_window_hours)
     articles: list[dict] = []
     health: dict[str, dict] = {}
     for discover in DISCOVERERS:
         name = discover.__name__.replace("discover_", "")
         try:
             items = discover()
-            health[name] = {"ok": True, "count": len(items)}
+            dated_items = [
+                dt
+                for item in items
+                if (dt := parse_dt(getattr(item, "published", ""))) is not None
+            ]
+            latest = max(dated_items, default=None)
+            stale_snapshot = (
+                name == "athletic"
+                and len(items) >= 10
+                and latest is not None
+                and latest < freshness_cutoff
+            )
+            health[name] = {
+                "ok": not stale_snapshot,
+                "count": len(items),
+                "latest_published": latest.isoformat() if latest else "",
+            }
+            if stale_snapshot:
+                health[name].update({
+                    "stale": True,
+                    "error": (
+                        "feed snapshot is stale: newest dated entry is older than "
+                        f"{freshness_window_hours} hours"
+                    ),
+                })
             articles.extend(asdict(item) for item in items)
         except Exception as exc:
             health[name] = {"ok": False, "error": f"{type(exc).__name__}: {exc}"}

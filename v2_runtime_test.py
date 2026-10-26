@@ -4,6 +4,7 @@ import os
 import tempfile
 import unittest
 from datetime import datetime, timezone
+from unittest.mock import patch
 
 from PIL import Image
 
@@ -14,6 +15,7 @@ from v2_bot import (
     _existing_thread_key,
     _set_thread_state,
     clean_card_summary,
+    discover_articles,
     load_state,
     mark_posted,
     record_run,
@@ -77,6 +79,29 @@ class FakeSession:
 
 
 class RuntimeSmokeTests(unittest.TestCase):
+    def test_stale_athletic_snapshot_is_reported_unhealthy(self):
+        from v2_probe import make_article
+
+        def athletic_snapshot():
+            return [make_article(
+                source="The Athletic",
+                title=f"Giants analysis {index}",
+                url=f"https://www.nytimes.com/athletic/{index}/old-story/",
+                published="Mon, 05 Oct 2026 17:05:26 GMT",
+                author="Andrew Baggarly",
+                access="paywalled",
+            ) for index in range(10)]
+
+        athletic_snapshot.__name__ = "discover_athletic"
+        now = datetime(2026, 10, 26, tzinfo=timezone.utc)
+        with patch("v2_bot.DISCOVERERS", [athletic_snapshot]):
+            _, health = discover_articles(now=now)
+
+        report = health["athletic"]
+        self.assertFalse(report["ok"])
+        self.assertTrue(report["stale"])
+        self.assertEqual(report["count"], 10)
+
     def test_athletic_paywall_post_text(self):
         candidate = Candidate(
             source="The Athletic",

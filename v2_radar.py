@@ -25,6 +25,7 @@ class RadarTarget:
     source: str
     domain: str
     query_requires_giants: bool = True
+    path_prefix: str = ""
 
 
 CORE_WRITER_RADAR_TARGETS = (
@@ -34,6 +35,10 @@ CORE_WRITER_RADAR_TARGETS = (
     RadarTarget("Justice delos Santos", "Mercury News", "mercurynews.com"),
     RadarTarget("Evan Webeck", "Mercury News", "mercurynews.com"),
     RadarTarget("Dieter Kurtenbach", "Mercury News", "mercurynews.com"),
+    # The Athletic's team RSS can be an old archive while remaining HTTP-healthy.
+    # This writer radar is a narrow, verified fallback for current Giants coverage.
+    RadarTarget("Andrew Baggarly", "The Athletic", "nytimes.com", path_prefix="/athletic/"),
+    RadarTarget("Grant Brisbee", "The Athletic", "nytimes.com", path_prefix="/athletic/"),
     # FanGraphs' team-category feed does not reliably include prospect pieces
     # that cover a Giants player alongside another organization.
     RadarTarget("Eric Longenhagen", "FanGraphs", "blogs.fangraphs.com"),
@@ -76,6 +81,8 @@ def radar_url_allowed(target: RadarTarget, url: str) -> bool:
         return False
 
     path = urlparse(url or "").path or "/"
+    if target.path_prefix and not path.startswith(target.path_prefix):
+        return False
     if target.domain.lower() == "sfchronicle.com":
         # The Chronicle radar exists specifically for Giants beat coverage.
         # Known valid results use this article subtree; weather, homepage,
