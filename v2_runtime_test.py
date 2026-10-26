@@ -102,6 +102,25 @@ class RuntimeSmokeTests(unittest.TestCase):
         self.assertTrue(report["stale"])
         self.assertEqual(report["count"], 10)
 
+    def test_stale_direct_source_is_reported_unhealthy(self):
+        from v2_probe import make_article
+
+        def standard_snapshot():
+            return [make_article(
+                source="San Francisco Standard",
+                title=f"Giants analysis {index}",
+                url=f"https://sfstandard.com/2026/10/old-story-{index}/",
+                published="Mon, 05 Oct 2026 17:05:26 GMT",
+            ) for index in range(3)]
+
+        standard_snapshot.__name__ = "discover_sf_standard"
+        now = datetime(2026, 10, 26, tzinfo=timezone.utc)
+        with patch("v2_bot.DISCOVERERS", [standard_snapshot]):
+            _, health = discover_articles(now=now)
+
+        self.assertFalse(health["sf_standard"]["ok"])
+        self.assertTrue(health["sf_standard"]["stale"])
+
     def test_athletic_paywall_post_text(self):
         candidate = Candidate(
             source="The Athletic",

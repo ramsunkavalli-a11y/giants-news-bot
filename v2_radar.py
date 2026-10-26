@@ -35,6 +35,8 @@ CORE_WRITER_RADAR_TARGETS = (
     RadarTarget("Justice delos Santos", "Mercury News", "mercurynews.com"),
     RadarTarget("Evan Webeck", "Mercury News", "mercurynews.com"),
     RadarTarget("Dieter Kurtenbach", "Mercury News", "mercurynews.com"),
+    RadarTarget("John Shea", "San Francisco Standard", "sfstandard.com", path_prefix="/2026/"),
+    RadarTarget("Alex Simon", "SFGATE", "sfgate.com", path_prefix="/giants/article/"),
     # The Athletic's team RSS can be an old archive while remaining HTTP-healthy.
     # This writer radar is a narrow, verified fallback for current Giants coverage.
     RadarTarget("Andrew Baggarly", "The Athletic", "nytimes.com", path_prefix="/athletic/"),

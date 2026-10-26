@@ -46,6 +46,18 @@ PROMO_SUMMARY_PATTERNS = (
     "subscribe to our newsletter",
 )
 
+# A direct source with several dated records but nothing recent is degraded:
+# it might be quiet, but it must not look healthy just because HTTP succeeded.
+FRESHNESS_MONITORED_DISCOVERERS = {
+    "sf_standard",
+    "athletic",
+    "mlb",
+    "sfgate",
+    "fangraphs",
+    "nbc",
+    "knbr_executive_show",
+}
+
 MANUAL_STORY_PUBLISHERS = {
     "mercurynews.com": ("Mercury News", "unknown"),
     "sfchronicle.com": ("San Francisco Chronicle", "paywalled"),
@@ -270,8 +282,8 @@ def discover_articles(
             ]
             latest = max(dated_items, default=None)
             stale_snapshot = (
-                name == "athletic"
-                and len(items) >= 10
+                name in FRESHNESS_MONITORED_DISCOVERERS
+                and len(items) >= 3
                 and latest is not None
                 and latest < freshness_cutoff
             )

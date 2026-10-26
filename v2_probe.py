@@ -16,6 +16,7 @@ UA = "Mozilla/5.0 GiantsNewsBotV2Probe/0.7"
 TIMEOUT = 20
 ATHLETIC_AUTHOR_ENRICH_LIMIT = 8
 NBC_AUTHOR_ENRICH_LIMIT = 10
+NBC_TIMESTAMP_ENRICH_LIMIT = 10
 
 TRUSTED_RADAR_SOURCES = [
     "San Francisco Chronicle",
@@ -257,6 +258,34 @@ def structured_meta_author(url: str) -> str:
     return ""
 
 
+def structured_meta_published(url: str) -> str:
+    """Read a publisher article timestamp when a listing page omits one."""
+    try:
+        response = requests.get(
+            url,
+            headers={"User-Agent": UA},
+            timeout=TIMEOUT,
+            allow_redirects=True,
+        )
+        response.raise_for_status()
+        soup = BeautifulSoup(response.text, "lxml")
+        for attrs in (
+            {"name": "parsely-pub-date"},
+            {"property": "article:published_time"},
+            {"name": "article:published_time"},
+            {"name": "publish-date"},
+            {"name": "pubdate"},
+            {"name": "sailthru.date"},
+        ):
+            tag = soup.find("meta", attrs=attrs)
+            if tag and tag.get("content"):
+                return clean(tag["content"])
+        time_tag = soup.find("time", attrs={"datetime": True})
+        return clean(time_tag.get("datetime", "")) if time_tag else ""
+    except Exception:
+        return ""
+
+
 def classify(source: str, title: str, author: str = "") -> tuple[str, str, str]:
     blob = title.lower()
     prior = author_prior(author)
@@ -458,6 +487,7 @@ def discover_nbc() -> list[Article]:
     seen: set[str] = set()
     out: list[Article] = []
     author_enrichments = 0
+    timestamp_enrichments = 0
     for section, page_url in pages:
         response = requests.get(page_url, headers={"User-Agent": UA}, timeout=TIMEOUT)
         response.raise_for_status()
@@ -475,6 +505,10 @@ def discover_nbc() -> list[Article]:
                 continue
             seen.add(href)
             author = extract_card_author(anchor)
+            published = ""
+            if timestamp_enrichments < NBC_TIMESTAMP_ENRICH_LIMIT:
+                published = structured_meta_published(href)
+                timestamp_enrichments += 1
             if not author and author_enrichments < NBC_AUTHOR_ENRICH_LIMIT:
                 author = structured_meta_author(href)
                 author_enrichments += 1
@@ -482,6 +516,7 @@ def discover_nbc() -> list[Article]:
                 source="NBC Sports Bay Area",
                 title=title,
                 url=href,
+                published=published,
                 author=author,
                 section=section + (" + author meta" if author else ""),
                 access="free",

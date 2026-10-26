@@ -1,10 +1,21 @@
 import unittest
-from unittest.mock import patch
+from unittest.mock import Mock, patch
 
-from v2_probe import classify, discover_sf_standard
+from v2_probe import classify, discover_sf_standard, structured_meta_published
 
 
 class ProbeEditorialClassificationTests(unittest.TestCase):
+    @patch("v2_probe.requests.get")
+    def test_article_timestamp_uses_publisher_metadata(self, request_get):
+        response = Mock()
+        response.text = '<meta name="parsely-pub-date" content="2026-10-07T22:15:01Z">'
+        request_get.return_value = response
+
+        self.assertEqual(
+            structured_meta_published("https://www.nbcsportsbayarea.com/article/123/"),
+            "2026-10-07T22:15:01Z",
+        )
+
     def test_free_prospect_stream_promo_is_low_value(self):
         quality, reason, _ = classify(
             "MLB.com",
