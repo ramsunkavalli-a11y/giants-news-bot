@@ -108,12 +108,22 @@
       "source": "The Athletic",
       "title": "Inside Buster Posey's new pitching plan: 'We have to make an effort to increase stuff'",
       "url": "https://www.nytimes.com/athletic/7722423/2026/10/26/inside-buster-poseys-new-pitching-plan-we-have-to-make-an-effort-to-increase-stuff/"
+    },
+    {
+      "author": "Maria Guardado",
+      "game_key": "",
+      "kind": "standalone",
+      "posted_at": "2026-10-28T13:27:08.659204+00:00",
+      "source": "MLB.com",
+      "title": "How will the Giants resolve their 40-man roster predicament?",
+      "url": "https://www.mlb.com/giants/news/giants-40-man-roster-crunch-2026-offseason"
     }
   ],
   "posted_urls": {
     "https://blogs.fangraphs.com/fall-instructional-league-notes-royals-giants-padres/": "2026-10-08T20:45:45.686438+00:00",
     "https://sfstandard.com/2026/10/09/sf-giants-40-man-roster-projection-buster-posey/": "2026-10-09T13:39:08.404655+00:00",
     "https://sfstandard.com/2026/10/16/even-year-magic-vs-2020s-dominance-did-giants-dodgers-have-better-run/": "2026-10-16T18:54:47.717989+00:00",
+    "https://www.mlb.com/giants/news/giants-40-man-roster-crunch-2026-offseason": "2026-10-28T13:27:08.659204+00:00",
     "https://www.mlb.com/giants/news/giants-could-target-these-pitchers-in-free-agency": "2026-10-21T12:15:15.944577+00:00",
     "https://www.mlb.com/giants/news/giants-prospects-who-could-contribute-in-2027": "2026-10-14T19:35:38.717209+00:00",
     "https://www.mlb.com/giants/news/giants-sticking-with-willy-adames-at-shortstop": "2026-10-10T19:26:17.619006+00:00",
@@ -125,36 +135,6 @@
     "https://www.sfgate.com/giants/article/banana-ball-oracle-park-2027-22479501.php": "2026-10-16T07:27:08.330900+00:00"
   },
   "run_history": [
-    {
-      "discovered": 148,
-      "finished_at": "2026-10-07T09:06:01.957489+00:00",
-      "game_selection_reasons": {
-        "already_posted": 6,
-        "game_source_duplicates": 0,
-        "not_game_story": 133,
-        "quality_low": 2,
-        "schedule_grounded_threads": 0,
-        "selected_game_stories": 0,
-        "selected_game_threads": 0,
-        "stale_game_story": 7,
-        "unrouted_game_stories": 0
-      },
-      "game_stories_selected": 0,
-      "game_threads_selected": 0,
-      "schedule_grounded_threads": 0,
-      "selection_reasons": {
-        "already_posted": 53,
-        "deferred_for_breaking_news": 2,
-        "quality_low": 17,
-        "selected": 0,
-        "stale": 61
-      },
-      "sources_failed": 0,
-      "sources_ok": 8,
-      "standalone_selected": 0,
-      "started_at": "2026-10-07T09:05:47.582193+00:00",
-      "status": "completed"
-    },
     {
       "discovered": 148,
       "finished_at": "2026-10-07T13:46:51.995247+00:00",
@@ -2741,6 +2721,36 @@
       "sources_ok": 2,
       "standalone_selected": 0,
       "started_at": "2026-10-28T08:52:44.333039+00:00",
+      "status": "completed"
+    },
+    {
+      "discovered": 25,
+      "finished_at": "2026-10-28T13:27:09.462512+00:00",
+      "game_selection_reasons": {
+        "game_source_duplicates": 0,
+        "not_game_story": 132,
+        "quality_low": 4,
+        "schedule_grounded_threads": 0,
+        "selected_game_stories": 0,
+        "selected_game_threads": 0,
+        "stale_game_story": 12,
+        "unrouted_game_stories": 0
+      },
+      "game_stories_selected": 0,
+      "game_threads_selected": 0,
+      "schedule_grounded_threads": 0,
+      "selection_reasons": {
+        "already_posted": 11,
+        "deferred_for_breaking_news": 1,
+        "eligible": 1,
+        "quality_low": 15,
+        "selected": 1,
+        "stale": 104
+      },
+      "sources_failed": 6,
+      "sources_ok": 2,
+      "standalone_selected": 1,
+      "started_at": "2026-10-28T13:26:35.820750+00:00",
       "status": "completed"
     }
   ]
