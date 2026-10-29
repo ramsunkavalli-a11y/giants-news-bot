@@ -108,6 +108,15 @@
       "source": "SFGATE",
       "title": "SF Giants owner Charles B. Johnson outspending rest of MLB combined in midterm donations this cycle",
       "url": "https://www.sfgate.com/giants/article/giants-johnson-midterm-donations-22499643.php"
+    },
+    {
+      "author": "",
+      "game_key": "",
+      "kind": "standalone",
+      "posted_at": "2026-10-29T13:36:55.654270+00:00",
+      "source": "The Athletic",
+      "title": "Giants Fall League notebook: Randy Rodriguez takes big step, Dalton Wentz turns heads",
+      "url": "https://www.nytimes.com/athletic/7733505/2026/10/29/giants-fall-league-randy-rodriguez/"
     }
   ],
   "posted_urls": {
@@ -121,40 +130,11 @@
     "https://www.mlb.com/giants/news/jung-hoo-lee-makes-progress-in-2026-season": "2026-10-24T18:18:17.409709+00:00",
     "https://www.mlb.com/giants/news/randy-rodriguez-rehabbing-in-arizona-fall-league": "2026-10-17T17:53:54.737727+00:00",
     "https://www.nytimes.com/athletic/7722423/2026/10/26/inside-buster-poseys-new-pitching-plan-we-have-to-make-an-effort-to-increase-stuff/": "2026-10-26T19:13:53.043056+00:00",
+    "https://www.nytimes.com/athletic/7733505/2026/10/29/giants-fall-league-randy-rodriguez/": "2026-10-29T13:36:55.654270+00:00",
     "https://www.sfgate.com/giants/article/banana-ball-oracle-park-2027-22479501.php": "2026-10-16T07:27:08.330900+00:00",
     "https://www.sfgate.com/giants/article/giants-johnson-midterm-donations-22499643.php": "2026-10-29T08:46:58.438649+00:00"
   },
   "run_history": [
-    {
-      "discovered": 147,
-      "finished_at": "2026-10-08T09:20:52.639717+00:00",
-      "game_selection_reasons": {
-        "already_posted": 6,
-        "game_source_duplicates": 0,
-        "not_game_story": 131,
-        "quality_low": 3,
-        "schedule_grounded_threads": 0,
-        "selected_game_stories": 0,
-        "selected_game_threads": 0,
-        "stale_game_story": 7,
-        "unrouted_game_stories": 0
-      },
-      "game_stories_selected": 0,
-      "game_threads_selected": 0,
-      "schedule_grounded_threads": 0,
-      "selection_reasons": {
-        "already_posted": 55,
-        "deferred_for_breaking_news": 2,
-        "quality_low": 16,
-        "selected": 0,
-        "stale": 58
-      },
-      "sources_failed": 0,
-      "sources_ok": 8,
-      "standalone_selected": 0,
-      "started_at": "2026-10-08T09:20:36.615612+00:00",
-      "status": "completed"
-    },
     {
       "discovered": 147,
       "finished_at": "2026-10-08T13:54:41.256844+00:00",
@@ -2736,6 +2716,37 @@
       "sources_ok": 3,
       "standalone_selected": 1,
       "started_at": "2026-10-29T08:46:35.828471+00:00",
+      "status": "completed"
+    },
+    {
+      "discovered": 86,
+      "finished_at": "2026-10-29T13:36:56.457504+00:00",
+      "game_selection_reasons": {
+        "game_source_duplicates": 0,
+        "not_game_story": 130,
+        "quality_low": 4,
+        "schedule_grounded_threads": 0,
+        "selected_game_stories": 0,
+        "selected_game_threads": 0,
+        "stale_game_story": 12,
+        "unrouted_game_stories": 0
+      },
+      "game_stories_selected": 0,
+      "game_threads_selected": 0,
+      "schedule_grounded_threads": 0,
+      "selection_reasons": {
+        "already_posted": 11,
+        "deferred_for_breaking_news": 1,
+        "eligible": 2,
+        "quality_low": 15,
+        "selected": 1,
+        "source_cap_cluster": 1,
+        "stale": 101
+      },
+      "sources_failed": 4,
+      "sources_ok": 4,
+      "standalone_selected": 1,
+      "started_at": "2026-10-29T13:35:03.015933+00:00",
       "status": "completed"
     }
   ]
