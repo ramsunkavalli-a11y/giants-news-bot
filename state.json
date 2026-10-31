@@ -5,15 +5,6 @@
       "author": "Maria Guardado",
       "game_key": "",
       "kind": "standalone",
-      "posted_at": "2026-10-10T19:26:17.619006+00:00",
-      "source": "MLB.com",
-      "title": "Posey expresses confidence in Adames despite down year",
-      "url": "https://www.mlb.com/giants/news/giants-sticking-with-willy-adames-at-shortstop"
-    },
-    {
-      "author": "Maria Guardado",
-      "game_key": "",
-      "kind": "standalone",
       "posted_at": "2026-10-14T19:35:38.717209+00:00",
       "source": "MLB.com",
       "title": "3 Giants prospects to watch in 2027",
@@ -126,6 +117,15 @@
       "source": "FanGraphs",
       "title": "Job Posting: San Francisco Giants – Director, Integrated Performance",
       "url": "https://blogs.fangraphs.com/instagraphs/job-posting-san-francisco-giants-director-integrated-performance/"
+    },
+    {
+      "author": "Maria Guardado",
+      "game_key": "",
+      "kind": "standalone",
+      "posted_at": "2026-10-31T19:27:09.049548+00:00",
+      "source": "MLB.com",
+      "title": "How are Giants prospects performing in Arizona Fall League?",
+      "url": "https://www.mlb.com/giants/news/giants-prospects-in-arizona-fall-league-2026"
     }
   ],
   "posted_urls": {
@@ -133,8 +133,8 @@
     "https://sfstandard.com/2026/10/16/even-year-magic-vs-2020s-dominance-did-giants-dodgers-have-better-run/": "2026-10-16T18:54:47.717989+00:00",
     "https://www.mlb.com/giants/news/giants-40-man-roster-crunch-2026-offseason": "2026-10-28T13:27:08.659204+00:00",
     "https://www.mlb.com/giants/news/giants-could-target-these-pitchers-in-free-agency": "2026-10-21T12:15:15.944577+00:00",
+    "https://www.mlb.com/giants/news/giants-prospects-in-arizona-fall-league-2026": "2026-10-31T19:27:09.049548+00:00",
     "https://www.mlb.com/giants/news/giants-prospects-who-could-contribute-in-2027": "2026-10-14T19:35:38.717209+00:00",
-    "https://www.mlb.com/giants/news/giants-sticking-with-willy-adames-at-shortstop": "2026-10-10T19:26:17.619006+00:00",
     "https://www.mlb.com/giants/news/jung-hoo-lee-makes-progress-in-2026-season": "2026-10-24T18:18:17.409709+00:00",
     "https://www.mlb.com/giants/news/randy-rodriguez-rehabbing-in-arizona-fall-league": "2026-10-17T17:53:54.737727+00:00",
     "https://www.nbcsportsbayarea.com/mlb/san-francisco-giants/questions-uncertain-2026-offseason/1975437/": "2026-10-29T20:26:36.961219+00:00",
@@ -145,37 +145,6 @@
     "https://www.sfgate.com/giants/article/giants-johnson-midterm-donations-22499643.php": "2026-10-29T08:46:58.438649+00:00"
   },
   "run_history": [
-    {
-      "discovered": 148,
-      "finished_at": "2026-10-10T19:26:18.422377+00:00",
-      "game_selection_reasons": {
-        "already_posted": 5,
-        "game_source_duplicates": 0,
-        "not_game_story": 133,
-        "quality_low": 3,
-        "schedule_grounded_threads": 0,
-        "selected_game_stories": 0,
-        "selected_game_threads": 0,
-        "stale_game_story": 7,
-        "unrouted_game_stories": 0
-      },
-      "game_stories_selected": 0,
-      "game_threads_selected": 0,
-      "schedule_grounded_threads": 0,
-      "selection_reasons": {
-        "already_posted": 49,
-        "deferred_for_breaking_news": 2,
-        "eligible": 1,
-        "quality_low": 16,
-        "selected": 1,
-        "stale": 65
-      },
-      "sources_failed": 0,
-      "sources_ok": 8,
-      "standalone_selected": 1,
-      "started_at": "2026-10-10T19:25:56.340780+00:00",
-      "status": "completed"
-    },
     {
       "discovered": 148,
       "finished_at": "2026-10-10T23:42:11.040007+00:00",
@@ -2741,6 +2710,39 @@
       "sources_ok": 6,
       "standalone_selected": 0,
       "started_at": "2026-10-31T12:58:21.883743+00:00",
+      "status": "completed"
+    },
+    {
+      "discovered": 112,
+      "finished_at": "2026-10-31T19:27:09.851694+00:00",
+      "game_selection_reasons": {
+        "eligible_game_story": 1,
+        "game_source_duplicates": 0,
+        "not_game_story": 131,
+        "quality_low": 4,
+        "schedule_grounded_threads": 0,
+        "selected_game_stories": 0,
+        "selected_game_threads": 0,
+        "stale_game_story": 10,
+        "unrouted_game_stories": 1
+      },
+      "game_stories_selected": 0,
+      "game_threads_selected": 0,
+      "schedule_grounded_threads": 0,
+      "selection_reasons": {
+        "already_posted": 12,
+        "deferred_for_breaking_news": 1,
+        "eligible": 3,
+        "missing_published": 1,
+        "quality_low": 15,
+        "selected": 1,
+        "stale": 100,
+        "story_already_posted": 2
+      },
+      "sources_failed": 2,
+      "sources_ok": 6,
+      "standalone_selected": 1,
+      "started_at": "2026-10-31T19:26:33.344258+00:00",
       "status": "completed"
     }
   ]
