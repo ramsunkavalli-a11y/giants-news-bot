@@ -144,6 +144,24 @@
       "source": "MLB.com",
       "title": "Giants pick up Minor League lefty Neubeck from Nats in exchange for Furman",
       "url": "https://www.mlb.com/giants/news/giants-trade-nate-furman-to-nationals-for-tony-neubeck"
+    },
+    {
+      "author": "",
+      "game_key": "",
+      "kind": "standalone",
+      "posted_at": "2026-11-02T23:39:22.743731+00:00",
+      "source": "The Athletic",
+      "title": "Brian Sabean discusses Hall of Fame ballot, Yankees role ending, Giants return possibility",
+      "url": "https://www.nytimes.com/athletic/7748429/2026/11/02/brian-sabean-hall-of-fame-ballot-yankees-giants/"
+    },
+    {
+      "author": "Alex Pavlovic",
+      "game_key": "",
+      "kind": "standalone",
+      "posted_at": "2026-11-02T23:39:25.027082+00:00",
+      "source": "NBC Sports Bay Area",
+      "title": "Giants well represented on Hall of Fame's 2026 Contemporary Baseball Era ballot",
+      "url": "https://www.nbcsportsbayarea.com/mlb/san-francisco-giants/managers-executives-contemporary-era-ballot/1976290/"
     }
   ],
   "posted_urls": {
@@ -157,44 +175,16 @@
     "https://www.mlb.com/giants/news/jung-hoo-lee-makes-progress-in-2026-season": "2026-10-24T18:18:17.409709+00:00",
     "https://www.mlb.com/giants/news/randy-rodriguez-rehabbing-in-arizona-fall-league": "2026-10-17T17:53:54.737727+00:00",
     "https://www.nbcsportsbayarea.com/mlb/san-francisco-giants/grant-mccray-mariners-offseason-roster-churn/1975500/": "2026-11-01T13:42:34.774024+00:00",
+    "https://www.nbcsportsbayarea.com/mlb/san-francisco-giants/managers-executives-contemporary-era-ballot/1976290/": "2026-11-02T23:39:25.027082+00:00",
     "https://www.nbcsportsbayarea.com/mlb/san-francisco-giants/questions-uncertain-2026-offseason/1975437/": "2026-10-29T20:26:36.961219+00:00",
     "https://www.nytimes.com/athletic/7722423/2026/10/26/inside-buster-poseys-new-pitching-plan-we-have-to-make-an-effort-to-increase-stuff/": "2026-10-26T19:13:53.043056+00:00",
     "https://www.nytimes.com/athletic/7733268/2026/10/29/sf-giants-offseason-primer-2026-2027-free-agency-trades/": "2026-10-29T20:26:37.859340+00:00",
     "https://www.nytimes.com/athletic/7733505/2026/10/29/giants-fall-league-randy-rodriguez/": "2026-10-29T13:36:55.654270+00:00",
+    "https://www.nytimes.com/athletic/7748429/2026/11/02/brian-sabean-hall-of-fame-ballot-yankees-giants/": "2026-11-02T23:39:22.743731+00:00",
     "https://www.sfgate.com/giants/article/banana-ball-oracle-park-2027-22479501.php": "2026-10-16T07:27:08.330900+00:00",
     "https://www.sfgate.com/giants/article/giants-johnson-midterm-donations-22499643.php": "2026-10-29T08:46:58.438649+00:00"
   },
   "run_history": [
-    {
-      "discovered": 148,
-      "finished_at": "2026-10-12T22:33:01.452345+00:00",
-      "game_selection_reasons": {
-        "already_posted": 5,
-        "game_source_duplicates": 0,
-        "not_game_story": 133,
-        "quality_low": 3,
-        "schedule_grounded_threads": 0,
-        "selected_game_stories": 0,
-        "selected_game_threads": 0,
-        "stale_game_story": 7,
-        "unrouted_game_stories": 0
-      },
-      "game_stories_selected": 0,
-      "game_threads_selected": 0,
-      "schedule_grounded_threads": 0,
-      "selection_reasons": {
-        "already_posted": 47,
-        "deferred_for_breaking_news": 2,
-        "quality_low": 16,
-        "selected": 0,
-        "stale": 68
-      },
-      "sources_failed": 0,
-      "sources_ok": 8,
-      "standalone_selected": 0,
-      "started_at": "2026-10-12T22:32:44.303993+00:00",
-      "status": "completed"
-    },
     {
       "discovered": 148,
       "finished_at": "2026-10-13T02:40:21.513026+00:00",
@@ -2777,6 +2767,37 @@
       "sources_ok": 2,
       "standalone_selected": 0,
       "started_at": "2026-11-02T16:28:09.617260+00:00",
+      "status": "completed"
+    },
+    {
+      "discovered": 93,
+      "finished_at": "2026-11-02T23:39:25.829791+00:00",
+      "game_selection_reasons": {
+        "already_posted": 1,
+        "game_source_duplicates": 0,
+        "not_game_story": 131,
+        "quality_low": 4,
+        "schedule_grounded_threads": 0,
+        "selected_game_stories": 0,
+        "selected_game_threads": 0,
+        "stale_game_story": 9,
+        "unrouted_game_stories": 0
+      },
+      "game_stories_selected": 0,
+      "game_threads_selected": 0,
+      "schedule_grounded_threads": 0,
+      "selection_reasons": {
+        "already_posted": 14,
+        "deferred_for_breaking_news": 1,
+        "eligible": 2,
+        "quality_low": 15,
+        "selected": 2,
+        "stale": 99
+      },
+      "sources_failed": 4,
+      "sources_ok": 4,
+      "standalone_selected": 2,
+      "started_at": "2026-11-02T23:39:01.729581+00:00",
       "status": "completed"
     }
   ]
