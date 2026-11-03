@@ -180,6 +180,15 @@
       "source": "San Francisco Standard",
       "title": "Buster Posey’s roster puzzle: 15 Giants rejoin the 40-man, and the squeeze is on",
       "url": "https://sfstandard.com/2026/11/02/buster-posey-sf-giants-roster-moves-60-day-injured-list/"
+    },
+    {
+      "author": "Maria Guardado",
+      "game_key": "",
+      "kind": "standalone",
+      "posted_at": "2026-11-03T11:09:15.442753+00:00",
+      "source": "MLB.com",
+      "title": "Buttó, Beck among 9 players departing from Giants",
+      "url": "https://www.mlb.com/giants/news/jose-butto-tristan-beck-other-players-leaving-giants"
     }
   ],
   "posted_urls": {
@@ -191,6 +200,7 @@
     "https://www.mlb.com/giants/news/giants-prospects-in-arizona-fall-league-2026": "2026-10-31T19:27:09.049548+00:00",
     "https://www.mlb.com/giants/news/giants-prospects-who-could-contribute-in-2027": "2026-10-14T19:35:38.717209+00:00",
     "https://www.mlb.com/giants/news/giants-trade-nate-furman-to-nationals-for-tony-neubeck": "2026-11-02T07:51:31.703683+00:00",
+    "https://www.mlb.com/giants/news/jose-butto-tristan-beck-other-players-leaving-giants": "2026-11-03T11:09:15.442753+00:00",
     "https://www.mlb.com/giants/news/jung-hoo-lee-makes-progress-in-2026-season": "2026-10-24T18:18:17.409709+00:00",
     "https://www.mlb.com/giants/news/randy-rodriguez-rehabbing-in-arizona-fall-league": "2026-10-17T17:53:54.737727+00:00",
     "https://www.nbcsportsbayarea.com/mlb/san-francisco-giants/grant-mccray-mariners-offseason-roster-churn/1975500/": "2026-11-01T13:42:34.774024+00:00",
@@ -205,36 +215,6 @@
     "https://www.sfgate.com/giants/article/giants-johnson-midterm-donations-22499643.php": "2026-10-29T08:46:58.438649+00:00"
   },
   "run_history": [
-    {
-      "discovered": 148,
-      "finished_at": "2026-10-13T09:40:01.941562+00:00",
-      "game_selection_reasons": {
-        "already_posted": 5,
-        "game_source_duplicates": 0,
-        "not_game_story": 133,
-        "quality_low": 3,
-        "schedule_grounded_threads": 0,
-        "selected_game_stories": 0,
-        "selected_game_threads": 0,
-        "stale_game_story": 7,
-        "unrouted_game_stories": 0
-      },
-      "game_stories_selected": 0,
-      "game_threads_selected": 0,
-      "schedule_grounded_threads": 0,
-      "selection_reasons": {
-        "already_posted": 45,
-        "deferred_for_breaking_news": 2,
-        "quality_low": 16,
-        "selected": 0,
-        "stale": 70
-      },
-      "sources_failed": 0,
-      "sources_ok": 8,
-      "standalone_selected": 0,
-      "started_at": "2026-10-13T09:39:45.461042+00:00",
-      "status": "completed"
-    },
     {
       "discovered": 148,
       "finished_at": "2026-10-13T14:30:32.758652+00:00",
@@ -2821,6 +2801,39 @@
       "sources_ok": 5,
       "standalone_selected": 2,
       "started_at": "2026-11-03T03:33:40.176113+00:00",
+      "status": "completed"
+    },
+    {
+      "discovered": 102,
+      "finished_at": "2026-11-03T11:09:16.246320+00:00",
+      "game_selection_reasons": {
+        "already_posted": 1,
+        "game_source_duplicates": 0,
+        "not_game_story": 131,
+        "quality_low": 4,
+        "schedule_grounded_threads": 0,
+        "selected_game_stories": 0,
+        "selected_game_threads": 0,
+        "stale_game_story": 8,
+        "unrouted_game_stories": 0
+      },
+      "game_stories_selected": 0,
+      "game_threads_selected": 0,
+      "schedule_grounded_threads": 0,
+      "selection_reasons": {
+        "already_posted": 18,
+        "deferred_for_breaking_news": 1,
+        "eligible": 2,
+        "missing_published": 1,
+        "quality_low": 14,
+        "selected": 1,
+        "stale": 95,
+        "story_already_posted": 1
+      },
+      "sources_failed": 3,
+      "sources_ok": 5,
+      "standalone_selected": 1,
+      "started_at": "2026-11-03T11:08:44.042444+00:00",
       "status": "completed"
     }
   ]
