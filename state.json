@@ -162,11 +162,30 @@
       "source": "NBC Sports Bay Area",
       "title": "Giants well represented on Hall of Fame's 2026 Contemporary Baseball Era ballot",
       "url": "https://www.nbcsportsbayarea.com/mlb/san-francisco-giants/managers-executives-contemporary-era-ballot/1976290/"
+    },
+    {
+      "author": "Alex Pavlovic",
+      "game_key": "",
+      "kind": "standalone",
+      "posted_at": "2026-11-03T03:34:08.514187+00:00",
+      "source": "NBC Sports Bay Area",
+      "title": "Giants remove nine players, including one surprise, in necessary roster purge",
+      "url": "https://www.nbcsportsbayarea.com/mlb/san-francisco-giants/roster-deadline-jose-butto/1976410/"
+    },
+    {
+      "author": "John Shea",
+      "game_key": "",
+      "kind": "standalone",
+      "posted_at": "2026-11-03T03:34:11.415757+00:00",
+      "source": "San Francisco Standard",
+      "title": "Buster Posey’s roster puzzle: 15 Giants rejoin the 40-man, and the squeeze is on",
+      "url": "https://sfstandard.com/2026/11/02/buster-posey-sf-giants-roster-moves-60-day-injured-list/"
     }
   ],
   "posted_urls": {
     "https://blogs.fangraphs.com/instagraphs/job-posting-san-francisco-giants-director-integrated-performance/": "2026-10-30T19:59:59.749926+00:00",
     "https://sfstandard.com/2026/10/16/even-year-magic-vs-2020s-dominance-did-giants-dodgers-have-better-run/": "2026-10-16T18:54:47.717989+00:00",
+    "https://sfstandard.com/2026/11/02/buster-posey-sf-giants-roster-moves-60-day-injured-list/": "2026-11-03T03:34:11.415757+00:00",
     "https://www.mlb.com/giants/news/giants-40-man-roster-crunch-2026-offseason": "2026-10-28T13:27:08.659204+00:00",
     "https://www.mlb.com/giants/news/giants-could-target-these-pitchers-in-free-agency": "2026-10-21T12:15:15.944577+00:00",
     "https://www.mlb.com/giants/news/giants-prospects-in-arizona-fall-league-2026": "2026-10-31T19:27:09.049548+00:00",
@@ -177,6 +196,7 @@
     "https://www.nbcsportsbayarea.com/mlb/san-francisco-giants/grant-mccray-mariners-offseason-roster-churn/1975500/": "2026-11-01T13:42:34.774024+00:00",
     "https://www.nbcsportsbayarea.com/mlb/san-francisco-giants/managers-executives-contemporary-era-ballot/1976290/": "2026-11-02T23:39:25.027082+00:00",
     "https://www.nbcsportsbayarea.com/mlb/san-francisco-giants/questions-uncertain-2026-offseason/1975437/": "2026-10-29T20:26:36.961219+00:00",
+    "https://www.nbcsportsbayarea.com/mlb/san-francisco-giants/roster-deadline-jose-butto/1976410/": "2026-11-03T03:34:08.514187+00:00",
     "https://www.nytimes.com/athletic/7722423/2026/10/26/inside-buster-poseys-new-pitching-plan-we-have-to-make-an-effort-to-increase-stuff/": "2026-10-26T19:13:53.043056+00:00",
     "https://www.nytimes.com/athletic/7733268/2026/10/29/sf-giants-offseason-primer-2026-2027-free-agency-trades/": "2026-10-29T20:26:37.859340+00:00",
     "https://www.nytimes.com/athletic/7733505/2026/10/29/giants-fall-league-randy-rodriguez/": "2026-10-29T13:36:55.654270+00:00",
@@ -185,36 +205,6 @@
     "https://www.sfgate.com/giants/article/giants-johnson-midterm-donations-22499643.php": "2026-10-29T08:46:58.438649+00:00"
   },
   "run_history": [
-    {
-      "discovered": 148,
-      "finished_at": "2026-10-13T02:40:21.513026+00:00",
-      "game_selection_reasons": {
-        "already_posted": 5,
-        "game_source_duplicates": 0,
-        "not_game_story": 133,
-        "quality_low": 3,
-        "schedule_grounded_threads": 0,
-        "selected_game_stories": 0,
-        "selected_game_threads": 0,
-        "stale_game_story": 7,
-        "unrouted_game_stories": 0
-      },
-      "game_stories_selected": 0,
-      "game_threads_selected": 0,
-      "schedule_grounded_threads": 0,
-      "selection_reasons": {
-        "already_posted": 46,
-        "deferred_for_breaking_news": 2,
-        "quality_low": 16,
-        "selected": 0,
-        "stale": 69
-      },
-      "sources_failed": 0,
-      "sources_ok": 8,
-      "standalone_selected": 0,
-      "started_at": "2026-10-13T02:39:52.345132+00:00",
-      "status": "completed"
-    },
     {
       "discovered": 148,
       "finished_at": "2026-10-13T09:40:01.941562+00:00",
@@ -2798,6 +2788,39 @@
       "sources_ok": 4,
       "standalone_selected": 2,
       "started_at": "2026-11-02T23:39:01.729581+00:00",
+      "status": "completed"
+    },
+    {
+      "discovered": 104,
+      "finished_at": "2026-11-03T03:34:12.219184+00:00",
+      "game_selection_reasons": {
+        "already_posted": 1,
+        "game_source_duplicates": 0,
+        "not_game_story": 133,
+        "quality_low": 4,
+        "schedule_grounded_threads": 0,
+        "selected_game_stories": 0,
+        "selected_game_threads": 0,
+        "stale_game_story": 8,
+        "unrouted_game_stories": 0
+      },
+      "game_stories_selected": 0,
+      "game_threads_selected": 0,
+      "schedule_grounded_threads": 0,
+      "selection_reasons": {
+        "already_posted": 16,
+        "deferred_for_breaking_news": 1,
+        "eligible": 3,
+        "missing_published": 1,
+        "quality_low": 15,
+        "selected": 2,
+        "stale": 97,
+        "story_already_posted": 1
+      },
+      "sources_failed": 3,
+      "sources_ok": 5,
+      "standalone_selected": 2,
+      "started_at": "2026-11-03T03:33:40.176113+00:00",
       "status": "completed"
     }
   ]
