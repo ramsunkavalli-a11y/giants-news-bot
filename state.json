@@ -2,15 +2,6 @@
   "game_threads": {},
   "posted_stories": [
     {
-      "author": "Maria Guardado",
-      "game_key": "",
-      "kind": "standalone",
-      "posted_at": "2026-10-14T19:35:38.717209+00:00",
-      "source": "MLB.com",
-      "title": "3 Giants prospects to watch in 2027",
-      "url": "https://www.mlb.com/giants/news/giants-prospects-who-could-contribute-in-2027"
-    },
-    {
       "author": "Alex Simon",
       "game_key": "",
       "kind": "standalone",
@@ -198,7 +189,6 @@
     "https://www.mlb.com/giants/news/giants-40-man-roster-crunch-2026-offseason": "2026-10-28T13:27:08.659204+00:00",
     "https://www.mlb.com/giants/news/giants-could-target-these-pitchers-in-free-agency": "2026-10-21T12:15:15.944577+00:00",
     "https://www.mlb.com/giants/news/giants-prospects-in-arizona-fall-league-2026": "2026-10-31T19:27:09.049548+00:00",
-    "https://www.mlb.com/giants/news/giants-prospects-who-could-contribute-in-2027": "2026-10-14T19:35:38.717209+00:00",
     "https://www.mlb.com/giants/news/giants-trade-nate-furman-to-nationals-for-tony-neubeck": "2026-11-02T07:51:31.703683+00:00",
     "https://www.mlb.com/giants/news/jose-butto-tristan-beck-other-players-leaving-giants": "2026-11-03T11:09:15.442753+00:00",
     "https://www.mlb.com/giants/news/jung-hoo-lee-makes-progress-in-2026-season": "2026-10-24T18:18:17.409709+00:00",
@@ -215,37 +205,6 @@
     "https://www.sfgate.com/giants/article/giants-johnson-midterm-donations-22499643.php": "2026-10-29T08:46:58.438649+00:00"
   },
   "run_history": [
-    {
-      "discovered": 148,
-      "finished_at": "2026-10-14T19:35:39.520507+00:00",
-      "game_selection_reasons": {
-        "already_posted": 3,
-        "game_source_duplicates": 0,
-        "not_game_story": 133,
-        "quality_low": 3,
-        "schedule_grounded_threads": 0,
-        "selected_game_stories": 0,
-        "selected_game_threads": 0,
-        "stale_game_story": 9,
-        "unrouted_game_stories": 0
-      },
-      "game_stories_selected": 0,
-      "game_threads_selected": 0,
-      "schedule_grounded_threads": 0,
-      "selection_reasons": {
-        "already_posted": 43,
-        "deferred_for_breaking_news": 2,
-        "eligible": 1,
-        "quality_low": 16,
-        "selected": 1,
-        "stale": 71
-      },
-      "sources_failed": 0,
-      "sources_ok": 8,
-      "standalone_selected": 1,
-      "started_at": "2026-10-14T19:35:07.142645+00:00",
-      "status": "completed"
-    },
     {
       "discovered": 148,
       "finished_at": "2026-10-15T00:00:41.470402+00:00",
@@ -2816,6 +2775,39 @@
       "sources_ok": 5,
       "standalone_selected": 0,
       "started_at": "2026-11-04T15:37:56.507795+00:00",
+      "status": "completed"
+    },
+    {
+      "discovered": 103,
+      "finished_at": "2026-11-04T22:04:17.363434+00:00",
+      "game_selection_reasons": {
+        "already_posted": 1,
+        "game_source_duplicates": 0,
+        "not_game_story": 133,
+        "quality_low": 3,
+        "schedule_grounded_threads": 0,
+        "selected_game_stories": 0,
+        "selected_game_threads": 0,
+        "stale_game_story": 8,
+        "unrouted_game_stories": 0
+      },
+      "game_stories_selected": 0,
+      "game_threads_selected": 0,
+      "schedule_grounded_threads": 0,
+      "selection_reasons": {
+        "already_posted": 18,
+        "deferred_for_breaking_news": 1,
+        "eligible": 2,
+        "missing_published": 1,
+        "quality_low": 15,
+        "selected": 0,
+        "stale": 96,
+        "story_already_posted": 2
+      },
+      "sources_failed": 3,
+      "sources_ok": 5,
+      "standalone_selected": 0,
+      "started_at": "2026-11-04T22:03:48.667125+00:00",
       "status": "completed"
     }
   ]
