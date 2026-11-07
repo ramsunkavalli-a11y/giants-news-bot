@@ -189,6 +189,15 @@
       "source": "SFGATE",
       "title": "SF Giants owner Charles Johnson had a hilariously bad record in midterm elections",
       "url": "https://www.sfgate.com/giants/article/giants-johnson-election-day-22516997.php"
+    },
+    {
+      "author": "",
+      "game_key": "",
+      "kind": "standalone",
+      "posted_at": "2026-11-07T10:30:44.673551+00:00",
+      "source": "The Athletic",
+      "title": "The Giants' 40-man roster is set for now, but plenty of questions remain",
+      "url": "https://www.nytimes.com/athletic/7751247/2026/11/04/sf-giants-40-man-roster-questions/"
     }
   ],
   "posted_urls": {
@@ -211,40 +220,11 @@
     "https://www.nytimes.com/athletic/7733268/2026/10/29/sf-giants-offseason-primer-2026-2027-free-agency-trades/": "2026-10-29T20:26:37.859340+00:00",
     "https://www.nytimes.com/athletic/7733505/2026/10/29/giants-fall-league-randy-rodriguez/": "2026-10-29T13:36:55.654270+00:00",
     "https://www.nytimes.com/athletic/7748429/2026/11/02/brian-sabean-hall-of-fame-ballot-yankees-giants/": "2026-11-02T23:39:22.743731+00:00",
+    "https://www.nytimes.com/athletic/7751247/2026/11/04/sf-giants-40-man-roster-questions/": "2026-11-07T10:30:44.673551+00:00",
     "https://www.sfgate.com/giants/article/giants-johnson-election-day-22516997.php": "2026-11-06T21:42:50.920439+00:00",
     "https://www.sfgate.com/giants/article/giants-johnson-midterm-donations-22499643.php": "2026-10-29T08:46:58.438649+00:00"
   },
   "run_history": [
-    {
-      "discovered": 148,
-      "finished_at": "2026-10-17T07:08:14.186200+00:00",
-      "game_selection_reasons": {
-        "already_posted": 2,
-        "game_source_duplicates": 0,
-        "not_game_story": 133,
-        "quality_low": 3,
-        "schedule_grounded_threads": 0,
-        "selected_game_stories": 0,
-        "selected_game_threads": 0,
-        "stale_game_story": 10,
-        "unrouted_game_stories": 0
-      },
-      "game_stories_selected": 0,
-      "game_threads_selected": 0,
-      "schedule_grounded_threads": 0,
-      "selection_reasons": {
-        "already_posted": 40,
-        "deferred_for_breaking_news": 2,
-        "quality_low": 16,
-        "selected": 0,
-        "stale": 75
-      },
-      "sources_failed": 0,
-      "sources_ok": 8,
-      "standalone_selected": 0,
-      "started_at": "2026-10-17T07:07:54.367188+00:00",
-      "status": "completed"
-    },
     {
       "discovered": 148,
       "finished_at": "2026-10-17T11:05:58.576934+00:00",
@@ -2841,6 +2821,38 @@
       "sources_ok": 6,
       "standalone_selected": 0,
       "started_at": "2026-11-07T02:08:31.556340+00:00",
+      "status": "completed"
+    },
+    {
+      "discovered": 118,
+      "finished_at": "2026-11-07T10:30:45.476953+00:00",
+      "game_selection_reasons": {
+        "already_posted": 2,
+        "game_source_duplicates": 0,
+        "not_game_story": 132,
+        "quality_low": 3,
+        "schedule_grounded_threads": 0,
+        "selected_game_stories": 0,
+        "selected_game_threads": 0,
+        "stale_game_story": 8,
+        "unrouted_game_stories": 0
+      },
+      "game_stories_selected": 0,
+      "game_threads_selected": 0,
+      "schedule_grounded_threads": 0,
+      "selection_reasons": {
+        "already_posted": 18,
+        "eligible": 2,
+        "missing_published": 2,
+        "quality_low": 17,
+        "selected": 1,
+        "stale": 93,
+        "story_already_posted": 1
+      },
+      "sources_failed": 2,
+      "sources_ok": 6,
+      "standalone_selected": 1,
+      "started_at": "2026-11-07T10:30:27.207659+00:00",
       "status": "completed"
     }
   ]
