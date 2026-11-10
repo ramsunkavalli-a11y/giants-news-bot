@@ -225,6 +225,15 @@
       "source": "San Francisco Standard",
       "title": "Giants open GM meetings with a long shopping list and a brief window to fill it",
       "url": "https://sfstandard.com/2026/11/09/sf-giants-gm-meetings-shopping-list-buster-posey/"
+    },
+    {
+      "author": "",
+      "game_key": "",
+      "kind": "standalone",
+      "posted_at": "2026-11-10T11:28:19.115771+00:00",
+      "source": "The Athletic",
+      "title": "The Giants still have a chance to compete in 2027, even after a terrible 2026 season",
+      "url": "https://www.nytimes.com/athletic/7768408/2026/11/10/sf-giants-2027-outlook/"
     }
   ],
   "posted_urls": {
@@ -251,40 +260,11 @@
     "https://www.nytimes.com/athletic/7748429/2026/11/02/brian-sabean-hall-of-fame-ballot-yankees-giants/": "2026-11-02T23:39:22.743731+00:00",
     "https://www.nytimes.com/athletic/7751247/2026/11/04/sf-giants-40-man-roster-questions/": "2026-11-07T10:30:44.673551+00:00",
     "https://www.nytimes.com/athletic/7767848/2026/11/09/sf-giants-offseason-pitching-defense-gm-meetings/": "2026-11-09T16:45:50.919963+00:00",
+    "https://www.nytimes.com/athletic/7768408/2026/11/10/sf-giants-2027-outlook/": "2026-11-10T11:28:19.115771+00:00",
     "https://www.sfgate.com/giants/article/giants-johnson-election-day-22516997.php": "2026-11-06T21:42:50.920439+00:00",
     "https://www.sfgate.com/giants/article/giants-johnson-midterm-donations-22499643.php": "2026-10-29T08:46:58.438649+00:00"
   },
   "run_history": [
-    {
-      "discovered": 148,
-      "finished_at": "2026-10-20T07:51:38.156696+00:00",
-      "game_selection_reasons": {
-        "game_source_duplicates": 0,
-        "not_game_story": 132,
-        "quality_low": 4,
-        "schedule_grounded_threads": 0,
-        "selected_game_stories": 0,
-        "selected_game_threads": 0,
-        "stale_game_story": 12,
-        "unrouted_game_stories": 0
-      },
-      "game_stories_selected": 0,
-      "game_threads_selected": 0,
-      "schedule_grounded_threads": 0,
-      "selection_reasons": {
-        "already_posted": 25,
-        "deferred_for_breaking_news": 2,
-        "missing_published": 3,
-        "quality_low": 15,
-        "selected": 0,
-        "stale": 87
-      },
-      "sources_failed": 0,
-      "sources_ok": 8,
-      "standalone_selected": 0,
-      "started_at": "2026-10-20T07:51:22.354423+00:00",
-      "status": "completed"
-    },
     {
       "discovered": 148,
       "finished_at": "2026-10-20T11:59:06.292344+00:00",
@@ -2891,6 +2871,37 @@
       "sources_ok": 4,
       "standalone_selected": 1,
       "started_at": "2026-11-10T04:14:08.970536+00:00",
+      "status": "completed"
+    },
+    {
+      "discovered": 79,
+      "finished_at": "2026-11-10T11:28:19.919157+00:00",
+      "game_selection_reasons": {
+        "already_posted": 2,
+        "game_source_duplicates": 0,
+        "not_game_story": 133,
+        "quality_low": 3,
+        "schedule_grounded_threads": 0,
+        "selected_game_stories": 0,
+        "selected_game_threads": 0,
+        "stale_game_story": 7,
+        "unrouted_game_stories": 0
+      },
+      "game_stories_selected": 0,
+      "game_threads_selected": 0,
+      "schedule_grounded_threads": 0,
+      "selection_reasons": {
+        "already_posted": 22,
+        "eligible": 1,
+        "missing_published": 2,
+        "quality_low": 18,
+        "selected": 1,
+        "stale": 90
+      },
+      "sources_failed": 4,
+      "sources_ok": 4,
+      "standalone_selected": 1,
+      "started_at": "2026-11-10T11:27:41.224013+00:00",
       "status": "completed"
     }
   ]
