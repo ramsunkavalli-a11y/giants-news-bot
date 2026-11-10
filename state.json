@@ -216,6 +216,15 @@
       "source": "San Francisco Standard",
       "title": "Could Hall of Fame candidate Brian Sabean return to Giants? ‘I’d certainly listen’",
       "url": "https://sfstandard.com/2026/11/09/brian-sabean-sf-giants-buster-posey/"
+    },
+    {
+      "author": "John Shea",
+      "game_key": "",
+      "kind": "standalone",
+      "posted_at": "2026-11-10T04:14:26.539767+00:00",
+      "source": "San Francisco Standard",
+      "title": "Giants open GM meetings with a long shopping list and a brief window to fill it",
+      "url": "https://sfstandard.com/2026/11/09/sf-giants-gm-meetings-shopping-list-buster-posey/"
     }
   ],
   "posted_urls": {
@@ -223,6 +232,7 @@
     "https://sfstandard.com/2026/11/02/buster-posey-sf-giants-roster-moves-60-day-injured-list/": "2026-11-03T03:34:11.415757+00:00",
     "https://sfstandard.com/2026/11/05/kaeden-kent-sf-giants-jeff-kent-legacy/": "2026-11-05T15:41:02.908147+00:00",
     "https://sfstandard.com/2026/11/09/brian-sabean-sf-giants-buster-posey/": "2026-11-09T16:45:54.024980+00:00",
+    "https://sfstandard.com/2026/11/09/sf-giants-gm-meetings-shopping-list-buster-posey/": "2026-11-10T04:14:26.539767+00:00",
     "https://www.mlb.com/giants/news/casey-schmitt-s-2027-outlook-for-giants": "2026-11-07T20:25:29.498760+00:00",
     "https://www.mlb.com/giants/news/giants-40-man-roster-crunch-2026-offseason": "2026-10-28T13:27:08.659204+00:00",
     "https://www.mlb.com/giants/news/giants-could-target-these-pitchers-in-free-agency": "2026-10-21T12:15:15.944577+00:00",
@@ -245,36 +255,6 @@
     "https://www.sfgate.com/giants/article/giants-johnson-midterm-donations-22499643.php": "2026-10-29T08:46:58.438649+00:00"
   },
   "run_history": [
-    {
-      "discovered": 148,
-      "finished_at": "2026-10-20T00:30:50.193095+00:00",
-      "game_selection_reasons": {
-        "game_source_duplicates": 0,
-        "not_game_story": 132,
-        "quality_low": 4,
-        "schedule_grounded_threads": 0,
-        "selected_game_stories": 0,
-        "selected_game_threads": 0,
-        "stale_game_story": 12,
-        "unrouted_game_stories": 0
-      },
-      "game_stories_selected": 0,
-      "game_threads_selected": 0,
-      "schedule_grounded_threads": 0,
-      "selection_reasons": {
-        "already_posted": 25,
-        "deferred_for_breaking_news": 2,
-        "missing_published": 3,
-        "quality_low": 15,
-        "selected": 0,
-        "stale": 87
-      },
-      "sources_failed": 0,
-      "sources_ok": 8,
-      "standalone_selected": 0,
-      "started_at": "2026-10-20T00:30:10.588057+00:00",
-      "status": "completed"
-    },
     {
       "discovered": 148,
       "finished_at": "2026-10-20T07:51:38.156696+00:00",
@@ -2880,6 +2860,37 @@
       "sources_ok": 4,
       "standalone_selected": 0,
       "started_at": "2026-11-10T00:21:44.285148+00:00",
+      "status": "completed"
+    },
+    {
+      "discovered": 79,
+      "finished_at": "2026-11-10T04:14:27.343077+00:00",
+      "game_selection_reasons": {
+        "already_posted": 2,
+        "game_source_duplicates": 0,
+        "not_game_story": 132,
+        "quality_low": 3,
+        "schedule_grounded_threads": 0,
+        "selected_game_stories": 0,
+        "selected_game_threads": 0,
+        "stale_game_story": 8,
+        "unrouted_game_stories": 0
+      },
+      "game_stories_selected": 0,
+      "game_threads_selected": 0,
+      "schedule_grounded_threads": 0,
+      "selection_reasons": {
+        "already_posted": 21,
+        "eligible": 1,
+        "missing_published": 2,
+        "quality_low": 18,
+        "selected": 1,
+        "stale": 90
+      },
+      "sources_failed": 4,
+      "sources_ok": 4,
+      "standalone_selected": 1,
+      "started_at": "2026-11-10T04:14:08.970536+00:00",
       "status": "completed"
     }
   ]
