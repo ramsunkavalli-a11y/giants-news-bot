@@ -5,15 +5,6 @@
       "author": "Maria Guardado",
       "game_key": "",
       "kind": "standalone",
-      "posted_at": "2026-10-21T12:15:15.944577+00:00",
-      "source": "MLB.com",
-      "title": "7 free-agent pitching targets for the Giants",
-      "url": "https://www.mlb.com/giants/news/giants-could-target-these-pitchers-in-free-agency"
-    },
-    {
-      "author": "Maria Guardado",
-      "game_key": "",
-      "kind": "standalone",
       "posted_at": "2026-10-24T18:18:17.409709+00:00",
       "source": "MLB.com",
       "title": "JHL calls '26 a 'rollercoaster season,' but Giants see improvement",
@@ -261,6 +252,33 @@
       "source": "NBC Sports Bay Area",
       "title": "U.S. Postal Service to release stamp honoring Giants legend Willie Mays in 2027",
       "url": "https://www.nbcsportsbayarea.com/mlb/san-francisco-giants/usps-stamp-willie-mays-black-heritage/1979012/"
+    },
+    {
+      "author": "John Shea",
+      "game_key": "",
+      "kind": "standalone",
+      "posted_at": "2026-11-11T15:30:25.898933+00:00",
+      "source": "San Francisco Standard",
+      "title": "Why Buster Posey’s Giants are reluctant to sign the pitchers they need most",
+      "url": "https://sfstandard.com/2026/11/11/buster-posey-sf-giants-offseason-pitching-plan/"
+    },
+    {
+      "author": "",
+      "game_key": "",
+      "kind": "standalone",
+      "posted_at": "2026-11-11T15:30:26.865202+00:00",
+      "source": "The Athletic",
+      "title": "Buster Posey sets up a Giants offseason with lowered sights: 'We have to be realistic'",
+      "url": "https://www.nytimes.com/athletic/7772204/2026/11/11/buster-posey-giants-offseason-general-managers-meetings/"
+    },
+    {
+      "author": "Maria Guardado",
+      "game_key": "",
+      "kind": "standalone",
+      "posted_at": "2026-11-11T15:30:29.014329+00:00",
+      "source": "MLB.com",
+      "title": "Rodríguez shut down after brief AFL stint",
+      "url": "https://www.mlb.com/giants/news/randy-rodriguez-s-arizona-fall-league-stint-cut-short"
     }
   ],
   "posted_urls": {
@@ -269,15 +287,16 @@
     "https://sfstandard.com/2026/11/05/kaeden-kent-sf-giants-jeff-kent-legacy/": "2026-11-05T15:41:02.908147+00:00",
     "https://sfstandard.com/2026/11/09/brian-sabean-sf-giants-buster-posey/": "2026-11-09T16:45:54.024980+00:00",
     "https://sfstandard.com/2026/11/09/sf-giants-gm-meetings-shopping-list-buster-posey/": "2026-11-10T04:14:26.539767+00:00",
+    "https://sfstandard.com/2026/11/11/buster-posey-sf-giants-offseason-pitching-plan/": "2026-11-11T15:30:25.898933+00:00",
     "https://www.mlb.com/giants/news/casey-schmitt-s-2027-outlook-for-giants": "2026-11-07T20:25:29.498760+00:00",
     "https://www.mlb.com/giants/news/giants-40-man-roster-crunch-2026-offseason": "2026-10-28T13:27:08.659204+00:00",
-    "https://www.mlb.com/giants/news/giants-could-target-these-pitchers-in-free-agency": "2026-10-21T12:15:15.944577+00:00",
     "https://www.mlb.com/giants/news/giants-lose-hitting-coach-hunter-mense-royals": "2026-11-05T22:12:02.070211+00:00",
     "https://www.mlb.com/giants/news/giants-prospects-in-arizona-fall-league-2026": "2026-10-31T19:27:09.049548+00:00",
     "https://www.mlb.com/giants/news/giants-trade-nate-furman-to-nationals-for-tony-neubeck": "2026-11-02T07:51:31.703683+00:00",
     "https://www.mlb.com/giants/news/harrison-bader-giants-close-to-resolving-dispute-over-scooter-crash": "2026-11-11T11:16:48.602694+00:00",
     "https://www.mlb.com/giants/news/jose-butto-tristan-beck-other-players-leaving-giants": "2026-11-03T11:09:15.442753+00:00",
     "https://www.mlb.com/giants/news/jung-hoo-lee-makes-progress-in-2026-season": "2026-10-24T18:18:17.409709+00:00",
+    "https://www.mlb.com/giants/news/randy-rodriguez-s-arizona-fall-league-stint-cut-short": "2026-11-11T15:30:29.014329+00:00",
     "https://www.nbcsportsbayarea.com/mlb/san-francisco-giants/grant-mccray-mariners-offseason-roster-churn/1975500/": "2026-11-01T13:42:34.774024+00:00",
     "https://www.nbcsportsbayarea.com/mlb/san-francisco-giants/harrison-bader-contract-dispute-accident-buster-posey/1979033/": "2026-11-11T02:03:49.475504+00:00",
     "https://www.nbcsportsbayarea.com/mlb/san-francisco-giants/managers-executives-contemporary-era-ballot/1976290/": "2026-11-02T23:39:25.027082+00:00",
@@ -291,41 +310,11 @@
     "https://www.nytimes.com/athletic/7751247/2026/11/04/sf-giants-40-man-roster-questions/": "2026-11-07T10:30:44.673551+00:00",
     "https://www.nytimes.com/athletic/7767848/2026/11/09/sf-giants-offseason-pitching-defense-gm-meetings/": "2026-11-09T16:45:50.919963+00:00",
     "https://www.nytimes.com/athletic/7768408/2026/11/10/sf-giants-2027-outlook/": "2026-11-10T11:28:19.115771+00:00",
+    "https://www.nytimes.com/athletic/7772204/2026/11/11/buster-posey-giants-offseason-general-managers-meetings/": "2026-11-11T15:30:26.865202+00:00",
     "https://www.sfgate.com/giants/article/giants-johnson-election-day-22516997.php": "2026-11-06T21:42:50.920439+00:00",
     "https://www.sfgate.com/giants/article/giants-johnson-midterm-donations-22499643.php": "2026-10-29T08:46:58.438649+00:00"
   },
   "run_history": [
-    {
-      "discovered": 148,
-      "finished_at": "2026-10-21T12:15:16.747986+00:00",
-      "game_selection_reasons": {
-        "game_source_duplicates": 0,
-        "not_game_story": 132,
-        "quality_low": 4,
-        "schedule_grounded_threads": 0,
-        "selected_game_stories": 0,
-        "selected_game_threads": 0,
-        "stale_game_story": 12,
-        "unrouted_game_stories": 0
-      },
-      "game_stories_selected": 0,
-      "game_threads_selected": 0,
-      "schedule_grounded_threads": 0,
-      "selection_reasons": {
-        "already_posted": 19,
-        "deferred_for_breaking_news": 2,
-        "eligible": 1,
-        "missing_published": 5,
-        "quality_low": 14,
-        "selected": 1,
-        "stale": 91
-      },
-      "sources_failed": 0,
-      "sources_ok": 8,
-      "standalone_selected": 1,
-      "started_at": "2026-10-21T12:14:38.745112+00:00",
-      "status": "completed"
-    },
     {
       "discovered": 148,
       "finished_at": "2026-10-21T19:28:03.378410+00:00",
@@ -2935,6 +2924,37 @@
       "sources_ok": 5,
       "standalone_selected": 2,
       "started_at": "2026-11-11T11:16:25.532185+00:00",
+      "status": "completed"
+    },
+    {
+      "discovered": 103,
+      "finished_at": "2026-11-11T15:30:29.817750+00:00",
+      "game_selection_reasons": {
+        "already_posted": 2,
+        "game_source_duplicates": 0,
+        "not_game_story": 134,
+        "quality_low": 2,
+        "schedule_grounded_threads": 0,
+        "selected_game_stories": 0,
+        "selected_game_threads": 0,
+        "stale_game_story": 7,
+        "unrouted_game_stories": 0
+      },
+      "game_stories_selected": 0,
+      "game_threads_selected": 0,
+      "schedule_grounded_threads": 0,
+      "selection_reasons": {
+        "already_posted": 25,
+        "eligible": 3,
+        "missing_published": 1,
+        "quality_low": 17,
+        "selected": 3,
+        "stale": 88
+      },
+      "sources_failed": 3,
+      "sources_ok": 5,
+      "standalone_selected": 3,
+      "started_at": "2026-11-11T15:29:46.907312+00:00",
       "status": "completed"
     }
   ]
