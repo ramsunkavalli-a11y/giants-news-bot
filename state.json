@@ -234,6 +234,15 @@
       "source": "The Athletic",
       "title": "The Giants still have a chance to compete in 2027, even after a terrible 2026 season",
       "url": "https://www.nytimes.com/athletic/7768408/2026/11/10/sf-giants-2027-outlook/"
+    },
+    {
+      "author": "Alex Pavlovic",
+      "game_key": "",
+      "kind": "standalone",
+      "posted_at": "2026-11-11T02:03:49.475504+00:00",
+      "source": "NBC Sports Bay Area",
+      "title": "Giants, Harrison Bader close to resolving contract dispute from scooter accident",
+      "url": "https://www.nbcsportsbayarea.com/mlb/san-francisco-giants/harrison-bader-contract-dispute-accident-buster-posey/1979033/"
     }
   ],
   "posted_urls": {
@@ -251,6 +260,7 @@
     "https://www.mlb.com/giants/news/jose-butto-tristan-beck-other-players-leaving-giants": "2026-11-03T11:09:15.442753+00:00",
     "https://www.mlb.com/giants/news/jung-hoo-lee-makes-progress-in-2026-season": "2026-10-24T18:18:17.409709+00:00",
     "https://www.nbcsportsbayarea.com/mlb/san-francisco-giants/grant-mccray-mariners-offseason-roster-churn/1975500/": "2026-11-01T13:42:34.774024+00:00",
+    "https://www.nbcsportsbayarea.com/mlb/san-francisco-giants/harrison-bader-contract-dispute-accident-buster-posey/1979033/": "2026-11-11T02:03:49.475504+00:00",
     "https://www.nbcsportsbayarea.com/mlb/san-francisco-giants/managers-executives-contemporary-era-ballot/1976290/": "2026-11-02T23:39:25.027082+00:00",
     "https://www.nbcsportsbayarea.com/mlb/san-francisco-giants/questions-uncertain-2026-offseason/1975437/": "2026-10-29T20:26:36.961219+00:00",
     "https://www.nbcsportsbayarea.com/mlb/san-francisco-giants/roster-deadline-jose-butto/1976410/": "2026-11-03T03:34:08.514187+00:00",
@@ -265,36 +275,6 @@
     "https://www.sfgate.com/giants/article/giants-johnson-midterm-donations-22499643.php": "2026-10-29T08:46:58.438649+00:00"
   },
   "run_history": [
-    {
-      "discovered": 148,
-      "finished_at": "2026-10-21T00:01:33.130151+00:00",
-      "game_selection_reasons": {
-        "game_source_duplicates": 0,
-        "not_game_story": 132,
-        "quality_low": 4,
-        "schedule_grounded_threads": 0,
-        "selected_game_stories": 0,
-        "selected_game_threads": 0,
-        "stale_game_story": 12,
-        "unrouted_game_stories": 0
-      },
-      "game_stories_selected": 0,
-      "game_threads_selected": 0,
-      "schedule_grounded_threads": 0,
-      "selection_reasons": {
-        "already_posted": 23,
-        "deferred_for_breaking_news": 2,
-        "missing_published": 3,
-        "quality_low": 15,
-        "selected": 0,
-        "stale": 89
-      },
-      "sources_failed": 0,
-      "sources_ok": 8,
-      "standalone_selected": 0,
-      "started_at": "2026-10-21T00:01:05.866627+00:00",
-      "status": "completed"
-    },
     {
       "discovered": 148,
       "finished_at": "2026-10-21T07:55:24.358384+00:00",
@@ -2902,6 +2882,38 @@
       "sources_ok": 4,
       "standalone_selected": 0,
       "started_at": "2026-11-10T21:53:10.793910+00:00",
+      "status": "completed"
+    },
+    {
+      "discovered": 103,
+      "finished_at": "2026-11-11T02:03:50.278257+00:00",
+      "game_selection_reasons": {
+        "already_posted": 2,
+        "game_source_duplicates": 0,
+        "not_game_story": 133,
+        "quality_low": 3,
+        "schedule_grounded_threads": 0,
+        "selected_game_stories": 0,
+        "selected_game_threads": 0,
+        "stale_game_story": 7,
+        "unrouted_game_stories": 0
+      },
+      "game_stories_selected": 0,
+      "game_threads_selected": 0,
+      "schedule_grounded_threads": 0,
+      "selection_reasons": {
+        "already_posted": 23,
+        "eligible": 2,
+        "missing_published": 1,
+        "quality_low": 18,
+        "selected": 1,
+        "source_cap_cluster": 1,
+        "stale": 89
+      },
+      "sources_failed": 3,
+      "sources_ok": 5,
+      "standalone_selected": 1,
+      "started_at": "2026-11-11T02:03:05.954224+00:00",
       "status": "completed"
     }
   ]
