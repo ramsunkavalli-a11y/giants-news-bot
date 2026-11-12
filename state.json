@@ -333,6 +333,24 @@
       "source": "FanGraphs",
       "title": "2027 Contemporary Baseball Era Committee Candidate: Dusty Baker",
       "url": "https://blogs.fangraphs.com/2027-contemporary-baseball-era-committee-candidate-dusty-baker/"
+    },
+    {
+      "author": "Grant Brisbee",
+      "game_key": "",
+      "kind": "standalone",
+      "posted_at": "2026-11-12T22:24:30.687369+00:00",
+      "source": "The Athletic",
+      "title": "The Giants plan to avoid free agents with qualifying offers. Is that the right call?",
+      "url": "https://www.nytimes.com/athletic/7776825/2026/11/12/sf-giants-free-agent-strategy-david-bednar-adrian-morejon/"
+    },
+    {
+      "author": "Alex Pavlovic",
+      "game_key": "",
+      "kind": "standalone",
+      "posted_at": "2026-11-12T22:24:32.864240+00:00",
+      "source": "NBC Sports Bay Area",
+      "title": "Giants notes: Ryan Walker at career ‘crossroads;' Camilo Doval decision looming",
+      "url": "https://www.nbcsportsbayarea.com/mlb/san-francisco-giants/ryan-walker-camilo-doval-roster-decisions/1979462/"
     }
   ],
   "posted_urls": {
@@ -359,6 +377,7 @@
     "https://www.nbcsportsbayarea.com/mlb/san-francisco-giants/managers-executives-contemporary-era-ballot/1976290/": "2026-11-02T23:39:25.027082+00:00",
     "https://www.nbcsportsbayarea.com/mlb/san-francisco-giants/questions-uncertain-2026-offseason/1975437/": "2026-10-29T20:26:36.961219+00:00",
     "https://www.nbcsportsbayarea.com/mlb/san-francisco-giants/roster-deadline-jose-butto/1976410/": "2026-11-03T03:34:08.514187+00:00",
+    "https://www.nbcsportsbayarea.com/mlb/san-francisco-giants/ryan-walker-camilo-doval-roster-decisions/1979462/": "2026-11-12T22:24:32.864240+00:00",
     "https://www.nbcsportsbayarea.com/mlb/san-francisco-giants/tony-vitello-coaching-staff-changes/1979167/": "2026-11-11T22:55:54.714085+00:00",
     "https://www.nbcsportsbayarea.com/mlb/san-francisco-giants/usps-stamp-willie-mays-black-heritage/1979012/": "2026-11-11T11:16:50.733540+00:00",
     "https://www.nbcsportsbayarea.com/mlb/san-francisco-giants/willy-adames-buster-posey-reaction/1979283/": "2026-11-12T03:13:05.104767+00:00",
@@ -371,40 +390,11 @@
     "https://www.nytimes.com/athletic/7768408/2026/11/10/sf-giants-2027-outlook/": "2026-11-10T11:28:19.115771+00:00",
     "https://www.nytimes.com/athletic/7772204/2026/11/11/buster-posey-giants-offseason-general-managers-meetings/": "2026-11-11T15:30:26.865202+00:00",
     "https://www.nytimes.com/athletic/7773594/2026/11/11/james-rowson-yankees-giants-hitting-coach-job/": "2026-11-11T22:55:52.119473+00:00",
+    "https://www.nytimes.com/athletic/7776825/2026/11/12/sf-giants-free-agent-strategy-david-bednar-adrian-morejon/": "2026-11-12T22:24:30.687369+00:00",
     "https://www.sfgate.com/giants/article/giants-johnson-election-day-22516997.php": "2026-11-06T21:42:50.920439+00:00",
     "https://www.sfgate.com/giants/article/giants-johnson-midterm-donations-22499643.php": "2026-10-29T08:46:58.438649+00:00"
   },
   "run_history": [
-    {
-      "discovered": 148,
-      "finished_at": "2026-10-22T19:21:13.321479+00:00",
-      "game_selection_reasons": {
-        "game_source_duplicates": 0,
-        "not_game_story": 132,
-        "quality_low": 4,
-        "schedule_grounded_threads": 0,
-        "selected_game_stories": 0,
-        "selected_game_threads": 0,
-        "stale_game_story": 12,
-        "unrouted_game_stories": 0
-      },
-      "game_stories_selected": 0,
-      "game_threads_selected": 0,
-      "schedule_grounded_threads": 0,
-      "selection_reasons": {
-        "already_posted": 15,
-        "deferred_for_breaking_news": 1,
-        "missing_published": 5,
-        "quality_low": 16,
-        "selected": 0,
-        "stale": 95
-      },
-      "sources_failed": 0,
-      "sources_ok": 8,
-      "standalone_selected": 0,
-      "started_at": "2026-10-22T19:20:53.542381+00:00",
-      "status": "completed"
-    },
     {
       "discovered": 148,
       "finished_at": "2026-10-23T00:04:28.218290+00:00",
@@ -3018,6 +3008,37 @@
       "sources_ok": 6,
       "standalone_selected": 1,
       "started_at": "2026-11-12T16:05:48.823339+00:00",
+      "status": "completed"
+    },
+    {
+      "discovered": 108,
+      "finished_at": "2026-11-12T22:24:33.667635+00:00",
+      "game_selection_reasons": {
+        "already_posted": 2,
+        "game_source_duplicates": 0,
+        "not_game_story": 137,
+        "quality_low": 2,
+        "schedule_grounded_threads": 0,
+        "selected_game_stories": 0,
+        "selected_game_threads": 0,
+        "stale_game_story": 6,
+        "unrouted_game_stories": 0
+      },
+      "game_stories_selected": 0,
+      "game_threads_selected": 0,
+      "schedule_grounded_threads": 0,
+      "selection_reasons": {
+        "already_posted": 34,
+        "eligible": 2,
+        "missing_published": 3,
+        "quality_low": 17,
+        "selected": 2,
+        "stale": 81
+      },
+      "sources_failed": 2,
+      "sources_ok": 6,
+      "standalone_selected": 2,
+      "started_at": "2026-11-12T22:23:52.208243+00:00",
       "status": "completed"
     }
   ]
