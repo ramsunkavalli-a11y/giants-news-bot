@@ -351,6 +351,15 @@
       "source": "NBC Sports Bay Area",
       "title": "Giants notes: Ryan Walker at career ‘crossroads;' Camilo Doval decision looming",
       "url": "https://www.nbcsportsbayarea.com/mlb/san-francisco-giants/ryan-walker-camilo-doval-roster-decisions/1979462/"
+    },
+    {
+      "author": "John Shea",
+      "game_key": "",
+      "kind": "standalone",
+      "posted_at": "2026-11-13T02:45:45.827317+00:00",
+      "source": "San Francisco Standard",
+      "title": "5 issues the Giants’ first ‘offensive coordinator’ must address in 2027",
+      "url": "https://sfstandard.com/2026/11/12/james-rowson-sf-giants-offensive-coordinator/"
     }
   ],
   "posted_urls": {
@@ -362,6 +371,7 @@
     "https://sfstandard.com/2026/11/09/sf-giants-gm-meetings-shopping-list-buster-posey/": "2026-11-10T04:14:26.539767+00:00",
     "https://sfstandard.com/2026/11/11/buster-posey-sf-giants-offseason-pitching-plan/": "2026-11-11T15:30:25.898933+00:00",
     "https://sfstandard.com/2026/11/11/scott-boras-sf-giants-offseason-targets-hot-stove/": "2026-11-12T03:13:08.382303+00:00",
+    "https://sfstandard.com/2026/11/12/james-rowson-sf-giants-offensive-coordinator/": "2026-11-13T02:45:45.827317+00:00",
     "https://www.mlb.com/giants/news/casey-schmitt-s-2027-outlook-for-giants": "2026-11-07T20:25:29.498760+00:00",
     "https://www.mlb.com/giants/news/giants-40-man-roster-crunch-2026-offseason": "2026-10-28T13:27:08.659204+00:00",
     "https://www.mlb.com/giants/news/giants-lose-hitting-coach-hunter-mense-royals": "2026-11-05T22:12:02.070211+00:00",
@@ -395,36 +405,6 @@
     "https://www.sfgate.com/giants/article/giants-johnson-midterm-donations-22499643.php": "2026-10-29T08:46:58.438649+00:00"
   },
   "run_history": [
-    {
-      "discovered": 148,
-      "finished_at": "2026-10-23T00:04:28.218290+00:00",
-      "game_selection_reasons": {
-        "game_source_duplicates": 0,
-        "not_game_story": 132,
-        "quality_low": 4,
-        "schedule_grounded_threads": 0,
-        "selected_game_stories": 0,
-        "selected_game_threads": 0,
-        "stale_game_story": 12,
-        "unrouted_game_stories": 0
-      },
-      "game_stories_selected": 0,
-      "game_threads_selected": 0,
-      "schedule_grounded_threads": 0,
-      "selection_reasons": {
-        "already_posted": 13,
-        "deferred_for_breaking_news": 1,
-        "missing_published": 6,
-        "quality_low": 16,
-        "selected": 0,
-        "stale": 96
-      },
-      "sources_failed": 0,
-      "sources_ok": 8,
-      "standalone_selected": 0,
-      "started_at": "2026-10-23T00:04:06.297410+00:00",
-      "status": "completed"
-    },
     {
       "discovered": 148,
       "finished_at": "2026-10-23T07:50:59.565011+00:00",
@@ -3039,6 +3019,38 @@
       "sources_ok": 6,
       "standalone_selected": 2,
       "started_at": "2026-11-12T22:23:52.208243+00:00",
+      "status": "completed"
+    },
+    {
+      "discovered": 107,
+      "finished_at": "2026-11-13T02:45:46.631544+00:00",
+      "game_selection_reasons": {
+        "already_posted": 2,
+        "game_source_duplicates": 0,
+        "not_game_story": 135,
+        "quality_low": 3,
+        "schedule_grounded_threads": 0,
+        "selected_game_stories": 0,
+        "selected_game_threads": 0,
+        "stale_game_story": 6,
+        "unrouted_game_stories": 0
+      },
+      "game_stories_selected": 0,
+      "game_threads_selected": 0,
+      "schedule_grounded_threads": 0,
+      "selection_reasons": {
+        "already_posted": 35,
+        "eligible": 2,
+        "missing_published": 1,
+        "quality_low": 17,
+        "selected": 1,
+        "stale": 80,
+        "story_already_posted": 1
+      },
+      "sources_failed": 2,
+      "sources_ok": 6,
+      "standalone_selected": 1,
+      "started_at": "2026-11-13T02:45:11.036552+00:00",
       "status": "completed"
     }
   ]
