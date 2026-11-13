@@ -407,36 +407,6 @@
   "run_history": [
     {
       "discovered": 148,
-      "finished_at": "2026-10-23T11:58:09.495849+00:00",
-      "game_selection_reasons": {
-        "game_source_duplicates": 0,
-        "not_game_story": 132,
-        "quality_low": 4,
-        "schedule_grounded_threads": 0,
-        "selected_game_stories": 0,
-        "selected_game_threads": 0,
-        "stale_game_story": 12,
-        "unrouted_game_stories": 0
-      },
-      "game_stories_selected": 0,
-      "game_threads_selected": 0,
-      "schedule_grounded_threads": 0,
-      "selection_reasons": {
-        "already_posted": 13,
-        "deferred_for_breaking_news": 1,
-        "missing_published": 6,
-        "quality_low": 16,
-        "selected": 0,
-        "stale": 96
-      },
-      "sources_failed": 0,
-      "sources_ok": 8,
-      "standalone_selected": 0,
-      "started_at": "2026-10-23T11:57:56.104610+00:00",
-      "status": "completed"
-    },
-    {
-      "discovered": 148,
       "finished_at": "2026-10-23T19:26:57.573608+00:00",
       "game_selection_reasons": {
         "game_source_duplicates": 0,
@@ -3053,6 +3023,38 @@
       "sources_ok": 6,
       "standalone_selected": 0,
       "started_at": "2026-11-13T11:18:30.669667+00:00",
+      "status": "completed"
+    },
+    {
+      "discovered": 107,
+      "finished_at": "2026-11-13T15:33:40.943329+00:00",
+      "game_selection_reasons": {
+        "already_posted": 2,
+        "game_source_duplicates": 0,
+        "not_game_story": 135,
+        "quality_low": 3,
+        "schedule_grounded_threads": 0,
+        "selected_game_stories": 0,
+        "selected_game_threads": 0,
+        "stale_game_story": 6,
+        "unrouted_game_stories": 0
+      },
+      "game_stories_selected": 0,
+      "game_threads_selected": 0,
+      "schedule_grounded_threads": 0,
+      "selection_reasons": {
+        "already_posted": 36,
+        "eligible": 1,
+        "missing_published": 1,
+        "quality_low": 17,
+        "selected": 0,
+        "stale": 80,
+        "story_already_posted": 1
+      },
+      "sources_failed": 2,
+      "sources_ok": 6,
+      "standalone_selected": 0,
+      "started_at": "2026-11-13T15:33:22.681345+00:00",
       "status": "completed"
     }
   ]
