@@ -360,6 +360,15 @@
       "source": "San Francisco Standard",
       "title": "5 issues the Giants’ first ‘offensive coordinator’ must address in 2027",
       "url": "https://sfstandard.com/2026/11/12/james-rowson-sf-giants-offensive-coordinator/"
+    },
+    {
+      "author": "Alex Pavlovic",
+      "game_key": "",
+      "kind": "standalone",
+      "posted_at": "2026-11-13T22:05:36.714727+00:00",
+      "source": "NBC Sports Bay Area",
+      "title": "Why Giants offensive coordinator James Rowson picked football title for himself",
+      "url": "https://www.nbcsportsbayarea.com/mlb/san-francisco-giants/offensive-coordinator-james-rowson-analysis/1979836/"
     }
   ],
   "posted_urls": {
@@ -385,6 +394,7 @@
     "https://www.nbcsportsbayarea.com/mlb/san-francisco-giants/grant-mccray-mariners-offseason-roster-churn/1975500/": "2026-11-01T13:42:34.774024+00:00",
     "https://www.nbcsportsbayarea.com/mlb/san-francisco-giants/harrison-bader-contract-dispute-accident-buster-posey/1979033/": "2026-11-11T02:03:49.475504+00:00",
     "https://www.nbcsportsbayarea.com/mlb/san-francisco-giants/managers-executives-contemporary-era-ballot/1976290/": "2026-11-02T23:39:25.027082+00:00",
+    "https://www.nbcsportsbayarea.com/mlb/san-francisco-giants/offensive-coordinator-james-rowson-analysis/1979836/": "2026-11-13T22:05:36.714727+00:00",
     "https://www.nbcsportsbayarea.com/mlb/san-francisco-giants/questions-uncertain-2026-offseason/1975437/": "2026-10-29T20:26:36.961219+00:00",
     "https://www.nbcsportsbayarea.com/mlb/san-francisco-giants/roster-deadline-jose-butto/1976410/": "2026-11-03T03:34:08.514187+00:00",
     "https://www.nbcsportsbayarea.com/mlb/san-francisco-giants/ryan-walker-camilo-doval-roster-decisions/1979462/": "2026-11-12T22:24:32.864240+00:00",
@@ -405,36 +415,6 @@
     "https://www.sfgate.com/giants/article/giants-johnson-midterm-donations-22499643.php": "2026-10-29T08:46:58.438649+00:00"
   },
   "run_history": [
-    {
-      "discovered": 148,
-      "finished_at": "2026-10-23T19:26:57.573608+00:00",
-      "game_selection_reasons": {
-        "game_source_duplicates": 0,
-        "not_game_story": 132,
-        "quality_low": 4,
-        "schedule_grounded_threads": 0,
-        "selected_game_stories": 0,
-        "selected_game_threads": 0,
-        "stale_game_story": 12,
-        "unrouted_game_stories": 0
-      },
-      "game_stories_selected": 0,
-      "game_threads_selected": 0,
-      "schedule_grounded_threads": 0,
-      "selection_reasons": {
-        "already_posted": 12,
-        "deferred_for_breaking_news": 1,
-        "missing_published": 6,
-        "quality_low": 16,
-        "selected": 0,
-        "stale": 97
-      },
-      "sources_failed": 0,
-      "sources_ok": 8,
-      "standalone_selected": 0,
-      "started_at": "2026-10-23T19:26:42.110149+00:00",
-      "status": "completed"
-    },
     {
       "discovered": 148,
       "finished_at": "2026-10-23T23:54:53.986644+00:00",
@@ -3055,6 +3035,38 @@
       "sources_ok": 6,
       "standalone_selected": 0,
       "started_at": "2026-11-13T15:33:22.681345+00:00",
+      "status": "completed"
+    },
+    {
+      "discovered": 108,
+      "finished_at": "2026-11-13T22:05:37.518085+00:00",
+      "game_selection_reasons": {
+        "already_posted": 2,
+        "game_source_duplicates": 0,
+        "not_game_story": 136,
+        "quality_low": 3,
+        "schedule_grounded_threads": 0,
+        "selected_game_stories": 0,
+        "selected_game_threads": 0,
+        "stale_game_story": 6,
+        "unrouted_game_stories": 0
+      },
+      "game_stories_selected": 0,
+      "game_threads_selected": 0,
+      "schedule_grounded_threads": 0,
+      "selection_reasons": {
+        "already_posted": 36,
+        "eligible": 3,
+        "quality_low": 17,
+        "selected": 1,
+        "source_cap_cluster": 1,
+        "stale": 80,
+        "story_already_posted": 1
+      },
+      "sources_failed": 2,
+      "sources_ok": 6,
+      "standalone_selected": 1,
+      "started_at": "2026-11-13T22:04:58.969161+00:00",
       "status": "completed"
     }
   ]
