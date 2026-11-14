@@ -369,6 +369,24 @@
       "source": "NBC Sports Bay Area",
       "title": "Why Giants offensive coordinator James Rowson picked football title for himself",
       "url": "https://www.nbcsportsbayarea.com/mlb/san-francisco-giants/offensive-coordinator-james-rowson-analysis/1979836/"
+    },
+    {
+      "author": "Maria Guardado",
+      "game_key": "",
+      "kind": "standalone",
+      "posted_at": "2026-11-14T02:35:10.522869+00:00",
+      "source": "MLB.com",
+      "title": "Joining Giants as OC was easy decision for Rowson: 'What's not to like?'",
+      "url": "https://www.mlb.com/giants/news/james-rowson-hired-giants-offensive-coordinator"
+    },
+    {
+      "author": "Alex Pavlovic",
+      "game_key": "",
+      "kind": "standalone",
+      "posted_at": "2026-11-14T02:35:12.869319+00:00",
+      "source": "NBC Sports Bay Area",
+      "title": "How Buster Posey, Giants plan to attack pitching problem ahead of 2027 season",
+      "url": "https://www.nbcsportsbayarea.com/mlb/san-francisco-giants/buster-posey-free-agency-pitching-rotation/1979815/"
     }
   ],
   "posted_urls": {
@@ -388,9 +406,11 @@
     "https://www.mlb.com/giants/news/giants-trade-nate-furman-to-nationals-for-tony-neubeck": "2026-11-02T07:51:31.703683+00:00",
     "https://www.mlb.com/giants/news/harrison-bader-giants-close-to-resolving-dispute-over-scooter-crash": "2026-11-11T11:16:48.602694+00:00",
     "https://www.mlb.com/giants/news/james-rowson-giants-offensive-coordinator": "2026-11-11T22:55:51.051244+00:00",
+    "https://www.mlb.com/giants/news/james-rowson-hired-giants-offensive-coordinator": "2026-11-14T02:35:10.522869+00:00",
     "https://www.mlb.com/giants/news/jose-butto-tristan-beck-other-players-leaving-giants": "2026-11-03T11:09:15.442753+00:00",
     "https://www.mlb.com/giants/news/jung-hoo-lee-makes-progress-in-2026-season": "2026-10-24T18:18:17.409709+00:00",
     "https://www.mlb.com/giants/news/randy-rodriguez-s-arizona-fall-league-stint-cut-short": "2026-11-11T15:30:29.014329+00:00",
+    "https://www.nbcsportsbayarea.com/mlb/san-francisco-giants/buster-posey-free-agency-pitching-rotation/1979815/": "2026-11-14T02:35:12.869319+00:00",
     "https://www.nbcsportsbayarea.com/mlb/san-francisco-giants/grant-mccray-mariners-offseason-roster-churn/1975500/": "2026-11-01T13:42:34.774024+00:00",
     "https://www.nbcsportsbayarea.com/mlb/san-francisco-giants/harrison-bader-contract-dispute-accident-buster-posey/1979033/": "2026-11-11T02:03:49.475504+00:00",
     "https://www.nbcsportsbayarea.com/mlb/san-francisco-giants/managers-executives-contemporary-era-ballot/1976290/": "2026-11-02T23:39:25.027082+00:00",
@@ -415,36 +435,6 @@
     "https://www.sfgate.com/giants/article/giants-johnson-midterm-donations-22499643.php": "2026-10-29T08:46:58.438649+00:00"
   },
   "run_history": [
-    {
-      "discovered": 148,
-      "finished_at": "2026-10-23T23:54:53.986644+00:00",
-      "game_selection_reasons": {
-        "game_source_duplicates": 0,
-        "not_game_story": 132,
-        "quality_low": 4,
-        "schedule_grounded_threads": 0,
-        "selected_game_stories": 0,
-        "selected_game_threads": 0,
-        "stale_game_story": 12,
-        "unrouted_game_stories": 0
-      },
-      "game_stories_selected": 0,
-      "game_threads_selected": 0,
-      "schedule_grounded_threads": 0,
-      "selection_reasons": {
-        "already_posted": 12,
-        "deferred_for_breaking_news": 1,
-        "missing_published": 6,
-        "quality_low": 16,
-        "selected": 0,
-        "stale": 97
-      },
-      "sources_failed": 0,
-      "sources_ok": 8,
-      "standalone_selected": 0,
-      "started_at": "2026-10-23T23:54:37.568307+00:00",
-      "status": "completed"
-    },
     {
       "discovered": 148,
       "finished_at": "2026-10-24T07:32:14.490586+00:00",
@@ -3067,6 +3057,37 @@
       "sources_ok": 6,
       "standalone_selected": 1,
       "started_at": "2026-11-13T22:04:58.969161+00:00",
+      "status": "completed"
+    },
+    {
+      "discovered": 108,
+      "finished_at": "2026-11-14T02:35:13.672940+00:00",
+      "game_selection_reasons": {
+        "already_posted": 2,
+        "game_source_duplicates": 0,
+        "not_game_story": 136,
+        "quality_low": 3,
+        "schedule_grounded_threads": 0,
+        "selected_game_stories": 0,
+        "selected_game_threads": 0,
+        "stale_game_story": 6,
+        "unrouted_game_stories": 0
+      },
+      "game_stories_selected": 0,
+      "game_threads_selected": 0,
+      "schedule_grounded_threads": 0,
+      "selection_reasons": {
+        "already_posted": 36,
+        "eligible": 3,
+        "quality_low": 17,
+        "selected": 2,
+        "stale": 80,
+        "story_already_posted": 1
+      },
+      "sources_failed": 2,
+      "sources_ok": 6,
+      "standalone_selected": 2,
+      "started_at": "2026-11-14T02:34:41.228246+00:00",
       "status": "completed"
     }
   ]
