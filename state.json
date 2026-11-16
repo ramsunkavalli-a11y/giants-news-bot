@@ -387,6 +387,24 @@
       "source": "MLB.com",
       "title": "Is four-time World Series champ Bochy a HOF slam dunk?",
       "url": "https://www.mlb.com/giants/news/bruce-bochy-baseball-hall-of-fame-case"
+    },
+    {
+      "author": "Alex Pavlovic",
+      "game_key": "",
+      "kind": "standalone",
+      "posted_at": "2026-11-16T01:19:44.872621+00:00",
+      "source": "NBC Sports Bay Area",
+      "title": "Giants trade former closer Ryan Walker to Brewers for two minor-league pitchers",
+      "url": "https://www.nbcsportsbayarea.com/mlb/san-francisco-giants/ryan-walker-trade-milwaukee-brewers/1980367/"
+    },
+    {
+      "author": "",
+      "game_key": "",
+      "kind": "standalone",
+      "posted_at": "2026-11-16T01:19:45.795319+00:00",
+      "source": "The Athletic",
+      "title": "Giants' first offensive coordinator James Rowson embraces a football mentality",
+      "url": "https://www.nytimes.com/athletic/7780569/2026/11/14/giants-hire-james-rowson-offensive-coordinator/"
     }
   ],
   "posted_urls": {
@@ -418,6 +436,7 @@
     "https://www.nbcsportsbayarea.com/mlb/san-francisco-giants/questions-uncertain-2026-offseason/1975437/": "2026-10-29T20:26:36.961219+00:00",
     "https://www.nbcsportsbayarea.com/mlb/san-francisco-giants/roster-deadline-jose-butto/1976410/": "2026-11-03T03:34:08.514187+00:00",
     "https://www.nbcsportsbayarea.com/mlb/san-francisco-giants/ryan-walker-camilo-doval-roster-decisions/1979462/": "2026-11-12T22:24:32.864240+00:00",
+    "https://www.nbcsportsbayarea.com/mlb/san-francisco-giants/ryan-walker-trade-milwaukee-brewers/1980367/": "2026-11-16T01:19:44.872621+00:00",
     "https://www.nbcsportsbayarea.com/mlb/san-francisco-giants/tony-vitello-coaching-staff-changes/1979167/": "2026-11-11T22:55:54.714085+00:00",
     "https://www.nbcsportsbayarea.com/mlb/san-francisco-giants/usps-stamp-willie-mays-black-heritage/1979012/": "2026-11-11T11:16:50.733540+00:00",
     "https://www.nbcsportsbayarea.com/mlb/san-francisco-giants/willy-adames-buster-posey-reaction/1979283/": "2026-11-12T03:13:05.104767+00:00",
@@ -431,40 +450,11 @@
     "https://www.nytimes.com/athletic/7772204/2026/11/11/buster-posey-giants-offseason-general-managers-meetings/": "2026-11-11T15:30:26.865202+00:00",
     "https://www.nytimes.com/athletic/7773594/2026/11/11/james-rowson-yankees-giants-hitting-coach-job/": "2026-11-11T22:55:52.119473+00:00",
     "https://www.nytimes.com/athletic/7776825/2026/11/12/sf-giants-free-agent-strategy-david-bednar-adrian-morejon/": "2026-11-12T22:24:30.687369+00:00",
+    "https://www.nytimes.com/athletic/7780569/2026/11/14/giants-hire-james-rowson-offensive-coordinator/": "2026-11-16T01:19:45.795319+00:00",
     "https://www.sfgate.com/giants/article/giants-johnson-election-day-22516997.php": "2026-11-06T21:42:50.920439+00:00",
     "https://www.sfgate.com/giants/article/giants-johnson-midterm-donations-22499643.php": "2026-10-29T08:46:58.438649+00:00"
   },
   "run_history": [
-    {
-      "discovered": 148,
-      "finished_at": "2026-10-25T22:43:20.314128+00:00",
-      "game_selection_reasons": {
-        "game_source_duplicates": 0,
-        "not_game_story": 132,
-        "quality_low": 4,
-        "schedule_grounded_threads": 0,
-        "selected_game_stories": 0,
-        "selected_game_threads": 0,
-        "stale_game_story": 12,
-        "unrouted_game_stories": 0
-      },
-      "game_stories_selected": 0,
-      "game_threads_selected": 0,
-      "schedule_grounded_threads": 0,
-      "selection_reasons": {
-        "already_posted": 13,
-        "deferred_for_breaking_news": 1,
-        "missing_published": 6,
-        "quality_low": 16,
-        "selected": 0,
-        "stale": 96
-      },
-      "sources_failed": 0,
-      "sources_ok": 8,
-      "standalone_selected": 0,
-      "started_at": "2026-10-25T22:42:52.690327+00:00",
-      "status": "completed"
-    },
     {
       "discovered": 148,
       "finished_at": "2026-10-26T05:06:17.323815+00:00",
@@ -3094,6 +3084,37 @@
       "sources_ok": 5,
       "standalone_selected": 0,
       "started_at": "2026-11-15T21:09:11.535328+00:00",
+      "status": "completed"
+    },
+    {
+      "discovered": 94,
+      "finished_at": "2026-11-16T01:19:46.597606+00:00",
+      "game_selection_reasons": {
+        "already_posted": 2,
+        "game_source_duplicates": 0,
+        "not_game_story": 138,
+        "quality_low": 2,
+        "schedule_grounded_threads": 0,
+        "selected_game_stories": 0,
+        "selected_game_threads": 0,
+        "stale_game_story": 5,
+        "unrouted_game_stories": 0
+      },
+      "game_stories_selected": 0,
+      "game_threads_selected": 0,
+      "schedule_grounded_threads": 0,
+      "selection_reasons": {
+        "already_posted": 38,
+        "eligible": 4,
+        "quality_low": 17,
+        "selected": 2,
+        "stale": 79,
+        "story_duplicate": 2
+      },
+      "sources_failed": 4,
+      "sources_ok": 4,
+      "standalone_selected": 2,
+      "started_at": "2026-11-16T01:19:17.901104+00:00",
       "status": "completed"
     }
   ]
