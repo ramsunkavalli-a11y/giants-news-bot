@@ -2,15 +2,6 @@
   "game_threads": {},
   "posted_stories": [
     {
-      "author": "Maria Guardado",
-      "game_key": "",
-      "kind": "standalone",
-      "posted_at": "2026-10-28T13:27:08.659204+00:00",
-      "source": "MLB.com",
-      "title": "How will the Giants resolve their 40-man roster predicament?",
-      "url": "https://www.mlb.com/giants/news/giants-40-man-roster-crunch-2026-offseason"
-    },
-    {
       "author": "Gabe Fernandez",
       "game_key": "",
       "kind": "standalone",
@@ -495,6 +486,15 @@
       "source": "MLB.com",
       "title": "Lalane headlines group of prospects added to Giants' 40-man roster",
       "url": "https://www.mlb.com/giants/news/giants-henry-lalane-prospects-40-man-roster"
+    },
+    {
+      "author": "Maria Guardado",
+      "game_key": "",
+      "kind": "standalone",
+      "posted_at": "2026-11-18T16:38:36.662607+00:00",
+      "source": "MLB.com",
+      "title": "Prized Trade Deadline acquisition Lalane embracing new chapter with Giants",
+      "url": "https://www.mlb.com/giants/news/henry-lalane-settling-in-with-giants"
     }
   ],
   "posted_urls": {
@@ -514,12 +514,12 @@
     "https://www.mlb.com/giants/news/bruce-bochy-baseball-hall-of-fame-case": "2026-11-14T20:52:48.560493+00:00",
     "https://www.mlb.com/giants/news/buster-posey-hall-of-fame-case": "2026-11-17T04:41:15.725779+00:00",
     "https://www.mlb.com/giants/news/casey-schmitt-s-2027-outlook-for-giants": "2026-11-07T20:25:29.498760+00:00",
-    "https://www.mlb.com/giants/news/giants-40-man-roster-crunch-2026-offseason": "2026-10-28T13:27:08.659204+00:00",
     "https://www.mlb.com/giants/news/giants-henry-lalane-prospects-40-man-roster": "2026-11-18T03:46:43.013564+00:00",
     "https://www.mlb.com/giants/news/giants-lose-hitting-coach-hunter-mense-royals": "2026-11-05T22:12:02.070211+00:00",
     "https://www.mlb.com/giants/news/giants-prospects-in-arizona-fall-league-2026": "2026-10-31T19:27:09.049548+00:00",
     "https://www.mlb.com/giants/news/giants-trade-nate-furman-to-nationals-for-tony-neubeck": "2026-11-02T07:51:31.703683+00:00",
     "https://www.mlb.com/giants/news/harrison-bader-giants-close-to-resolving-dispute-over-scooter-crash": "2026-11-11T11:16:48.602694+00:00",
+    "https://www.mlb.com/giants/news/henry-lalane-settling-in-with-giants": "2026-11-18T16:38:36.662607+00:00",
     "https://www.mlb.com/giants/news/james-rowson-giants-offensive-coordinator": "2026-11-11T22:55:51.051244+00:00",
     "https://www.mlb.com/giants/news/james-rowson-hired-giants-offensive-coordinator": "2026-11-14T02:35:10.522869+00:00",
     "https://www.mlb.com/giants/news/jose-butto-tristan-beck-other-players-leaving-giants": "2026-11-03T11:09:15.442753+00:00",
@@ -555,36 +555,6 @@
     "https://www.sfgate.com/giants/article/pablo-sandoval-grand-slam-send-off-22533425.php": "2026-11-17T00:23:50.353737+00:00"
   },
   "run_history": [
-    {
-      "discovered": 25,
-      "finished_at": "2026-10-28T13:27:09.462512+00:00",
-      "game_selection_reasons": {
-        "game_source_duplicates": 0,
-        "not_game_story": 132,
-        "quality_low": 4,
-        "schedule_grounded_threads": 0,
-        "selected_game_stories": 0,
-        "selected_game_threads": 0,
-        "stale_game_story": 12,
-        "unrouted_game_stories": 0
-      },
-      "game_stories_selected": 0,
-      "game_threads_selected": 0,
-      "schedule_grounded_threads": 0,
-      "selection_reasons": {
-        "already_posted": 11,
-        "deferred_for_breaking_news": 1,
-        "eligible": 1,
-        "quality_low": 15,
-        "selected": 1,
-        "stale": 104
-      },
-      "sources_failed": 6,
-      "sources_ok": 2,
-      "standalone_selected": 1,
-      "started_at": "2026-10-28T13:26:35.820750+00:00",
-      "status": "completed"
-    },
     {
       "discovered": 25,
       "finished_at": "2026-10-28T20:27:48.604537+00:00",
@@ -3172,6 +3142,37 @@
       "sources_ok": 7,
       "standalone_selected": 0,
       "started_at": "2026-11-18T11:59:33.413553+00:00",
+      "status": "completed"
+    },
+    {
+      "discovered": 121,
+      "finished_at": "2026-11-18T16:38:37.466165+00:00",
+      "game_selection_reasons": {
+        "already_posted": 1,
+        "game_source_duplicates": 0,
+        "not_game_story": 138,
+        "quality_low": 2,
+        "schedule_grounded_threads": 0,
+        "selected_game_stories": 0,
+        "selected_game_threads": 0,
+        "stale_game_story": 4,
+        "unrouted_game_stories": 0
+      },
+      "game_stories_selected": 0,
+      "game_threads_selected": 0,
+      "schedule_grounded_threads": 0,
+      "selection_reasons": {
+        "already_posted": 49,
+        "eligible": 4,
+        "quality_low": 16,
+        "selected": 1,
+        "stale": 69,
+        "story_already_posted": 3
+      },
+      "sources_failed": 1,
+      "sources_ok": 7,
+      "standalone_selected": 1,
+      "started_at": "2026-11-18T16:38:15.241010+00:00",
       "status": "completed"
     }
   ]
