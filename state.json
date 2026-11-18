@@ -468,6 +468,33 @@
       "source": "NBC Sports Bay Area",
       "title": "What's next for healthy Giants RHP Randy Rodriguez after Arizona Fall League?",
       "url": "https://www.nbcsportsbayarea.com/mlb/san-francisco-giants/randy-rodriguez-update-buster-posey/1980937/"
+    },
+    {
+      "author": "Alex Pavlovic",
+      "game_key": "",
+      "kind": "standalone",
+      "posted_at": "2026-11-18T03:46:37.493509+00:00",
+      "source": "NBC Sports Bay Area",
+      "title": "Giants designate Christian Koss for assignment, add prospects to 40-man roster",
+      "url": "https://www.nbcsportsbayarea.com/mlb/san-francisco-giants/christian-koss-henry-lalane-rule-5-draft/1981034/"
+    },
+    {
+      "author": "John Shea",
+      "game_key": "",
+      "kind": "standalone",
+      "posted_at": "2026-11-18T03:46:40.472088+00:00",
+      "source": "San Francisco Standard",
+      "title": "Giants roster changes: Why Buster Posey added 3 pitchers ahead of a key MLB deadline",
+      "url": "https://sfstandard.com/2026/11/17/sf-giants-rule-5-protection-henry-lalane/"
+    },
+    {
+      "author": "Maria Guardado",
+      "game_key": "",
+      "kind": "standalone",
+      "posted_at": "2026-11-18T03:46:43.013564+00:00",
+      "source": "MLB.com",
+      "title": "Lalane headlines group of prospects added to Giants' 40-man roster",
+      "url": "https://www.mlb.com/giants/news/giants-henry-lalane-prospects-40-man-roster"
     }
   ],
   "posted_urls": {
@@ -481,12 +508,14 @@
     "https://sfstandard.com/2026/11/11/buster-posey-sf-giants-offseason-pitching-plan/": "2026-11-11T15:30:25.898933+00:00",
     "https://sfstandard.com/2026/11/11/scott-boras-sf-giants-offseason-targets-hot-stove/": "2026-11-12T03:13:08.382303+00:00",
     "https://sfstandard.com/2026/11/12/james-rowson-sf-giants-offensive-coordinator/": "2026-11-13T02:45:45.827317+00:00",
+    "https://sfstandard.com/2026/11/17/sf-giants-rule-5-protection-henry-lalane/": "2026-11-18T03:46:40.472088+00:00",
     "https://sfstandard.com/2026/11/17/tony-vitello-sf-giants-manager-2027-changes/": "2026-11-17T16:59:31.078227+00:00",
     "https://sfstandard.com/section-415/2026/11/17/sf-giants-buster-posey-podcast/": "2026-11-17T23:37:02.291140+00:00",
     "https://www.mlb.com/giants/news/bruce-bochy-baseball-hall-of-fame-case": "2026-11-14T20:52:48.560493+00:00",
     "https://www.mlb.com/giants/news/buster-posey-hall-of-fame-case": "2026-11-17T04:41:15.725779+00:00",
     "https://www.mlb.com/giants/news/casey-schmitt-s-2027-outlook-for-giants": "2026-11-07T20:25:29.498760+00:00",
     "https://www.mlb.com/giants/news/giants-40-man-roster-crunch-2026-offseason": "2026-10-28T13:27:08.659204+00:00",
+    "https://www.mlb.com/giants/news/giants-henry-lalane-prospects-40-man-roster": "2026-11-18T03:46:43.013564+00:00",
     "https://www.mlb.com/giants/news/giants-lose-hitting-coach-hunter-mense-royals": "2026-11-05T22:12:02.070211+00:00",
     "https://www.mlb.com/giants/news/giants-prospects-in-arizona-fall-league-2026": "2026-10-31T19:27:09.049548+00:00",
     "https://www.mlb.com/giants/news/giants-trade-nate-furman-to-nationals-for-tony-neubeck": "2026-11-02T07:51:31.703683+00:00",
@@ -497,6 +526,7 @@
     "https://www.mlb.com/giants/news/randy-rodriguez-s-arizona-fall-league-stint-cut-short": "2026-11-11T15:30:29.014329+00:00",
     "https://www.nbcsportsbayarea.com/mlb/san-francisco-giants/buster-posey-baseball-hall-fame-ballot/1980653/": "2026-11-17T00:23:53.058638+00:00",
     "https://www.nbcsportsbayarea.com/mlb/san-francisco-giants/buster-posey-free-agency-pitching-rotation/1979815/": "2026-11-14T02:35:12.869319+00:00",
+    "https://www.nbcsportsbayarea.com/mlb/san-francisco-giants/christian-koss-henry-lalane-rule-5-draft/1981034/": "2026-11-18T03:46:37.493509+00:00",
     "https://www.nbcsportsbayarea.com/mlb/san-francisco-giants/grant-mccray-mariners-offseason-roster-churn/1975500/": "2026-11-01T13:42:34.774024+00:00",
     "https://www.nbcsportsbayarea.com/mlb/san-francisco-giants/harrison-bader-contract-dispute-accident-buster-posey/1979033/": "2026-11-11T02:03:49.475504+00:00",
     "https://www.nbcsportsbayarea.com/mlb/san-francisco-giants/managers-executives-contemporary-era-ballot/1976290/": "2026-11-02T23:39:25.027082+00:00",
@@ -525,35 +555,6 @@
     "https://www.sfgate.com/giants/article/pablo-sandoval-grand-slam-send-off-22533425.php": "2026-11-17T00:23:50.353737+00:00"
   },
   "run_history": [
-    {
-      "discovered": 25,
-      "finished_at": "2026-10-28T00:39:28.274481+00:00",
-      "game_selection_reasons": {
-        "game_source_duplicates": 0,
-        "not_game_story": 132,
-        "quality_low": 4,
-        "schedule_grounded_threads": 0,
-        "selected_game_stories": 0,
-        "selected_game_threads": 0,
-        "stale_game_story": 12,
-        "unrouted_game_stories": 0
-      },
-      "game_stories_selected": 0,
-      "game_threads_selected": 0,
-      "schedule_grounded_threads": 0,
-      "selection_reasons": {
-        "already_posted": 11,
-        "deferred_for_breaking_news": 1,
-        "quality_low": 16,
-        "selected": 0,
-        "stale": 104
-      },
-      "sources_failed": 6,
-      "sources_ok": 2,
-      "standalone_selected": 0,
-      "started_at": "2026-10-28T00:38:54.431500+00:00",
-      "status": "completed"
-    },
     {
       "discovered": 25,
       "finished_at": "2026-10-28T08:53:13.650496+00:00",
@@ -3137,6 +3138,38 @@
       "sources_ok": 7,
       "standalone_selected": 2,
       "started_at": "2026-11-17T23:36:39.501148+00:00",
+      "status": "completed"
+    },
+    {
+      "discovered": 121,
+      "finished_at": "2026-11-18T03:46:43.816450+00:00",
+      "game_selection_reasons": {
+        "already_posted": 1,
+        "game_source_duplicates": 0,
+        "not_game_story": 138,
+        "quality_low": 2,
+        "schedule_grounded_threads": 0,
+        "selected_game_stories": 0,
+        "selected_game_threads": 0,
+        "stale_game_story": 4,
+        "unrouted_game_stories": 0
+      },
+      "game_stories_selected": 0,
+      "game_threads_selected": 0,
+      "schedule_grounded_threads": 0,
+      "selection_reasons": {
+        "already_posted": 47,
+        "eligible": 6,
+        "quality_low": 16,
+        "selected": 3,
+        "stale": 69,
+        "story_already_posted": 2,
+        "story_duplicate": 1
+      },
+      "sources_failed": 1,
+      "sources_ok": 7,
+      "standalone_selected": 3,
+      "started_at": "2026-11-18T03:46:18.972784+00:00",
       "status": "completed"
     }
   ]
