@@ -2,15 +2,6 @@
   "game_threads": {},
   "posted_stories": [
     {
-      "author": "",
-      "game_key": "",
-      "kind": "standalone",
-      "posted_at": "2026-10-29T13:36:55.654270+00:00",
-      "source": "The Athletic",
-      "title": "Giants Fall League notebook: Randy Rodriguez takes big step, Dalton Wentz turns heads",
-      "url": "https://www.nytimes.com/athletic/7733505/2026/10/29/giants-fall-league-randy-rodriguez/"
-    },
-    {
       "author": "Alex Pavlovic",
       "game_key": "",
       "kind": "standalone",
@@ -495,6 +486,15 @@
       "source": "SFGATE",
       "title": "The SF Giants have reportedly put Casey Schmitt on the trade block",
       "url": "https://www.sfgate.com/giants/article/giants-casey-schmitt-trade-22537901.php"
+    },
+    {
+      "author": "John Shea",
+      "game_key": "",
+      "kind": "standalone",
+      "posted_at": "2026-11-19T16:41:59.060715+00:00",
+      "source": "San Francisco Standard",
+      "title": "Why the Giants’ 16th round draft pick could become one of their top prospects",
+      "url": "https://sfstandard.com/2026/11/19/dalton-wentz-sf-giants-prospect-fall-star/"
     }
   ],
   "posted_urls": {
@@ -510,6 +510,7 @@
     "https://sfstandard.com/2026/11/12/james-rowson-sf-giants-offensive-coordinator/": "2026-11-13T02:45:45.827317+00:00",
     "https://sfstandard.com/2026/11/17/sf-giants-rule-5-protection-henry-lalane/": "2026-11-18T03:46:40.472088+00:00",
     "https://sfstandard.com/2026/11/17/tony-vitello-sf-giants-manager-2027-changes/": "2026-11-17T16:59:31.078227+00:00",
+    "https://sfstandard.com/2026/11/19/dalton-wentz-sf-giants-prospect-fall-star/": "2026-11-19T16:41:59.060715+00:00",
     "https://sfstandard.com/section-415/2026/11/17/sf-giants-buster-posey-podcast/": "2026-11-17T23:37:02.291140+00:00",
     "https://www.mlb.com/giants/news/bruce-bochy-baseball-hall-of-fame-case": "2026-11-14T20:52:48.560493+00:00",
     "https://www.mlb.com/giants/news/buster-posey-hall-of-fame-case": "2026-11-17T04:41:15.725779+00:00",
@@ -540,7 +541,6 @@
     "https://www.nbcsportsbayarea.com/mlb/san-francisco-giants/usps-stamp-willie-mays-black-heritage/1979012/": "2026-11-11T11:16:50.733540+00:00",
     "https://www.nbcsportsbayarea.com/mlb/san-francisco-giants/willy-adames-buster-posey-reaction/1979283/": "2026-11-12T03:13:05.104767+00:00",
     "https://www.nytimes.com/athletic/7733268/2026/10/29/sf-giants-offseason-primer-2026-2027-free-agency-trades/": "2026-10-29T20:26:37.859340+00:00",
-    "https://www.nytimes.com/athletic/7733505/2026/10/29/giants-fall-league-randy-rodriguez/": "2026-10-29T13:36:55.654270+00:00",
     "https://www.nytimes.com/athletic/7748429/2026/11/02/brian-sabean-hall-of-fame-ballot-yankees-giants/": "2026-11-02T23:39:22.743731+00:00",
     "https://www.nytimes.com/athletic/7751247/2026/11/04/sf-giants-40-man-roster-questions/": "2026-11-07T10:30:44.673551+00:00",
     "https://www.nytimes.com/athletic/7767848/2026/11/09/sf-giants-offseason-pitching-defense-gm-meetings/": "2026-11-09T16:45:50.919963+00:00",
@@ -555,37 +555,6 @@
     "https://www.sfgate.com/giants/article/pablo-sandoval-grand-slam-send-off-22533425.php": "2026-11-17T00:23:50.353737+00:00"
   },
   "run_history": [
-    {
-      "discovered": 86,
-      "finished_at": "2026-10-29T13:36:56.457504+00:00",
-      "game_selection_reasons": {
-        "game_source_duplicates": 0,
-        "not_game_story": 130,
-        "quality_low": 4,
-        "schedule_grounded_threads": 0,
-        "selected_game_stories": 0,
-        "selected_game_threads": 0,
-        "stale_game_story": 12,
-        "unrouted_game_stories": 0
-      },
-      "game_stories_selected": 0,
-      "game_threads_selected": 0,
-      "schedule_grounded_threads": 0,
-      "selection_reasons": {
-        "already_posted": 11,
-        "deferred_for_breaking_news": 1,
-        "eligible": 2,
-        "quality_low": 15,
-        "selected": 1,
-        "source_cap_cluster": 1,
-        "stale": 101
-      },
-      "sources_failed": 4,
-      "sources_ok": 4,
-      "standalone_selected": 1,
-      "started_at": "2026-10-29T13:35:03.015933+00:00",
-      "status": "completed"
-    },
     {
       "discovered": 109,
       "finished_at": "2026-10-29T20:26:38.662442+00:00",
@@ -3179,6 +3148,37 @@
       "sources_ok": 7,
       "standalone_selected": 0,
       "started_at": "2026-11-19T11:56:32.955857+00:00",
+      "status": "completed"
+    },
+    {
+      "discovered": 122,
+      "finished_at": "2026-11-19T16:41:59.863657+00:00",
+      "game_selection_reasons": {
+        "already_posted": 1,
+        "game_source_duplicates": 0,
+        "not_game_story": 139,
+        "quality_low": 2,
+        "schedule_grounded_threads": 0,
+        "selected_game_stories": 0,
+        "selected_game_threads": 0,
+        "stale_game_story": 4,
+        "unrouted_game_stories": 0
+      },
+      "game_stories_selected": 0,
+      "game_threads_selected": 0,
+      "schedule_grounded_threads": 0,
+      "selection_reasons": {
+        "already_posted": 48,
+        "eligible": 3,
+        "quality_low": 16,
+        "selected": 1,
+        "stale": 72,
+        "story_already_posted": 2
+      },
+      "sources_failed": 1,
+      "sources_ok": 7,
+      "standalone_selected": 1,
+      "started_at": "2026-11-19T16:41:38.133775+00:00",
       "status": "completed"
     }
   ]
