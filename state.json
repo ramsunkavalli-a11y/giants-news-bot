@@ -468,6 +468,33 @@
       "source": "San Francisco Standard",
       "title": "Why the Giants’ 16th round draft pick could become one of their top prospects",
       "url": "https://sfstandard.com/2026/11/19/dalton-wentz-sf-giants-prospect-fall-star/"
+    },
+    {
+      "author": "Maria Guardado",
+      "game_key": "",
+      "kind": "standalone",
+      "posted_at": "2026-11-21T03:20:33.422284+00:00",
+      "source": "MLB.com",
+      "title": "Giants agree to 1-year deal with Doval, trade Koss to Rays for Minor League RHP",
+      "url": "https://www.mlb.com/giants/news/camilo-doval-giants-contract-christian-koss-traded-to-rays"
+    },
+    {
+      "author": "John Shea",
+      "game_key": "",
+      "kind": "standalone",
+      "posted_at": "2026-11-21T03:20:36.855649+00:00",
+      "source": "San Francisco Standard",
+      "title": "Why the Giants are rolling the dice with reliever Camilo Doval",
+      "url": "https://sfstandard.com/2026/11/20/giants-rolling-dice-reliever-camilo-doval/"
+    },
+    {
+      "author": "Vince Lontz",
+      "game_key": "",
+      "kind": "standalone",
+      "posted_at": "2026-11-21T03:20:38.698722+00:00",
+      "source": "NBC Sports Bay Area",
+      "title": "Baseball America reveals Top 10 Giants prospect ranking for 2027 MLB season",
+      "url": "https://www.nbcsportsbayarea.com/mlb/san-francisco-giants/baseball-america-prospects-ranking/1981726/"
     }
   ],
   "posted_urls": {
@@ -483,9 +510,11 @@
     "https://sfstandard.com/2026/11/17/sf-giants-rule-5-protection-henry-lalane/": "2026-11-18T03:46:40.472088+00:00",
     "https://sfstandard.com/2026/11/17/tony-vitello-sf-giants-manager-2027-changes/": "2026-11-17T16:59:31.078227+00:00",
     "https://sfstandard.com/2026/11/19/dalton-wentz-sf-giants-prospect-fall-star/": "2026-11-19T16:41:59.060715+00:00",
+    "https://sfstandard.com/2026/11/20/giants-rolling-dice-reliever-camilo-doval/": "2026-11-21T03:20:36.855649+00:00",
     "https://sfstandard.com/section-415/2026/11/17/sf-giants-buster-posey-podcast/": "2026-11-17T23:37:02.291140+00:00",
     "https://www.mlb.com/giants/news/bruce-bochy-baseball-hall-of-fame-case": "2026-11-14T20:52:48.560493+00:00",
     "https://www.mlb.com/giants/news/buster-posey-hall-of-fame-case": "2026-11-17T04:41:15.725779+00:00",
+    "https://www.mlb.com/giants/news/camilo-doval-giants-contract-christian-koss-traded-to-rays": "2026-11-21T03:20:33.422284+00:00",
     "https://www.mlb.com/giants/news/casey-schmitt-s-2027-outlook-for-giants": "2026-11-07T20:25:29.498760+00:00",
     "https://www.mlb.com/giants/news/giants-henry-lalane-prospects-40-man-roster": "2026-11-18T03:46:43.013564+00:00",
     "https://www.mlb.com/giants/news/giants-lose-hitting-coach-hunter-mense-royals": "2026-11-05T22:12:02.070211+00:00",
@@ -497,6 +526,7 @@
     "https://www.mlb.com/giants/news/james-rowson-hired-giants-offensive-coordinator": "2026-11-14T02:35:10.522869+00:00",
     "https://www.mlb.com/giants/news/jose-butto-tristan-beck-other-players-leaving-giants": "2026-11-03T11:09:15.442753+00:00",
     "https://www.mlb.com/giants/news/randy-rodriguez-s-arizona-fall-league-stint-cut-short": "2026-11-11T15:30:29.014329+00:00",
+    "https://www.nbcsportsbayarea.com/mlb/san-francisco-giants/baseball-america-prospects-ranking/1981726/": "2026-11-21T03:20:38.698722+00:00",
     "https://www.nbcsportsbayarea.com/mlb/san-francisco-giants/buster-posey-baseball-hall-fame-ballot/1980653/": "2026-11-17T00:23:53.058638+00:00",
     "https://www.nbcsportsbayarea.com/mlb/san-francisco-giants/buster-posey-free-agency-pitching-rotation/1979815/": "2026-11-14T02:35:12.869319+00:00",
     "https://www.nbcsportsbayarea.com/mlb/san-francisco-giants/christian-koss-henry-lalane-rule-5-draft/1981034/": "2026-11-18T03:46:37.493509+00:00",
@@ -525,38 +555,6 @@
     "https://www.sfgate.com/giants/article/pablo-sandoval-grand-slam-send-off-22533425.php": "2026-11-17T00:23:50.353737+00:00"
   },
   "run_history": [
-    {
-      "discovered": 112,
-      "finished_at": "2026-10-31T00:57:11.720954+00:00",
-      "game_selection_reasons": {
-        "game_source_duplicates": 0,
-        "not_game_story": 132,
-        "quality_low": 4,
-        "schedule_grounded_threads": 0,
-        "selected_game_stories": 0,
-        "selected_game_threads": 0,
-        "stale_game_story": 10,
-        "unrouted_game_stories": 0
-      },
-      "game_stories_selected": 0,
-      "game_threads_selected": 0,
-      "schedule_grounded_threads": 0,
-      "selection_reasons": {
-        "already_posted": 13,
-        "deferred_for_breaking_news": 1,
-        "eligible": 2,
-        "missing_published": 1,
-        "quality_low": 16,
-        "selected": 0,
-        "stale": 99,
-        "story_already_posted": 2
-      },
-      "sources_failed": 2,
-      "sources_ok": 6,
-      "standalone_selected": 0,
-      "started_at": "2026-10-31T00:56:39.972470+00:00",
-      "status": "completed"
-    },
     {
       "discovered": 112,
       "finished_at": "2026-10-31T08:42:50.120492+00:00",
@@ -3144,6 +3142,38 @@
       "sources_ok": 6,
       "standalone_selected": 0,
       "started_at": "2026-11-20T22:45:28.777675+00:00",
+      "status": "completed"
+    },
+    {
+      "discovered": 120,
+      "finished_at": "2026-11-21T03:20:39.502378+00:00",
+      "game_selection_reasons": {
+        "already_posted": 1,
+        "game_source_duplicates": 0,
+        "not_game_story": 143,
+        "quality_low": 2,
+        "schedule_grounded_threads": 0,
+        "selected_game_stories": 0,
+        "selected_game_threads": 0,
+        "stale_game_story": 3,
+        "unrouted_game_stories": 0
+      },
+      "game_stories_selected": 0,
+      "game_threads_selected": 0,
+      "schedule_grounded_threads": 0,
+      "selection_reasons": {
+        "already_posted": 45,
+        "eligible": 8,
+        "quality_low": 15,
+        "selected": 3,
+        "stale": 75,
+        "story_already_posted": 2,
+        "story_duplicate": 3
+      },
+      "sources_failed": 2,
+      "sources_ok": 6,
+      "standalone_selected": 3,
+      "started_at": "2026-11-21T03:20:11.109969+00:00",
       "status": "completed"
     }
   ]
