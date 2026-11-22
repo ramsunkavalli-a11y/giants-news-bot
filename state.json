@@ -495,6 +495,15 @@
       "source": "MLB.com",
       "title": "Examining Sabean's case for Hall of Fame enshrinement",
       "url": "https://www.mlb.com/giants/news/brian-sabean-hall-of-fame-case"
+    },
+    {
+      "author": "",
+      "game_key": "",
+      "kind": "standalone",
+      "posted_at": "2026-11-22T01:29:51.847206+00:00",
+      "source": "The Athletic",
+      "title": "Why the Giants are listening to trade offers for ace Logan Webb",
+      "url": "https://www.nytimes.com/athletic/7801137/2026/11/21/sf-giants-logan-webb-trade-offers-mlb-offseason/"
     }
   ],
   "posted_urls": {
@@ -550,44 +559,12 @@
     "https://www.nytimes.com/athletic/7776825/2026/11/12/sf-giants-free-agent-strategy-david-bednar-adrian-morejon/": "2026-11-12T22:24:30.687369+00:00",
     "https://www.nytimes.com/athletic/7780569/2026/11/14/giants-hire-james-rowson-offensive-coordinator/": "2026-11-16T01:19:45.795319+00:00",
     "https://www.nytimes.com/athletic/7788851/2026/11/17/pablo-sandoval-mlb-hall-of-fame-sf-giants/": "2026-11-17T16:59:27.216850+00:00",
+    "https://www.nytimes.com/athletic/7801137/2026/11/21/sf-giants-logan-webb-trade-offers-mlb-offseason/": "2026-11-22T01:29:51.847206+00:00",
     "https://www.sfgate.com/giants/article/giants-casey-schmitt-trade-22537901.php": "2026-11-18T23:00:50.725965+00:00",
     "https://www.sfgate.com/giants/article/giants-johnson-election-day-22516997.php": "2026-11-06T21:42:50.920439+00:00",
     "https://www.sfgate.com/giants/article/pablo-sandoval-grand-slam-send-off-22533425.php": "2026-11-17T00:23:50.353737+00:00"
   },
   "run_history": [
-    {
-      "discovered": 112,
-      "finished_at": "2026-10-31T23:31:57.918222+00:00",
-      "game_selection_reasons": {
-        "already_posted": 1,
-        "game_source_duplicates": 0,
-        "not_game_story": 131,
-        "quality_low": 4,
-        "schedule_grounded_threads": 0,
-        "selected_game_stories": 0,
-        "selected_game_threads": 0,
-        "stale_game_story": 10,
-        "unrouted_game_stories": 0
-      },
-      "game_stories_selected": 0,
-      "game_threads_selected": 0,
-      "schedule_grounded_threads": 0,
-      "selection_reasons": {
-        "already_posted": 12,
-        "deferred_for_breaking_news": 1,
-        "eligible": 2,
-        "missing_published": 1,
-        "quality_low": 15,
-        "selected": 0,
-        "stale": 100,
-        "story_already_posted": 2
-      },
-      "sources_failed": 2,
-      "sources_ok": 6,
-      "standalone_selected": 0,
-      "started_at": "2026-10-31T23:31:25.213877+00:00",
-      "status": "completed"
-    },
     {
       "discovered": 97,
       "finished_at": "2026-11-01T06:34:06.053644+00:00",
@@ -3168,6 +3145,36 @@
       "sources_ok": 5,
       "standalone_selected": 0,
       "started_at": "2026-11-21T21:48:06.423345+00:00",
+      "status": "completed"
+    },
+    {
+      "discovered": 106,
+      "finished_at": "2026-11-22T01:29:52.650153+00:00",
+      "game_selection_reasons": {
+        "game_source_duplicates": 0,
+        "not_game_story": 145,
+        "quality_low": 2,
+        "schedule_grounded_threads": 0,
+        "selected_game_stories": 0,
+        "selected_game_threads": 0,
+        "stale_game_story": 3,
+        "unrouted_game_stories": 0
+      },
+      "game_stories_selected": 0,
+      "game_threads_selected": 0,
+      "schedule_grounded_threads": 0,
+      "selection_reasons": {
+        "already_posted": 49,
+        "eligible": 6,
+        "quality_low": 15,
+        "selected": 1,
+        "stale": 75,
+        "story_already_posted": 5
+      },
+      "sources_failed": 3,
+      "sources_ok": 5,
+      "standalone_selected": 1,
+      "started_at": "2026-11-22T01:29:30.676025+00:00",
       "status": "completed"
     }
   ]
