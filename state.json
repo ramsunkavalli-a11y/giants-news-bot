@@ -495,6 +495,15 @@
       "source": "The Athletic",
       "title": "Why the Giants are listening to trade offers for ace Logan Webb",
       "url": "https://www.nytimes.com/athletic/7801137/2026/11/21/sf-giants-logan-webb-trade-offers-mlb-offseason/"
+    },
+    {
+      "author": "Will Simonds",
+      "game_key": "",
+      "kind": "standalone",
+      "posted_at": "2026-11-22T21:56:22.937100+00:00",
+      "source": "NBC Sports Bay Area",
+      "title": "Giants open to Webb trade?",
+      "url": "https://www.nbcsportsbayarea.com/mlb/san-francisco-giants/logan-webb-open-trade-offers-report/1981898/"
     }
   ],
   "posted_urls": {
@@ -531,6 +540,7 @@
     "https://www.nbcsportsbayarea.com/mlb/san-francisco-giants/buster-posey-free-agency-pitching-rotation/1979815/": "2026-11-14T02:35:12.869319+00:00",
     "https://www.nbcsportsbayarea.com/mlb/san-francisco-giants/christian-koss-henry-lalane-rule-5-draft/1981034/": "2026-11-18T03:46:37.493509+00:00",
     "https://www.nbcsportsbayarea.com/mlb/san-francisco-giants/harrison-bader-contract-dispute-accident-buster-posey/1979033/": "2026-11-11T02:03:49.475504+00:00",
+    "https://www.nbcsportsbayarea.com/mlb/san-francisco-giants/logan-webb-open-trade-offers-report/1981898/": "2026-11-22T21:56:22.937100+00:00",
     "https://www.nbcsportsbayarea.com/mlb/san-francisco-giants/managers-executives-contemporary-era-ballot/1976290/": "2026-11-02T23:39:25.027082+00:00",
     "https://www.nbcsportsbayarea.com/mlb/san-francisco-giants/offensive-coordinator-james-rowson-analysis/1979836/": "2026-11-13T22:05:36.714727+00:00",
     "https://www.nbcsportsbayarea.com/mlb/san-francisco-giants/randy-rodriguez-update-buster-posey/1980937/": "2026-11-17T23:37:04.741433+00:00",
@@ -555,37 +565,6 @@
     "https://www.sfgate.com/giants/article/pablo-sandoval-grand-slam-send-off-22533425.php": "2026-11-17T00:23:50.353737+00:00"
   },
   "run_history": [
-    {
-      "discovered": 28,
-      "finished_at": "2026-11-01T20:43:04.277594+00:00",
-      "game_selection_reasons": {
-        "already_posted": 1,
-        "game_source_duplicates": 0,
-        "not_game_story": 131,
-        "quality_low": 4,
-        "schedule_grounded_threads": 0,
-        "selected_game_stories": 0,
-        "selected_game_threads": 0,
-        "stale_game_story": 10,
-        "unrouted_game_stories": 0
-      },
-      "game_stories_selected": 0,
-      "game_threads_selected": 0,
-      "schedule_grounded_threads": 0,
-      "selection_reasons": {
-        "already_posted": 13,
-        "deferred_for_breaking_news": 1,
-        "missing_published": 1,
-        "quality_low": 15,
-        "selected": 0,
-        "stale": 101
-      },
-      "sources_failed": 5,
-      "sources_ok": 3,
-      "standalone_selected": 0,
-      "started_at": "2026-11-01T20:42:45.652987+00:00",
-      "status": "completed"
-    },
     {
       "discovered": 28,
       "finished_at": "2026-11-02T00:59:08.396068+00:00",
@@ -3159,6 +3138,36 @@
       "sources_ok": 5,
       "standalone_selected": 0,
       "started_at": "2026-11-22T14:48:38.750354+00:00",
+      "status": "completed"
+    },
+    {
+      "discovered": 106,
+      "finished_at": "2026-11-22T21:56:23.740821+00:00",
+      "game_selection_reasons": {
+        "game_source_duplicates": 0,
+        "not_game_story": 144,
+        "quality_low": 2,
+        "schedule_grounded_threads": 0,
+        "selected_game_stories": 0,
+        "selected_game_threads": 0,
+        "stale_game_story": 3,
+        "unrouted_game_stories": 0
+      },
+      "game_stories_selected": 0,
+      "game_threads_selected": 0,
+      "schedule_grounded_threads": 0,
+      "selection_reasons": {
+        "already_posted": 49,
+        "eligible": 4,
+        "quality_low": 15,
+        "selected": 1,
+        "stale": 76,
+        "story_already_posted": 3
+      },
+      "sources_failed": 3,
+      "sources_ok": 5,
+      "standalone_selected": 1,
+      "started_at": "2026-11-22T21:56:09.695458+00:00",
       "status": "completed"
     }
   ]
