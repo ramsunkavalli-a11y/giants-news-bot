@@ -2,15 +2,6 @@
   "game_threads": {},
   "posted_stories": [
     {
-      "author": "Alex Pavlovic",
-      "game_key": "",
-      "kind": "standalone",
-      "posted_at": "2026-11-01T13:42:34.774024+00:00",
-      "source": "NBC Sports Bay Area",
-      "title": "Mariners claim outfielder Grant McCray in first act of Giants' roster churn",
-      "url": "https://www.nbcsportsbayarea.com/mlb/san-francisco-giants/grant-mccray-mariners-offseason-roster-churn/1975500/"
-    },
-    {
       "author": "Maria Guardado",
       "game_key": "",
       "kind": "standalone",
@@ -539,7 +530,6 @@
     "https://www.nbcsportsbayarea.com/mlb/san-francisco-giants/buster-posey-baseball-hall-fame-ballot/1980653/": "2026-11-17T00:23:53.058638+00:00",
     "https://www.nbcsportsbayarea.com/mlb/san-francisco-giants/buster-posey-free-agency-pitching-rotation/1979815/": "2026-11-14T02:35:12.869319+00:00",
     "https://www.nbcsportsbayarea.com/mlb/san-francisco-giants/christian-koss-henry-lalane-rule-5-draft/1981034/": "2026-11-18T03:46:37.493509+00:00",
-    "https://www.nbcsportsbayarea.com/mlb/san-francisco-giants/grant-mccray-mariners-offseason-roster-churn/1975500/": "2026-11-01T13:42:34.774024+00:00",
     "https://www.nbcsportsbayarea.com/mlb/san-francisco-giants/harrison-bader-contract-dispute-accident-buster-posey/1979033/": "2026-11-11T02:03:49.475504+00:00",
     "https://www.nbcsportsbayarea.com/mlb/san-francisco-giants/managers-executives-contemporary-era-ballot/1976290/": "2026-11-02T23:39:25.027082+00:00",
     "https://www.nbcsportsbayarea.com/mlb/san-francisco-giants/offensive-coordinator-james-rowson-analysis/1979836/": "2026-11-13T22:05:36.714727+00:00",
@@ -565,39 +555,6 @@
     "https://www.sfgate.com/giants/article/pablo-sandoval-grand-slam-send-off-22533425.php": "2026-11-17T00:23:50.353737+00:00"
   },
   "run_history": [
-    {
-      "discovered": 97,
-      "finished_at": "2026-11-01T13:42:35.576202+00:00",
-      "game_selection_reasons": {
-        "already_posted": 1,
-        "game_source_duplicates": 0,
-        "not_game_story": 131,
-        "quality_low": 4,
-        "schedule_grounded_threads": 0,
-        "selected_game_stories": 0,
-        "selected_game_threads": 0,
-        "stale_game_story": 10,
-        "unrouted_game_stories": 0
-      },
-      "game_stories_selected": 0,
-      "game_threads_selected": 0,
-      "schedule_grounded_threads": 0,
-      "selection_reasons": {
-        "already_posted": 12,
-        "deferred_for_breaking_news": 1,
-        "eligible": 2,
-        "missing_published": 1,
-        "quality_low": 15,
-        "selected": 1,
-        "stale": 100,
-        "story_duplicate": 1
-      },
-      "sources_failed": 3,
-      "sources_ok": 5,
-      "standalone_selected": 1,
-      "started_at": "2026-11-01T13:42:11.983015+00:00",
-      "status": "completed"
-    },
     {
       "discovered": 28,
       "finished_at": "2026-11-01T20:43:04.277594+00:00",
@@ -3172,6 +3129,36 @@
       "sources_ok": 5,
       "standalone_selected": 0,
       "started_at": "2026-11-22T08:20:26.256826+00:00",
+      "status": "completed"
+    },
+    {
+      "discovered": 106,
+      "finished_at": "2026-11-22T14:48:59.255035+00:00",
+      "game_selection_reasons": {
+        "game_source_duplicates": 0,
+        "not_game_story": 144,
+        "quality_low": 2,
+        "schedule_grounded_threads": 0,
+        "selected_game_stories": 0,
+        "selected_game_threads": 0,
+        "stale_game_story": 3,
+        "unrouted_game_stories": 0
+      },
+      "game_stories_selected": 0,
+      "game_threads_selected": 0,
+      "schedule_grounded_threads": 0,
+      "selection_reasons": {
+        "already_posted": 49,
+        "eligible": 5,
+        "quality_low": 15,
+        "selected": 0,
+        "stale": 75,
+        "story_already_posted": 5
+      },
+      "sources_failed": 3,
+      "sources_ok": 5,
+      "standalone_selected": 0,
+      "started_at": "2026-11-22T14:48:38.750354+00:00",
       "status": "completed"
     }
   ]
