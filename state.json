@@ -2,15 +2,6 @@
   "game_threads": {},
   "posted_stories": [
     {
-      "author": "Maria Guardado",
-      "game_key": "",
-      "kind": "standalone",
-      "posted_at": "2026-11-02T07:51:31.703683+00:00",
-      "source": "MLB.com",
-      "title": "Giants pick up Minor League lefty Neubeck from Nats in exchange for Furman",
-      "url": "https://www.mlb.com/giants/news/giants-trade-nate-furman-to-nationals-for-tony-neubeck"
-    },
-    {
       "author": "",
       "game_key": "",
       "kind": "standalone",
@@ -528,7 +519,6 @@
     "https://www.mlb.com/giants/news/casey-schmitt-s-2027-outlook-for-giants": "2026-11-07T20:25:29.498760+00:00",
     "https://www.mlb.com/giants/news/giants-henry-lalane-prospects-40-man-roster": "2026-11-18T03:46:43.013564+00:00",
     "https://www.mlb.com/giants/news/giants-lose-hitting-coach-hunter-mense-royals": "2026-11-05T22:12:02.070211+00:00",
-    "https://www.mlb.com/giants/news/giants-trade-nate-furman-to-nationals-for-tony-neubeck": "2026-11-02T07:51:31.703683+00:00",
     "https://www.mlb.com/giants/news/harrison-bader-giants-close-to-resolving-dispute-over-scooter-crash": "2026-11-11T11:16:48.602694+00:00",
     "https://www.mlb.com/giants/news/henry-lalane-settling-in-with-giants": "2026-11-18T16:38:36.662607+00:00",
     "https://www.mlb.com/giants/news/james-rowson-giants-offensive-coordinator": "2026-11-11T22:55:51.051244+00:00",
@@ -565,38 +555,6 @@
     "https://www.sfgate.com/giants/article/pablo-sandoval-grand-slam-send-off-22533425.php": "2026-11-17T00:23:50.353737+00:00"
   },
   "run_history": [
-    {
-      "discovered": 28,
-      "finished_at": "2026-11-02T07:51:32.506969+00:00",
-      "game_selection_reasons": {
-        "already_posted": 1,
-        "game_source_duplicates": 0,
-        "not_game_story": 131,
-        "quality_low": 4,
-        "schedule_grounded_threads": 0,
-        "selected_game_stories": 0,
-        "selected_game_threads": 0,
-        "stale_game_story": 10,
-        "unrouted_game_stories": 0
-      },
-      "game_stories_selected": 0,
-      "game_threads_selected": 0,
-      "schedule_grounded_threads": 0,
-      "selection_reasons": {
-        "already_posted": 13,
-        "deferred_for_breaking_news": 1,
-        "eligible": 1,
-        "missing_published": 1,
-        "quality_low": 15,
-        "selected": 1,
-        "stale": 100
-      },
-      "sources_failed": 5,
-      "sources_ok": 3,
-      "standalone_selected": 1,
-      "started_at": "2026-11-02T07:51:10.736393+00:00",
-      "status": "completed"
-    },
     {
       "discovered": 25,
       "finished_at": "2026-11-02T16:28:28.718790+00:00",
@@ -3167,6 +3125,36 @@
       "sources_ok": 5,
       "standalone_selected": 0,
       "started_at": "2026-11-23T01:54:32.204135+00:00",
+      "status": "completed"
+    },
+    {
+      "discovered": 106,
+      "finished_at": "2026-11-23T09:20:06.690503+00:00",
+      "game_selection_reasons": {
+        "game_source_duplicates": 0,
+        "not_game_story": 144,
+        "quality_low": 2,
+        "schedule_grounded_threads": 0,
+        "selected_game_stories": 0,
+        "selected_game_threads": 0,
+        "stale_game_story": 3,
+        "unrouted_game_stories": 0
+      },
+      "game_stories_selected": 0,
+      "game_threads_selected": 0,
+      "schedule_grounded_threads": 0,
+      "selection_reasons": {
+        "already_posted": 50,
+        "eligible": 3,
+        "quality_low": 15,
+        "selected": 0,
+        "stale": 76,
+        "story_already_posted": 3
+      },
+      "sources_failed": 3,
+      "sources_ok": 5,
+      "standalone_selected": 0,
+      "started_at": "2026-11-23T09:19:56.570187+00:00",
       "status": "completed"
     }
   ]
