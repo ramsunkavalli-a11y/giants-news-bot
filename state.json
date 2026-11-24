@@ -2,24 +2,6 @@
   "game_threads": {},
   "posted_stories": [
     {
-      "author": "Alex Pavlovic",
-      "game_key": "",
-      "kind": "standalone",
-      "posted_at": "2026-11-03T03:34:08.514187+00:00",
-      "source": "NBC Sports Bay Area",
-      "title": "Giants remove nine players, including one surprise, in necessary roster purge",
-      "url": "https://www.nbcsportsbayarea.com/mlb/san-francisco-giants/roster-deadline-jose-butto/1976410/"
-    },
-    {
-      "author": "John Shea",
-      "game_key": "",
-      "kind": "standalone",
-      "posted_at": "2026-11-03T03:34:11.415757+00:00",
-      "source": "San Francisco Standard",
-      "title": "Buster Posey’s roster puzzle: 15 Giants rejoin the 40-man, and the squeeze is on",
-      "url": "https://sfstandard.com/2026/11/02/buster-posey-sf-giants-roster-moves-60-day-injured-list/"
-    },
-    {
       "author": "Maria Guardado",
       "game_key": "",
       "kind": "standalone",
@@ -482,7 +464,6 @@
   "posted_urls": {
     "https://blogs.fangraphs.com/2027-contemporary-baseball-era-committee-candidate-brian-sabean/": "2026-11-17T00:23:49.436708+00:00",
     "https://blogs.fangraphs.com/2027-contemporary-baseball-era-committee-candidate-dusty-baker/": "2026-11-12T16:06:09.383024+00:00",
-    "https://sfstandard.com/2026/11/02/buster-posey-sf-giants-roster-moves-60-day-injured-list/": "2026-11-03T03:34:11.415757+00:00",
     "https://sfstandard.com/2026/11/05/kaeden-kent-sf-giants-jeff-kent-legacy/": "2026-11-05T15:41:02.908147+00:00",
     "https://sfstandard.com/2026/11/09/brian-sabean-sf-giants-buster-posey/": "2026-11-09T16:45:54.024980+00:00",
     "https://sfstandard.com/2026/11/09/sf-giants-gm-meetings-shopping-list-buster-posey/": "2026-11-10T04:14:26.539767+00:00",
@@ -515,7 +496,6 @@
     "https://www.nbcsportsbayarea.com/mlb/san-francisco-giants/logan-webb-open-trade-offers-report/1981898/": "2026-11-22T21:56:22.937100+00:00",
     "https://www.nbcsportsbayarea.com/mlb/san-francisco-giants/offensive-coordinator-james-rowson-analysis/1979836/": "2026-11-13T22:05:36.714727+00:00",
     "https://www.nbcsportsbayarea.com/mlb/san-francisco-giants/randy-rodriguez-update-buster-posey/1980937/": "2026-11-17T23:37:04.741433+00:00",
-    "https://www.nbcsportsbayarea.com/mlb/san-francisco-giants/roster-deadline-jose-butto/1976410/": "2026-11-03T03:34:08.514187+00:00",
     "https://www.nbcsportsbayarea.com/mlb/san-francisco-giants/ryan-walker-camilo-doval-roster-decisions/1979462/": "2026-11-12T22:24:32.864240+00:00",
     "https://www.nbcsportsbayarea.com/mlb/san-francisco-giants/ryan-walker-trade-milwaukee-brewers/1980367/": "2026-11-16T01:19:44.872621+00:00",
     "https://www.nbcsportsbayarea.com/mlb/san-francisco-giants/tony-vitello-coaching-staff-changes/1979167/": "2026-11-11T22:55:54.714085+00:00",
@@ -535,39 +515,6 @@
     "https://www.sfgate.com/giants/article/pablo-sandoval-grand-slam-send-off-22533425.php": "2026-11-17T00:23:50.353737+00:00"
   },
   "run_history": [
-    {
-      "discovered": 104,
-      "finished_at": "2026-11-03T03:34:12.219184+00:00",
-      "game_selection_reasons": {
-        "already_posted": 1,
-        "game_source_duplicates": 0,
-        "not_game_story": 133,
-        "quality_low": 4,
-        "schedule_grounded_threads": 0,
-        "selected_game_stories": 0,
-        "selected_game_threads": 0,
-        "stale_game_story": 8,
-        "unrouted_game_stories": 0
-      },
-      "game_stories_selected": 0,
-      "game_threads_selected": 0,
-      "schedule_grounded_threads": 0,
-      "selection_reasons": {
-        "already_posted": 16,
-        "deferred_for_breaking_news": 1,
-        "eligible": 3,
-        "missing_published": 1,
-        "quality_low": 15,
-        "selected": 2,
-        "stale": 97,
-        "story_already_posted": 1
-      },
-      "sources_failed": 3,
-      "sources_ok": 5,
-      "standalone_selected": 2,
-      "started_at": "2026-11-03T03:33:40.176113+00:00",
-      "status": "completed"
-    },
     {
       "discovered": 102,
       "finished_at": "2026-11-03T11:09:16.246320+00:00",
@@ -3133,6 +3080,37 @@
       "sources_ok": 4,
       "standalone_selected": 0,
       "started_at": "2026-11-24T02:59:18.510522+00:00",
+      "status": "completed"
+    },
+    {
+      "discovered": 96,
+      "finished_at": "2026-11-24T06:14:07.572119+00:00",
+      "game_selection_reasons": {
+        "game_source_duplicates": 0,
+        "not_game_story": 145,
+        "quality_low": 2,
+        "schedule_grounded_threads": 0,
+        "selected_game_stories": 0,
+        "selected_game_threads": 0,
+        "stale_game_story": 2,
+        "unrouted_game_stories": 0
+      },
+      "game_stories_selected": 0,
+      "game_threads_selected": 0,
+      "schedule_grounded_threads": 0,
+      "selection_reasons": {
+        "already_posted": 47,
+        "eligible": 2,
+        "missing_published": 1,
+        "quality_low": 15,
+        "selected": 0,
+        "stale": 80,
+        "story_already_posted": 2
+      },
+      "sources_failed": 4,
+      "sources_ok": 4,
+      "standalone_selected": 0,
+      "started_at": "2026-11-24T06:13:58.223230+00:00",
       "status": "completed"
     }
   ]
