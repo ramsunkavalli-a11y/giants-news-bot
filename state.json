@@ -450,6 +450,15 @@
       "source": "NBC Sports Bay Area",
       "title": "Giants open to Webb trade?",
       "url": "https://www.nbcsportsbayarea.com/mlb/san-francisco-giants/logan-webb-open-trade-offers-report/1981898/"
+    },
+    {
+      "author": "Dylan Grausz",
+      "game_key": "",
+      "kind": "standalone",
+      "posted_at": "2026-11-25T00:59:24.362897+00:00",
+      "source": "NBC Sports Bay Area",
+      "title": "Giants' Tony Vitello explains how hitting philosophy changes with James Rowson",
+      "url": "https://www.nbcsportsbayarea.com/mlb/san-francisco-giants/tony-vitello-james-rowson-new-hitting-philosophy/1982924/"
     }
   ],
   "posted_urls": {
@@ -489,6 +498,7 @@
     "https://www.nbcsportsbayarea.com/mlb/san-francisco-giants/ryan-walker-camilo-doval-roster-decisions/1979462/": "2026-11-12T22:24:32.864240+00:00",
     "https://www.nbcsportsbayarea.com/mlb/san-francisco-giants/ryan-walker-trade-milwaukee-brewers/1980367/": "2026-11-16T01:19:44.872621+00:00",
     "https://www.nbcsportsbayarea.com/mlb/san-francisco-giants/tony-vitello-coaching-staff-changes/1979167/": "2026-11-11T22:55:54.714085+00:00",
+    "https://www.nbcsportsbayarea.com/mlb/san-francisco-giants/tony-vitello-james-rowson-new-hitting-philosophy/1982924/": "2026-11-25T00:59:24.362897+00:00",
     "https://www.nbcsportsbayarea.com/mlb/san-francisco-giants/usps-stamp-willie-mays-black-heritage/1979012/": "2026-11-11T11:16:50.733540+00:00",
     "https://www.nbcsportsbayarea.com/mlb/san-francisco-giants/willy-adames-buster-posey-reaction/1979283/": "2026-11-12T03:13:05.104767+00:00",
     "https://www.nytimes.com/athletic/7751247/2026/11/04/sf-giants-40-man-roster-questions/": "2026-11-07T10:30:44.673551+00:00",
@@ -505,39 +515,6 @@
     "https://www.sfgate.com/giants/article/pablo-sandoval-grand-slam-send-off-22533425.php": "2026-11-17T00:23:50.353737+00:00"
   },
   "run_history": [
-    {
-      "discovered": 102,
-      "finished_at": "2026-11-03T21:53:33.900238+00:00",
-      "game_selection_reasons": {
-        "already_posted": 1,
-        "game_source_duplicates": 0,
-        "not_game_story": 131,
-        "quality_low": 4,
-        "schedule_grounded_threads": 0,
-        "selected_game_stories": 0,
-        "selected_game_threads": 0,
-        "stale_game_story": 8,
-        "unrouted_game_stories": 0
-      },
-      "game_stories_selected": 0,
-      "game_threads_selected": 0,
-      "schedule_grounded_threads": 0,
-      "selection_reasons": {
-        "already_posted": 19,
-        "deferred_for_breaking_news": 1,
-        "eligible": 1,
-        "missing_published": 1,
-        "quality_low": 14,
-        "selected": 0,
-        "stale": 95,
-        "story_already_posted": 1
-      },
-      "sources_failed": 3,
-      "sources_ok": 5,
-      "standalone_selected": 0,
-      "started_at": "2026-11-03T21:53:19.902797+00:00",
-      "status": "completed"
-    },
     {
       "discovered": 102,
       "finished_at": "2026-11-04T02:32:15.974362+00:00",
@@ -3097,6 +3074,36 @@
       "sources_ok": 4,
       "standalone_selected": 0,
       "started_at": "2026-11-24T18:59:29.778008+00:00",
+      "status": "completed"
+    },
+    {
+      "discovered": 96,
+      "finished_at": "2026-11-25T00:59:25.166412+00:00",
+      "game_selection_reasons": {
+        "game_source_duplicates": 0,
+        "not_game_story": 145,
+        "quality_low": 2,
+        "schedule_grounded_threads": 0,
+        "selected_game_stories": 0,
+        "selected_game_threads": 0,
+        "stale_game_story": 2,
+        "unrouted_game_stories": 0
+      },
+      "game_stories_selected": 0,
+      "game_threads_selected": 0,
+      "schedule_grounded_threads": 0,
+      "selection_reasons": {
+        "already_posted": 46,
+        "eligible": 4,
+        "quality_low": 16,
+        "selected": 1,
+        "stale": 79,
+        "story_already_posted": 3
+      },
+      "sources_failed": 3,
+      "sources_ok": 5,
+      "standalone_selected": 1,
+      "started_at": "2026-11-25T00:58:51.471758+00:00",
       "status": "completed"
     }
   ]
