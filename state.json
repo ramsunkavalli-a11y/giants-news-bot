@@ -468,6 +468,15 @@
       "source": "MLB.com",
       "title": "Giants prospects connect with young fans during annual Oracle Camp",
       "url": "https://www.mlb.com/giants/news/giants-prospects-visit-boys-and-girls-club-san-francisco"
+    },
+    {
+      "author": "John Shea",
+      "game_key": "",
+      "kind": "standalone",
+      "posted_at": "2026-11-26T04:15:25.581786+00:00",
+      "source": "San Francisco Standard",
+      "title": "Why the Giants can’t ignore trade offers for Logan Webb",
+      "url": "https://sfstandard.com/2026/11/24/logan-webb-sf-giants-trade-offers/"
     }
   ],
   "posted_urls": {
@@ -483,6 +492,7 @@
     "https://sfstandard.com/2026/11/17/tony-vitello-sf-giants-manager-2027-changes/": "2026-11-17T16:59:31.078227+00:00",
     "https://sfstandard.com/2026/11/19/dalton-wentz-sf-giants-prospect-fall-star/": "2026-11-19T16:41:59.060715+00:00",
     "https://sfstandard.com/2026/11/20/giants-rolling-dice-reliever-camilo-doval/": "2026-11-21T03:20:36.855649+00:00",
+    "https://sfstandard.com/2026/11/24/logan-webb-sf-giants-trade-offers/": "2026-11-26T04:15:25.581786+00:00",
     "https://sfstandard.com/section-415/2026/11/17/sf-giants-buster-posey-podcast/": "2026-11-17T23:37:02.291140+00:00",
     "https://www.mlb.com/giants/news/brian-sabean-hall-of-fame-case": "2026-11-21T15:30:07.827081+00:00",
     "https://www.mlb.com/giants/news/bruce-bochy-baseball-hall-of-fame-case": "2026-11-14T20:52:48.560493+00:00",
@@ -525,39 +535,6 @@
     "https://www.sfgate.com/giants/article/pablo-sandoval-grand-slam-send-off-22533425.php": "2026-11-17T00:23:50.353737+00:00"
   },
   "run_history": [
-    {
-      "discovered": 103,
-      "finished_at": "2026-11-05T02:39:25.403999+00:00",
-      "game_selection_reasons": {
-        "already_posted": 1,
-        "game_source_duplicates": 0,
-        "not_game_story": 133,
-        "quality_low": 3,
-        "schedule_grounded_threads": 0,
-        "selected_game_stories": 0,
-        "selected_game_threads": 0,
-        "stale_game_story": 8,
-        "unrouted_game_stories": 0
-      },
-      "game_stories_selected": 0,
-      "game_threads_selected": 0,
-      "schedule_grounded_threads": 0,
-      "selection_reasons": {
-        "already_posted": 18,
-        "deferred_for_breaking_news": 1,
-        "eligible": 2,
-        "missing_published": 1,
-        "quality_low": 15,
-        "selected": 0,
-        "stale": 96,
-        "story_already_posted": 2
-      },
-      "sources_failed": 3,
-      "sources_ok": 5,
-      "standalone_selected": 0,
-      "started_at": "2026-11-05T02:38:55.667519+00:00",
-      "status": "completed"
-    },
     {
       "discovered": 103,
       "finished_at": "2026-11-05T11:16:52.682417+00:00",
@@ -3135,6 +3112,36 @@
       "sources_ok": 6,
       "standalone_selected": 0,
       "started_at": "2026-11-26T00:35:00.804552+00:00",
+      "status": "completed"
+    },
+    {
+      "discovered": 121,
+      "finished_at": "2026-11-26T04:15:26.384631+00:00",
+      "game_selection_reasons": {
+        "game_source_duplicates": 0,
+        "not_game_story": 145,
+        "quality_low": 2,
+        "schedule_grounded_threads": 0,
+        "selected_game_stories": 0,
+        "selected_game_threads": 0,
+        "stale_game_story": 2,
+        "unrouted_game_stories": 0
+      },
+      "game_stories_selected": 0,
+      "game_threads_selected": 0,
+      "schedule_grounded_threads": 0,
+      "selection_reasons": {
+        "already_posted": 47,
+        "eligible": 3,
+        "quality_low": 16,
+        "selected": 1,
+        "stale": 79,
+        "story_already_posted": 2
+      },
+      "sources_failed": 2,
+      "sources_ok": 6,
+      "standalone_selected": 1,
+      "started_at": "2026-11-26T04:15:12.500085+00:00",
       "status": "completed"
     }
   ]
